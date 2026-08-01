@@ -490,20 +490,13 @@ func show_my_restaurant() -> void:
 	var root := make_shell("Restaurant studio")
 	var finances := Label.new(); finances.text = "%s  ·  ★ %.2f  ·  sanitation %d  ·  treasury $%.2f" % [restaurant.get("name", "My restaurant"), float(restaurant.get("rating", 0)), int(restaurant.get("sanitation", 0)), float(restaurant.get("treasuryCents", 0))/100.0]; finances.add_theme_color_override("font_color", Color("80cdb1")); root.add_child(finances)
 	var service_actions := HBoxContainer.new(); root.add_child(service_actions)
-	var owner_shift := Button.new(); owner_shift.text = "Open / join today's shift as Owner"
+	var owner_shift := Button.new(); owner_shift.text = "Open shift and work as Owner"; owner_shift.custom_minimum_size.y = 48
 	owner_shift.pressed.connect(func() -> void:
 		api.post_json("/v1/restaurants/%s/shifts" % current_restaurant_id, {}, func(ok: bool, data: Dictionary, _code: int) -> void:
 			if ok: join_shift(str(data.get("id", "")), "employee", "owner")
 		)
 	)
 	service_actions.add_child(owner_shift)
-	var guest_visit := Button.new(); guest_visit.text = "Visit this house as a guest"
-	guest_visit.pressed.connect(func() -> void:
-		api.post_json("/v1/restaurants/%s/shifts" % current_restaurant_id, {}, func(ok: bool, data: Dictionary, _code: int) -> void:
-			if ok: join_shift(str(data.get("id", "")), "guest", "")
-		)
-	)
-	service_actions.add_child(guest_visit)
 	var split := HSplitContainer.new(); split.size_flags_vertical = Control.SIZE_EXPAND_FILL; root.add_child(split)
 	current_floor = RestaurantFloor.new(); current_floor.custom_minimum_size = Vector2(900, 620); current_floor.size_flags_horizontal = Control.SIZE_EXPAND_FILL; current_floor.set_content(bootstrap.get("content", {})); current_floor.set_build_mode(true); current_floor.build_action_requested.connect(handle_build_action)
 	current_floor.object_selected.connect(func(object: Dictionary) -> void:

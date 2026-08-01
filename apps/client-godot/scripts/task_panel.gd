@@ -104,12 +104,19 @@ func select_task(task: Dictionary) -> void:
 	role_label.add_theme_color_override("font_color", Color("d65b4c") if off_role else Color("7fd0b2"))
 	var phase: Dictionary = task.get("phase", {})
 	prompt_label.text = "%s\n%s" % [str(task.get("label", "Work")), str(phase.get("prompt", "Choose the next controlled action."))]
-	stage.configure(str(task.get("grammar", "process")), int(task.get("phaseIndex", 0)))
+	var phase_index := int(task.get("phaseIndex", 0))
+	var phase_dots := ""
+	for i in range(3):
+		phase_dots += "\u25cf " if i <= phase_index else "\u25cb "
+	prompt_label.text += "\nPhase %s" % phase_dots.strip_edges()
+	stage.configure(str(task.get("grammar", "process")), phase_index)
 	consequence_label.text = grammar_help(str(task.get("grammar", "process")))
 	for child in action_box.get_children(): child.queue_free()
 	if claimed_by.is_empty():
 		var claim := Button.new()
-		claim.text = "Claim task%s" % (" (−18 off-role)" if off_role else "")
+		claim.text = "CLAIM TASK" if not off_role else "CLAIM (\u221218 off-role)"
+		claim.custom_minimum_size.y = 52
+		claim.add_theme_font_size_override("font_size", 18)
 		claim.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		claim.pressed.connect(func() -> void: task_claim_requested.emit(str(task.get("id", ""))))
 		action_box.add_child(claim)
