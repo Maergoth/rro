@@ -1,0 +1,23 @@
+[
+  {
+    "id": "street-fair-week",
+    "label": "Summer Street-Fair Season",
+    "description": "Warm nights raise foot traffic while pop-up vendors tighten produce and labor supply.",
+    "startsAt": "2026-07-15T00:00:00-04:00",
+    "endsAt": "2026-08-15T23:59:59-04:00",
+    "accent": "#e3ad38",
+    "modifiers": {
+      "demand": 7,
+      "produce": -6,
+      "labor": -5,
+      "fuel": 2,
+      "sanitation": -2
+    },
+    "tags": [
+      "summer",
+      "market",
+      "outdoor"
+    ],
+    "contentPackId": "summer-street-fair"
+  }
+]

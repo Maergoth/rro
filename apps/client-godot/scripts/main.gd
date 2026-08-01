@@ -1,0 +1,436 @@
+extends Control
+
+const CLIENT_VERSION := "1.0.0-alpha.1"
+
+var api: RroApiClient
+var realtime: RroRealtimeClient
+var store := RroSessionStore.new()
+var bootstrap: Dictionary = {}
+var current_shift_id := ""
+var current_restaurant_id := ""
+var current_role_id := ""
+var presence_kind := ""
+var latest_snapshot: Dictionary = {}
+var current_floor: RestaurantFloor
+var current_task_panel: TaskPanel
+var current_builder: BuilderPalette
+var selected_builder_object: Dictionary = {}
+var status_label: Label
+var screen_root: Control
+
+func _ready() -> void:
+	api = RroApiClient.new()
+	add_child(api)
+	api.request_failed.connect(show_status)
+	realtime = RroRealtimeClient.new()
+	add_child(realtime)
+	realtime.snapshot_received.connect(on_realtime_snapshot)
+	realtime.command_acknowledged.connect(on_command_ack)
+	realtime.realtime_error.connect(show_status)
+	realtime.shift_closed.connect(func(_id: String) -> void: show_status("The restaurant closed for the day."); leave_shift_ui())
+	theme = make_theme()
+	api.session_token = store.load_token()
+	if api.session_token.is_empty(): show_login()
+	else: load_bootstrap()
+
+func make_theme() -> Theme:
+	var result := Theme.new()
+	result.default_font_size = 14
+	result.set_color("font_color", "Label", Color("e7e5d5"))
+	result.set_color("font_color", "Button", Color("e7e5d5"))
+	result.set_color("font_hover_color", "Button", Color("ffffff"))
+	result.set_color("font_pressed_color", "Button", Color("182024"))
+	result.set_color("font_color", "LineEdit", Color("f4f1df"))
+	result.set_color("font_color", "OptionButton", Color("f4f1df"))
+	result.set_color("font_color", "TabBar", Color("d5d7cb"))
+	result.set_constant("outline_size", "Label", 0)
+	result.set_constant("separation", "HBoxContainer", 9)
+	result.set_constant("separation", "VBoxContainer", 9)
+	var button := StyleBoxFlat.new(); button.bg_color = Color("203135"); button.border_color = Color("3d585c"); button.set_border_width_all(1); button.set_corner_radius_all(6); button.content_margin_left = 13; button.content_margin_right = 13; button.content_margin_top = 9; button.content_margin_bottom = 9
+	var hover := button.duplicate(); hover.bg_color = Color("315056"); hover.border_color = Color("70b69e")
+	var pressed := button.duplicate(); pressed.bg_color = Color("d7a94c"); pressed.border_color = Color("f2c96b")
+	result.set_stylebox("normal", "Button", button); result.set_stylebox("hover", "Button", hover); result.set_stylebox("pressed", "Button", pressed); result.set_stylebox("focus", "Button", hover)
+	var input := StyleBoxFlat.new(); input.bg_color = Color("111b1e"); input.border_color = Color("385156"); input.set_border_width_all(1); input.set_corner_radius_all(6); input.content_margin_left = 11; input.content_margin_right = 11; input.content_margin_top = 9; input.content_margin_bottom = 9
+	result.set_stylebox("normal", "LineEdit", input); result.set_stylebox("focus", "LineEdit", hover)
+	var panel := StyleBoxFlat.new(); panel.bg_color = Color("10191c"); panel.border_color = Color("293d41"); panel.set_border_width_all(1); panel.set_corner_radius_all(9); panel.content_margin_left = 14; panel.content_margin_right = 14; panel.content_margin_top = 14; panel.content_margin_bottom = 14
+	result.set_stylebox("panel", "PanelContainer", panel)
+	return result
+
+func clear_screen() -> void:
+	for child in get_children():
+		if child != api and child != realtime: child.queue_free()
+	screen_root = null
+	status_label = null
+	current_floor = null
+	current_task_panel = null
+	current_builder = null
+
+func add_background() -> void:
+	var background := ColorRect.new()
+	background.color = Color("091113")
+	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(background)
+	move_child(background, 0)
+
+func show_login() -> void:
+	clear_screen(); add_background()
+	var composition := Control.new(); composition.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); add_child(composition)
+	var title := Label.new(); title.text = "RUSH & REVENUE\nONLINE"; title.position = Vector2(90, 90); title.add_theme_font_size_override("font_size", 50); title.add_theme_color_override("font_color", Color("efbc54")); composition.add_child(title)
+	var subtitle := Label.new(); subtitle.text = "A persistent hospitality world\nCrew a live restaurant. Own every decision."; subtitle.position = Vector2(95, 230); subtitle.add_theme_font_size_override("font_size", 20); subtitle.add_theme_color_override("font_color", Color("80ceb2")); composition.add_child(subtitle)
+	var feature := Label.new(); feature.text = "NATIVE V1  ·  SHARED SHIFTS  ·  4× SERVICE TIME\n196 ROLE SKILLS  ·  89 MULTI-PHASE ACTIVITIES"; feature.position = Vector2(95, 335); feature.add_theme_font_size_override("font_size", 13); feature.add_theme_color_override("font_color", Color("87999a")); composition.add_child(feature)
+	var panel := PanelContainer.new(); panel.custom_minimum_size = Vector2(470, 610); panel.position = Vector2(size.x - 560, 90); panel.set_anchors_preset(Control.PRESET_TOP_RIGHT); panel.offset_left = -560; panel.offset_right = -90; panel.offset_top = 90; panel.offset_bottom = 790; composition.add_child(panel)
+	var form := VBoxContainer.new(); panel.add_child(form)
+	var heading := Label.new(); heading.text = "Enter the local world"; heading.add_theme_font_size_override("font_size", 26); form.add_child(heading)
+	var server_field := make_field("Local server", api.server_url, false); form.add_child(server_field)
+	var username := make_field("Username or email", "", false); form.add_child(username)
+	var password := make_field("Password", "", true); form.add_child(password)
+	var login_button := Button.new(); login_button.text = "Log in"; login_button.custom_minimum_size.y = 48; form.add_child(login_button)
+	form.add_child(labeled_rule("NEW TO THE WORLD"))
+	var signup_username := make_field("New username", "", false); form.add_child(signup_username)
+	var email := make_field("Email", "", false); form.add_child(email)
+	var display_name := make_field("Character name", "", false); form.add_child(display_name)
+	var signup_password := make_field("Password (10+ characters)", "", true); form.add_child(signup_password)
+	var signup_button := Button.new(); signup_button.text = "Create account and character"; signup_button.custom_minimum_size.y = 48; form.add_child(signup_button)
+	status_label = Label.new(); status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; status_label.add_theme_color_override("font_color", Color("e68472")); form.add_child(status_label)
+	var build := Label.new(); build.text = "Client %s · protocol rro.v1" % CLIENT_VERSION; build.add_theme_color_override("font_color", Color("687b7d")); form.add_child(build)
+	login_button.pressed.connect(func() -> void:
+		api.server_url = server_field.text.strip_edges().trim_suffix("/")
+		show_status("Contacting the persistent world…")
+		api.post_json("/v1/auth/login", {"login": username.text, "password": password.text}, func(ok: bool, data: Dictionary, _code: int) -> void:
+			if ok: accept_session(data)
+		)
+	)
+	signup_button.pressed.connect(func() -> void:
+		api.server_url = server_field.text.strip_edges().trim_suffix("/")
+		show_status("Creating a clean V1 account and randomized aptitudes…")
+		api.post_json("/v1/auth/signup", {"username": signup_username.text, "email": email.text, "displayName": display_name.text, "password": signup_password.text}, func(ok: bool, data: Dictionary, _code: int) -> void:
+			if ok: accept_session(data)
+		)
+	)
+
+func make_field(placeholder: String, value: String, secret: bool) -> LineEdit:
+	var field := LineEdit.new(); field.placeholder_text = placeholder; field.text = value; field.secret = secret; field.custom_minimum_size.y = 44; return field
+
+func labeled_rule(label: String) -> HBoxContainer:
+	var row := HBoxContainer.new(); var left := HSeparator.new(); left.size_flags_horizontal = Control.SIZE_EXPAND_FILL; row.add_child(left); var text := Label.new(); text.text = label; text.add_theme_font_size_override("font_size", 11); text.add_theme_color_override("font_color", Color("819193")); row.add_child(text); var right := HSeparator.new(); right.size_flags_horizontal = Control.SIZE_EXPAND_FILL; row.add_child(right); return row
+
+func accept_session(data: Dictionary) -> void:
+	api.session_token = str(data.get("sessionToken", "")); store.save_token(api.session_token); load_bootstrap()
+
+func load_bootstrap() -> void:
+	api.get_json("/v1/bootstrap", func(ok: bool, data: Dictionary, _code: int) -> void:
+		if not ok:
+			store.clear(); api.session_token = ""; show_login(); show_status("Session expired. Log in again."); return
+		bootstrap = data
+		show_world()
+	)
+
+func make_shell(section_title: String) -> VBoxContainer:
+	clear_screen(); add_background()
+	var margin := MarginContainer.new(); margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); margin.add_theme_constant_override("margin_left", 24); margin.add_theme_constant_override("margin_right", 24); margin.add_theme_constant_override("margin_top", 18); margin.add_theme_constant_override("margin_bottom", 18); add_child(margin)
+	var root := VBoxContainer.new(); root.size_flags_horizontal = Control.SIZE_EXPAND_FILL; root.size_flags_vertical = Control.SIZE_EXPAND_FILL; margin.add_child(root)
+	var top := HBoxContainer.new(); root.add_child(top)
+	var logo := Label.new(); logo.text = "R&R  /  %s" % section_title.to_upper(); logo.add_theme_font_size_override("font_size", 23); logo.add_theme_color_override("font_color", Color("efbc54")); logo.size_flags_horizontal = Control.SIZE_EXPAND_FILL; top.add_child(logo)
+	var character: Dictionary = bootstrap.get("character", {})
+	var identity := Label.new(); identity.text = "%s  ·  LV %d  ·  $%.2f" % [character.get("name", "Operator"), int(character.get("level", 1)), float(character.get("cashCents", 0))/100.0]; identity.add_theme_color_override("font_color", Color("83cdb2")); top.add_child(identity)
+	var quit := Button.new(); quit.text = "Quit"; quit.pressed.connect(func() -> void: get_tree().quit()); top.add_child(quit)
+	var navigation := HBoxContainer.new(); root.add_child(navigation)
+	add_nav(navigation, "Globe", show_world); add_nav(navigation, "Live shifts", show_live_shifts); add_nav(navigation, "Character", show_character); add_nav(navigation, "Skills", show_skills); add_nav(navigation, "My restaurant", show_my_restaurant)
+	var logout := Button.new(); logout.text = "Log out"; logout.pressed.connect(log_out); navigation.add_child(logout)
+	status_label = Label.new(); status_label.custom_minimum_size.y = 22; status_label.add_theme_color_override("font_color", Color("e78874")); root.add_child(status_label)
+	root.add_child(HSeparator.new())
+	return root
+
+func add_nav(parent: HBoxContainer, label: String, callback: Callable) -> void:
+	var button := Button.new(); button.text = label; button.pressed.connect(callback); parent.add_child(button)
+
+func show_world() -> void:
+	if bootstrap.is_empty(): return
+	var root := make_shell("World network")
+	var split := HSplitContainer.new(); split.size_flags_vertical = Control.SIZE_EXPAND_FILL; root.add_child(split)
+	var globe := WorldGlobe.new(); globe.custom_minimum_size = Vector2(780, 650); globe.size_flags_horizontal = Control.SIZE_EXPAND_FILL; globe.set_countries(bootstrap.get("world", {}).get("countries", [])); split.add_child(globe)
+	var region_panel := PanelContainer.new(); region_panel.custom_minimum_size.x = 410; split.add_child(region_panel)
+	var region_box := VBoxContainer.new(); region_panel.add_child(region_box)
+	var instruction := Label.new(); instruction.text = "SELECT A COUNTRY"; instruction.add_theme_font_size_override("font_size", 21); instruction.add_theme_color_override("font_color", Color("7fd0b2")); region_box.add_child(instruction)
+	var copy := Label.new(); copy.text = "The world begins at approximately 20% NPC restaurant occupancy. Locations compete for finite labor, produce, seafood, fuel, and sanitation capacity; businesses can fail and later be replaced."; copy.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; copy.add_theme_color_override("font_color", Color("9aa8a7")); region_box.add_child(copy)
+	var region_list := VBoxContainer.new(); region_box.add_child(region_list)
+	globe.country_selected.connect(func(country: Dictionary) -> void:
+		instruction.text = "%s  %s" % [country.get("flag", ""), country.get("name", "")]
+		for child in region_list.get_children(): child.queue_free()
+		for region in country.get("regions", []):
+			var selected_region: Dictionary = region.duplicate(true)
+			var button := Button.new(); button.alignment = HORIZONTAL_ALIGNMENT_LEFT; button.custom_minimum_size.y = 76
+			button.text = "%s\n%d/%d restaurants  ·  %d live  ·  demand %d  ·  cost %d" % [region.get("name", "Region"), int(region.get("restaurantCount", 0)), int(region.get("capacity", 0)), int(region.get("liveShifts", 0)), int(region.get("demand", 0)), int(region.get("costIndex", 0))]
+			button.pressed.connect(func() -> void: show_region_restaurants(selected_region))
+			region_list.add_child(button)
+	)
+
+func show_region_restaurants(region: Dictionary) -> void:
+	var root := make_shell(str(region.get("name", "Region")))
+	var heading := HBoxContainer.new(); root.add_child(heading)
+	var resource := Label.new(); resource.text = "REGIONAL SUPPLY  ·  %s" % format_resources(region.get("resources", {})); resource.size_flags_horizontal = Control.SIZE_EXPAND_FILL; resource.add_theme_color_override("font_color", Color("80cdb1")); heading.add_child(resource)
+	var back := Button.new(); back.text = "Back to globe"; back.pressed.connect(show_world); heading.add_child(back)
+	var scroll := ScrollContainer.new(); scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL; root.add_child(scroll)
+	var list := VBoxContainer.new(); list.size_flags_horizontal = Control.SIZE_EXPAND_FILL; scroll.add_child(list)
+	api.get_json("/v1/regions/%s/restaurants" % region.get("id", ""), func(ok: bool, data: Dictionary, _code: int) -> void:
+		if not ok: return
+		for restaurant in data.get("restaurants", []): add_restaurant_card(list, restaurant)
+	)
+
+func add_restaurant_card(parent: VBoxContainer, restaurant: Dictionary) -> void:
+	var panel := PanelContainer.new(); panel.custom_minimum_size.y = 148; parent.add_child(panel)
+	var row := HBoxContainer.new(); panel.add_child(row)
+	var info := VBoxContainer.new(); info.size_flags_horizontal = Control.SIZE_EXPAND_FILL; row.add_child(info)
+	var restaurant_name := Label.new(); restaurant_name.text = "%s  %s" % [restaurant.get("name", "Restaurant"), "[LIVE]" if restaurant.get("liveShift") != null else ""]; restaurant_name.add_theme_font_size_override("font_size", 22); restaurant_name.add_theme_color_override("font_color", Color("efbc54")); info.add_child(restaurant_name)
+	var details := Label.new(); details.text = "%s  ·  %s  ·  ★ %.2f  ·  sanitation %d  ·  generation %d" % [restaurant.get("concept", ""), restaurant.get("style", ""), float(restaurant.get("rating", 0)), int(restaurant.get("sanitation", 0)), int(restaurant.get("generation", 1))]; info.add_child(details)
+	var permanence := Label.new(); permanence.text = "NPC business" if restaurant.get("isNpc", false) else "Player-owned business"; permanence.add_theme_color_override("font_color", Color("8e9e9f")); info.add_child(permanence)
+	var controls := VBoxContainer.new(); controls.custom_minimum_size.x = 330; row.add_child(controls)
+	var role := OptionButton.new(); populate_roles(role, false); controls.add_child(role)
+	var apply := Button.new(); apply.text = "Apply for selected role"; controls.add_child(apply)
+	apply.pressed.connect(func() -> void:
+		var role_id := str(role.get_item_metadata(role.selected))
+		api.post_json("/v1/restaurants/%s/applications" % restaurant.get("id", ""), {"roleId": role_id, "note": "Available for open crew calls and committed to role standards."}, func(ok: bool, _data: Dictionary, _code: int) -> void:
+			if ok: show_status("Application submitted. Open shifts remain drop-in while staffing is available.")
+		)
+	)
+	var live = restaurant.get("liveShift")
+	if live != null:
+		var actions := HBoxContainer.new(); controls.add_child(actions)
+		var crew := Button.new(); crew.text = "Join crew"; crew.pressed.connect(func() -> void: join_shift(str(live.get("id", "")), "employee", str(role.get_item_metadata(role.selected)))); actions.add_child(crew)
+		var visit := Button.new(); visit.text = "Visit as guest"; visit.pressed.connect(func() -> void: join_shift(str(live.get("id", "")), "guest", "")); actions.add_child(visit)
+	else:
+		var closed := Label.new(); closed.text = "Not currently open for a shift"; closed.add_theme_color_override("font_color", Color("7f8c8e")); controls.add_child(closed)
+
+func format_resources(resources: Dictionary) -> String:
+	var parts: Array[String] = []
+	for key in resources.keys(): parts.append("%s %s" % [str(key).capitalize(), resources[key]])
+	return "  ·  ".join(parts)
+
+func populate_roles(option: OptionButton, include_owner: bool) -> void:
+	for role in bootstrap.get("content", {}).get("roles", []):
+		if str(role.get("kind", "base")) != "base": continue
+		if not include_owner and str(role.get("id", "")) == "owner": continue
+		option.add_item("%s  %s" % [role.get("icon", ""), role.get("label", "Role")]); option.set_item_metadata(option.item_count - 1, role.get("id", ""))
+	var active := str(bootstrap.get("character", {}).get("activeRoleId", ""))
+	for index in range(option.item_count):
+		if str(option.get_item_metadata(index)) == active: option.select(index)
+
+func show_live_shifts() -> void:
+	var root := make_shell("Open shifts")
+	var intro := Label.new(); intro.text = "Any open restaurant can be joined in progress. NPCs cover every duty until a player takes the slot; the handoff is persistent and server-authoritative."; intro.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; intro.add_theme_color_override("font_color", Color("9eacab")); root.add_child(intro)
+	var role := OptionButton.new(); populate_roles(role, true); root.add_child(role)
+	var scroll := ScrollContainer.new(); scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL; root.add_child(scroll)
+	var list := VBoxContainer.new(); list.size_flags_horizontal = Control.SIZE_EXPAND_FILL; scroll.add_child(list)
+	api.get_json("/v1/shifts", func(ok: bool, data: Dictionary, _code: int) -> void:
+		if not ok: return
+		for shift in data.get("shifts", []):
+			var selected_shift: Dictionary = shift.duplicate(true)
+			var row := PanelContainer.new(); list.add_child(row); var inner := HBoxContainer.new(); row.add_child(inner)
+			var label := Label.new(); label.size_flags_horizontal = Control.SIZE_EXPAND_FILL; label.text = "%s\n%s  ·  ★ %.2f  ·  sanitation %d  ·  %d open duties  ·  %d players" % [shift.get("restaurantName", "Restaurant"), shift.get("regionId", ""), float(shift.get("rating", 0)), int(shift.get("sanitation", 0)), int(shift.get("openSlots", 0)), int(shift.get("players", 0))]; label.add_theme_font_size_override("font_size", 16); inner.add_child(label)
+			var crew := Button.new(); crew.text = "Crew"; crew.pressed.connect(func() -> void: join_shift(str(selected_shift.get("id", "")), "employee", str(role.get_item_metadata(role.selected)))); inner.add_child(crew)
+			var guest := Button.new(); guest.text = "Guest PvP"; guest.pressed.connect(func() -> void: join_shift(str(selected_shift.get("id", "")), "guest", "")); inner.add_child(guest)
+	)
+
+func join_shift(shift_id: String, kind: String, role_id: String) -> void:
+	show_status("Joining the live restaurant and negotiating the NPC handoff…")
+	api.post_json("/v1/shifts/%s/join" % shift_id, {"kind": kind, "roleId": role_id, "partySize": 2}, func(ok: bool, data: Dictionary, _code: int) -> void:
+		if not ok: return
+		current_shift_id = shift_id; current_restaurant_id = str(data.get("restaurantId", "")); presence_kind = kind; current_role_id = str(data.get("roleId", role_id)); latest_snapshot = data.get("snapshot", {})
+		realtime.connect_world(api.server_url, api.session_token); realtime.subscribe(shift_id); show_shift()
+	)
+
+func show_shift() -> void:
+	var title := str(latest_snapshot.get("restaurant", {}).get("name", "Live restaurant"))
+	var root := make_shell(title)
+	var strip := HBoxContainer.new(); root.add_child(strip)
+	var state := Label.new(); state.text = "%s  ·  %s  ·  %s" % [presence_kind.to_upper(), current_role_id.to_upper(), shift_clock()]; state.size_flags_horizontal = Control.SIZE_EXPAND_FILL; state.add_theme_color_override("font_color", Color("80cdb1")); strip.add_child(state)
+	var leave := Button.new(); leave.text = "Leave shift"; leave.pressed.connect(request_leave_shift); strip.add_child(leave)
+	var split := HSplitContainer.new(); split.size_flags_vertical = Control.SIZE_EXPAND_FILL; root.add_child(split)
+	current_floor = RestaurantFloor.new(); current_floor.custom_minimum_size = Vector2(900, 620); current_floor.size_flags_horizontal = Control.SIZE_EXPAND_FILL; current_floor.set_content(bootstrap.get("content", {})); current_floor.set_snapshot(latest_snapshot); current_floor.movement_input.connect(send_movement); split.add_child(current_floor)
+	var panel := PanelContainer.new(); panel.custom_minimum_size.x = 390; split.add_child(panel)
+	if presence_kind == "employee":
+		current_task_panel = TaskPanel.new(); current_task_panel.task_claim_requested.connect(func(task_id: String) -> void: realtime.send_command("task.claim", current_shift_id, {"taskId": task_id})); current_task_panel.task_action_requested.connect(func(task_id: String, action: String) -> void: realtime.send_command("task.action", current_shift_id, {"taskId": task_id, "action": action})); panel.add_child(current_task_panel); current_task_panel.set_state(latest_snapshot, str(bootstrap.get("character", {}).get("id", "")), current_role_id)
+	else:
+		panel.add_child(make_guest_panel())
+
+func make_guest_panel() -> VBoxContainer:
+	var box := VBoxContainer.new(); var title := Label.new(); title.text = "GUEST INFLUENCE"; title.add_theme_font_size_override("font_size", 20); title.add_theme_color_override("font_color", Color("efbc54")); box.add_child(title)
+	var copy := Label.new(); copy.text = "Spend earned money on a real visit. Requests add fair, visible pressure to crew queues—never hidden sabotage. Staff success can turn your challenge into a better review."; copy.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; box.add_child(copy)
+	var challenges := [["special-request", "$8  ·  off-menu preference"], ["allergy-declaration", "$5  ·  allergy protocol"], ["split-check", "$12  ·  complex split"], ["impatient-pace", "$18  ·  accelerated pacing"], ["tasting-menu", "$25  ·  chef-guided tasting"]]
+	for option in challenges:
+		var challenge_id := str(option[0])
+		var challenge_label := str(option[1])
+		var button := Button.new(); button.text = challenge_label; button.pressed.connect(func() -> void: realtime.send_command("guest.challenge", current_shift_id, {"challenge": challenge_id})); box.add_child(button)
+	var evidence := Label.new(); evidence.text = "Live party satisfaction and patience are visible on the floor. Your eventual review is generated from recorded food, service, cleanliness, value, and ambience evidence."; evidence.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; evidence.add_theme_color_override("font_color", Color("8fa1a1")); box.add_child(evidence)
+	return box
+
+func shift_clock() -> String:
+	var closes := int(latest_snapshot.get("shift", {}).get("closesAt", 0)); var remaining := maxi(0, int((closes - Time.get_unix_time_from_system()*1000.0)/1000.0)); return "%02d:%02d remaining" % [floori(float(remaining)/60.0), remaining%60]
+
+func send_movement(direction: Vector2) -> void:
+	if not current_shift_id.is_empty(): realtime.send_command("move", current_shift_id, {"x": direction.x, "y": direction.y})
+
+func on_realtime_snapshot(snapshot: Dictionary) -> void:
+	if str(snapshot.get("shift", {}).get("id", "")) != current_shift_id: return
+	latest_snapshot = snapshot
+	if is_instance_valid(current_floor): current_floor.set_snapshot(snapshot)
+	if is_instance_valid(current_task_panel): current_task_panel.set_state(snapshot, str(bootstrap.get("character", {}).get("id", "")), current_role_id)
+
+func on_command_ack(_command_id: String, result: Dictionary) -> void:
+	if result.has("score"): show_status("Authoritative result: %d/100 · %s" % [int(result.get("score", 0)), result.get("outcome", "resolved")])
+	elif result.has("message"): show_status(str(result.message))
+
+func request_leave_shift() -> void:
+	if current_shift_id.is_empty(): leave_shift_ui(); return
+	api.post_json("/v1/shifts/%s/leave" % current_shift_id, {}, func(_ok: bool, _data: Dictionary, _code: int) -> void: leave_shift_ui())
+
+func leave_shift_ui() -> void:
+	realtime.close(); current_shift_id = ""; current_restaurant_id = ""; latest_snapshot = {}; load_bootstrap()
+
+func show_my_restaurant() -> void:
+	var owned: Array = bootstrap.get("ownedRestaurants", [])
+	if owned.is_empty(): show_found_restaurant(); return
+	var restaurant: Dictionary = owned[0]; current_restaurant_id = str(restaurant.get("id", ""))
+	var root := make_shell("Restaurant studio")
+	var finances := Label.new(); finances.text = "%s  ·  ★ %.2f  ·  sanitation %d  ·  treasury $%.2f" % [restaurant.get("name", "My restaurant"), float(restaurant.get("rating", 0)), int(restaurant.get("sanitation", 0)), float(restaurant.get("treasuryCents", 0))/100.0]; finances.add_theme_color_override("font_color", Color("80cdb1")); root.add_child(finances)
+	var service_actions := HBoxContainer.new(); root.add_child(service_actions)
+	var owner_shift := Button.new(); owner_shift.text = "Open / join today's shift as Owner"
+	owner_shift.pressed.connect(func() -> void:
+		api.post_json("/v1/restaurants/%s/shifts" % current_restaurant_id, {}, func(ok: bool, data: Dictionary, _code: int) -> void:
+			if ok: join_shift(str(data.get("id", "")), "employee", "owner")
+		)
+	)
+	service_actions.add_child(owner_shift)
+	var guest_visit := Button.new(); guest_visit.text = "Visit this house as a guest"
+	guest_visit.pressed.connect(func() -> void:
+		api.post_json("/v1/restaurants/%s/shifts" % current_restaurant_id, {}, func(ok: bool, data: Dictionary, _code: int) -> void:
+			if ok: join_shift(str(data.get("id", "")), "guest", "")
+		)
+	)
+	service_actions.add_child(guest_visit)
+	var split := HSplitContainer.new(); split.size_flags_vertical = Control.SIZE_EXPAND_FILL; root.add_child(split)
+	current_floor = RestaurantFloor.new(); current_floor.custom_minimum_size = Vector2(900, 620); current_floor.size_flags_horizontal = Control.SIZE_EXPAND_FILL; current_floor.set_content(bootstrap.get("content", {})); current_floor.set_build_mode(true); current_floor.build_action_requested.connect(handle_build_action)
+	current_floor.object_selected.connect(func(object: Dictionary) -> void:
+		selected_builder_object = object
+		if is_instance_valid(current_builder): current_builder.set_selected_object(object)
+	)
+	split.add_child(current_floor)
+	var panel := PanelContainer.new(); panel.custom_minimum_size.x = 390; split.add_child(panel); current_builder = BuilderPalette.new(); current_builder.set_content(bootstrap.get("content", {})); current_builder.tool_selected.connect(func(tool: String, id: String) -> void: current_floor.select_tool(tool, id)); current_builder.sell_selected_requested.connect(sell_selected_builder_object); current_builder.expand_requested.connect(expand_builder); panel.add_child(current_builder)
+	api.get_json("/v1/restaurants/%s/layout" % current_restaurant_id, func(ok: bool, data: Dictionary, _code: int) -> void:
+		if ok and is_instance_valid(current_floor): current_floor.set_layout(data)
+	)
+
+func show_found_restaurant() -> void:
+	var root := make_shell("Found a restaurant")
+	var panel := PanelContainer.new(); panel.custom_minimum_size = Vector2(680, 520); panel.size_flags_horizontal = Control.SIZE_SHRINK_CENTER; root.add_child(panel)
+	var box := VBoxContainer.new(); panel.add_child(box)
+	var heading := Label.new(); heading.text = "TURN $10,000 INTO A WORKING HOUSE"; heading.add_theme_font_size_override("font_size", 24); heading.add_theme_color_override("font_color", Color("efbc54")); box.add_child(heading)
+	var text := Label.new(); text.text = "Choose a region with a free license. You receive a fully editable 24×16 modular shell and $8,000 restaurant treasury. Floor, kitchen flow, storage, utilities, seating, office, and decoration placement are your design—not a background picture."; text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; box.add_child(text)
+	var restaurant_name := make_field("Restaurant name", "", false); box.add_child(restaurant_name)
+	var region := OptionButton.new(); box.add_child(region)
+	for country in bootstrap.get("world", {}).get("countries", []):
+		for value in country.get("regions", []):
+			if int(value.get("restaurantCount", 0)) < int(value.get("capacity", 0)): region.add_item("%s / %s  ·  %d licenses left" % [country.get("name", ""), value.get("name", ""), int(value.get("capacity", 0))-int(value.get("restaurantCount", 0))]); region.set_item_metadata(region.item_count-1, value.get("id", ""))
+	var concept := OptionButton.new()
+	for value in bootstrap.get("content", {}).get("concepts", []): concept.add_item(str(value))
+	box.add_child(concept)
+	var style := OptionButton.new()
+	for value in bootstrap.get("content", {}).get("styles", []): style.add_item(str(value))
+	box.add_child(style)
+	var found := Button.new(); found.text = "Purchase license and open design studio"; found.custom_minimum_size.y = 52; box.add_child(found)
+	found.pressed.connect(func() -> void:
+		api.post_json("/v1/restaurants", {"name": restaurant_name.text, "regionId": region.get_item_metadata(region.selected), "concept": concept.get_item_text(concept.selected), "style": style.get_item_text(style.selected)}, func(ok: bool, _data: Dictionary, _code: int) -> void:
+			if ok: load_bootstrap()
+		)
+	)
+
+func handle_build_action(action: String, payload: Dictionary) -> void:
+	if current_restaurant_id.is_empty(): return
+	match action:
+		"floor": api.patch_json("/v1/restaurants/%s/layout/floor" % current_restaurant_id, payload, build_response)
+		"wall": api.put_json("/v1/restaurants/%s/layout/walls" % current_restaurant_id, payload, build_response)
+		"place": api.post_json("/v1/restaurants/%s/layout/objects" % current_restaurant_id, payload, build_response)
+		"move":
+			var id := str(payload.get("id", "")); payload.erase("id"); api.patch_json("/v1/restaurants/%s/layout/objects/%s" % [current_restaurant_id, id], payload, build_response)
+
+func build_response(ok: bool, data: Dictionary, _code: int) -> void:
+	if ok and is_instance_valid(current_floor): current_floor.set_layout(data.get("layout", data)); show_status("Layout committed to the authoritative restaurant database.")
+
+func sell_selected_builder_object() -> void:
+	if selected_builder_object.is_empty(): show_status("Select a placed object first."); return
+	api.delete_json("/v1/restaurants/%s/layout/objects/%s" % [current_restaurant_id, selected_builder_object.get("id", "")], func(ok: bool, data: Dictionary, _code: int) -> void:
+		if ok: selected_builder_object = {}; current_floor.set_layout(data.get("layout", {})); show_status("Object sold back at its wear-adjusted recovery value.")
+	)
+
+func expand_builder(add_width: int, add_height: int) -> void:
+	api.post_json("/v1/restaurants/%s/layout/expand" % current_restaurant_id, {"addWidth": add_width, "addHeight": add_height}, build_response)
+
+func show_character() -> void:
+	var root := make_shell("Character")
+	var character: Dictionary = bootstrap.get("character", {}); var split := HSplitContainer.new(); split.size_flags_vertical = Control.SIZE_EXPAND_FILL; root.add_child(split)
+	var stats_panel := PanelContainer.new(); split.add_child(stats_panel); var stats := VBoxContainer.new(); stats_panel.add_child(stats); var heading := Label.new(); heading.text = "RANDOMIZED APTITUDES"; heading.add_theme_font_size_override("font_size", 21); heading.add_theme_color_override("font_color", Color("7fd0b2")); stats.add_child(heading)
+	var explanation := Label.new(); explanation.text = "Every new character begins with two strengths, two weak areas, and mixed middle aptitude. This suggests roles; it never locks progression."; explanation.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; stats.add_child(explanation)
+	for attribute in character.get("attributes", []):
+		var row := HBoxContainer.new(); var label := Label.new(); label.text = str(attribute.get("attributeId", "")).capitalize(); label.custom_minimum_size.x = 150; row.add_child(label); var bar := ProgressBar.new(); bar.value = float(attribute.get("value", 0)); bar.max_value = 100; bar.show_percentage = true; bar.custom_minimum_size = Vector2(300, 24); row.add_child(bar); stats.add_child(row)
+	var fit_parts: Array[String] = []
+	for fit in character.get("recommendedRoles", []).slice(0, 3): fit_parts.append("%s %d" % [fit.get("roleId", ""), int(fit.get("fit", 0))])
+	var fits := Label.new(); fits.text = "ROLE FIT  ·  " + "  ·  ".join(fit_parts); fits.add_theme_color_override("font_color", Color("efbc54")); stats.add_child(fits)
+	var appearance_panel := PanelContainer.new(); appearance_panel.custom_minimum_size.x = 430; split.add_child(appearance_panel); var appearance := VBoxContainer.new(); appearance_panel.add_child(appearance); var appearance_heading := Label.new(); appearance_heading.text = "OUTFIT DESIGN"; appearance_heading.add_theme_font_size_override("font_size", 21); appearance.add_child(appearance_heading)
+	var outfit := OptionButton.new()
+	for value in bootstrap.get("content", {}).get("appearance", {}).get("outfitSilhouettes", []):
+		outfit.add_item(str(value).capitalize())
+		outfit.set_item_metadata(outfit.item_count-1, value)
+	appearance.add_child(outfit)
+	var primary := ColorPickerButton.new(); primary.text = "Primary outfit color"; primary.color = Color(str(character.get("appearance", {}).get("primaryColor", "#2f684f"))); appearance.add_child(primary)
+	var secondary := ColorPickerButton.new(); secondary.text = "Secondary outfit color"; secondary.color = Color(str(character.get("appearance", {}).get("secondaryColor", "#d6a84b"))); appearance.add_child(secondary)
+	var preview := Control.new(); preview.custom_minimum_size = Vector2(360, 250); preview.draw.connect(func() -> void: draw_character_preview(preview, primary.color, secondary.color)); primary.color_changed.connect(func(_color: Color) -> void: preview.queue_redraw()); secondary.color_changed.connect(func(_color: Color) -> void: preview.queue_redraw()); appearance.add_child(preview)
+	var save := Button.new(); save.text = "Save appearance"
+	save.pressed.connect(func() -> void:
+		api.patch_json("/v1/character/appearance", {"outfit": outfit.get_item_metadata(outfit.selected), "primaryColor": "#" + primary.color.to_html(false), "secondaryColor": "#" + secondary.color.to_html(false)}, func(ok: bool, _data: Dictionary, _code: int) -> void:
+			if ok: load_bootstrap()
+		)
+	)
+	appearance.add_child(save)
+
+func draw_character_preview(control: Control, primary: Color, secondary: Color) -> void:
+	var center := Vector2(control.size.x*.5, 88); control.draw_circle(center, 34, Color("b9825c")); control.draw_rect(Rect2(center.x-48, center.y+30, 96, 118), primary, true); control.draw_rect(Rect2(center.x-48, center.y+70, 96, 18), secondary, true); control.draw_line(center+Vector2(-35,145), center+Vector2(-40,200), primary, 18); control.draw_line(center+Vector2(35,145), center+Vector2(40,200), primary, 18)
+
+func show_skills() -> void:
+	var root := make_shell("Role progression")
+	var top := HBoxContainer.new(); root.add_child(top); var role_option := OptionButton.new(); populate_roles(role_option, true); top.add_child(role_option); var points := Label.new(); points.text = "%d skill points available" % int(bootstrap.get("character", {}).get("skillPoints", 0)); points.add_theme_color_override("font_color", Color("efbc54")); top.add_child(points)
+	var scroll := ScrollContainer.new(); scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL; root.add_child(scroll); var tree := VBoxContainer.new(); tree.size_flags_horizontal = Control.SIZE_EXPAND_FILL; scroll.add_child(tree)
+	var render := func() -> void:
+		for child in tree.get_children(): child.queue_free()
+		var role_id := str(role_option.get_item_metadata(role_option.selected))
+		var role: Dictionary = {}
+		for candidate in bootstrap.get("content", {}).get("roles", []):
+			if str(candidate.get("id", "")) == role_id: role = candidate; break
+		if role.is_empty(): return
+		var fantasy := Label.new(); fantasy.text = str(role.get("fantasy", "")); fantasy.add_theme_font_size_override("font_size", 18); fantasy.add_theme_color_override("font_color", Color("7fd0b2")); tree.add_child(fantasy)
+		var unlocked := {}
+		for value in bootstrap.get("character", {}).get("unlockedSkills", []): unlocked[str(value.get("skillId", ""))] = true
+		var branch_order := ["fundamentals"]
+		for branch in role.get("branches", []): branch_order.append(str(branch.get("id", "")))
+		for branch_id in branch_order:
+			var branch_title := Label.new(); branch_title.text = str(branch_id).replace("-", " ").to_upper(); branch_title.add_theme_font_size_override("font_size", 18); branch_title.add_theme_color_override("font_color", Color("efbc54")); tree.add_child(branch_title)
+			var row := HBoxContainer.new(); tree.add_child(row)
+			for skill in role.get("skills", []):
+				if str(skill.get("branch", "fundamentals")) != branch_id: continue
+				var node := Button.new(); var is_unlocked := unlocked.has(str(skill.get("id", ""))); var requires := str(skill.get("requires", "")); var available := requires.is_empty() or unlocked.has(requires); node.text = "%s\n%d SP\n%s" % [("✓ " if is_unlocked else "") + str(skill.get("label", "Skill")), int(skill.get("cost", 1)), skill.get("description", "")]; node.custom_minimum_size = Vector2(188, 112); node.disabled = is_unlocked or not available; node.tooltip_text = str(skill.get("effect", {}))
+				var skill_id := str(skill.get("id", ""))
+				node.pressed.connect(func() -> void:
+					api.post_json("/v1/character/skills/unlock", {"roleId": role_id, "skillId": skill_id}, func(ok: bool, _data: Dictionary, _code: int) -> void:
+						if ok: load_bootstrap()
+					)
+				)
+				row.add_child(node)
+	role_option.item_selected.connect(func(_index: int) -> void: render.call()); render.call()
+
+func log_out() -> void:
+	api.post_json("/v1/auth/logout", {}, func(_ok: bool, _data: Dictionary, _code: int) -> void:
+		realtime.close(); store.clear(); api.session_token = ""; bootstrap = {}; show_login()
+	)
+
+func show_status(message: String) -> void:
+	if is_instance_valid(status_label): status_label.text = message

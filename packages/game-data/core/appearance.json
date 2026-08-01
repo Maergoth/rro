@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "outfitSilhouettes": [
+    "classic",
+    "apron",
+    "chef-coat",
+    "manager-jacket",
+    "utility"
+  ],
+  "defaultPrimary": "#2f684f",
+  "defaultSecondary": "#d6a84b",
+  "palettes": [
+    {
+      "id": "house-green",
+      "primary": "#2f684f",
+      "secondary": "#d6a84b"
+    },
+    {
+      "id": "oxblood",
+      "primary": "#6f2838",
+      "secondary": "#e5c6a5"
+    },
+    {
+      "id": "navy",
+      "primary": "#243d5c",
+      "secondary": "#d9d5c9"
+    },
+    {
+      "id": "charcoal",
+      "primary": "#303638",
+      "secondary": "#d98b4b"
+    },
+    {
+      "id": "cream",
+      "primary": "#e7ddc5",
+      "secondary": "#4d5a4e"
+    },
+    {
+      "id": "plum",
+      "primary": "#5e345f",
+      "secondary": "#d2a24c"
+    }
+  ]
+}

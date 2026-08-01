@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "simulation": {
+    "timeScale": 4,
+    "restaurantDayRealMinutes": 240,
+    "recommendedSessionMinutes": 60,
+    "allowedShiftMinutes": [60, 120, 240],
+    "opensAtGameMinute": 360,
+    "closesAtGameMinute": 1320
+  },
+  "restaurant": {
+    "openingCostCents": 1000000,
+    "startingTreasuryCents": 800000,
+    "npcStartingTreasuryCents": 1200000,
+    "npcTreasuryStepCents": 25000,
+    "gridWidth": 24,
+    "gridHeight": 16,
+    "npcOccupancyFloor": 0.2,
+    "npcOccupancyCeiling": 0.44,
+    "seedProtectionDays": 4,
+    "playerReceivershipDays": 7,
+    "npcFailureDays": 6,
+    "playerFailureDays": 9
+  },
+  "player": {
+    "startingCashCents": 3500000,
+    "startingSkillPoints": 5,
+    "attributeStrengthRange": [72, 86],
+    "attributeWeaknessRange": [28, 45],
+    "attributeMiddleRange": [44, 68],
+    "attributeTrainingTaskInterval": 8
+  },
+  "jobOpenings": {
+    "manager": 1,
+    "owner": 0,
+    "server": 3,
+    "dishwasher": 1,
+    "chef": 1,
+    "cook": 2,
+    "host-busser": 2
+  },
+  "proceduralRestaurantNames": {
+    "first": ["Copper", "Juniper", "Corner", "Morning", "Civic", "Lantern", "Market", "River", "Golden", "Little", "Open", "Good"],
+    "last": ["Table", "Spoon", "Room", "House", "Counter", "Larder", "Kitchen", "Plate", "Parlor", "Garden", "Grill", "Cafe"]
+  }
+}

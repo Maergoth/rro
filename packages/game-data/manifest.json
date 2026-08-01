@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "packs": [
+    {
+      "id": "core-hospitality",
+      "directory": "core",
+      "enabled": true
+    },
+    {
+      "id": "summer-street-fair",
+      "directory": "seasonal/summer-street-fair",
+      "enabled": true
+    }
+  ]
+}

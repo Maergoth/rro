@@ -1,0 +1,500 @@
+[
+  {
+    "id": "us",
+    "name": "United States",
+    "code": "US",
+    "flag": "🇺🇸",
+    "x": 31,
+    "y": 43,
+    "regions": [
+      {
+        "id": "us-mid-atlantic",
+        "name": "Mid-Atlantic",
+        "capacity": 12,
+        "demand": 86,
+        "costIndex": 72,
+        "resources": {
+          "produce": 84,
+          "seafood": 61,
+          "labor": 57,
+          "fuel": 68,
+          "sanitation": 92
+        },
+        "restaurants": [
+          {
+            "id": "rr-bellwether",
+            "name": "The Bellwether",
+            "concept": "Neighborhood Bistro",
+            "style": "Heritage",
+            "rating": 4.3,
+            "sanitation": 94,
+            "dailyCovers": 168,
+            "turnover": 71
+          },
+          {
+            "id": "rr-common-table",
+            "name": "Common Table",
+            "concept": "Modern American",
+            "style": "Modern",
+            "rating": 4.6,
+            "sanitation": 97,
+            "dailyCovers": 214,
+            "turnover": 78
+          },
+          {
+            "id": "rr-night-owl",
+            "name": "Night Owl Noodles",
+            "concept": "Late-Night Noodles",
+            "style": "Diner",
+            "rating": 4.1,
+            "sanitation": 88,
+            "dailyCovers": 246,
+            "turnover": 86
+          },
+          {
+            "id": "rr-harbor-light",
+            "name": "Harbor Light Grill",
+            "concept": "Coastal Grill",
+            "style": "Natural",
+            "rating": 4.4,
+            "sanitation": 91,
+            "dailyCovers": 192,
+            "turnover": 73
+          }
+        ]
+      },
+      {
+        "id": "us-pacific-northwest",
+        "name": "Pacific Northwest",
+        "capacity": 8,
+        "demand": 71,
+        "costIndex": 81,
+        "resources": {
+          "produce": 78,
+          "seafood": 88,
+          "labor": 49,
+          "fuel": 59,
+          "sanitation": 86
+        },
+        "restaurants": [
+          {
+            "id": "rr-evergreen",
+            "name": "Evergreen Cafe",
+            "concept": "Seasonal Cafe",
+            "style": "Natural",
+            "rating": 4.1,
+            "sanitation": 89,
+            "dailyCovers": 133,
+            "turnover": 65
+          },
+          {
+            "id": "rr-cascade",
+            "name": "Cascade Supper Club",
+            "concept": "Supper Club",
+            "style": "Heritage",
+            "rating": 4.5,
+            "sanitation": 95,
+            "dailyCovers": 154,
+            "turnover": 68
+          }
+        ]
+      },
+      {
+        "id": "us-gulf-coast",
+        "name": "Gulf Coast",
+        "capacity": 9,
+        "demand": 79,
+        "costIndex": 61,
+        "resources": {
+          "produce": 71,
+          "seafood": 94,
+          "labor": 66,
+          "fuel": 72,
+          "sanitation": 74
+        },
+        "restaurants": [
+          {
+            "id": "rr-cypress",
+            "name": "Cypress & Salt",
+            "concept": "Gulf Kitchen",
+            "style": "Heritage",
+            "rating": 4.2,
+            "sanitation": 84,
+            "dailyCovers": 205,
+            "turnover": 77
+          },
+          {
+            "id": "rr-pelican",
+            "name": "The Copper Pelican",
+            "concept": "Seafood House",
+            "style": "Diner",
+            "rating": 4,
+            "sanitation": 81,
+            "dailyCovers": 229,
+            "turnover": 83
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ca",
+    "name": "Canada",
+    "code": "CA",
+    "flag": "🇨🇦",
+    "x": 29,
+    "y": 28,
+    "regions": [
+      {
+        "id": "ca-great-lakes",
+        "name": "Great Lakes",
+        "capacity": 8,
+        "demand": 68,
+        "costIndex": 74,
+        "resources": {
+          "produce": 73,
+          "seafood": 69,
+          "labor": 64,
+          "fuel": 61,
+          "sanitation": 91
+        },
+        "restaurants": [
+          {
+            "id": "rr-junction",
+            "name": "Junction House",
+            "concept": "Gastropub",
+            "style": "Industrial",
+            "rating": 4.2,
+            "sanitation": 93,
+            "dailyCovers": 144,
+            "turnover": 69
+          },
+          {
+            "id": "rr-sugar-maple",
+            "name": "Sugar Maple",
+            "concept": "Brunch Room",
+            "style": "Natural",
+            "rating": 4.5,
+            "sanitation": 96,
+            "dailyCovers": 176,
+            "turnover": 81
+          }
+        ]
+      },
+      {
+        "id": "ca-british-columbia",
+        "name": "British Columbia",
+        "capacity": 7,
+        "demand": 72,
+        "costIndex": 83,
+        "resources": {
+          "produce": 76,
+          "seafood": 91,
+          "labor": 48,
+          "fuel": 55,
+          "sanitation": 93
+        },
+        "restaurants": [
+          {
+            "id": "rr-tidepine",
+            "name": "Tide & Pine",
+            "concept": "Pacific Kitchen",
+            "style": "Natural",
+            "rating": 4.6,
+            "sanitation": 97,
+            "dailyCovers": 151,
+            "turnover": 66
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mx",
+    "name": "Mexico",
+    "code": "MX",
+    "flag": "🇲🇽",
+    "x": 26,
+    "y": 60,
+    "regions": [
+      {
+        "id": "mx-central",
+        "name": "Central Highlands",
+        "capacity": 9,
+        "demand": 91,
+        "costIndex": 48,
+        "resources": {
+          "produce": 95,
+          "seafood": 52,
+          "labor": 84,
+          "fuel": 63,
+          "sanitation": 69
+        },
+        "restaurants": [
+          {
+            "id": "rr-comal",
+            "name": "Casa Comal",
+            "concept": "Regional Cocina",
+            "style": "Heritage",
+            "rating": 4.7,
+            "sanitation": 90,
+            "dailyCovers": 267,
+            "turnover": 82
+          },
+          {
+            "id": "rr-luciernaga",
+            "name": "Luciérnaga",
+            "concept": "Night Market",
+            "style": "Diner",
+            "rating": 4.4,
+            "sanitation": 86,
+            "dailyCovers": 301,
+            "turnover": 91
+          }
+        ]
+      },
+      {
+        "id": "mx-yucatan",
+        "name": "Yucatán Coast",
+        "capacity": 7,
+        "demand": 76,
+        "costIndex": 52,
+        "resources": {
+          "produce": 88,
+          "seafood": 96,
+          "labor": 77,
+          "fuel": 58,
+          "sanitation": 72
+        },
+        "restaurants": [
+          {
+            "id": "rr-ceiba",
+            "name": "La Ceiba",
+            "concept": "Coastal Cocina",
+            "style": "Natural",
+            "rating": 4.5,
+            "sanitation": 88,
+            "dailyCovers": 223,
+            "turnover": 79
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gb",
+    "name": "United Kingdom",
+    "code": "GB",
+    "flag": "🇬🇧",
+    "x": 49,
+    "y": 34,
+    "regions": [
+      {
+        "id": "gb-london",
+        "name": "Greater London",
+        "capacity": 11,
+        "demand": 93,
+        "costIndex": 96,
+        "resources": {
+          "produce": 58,
+          "seafood": 73,
+          "labor": 42,
+          "fuel": 47,
+          "sanitation": 89
+        },
+        "restaurants": [
+          {
+            "id": "rr-larder",
+            "name": "The Green Larder",
+            "concept": "Modern British",
+            "style": "Heritage",
+            "rating": 4.3,
+            "sanitation": 94,
+            "dailyCovers": 187,
+            "turnover": 72
+          },
+          {
+            "id": "rr-platform",
+            "name": "Platform Nine",
+            "concept": "All-Day Dining",
+            "style": "Industrial",
+            "rating": 4,
+            "sanitation": 87,
+            "dailyCovers": 258,
+            "turnover": 88
+          }
+        ]
+      },
+      {
+        "id": "gb-northwest",
+        "name": "North West",
+        "capacity": 8,
+        "demand": 66,
+        "costIndex": 64,
+        "resources": {
+          "produce": 67,
+          "seafood": 66,
+          "labor": 71,
+          "fuel": 52,
+          "sanitation": 84
+        },
+        "restaurants": [
+          {
+            "id": "rr-loom",
+            "name": "The Loom Room",
+            "concept": "Neighborhood Dining",
+            "style": "Industrial",
+            "rating": 4.4,
+            "sanitation": 92,
+            "dailyCovers": 162,
+            "turnover": 73
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fr",
+    "name": "France",
+    "code": "FR",
+    "flag": "🇫🇷",
+    "x": 51,
+    "y": 42,
+    "regions": [
+      {
+        "id": "fr-idf",
+        "name": "Île-de-France",
+        "capacity": 10,
+        "demand": 88,
+        "costIndex": 93,
+        "resources": {
+          "produce": 81,
+          "seafood": 62,
+          "labor": 44,
+          "fuel": 49,
+          "sanitation": 94
+        },
+        "restaurants": [
+          {
+            "id": "rr-petit-service",
+            "name": "Petit Service",
+            "concept": "Contemporary Bistro",
+            "style": "Modern",
+            "rating": 4.6,
+            "sanitation": 98,
+            "dailyCovers": 149,
+            "turnover": 64
+          },
+          {
+            "id": "rr-quatre",
+            "name": "Quatre Saisons",
+            "concept": "Market Dining",
+            "style": "Heritage",
+            "rating": 4.5,
+            "sanitation": 96,
+            "dailyCovers": 173,
+            "turnover": 68
+          }
+        ]
+      },
+      {
+        "id": "fr-provence",
+        "name": "Provence",
+        "capacity": 8,
+        "demand": 74,
+        "costIndex": 70,
+        "resources": {
+          "produce": 96,
+          "seafood": 83,
+          "labor": 57,
+          "fuel": 61,
+          "sanitation": 91
+        },
+        "restaurants": [
+          {
+            "id": "rr-soleil",
+            "name": "Maison Soleil",
+            "concept": "Provençal Kitchen",
+            "style": "Natural",
+            "rating": 4.7,
+            "sanitation": 97,
+            "dailyCovers": 158,
+            "turnover": 66
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jp",
+    "name": "Japan",
+    "code": "JP",
+    "flag": "🇯🇵",
+    "x": 82,
+    "y": 43,
+    "regions": [
+      {
+        "id": "jp-kanto",
+        "name": "Kantō",
+        "capacity": 10,
+        "demand": 96,
+        "costIndex": 89,
+        "resources": {
+          "produce": 68,
+          "seafood": 98,
+          "labor": 39,
+          "fuel": 54,
+          "sanitation": 99
+        },
+        "restaurants": [
+          {
+            "id": "rr-yoru",
+            "name": "Yoru Shokudō",
+            "concept": "Late-Night Shokudō",
+            "style": "Diner",
+            "rating": 4.6,
+            "sanitation": 99,
+            "dailyCovers": 321,
+            "turnover": 93
+          },
+          {
+            "id": "rr-sora",
+            "name": "Sora Counter",
+            "concept": "Seasonal Counter",
+            "style": "Modern",
+            "rating": 4.8,
+            "sanitation": 99,
+            "dailyCovers": 128,
+            "turnover": 75
+          }
+        ]
+      },
+      {
+        "id": "jp-kansai",
+        "name": "Kansai",
+        "capacity": 8,
+        "demand": 87,
+        "costIndex": 77,
+        "resources": {
+          "produce": 74,
+          "seafood": 93,
+          "labor": 46,
+          "fuel": 57,
+          "sanitation": 98
+        },
+        "restaurants": [
+          {
+            "id": "rr-noren",
+            "name": "Noren Alley",
+            "concept": "Small Plates",
+            "style": "Heritage",
+            "rating": 4.7,
+            "sanitation": 98,
+            "dailyCovers": 276,
+            "turnover": 89
+          }
+        ]
+      }
+    ]
+  }
+]

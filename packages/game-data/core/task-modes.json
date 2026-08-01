@@ -1,0 +1,62 @@
+[
+  {
+    "id": "cook",
+    "renderer": "timing",
+    "domain": "production",
+    "contentPackId": "core-hospitality"
+  },
+  {
+    "id": "expo",
+    "renderer": "timing",
+    "domain": "production",
+    "contentPackId": "core-hospitality"
+  },
+  {
+    "id": "serve",
+    "renderer": "service",
+    "domain": "service",
+    "contentPackId": "core-hospitality"
+  },
+  {
+    "id": "dishes",
+    "renderer": "rack",
+    "domain": "sanitation",
+    "contentPackId": "core-hospitality"
+  },
+  {
+    "id": "seat",
+    "renderer": "seating",
+    "domain": "service",
+    "contentPackId": "core-hospitality"
+  },
+  {
+    "id": "clean",
+    "renderer": "coverage",
+    "domain": "sanitation",
+    "contentPackId": "core-hospitality"
+  },
+  {
+    "id": "triage",
+    "renderer": "decision",
+    "domain": "management",
+    "contentPackId": "core-hospitality"
+  },
+  {
+    "id": "allocate",
+    "renderer": "allocation",
+    "domain": "ownership",
+    "contentPackId": "core-hospitality"
+  },
+  {
+    "id": "paperwork",
+    "renderer": "paperwork",
+    "domain": "compliance",
+    "contentPackId": "core-hospitality"
+  },
+  {
+    "id": "rotation",
+    "renderer": "fifo",
+    "domain": "inventory",
+    "contentPackId": "core-hospitality"
+  }
+]

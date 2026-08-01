@@ -1,0 +1,33 @@
+{
+  "name": "rush-revenue-online",
+  "version": "1.0.0-alpha.1",
+  "private": true,
+  "type": "module",
+  "displayName": "Rush & Revenue Online",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "generate:data": "node tools/generate-production-data.mjs",
+    "generate:backlog": "node tools/generate-v2-backlog.mjs",
+    "dev:server": "npm run build:server && node --no-warnings dist/server/index.js",
+    "build:server": "tsc -p apps/server/tsconfig.json",
+    "build": "npm run generate:data && npm run generate:backlog && npm run build:server",
+    "typecheck": "tsc -p apps/server/tsconfig.json --noEmit",
+    "validate:data": "node tools/validate-data.mjs",
+    "validate:godot": "node tools/validate-godot-project.mjs",
+    "smoke:server": "npm run build:server && node tools/smoke-local-server.mjs",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "verify": "npm run validate:data && npm run validate:godot && npm run typecheck && npm test",
+    "release": "npm run verify && npm run smoke:server && node tools/make-v1-release.mjs"
+  },
+  "dependencies": {
+    "ws": "8.21.1"
+  },
+  "devDependencies": {
+    "@gdscript-analyzer/core": "0.6.1",
+    "@types/node": "24.10.1",
+    "@types/ws": "8.18.1",
+    "typescript": "5.9.3"
+  }
+}

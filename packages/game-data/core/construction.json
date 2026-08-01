@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "grid": {
+    "defaultWidth": 24,
+    "defaultHeight": 16,
+    "cellMeters": 0.5,
+    "rotations": [
+      0,
+      90,
+      180,
+      270
+    ]
+  },
+  "surfaces": [
+    {
+      "id": "sealed-concrete",
+      "label": "Sealed Concrete",
+      "costCents": 1200,
+      "stats": {
+        "sanitation": 8,
+        "ambience": 2
+      },
+      "assetId": "floor-sealed-concrete"
+    },
+    {
+      "id": "quarry-tile",
+      "label": "Quarry Tile",
+      "costCents": 2200,
+      "stats": {
+        "sanitation": 10,
+        "ambience": 3
+      },
+      "assetId": "floor-quarry-tile"
+    },
+    {
+      "id": "white-hex",
+      "label": "White Hex Tile",
+      "costCents": 3100,
+      "stats": {
+        "sanitation": 8,
+        "ambience": 6
+      },
+      "assetId": "floor-white-hex"
+    },
+    {
+      "id": "slate-tile",
+      "label": "Slate Tile",
+      "costCents": 4200,
+      "stats": {
+        "sanitation": 9,
+        "ambience": 8
+      },
+      "assetId": "floor-slate-tile"
+    },
+    {
+      "id": "oak-plank",
+      "label": "Oak Plank",
+      "costCents": 4800,
+      "stats": {
+        "sanitation": 5,
+        "ambience": 11
+      },
+      "assetId": "floor-oak-plank"
+    },
+    {
+      "id": "walnut-plank",
+      "label": "Walnut Plank",
+      "costCents": 6600,
+      "stats": {
+        "sanitation": 5,
+        "ambience": 14
+      },
+      "assetId": "floor-walnut-plank"
+    },
+    {
+      "id": "terrazzo",
+      "label": "Terrazzo",
+      "costCents": 7200,
+      "stats": {
+        "sanitation": 10,
+        "ambience": 13
+      },
+      "assetId": "floor-terrazzo"
+    },
+    {
+      "id": "pattern-cement",
+      "label": "Patterned Cement Tile",
+      "costCents": 5600,
+      "stats": {
+        "sanitation": 9,
+        "ambience": 12
+      },
+      "assetId": "floor-pattern-cement"
+    },
+    {
+      "id": "commercial-vinyl",
+      "label": "Commercial Vinyl",
+      "costCents": 1800,
+      "stats": {
+        "sanitation": 8,
+        "ambience": 3
+      },
+      "assetId": "floor-commercial-vinyl"
+    },
+    {
+      "id": "rubber-kitchen",
+      "label": "Kitchen Rubber Flooring",
+      "costCents": 3600,
+      "stats": {
+        "sanitation": 12,
+        "ambience": 1
+      },
+      "assetId": "floor-rubber-kitchen"
+    },
+    {
+      "id": "entry-mat",
+      "label": "Entry Mat System",
+      "costCents": 2900,
+      "stats": {
+        "sanitation": 7,
+        "ambience": 2
+      },
+      "assetId": "floor-entry-mat"
+    },
+    {
+      "id": "outdoor-paver",
+      "label": "Outdoor Paver",
+      "costCents": 3500,
+      "stats": {
+        "sanitation": 9,
+        "ambience": 7
+      },
+      "assetId": "floor-outdoor-paver"
+    }
+  ],
+  "wallStyles": [
+    {
+      "id": "painted-plaster",
+      "label": "Painted Plaster",
+      "costCents": 3500,
+      "assetId": "wall-painted-plaster"
+    },
+    {
+      "id": "subway-tile",
+      "label": "Subway Tile",
+      "costCents": 6500,
+      "assetId": "wall-subway-tile"
+    },
+    {
+      "id": "exposed-brick",
+      "label": "Exposed Brick",
+      "costCents": 8200,
+      "assetId": "wall-exposed-brick"
+    },
+    {
+      "id": "oak-panel",
+      "label": "Oak Panel",
+      "costCents": 11500,
+      "assetId": "wall-oak-panel"
+    },
+    {
+      "id": "glass-partition",
+      "label": "Glass Partition",
+      "costCents": 14500,
+      "assetId": "wall-glass-partition"
+    },
+    {
+      "id": "stainless-kitchen",
+      "label": "Stainless Kitchen Wall",
+      "costCents": 12500,
+      "assetId": "wall-stainless-kitchen"
+    }
+  ],
+  "utilityTypes": [
+    "power",
+    "gas",
+    "water",
+    "drain",
+    "ventilation"
+  ]
+}

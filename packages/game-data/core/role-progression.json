@@ -1,0 +1,2616 @@
+{
+  "schemaVersion": 1,
+  "roles": [
+    {
+      "roleId": "manager",
+      "fundamentals": [
+        {
+          "id": "manager-fundamental-1",
+          "label": "Manager's Notebook",
+          "cost": 1,
+          "requires": null,
+          "description": "Clarifies owned work and its world cues.",
+          "effect": {
+            "type": "perception",
+            "value": 5,
+            "roleId": "manager"
+          }
+        },
+        {
+          "id": "manager-fundamental-2",
+          "label": "Clear Delegation",
+          "cost": 1,
+          "requires": "manager-fundamental-1",
+          "description": "Improves structured crew communication.",
+          "effect": {
+            "type": "handoff",
+            "value": 8,
+            "roleId": "manager"
+          }
+        },
+        {
+          "id": "manager-fundamental-3",
+          "label": "Cross-Role Literacy",
+          "cost": 2,
+          "requires": "manager-fundamental-2",
+          "description": "Reduces ordinary off-role penalties by 3%.",
+          "effect": {
+            "type": "cross-training",
+            "value": 3,
+            "roleId": "manager"
+          }
+        },
+        {
+          "id": "manager-fundamental-4",
+          "label": "Shift Handoff",
+          "cost": 2,
+          "requires": "manager-fundamental-3",
+          "description": "Improves join-in-progress and clock-out handoffs.",
+          "effect": {
+            "type": "handoff",
+            "value": 12,
+            "roleId": "manager"
+          }
+        }
+      ],
+      "branches": {
+        "flow": [
+          {
+            "id": "manager-flow-1",
+            "label": "Preflight",
+            "cost": 1,
+            "requires": null,
+            "description": "Shows earlier and clearer role cues.",
+            "effect": {
+              "type": "perception",
+              "value": 8,
+              "roleId": "manager",
+              "branchId": "flow"
+            }
+          },
+          {
+            "id": "manager-flow-2",
+            "label": "Live Read",
+            "cost": 1,
+            "requires": "manager-flow-1",
+            "description": "Reduces execution and transition time without skipping decisions.",
+            "effect": {
+              "type": "speed",
+              "value": 6,
+              "roleId": "manager",
+              "branchId": "flow"
+            }
+          },
+          {
+            "id": "manager-flow-3",
+            "label": "Queue Sense",
+            "cost": 2,
+            "requires": "manager-flow-2",
+            "description": "Improves recovery quality after a partial failure.",
+            "effect": {
+              "type": "recovery",
+              "value": 10,
+              "roleId": "manager",
+              "branchId": "flow"
+            }
+          },
+          {
+            "id": "manager-flow-4",
+            "label": "Seat Throttle",
+            "cost": 2,
+            "requires": "manager-flow-3",
+            "description": "Adds one safe concurrent state slot for matching tasks.",
+            "effect": {
+              "type": "capacity",
+              "value": 1,
+              "roleId": "manager",
+              "branchId": "flow"
+            }
+          },
+          {
+            "id": "manager-flow-5",
+            "label": "Expedite",
+            "cost": 2,
+            "requires": "manager-flow-4",
+            "description": "Raises the safe quality floor for matching work.",
+            "effect": {
+              "type": "safety",
+              "value": 8,
+              "roleId": "manager",
+              "branchId": "flow"
+            }
+          },
+          {
+            "id": "manager-flow-6",
+            "label": "Bottleneck Break",
+            "cost": 2,
+            "requires": "manager-flow-5",
+            "description": "Improves structured callouts and crew handoffs.",
+            "effect": {
+              "type": "handoff",
+              "value": 10,
+              "roleId": "manager",
+              "branchId": "flow"
+            }
+          },
+          {
+            "id": "manager-flow-7",
+            "label": "Command Presence",
+            "cost": 3,
+            "requires": "manager-flow-6",
+            "description": "Reduces stress gained while this branch is under pressure.",
+            "effect": {
+              "type": "stress",
+              "value": 12,
+              "roleId": "manager",
+              "branchId": "flow"
+            }
+          },
+          {
+            "id": "manager-flow-8",
+            "label": "Service Conductor",
+            "cost": 3,
+            "requires": "manager-flow-7",
+            "description": "Unlocks the branch's signature active technique.",
+            "effect": {
+              "type": "capstone",
+              "value": 1,
+              "roleId": "manager",
+              "branchId": "flow"
+            }
+          }
+        ],
+        "people": [
+          {
+            "id": "manager-people-1",
+            "label": "Five-Minute Huddle",
+            "cost": 1,
+            "requires": null,
+            "description": "Shows earlier and clearer role cues.",
+            "effect": {
+              "type": "perception",
+              "value": 8,
+              "roleId": "manager",
+              "branchId": "people"
+            }
+          },
+          {
+            "id": "manager-people-2",
+            "label": "Read the Room",
+            "cost": 1,
+            "requires": "manager-people-1",
+            "description": "Reduces execution and transition time without skipping decisions.",
+            "effect": {
+              "type": "speed",
+              "value": 6,
+              "roleId": "manager",
+              "branchId": "people"
+            }
+          },
+          {
+            "id": "manager-people-3",
+            "label": "Break Guard",
+            "cost": 2,
+            "requires": "manager-people-2",
+            "description": "Improves recovery quality after a partial failure.",
+            "effect": {
+              "type": "recovery",
+              "value": 10,
+              "roleId": "manager",
+              "branchId": "people"
+            }
+          },
+          {
+            "id": "manager-people-4",
+            "label": "Calm Correction",
+            "cost": 2,
+            "requires": "manager-people-3",
+            "description": "Adds one safe concurrent state slot for matching tasks.",
+            "effect": {
+              "type": "capacity",
+              "value": 1,
+              "roleId": "manager",
+              "branchId": "people"
+            }
+          },
+          {
+            "id": "manager-people-5",
+            "label": "In the Moment",
+            "cost": 2,
+            "requires": "manager-people-4",
+            "description": "Raises the safe quality floor for matching work.",
+            "effect": {
+              "type": "safety",
+              "value": 8,
+              "roleId": "manager",
+              "branchId": "people"
+            }
+          },
+          {
+            "id": "manager-people-6",
+            "label": "Cross-Train Plan",
+            "cost": 2,
+            "requires": "manager-people-5",
+            "description": "Improves structured callouts and crew handoffs.",
+            "effect": {
+              "type": "handoff",
+              "value": 10,
+              "roleId": "manager",
+              "branchId": "people"
+            }
+          },
+          {
+            "id": "manager-people-7",
+            "label": "Retention Talk",
+            "cost": 3,
+            "requires": "manager-people-6",
+            "description": "Reduces stress gained while this branch is under pressure.",
+            "effect": {
+              "type": "stress",
+              "value": 12,
+              "roleId": "manager",
+              "branchId": "people"
+            }
+          },
+          {
+            "id": "manager-people-8",
+            "label": "Crew Trust",
+            "cost": 3,
+            "requires": "manager-people-7",
+            "description": "Unlocks the branch's signature active technique.",
+            "effect": {
+              "type": "capstone",
+              "value": 1,
+              "roleId": "manager",
+              "branchId": "people"
+            }
+          }
+        ],
+        "compliance": [
+          {
+            "id": "manager-compliance-1",
+            "label": "HACCP Eyes",
+            "cost": 1,
+            "requires": null,
+            "description": "Shows earlier and clearer role cues.",
+            "effect": {
+              "type": "perception",
+              "value": 8,
+              "roleId": "manager",
+              "branchId": "compliance"
+            }
+          },
+          {
+            "id": "manager-compliance-2",
+            "label": "Log Discipline",
+            "cost": 1,
+            "requires": "manager-compliance-1",
+            "description": "Reduces execution and transition time without skipping decisions.",
+            "effect": {
+              "type": "speed",
+              "value": 6,
+              "roleId": "manager",
+              "branchId": "compliance"
+            }
+          },
+          {
+            "id": "manager-compliance-3",
+            "label": "Root Cause",
+            "cost": 2,
+            "requires": "manager-compliance-2",
+            "description": "Improves recovery quality after a partial failure.",
+            "effect": {
+              "type": "recovery",
+              "value": 10,
+              "roleId": "manager",
+              "branchId": "compliance"
+            }
+          },
+          {
+            "id": "manager-compliance-4",
+            "label": "Containment",
+            "cost": 2,
+            "requires": "manager-compliance-3",
+            "description": "Adds one safe concurrent state slot for matching tasks.",
+            "effect": {
+              "type": "capacity",
+              "value": 1,
+              "roleId": "manager",
+              "branchId": "compliance"
+            }
+          },
+          {
+            "id": "manager-compliance-5",
+            "label": "Clean Recovery",
+            "cost": 2,
+            "requires": "manager-compliance-4",
+            "description": "Raises the safe quality floor for matching work.",
+            "effect": {
+              "type": "safety",
+              "value": 8,
+              "roleId": "manager",
+              "branchId": "compliance"
+            }
+          },
+          {
+            "id": "manager-compliance-6",
+            "label": "Inspector Rapport",
+            "cost": 2,
+            "requires": "manager-compliance-5",
+            "description": "Improves structured callouts and crew handoffs.",
+            "effect": {
+              "type": "handoff",
+              "value": 10,
+              "roleId": "manager",
+              "branchId": "compliance"
+            }
+          },
+          {
+            "id": "manager-compliance-7",
+            "label": "Safety Culture",
+            "cost": 3,
+            "requires": "manager-compliance-6",
+            "description": "Reduces stress gained while this branch is under pressure.",
+            "effect": {
+              "type": "stress",
+              "value": 12,
+              "roleId": "manager",
+              "branchId": "compliance"
+            }
+          },
+          {
+            "id": "manager-compliance-8",
+            "label": "Zero Surprise",
+            "cost": 3,
+            "requires": "manager-compliance-7",
+            "description": "Unlocks the branch's signature active technique.",
+            "effect": {
+              "type": "capstone",
+              "value": 1,
+              "roleId": "manager",
+              "branchId": "compliance"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "roleId": "owner",
+      "fundamentals": [
+        {
+          "id": "owner-fundamental-1",
+          "label": "Owner's Ledger",
+          "cost": 1,
+          "requires": null,
+          "description": "Clarifies owned work and its world cues.",
+          "effect": {
+            "type": "perception",
+            "value": 5,
+            "roleId": "owner"
+          }
+        },
+        {
+          "id": "owner-fundamental-2",
+          "label": "House Standards",
+          "cost": 1,
+          "requires": "owner-fundamental-1",
+          "description": "Improves structured crew communication.",
+          "effect": {
+            "type": "handoff",
+            "value": 8,
+            "roleId": "owner"
+          }
+        },
+        {
+          "id": "owner-fundamental-3",
+          "label": "Operator Network",
+          "cost": 2,
+          "requires": "owner-fundamental-2",
+          "description": "Reduces ordinary off-role penalties by 3%.",
+          "effect": {
+            "type": "cross-training",
+            "value": 3,
+            "roleId": "owner"
+          }
+        },
+        {
+          "id": "owner-fundamental-4",
+          "label": "Succession Notes",
+          "cost": 2,
+          "requires": "owner-fundamental-3",
+          "description": "Improves join-in-progress and clock-out handoffs.",
+          "effect": {
+            "type": "handoff",
+            "value": 12,
+            "roleId": "owner"
+          }
+        }
+      ],
+      "branches": {
+        "hospitality": [
+          {
+            "id": "owner-hospitality-1",
+            "label": "House Welcome",
+            "cost": 1,
+            "requires": null,
+            "description": "Shows earlier and clearer role cues.",
+            "effect": {
+              "type": "perception",
+              "value": 8,
+              "roleId": "owner",
+              "branchId": "hospitality"
+            }
+          },
+          {
+            "id": "owner-hospitality-2",
+            "label": "Regular Memory",
+            "cost": 1,
+            "requires": "owner-hospitality-1",
+            "description": "Reduces execution and transition time without skipping decisions.",
+            "effect": {
+              "type": "speed",
+              "value": 6,
+              "roleId": "owner",
+              "branchId": "hospitality"
+            }
+          },
+          {
+            "id": "owner-hospitality-3",
+            "label": "Community Table",
+            "cost": 2,
+            "requires": "owner-hospitality-2",
+            "description": "Improves recovery quality after a partial failure.",
+            "effect": {
+              "type": "recovery",
+              "value": 10,
+              "roleId": "owner",
+              "branchId": "hospitality"
+            }
+          },
+          {
+            "id": "owner-hospitality-4",
+            "label": "Recovery Reserve",
+            "cost": 2,
+            "requires": "owner-hospitality-3",
+            "description": "Adds one safe concurrent state slot for matching tasks.",
+            "effect": {
+              "type": "capacity",
+              "value": 1,
+              "roleId": "owner",
+              "branchId": "hospitality"
+            }
+          },
+          {
+            "id": "owner-hospitality-5",
+            "label": "Brand Promise",
+            "cost": 2,
+            "requires": "owner-hospitality-4",
+            "description": "Raises the safe quality floor for matching work.",
+            "effect": {
+              "type": "safety",
+              "value": 8,
+              "roleId": "owner",
+              "branchId": "hospitality"
+            }
+          },
+          {
+            "id": "owner-hospitality-6",
+            "label": "VIP Read",
+            "cost": 2,
+            "requires": "owner-hospitality-5",
+            "description": "Improves structured callouts and crew handoffs.",
+            "effect": {
+              "type": "handoff",
+              "value": 10,
+              "roleId": "owner",
+              "branchId": "hospitality"
+            }
+          },
+          {
+            "id": "owner-hospitality-7",
+            "label": "Neighborhood Institution",
+            "cost": 3,
+            "requires": "owner-hospitality-6",
+            "description": "Reduces stress gained while this branch is under pressure.",
+            "effect": {
+              "type": "stress",
+              "value": 12,
+              "roleId": "owner",
+              "branchId": "hospitality"
+            }
+          },
+          {
+            "id": "owner-hospitality-8",
+            "label": "House Legacy",
+            "cost": 3,
+            "requires": "owner-hospitality-7",
+            "description": "Unlocks the branch's signature active technique.",
+            "effect": {
+              "type": "capstone",
+              "value": 1,
+              "roleId": "owner",
+              "branchId": "hospitality"
+            }
+          }
+        ],
+        "capital": [
+          {
+            "id": "owner-capital-1",
+            "label": "Cash Position",
+            "cost": 1,
+            "requires": null,
+            "description": "Shows earlier and clearer role cues.",
+            "effect": {
+              "type": "perception",
+              "value": 8,
+              "roleId": "owner",
+              "branchId": "capital"
+            }
+          },
+          {
+            "id": "owner-capital-2",
+            "label": "Quote Compare",
+            "cost": 1,
+            "requires": "owner-capital-1",
+            "description": "Reduces execution and transition time without skipping decisions.",
+            "effect": {
+              "type": "speed",
+              "value": 6,
+              "roleId": "owner",
+              "branchId": "capital"
+            }
+          },
+          {
+            "id": "owner-capital-3",
+            "label": "Maintenance Reserve",
+            "cost": 2,
+            "requires": "owner-capital-2",
+            "description": "Improves recovery quality after a partial failure.",
+            "effect": {
+              "type": "recovery",
+              "value": 10,
+              "roleId": "owner",
+              "branchId": "capital"
+            }
+          },
+          {
+            "id": "owner-capital-4",
+            "label": "Vendor Terms",
+            "cost": 2,
+            "requires": "owner-capital-3",
+            "description": "Adds one safe concurrent state slot for matching tasks.",
+            "effect": {
+              "type": "capacity",
+              "value": 1,
+              "roleId": "owner",
+              "branchId": "capital"
+            }
+          },
+          {
+            "id": "owner-capital-5",
+            "label": "Bridge Finance",
+            "cost": 2,
+            "requires": "owner-capital-4",
+            "description": "Raises the safe quality floor for matching work.",
+            "effect": {
+              "type": "safety",
+              "value": 8,
+              "roleId": "owner",
+              "branchId": "capital"
+            }
+          },
+          {
+            "id": "owner-capital-6",
+            "label": "Portfolio Discipline",
+            "cost": 2,
+            "requires": "owner-capital-5",
+            "description": "Improves structured callouts and crew handoffs.",
+            "effect": {
+              "type": "handoff",
+              "value": 10,
+              "roleId": "owner",
+              "branchId": "capital"
+            }
+          },
+          {
+            "id": "owner-capital-7",
+            "label": "Patient Capital",
+            "cost": 3,
+            "requires": "owner-capital-6",
+            "description": "Reduces stress gained while this branch is under pressure.",
+            "effect": {
+              "type": "stress",
+              "value": 12,
+              "roleId": "owner",
+              "branchId": "capital"
+            }
+          },
+          {
+            "id": "owner-capital-8",
+            "label": "Durable Operator",
+            "cost": 3,
+            "requires": "owner-capital-7",
+            "description": "Unlocks the branch's signature active technique.",
+            "effect": {
+              "type": "capstone",
+              "value": 1,
+              "roleId": "owner",
+              "branchId": "capital"
+            }
+          }
+        ],
+        "expansion": [
+          {
+            "id": "owner-expansion-1",
+            "label": "Site Read",
+            "cost": 1,
+            "requires": null,
+            "description": "Shows earlier and clearer role cues.",
+            "effect": {
+              "type": "perception",
+              "value": 8,
+              "roleId": "owner",
+              "branchId": "expansion"
+            }
+          },
+          {
+            "id": "owner-expansion-2",
+            "label": "Lease Sense",
+            "cost": 1,
+            "requires": "owner-expansion-1",
+            "description": "Reduces execution and transition time without skipping decisions.",
+            "effect": {
+              "type": "speed",
+              "value": 6,
+              "roleId": "owner",
+              "branchId": "expansion"
+            }
+          },
+          {
+            "id": "owner-expansion-3",
+            "label": "Opening Runway",
+            "cost": 2,
+            "requires": "owner-expansion-2",
+            "description": "Improves recovery quality after a partial failure.",
+            "effect": {
+              "type": "recovery",
+              "value": 10,
+              "roleId": "owner",
+              "branchId": "expansion"
+            }
+          },
+          {
+            "id": "owner-expansion-4",
+            "label": "Second Set of Keys",
+            "cost": 2,
+            "requires": "owner-expansion-3",
+            "description": "Adds one safe concurrent state slot for matching tasks.",
+            "effect": {
+              "type": "capacity",
+              "value": 1,
+              "roleId": "owner",
+              "branchId": "expansion"
+            }
+          },
+          {
+            "id": "owner-expansion-5",
+            "label": "Regional Buyer",
+            "cost": 2,
+            "requires": "owner-expansion-4",
+            "description": "Raises the safe quality floor for matching work.",
+            "effect": {
+              "type": "safety",
+              "value": 8,
+              "roleId": "owner",
+              "branchId": "expansion"
+            }
+          },
+          {
+            "id": "owner-expansion-6",
+            "label": "Delegated Standards",
+            "cost": 2,
+            "requires": "owner-expansion-5",
+            "description": "Improves structured callouts and crew handoffs.",
+            "effect": {
+              "type": "handoff",
+              "value": 10,
+              "roleId": "owner",
+              "branchId": "expansion"
+            }
+          },
+          {
+            "id": "owner-expansion-7",
+            "label": "Multi-Unit View",
+            "cost": 3,
+            "requires": "owner-expansion-6",
+            "description": "Reduces stress gained while this branch is under pressure.",
+            "effect": {
+              "type": "stress",
+              "value": 12,
+              "roleId": "owner",
+              "branchId": "expansion"
+            }
+          },
+          {
+            "id": "owner-expansion-8",
+            "label": "Hospitality Group",
+            "cost": 3,
+            "requires": "owner-expansion-7",
+            "description": "Unlocks the branch's signature active technique.",
+            "effect": {
+              "type": "capstone",
+              "value": 1,
+              "roleId": "owner",
+              "branchId": "expansion"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "roleId": "server",
+      "fundamentals": [
+        {
+          "id": "server-fundamental-1",
+          "label": "Server Book",
+          "cost": 1,
+          "requires": null,
+          "description": "Clarifies owned work and its world cues.",
+          "effect": {
+            "type": "perception",
+            "value": 5,
+            "roleId": "server"
+          }
+        },
+        {
+          "id": "server-fundamental-2",
+          "label": "Section Voice",
+          "cost": 1,
+          "requires": "server-fundamental-1",
+          "description": "Improves structured crew communication.",
+          "effect": {
+            "type": "handoff",
+            "value": 8,
+            "roleId": "server"
+          }
+        },
+        {
+          "id": "server-fundamental-3",
+          "label": "Safe Carry",
+          "cost": 2,
+          "requires": "server-fundamental-2",
+          "description": "Reduces ordinary off-role penalties by 3%.",
+          "effect": {
+            "type": "cross-training",
+            "value": 3,
+            "roleId": "server"
+          }
+        },
+        {
+          "id": "server-fundamental-4",
+          "label": "Checkout Discipline",
+          "cost": 2,
+          "requires": "server-fundamental-3",
+          "description": "Improves join-in-progress and clock-out handoffs.",
+          "effect": {
+            "type": "handoff",
+            "value": 12,
+            "roleId": "server"
+          }
+        }
+      ],
+      "branches": {
+        "timing": [
+          {
+            "id": "server-timing-1",
+            "label": "Section Setup",
+            "cost": 1,
+            "requires": null,
+            "description": "Shows earlier and clearer role cues.",
+            "effect": {
+              "type": "perception",
+              "value": 8,
+              "roleId": "server",
+              "branchId": "timing"
+            }
+          },
+          {
+            "id": "server-timing-2",
+            "label": "Seat Memory",
+            "cost": 1,
+            "requires": "server-timing-1",
+            "description": "Reduces execution and transition time without skipping decisions.",
+            "effect": {
+              "type": "speed",
+              "value": 6,
+              "roleId": "server",
+              "branchId": "timing"
+            }
+          },
+          {
+            "id": "server-timing-3",
+            "label": "Silent Cues",
+            "cost": 2,
+            "requires": "server-timing-2",
+            "description": "Improves recovery quality after a partial failure.",
+            "effect": {
+              "type": "recovery",
+              "value": 10,
+              "roleId": "server",
+              "branchId": "timing"
+            }
+          },
+          {
+            "id": "server-timing-4",
+            "label": "Route Chain",
+            "cost": 2,
+            "requires": "server-timing-3",
+            "description": "Adds one safe concurrent state slot for matching tasks.",
+            "effect": {
+              "type": "capacity",
+              "value": 1,
+              "roleId": "server",
+              "branchId": "timing"
+            }
+          },
+          {
+            "id": "server-timing-5",
+            "label": "Tray Geometry",
+            "cost": 2,
+            "requires": "server-timing-4",
+            "description": "Raises the safe quality floor for matching work.",
+            "effect": {
+              "type": "safety",
+              "value": 8,
+              "roleId": "server",
+              "branchId": "timing"
+            }
+          },
+          {
+            "id": "server-timing-6",
+            "label": "Pace Read",
+            "cost": 2,
+            "requires": "server-timing-5",
+            "description": "Improves structured callouts and crew handoffs.",
+            "effect": {
+              "type": "handoff",
+              "value": 10,
+              "roleId": "server",
+              "branchId": "timing"
+            }
+          },
+          {
+            "id": "server-timing-7",
+            "label": "Invisible Service",
+            "cost": 3,
+            "requires": "server-timing-6",
+            "description": "Reduces stress gained while this branch is under pressure.",
+            "effect": {
+              "type": "stress",
+              "value": 12,
+              "roleId": "server",
+              "branchId": "timing"
+            }
+          },
+          {
+            "id": "server-timing-8",
+            "label": "Dining Captain",
+            "cost": 3,
+            "requires": "server-timing-7",
+            "description": "Unlocks the branch's signature active technique.",
+            "effect": {
+              "type": "capstone",
+              "value": 1,
+              "roleId": "server",
+              "branchId": "timing"
+            }
+          }
+        ],
+        "sales": [
+          {
+            "id": "server-sales-1",
+            "label": "Menu Map",
+            "cost": 1,
+            "requires": null,
+            "description": "Shows earlier and clearer role cues.",
+            "effect": {
+              "type": "perception",
+              "value": 8,
+              "roleId": "server",
+              "branchId": "sales"
+            }
+          },
+          {
+            "id": "server-sales-2",
+            "label": "Modifier Fluency",
+            "cost": 1,
+            "requires": "server-sales-1",
+            "description": "Reduces execution and transition time without skipping decisions.",
+            "effect": {
+              "type": "speed",
+              "value": 6,
+              "roleId": "server",
+              "branchId": "sales"
+            }
+          },
+          {
+            "id": "server-sales-3",
+            "label": "Ingredient Recall",
+            "cost": 2,
+            "requires": "server-sales-2",
+            "description": "Improves recovery quality after a partial failure.",
+            "effect": {
+              "type": "recovery",
+              "value": 10,
+              "roleId": "server",
+              "branchId": "sales"
+            }
+          },
+          {
+            "id": "server-sales-4",
+            "label": "Value Match",
+            "cost": 2,
+            "requires": "server-sales-3",
+            "description": "Adds one safe concurrent state slot for matching tasks.",
+            "effect": {
+              "type": "capacity",
+              "value": 1,
+              "roleId": "server",
+              "branchId": "sales"
+            }
+          },
+          {
+            "id": "server-sales-5",
+            "label": "Pairing Sense",
+            "cost": 2,
+            "requires": "server-sales-4",
+            "description": "Raises the safe quality floor for matching work.",
+            "effect": {
+              "type": "safety",
+              "value": 8,
+              "roleId": "server",
+              "branchId": "sales"
+            }
+          },
+          {
+            "id": "server-sales-6",
+            "label": "Allergy Confirmation",
+            "cost": 2,
+            "requires": "server-sales-5",
+            "description": "Improves structured callouts and crew handoffs.",
+            "effect": {
+              "type": "handoff",
+              "value": 10,
+              "roleId": "server",
+              "branchId": "sales"
+            }
+          },
+          {
+            "id": "server-sales-7",
+            "label": "Confident Guide",
+            "cost": 3,
+            "requires": "server-sales-6",
+            "description": "Reduces stress gained while this branch is under pressure.",
+            "effect": {
+              "type": "stress",
+              "value": 12,
+              "roleId": "server",
+              "branchId": "sales"
+            }
+          },
+          {
+            "id": "server-sales-8",
+            "label": "Menu Steward",
+            "cost": 3,
+            "requires": "server-sales-7",
+            "description": "Unlocks the branch's signature active technique.",
+            "effect": {
+              "type": "capstone",
+              "value": 1,
+              "roleId": "server",
+              "branchId": "sales"
+            }
+          }
+        ],
+        "recovery": [
+          {
+            "id": "server-recovery-1",
+            "label": "Listen First",
+            "cost": 1,
+            "requires": null,
+            "description": "Shows earlier and clearer role cues.",
+            "effect": {
+              "type": "perception",
+              "value": 8,
+              "roleId": "server",
+              "branchId": "recovery"
+            }
+          },
+          {
+            "id": "server-recovery-2",
+            "label": "Name the Issue",
+            "cost": 1,
+            "requires": "server-recovery-1",
+            "description": "Reduces execution and transition time without skipping decisions.",
+            "effect": {
+              "type": "speed",
+              "value": 6,
+              "roleId": "server",
+              "branchId": "recovery"
+            }
+          },
+          {
+            "id": "server-recovery-3",
+            "label": "Authority Read",
+            "cost": 2,
+            "requires": "server-recovery-2",
+            "description": "Improves recovery quality after a partial failure.",
+            "effect": {
+              "type": "recovery",
+              "value": 10,
+              "roleId": "server",
+              "branchId": "recovery"
+            }
+          },
+          {
+            "id": "server-recovery-4",
+            "label": "Measured Remedy",
+            "cost": 2,
+            "requires": "server-recovery-3",
+            "description": "Adds one safe concurrent state slot for matching tasks.",
+            "effect": {
+              "type": "capacity",
+              "value": 1,
+              "roleId": "server",
+              "branchId": "recovery"
+            }
+          },
+          {
+            "id": "server-recovery-5",
+            "label": "Own the Fix",
+            "cost": 2,
+            "requires": "server-recovery-4",
+            "description": "Raises the safe quality floor for matching work.",
+            "effect": {
+              "type": "safety",
+              "value": 8,
+              "roleId": "server",
+              "branchId": "recovery"
+            }
+          },
+          {
+            "id": "server-recovery-6",
+            "label": "Follow Through",
+            "cost": 2,
+            "requires": "server-recovery-5",
+            "description": "Improves structured callouts and crew handoffs.",
+            "effect": {
+              "type": "handoff",
+              "value": 10,
+              "roleId": "server",
+              "branchId": "recovery"
+            }
+          },
+          {
+            "id": "server-recovery-7",
+            "label": "Lasting Recovery",
+            "cost": 3,
+            "requires": "server-recovery-6",
+            "description": "Reduces stress gained while this branch is under pressure.",
+            "effect": {
+              "type": "stress",
+              "value": 12,
+              "roleId": "server",
+              "branchId": "recovery"
+            }
+          },
+          {
+            "id": "server-recovery-8",
+            "label": "House Favorite",
+            "cost": 3,
+            "requires": "server-recovery-7",
+            "description": "Unlocks the branch's signature active technique.",
+            "effect": {
+              "type": "capstone",
+              "value": 1,
+              "roleId": "server",
+              "branchId": "recovery"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "roleId": "dishwasher",
+      "fundamentals": [
+        {
+          "id": "dishwasher-fundamental-1",
+          "label": "Pit Safety",
+          "cost": 1,
+          "requires": null,
+          "description": "Clarifies owned work and its world cues.",
+          "effect": {
+            "type": "perception",
+            "value": 5,
+            "roleId": "dishwasher"
+          }
+        },
+        {
+          "id": "dishwasher-fundamental-2",
+          "label": "Clean/Dry Divide",
+          "cost": 1,
+          "requires": "dishwasher-fundamental-1",
+          "description": "Improves structured crew communication.",
+          "effect": {
+            "type": "handoff",
+            "value": 8,
+            "roleId": "dishwasher"
+          }
+        },
+        {
+          "id": "dishwasher-fundamental-3",
+          "label": "Downstream Awareness",
+          "cost": 2,
+          "requires": "dishwasher-fundamental-2",
+          "description": "Reduces ordinary off-role penalties by 3%.",
+          "effect": {
+            "type": "cross-training",
+            "value": 3,
+            "roleId": "dishwasher"
+          }
+        },
+        {
+          "id": "dishwasher-fundamental-4",
+          "label": "Close Ready",
+          "cost": 2,
+          "requires": "dishwasher-fundamental-3",
+          "description": "Improves join-in-progress and clock-out handoffs.",
+          "effect": {
+            "type": "handoff",
+            "value": 12,
+            "roleId": "dishwasher"
+          }
+        }
+      ],
+      "branches": {
+        "flow": [
+          {
+            "id": "dishwasher-flow-1",
+            "label": "Intake Order",
+            "cost": 1,
+            "requires": null,
+            "description": "Shows earlier and clearer role cues.",
+            "effect": {
+              "type": "perception",
+              "value": 8,
+              "roleId": "dishwasher",
+              "branchId": "flow"
+            }
+          },
+          {
+            "id": "dishwasher-flow-2",
+            "label": "Rack Geometry",
+            "cost": 1,
+            "requires": "dishwasher-flow-1",
+            "description": "Reduces execution and transition time without skipping decisions.",
+            "effect": {
+              "type": "speed",
+              "value": 6,
+              "roleId": "dishwasher",
+              "branchId": "flow"
+            }
+          },
+          {
+            "id": "dishwasher-flow-3",
+            "label": "Spray Paths",
+            "cost": 2,
+            "requires": "dishwasher-flow-2",
+            "description": "Improves recovery quality after a partial failure.",
+            "effect": {
+              "type": "recovery",
+              "value": 10,
+              "roleId": "dishwasher",
+              "branchId": "flow"
+            }
+          },
+          {
+            "id": "dishwasher-flow-4",
+            "label": "Cycle Chain",
+            "cost": 2,
+            "requires": "dishwasher-flow-3",
+            "description": "Adds one safe concurrent state slot for matching tasks.",
+            "effect": {
+              "type": "capacity",
+              "value": 1,
+              "roleId": "dishwasher",
+              "branchId": "flow"
+            }
+          },
+          {
+            "id": "dishwasher-flow-5",
+            "label": "Shortage Sight",
+            "cost": 2,
+            "requires": "dishwasher-flow-4",
+            "description": "Raises the safe quality floor for matching work.",
+            "effect": {
+              "type": "safety",
+              "value": 8,
+              "roleId": "dishwasher",
+              "branchId": "flow"
+            }
+          },
+          {
+            "id": "dishwasher-flow-6",
+            "label": "Landing Zone",
+            "cost": 2,
+            "requires": "dishwasher-flow-5",
+            "description": "Improves structured callouts and crew handoffs.",
+            "effect": {
+              "type": "handoff",
+              "value": 10,
+              "roleId": "dishwasher",
+              "branchId": "flow"
+            }
+          },
+          {
+            "id": "dishwasher-flow-7",
+            "label": "Pit Rhythm",
+            "cost": 3,
+            "requires": "dishwasher-flow-6",
+            "description": "Reduces stress gained while this branch is under pressure.",
+            "effect": {
+              "type": "stress",
+              "value": 12,
+              "roleId": "dishwasher",
+              "branchId": "flow"
+            }
+          },
+          {
+            "id": "dishwasher-flow-8",
+            "label": "Endless Rack",
+            "cost": 3,
+            "requires": "dishwasher-flow-7",
+            "description": "Unlocks the branch's signature active technique.",
+            "effect": {
+              "type": "capstone",
+              "value": 1,
+              "roleId": "dishwasher",
+              "branchId": "flow"
+            }
+          }
+        ],
+        "chemistry": [
+          {
+            "id": "dishwasher-chemistry-1",
+            "label": "Test Strip",
+            "cost": 1,
+            "requires": null,
+            "description": "Shows earlier and clearer role cues.",
+            "effect": {
+              "type": "perception",
+              "value": 8,
+              "roleId": "dishwasher",
+              "branchId": "chemistry"
+            }
+          },
+          {
+            "id": "dishwasher-chemistry-2",
+            "label": "Material Care",
+            "cost": 1,
+            "requires": "dishwasher-chemistry-1",
+            "description": "Reduces execution and transition time without skipping decisions.",
+            "effect": {
+              "type": "speed",
+              "value": 6,
+              "roleId": "dishwasher",
+              "branchId": "chemistry"
+            }
+          },
+          {
+            "id": "dishwasher-chemistry-3",
+            "label": "Soil Read",
+            "cost": 2,
+            "requires": "dishwasher-chemistry-2",
+            "description": "Improves recovery quality after a partial failure.",
+            "effect": {
+              "type": "recovery",
+              "value": 10,
+              "roleId": "dishwasher",
+              "branchId": "chemistry"
+            }
+          },
+          {
+            "id": "dishwasher-chemistry-4",
+            "label": "Temperature Window",
+            "cost": 2,
+            "requires": "dishwasher-chemistry-3",
+            "description": "Adds one safe concurrent state slot for matching tasks.",
+            "effect": {
+              "type": "capacity",
+              "value": 1,
+              "roleId": "dishwasher",
+              "branchId": "chemistry"
+            }
+          },
+          {
+            "id": "dishwasher-chemistry-5",
+            "label": "Batch Recall",
+            "cost": 2,
+            "requires": "dishwasher-chemistry-4",
+            "description": "Raises the safe quality floor for matching work.",
+            "effect": {
+              "type": "safety",
+              "value": 8,
+              "roleId": "dishwasher",
+              "branchId": "chemistry"
+            }
+          },
+          {
+            "id": "dishwasher-chemistry-6",
+            "label": "Root-Cause Wash",
+            "cost": 2,
+            "requires": "dishwasher-chemistry-5",
+            "description": "Improves structured callouts and crew handoffs.",
+            "effect": {
+              "type": "handoff",
+              "value": 10,
+              "roleId": "dishwasher",
+              "branchId": "chemistry"
+            }
+          },
+          {
+            "id": "dishwasher-chemistry-7",
+            "label": "Sanitation Rescue",
+            "cost": 3,
+            "requires": "dishwasher-chemistry-6",
+            "description": "Reduces stress gained while this branch is under pressure.",
+            "effect": {
+              "type": "stress",
+              "value": 12,
+              "roleId": "dishwasher",
+              "branchId": "chemistry"
+            }
+          },
+          {
+            "id": "dishwasher-chemistry-8",
+            "label": "Clean Certainty",
+            "cost": 3,
+            "requires": "dishwasher-chemistry-7",
+            "description": "Unlocks the branch's signature active technique.",
+            "effect": {
+              "type": "capstone",
+              "value": 1,
+              "roleId": "dishwasher",
+              "branchId": "chemistry"
+            }
+          }
+        ],
+        "reliability": [
+          {
+            "id": "dishwasher-reliability-1",
+            "label": "Safe Hands",
+            "cost": 1,
+            "requires": null,
+            "description": "Shows earlier and clearer role cues.",
+            "effect": {
+              "type": "perception",
+              "value": 8,
+              "roleId": "dishwasher",
+              "branchId": "reliability"
+            }
+          },
+          {
+            "id": "dishwasher-reliability-2",
+            "label": "Breakage Guard",
+            "cost": 1,
+            "requires": "dishwasher-reliability-1",
+            "description": "Reduces execution and transition time without skipping decisions.",
+            "effect": {
+              "type": "speed",
+              "value": 6,
+              "roleId": "dishwasher",
+              "branchId": "reliability"
+            }
+          },
+          {
+            "id": "dishwasher-reliability-3",
+            "label": "Machine Ear",
+            "cost": 2,
+            "requires": "dishwasher-reliability-2",
+            "description": "Improves recovery quality after a partial failure.",
+            "effect": {
+              "type": "recovery",
+              "value": 10,
+              "roleId": "dishwasher",
+              "branchId": "reliability"
+            }
+          },
+          {
+            "id": "dishwasher-reliability-4",
+            "label": "Preventative Pull",
+            "cost": 2,
+            "requires": "dishwasher-reliability-3",
+            "description": "Adds one safe concurrent state slot for matching tasks.",
+            "effect": {
+              "type": "capacity",
+              "value": 1,
+              "roleId": "dishwasher",
+              "branchId": "reliability"
+            }
+          },
+          {
+            "id": "dishwasher-reliability-5",
+            "label": "Utility Runner",
+            "cost": 2,
+            "requires": "dishwasher-reliability-4",
+            "description": "Raises the safe quality floor for matching work.",
+            "effect": {
+              "type": "safety",
+              "value": 8,
+              "roleId": "dishwasher",
+              "branchId": "reliability"
+            }
+          },
+          {
+            "id": "dishwasher-reliability-6",
+            "label": "Deep-Close Habit",
+            "cost": 2,
+            "requires": "dishwasher-reliability-5",
+            "description": "Improves structured callouts and crew handoffs.",
+            "effect": {
+              "type": "handoff",
+              "value": 10,
+              "roleId": "dishwasher",
+              "branchId": "reliability"
+            }
+          },
+          {
+            "id": "dishwasher-reliability-7",
+            "label": "Unshakeable",
+            "cost": 3,
+            "requires": "dishwasher-reliability-6",
+            "description": "Reduces stress gained while this branch is under pressure.",
+            "effect": {
+              "type": "stress",
+              "value": 12,
+              "roleId": "dishwasher",
+              "branchId": "reliability"
+            }
+          },
+          {
+            "id": "dishwasher-reliability-8",
+            "label": "Pit Anchor",
+            "cost": 3,
+            "requires": "dishwasher-reliability-7",
+            "description": "Unlocks the branch's signature active technique.",
+            "effect": {
+              "type": "capstone",
+              "value": 1,
+              "roleId": "dishwasher",
+              "branchId": "reliability"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "roleId": "chef",
+      "fundamentals": [
+        {
+          "id": "chef-fundamental-1",
+          "label": "Chef's Book",
+          "cost": 1,
+          "requires": null,
+          "description": "Clarifies owned work and its world cues.",
+          "effect": {
+            "type": "perception",
+            "value": 5,
+            "roleId": "chef"
+          }
+        },
+        {
+          "id": "chef-fundamental-2",
+          "label": "Pass Voice",
+          "cost": 1,
+          "requires": "chef-fundamental-1",
+          "description": "Improves structured crew communication.",
+          "effect": {
+            "type": "handoff",
+            "value": 8,
+            "roleId": "chef"
+          }
+        },
+        {
+          "id": "chef-fundamental-3",
+          "label": "Food-Safety Authority",
+          "cost": 2,
+          "requires": "chef-fundamental-2",
+          "description": "Reduces ordinary off-role penalties by 3%.",
+          "effect": {
+            "type": "cross-training",
+            "value": 3,
+            "roleId": "chef"
+          }
+        },
+        {
+          "id": "chef-fundamental-4",
+          "label": "Kitchen Handoff",
+          "cost": 2,
+          "requires": "chef-fundamental-3",
+          "description": "Improves join-in-progress and clock-out handoffs.",
+          "effect": {
+            "type": "handoff",
+            "value": 12,
+            "roleId": "chef"
+          }
+        }
+      ],
+      "branches": {
+        "cuisine": [
+          {
+            "id": "chef-cuisine-1",
+            "label": "Spec Memory",
+            "cost": 1,
+            "requires": null,
+            "description": "Shows earlier and clearer role cues.",
+            "effect": {
+              "type": "perception",
+              "value": 8,
+              "roleId": "chef",
+              "branchId": "cuisine"
+            }
+          },
+          {
+            "id": "chef-cuisine-2",
+            "label": "Taste Baseline",
+            "cost": 1,
+            "requires": "chef-cuisine-1",
+            "description": "Reduces execution and transition time without skipping decisions.",
+            "effect": {
+              "type": "speed",
+              "value": 6,
+              "roleId": "chef",
+              "branchId": "cuisine"
+            }
+          },
+          {
+            "id": "chef-cuisine-3",
+            "label": "Yield Eye",
+            "cost": 2,
+            "requires": "chef-cuisine-2",
+            "description": "Improves recovery quality after a partial failure.",
+            "effect": {
+              "type": "recovery",
+              "value": 10,
+              "roleId": "chef",
+              "branchId": "cuisine"
+            }
+          },
+          {
+            "id": "chef-cuisine-4",
+            "label": "Portion Truth",
+            "cost": 2,
+            "requires": "chef-cuisine-3",
+            "description": "Adds one safe concurrent state slot for matching tasks.",
+            "effect": {
+              "type": "capacity",
+              "value": 1,
+              "roleId": "chef",
+              "branchId": "cuisine"
+            }
+          },
+          {
+            "id": "chef-cuisine-5",
+            "label": "Ingredient Voice",
+            "cost": 2,
+            "requires": "chef-cuisine-4",
+            "description": "Raises the safe quality floor for matching work.",
+            "effect": {
+              "type": "safety",
+              "value": 8,
+              "roleId": "chef",
+              "branchId": "cuisine"
+            }
+          },
+          {
+            "id": "chef-cuisine-6",
+            "label": "Menu Cost Sense",
+            "cost": 2,
+            "requires": "chef-cuisine-5",
+            "description": "Improves structured callouts and crew handoffs.",
+            "effect": {
+              "type": "handoff",
+              "value": 10,
+              "roleId": "chef",
+              "branchId": "cuisine"
+            }
+          },
+          {
+            "id": "chef-cuisine-7",
+            "label": "Recipe Authority",
+            "cost": 3,
+            "requires": "chef-cuisine-6",
+            "description": "Reduces stress gained while this branch is under pressure.",
+            "effect": {
+              "type": "stress",
+              "value": 12,
+              "roleId": "chef",
+              "branchId": "cuisine"
+            }
+          },
+          {
+            "id": "chef-cuisine-8",
+            "label": "House Cuisine",
+            "cost": 3,
+            "requires": "chef-cuisine-7",
+            "description": "Unlocks the branch's signature active technique.",
+            "effect": {
+              "type": "capstone",
+              "value": 1,
+              "roleId": "chef",
+              "branchId": "cuisine"
+            }
+          }
+        ],
+        "expo": [
+          {
+            "id": "chef-expo-1",
+            "label": "Rail Order",
+            "cost": 1,
+            "requires": null,
+            "description": "Shows earlier and clearer role cues.",
+            "effect": {
+              "type": "perception",
+              "value": 8,
+              "roleId": "chef",
+              "branchId": "expo"
+            }
+          },
+          {
+            "id": "chef-expo-2",
+            "label": "All-Day Count",
+            "cost": 1,
+            "requires": "chef-expo-1",
+            "description": "Reduces execution and transition time without skipping decisions.",
+            "effect": {
+              "type": "speed",
+              "value": 6,
+              "roleId": "chef",
+              "branchId": "expo"
+            }
+          },
+          {
+            "id": "chef-expo-3",
+            "label": "Call and Answer",
+            "cost": 2,
+            "requires": "chef-expo-2",
+            "description": "Improves recovery quality after a partial failure.",
+            "effect": {
+              "type": "recovery",
+              "value": 10,
+              "roleId": "chef",
+              "branchId": "expo"
+            }
+          },
+          {
+            "id": "chef-expo-4",
+            "label": "Hold Control",
+            "cost": 2,
+            "requires": "chef-expo-3",
+            "description": "Adds one safe concurrent state slot for matching tasks.",
+            "effect": {
+              "type": "capacity",
+              "value": 1,
+              "roleId": "chef",
+              "branchId": "expo"
+            }
+          },
+          {
+            "id": "chef-expo-5",
+            "label": "Pickup Window",
+            "cost": 2,
+            "requires": "chef-expo-4",
+            "description": "Raises the safe quality floor for matching work.",
+            "effect": {
+              "type": "safety",
+              "value": 8,
+              "roleId": "chef",
+              "branchId": "expo"
+            }
+          },
+          {
+            "id": "chef-expo-6",
+            "label": "Refire Command",
+            "cost": 2,
+            "requires": "chef-expo-5",
+            "description": "Improves structured callouts and crew handoffs.",
+            "effect": {
+              "type": "handoff",
+              "value": 10,
+              "roleId": "chef",
+              "branchId": "expo"
+            }
+          },
+          {
+            "id": "chef-expo-7",
+            "label": "Whole-Rail Sight",
+            "cost": 3,
+            "requires": "chef-expo-6",
+            "description": "Reduces stress gained while this branch is under pressure.",
+            "effect": {
+              "type": "stress",
+              "value": 12,
+              "roleId": "chef",
+              "branchId": "expo"
+            }
+          },
+          {
+            "id": "chef-expo-8",
+            "label": "Perfect Pass",
+            "cost": 3,
+            "requires": "chef-expo-7",
+            "description": "Unlocks the branch's signature active technique.",
+            "effect": {
+              "type": "capstone",
+              "value": 1,
+              "roleId": "chef",
+              "branchId": "expo"
+            }
+          }
+        ],
+        "leadership": [
+          {
+            "id": "chef-leadership-1",
+            "label": "Line Check",
+            "cost": 1,
+            "requires": null,
+            "description": "Shows earlier and clearer role cues.",
+            "effect": {
+              "type": "perception",
+              "value": 8,
+              "roleId": "chef",
+              "branchId": "leadership"
+            }
+          },
+          {
+            "id": "chef-leadership-2",
+            "label": "Precise Call",
+            "cost": 1,
+            "requires": "chef-leadership-1",
+            "description": "Reduces execution and transition time without skipping decisions.",
+            "effect": {
+              "type": "speed",
+              "value": 6,
+              "roleId": "chef",
+              "branchId": "leadership"
+            }
+          },
+          {
+            "id": "chef-leadership-3",
+            "label": "Calm Refire",
+            "cost": 2,
+            "requires": "chef-leadership-2",
+            "description": "Improves recovery quality after a partial failure.",
+            "effect": {
+              "type": "recovery",
+              "value": 10,
+              "roleId": "chef",
+              "branchId": "leadership"
+            }
+          },
+          {
+            "id": "chef-leadership-4",
+            "label": "Safety Culture",
+            "cost": 2,
+            "requires": "chef-leadership-3",
+            "description": "Adds one safe concurrent state slot for matching tasks.",
+            "effect": {
+              "type": "capacity",
+              "value": 1,
+              "roleId": "chef",
+              "branchId": "leadership"
+            }
+          },
+          {
+            "id": "chef-leadership-5",
+            "label": "Coach the Cause",
+            "cost": 2,
+            "requires": "chef-leadership-4",
+            "description": "Raises the safe quality floor for matching work.",
+            "effect": {
+              "type": "safety",
+              "value": 8,
+              "roleId": "chef",
+              "branchId": "leadership"
+            }
+          },
+          {
+            "id": "chef-leadership-6",
+            "label": "Station Trust",
+            "cost": 2,
+            "requires": "chef-leadership-5",
+            "description": "Improves structured callouts and crew handoffs.",
+            "effect": {
+              "type": "handoff",
+              "value": 10,
+              "roleId": "chef",
+              "branchId": "leadership"
+            }
+          },
+          {
+            "id": "chef-leadership-7",
+            "label": "Brigade Tempo",
+            "cost": 3,
+            "requires": "chef-leadership-6",
+            "description": "Reduces stress gained while this branch is under pressure.",
+            "effect": {
+              "type": "stress",
+              "value": 12,
+              "roleId": "chef",
+              "branchId": "leadership"
+            }
+          },
+          {
+            "id": "chef-leadership-8",
+            "label": "Kitchen Standard",
+            "cost": 3,
+            "requires": "chef-leadership-7",
+            "description": "Unlocks the branch's signature active technique.",
+            "effect": {
+              "type": "capstone",
+              "value": 1,
+              "roleId": "chef",
+              "branchId": "leadership"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "roleId": "cook",
+      "fundamentals": [
+        {
+          "id": "cook-fundamental-1",
+          "label": "Cook's Mise",
+          "cost": 1,
+          "requires": null,
+          "description": "Clarifies owned work and its world cues.",
+          "effect": {
+            "type": "perception",
+            "value": 5,
+            "roleId": "cook"
+          }
+        },
+        {
+          "id": "cook-fundamental-2",
+          "label": "Behind and Corner",
+          "cost": 1,
+          "requires": "cook-fundamental-1",
+          "description": "Improves structured crew communication.",
+          "effect": {
+            "type": "handoff",
+            "value": 8,
+            "roleId": "cook"
+          }
+        },
+        {
+          "id": "cook-fundamental-3",
+          "label": "Clean as You Go",
+          "cost": 2,
+          "requires": "cook-fundamental-2",
+          "description": "Reduces ordinary off-role penalties by 3%.",
+          "effect": {
+            "type": "cross-training",
+            "value": 3,
+            "roleId": "cook"
+          }
+        },
+        {
+          "id": "cook-fundamental-4",
+          "label": "Station Handoff",
+          "cost": 2,
+          "requires": "cook-fundamental-3",
+          "description": "Improves join-in-progress and clock-out handoffs.",
+          "effect": {
+            "type": "handoff",
+            "value": 12,
+            "roleId": "cook"
+          }
+        }
+      ],
+      "branches": {
+        "stations": [
+          {
+            "id": "cook-stations-1",
+            "label": "Station Setup",
+            "cost": 1,
+            "requires": null,
+            "description": "Shows earlier and clearer role cues.",
+            "effect": {
+              "type": "perception",
+              "value": 8,
+              "roleId": "cook",
+              "branchId": "stations"
+            }
+          },
+          {
+            "id": "cook-stations-2",
+            "label": "Heat Zones",
+            "cost": 1,
+            "requires": "cook-stations-1",
+            "description": "Reduces execution and transition time without skipping decisions.",
+            "effect": {
+              "type": "speed",
+              "value": 6,
+              "roleId": "cook",
+              "branchId": "stations"
+            }
+          },
+          {
+            "id": "cook-stations-3",
+            "label": "Pan Memory",
+            "cost": 2,
+            "requires": "cook-stations-2",
+            "description": "Improves recovery quality after a partial failure.",
+            "effect": {
+              "type": "recovery",
+              "value": 10,
+              "roleId": "cook",
+              "branchId": "stations"
+            }
+          },
+          {
+            "id": "cook-stations-4",
+            "label": "Doneness Read",
+            "cost": 2,
+            "requires": "cook-stations-3",
+            "description": "Adds one safe concurrent state slot for matching tasks.",
+            "effect": {
+              "type": "capacity",
+              "value": 1,
+              "roleId": "cook",
+              "branchId": "stations"
+            }
+          },
+          {
+            "id": "cook-stations-5",
+            "label": "Rest Window",
+            "cost": 2,
+            "requires": "cook-stations-4",
+            "description": "Raises the safe quality floor for matching work.",
+            "effect": {
+              "type": "safety",
+              "value": 8,
+              "roleId": "cook",
+              "branchId": "stations"
+            }
+          },
+          {
+            "id": "cook-stations-6",
+            "label": "Modifier Lane",
+            "cost": 2,
+            "requires": "cook-stations-5",
+            "description": "Improves structured callouts and crew handoffs.",
+            "effect": {
+              "type": "handoff",
+              "value": 10,
+              "roleId": "cook",
+              "branchId": "stations"
+            }
+          },
+          {
+            "id": "cook-stations-7",
+            "label": "Station Rescue",
+            "cost": 3,
+            "requires": "cook-stations-6",
+            "description": "Reduces stress gained while this branch is under pressure.",
+            "effect": {
+              "type": "stress",
+              "value": 12,
+              "roleId": "cook",
+              "branchId": "stations"
+            }
+          },
+          {
+            "id": "cook-stations-8",
+            "label": "Station Master",
+            "cost": 3,
+            "requires": "cook-stations-7",
+            "description": "Unlocks the branch's signature active technique.",
+            "effect": {
+              "type": "capstone",
+              "value": 1,
+              "roleId": "cook",
+              "branchId": "stations"
+            }
+          }
+        ],
+        "mise": [
+          {
+            "id": "cook-mise-1",
+            "label": "Sharp Start",
+            "cost": 1,
+            "requires": null,
+            "description": "Shows earlier and clearer role cues.",
+            "effect": {
+              "type": "perception",
+              "value": 8,
+              "roleId": "cook",
+              "branchId": "mise"
+            }
+          },
+          {
+            "id": "cook-mise-2",
+            "label": "Prep Dependencies",
+            "cost": 1,
+            "requires": "cook-mise-1",
+            "description": "Reduces execution and transition time without skipping decisions.",
+            "effect": {
+              "type": "speed",
+              "value": 6,
+              "roleId": "cook",
+              "branchId": "mise"
+            }
+          },
+          {
+            "id": "cook-mise-3",
+            "label": "Batch Scale",
+            "cost": 2,
+            "requires": "cook-mise-2",
+            "description": "Improves recovery quality after a partial failure.",
+            "effect": {
+              "type": "recovery",
+              "value": 10,
+              "roleId": "cook",
+              "branchId": "mise"
+            }
+          },
+          {
+            "id": "cook-mise-4",
+            "label": "Par Sense",
+            "cost": 2,
+            "requires": "cook-mise-3",
+            "description": "Adds one safe concurrent state slot for matching tasks.",
+            "effect": {
+              "type": "capacity",
+              "value": 1,
+              "roleId": "cook",
+              "branchId": "mise"
+            }
+          },
+          {
+            "id": "cook-mise-5",
+            "label": "FIFO Hands",
+            "cost": 2,
+            "requires": "cook-mise-4",
+            "description": "Raises the safe quality floor for matching work.",
+            "effect": {
+              "type": "safety",
+              "value": 8,
+              "roleId": "cook",
+              "branchId": "mise"
+            }
+          },
+          {
+            "id": "cook-mise-6",
+            "label": "Yield Discipline",
+            "cost": 2,
+            "requires": "cook-mise-5",
+            "description": "Improves structured callouts and crew handoffs.",
+            "effect": {
+              "type": "handoff",
+              "value": 10,
+              "roleId": "cook",
+              "branchId": "mise"
+            }
+          },
+          {
+            "id": "cook-mise-7",
+            "label": "Perfect Readiness",
+            "cost": 3,
+            "requires": "cook-mise-6",
+            "description": "Reduces stress gained while this branch is under pressure.",
+            "effect": {
+              "type": "stress",
+              "value": 12,
+              "roleId": "cook",
+              "branchId": "mise"
+            }
+          },
+          {
+            "id": "cook-mise-8",
+            "label": "Mise Complete",
+            "cost": 3,
+            "requires": "cook-mise-7",
+            "description": "Unlocks the branch's signature active technique.",
+            "effect": {
+              "type": "capstone",
+              "value": 1,
+              "roleId": "cook",
+              "branchId": "mise"
+            }
+          }
+        ],
+        "tempo": [
+          {
+            "id": "cook-tempo-1",
+            "label": "Call Back",
+            "cost": 1,
+            "requires": null,
+            "description": "Shows earlier and clearer role cues.",
+            "effect": {
+              "type": "perception",
+              "value": 8,
+              "roleId": "cook",
+              "branchId": "tempo"
+            }
+          },
+          {
+            "id": "cook-tempo-2",
+            "label": "Pickup Sense",
+            "cost": 1,
+            "requires": "cook-tempo-1",
+            "description": "Reduces execution and transition time without skipping decisions.",
+            "effect": {
+              "type": "speed",
+              "value": 6,
+              "roleId": "cook",
+              "branchId": "tempo"
+            }
+          },
+          {
+            "id": "cook-tempo-3",
+            "label": "Safe Acceleration",
+            "cost": 2,
+            "requires": "cook-tempo-2",
+            "description": "Improves recovery quality after a partial failure.",
+            "effect": {
+              "type": "recovery",
+              "value": 10,
+              "roleId": "cook",
+              "branchId": "tempo"
+            }
+          },
+          {
+            "id": "cook-tempo-4",
+            "label": "Hold Recovery",
+            "cost": 2,
+            "requires": "cook-tempo-3",
+            "description": "Adds one safe concurrent state slot for matching tasks.",
+            "effect": {
+              "type": "capacity",
+              "value": 1,
+              "roleId": "cook",
+              "branchId": "tempo"
+            }
+          },
+          {
+            "id": "cook-tempo-5",
+            "label": "Multi-Process",
+            "cost": 2,
+            "requires": "cook-tempo-4",
+            "description": "Raises the safe quality floor for matching work.",
+            "effect": {
+              "type": "safety",
+              "value": 8,
+              "roleId": "cook",
+              "branchId": "tempo"
+            }
+          },
+          {
+            "id": "cook-tempo-6",
+            "label": "Second Wind",
+            "cost": 2,
+            "requires": "cook-tempo-5",
+            "description": "Improves structured callouts and crew handoffs.",
+            "effect": {
+              "type": "handoff",
+              "value": 10,
+              "roleId": "cook",
+              "branchId": "tempo"
+            }
+          },
+          {
+            "id": "cook-tempo-7",
+            "label": "Rush Clarity",
+            "cost": 3,
+            "requires": "cook-tempo-6",
+            "description": "Reduces stress gained while this branch is under pressure.",
+            "effect": {
+              "type": "stress",
+              "value": 12,
+              "roleId": "cook",
+              "branchId": "tempo"
+            }
+          },
+          {
+            "id": "cook-tempo-8",
+            "label": "Unbroken Tempo",
+            "cost": 3,
+            "requires": "cook-tempo-7",
+            "description": "Unlocks the branch's signature active technique.",
+            "effect": {
+              "type": "capstone",
+              "value": 1,
+              "roleId": "cook",
+              "branchId": "tempo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "roleId": "host-busser",
+      "fundamentals": [
+        {
+          "id": "host-busser-fundamental-1",
+          "label": "Door Book",
+          "cost": 1,
+          "requires": null,
+          "description": "Clarifies owned work and its world cues.",
+          "effect": {
+            "type": "perception",
+            "value": 5,
+            "roleId": "host-busser"
+          }
+        },
+        {
+          "id": "host-busser-fundamental-2",
+          "label": "Room Voice",
+          "cost": 1,
+          "requires": "host-busser-fundamental-1",
+          "description": "Improves structured crew communication.",
+          "effect": {
+            "type": "handoff",
+            "value": 8,
+            "roleId": "host-busser"
+          }
+        },
+        {
+          "id": "host-busser-fundamental-3",
+          "label": "Safe Bussing",
+          "cost": 2,
+          "requires": "host-busser-fundamental-2",
+          "description": "Reduces ordinary off-role penalties by 3%.",
+          "effect": {
+            "type": "cross-training",
+            "value": 3,
+            "roleId": "host-busser"
+          }
+        },
+        {
+          "id": "host-busser-fundamental-4",
+          "label": "Closing Circuit",
+          "cost": 2,
+          "requires": "host-busser-fundamental-3",
+          "description": "Improves join-in-progress and clock-out handoffs.",
+          "effect": {
+            "type": "handoff",
+            "value": 12,
+            "roleId": "host-busser"
+          }
+        }
+      ],
+      "branches": {
+        "door": [
+          {
+            "id": "host-busser-door-1",
+            "label": "Warm Arrival",
+            "cost": 1,
+            "requires": null,
+            "description": "Shows earlier and clearer role cues.",
+            "effect": {
+              "type": "perception",
+              "value": 8,
+              "roleId": "host-busser",
+              "branchId": "door"
+            }
+          },
+          {
+            "id": "host-busser-door-2",
+            "label": "Quote Band",
+            "cost": 1,
+            "requires": "host-busser-door-1",
+            "description": "Reduces execution and transition time without skipping decisions.",
+            "effect": {
+              "type": "speed",
+              "value": 6,
+              "roleId": "host-busser",
+              "branchId": "door"
+            }
+          },
+          {
+            "id": "host-busser-door-3",
+            "label": "Reservation Read",
+            "cost": 2,
+            "requires": "host-busser-door-2",
+            "description": "Improves recovery quality after a partial failure.",
+            "effect": {
+              "type": "recovery",
+              "value": 10,
+              "roleId": "host-busser",
+              "branchId": "door"
+            }
+          },
+          {
+            "id": "host-busser-door-4",
+            "label": "Expectation Reset",
+            "cost": 2,
+            "requires": "host-busser-door-3",
+            "description": "Adds one safe concurrent state slot for matching tasks.",
+            "effect": {
+              "type": "capacity",
+              "value": 1,
+              "roleId": "host-busser",
+              "branchId": "door"
+            }
+          },
+          {
+            "id": "host-busser-door-5",
+            "label": "Fair Queue",
+            "cost": 2,
+            "requires": "host-busser-door-4",
+            "description": "Raises the safe quality floor for matching work.",
+            "effect": {
+              "type": "safety",
+              "value": 8,
+              "roleId": "host-busser",
+              "branchId": "door"
+            }
+          },
+          {
+            "id": "host-busser-door-6",
+            "label": "Regular Welcome",
+            "cost": 2,
+            "requires": "host-busser-door-5",
+            "description": "Improves structured callouts and crew handoffs.",
+            "effect": {
+              "type": "handoff",
+              "value": 10,
+              "roleId": "host-busser",
+              "branchId": "door"
+            }
+          },
+          {
+            "id": "host-busser-door-7",
+            "label": "Door Authority",
+            "cost": 3,
+            "requires": "host-busser-door-6",
+            "description": "Reduces stress gained while this branch is under pressure.",
+            "effect": {
+              "type": "stress",
+              "value": 12,
+              "roleId": "host-busser",
+              "branchId": "door"
+            }
+          },
+          {
+            "id": "host-busser-door-8",
+            "label": "Maître d'",
+            "cost": 3,
+            "requires": "host-busser-door-7",
+            "description": "Unlocks the branch's signature active technique.",
+            "effect": {
+              "type": "capstone",
+              "value": 1,
+              "roleId": "host-busser",
+              "branchId": "door"
+            }
+          }
+        ],
+        "room": [
+          {
+            "id": "host-busser-room-1",
+            "label": "Table Graph",
+            "cost": 1,
+            "requires": null,
+            "description": "Shows earlier and clearer role cues.",
+            "effect": {
+              "type": "perception",
+              "value": 8,
+              "roleId": "host-busser",
+              "branchId": "room"
+            }
+          },
+          {
+            "id": "host-busser-room-2",
+            "label": "Section Balance",
+            "cost": 1,
+            "requires": "host-busser-room-1",
+            "description": "Reduces execution and transition time without skipping decisions.",
+            "effect": {
+              "type": "speed",
+              "value": 6,
+              "roleId": "host-busser",
+              "branchId": "room"
+            }
+          },
+          {
+            "id": "host-busser-room-3",
+            "label": "Combination Sight",
+            "cost": 2,
+            "requires": "host-busser-room-2",
+            "description": "Improves recovery quality after a partial failure.",
+            "effect": {
+              "type": "recovery",
+              "value": 10,
+              "roleId": "host-busser",
+              "branchId": "room"
+            }
+          },
+          {
+            "id": "host-busser-room-4",
+            "label": "Accessible Route",
+            "cost": 2,
+            "requires": "host-busser-room-3",
+            "description": "Adds one safe concurrent state slot for matching tasks.",
+            "effect": {
+              "type": "capacity",
+              "value": 1,
+              "roleId": "host-busser",
+              "branchId": "room"
+            }
+          },
+          {
+            "id": "host-busser-room-5",
+            "label": "Turn Forecast",
+            "cost": 2,
+            "requires": "host-busser-room-4",
+            "description": "Raises the safe quality floor for matching work.",
+            "effect": {
+              "type": "safety",
+              "value": 8,
+              "roleId": "host-busser",
+              "branchId": "room"
+            }
+          },
+          {
+            "id": "host-busser-room-6",
+            "label": "Congestion Read",
+            "cost": 2,
+            "requires": "host-busser-room-5",
+            "description": "Improves structured callouts and crew handoffs.",
+            "effect": {
+              "type": "handoff",
+              "value": 10,
+              "roleId": "host-busser",
+              "branchId": "room"
+            }
+          },
+          {
+            "id": "host-busser-room-7",
+            "label": "Room Conductor",
+            "cost": 3,
+            "requires": "host-busser-room-6",
+            "description": "Reduces stress gained while this branch is under pressure.",
+            "effect": {
+              "type": "stress",
+              "value": 12,
+              "roleId": "host-busser",
+              "branchId": "room"
+            }
+          },
+          {
+            "id": "host-busser-room-8",
+            "label": "Perfect Floor",
+            "cost": 3,
+            "requires": "host-busser-room-7",
+            "description": "Unlocks the branch's signature active technique.",
+            "effect": {
+              "type": "capstone",
+              "value": 1,
+              "roleId": "host-busser",
+              "branchId": "room"
+            }
+          }
+        ],
+        "support": [
+          {
+            "id": "host-busser-support-1",
+            "label": "Room Scan",
+            "cost": 1,
+            "requires": null,
+            "description": "Shows earlier and clearer role cues.",
+            "effect": {
+              "type": "perception",
+              "value": 8,
+              "roleId": "host-busser",
+              "branchId": "support"
+            }
+          },
+          {
+            "id": "host-busser-support-2",
+            "label": "Pre-Bus Cue",
+            "cost": 1,
+            "requires": "host-busser-support-1",
+            "description": "Reduces execution and transition time without skipping decisions.",
+            "effect": {
+              "type": "speed",
+              "value": 6,
+              "roleId": "host-busser",
+              "branchId": "support"
+            }
+          },
+          {
+            "id": "host-busser-support-3",
+            "label": "Stack Balance",
+            "cost": 2,
+            "requires": "host-busser-support-2",
+            "description": "Improves recovery quality after a partial failure.",
+            "effect": {
+              "type": "recovery",
+              "value": 10,
+              "roleId": "host-busser",
+              "branchId": "support"
+            }
+          },
+          {
+            "id": "host-busser-support-4",
+            "label": "Reset Chain",
+            "cost": 2,
+            "requires": "host-busser-support-3",
+            "description": "Adds one safe concurrent state slot for matching tasks.",
+            "effect": {
+              "type": "capacity",
+              "value": 1,
+              "roleId": "host-busser",
+              "branchId": "support"
+            }
+          },
+          {
+            "id": "host-busser-support-5",
+            "label": "Spill Response",
+            "cost": 2,
+            "requires": "host-busser-support-4",
+            "description": "Raises the safe quality floor for matching work.",
+            "effect": {
+              "type": "safety",
+              "value": 8,
+              "roleId": "host-busser",
+              "branchId": "support"
+            }
+          },
+          {
+            "id": "host-busser-support-6",
+            "label": "Silent Support",
+            "cost": 2,
+            "requires": "host-busser-support-5",
+            "description": "Improves structured callouts and crew handoffs.",
+            "effect": {
+              "type": "handoff",
+              "value": 10,
+              "roleId": "host-busser",
+              "branchId": "support"
+            }
+          },
+          {
+            "id": "host-busser-support-7",
+            "label": "Turnover Captain",
+            "cost": 3,
+            "requires": "host-busser-support-6",
+            "description": "Reduces stress gained while this branch is under pressure.",
+            "effect": {
+              "type": "stress",
+              "value": 12,
+              "roleId": "host-busser",
+              "branchId": "support"
+            }
+          },
+          {
+            "id": "host-busser-support-8",
+            "label": "Room Restored",
+            "cost": 3,
+            "requires": "host-busser-support-7",
+            "description": "Unlocks the branch's signature active technique.",
+            "effect": {
+              "type": "capstone",
+              "value": 1,
+              "roleId": "host-busser",
+              "branchId": "support"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

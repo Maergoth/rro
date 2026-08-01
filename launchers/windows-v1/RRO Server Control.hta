@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+  <title>Rush &amp; Revenue Online — Server Control</title>
+  <hta:application id="app" applicationname="RROServerControl" border="thin" caption="yes" maximizebutton="no" minimizebutton="yes" singleinstance="yes" sysmenu="yes" windowstate="normal" />
+  <meta http-equiv="x-ua-compatible" content="IE=9" />
+  <style>
+    html,body{margin:0;background:#091315;color:#e8e5d5;font:15px Segoe UI,Arial,sans-serif;overflow:hidden}
+    .top{height:92px;padding:24px 28px;background:#101e21;border-bottom:1px solid #294145}
+    .brand{font-size:25px;color:#efbc54;font-weight:700;letter-spacing:1px}.sub{color:#80cdb1;margin-top:6px}
+    .body{padding:26px 28px}.status{padding:16px;border:1px solid #355258;border-radius:8px;background:#111c1f;margin-bottom:18px}
+    .dot{display:inline-block;width:11px;height:11px;border-radius:50%;background:#d35e4c;margin-right:9px}
+    .online .dot{background:#77c7a9;box-shadow:0 0 10px #77c7a9}.buttons{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .button{display:block;padding:15px 12px;border:1px solid #426068;border-radius:7px;background:#203438;color:#f2eedb;text-align:center;cursor:pointer}
+    .button:hover{background:#315158;border-color:#7ac6ac}.danger{border-color:#77443e}.fine{font-size:12px;color:#84999a;line-height:1.6;margin-top:20px}
+  </style>
+  <script language="VBScript">
+    Option Explicit
+    Dim fso, shell, root
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    Set shell = CreateObject("WScript.Shell")
+    root = fso.GetParentFolderName(Replace(document.location.pathname, "%20", " "))
+    If Left(root, 1) = "/" And Mid(root, 3, 1) = ":" Then root = Mid(root, 2)
+    root = Replace(root, "/", "\")
+
+    Sub Window_OnLoad
+      window.resizeTo 650, 535
+      window.moveTo (screen.availWidth-650)/2, (screen.availHeight-535)/2
+      RefreshStatus
+      window.setInterval "RefreshStatus", 2000
+    End Sub
+
+    Sub StartServer
+      shell.Run Chr(34) & fso.BuildPath(root, "Start RRO Server.vbs") & Chr(34), 0, False
+      window.setTimeout "RefreshStatus", 1200
+    End Sub
+
+    Sub StopServer
+      shell.Run Chr(34) & fso.BuildPath(root, "Stop RRO Server.vbs") & Chr(34), 0, True
+      RefreshStatus
+    End Sub
+
+    Sub OpenData
+      If Not fso.FolderExists(fso.BuildPath(root, "data")) Then fso.CreateFolder fso.BuildPath(root, "data")
+      shell.Run "explorer.exe " & Chr(34) & fso.BuildPath(root, "data") & Chr(34), 1, False
+    End Sub
+
+    Sub OpenReadme
+      shell.Run Chr(34) & fso.BuildPath(root, "SERVER_README.md") & Chr(34), 1, False
+    End Sub
+
+    Sub RefreshStatus
+      On Error Resume Next
+      Dim http, healthy
+      healthy = False
+      Set http = CreateObject("WinHttp.WinHttpRequest.5.1")
+      http.SetTimeouts 250,250,250,250
+      http.Open "GET", "http://127.0.0.1:8788/health", False
+      http.Send
+      healthy = (Err.Number = 0 And http.Status = 200)
+      Err.Clear
+      If healthy Then
+        statusBox.className = "status online"
+        stateText.innerText = "ONLINE — accepting V1 clients at 127.0.0.1:8788"
+        detailText.innerText = http.ResponseText
+      Else
+        statusBox.className = "status"
+        stateText.innerText = "OFFLINE — no local world process is listening"
+        detailText.innerText = "Start creates or resumes data\rro-v1.sqlite. Stop requests a graceful database shutdown."
+      End If
+      On Error GoTo 0
+    End Sub
+  </script>
+</head>
+<body>
+  <div class="top"><div class="brand">RUSH &amp; REVENUE ONLINE</div><div class="sub">Persistent local world · clean V1 server control</div></div>
+  <div class="body">
+    <div id="statusBox" class="status"><span class="dot"></span><strong id="stateText">Checking…</strong><div id="detailText" class="fine"></div></div>
+    <div class="buttons">
+      <div class="button" onclick="StartServer">Start server</div><div class="button danger" onclick="StopServer">Stop gracefully</div>
+      <div class="button" onclick="OpenData">Open world data</div><div class="button" onclick="OpenReadme">Server guide</div>
+    </div>
+    <div class="fine">There is no visible command prompt. The controller starts the pinned Node runtime hidden, checks the health endpoint, and stops through a loopback-only token. The exact-PID fallback is used only when graceful control is unavailable.</div>
+  </div>
+</body>
+</html>

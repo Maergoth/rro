@@ -1,0 +1,4088 @@
+{
+  "schemaVersion": 1,
+  "product": "Rush & Revenue Online",
+  "baseline": "V1 clean Godot/TypeScript foundation",
+  "target": "V2 AAA restaurant MMORPG",
+  "generatorRevision": 1,
+  "conventions": {
+    "estimates": {
+      "S": "1–3 developer-days",
+      "M": "3–10 developer-days",
+      "L": "2–5 developer-weeks",
+      "XL": "Epic requiring decomposition before commitment"
+    },
+    "priorities": [
+      "Must",
+      "Should",
+      "Could"
+    ]
+  },
+  "counts": {
+    "categories": 28,
+    "tasks": 240,
+    "must": 152,
+    "should": 61,
+    "could": 27
+  },
+  "tasks": [
+    {
+      "id": "PROD-001",
+      "category": "Production & Direction",
+      "categoryId": "PROD",
+      "discipline": "Production",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "V2 pillars and kill criteria",
+      "description": "Ratify the AAA hospitality, shared-crew, persistent-world, and fair-guest-conflict pillars with measurable kill criteria.",
+      "dependencies": [],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can ratify the AAA hospitality, shared-crew, persistent-world, and fair-guest-conflict pillars with measurable kill criteria. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PROD-002",
+      "category": "Production & Direction",
+      "categoryId": "PROD",
+      "discipline": "Production",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Vertical-slice budget",
+      "description": "Cost the eight-player dinner-rush vertical slice by discipline, vendor, hardware, and contingency.",
+      "dependencies": [
+        "PROD-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can cost the eight-player dinner-rush vertical slice by discipline, vendor, hardware, and contingency. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PROD-003",
+      "category": "Production & Direction",
+      "categoryId": "PROD",
+      "discipline": "Production",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Feature ownership map",
+      "description": "Assign a directly responsible owner and backup for every runtime, content, and operational domain.",
+      "dependencies": [
+        "PROD-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can assign a directly responsible owner and backup for every runtime, content, and operational domain. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PROD-004",
+      "category": "Production & Direction",
+      "categoryId": "PROD",
+      "discipline": "Production",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Milestone exit reviews",
+      "description": "Create evidence-based concept, pre-production, alpha, beta, launch, and live gates.",
+      "dependencies": [
+        "PROD-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can create evidence-based concept, pre-production, alpha, beta, launch, and live gates. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PROD-005",
+      "category": "Production & Direction",
+      "categoryId": "PROD",
+      "discipline": "Production",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Risk register cadence",
+      "description": "Maintain weekly technical, staffing, content, licensing, and schedule risks with triggers and mitigations.",
+      "dependencies": [
+        "PROD-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can maintain weekly technical, staffing, content, licensing, and schedule risks with triggers and mitigations. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PROD-006",
+      "category": "Production & Direction",
+      "categoryId": "PROD",
+      "discipline": "Production",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "External playtest council",
+      "description": "Recruit restaurant veterans and MMO raid leaders for recurring compensated reviews.",
+      "dependencies": [
+        "PROD-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can recruit restaurant veterans and MMO raid leaders for recurring compensated reviews. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PROD-007",
+      "category": "Production & Direction",
+      "categoryId": "PROD",
+      "discipline": "Production",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "M",
+      "title": "Vendor and outsourcing plan",
+      "description": "Define briefs, source-control boundaries, review SLAs, and acceptance standards for external teams.",
+      "dependencies": [
+        "PROD-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can define briefs, source-control boundaries, review SLAs, and acceptance standards for external teams. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PROD-008",
+      "category": "Production & Direction",
+      "categoryId": "PROD",
+      "discipline": "Production",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "L",
+      "title": "Post-launch capacity model",
+      "description": "Staff a 24/7 live game, moderation, SRE, support, content, and economy operation.",
+      "dependencies": [
+        "PROD-007"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can staff a 24/7 live game, moderation, SRE, support, content, and economy operation. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ARCH-001",
+      "category": "Architecture & Developer Platform",
+      "categoryId": "ARCH",
+      "discipline": "Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Service boundary ADRs",
+      "description": "Split identity, world, shift, economy, social, content, and telemetry responsibilities with versioned contracts.",
+      "dependencies": [
+        "PROD-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can split identity, world, shift, economy, social, content, and telemetry responsibilities with versioned contracts. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ARCH-002",
+      "category": "Architecture & Developer Platform",
+      "categoryId": "ARCH",
+      "discipline": "Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Repository ownership rules",
+      "description": "Add CODEOWNERS, package boundaries, dependency rules, and architectural linting.",
+      "dependencies": [
+        "PROD-001",
+        "ARCH-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can add CODEOWNERS, package boundaries, dependency rules, and architectural linting. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ARCH-003",
+      "category": "Architecture & Developer Platform",
+      "categoryId": "ARCH",
+      "discipline": "Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Schema evolution framework",
+      "description": "Replace clean-start schema creation with forward-only migrations, verification, rollback drills, and compatibility windows.",
+      "dependencies": [
+        "PROD-001",
+        "ARCH-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can replace clean-start schema creation with forward-only migrations, verification, rollback drills, and compatibility windows. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ARCH-004",
+      "category": "Architecture & Developer Platform",
+      "categoryId": "ARCH",
+      "discipline": "Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Content schema compiler",
+      "description": "Generate typed server and Godot bindings from versioned content schemas with actionable diagnostics.",
+      "dependencies": [
+        "PROD-001",
+        "ARCH-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can generate typed server and Godot bindings from versioned content schemas with actionable diagnostics. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ARCH-005",
+      "category": "Architecture & Developer Platform",
+      "categoryId": "ARCH",
+      "discipline": "Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Deterministic simulation harness",
+      "description": "Run recorded shift inputs against pinned seeds and compare state hashes across builds.",
+      "dependencies": [
+        "PROD-001",
+        "ARCH-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can run recorded shift inputs against pinned seeds and compare state hashes across builds. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ARCH-006",
+      "category": "Architecture & Developer Platform",
+      "categoryId": "ARCH",
+      "discipline": "Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Feature flag service",
+      "description": "Target flags by environment, cohort, region, restaurant, and account with audited changes.",
+      "dependencies": [
+        "PROD-001",
+        "ARCH-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can target flags by environment, cohort, region, restaurant, and account with audited changes. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ARCH-007",
+      "category": "Architecture & Developer Platform",
+      "categoryId": "ARCH",
+      "discipline": "Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "M",
+      "title": "Plugin SDK",
+      "description": "Publish sandboxed extension points for subclasses, furniture packs, events, minigames, and server rules.",
+      "dependencies": [
+        "PROD-001",
+        "ARCH-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can publish sandboxed extension points for subclasses, furniture packs, events, minigames, and server rules. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ARCH-008",
+      "category": "Architecture & Developer Platform",
+      "categoryId": "ARCH",
+      "discipline": "Engineering",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "L",
+      "title": "Developer world snapshots",
+      "description": "Create scrubbed, shareable world snapshots and one-click scenario restores for team debugging.",
+      "dependencies": [
+        "PROD-001",
+        "ARCH-007"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can create scrubbed, shareable world snapshots and one-click scenario restores for team debugging. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "NET-001",
+      "category": "Networking & Scale",
+      "categoryId": "NET",
+      "discipline": "Online Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Gateway and session routing",
+      "description": "Route authenticated clients to region and shift authorities while preserving reconnect state.",
+      "dependencies": [
+        "ARCH-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can route authenticated clients to region and shift authorities while preserving reconnect state. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "NET-002",
+      "category": "Networking & Scale",
+      "categoryId": "NET",
+      "discipline": "Online Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Interest management",
+      "description": "Replicate only relevant restaurant rooms, entities, cues, and work queues at bounded bandwidth.",
+      "dependencies": [
+        "ARCH-001",
+        "NET-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can replicate only relevant restaurant rooms, entities, cues, and work queues at bounded bandwidth. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "NET-003",
+      "category": "Networking & Scale",
+      "categoryId": "NET",
+      "discipline": "Online Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Input sequencing",
+      "description": "Add server tick numbers, client sequence IDs, acknowledgement windows, and duplicate suppression.",
+      "dependencies": [
+        "ARCH-001",
+        "NET-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can add server tick numbers, client sequence IDs, acknowledgement windows, and duplicate suppression. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "NET-004",
+      "category": "Networking & Scale",
+      "categoryId": "NET",
+      "discipline": "Online Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Prediction and reconciliation",
+      "description": "Predict top-down locomotion locally and reconcile against authoritative collision without rubber-banding.",
+      "dependencies": [
+        "ARCH-001",
+        "NET-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can predict top-down locomotion locally and reconcile against authoritative collision without rubber-banding. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "NET-005",
+      "category": "Networking & Scale",
+      "categoryId": "NET",
+      "discipline": "Online Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Snapshot delta codec",
+      "description": "Replace full JSON snapshots with measured binary deltas, baselines, and recovery snapshots.",
+      "dependencies": [
+        "ARCH-001",
+        "NET-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can replace full JSON snapshots with measured binary deltas, baselines, and recovery snapshots. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "NET-006",
+      "category": "Networking & Scale",
+      "categoryId": "NET",
+      "discipline": "Online Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Reconnect and role handoff",
+      "description": "Restore presence, duty ownership, minigame phase, and queued intent after transient disconnects.",
+      "dependencies": [
+        "ARCH-001",
+        "NET-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can restore presence, duty ownership, minigame phase, and queued intent after transient disconnects. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "NET-007",
+      "category": "Networking & Scale",
+      "categoryId": "NET",
+      "discipline": "Online Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "M",
+      "title": "Shift process isolation",
+      "description": "Host busy restaurants in isolated workers with health transfer and crash containment.",
+      "dependencies": [
+        "ARCH-001",
+        "NET-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can host busy restaurants in isolated workers with health transfer and crash containment. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "NET-008",
+      "category": "Networking & Scale",
+      "categoryId": "NET",
+      "discipline": "Online Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Regional shard orchestration",
+      "description": "Place countries and regions across capacity pools while keeping travel and economy identities stable.",
+      "dependencies": [
+        "ARCH-001",
+        "NET-007"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can place countries and regions across capacity pools while keeping travel and economy identities stable. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "NET-009",
+      "category": "Networking & Scale",
+      "categoryId": "NET",
+      "discipline": "Online Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "XL",
+      "title": "Load-shed policies",
+      "description": "Protect active service by degrading noncritical social, analytics, and browsing traffic first.",
+      "dependencies": [
+        "ARCH-001",
+        "NET-008"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can protect active service by degrading noncritical social, analytics, and browsing traffic first. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "NET-010",
+      "category": "Networking & Scale",
+      "categoryId": "NET",
+      "discipline": "Online Engineering",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "M",
+      "title": "Mass concurrency soak",
+      "description": "Sustain target concurrent users, shifts, guests, and NPC roles through a 24-hour automated soak.",
+      "dependencies": [
+        "ARCH-001",
+        "NET-009"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can sustain target concurrent users, shifts, guests, and NPC roles through a 24-hour automated soak. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "DATA-001",
+      "category": "Persistence & Data Integrity",
+      "categoryId": "DATA",
+      "discipline": "Backend Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Production datastore selection",
+      "description": "Benchmark and select transactional, cache, queue, object-store, and search technologies against MMO workloads.",
+      "dependencies": [
+        "ARCH-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can benchmark and select transactional, cache, queue, object-store, and search technologies against MMO workloads. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "DATA-002",
+      "category": "Persistence & Data Integrity",
+      "categoryId": "DATA",
+      "discipline": "Backend Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "World event journal",
+      "description": "Persist append-only economic and shift facts that can reconstruct disputed outcomes.",
+      "dependencies": [
+        "ARCH-003",
+        "DATA-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can persist append-only economic and shift facts that can reconstruct disputed outcomes. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "DATA-003",
+      "category": "Persistence & Data Integrity",
+      "categoryId": "DATA",
+      "discipline": "Backend Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Atomic cross-service ledger",
+      "description": "Guarantee idempotent player and restaurant money movements across retries and partial failures.",
+      "dependencies": [
+        "ARCH-003",
+        "DATA-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can guarantee idempotent player and restaurant money movements across retries and partial failures. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "DATA-004",
+      "category": "Persistence & Data Integrity",
+      "categoryId": "DATA",
+      "discipline": "Backend Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Backup and point-in-time restore",
+      "description": "Automate encrypted backups and prove region-level recovery within RPO and RTO targets.",
+      "dependencies": [
+        "ARCH-003",
+        "DATA-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can automate encrypted backups and prove region-level recovery within RPO and RTO targets. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "DATA-005",
+      "category": "Persistence & Data Integrity",
+      "categoryId": "DATA",
+      "discipline": "Backend Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Data retention policy",
+      "description": "Classify account, gameplay, chat, moderation, telemetry, and payment records with deletion workflows.",
+      "dependencies": [
+        "ARCH-003",
+        "DATA-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can classify account, gameplay, chat, moderation, telemetry, and payment records with deletion workflows. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "DATA-006",
+      "category": "Persistence & Data Integrity",
+      "categoryId": "DATA",
+      "discipline": "Backend Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Corruption detector",
+      "description": "Continuously validate referential, ledger, inventory, layout, and progression invariants.",
+      "dependencies": [
+        "ARCH-003",
+        "DATA-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can continuously validate referential, ledger, inventory, layout, and progression invariants. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "DATA-007",
+      "category": "Persistence & Data Integrity",
+      "categoryId": "DATA",
+      "discipline": "Backend Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "M",
+      "title": "Hot/cold world storage",
+      "description": "Archive dormant restaurant histories without breaking visits, reviews, or reactivation.",
+      "dependencies": [
+        "ARCH-003",
+        "DATA-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can archive dormant restaurant histories without breaking visits, reviews, or reactivation. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "DATA-008",
+      "category": "Persistence & Data Integrity",
+      "categoryId": "DATA",
+      "discipline": "Backend Engineering",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "L",
+      "title": "Player data export",
+      "description": "Deliver authenticated portable account, character, purchase, and moderation-history exports.",
+      "dependencies": [
+        "ARCH-003",
+        "DATA-007"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can deliver authenticated portable account, character, purchase, and moderation-history exports. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SIM-001",
+      "category": "Restaurant Simulation",
+      "categoryId": "SIM",
+      "discipline": "Gameplay Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Canonical service state machine",
+      "description": "Model arrival through departure with branches for courses, bar service, takeout, recovery, and abandonment.",
+      "dependencies": [
+        "ARCH-005",
+        "DATA-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can model arrival through departure with branches for courses, bar service, takeout, recovery, and abandonment. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SIM-002",
+      "category": "Restaurant Simulation",
+      "categoryId": "SIM",
+      "discipline": "Gameplay Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Menu item dependency graph",
+      "description": "Resolve recipes, prep, equipment, station capacity, allergens, garnishes, holds, and substitutions.",
+      "dependencies": [
+        "ARCH-005",
+        "SIM-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can resolve recipes, prep, equipment, station capacity, allergens, garnishes, holds, and substitutions. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SIM-003",
+      "category": "Restaurant Simulation",
+      "categoryId": "SIM",
+      "discipline": "Gameplay Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Ticket rail authority",
+      "description": "Simulate seat-numbered modifiers, all-day counts, firing, holding, refires, and pickup synchronization.",
+      "dependencies": [
+        "ARCH-005",
+        "SIM-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can simulate seat-numbered modifiers, all-day counts, firing, holding, refires, and pickup synchronization. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SIM-004",
+      "category": "Restaurant Simulation",
+      "categoryId": "SIM",
+      "discipline": "Gameplay Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Physical inventory lots",
+      "description": "Track quantity, unit, lot, expiration, storage location, temperature, and ownership for every product.",
+      "dependencies": [
+        "ARCH-005",
+        "SIM-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can track quantity, unit, lot, expiration, storage location, temperature, and ownership for every product. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SIM-005",
+      "category": "Restaurant Simulation",
+      "categoryId": "SIM",
+      "discipline": "Gameplay Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Food safety simulation",
+      "description": "Model time-temperature control, cross-contact, handwashing, sanitizer, pests, and corrective actions.",
+      "dependencies": [
+        "ARCH-005",
+        "SIM-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can model time-temperature control, cross-contact, handwashing, sanitizer, pests, and corrective actions. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SIM-006",
+      "category": "Restaurant Simulation",
+      "categoryId": "SIM",
+      "discipline": "Gameplay Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Wear and maintenance",
+      "description": "Degrade equipment by use, soil, heat, misuse, and maintenance quality with causal failures.",
+      "dependencies": [
+        "ARCH-005",
+        "SIM-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can degrade equipment by use, soil, heat, misuse, and maintenance quality with causal failures. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SIM-007",
+      "category": "Restaurant Simulation",
+      "categoryId": "SIM",
+      "discipline": "Gameplay Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "M",
+      "title": "Guest perception model",
+      "description": "Convert observable moments and expectations into patience, satisfaction, memory, review, and return behavior.",
+      "dependencies": [
+        "ARCH-005",
+        "SIM-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can convert observable moments and expectations into patience, satisfaction, memory, review, and return behavior. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SIM-008",
+      "category": "Restaurant Simulation",
+      "categoryId": "SIM",
+      "discipline": "Gameplay Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Urgency director",
+      "description": "Pace recoverable incidents so every staffed role has pressure without manufactured impossibility.",
+      "dependencies": [
+        "ARCH-005",
+        "SIM-007"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can pace recoverable incidents so every staffed role has pressure without manufactured impossibility. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SIM-009",
+      "category": "Restaurant Simulation",
+      "categoryId": "SIM",
+      "discipline": "Gameplay Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "XL",
+      "title": "Shift settlement",
+      "description": "Reconcile covers, checks, tips, wages, comps, waste, purchasing, utilities, reviews, and cash variance.",
+      "dependencies": [
+        "ARCH-005",
+        "SIM-008"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can reconcile covers, checks, tips, wages, comps, waste, purchasing, utilities, reviews, and cash variance. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SIM-010",
+      "category": "Restaurant Simulation",
+      "categoryId": "SIM",
+      "discipline": "Gameplay Engineering",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "M",
+      "title": "Four-timescale audit",
+      "description": "Verify every recipe, turn, break, delivery, decay, and session rule against the 4× clock and one-hour target.",
+      "dependencies": [
+        "ARCH-005",
+        "SIM-009"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can verify every recipe, turn, break, delivery, decay, and session rule against the 4× clock and one-hour target. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "MGR-001",
+      "category": "Manager Role",
+      "categoryId": "MGR",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Manager operations board",
+      "description": "Turn staffing, queues, breaks, 86s, incidents, and guest risk into a spatial triage interface.",
+      "dependencies": [
+        "SIM-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can turn staffing, queues, breaks, 86s, incidents, and guest risk into a spatial triage interface. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "MGR-002",
+      "category": "Manager Role",
+      "categoryId": "MGR",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Labor and break paperwork",
+      "description": "Model availability, labor targets, break law, call-outs, approvals, and signed exceptions.",
+      "dependencies": [
+        "SIM-001",
+        "MGR-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can model availability, labor targets, break law, call-outs, approvals, and signed exceptions. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "MGR-003",
+      "category": "Manager Role",
+      "categoryId": "MGR",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Comp and void audit",
+      "description": "Require evidence, authority limits, reason codes, guest follow-up, and drawer reconciliation.",
+      "dependencies": [
+        "SIM-001",
+        "MGR-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can require evidence, authority limits, reason codes, guest follow-up, and drawer reconciliation. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "MGR-004",
+      "category": "Manager Role",
+      "categoryId": "MGR",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Inspection walk",
+      "description": "Build HACCP, restroom, ingress, temperature, chemical, and corrective-action rounds.",
+      "dependencies": [
+        "SIM-001",
+        "MGR-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can build HACCP, restroom, ingress, temperature, chemical, and corrective-action rounds. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "MGR-005",
+      "category": "Manager Role",
+      "categoryId": "MGR",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Coaching conversations",
+      "description": "Branch feedback by evidence, tone, timing, skill gap, stress, and follow-through.",
+      "dependencies": [
+        "SIM-001",
+        "MGR-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can branch feedback by evidence, tone, timing, skill gap, stress, and follow-through. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "MGR-006",
+      "category": "Manager Role",
+      "categoryId": "MGR",
+      "discipline": "Role Design",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Incident command",
+      "description": "Coordinate containment, guest care, documentation, vendor calls, and reopening decisions.",
+      "dependencies": [
+        "SIM-001",
+        "MGR-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can coordinate containment, guest care, documentation, vendor calls, and reopening decisions. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "MGR-007",
+      "category": "Manager Role",
+      "categoryId": "MGR",
+      "discipline": "Role Design",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "M",
+      "title": "Manager specialization pass",
+      "description": "Add flow, people, and compliance subclasses with active techniques and team synergies.",
+      "dependencies": [
+        "SIM-001",
+        "MGR-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can add flow, people, and compliance subclasses with active techniques and team synergies. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "OWN-001",
+      "category": "Owner Role",
+      "categoryId": "OWN",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Owner financial statements",
+      "description": "Create playable P&L, cash flow, balance sheet, prime cost, and variance review.",
+      "dependencies": [
+        "ECON-001",
+        "BUILD-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can create playable P&L, cash flow, balance sheet, prime cost, and variance review. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "OWN-002",
+      "category": "Owner Role",
+      "categoryId": "OWN",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Lease and insurance desk",
+      "description": "Negotiate clauses, renewals, claims, deductibles, inspections, and coverage tradeoffs.",
+      "dependencies": [
+        "ECON-001",
+        "OWN-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can negotiate clauses, renewals, claims, deductibles, inspections, and coverage tradeoffs. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "OWN-003",
+      "category": "Owner Role",
+      "categoryId": "OWN",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Capital portfolio",
+      "description": "Compare equipment, decor, maintenance, debt, marketing, and expansion by risk-adjusted return.",
+      "dependencies": [
+        "ECON-001",
+        "OWN-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can compare equipment, decor, maintenance, debt, marketing, and expansion by risk-adjusted return. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "OWN-004",
+      "category": "Owner Role",
+      "categoryId": "OWN",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Vendor negotiation",
+      "description": "Use volume, terms, quality, reliability, seasonality, and relationship history in contracts.",
+      "dependencies": [
+        "ECON-001",
+        "OWN-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can use volume, terms, quality, reliability, seasonality, and relationship history in contracts. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "OWN-005",
+      "category": "Owner Role",
+      "categoryId": "OWN",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Menu engineering",
+      "description": "Balance contribution margin, popularity, station load, waste, identity, and guest expectations.",
+      "dependencies": [
+        "ECON-001",
+        "OWN-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can balance contribution margin, popularity, station load, waste, identity, and guest expectations. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "OWN-006",
+      "category": "Owner Role",
+      "categoryId": "OWN",
+      "discipline": "Role Design",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Multi-unit governance",
+      "description": "Delegate standards, budgets, leaders, transfers, and interventions across a restaurant group.",
+      "dependencies": [
+        "ECON-001",
+        "OWN-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can delegate standards, budgets, leaders, transfers, and interventions across a restaurant group. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "OWN-007",
+      "category": "Owner Role",
+      "categoryId": "OWN",
+      "discipline": "Role Design",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "M",
+      "title": "Ownership succession",
+      "description": "Support partnerships, buyouts, inheritance, receivership, closure, and sale without deleting history.",
+      "dependencies": [
+        "ECON-001",
+        "OWN-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can support partnerships, buyouts, inheritance, receivership, closure, and sale without deleting history. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SRV-001",
+      "category": "Server Role",
+      "categoryId": "SRV",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Contextual greeting matrix",
+      "description": "Branch greeting dialogue by reservation, occasion, wait, regular status, accessibility, and table mood.",
+      "dependencies": [
+        "SIM-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can branch greeting dialogue by reservation, occasion, wait, regular status, accessibility, and table mood. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SRV-002",
+      "category": "Server Role",
+      "categoryId": "SRV",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Beverage discovery",
+      "description": "Model preference questions, responsible alcohol service, pacing, pairings, and refill attention.",
+      "dependencies": [
+        "SIM-001",
+        "SRV-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can model preference questions, responsible alcohol service, pacing, pairings, and refill attention. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SRV-003",
+      "category": "Server Role",
+      "categoryId": "SRV",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Seat-number order entry",
+      "description": "Test memory, modifiers, allergy confirmation, coursing, POS navigation, and verbal readback.",
+      "dependencies": [
+        "SIM-001",
+        "SRV-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can test memory, modifiers, allergy confirmation, coursing, POS navigation, and verbal readback. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SRV-004",
+      "category": "Server Role",
+      "categoryId": "SRV",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Section attention model",
+      "description": "Make gaze, menus, glass levels, course state, conversation, and check cues readable without icons alone.",
+      "dependencies": [
+        "SIM-001",
+        "SRV-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can make gaze, menus, glass levels, course state, conversation, and check cues readable without icons alone. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SRV-005",
+      "category": "Server Role",
+      "categoryId": "SRV",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Tray and route mastery",
+      "description": "Simulate weight, balance, hot/cold separation, seat delivery, hazards, and full-hands routing.",
+      "dependencies": [
+        "SIM-001",
+        "SRV-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can simulate weight, balance, hot/cold separation, seat delivery, hazards, and full-hands routing. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SRV-006",
+      "category": "Server Role",
+      "categoryId": "SRV",
+      "discipline": "Role Design",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Two-bite check and recovery",
+      "description": "Time check-ins, diagnose the actual problem, offer bounded remedies, and verify satisfaction.",
+      "dependencies": [
+        "SIM-001",
+        "SRV-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can time check-ins, diagnose the actual problem, offer bounded remedies, and verify satisfaction. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SRV-007",
+      "category": "Server Role",
+      "categoryId": "SRV",
+      "discipline": "Role Design",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "M",
+      "title": "Payment and checkout",
+      "description": "Handle split methods, gift cards, cash, tips, fraud cues, receipts, side work, and declared cash.",
+      "dependencies": [
+        "SIM-001",
+        "SRV-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can handle split methods, gift cards, cash, tips, fraud cues, receipts, side work, and declared cash. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SRV-008",
+      "category": "Server Role",
+      "categoryId": "SRV",
+      "discipline": "Role Design",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "L",
+      "title": "Server specialization pass",
+      "description": "Add fine-dining captain, high-volume server, sommelier, and banquet subclasses.",
+      "dependencies": [
+        "SIM-001",
+        "SRV-007"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can add fine-dining captain, high-volume server, sommelier, and banquet subclasses. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "DSH-001",
+      "category": "Dishwasher Role",
+      "categoryId": "DSH",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Pit intake topology",
+      "description": "Prioritize ware by downstream shortage, soil, material, breakage risk, and landing-zone congestion.",
+      "dependencies": [
+        "SIM-004",
+        "SIM-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can prioritize ware by downstream shortage, soil, material, breakage risk, and landing-zone congestion. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "DSH-002",
+      "category": "Dishwasher Role",
+      "categoryId": "DSH",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Rack geometry game",
+      "description": "Pack compatible pieces for spray exposure, drainage, capacity, and safe unloading.",
+      "dependencies": [
+        "SIM-004",
+        "DSH-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can pack compatible pieces for spray exposure, drainage, capacity, and safe unloading. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "DSH-003",
+      "category": "Dishwasher Role",
+      "categoryId": "DSH",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Chemistry control",
+      "description": "Test concentration, temperature, contact time, water condition, and corrective dosing.",
+      "dependencies": [
+        "SIM-004",
+        "DSH-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can test concentration, temperature, contact time, water condition, and corrective dosing. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "DSH-004",
+      "category": "Dishwasher Role",
+      "categoryId": "DSH",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Cycle cadence",
+      "description": "Coordinate scrape, soak, load, machine state, inspection, drying, and distribution without idle gaps.",
+      "dependencies": [
+        "SIM-004",
+        "DSH-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can coordinate scrape, soak, load, machine state, inspection, drying, and distribution without idle gaps. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "DSH-005",
+      "category": "Dishwasher Role",
+      "categoryId": "DSH",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Pot and specialty ware",
+      "description": "Add carbonized cookware, knives, wood, glass, silver, allergen tools, and fragile finishes.",
+      "dependencies": [
+        "SIM-004",
+        "DSH-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can add carbonized cookware, knives, wood, glass, silver, allergen tools, and fragile finishes. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "DSH-006",
+      "category": "Dishwasher Role",
+      "categoryId": "DSH",
+      "discipline": "Role Design",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Machine maintenance",
+      "description": "Diagnose arms, strainers, booster heat, pumps, scale, leaks, and safe lockout.",
+      "dependencies": [
+        "SIM-004",
+        "DSH-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can diagnose arms, strainers, booster heat, pumps, scale, leaks, and safe lockout. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "DSH-007",
+      "category": "Dishwasher Role",
+      "categoryId": "DSH",
+      "discipline": "Role Design",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "M",
+      "title": "Dish specialization pass",
+      "description": "Add pit lead, steward, sanitation technician, and utility subclasses.",
+      "dependencies": [
+        "SIM-004",
+        "DSH-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can add pit lead, steward, sanitation technician, and utility subclasses. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "CHF-001",
+      "category": "Chef Role",
+      "categoryId": "CHF",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Chef line check",
+      "description": "Inspect pars, labels, taste baselines, tools, safety, 86 risk, and station readiness.",
+      "dependencies": [
+        "SIM-002",
+        "SIM-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can inspect pars, labels, taste baselines, tools, safety, 86 risk, and station readiness. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "CHF-002",
+      "category": "Chef Role",
+      "categoryId": "CHF",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "All-day rail control",
+      "description": "Call, acknowledge, pace, hold, sell, refire, and synchronize an entire kitchen rail.",
+      "dependencies": [
+        "SIM-002",
+        "CHF-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can call, acknowledge, pace, hold, sell, refire, and synchronize an entire kitchen rail. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "CHF-003",
+      "category": "Chef Role",
+      "categoryId": "CHF",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Plate inspection",
+      "description": "Judge temperature, doneness, portion, seasoning, garnish, allergen marking, and table completeness.",
+      "dependencies": [
+        "SIM-002",
+        "CHF-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can judge temperature, doneness, portion, seasoning, garnish, allergen marking, and table completeness. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "CHF-004",
+      "category": "Chef Role",
+      "categoryId": "CHF",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Taste calibration",
+      "description": "Compare samples against recipe intent while accounting for palate fatigue and product variance.",
+      "dependencies": [
+        "SIM-002",
+        "CHF-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can compare samples against recipe intent while accounting for palate fatigue and product variance. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "CHF-005",
+      "category": "Chef Role",
+      "categoryId": "CHF",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Yield and ordering",
+      "description": "Reconcile forecast, edible yield, trim, waste, on-hand lots, lead time, and safety stock.",
+      "dependencies": [
+        "SIM-002",
+        "CHF-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can reconcile forecast, edible yield, trim, waste, on-hand lots, lead time, and safety stock. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "CHF-006",
+      "category": "Chef Role",
+      "categoryId": "CHF",
+      "discipline": "Role Design",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Kitchen coaching",
+      "description": "Diagnose technique versus system failures and choose real-time or post-shift intervention.",
+      "dependencies": [
+        "SIM-002",
+        "CHF-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can diagnose technique versus system failures and choose real-time or post-shift intervention. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "CHF-007",
+      "category": "Chef Role",
+      "categoryId": "CHF",
+      "discipline": "Role Design",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "M",
+      "title": "Chef specialization pass",
+      "description": "Add executive chef, sous chef, pastry chef, and chef de cuisine subclasses.",
+      "dependencies": [
+        "SIM-002",
+        "CHF-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can add executive chef, sous chef, pastry chef, and chef de cuisine subclasses. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "COK-001",
+      "category": "Cook Role",
+      "categoryId": "COK",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "FIFO product rotation",
+      "description": "Receive, date, rotate, consolidate, flag, discard, and document lots by real storage rules.",
+      "dependencies": [
+        "SIM-002",
+        "SIM-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can receive, date, rotate, consolidate, flag, discard, and document lots by real storage rules. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "COK-002",
+      "category": "Cook Role",
+      "categoryId": "COK",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Mise dependency plan",
+      "description": "Sequence prep by downstream recipes, equipment, chilling, proofing, yield, and station par.",
+      "dependencies": [
+        "SIM-002",
+        "COK-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can sequence prep by downstream recipes, equipment, chilling, proofing, yield, and station par. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "COK-003",
+      "category": "Cook Role",
+      "categoryId": "COK",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Knife and prep craft",
+      "description": "Score safety, uniformity, yield, speed, tool care, and ergonomics across ingredients.",
+      "dependencies": [
+        "SIM-002",
+        "COK-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can score safety, uniformity, yield, speed, tool care, and ergonomics across ingredients. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "COK-004",
+      "category": "Cook Role",
+      "categoryId": "COK",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Multi-pan heat control",
+      "description": "Manage burners, pan recovery, carryover, basting, resting, and simultaneous pickups.",
+      "dependencies": [
+        "SIM-002",
+        "COK-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can manage burners, pan recovery, carryover, basting, resting, and simultaneous pickups. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "COK-005",
+      "category": "Cook Role",
+      "categoryId": "COK",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Doneness sensory read",
+      "description": "Combine time, touch, sound, aroma, visual state, and thermometer evidence.",
+      "dependencies": [
+        "SIM-002",
+        "COK-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can combine time, touch, sound, aroma, visual state, and thermometer evidence. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "COK-006",
+      "category": "Cook Role",
+      "categoryId": "COK",
+      "discipline": "Role Design",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Modifier and allergy lane",
+      "description": "Separate tools, product, surfaces, communication, and verification for exceptional tickets.",
+      "dependencies": [
+        "SIM-002",
+        "COK-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can separate tools, product, surfaces, communication, and verification for exceptional tickets. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "COK-007",
+      "category": "Cook Role",
+      "categoryId": "COK",
+      "discipline": "Role Design",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "M",
+      "title": "Clean-as-you-go",
+      "description": "Make wiping, tool reset, waste, floor hazards, and sanitizer part of station tempo.",
+      "dependencies": [
+        "SIM-002",
+        "COK-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can make wiping, tool reset, waste, floor hazards, and sanitizer part of station tempo. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "COK-008",
+      "category": "Cook Role",
+      "categoryId": "COK",
+      "discipline": "Role Design",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "L",
+      "title": "Cook specialization pass",
+      "description": "Add grill, sauté, garde manger, baker, prep, and production-cook subclasses.",
+      "dependencies": [
+        "SIM-002",
+        "COK-007"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can add grill, sauté, garde manger, baker, prep, and production-cook subclasses. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "HST-001",
+      "category": "Host & Busser Role",
+      "categoryId": "HST",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Reservation graph",
+      "description": "Fit promises, durations, table combinations, accessibility, server load, and walk-in reserve.",
+      "dependencies": [
+        "SIM-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can fit promises, durations, table combinations, accessibility, server load, and walk-in reserve. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "HST-002",
+      "category": "Host & Busser Role",
+      "categoryId": "HST",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Wait forecast",
+      "description": "Quote honest ranges from turn state, party constraints, no-shows, congestion, and kitchen pace.",
+      "dependencies": [
+        "SIM-001",
+        "HST-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can quote honest ranges from turn state, party constraints, no-shows, congestion, and kitchen pace. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "HST-003",
+      "category": "Host & Busser Role",
+      "categoryId": "HST",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Arrival dialogue",
+      "description": "Handle names, delays, special occasions, seating needs, frustration, and expectation resets.",
+      "dependencies": [
+        "SIM-001",
+        "HST-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can handle names, delays, special occasions, seating needs, frustration, and expectation resets. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "HST-004",
+      "category": "Host & Busser Role",
+      "categoryId": "HST",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Seating topology",
+      "description": "Balance sections and route cost while honoring table fit, fairness, and guest preference.",
+      "dependencies": [
+        "SIM-001",
+        "HST-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can balance sections and route cost while honoring table fit, fairness, and guest preference. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "HST-005",
+      "category": "Host & Busser Role",
+      "categoryId": "HST",
+      "discipline": "Role Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Pre-bus circuit",
+      "description": "Read course state, conversation, hand signals, stack risk, and server handoff while routing.",
+      "dependencies": [
+        "SIM-001",
+        "HST-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can read course state, conversation, hand signals, stack risk, and server handoff while routing. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "HST-006",
+      "category": "Host & Busser Role",
+      "categoryId": "HST",
+      "discipline": "Role Design",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Reset sequence",
+      "description": "Clear, sanitize, dry, inspect, set, align, and release tables with material-specific rules.",
+      "dependencies": [
+        "SIM-001",
+        "HST-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can clear, sanitize, dry, inspect, set, align, and release tables with material-specific rules. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "HST-007",
+      "category": "Host & Busser Role",
+      "categoryId": "HST",
+      "discipline": "Role Design",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "M",
+      "title": "Host/busser specialization pass",
+      "description": "Add maître d’, reservationist, dining-room attendant, and banquet support subclasses.",
+      "dependencies": [
+        "SIM-001",
+        "HST-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can add maître d’, reservationist, dining-room attendant, and banquet support subclasses. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "MINI-001",
+      "category": "Minigame Platform",
+      "categoryId": "MINI",
+      "discipline": "Gameplay/UI Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Grammar runtime",
+      "description": "Turn dialogue, orchestration, allocation, scheduling, evidence, diagnosis, memory, precision, packing, route, process, and construction into reusable runtime modules.",
+      "dependencies": [
+        "ARCH-004",
+        "SIM-008"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can turn dialogue, orchestration, allocation, scheduling, evidence, diagnosis, memory, precision, packing, route, process, and construction into reusable runtime modules. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "MINI-002",
+      "category": "Minigame Platform",
+      "categoryId": "MINI",
+      "discipline": "Gameplay/UI Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Difficulty composition",
+      "description": "Scale cue density, simultaneity, ambiguity, motor demand, consequence, and recovery independently.",
+      "dependencies": [
+        "ARCH-004",
+        "MINI-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can scale cue density, simultaneity, ambiguity, motor demand, consequence, and recovery independently. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "MINI-003",
+      "category": "Minigame Platform",
+      "categoryId": "MINI",
+      "discipline": "Gameplay/UI Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Failure taxonomy",
+      "description": "Standardize partial failure, unsafe failure, recoverable failure, cascading failure, and abort outcomes.",
+      "dependencies": [
+        "ARCH-004",
+        "MINI-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can standardize partial failure, unsafe failure, recoverable failure, cascading failure, and abort outcomes. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "MINI-004",
+      "category": "Minigame Platform",
+      "categoryId": "MINI",
+      "discipline": "Gameplay/UI Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "World-context binding",
+      "description": "Feed minigames actual guests, tickets, items, tools, layouts, paperwork, and causal history.",
+      "dependencies": [
+        "ARCH-004",
+        "MINI-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can feed minigames actual guests, tickets, items, tools, layouts, paperwork, and causal history. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "MINI-005",
+      "category": "Minigame Platform",
+      "categoryId": "MINI",
+      "discipline": "Gameplay/UI Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Multiplayer handoff",
+      "description": "Let coworkers observe, assist, take over, or receive the result without duplicating authority.",
+      "dependencies": [
+        "ARCH-004",
+        "MINI-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can let coworkers observe, assist, take over, or receive the result without duplicating authority. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "MINI-006",
+      "category": "Minigame Platform",
+      "categoryId": "MINI",
+      "discipline": "Gameplay/UI Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Accessibility transforms",
+      "description": "Offer motor, timing, color, reading, audio, and cognitive alternatives without removing decisions.",
+      "dependencies": [
+        "ARCH-004",
+        "MINI-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can offer motor, timing, color, reading, audio, and cognitive alternatives without removing decisions. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "MINI-007",
+      "category": "Minigame Platform",
+      "categoryId": "MINI",
+      "discipline": "Gameplay/UI Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "M",
+      "title": "Authoring preview",
+      "description": "Give designers hot reload, seeded scenarios, input recording, scoring traces, and consequence inspection.",
+      "dependencies": [
+        "ARCH-004",
+        "MINI-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can give designers hot reload, seeded scenarios, input recording, scoring traces, and consequence inspection. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "MINI-008",
+      "category": "Minigame Platform",
+      "categoryId": "MINI",
+      "discipline": "Gameplay/UI Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Minigame telemetry",
+      "description": "Measure choice, hesitation, retries, abandonment, accessibility mode, outcome, and downstream effect.",
+      "dependencies": [
+        "ARCH-004",
+        "MINI-007"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can measure choice, hesitation, retries, abandonment, accessibility mode, outcome, and downstream effect. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "MINI-009",
+      "category": "Minigame Platform",
+      "categoryId": "MINI",
+      "discipline": "Gameplay/UI Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "XL",
+      "title": "Anti-repetition director",
+      "description": "Rotate equivalent activity variants while preserving role workload and operational truth.",
+      "dependencies": [
+        "ARCH-004",
+        "MINI-008"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can rotate equivalent activity variants while preserving role workload and operational truth. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "MINI-010",
+      "category": "Minigame Platform",
+      "categoryId": "MINI",
+      "discipline": "Gameplay/UI Engineering",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "M",
+      "title": "Certification suite",
+      "description": "Require deterministic, network, save/load, accessibility, localization, and exploit tests for every new minigame.",
+      "dependencies": [
+        "ARCH-004",
+        "MINI-009"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can require deterministic, network, save/load, accessibility, localization, and exploit tests for every new minigame. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "BUILD-001",
+      "category": "Restaurant Construction",
+      "categoryId": "BUILD",
+      "discipline": "Systems/UI Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Room and lease parcels",
+      "description": "Represent irregular shells, lease lines, exterior access, easements, columns, windows, and expansion parcels.",
+      "dependencies": [
+        "ARCH-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can represent irregular shells, lease lines, exterior access, easements, columns, windows, and expansion parcels. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "BUILD-002",
+      "category": "Restaurant Construction",
+      "categoryId": "BUILD",
+      "discipline": "Systems/UI Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Utility network solver",
+      "description": "Route power, gas, water, drain, ventilation, grease, data, and fire systems with capacity and code checks.",
+      "dependencies": [
+        "ARCH-004",
+        "BUILD-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can route power, gas, water, drain, ventilation, grease, data, and fire systems with capacity and code checks. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "BUILD-003",
+      "category": "Restaurant Construction",
+      "categoryId": "BUILD",
+      "discipline": "Systems/UI Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Flow simulation heatmap",
+      "description": "Preview staff routes, crossings, congestion, travel time, noise, sightlines, and guest exposure.",
+      "dependencies": [
+        "ARCH-004",
+        "BUILD-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can preview staff routes, crossings, congestion, travel time, noise, sightlines, and guest exposure. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "BUILD-004",
+      "category": "Restaurant Construction",
+      "categoryId": "BUILD",
+      "discipline": "Systems/UI Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Code and clearance validator",
+      "description": "Enforce exits, aisle width, accessibility, hood, hand sink, chemical, restroom, and occupancy requirements.",
+      "dependencies": [
+        "ARCH-004",
+        "BUILD-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can enforce exits, aisle width, accessibility, hood, hand sink, chemical, restroom, and occupancy requirements. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "BUILD-005",
+      "category": "Restaurant Construction",
+      "categoryId": "BUILD",
+      "discipline": "Systems/UI Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Construction phases",
+      "description": "Schedule demolition, rough-in, inspection, delivery, install, punch list, downtime, and cost overrun.",
+      "dependencies": [
+        "ARCH-004",
+        "BUILD-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can schedule demolition, rough-in, inspection, delivery, install, punch list, downtime, and cost overrun. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "BUILD-006",
+      "category": "Restaurant Construction",
+      "categoryId": "BUILD",
+      "discipline": "Systems/UI Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Blueprint collaboration",
+      "description": "Support co-owner cursors, proposals, comments, permissions, diff, vote, and rollback.",
+      "dependencies": [
+        "ARCH-004",
+        "BUILD-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can support co-owner cursors, proposals, comments, permissions, diff, vote, and rollback. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "BUILD-007",
+      "category": "Restaurant Construction",
+      "categoryId": "BUILD",
+      "discipline": "Systems/UI Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "M",
+      "title": "Furniture socket system",
+      "description": "Snap chairs, table combinations, shelving, smallwares, decor, lighting, and service accessories.",
+      "dependencies": [
+        "ARCH-004",
+        "BUILD-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can snap chairs, table combinations, shelving, smallwares, decor, lighting, and service accessories. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "BUILD-008",
+      "category": "Restaurant Construction",
+      "categoryId": "BUILD",
+      "discipline": "Systems/UI Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Material wear and cleaning",
+      "description": "Connect surfaces to slip, stain, noise, sanitation, maintenance, and replacement behavior.",
+      "dependencies": [
+        "ARCH-004",
+        "BUILD-007"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can connect surfaces to slip, stain, noise, sanitation, maintenance, and replacement behavior. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "BUILD-009",
+      "category": "Restaurant Construction",
+      "categoryId": "BUILD",
+      "discipline": "Systems/UI Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "XL",
+      "title": "Prefab and template library",
+      "description": "Save, tag, share, validate, and version player-authored room modules and layouts.",
+      "dependencies": [
+        "ARCH-004",
+        "BUILD-008"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can save, tag, share, validate, and version player-authored room modules and layouts. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "BUILD-010",
+      "category": "Restaurant Construction",
+      "categoryId": "BUILD",
+      "discipline": "Systems/UI Engineering",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "M",
+      "title": "Builder controller parity",
+      "description": "Deliver precise mouse, keyboard, controller, touchpad, undo, multiselect, copy, and accessibility workflows.",
+      "dependencies": [
+        "ARCH-004",
+        "BUILD-009"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can deliver precise mouse, keyboard, controller, touchpad, undo, multiselect, copy, and accessibility workflows. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ECON-001",
+      "category": "Economy, Markets & Logistics",
+      "categoryId": "ECON",
+      "discipline": "Economy Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Regional supply pools",
+      "description": "Clear finite produce, seafood, meat, dry goods, labor, fuel, sanitation, and contractor capacity by region.",
+      "dependencies": [
+        "DATA-003",
+        "SIM-009"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can clear finite produce, seafood, meat, dry goods, labor, fuel, sanitation, and contractor capacity by region. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ECON-002",
+      "category": "Economy, Markets & Logistics",
+      "categoryId": "ECON",
+      "discipline": "Economy Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Supplier catalog",
+      "description": "Model quality, consistency, minimums, lead times, substitutions, recalls, terms, and relationship reputation.",
+      "dependencies": [
+        "DATA-003",
+        "ECON-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can model quality, consistency, minimums, lead times, substitutions, recalls, terms, and relationship reputation. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ECON-003",
+      "category": "Economy, Markets & Logistics",
+      "categoryId": "ECON",
+      "discipline": "Economy Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Purchase order workflow",
+      "description": "Forecast, draft, approve, transmit, receive, reconcile, dispute, and pay real orders.",
+      "dependencies": [
+        "DATA-003",
+        "ECON-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can forecast, draft, approve, transmit, receive, reconcile, dispute, and pay real orders. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ECON-004",
+      "category": "Economy, Markets & Logistics",
+      "categoryId": "ECON",
+      "discipline": "Economy Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Delivery routing",
+      "description": "Simulate docks, delivery windows, cold chain, missed drops, traffic, fuel, and receiving labor.",
+      "dependencies": [
+        "DATA-003",
+        "ECON-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can simulate docks, delivery windows, cold chain, missed drops, traffic, fuel, and receiving labor. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ECON-005",
+      "category": "Economy, Markets & Logistics",
+      "categoryId": "ECON",
+      "discipline": "Economy Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Labor market",
+      "description": "Price role skill, availability, scheduling preference, commute, reputation, benefits, and regional scarcity.",
+      "dependencies": [
+        "DATA-003",
+        "ECON-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can price role skill, availability, scheduling preference, commute, reputation, benefits, and regional scarcity. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ECON-006",
+      "category": "Economy, Markets & Logistics",
+      "categoryId": "ECON",
+      "discipline": "Economy Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Dynamic demand",
+      "description": "Generate covers from concept, price, capacity, reviews, season, events, competition, weather, and loyalty.",
+      "dependencies": [
+        "DATA-003",
+        "ECON-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can generate covers from concept, price, capacity, reviews, season, events, competition, weather, and loyalty. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ECON-007",
+      "category": "Economy, Markets & Logistics",
+      "categoryId": "ECON",
+      "discipline": "Economy Design",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "M",
+      "title": "Inflation and sinks",
+      "description": "Balance wages, ingredients, leases, utilities, maintenance, taxes, fees, decor, travel, and luxury visits.",
+      "dependencies": [
+        "DATA-003",
+        "ECON-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can balance wages, ingredients, leases, utilities, maintenance, taxes, fees, decor, travel, and luxury visits. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ECON-008",
+      "category": "Economy, Markets & Logistics",
+      "categoryId": "ECON",
+      "discipline": "Economy Design",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Market abuse controls",
+      "description": "Detect collusion, wash trades, mule accounts, price manipulation, duplication, and refund fraud.",
+      "dependencies": [
+        "DATA-003",
+        "ECON-007"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can detect collusion, wash trades, mule accounts, price manipulation, duplication, and refund fraud. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ECON-009",
+      "category": "Economy, Markets & Logistics",
+      "categoryId": "ECON",
+      "discipline": "Economy Design",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "XL",
+      "title": "Economy simulation lab",
+      "description": "Run millions of agent-days with cohort dashboards, inequality measures, and sink/source attribution.",
+      "dependencies": [
+        "DATA-003",
+        "ECON-008"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can run millions of agent-days with cohort dashboards, inequality measures, and sink/source attribution. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ECON-010",
+      "category": "Economy, Markets & Logistics",
+      "categoryId": "ECON",
+      "discipline": "Economy Design",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "M",
+      "title": "Receivership and bankruptcy",
+      "description": "Create fair warning, restructuring, sale, closure, creditor, employee, and historical-record outcomes.",
+      "dependencies": [
+        "DATA-003",
+        "ECON-009"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can create fair warning, restructuring, sale, closure, creditor, employee, and historical-record outcomes. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "NPC-001",
+      "category": "NPCs & World Ecology",
+      "categoryId": "NPC",
+      "discipline": "AI Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "NPC role agents",
+      "description": "Give every role perception, work selection, skill, stress, handoff, failure, and learning behavior.",
+      "dependencies": [
+        "SIM-001",
+        "ECON-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can give every role perception, work selection, skill, stress, handoff, failure, and learning behavior. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "NPC-002",
+      "category": "NPCs & World Ecology",
+      "categoryId": "NPC",
+      "discipline": "AI Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Human handoff policy",
+      "description": "Transfer NPC duty state to joining players without resets, duplicate work, or silent consequences.",
+      "dependencies": [
+        "SIM-001",
+        "NPC-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can transfer NPC duty state to joining players without resets, duplicate work, or silent consequences. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "NPC-003",
+      "category": "NPCs & World Ecology",
+      "categoryId": "NPC",
+      "discipline": "AI Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Guest population",
+      "description": "Generate grounded preferences, budgets, schedules, occasions, cultures, accessibility needs, and memory.",
+      "dependencies": [
+        "SIM-001",
+        "NPC-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can generate grounded preferences, budgets, schedules, occasions, cultures, accessibility needs, and memory. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "NPC-004",
+      "category": "NPCs & World Ecology",
+      "categoryId": "NPC",
+      "discipline": "AI Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Restaurant birth director",
+      "description": "Seed new NPC concepts from regional gaps, available parcels, capital, trends, and founder traits.",
+      "dependencies": [
+        "SIM-001",
+        "NPC-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can seed new NPC concepts from regional gaps, available parcels, capital, trends, and founder traits. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "NPC-005",
+      "category": "NPCs & World Ecology",
+      "categoryId": "NPC",
+      "discipline": "AI Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Restaurant failure ecology",
+      "description": "Let weak NPC businesses restructure, close permanently, sell assets, and leave discoverable history.",
+      "dependencies": [
+        "SIM-001",
+        "NPC-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can let weak NPC businesses restructure, close permanently, sell assets, and leave discoverable history. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "NPC-006",
+      "category": "NPCs & World Ecology",
+      "categoryId": "NPC",
+      "discipline": "AI Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Competitor strategy",
+      "description": "Allow NPC owners to alter menu, price, staffing, marketing, sourcing, hours, and expansion based on evidence.",
+      "dependencies": [
+        "SIM-001",
+        "NPC-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can allow NPC owners to alter menu, price, staffing, marketing, sourcing, hours, and expansion based on evidence. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "NPC-007",
+      "category": "NPCs & World Ecology",
+      "categoryId": "NPC",
+      "discipline": "AI Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "M",
+      "title": "Crew relationships",
+      "description": "Model trust, conflict, mentoring, regular shifts, turnover, references, and poaching across restaurants.",
+      "dependencies": [
+        "SIM-001",
+        "NPC-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can model trust, conflict, mentoring, regular shifts, turnover, references, and poaching across restaurants. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "NPC-008",
+      "category": "NPCs & World Ecology",
+      "categoryId": "NPC",
+      "discipline": "AI Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "AI explainability",
+      "description": "Expose why an NPC chose, failed, quit, reviewed, purchased, or closed through inspectable facts.",
+      "dependencies": [
+        "SIM-001",
+        "NPC-007"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can expose why an NPC chose, failed, quit, reviewed, purchased, or closed through inspectable facts. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "NPC-009",
+      "category": "NPCs & World Ecology",
+      "categoryId": "NPC",
+      "discipline": "AI Engineering",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "XL",
+      "title": "Offline world budget",
+      "description": "Simulate dormant regions at lower fidelity while preserving economically equivalent outcomes.",
+      "dependencies": [
+        "SIM-001",
+        "NPC-008"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can simulate dormant regions at lower fidelity while preserving economically equivalent outcomes. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SOC-001",
+      "category": "Social & MMO Systems",
+      "categoryId": "SOC",
+      "discipline": "Online/Social Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Friends and presence",
+      "description": "Support privacy-aware friends, recent crew, blocks, rich presence, join permissions, and invitations.",
+      "dependencies": [
+        "NET-001",
+        "DATA-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can support privacy-aware friends, recent crew, blocks, rich presence, join permissions, and invitations. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SOC-002",
+      "category": "Social & MMO Systems",
+      "categoryId": "SOC",
+      "discipline": "Online/Social Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Restaurant crews",
+      "description": "Create persistent rosters, ranks, schedules, standards, shared goals, applications, and audit history.",
+      "dependencies": [
+        "NET-001",
+        "SOC-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can create persistent rosters, ranks, schedules, standards, shared goals, applications, and audit history. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SOC-003",
+      "category": "Social & MMO Systems",
+      "categoryId": "SOC",
+      "discipline": "Online/Social Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Voice and text chat",
+      "description": "Add spatial, party, crew, region, and direct channels with moderation, transcription controls, and accessibility.",
+      "dependencies": [
+        "NET-001",
+        "SOC-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can add spatial, party, crew, region, and direct channels with moderation, transcription controls, and accessibility. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SOC-004",
+      "category": "Social & MMO Systems",
+      "categoryId": "SOC",
+      "discipline": "Online/Social Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Shift finder",
+      "description": "Match role, skill, time, language, style, mentorship, latency, and accessibility preferences.",
+      "dependencies": [
+        "NET-001",
+        "SOC-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can match role, skill, time, language, style, mentorship, latency, and accessibility preferences. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SOC-005",
+      "category": "Social & MMO Systems",
+      "categoryId": "SOC",
+      "discipline": "Online/Social Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Reputation references",
+      "description": "Let verified coworkers and employers issue bounded, appealable endorsements grounded in shared shifts.",
+      "dependencies": [
+        "NET-001",
+        "SOC-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can let verified coworkers and employers issue bounded, appealable endorsements grounded in shared shifts. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SOC-006",
+      "category": "Social & MMO Systems",
+      "categoryId": "SOC",
+      "discipline": "Online/Social Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Mentorship contracts",
+      "description": "Reward structured teaching without boosting, coercion, or exploitative unpaid-role play.",
+      "dependencies": [
+        "NET-001",
+        "SOC-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can reward structured teaching without boosting, coercion, or exploitative unpaid-role play. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SOC-007",
+      "category": "Social & MMO Systems",
+      "categoryId": "SOC",
+      "discipline": "Online/Social Design",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "M",
+      "title": "Regional associations",
+      "description": "Enable restaurant groups to coordinate events, standards, purchasing, and competitions under antitrust limits.",
+      "dependencies": [
+        "NET-001",
+        "SOC-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can enable restaurant groups to coordinate events, standards, purchasing, and competitions under antitrust limits. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SOC-008",
+      "category": "Social & MMO Systems",
+      "categoryId": "SOC",
+      "discipline": "Online/Social Design",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Player events calendar",
+      "description": "Schedule tastings, openings, tournaments, training, and private services with capacity and reminders.",
+      "dependencies": [
+        "NET-001",
+        "SOC-007"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can schedule tastings, openings, tournaments, training, and private services with capacity and reminders. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SOC-009",
+      "category": "Social & MMO Systems",
+      "categoryId": "SOC",
+      "discipline": "Online/Social Design",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "XL",
+      "title": "Spectator and replay",
+      "description": "Watch consented shifts with delayed data, role overlays, privacy controls, and teachable bookmarks.",
+      "dependencies": [
+        "NET-001",
+        "SOC-008"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can watch consented shifts with delayed data, role overlays, privacy controls, and teachable bookmarks. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SOC-010",
+      "category": "Social & MMO Systems",
+      "categoryId": "SOC",
+      "discipline": "Online/Social Design",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "M",
+      "title": "Community governance",
+      "description": "Define report, vote, ownership dispute, inactive leader, name, and shared-asset procedures.",
+      "dependencies": [
+        "NET-001",
+        "SOC-009"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can define report, vote, ownership dispute, inactive leader, name, and shared-asset procedures. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PVP-001",
+      "category": "Guest Influence & Competition",
+      "categoryId": "PVP",
+      "discipline": "Systems Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Guest challenge budget",
+      "description": "Price legitimate complexity by character economy, visit context, cooldown, and staff reward.",
+      "dependencies": [
+        "SIM-007",
+        "SOC-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can price legitimate complexity by character economy, visit context, cooldown, and staff reward. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PVP-002",
+      "category": "Guest Influence & Competition",
+      "categoryId": "PVP",
+      "discipline": "Systems Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Consent and matchmaking",
+      "description": "Let restaurants opt into challenge tiers, events, and private practice without enabling harassment.",
+      "dependencies": [
+        "SIM-007",
+        "PVP-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can let restaurants opt into challenge tiers, events, and private practice without enabling harassment. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PVP-003",
+      "category": "Guest Influence & Competition",
+      "categoryId": "PVP",
+      "discipline": "Systems Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Fair request catalog",
+      "description": "Author allergies, celebrations, pacing, splits, pairings, accessibility, tasting, and recovery scenarios.",
+      "dependencies": [
+        "SIM-007",
+        "PVP-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can author allergies, celebrations, pacing, splits, pairings, accessibility, tasting, and recovery scenarios. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PVP-004",
+      "category": "Guest Influence & Competition",
+      "categoryId": "PVP",
+      "discipline": "Systems Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Guest objective deck",
+      "description": "Give visitors positive goals such as discovery, hospitality testing, collecting, socializing, and spending.",
+      "dependencies": [
+        "SIM-007",
+        "PVP-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can give visitors positive goals such as discovery, hospitality testing, collecting, socializing, and spending. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PVP-005",
+      "category": "Guest Influence & Competition",
+      "categoryId": "PVP",
+      "discipline": "Systems Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Staff counterplay",
+      "description": "Surface request intent, authority, timing, collaboration, recovery, and bounded refusal options.",
+      "dependencies": [
+        "SIM-007",
+        "PVP-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can surface request intent, authority, timing, collaboration, recovery, and bounded refusal options. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PVP-006",
+      "category": "Guest Influence & Competition",
+      "categoryId": "PVP",
+      "discipline": "Systems Design",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Review integrity",
+      "description": "Prevent revenge reviews, brigading, self-review, undisclosed collusion, and unverifiable claims.",
+      "dependencies": [
+        "SIM-007",
+        "PVP-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can prevent revenge reviews, brigading, self-review, undisclosed collusion, and unverifiable claims. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PVP-007",
+      "category": "Guest Influence & Competition",
+      "categoryId": "PVP",
+      "discipline": "Systems Design",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "M",
+      "title": "Regional competitions",
+      "description": "Score service leagues and restaurant cups on normalized demand, complexity, quality, safety, and profit.",
+      "dependencies": [
+        "SIM-007",
+        "PVP-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can score service leagues and restaurant cups on normalized demand, complexity, quality, safety, and profit. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PVP-008",
+      "category": "Guest Influence & Competition",
+      "categoryId": "PVP",
+      "discipline": "Systems Design",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "L",
+      "title": "Abuse response",
+      "description": "Detect repeated targeting, slurs, grief patterns, stalking, economic transfer, and coordinated disruption.",
+      "dependencies": [
+        "SIM-007",
+        "PVP-007"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can detect repeated targeting, slurs, grief patterns, stalking, economic transfer, and coordinated disruption. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "LIVE-001",
+      "category": "Content & Live Operations",
+      "categoryId": "LIVE",
+      "discipline": "Live Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Season calendar service",
+      "description": "Schedule, stage, validate, preview, launch, pause, extend, and retire events by region and cohort.",
+      "dependencies": [
+        "ARCH-006",
+        "ARCH-007"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can schedule, stage, validate, preview, launch, pause, extend, and retire events by region and cohort. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "LIVE-002",
+      "category": "Content & Live Operations",
+      "categoryId": "LIVE",
+      "discipline": "Live Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Furniture pack pipeline",
+      "description": "Ship themed modular sets with LODs, sockets, modifiers, prices, wear, localization, and licensing metadata.",
+      "dependencies": [
+        "ARCH-006",
+        "LIVE-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can ship themed modular sets with LODs, sockets, modifiers, prices, wear, localization, and licensing metadata. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "LIVE-003",
+      "category": "Content & Live Operations",
+      "categoryId": "LIVE",
+      "discipline": "Live Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Subclass pack pipeline",
+      "description": "Add roles through inherited permissions, activities, skills, animations, equipment, and matchmaking tags.",
+      "dependencies": [
+        "ARCH-006",
+        "LIVE-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can add roles through inherited permissions, activities, skills, animations, equipment, and matchmaking tags. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "LIVE-004",
+      "category": "Content & Live Operations",
+      "categoryId": "LIVE",
+      "discipline": "Live Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Restaurant concept packs",
+      "description": "Bundle menus, recipes, equipment, decor, guest expectations, supply needs, and tutorials.",
+      "dependencies": [
+        "ARCH-006",
+        "LIVE-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can bundle menus, recipes, equipment, decor, guest expectations, supply needs, and tutorials. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "LIVE-005",
+      "category": "Content & Live Operations",
+      "categoryId": "LIVE",
+      "discipline": "Live Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Live balance console",
+      "description": "Adjust bounded data values with review, simulation forecast, audit log, rollback, and player-facing notes.",
+      "dependencies": [
+        "ARCH-006",
+        "LIVE-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can adjust bounded data values with review, simulation forecast, audit log, rollback, and player-facing notes. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "LIVE-006",
+      "category": "Content & Live Operations",
+      "categoryId": "LIVE",
+      "discipline": "Live Design",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Event authoring tools",
+      "description": "Compose quests, modifiers, world props, vendors, rewards, dialogue, incidents, and success metrics.",
+      "dependencies": [
+        "ARCH-006",
+        "LIVE-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can compose quests, modifiers, world props, vendors, rewards, dialogue, incidents, and success metrics. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "LIVE-007",
+      "category": "Content & Live Operations",
+      "categoryId": "LIVE",
+      "discipline": "Live Design",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "M",
+      "title": "Content dependency scanner",
+      "description": "Block missing assets, cyclic inheritance, expired references, schema drift, and unsafe removals.",
+      "dependencies": [
+        "ARCH-006",
+        "LIVE-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can block missing assets, cyclic inheritance, expired references, schema drift, and unsafe removals. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "LIVE-008",
+      "category": "Content & Live Operations",
+      "categoryId": "LIVE",
+      "discipline": "Live Design",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Hotfix channel",
+      "description": "Deliver signed data-only fixes separately from executable patches with version pinning and rollback.",
+      "dependencies": [
+        "ARCH-006",
+        "LIVE-007"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can deliver signed data-only fixes separately from executable patches with version pinning and rollback. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "LIVE-009",
+      "category": "Content & Live Operations",
+      "categoryId": "LIVE",
+      "discipline": "Live Design",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "XL",
+      "title": "Archive and recurrence",
+      "description": "Preserve event provenance and safely rerun past seasons with updated rewards and rules.",
+      "dependencies": [
+        "ARCH-006",
+        "LIVE-008"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can preserve event provenance and safely rerun past seasons with updated rewards and rules. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "CLI-001",
+      "category": "Native Client & UX",
+      "categoryId": "CLI",
+      "discipline": "Client Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Production scene architecture",
+      "description": "Replace the V1 dynamic UI shell with maintainable Godot scenes, presenters, navigation, and state stores.",
+      "dependencies": [
+        "NET-004",
+        "MINI-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can replace the V1 dynamic UI shell with maintainable Godot scenes, presenters, navigation, and state stores. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "CLI-002",
+      "category": "Native Client & UX",
+      "categoryId": "CLI",
+      "discipline": "Client Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Input abstraction",
+      "description": "Support remappable keyboard, mouse, controller, Steam Input, and accessibility devices in every screen.",
+      "dependencies": [
+        "NET-004",
+        "CLI-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can support remappable keyboard, mouse, controller, Steam Input, and accessibility devices in every screen. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "CLI-003",
+      "category": "Native Client & UX",
+      "categoryId": "CLI",
+      "discipline": "Client Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "World map production pass",
+      "description": "Build a performant 3D tactical globe with country selection, regional overlays, events, resources, and travel.",
+      "dependencies": [
+        "NET-004",
+        "CLI-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can build a performant 3D tactical globe with country selection, regional overlays, events, resources, and travel. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "CLI-004",
+      "category": "Native Client & UX",
+      "categoryId": "CLI",
+      "discipline": "Client Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Restaurant camera",
+      "description": "Deliver occlusion, zoom, room focus, floor switching, follow, free camera, and readable urgency framing.",
+      "dependencies": [
+        "NET-004",
+        "CLI-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can deliver occlusion, zoom, room focus, floor switching, follow, free camera, and readable urgency framing. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "CLI-005",
+      "category": "Native Client & UX",
+      "categoryId": "CLI",
+      "discipline": "Client Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "World cue language",
+      "description": "Communicate ownership, responsibility, risk, urgency, handoff, accessibility, and interaction range without clutter.",
+      "dependencies": [
+        "NET-004",
+        "CLI-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can communicate ownership, responsibility, risk, urgency, handoff, accessibility, and interaction range without clutter. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "CLI-006",
+      "category": "Native Client & UX",
+      "categoryId": "CLI",
+      "discipline": "Client Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "HUD customization",
+      "description": "Let players resize, move, filter, save, and role-swap panels while preserving critical safety cues.",
+      "dependencies": [
+        "NET-004",
+        "CLI-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can let players resize, move, filter, save, and role-swap panels while preserving critical safety cues. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "CLI-007",
+      "category": "Native Client & UX",
+      "categoryId": "CLI",
+      "discipline": "Client Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "M",
+      "title": "Reconnect UX",
+      "description": "Explain network state, preserve input, show authority recovery, and avoid duplicate player actions.",
+      "dependencies": [
+        "NET-004",
+        "CLI-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can explain network state, preserve input, show authority recovery, and avoid duplicate player actions. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "CLI-008",
+      "category": "Native Client & UX",
+      "categoryId": "CLI",
+      "discipline": "Client Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Tutorial and certification",
+      "description": "Teach restaurant truth and MMO collaboration through role-specific practice, assessment, and recertification.",
+      "dependencies": [
+        "NET-004",
+        "CLI-007"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can teach restaurant truth and MMO collaboration through role-specific practice, assessment, and recertification. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "CLI-009",
+      "category": "Native Client & UX",
+      "categoryId": "CLI",
+      "discipline": "Client Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "XL",
+      "title": "Settings account portability",
+      "description": "Sync graphics, audio, input, accessibility, social, and privacy settings with device overrides.",
+      "dependencies": [
+        "NET-004",
+        "CLI-008"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can sync graphics, audio, input, accessibility, social, and privacy settings with device overrides. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "CLI-010",
+      "category": "Native Client & UX",
+      "categoryId": "CLI",
+      "discipline": "Client Engineering",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "M",
+      "title": "Low-spec scalability",
+      "description": "Define CPU, GPU, memory, disk, and network tiers with measured visual and simulation degradation.",
+      "dependencies": [
+        "NET-004",
+        "CLI-009"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can define CPU, GPU, memory, disk, and network tiers with measured visual and simulation degradation. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ART-001",
+      "category": "Art, Animation & VFX",
+      "categoryId": "ART",
+      "discipline": "Art",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Visual target bible",
+      "description": "Lock top-down proportions, materials, lighting, silhouette, readability, color, density, and cultural reference standards.",
+      "dependencies": [
+        "CLI-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can lock top-down proportions, materials, lighting, silhouette, readability, color, density, and cultural reference standards. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ART-002",
+      "category": "Art, Animation & VFX",
+      "categoryId": "ART",
+      "discipline": "Art",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Modular character system",
+      "description": "Build inclusive bodies, faces, hair, skin, mobility aids, outfits, accessories, color zones, and role PPE.",
+      "dependencies": [
+        "CLI-001",
+        "ART-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can build inclusive bodies, faces, hair, skin, mobility aids, outfits, accessories, color zones, and role PPE. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ART-003",
+      "category": "Art, Animation & VFX",
+      "categoryId": "ART",
+      "discipline": "Art",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Locomotion set",
+      "description": "Animate eight-way walk, run, carry, push, pull, turn, stop, squeeze, slip, recover, and fatigue.",
+      "dependencies": [
+        "CLI-001",
+        "ART-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can animate eight-way walk, run, carry, push, pull, turn, stop, squeeze, slip, recover, and fatigue. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ART-004",
+      "category": "Art, Animation & VFX",
+      "categoryId": "ART",
+      "discipline": "Art",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Role interaction library",
+      "description": "Create tool- and station-aware cooking, serving, washing, cleaning, paperwork, hosting, and management actions.",
+      "dependencies": [
+        "CLI-001",
+        "ART-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can create tool- and station-aware cooking, serving, washing, cleaning, paperwork, hosting, and management actions. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ART-005",
+      "category": "Art, Animation & VFX",
+      "categoryId": "ART",
+      "discipline": "Art",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Object modular kit",
+      "description": "Produce grid-safe furniture, equipment, decor, walls, floors, doors, utilities, damage, soil, and upgrade states.",
+      "dependencies": [
+        "CLI-001",
+        "ART-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can produce grid-safe furniture, equipment, decor, walls, floors, doors, utilities, damage, soil, and upgrade states. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ART-006",
+      "category": "Art, Animation & VFX",
+      "categoryId": "ART",
+      "discipline": "Art",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Food presentation pipeline",
+      "description": "Represent ingredients, prep states, cooking transitions, plating layers, defects, steam, and spoilage.",
+      "dependencies": [
+        "CLI-001",
+        "ART-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can represent ingredients, prep states, cooking transitions, plating layers, defects, steam, and spoilage. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ART-007",
+      "category": "Art, Animation & VFX",
+      "categoryId": "ART",
+      "discipline": "Art",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "M",
+      "title": "Urgency VFX language",
+      "description": "Show heat, spills, smoke, grease, water, breakage, pests, contamination, and safe containment without visual spam.",
+      "dependencies": [
+        "CLI-001",
+        "ART-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can show heat, spills, smoke, grease, water, breakage, pests, contamination, and safe containment without visual spam. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ART-008",
+      "category": "Art, Animation & VFX",
+      "categoryId": "ART",
+      "discipline": "Art",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Lighting and ambience",
+      "description": "Support time, weather, fixtures, windows, emergency states, mood, visibility, and performance budgets.",
+      "dependencies": [
+        "CLI-001",
+        "ART-007"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can support time, weather, fixtures, windows, emergency states, mood, visibility, and performance budgets. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ART-009",
+      "category": "Art, Animation & VFX",
+      "categoryId": "ART",
+      "discipline": "Art",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "XL",
+      "title": "LOD and atlas pipeline",
+      "description": "Automate import, pivots, sockets, atlases, variants, LODs, collision, thumbnails, and validation.",
+      "dependencies": [
+        "CLI-001",
+        "ART-008"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can automate import, pivots, sockets, atlases, variants, LODs, collision, thumbnails, and validation. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ART-010",
+      "category": "Art, Animation & VFX",
+      "categoryId": "ART",
+      "discipline": "Art",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "M",
+      "title": "Cultural art review",
+      "description": "Review regional architecture, uniforms, food, signage, symbols, and decor with paid subject experts.",
+      "dependencies": [
+        "CLI-001",
+        "ART-009"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can review regional architecture, uniforms, food, signage, symbols, and decor with paid subject experts. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "AUD-001",
+      "category": "Audio",
+      "categoryId": "AUD",
+      "discipline": "Audio",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Restaurant soundscape",
+      "description": "Layer crowd, HVAC, kitchen, dish pit, street, music, weather, and room acoustics by live state.",
+      "dependencies": [
+        "SIM-008"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can layer crowd, HVAC, kitchen, dish pit, street, music, weather, and room acoustics by live state. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "AUD-002",
+      "category": "Audio",
+      "categoryId": "AUD",
+      "discipline": "Audio",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Role action audio",
+      "description": "Create material-, tool-, speed-, quality-, and failure-aware sounds for every repeated interaction.",
+      "dependencies": [
+        "SIM-008",
+        "AUD-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can create material-, tool-, speed-, quality-, and failure-aware sounds for every repeated interaction. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "AUD-003",
+      "category": "Audio",
+      "categoryId": "AUD",
+      "discipline": "Audio",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Operational callouts",
+      "description": "Make behind, corner, hot, sharp, hands, pickup, 86, heard, and emergency calls spatial and readable.",
+      "dependencies": [
+        "SIM-008",
+        "AUD-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can make behind, corner, hot, sharp, hands, pickup, 86, heard, and emergency calls spatial and readable. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "AUD-004",
+      "category": "Audio",
+      "categoryId": "AUD",
+      "discipline": "Audio",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Adaptive score",
+      "description": "Move between prep, open, rush, recovery, close, success, and failure without masking operational cues.",
+      "dependencies": [
+        "SIM-008",
+        "AUD-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can move between prep, open, rush, recovery, close, success, and failure without masking operational cues. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "AUD-005",
+      "category": "Audio",
+      "categoryId": "AUD",
+      "discipline": "Audio",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "S",
+      "title": "Audio accessibility",
+      "description": "Caption directional cues, visualize critical sound classes, and expose independent dynamic-range controls.",
+      "dependencies": [
+        "SIM-008",
+        "AUD-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can caption directional cues, visualize critical sound classes, and expose independent dynamic-range controls. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "AUD-006",
+      "category": "Audio",
+      "categoryId": "AUD",
+      "discipline": "Audio",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Voice pipeline",
+      "description": "Define casting, recording, localization, runtime assembly, consent, moderation, and AI-voice prohibitions.",
+      "dependencies": [
+        "SIM-008",
+        "AUD-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can define casting, recording, localization, runtime assembly, consent, moderation, and AI-voice prohibitions. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ACC-001",
+      "category": "Accessibility & Localization",
+      "categoryId": "ACC",
+      "discipline": "Accessibility/Localization",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Accessibility requirements",
+      "description": "Set WCAG-informed and game-specific motor, vision, hearing, cognitive, speech, and fatigue targets.",
+      "dependencies": [
+        "CLI-002",
+        "MINI-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can set WCAG-informed and game-specific motor, vision, hearing, cognitive, speech, and fatigue targets. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ACC-002",
+      "category": "Accessibility & Localization",
+      "categoryId": "ACC",
+      "discipline": "Accessibility/Localization",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Timing alternatives",
+      "description": "Offer pause-safe practice, widened windows, rhythm alternatives, and decision-equivalent assist modes.",
+      "dependencies": [
+        "CLI-002",
+        "ACC-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can offer pause-safe practice, widened windows, rhythm alternatives, and decision-equivalent assist modes. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ACC-003",
+      "category": "Accessibility & Localization",
+      "categoryId": "ACC",
+      "discipline": "Accessibility/Localization",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Color and contrast",
+      "description": "Validate cues across color-vision profiles, HDR, low vision, glare, and customizable palettes.",
+      "dependencies": [
+        "CLI-002",
+        "ACC-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can validate cues across color-vision profiles, HDR, low vision, glare, and customizable palettes. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ACC-004",
+      "category": "Accessibility & Localization",
+      "categoryId": "ACC",
+      "discipline": "Accessibility/Localization",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Screen reader semantics",
+      "description": "Expose menus, work queues, paperwork, builder state, maps, chat, and results through accessible structure.",
+      "dependencies": [
+        "CLI-002",
+        "ACC-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can expose menus, work queues, paperwork, builder state, maps, chat, and results through accessible structure. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ACC-005",
+      "category": "Accessibility & Localization",
+      "categoryId": "ACC",
+      "discipline": "Accessibility/Localization",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Localization architecture",
+      "description": "Externalize text, units, dates, currencies, names, layouts, fonts, plural rules, and content-pack strings.",
+      "dependencies": [
+        "CLI-002",
+        "ACC-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can externalize text, units, dates, currencies, names, layouts, fonts, plural rules, and content-pack strings. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ACC-006",
+      "category": "Accessibility & Localization",
+      "categoryId": "ACC",
+      "discipline": "Accessibility/Localization",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Restaurant terminology review",
+      "description": "Use region-appropriate job, ingredient, safety, and service terminology without flattening differences.",
+      "dependencies": [
+        "CLI-002",
+        "ACC-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can use region-appropriate job, ingredient, safety, and service terminology without flattening differences. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ACC-007",
+      "category": "Accessibility & Localization",
+      "categoryId": "ACC",
+      "discipline": "Accessibility/Localization",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "M",
+      "title": "RTL and complex scripts",
+      "description": "Support bidirectional layout, shaping, line breaking, input, search, and mixed operational notation.",
+      "dependencies": [
+        "CLI-002",
+        "ACC-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can support bidirectional layout, shaping, line breaking, input, search, and mixed operational notation. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ACC-008",
+      "category": "Accessibility & Localization",
+      "categoryId": "ACC",
+      "discipline": "Accessibility/Localization",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "L",
+      "title": "Accessibility playtest lab",
+      "description": "Run recurring paid tests with disabled players and publish issue ownership and closure evidence.",
+      "dependencies": [
+        "CLI-002",
+        "ACC-007"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can run recurring paid tests with disabled players and publish issue ownership and closure evidence. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PLAT-001",
+      "category": "Platform, Launcher & Release",
+      "categoryId": "PLAT",
+      "discipline": "Platform Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Signed native launcher",
+      "description": "Replace HTA/VBS developer controls with a signed, accessible launcher and local-world service manager.",
+      "dependencies": [
+        "CLI-001",
+        "ARCH-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can replace HTA/VBS developer controls with a signed, accessible launcher and local-world service manager. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PLAT-002",
+      "category": "Platform, Launcher & Release",
+      "categoryId": "PLAT",
+      "discipline": "Platform Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Differential patcher",
+      "description": "Download signed chunk manifests, verify hashes, repair installs, resume, rollback, and limit bandwidth.",
+      "dependencies": [
+        "CLI-001",
+        "PLAT-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can download signed chunk manifests, verify hashes, repair installs, resume, rollback, and limit bandwidth. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PLAT-003",
+      "category": "Platform, Launcher & Release",
+      "categoryId": "PLAT",
+      "discipline": "Platform Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Client crash reporter",
+      "description": "Capture consented dumps, logs, hardware, build, and session correlation with privacy scrubbing.",
+      "dependencies": [
+        "CLI-001",
+        "PLAT-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can capture consented dumps, logs, hardware, build, and session correlation with privacy scrubbing. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PLAT-004",
+      "category": "Platform, Launcher & Release",
+      "categoryId": "PLAT",
+      "discipline": "Platform Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Server deployment artifact",
+      "description": "Build minimal signed containers and local binaries with SBOM, provenance, health, and rollback metadata.",
+      "dependencies": [
+        "CLI-001",
+        "PLAT-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can build minimal signed containers and local binaries with SBOM, provenance, health, and rollback metadata. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PLAT-005",
+      "category": "Platform, Launcher & Release",
+      "categoryId": "PLAT",
+      "discipline": "Platform Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Code signing",
+      "description": "Protect Windows executables, installer, updater, crash tools, and release manifests with rotated keys.",
+      "dependencies": [
+        "CLI-001",
+        "PLAT-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can protect Windows executables, installer, updater, crash tools, and release manifests with rotated keys. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PLAT-006",
+      "category": "Platform, Launcher & Release",
+      "categoryId": "PLAT",
+      "discipline": "Platform Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Installer and uninstall",
+      "description": "Install per-user safely, preserve or remove world data by explicit choice, and leave no background services.",
+      "dependencies": [
+        "CLI-001",
+        "PLAT-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can install per-user safely, preserve or remove world data by explicit choice, and leave no background services. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PLAT-007",
+      "category": "Platform, Launcher & Release",
+      "categoryId": "PLAT",
+      "discipline": "Platform Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "M",
+      "title": "Environment promotion",
+      "description": "Promote immutable builds through dev, integration, staging, certification, canary, and production.",
+      "dependencies": [
+        "CLI-001",
+        "PLAT-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can promote immutable builds through dev, integration, staging, certification, canary, and production. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PLAT-008",
+      "category": "Platform, Launcher & Release",
+      "categoryId": "PLAT",
+      "discipline": "Platform Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Store platform integration",
+      "description": "Implement entitlements, invites, rich presence, achievements, overlay, cloud settings, and compliance per store.",
+      "dependencies": [
+        "CLI-001",
+        "PLAT-007"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can implement entitlements, invites, rich presence, achievements, overlay, cloud settings, and compliance per store. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PLAT-009",
+      "category": "Platform, Launcher & Release",
+      "categoryId": "PLAT",
+      "discipline": "Platform Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "XL",
+      "title": "Release rollback drill",
+      "description": "Prove executable, content, schema, server, and economy rollback paths on a production-like environment.",
+      "dependencies": [
+        "CLI-001",
+        "PLAT-008"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can prove executable, content, schema, server, and economy rollback paths on a production-like environment. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "PLAT-010",
+      "category": "Platform, Launcher & Release",
+      "categoryId": "PLAT",
+      "discipline": "Platform Engineering",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "M",
+      "title": "Open-source notice automation",
+      "description": "Generate complete per-artifact licenses, SBOMs, source offers, and attribution screens.",
+      "dependencies": [
+        "CLI-001",
+        "PLAT-009"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can generate complete per-artifact licenses, SBOMs, source offers, and attribution screens. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SEC-001",
+      "category": "Security, Trust & Safety",
+      "categoryId": "SEC",
+      "discipline": "Security Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Threat model",
+      "description": "Model account, economy, authority, chat, modding, launcher, supply-chain, privacy, and insider threats.",
+      "dependencies": [
+        "ARCH-001",
+        "NET-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can model account, economy, authority, chat, modding, launcher, supply-chain, privacy, and insider threats. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SEC-002",
+      "category": "Security, Trust & Safety",
+      "categoryId": "SEC",
+      "discipline": "Security Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Authentication hardening",
+      "description": "Add verified email, MFA, device sessions, breach checks, recovery, revocation, and suspicious-login response.",
+      "dependencies": [
+        "ARCH-001",
+        "SEC-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can add verified email, MFA, device sessions, breach checks, recovery, revocation, and suspicious-login response. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SEC-003",
+      "category": "Security, Trust & Safety",
+      "categoryId": "SEC",
+      "discipline": "Security Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Authorization policy",
+      "description": "Centralize owner, manager, employee, guest, moderator, support, liveops, and service permissions.",
+      "dependencies": [
+        "ARCH-001",
+        "SEC-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can centralize owner, manager, employee, guest, moderator, support, liveops, and service permissions. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SEC-004",
+      "category": "Security, Trust & Safety",
+      "categoryId": "SEC",
+      "discipline": "Security Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Anti-cheat signals",
+      "description": "Detect impossible movement, action timing, task authority, automation, memory tampering, and replay abuse server-side.",
+      "dependencies": [
+        "ARCH-001",
+        "SEC-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can detect impossible movement, action timing, task authority, automation, memory tampering, and replay abuse server-side. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SEC-005",
+      "category": "Security, Trust & Safety",
+      "categoryId": "SEC",
+      "discipline": "Security Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Secure content signing",
+      "description": "Sign manifests, packs, scripts, schemas, and hotfixes; reject downgrade and substitution attacks.",
+      "dependencies": [
+        "ARCH-001",
+        "SEC-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can sign manifests, packs, scripts, schemas, and hotfixes; reject downgrade and substitution attacks. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SEC-006",
+      "category": "Security, Trust & Safety",
+      "categoryId": "SEC",
+      "discipline": "Security Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Secrets and key management",
+      "description": "Store, rotate, audit, and least-privilege database, signing, payment, moderation, and service credentials.",
+      "dependencies": [
+        "ARCH-001",
+        "SEC-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can store, rotate, audit, and least-privilege database, signing, payment, moderation, and service credentials. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SEC-007",
+      "category": "Security, Trust & Safety",
+      "categoryId": "SEC",
+      "discipline": "Security Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "M",
+      "title": "Moderation case system",
+      "description": "Unify reports, evidence, chat, replays, sanctions, appeals, privacy access, and moderator accountability.",
+      "dependencies": [
+        "ARCH-001",
+        "SEC-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can unify reports, evidence, chat, replays, sanctions, appeals, privacy access, and moderator accountability. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "SEC-008",
+      "category": "Security, Trust & Safety",
+      "categoryId": "SEC",
+      "discipline": "Security Engineering",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "L",
+      "title": "Penetration and abuse testing",
+      "description": "Commission recurring external tests across API, client, launcher, economy, social, and operations.",
+      "dependencies": [
+        "ARCH-001",
+        "SEC-007"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can commission recurring external tests across API, client, launcher, economy, social, and operations. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "QA-001",
+      "category": "Quality, Performance & Certification",
+      "categoryId": "QA",
+      "discipline": "Quality Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Test pyramid",
+      "description": "Define unit, property, simulation, contract, integration, client, soak, compatibility, and exploratory ownership.",
+      "dependencies": [
+        "ARCH-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can define unit, property, simulation, contract, integration, client, soak, compatibility, and exploratory ownership. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "QA-002",
+      "category": "Quality, Performance & Certification",
+      "categoryId": "QA",
+      "discipline": "Quality Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Restaurant scenario suite",
+      "description": "Automate normal, rush, call-out, outage, allergy, spill, injury, inspection, closure, and recovery shifts.",
+      "dependencies": [
+        "ARCH-005",
+        "QA-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can automate normal, rush, call-out, outage, allergy, spill, injury, inspection, closure, and recovery shifts. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "QA-003",
+      "category": "Quality, Performance & Certification",
+      "categoryId": "QA",
+      "discipline": "Quality Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Role expert acceptance",
+      "description": "Require paid role veterans to score authenticity, workload, terminology, consequence, and fun.",
+      "dependencies": [
+        "ARCH-005",
+        "QA-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can require paid role veterans to score authenticity, workload, terminology, consequence, and fun. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "QA-004",
+      "category": "Quality, Performance & Certification",
+      "categoryId": "QA",
+      "discipline": "Quality Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Network chaos lab",
+      "description": "Inject latency, loss, duplication, reordering, disconnect, region failover, and partial service failure.",
+      "dependencies": [
+        "ARCH-005",
+        "QA-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can inject latency, loss, duplication, reordering, disconnect, region failover, and partial service failure. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "QA-005",
+      "category": "Quality, Performance & Certification",
+      "categoryId": "QA",
+      "discipline": "Quality Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Economy exploit suite",
+      "description": "Fuzz trades, refunds, retries, inventory, closures, transfers, events, and cross-service ledger edges.",
+      "dependencies": [
+        "ARCH-005",
+        "QA-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can fuzz trades, refunds, retries, inventory, closures, transfers, events, and cross-service ledger edges. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "QA-006",
+      "category": "Quality, Performance & Certification",
+      "categoryId": "QA",
+      "discipline": "Quality Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Performance budgets",
+      "description": "Gate frame, simulation, server tick, query, replication, memory, load, patch, and startup targets.",
+      "dependencies": [
+        "ARCH-005",
+        "QA-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can gate frame, simulation, server tick, query, replication, memory, load, patch, and startup targets. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "QA-007",
+      "category": "Quality, Performance & Certification",
+      "categoryId": "QA",
+      "discipline": "Quality Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "M",
+      "title": "Hardware compatibility",
+      "description": "Cover supported CPU, GPU, RAM, storage, display, controller, audio, network, and OS matrices.",
+      "dependencies": [
+        "ARCH-005",
+        "QA-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can cover supported CPU, GPU, RAM, storage, display, controller, audio, network, and OS matrices. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "QA-008",
+      "category": "Quality, Performance & Certification",
+      "categoryId": "QA",
+      "discipline": "Quality Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Save upgrade matrix",
+      "description": "Upgrade representative worlds and accounts from every supported production schema/content combination.",
+      "dependencies": [
+        "ARCH-005",
+        "QA-007"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can upgrade representative worlds and accounts from every supported production schema/content combination. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "QA-009",
+      "category": "Quality, Performance & Certification",
+      "categoryId": "QA",
+      "discipline": "Quality Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "XL",
+      "title": "Localization functional QA",
+      "description": "Verify clipping, fonts, input, sorting, units, speech, screenshots, and culturally sensitive content.",
+      "dependencies": [
+        "ARCH-005",
+        "QA-008"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can verify clipping, fonts, input, sorting, units, speech, screenshots, and culturally sensitive content. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "QA-010",
+      "category": "Quality, Performance & Certification",
+      "categoryId": "QA",
+      "discipline": "Quality Engineering",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "M",
+      "title": "Launch certification war room",
+      "description": "Track blockers, ownership, evidence, rollback, customer support, status, and executive go/no-go.",
+      "dependencies": [
+        "ARCH-005",
+        "QA-009"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can track blockers, ownership, evidence, rollback, customer support, status, and executive go/no-go. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ANL-001",
+      "category": "Analytics & Research",
+      "categoryId": "ANL",
+      "discipline": "Data Science",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Event taxonomy",
+      "description": "Define privacy-reviewed account, world, shift, role, minigame, economy, social, content, and performance events.",
+      "dependencies": [
+        "DATA-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can define privacy-reviewed account, world, shift, role, minigame, economy, social, content, and performance events. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ANL-002",
+      "category": "Analytics & Research",
+      "categoryId": "ANL",
+      "discipline": "Data Science",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Experiment platform",
+      "description": "Assign cohorts, guardrails, exposure, attribution, significance, stopping, and audit across live features.",
+      "dependencies": [
+        "DATA-002",
+        "ANL-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can assign cohorts, guardrails, exposure, attribution, significance, stopping, and audit across live features. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ANL-003",
+      "category": "Analytics & Research",
+      "categoryId": "ANL",
+      "discipline": "Data Science",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Role workload dashboard",
+      "description": "Measure idle time, queue pressure, off-role work, failures, recovery, handoffs, stress, and retention.",
+      "dependencies": [
+        "DATA-002",
+        "ANL-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can measure idle time, queue pressure, off-role work, failures, recovery, handoffs, stress, and retention. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ANL-004",
+      "category": "Analytics & Research",
+      "categoryId": "ANL",
+      "discipline": "Data Science",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Restaurant health model",
+      "description": "Explain demand, margin, sanitation, reviews, staffing, logistics, capital, and closure risk without opaque punishment.",
+      "dependencies": [
+        "DATA-002",
+        "ANL-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can explain demand, margin, sanitation, reviews, staffing, logistics, capital, and closure risk without opaque punishment. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ANL-005",
+      "category": "Analytics & Research",
+      "categoryId": "ANL",
+      "discipline": "Data Science",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Economy source/sink dashboard",
+      "description": "Trace currency, item, labor, ingredient, and capacity creation, transfer, hoarding, and destruction.",
+      "dependencies": [
+        "DATA-002",
+        "ANL-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can trace currency, item, labor, ingredient, and capacity creation, transfer, hoarding, and destruction. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ANL-006",
+      "category": "Analytics & Research",
+      "categoryId": "ANL",
+      "discipline": "Data Science",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Accessibility outcomes",
+      "description": "Measure adoption, completion, frustration, retention, and parity without inferring disability.",
+      "dependencies": [
+        "DATA-002",
+        "ANL-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can measure adoption, completion, frustration, retention, and parity without inferring disability. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "ANL-007",
+      "category": "Analytics & Research",
+      "categoryId": "ANL",
+      "discipline": "Data Science",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "M",
+      "title": "Research repository",
+      "description": "Index playtests, interviews, surveys, support, telemetry, decisions, and follow-up by feature and cohort.",
+      "dependencies": [
+        "DATA-002",
+        "ANL-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can index playtests, interviews, surveys, support, telemetry, decisions, and follow-up by feature and cohort. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "OPS-001",
+      "category": "Operations & SRE",
+      "categoryId": "OPS",
+      "discipline": "Site Reliability Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "Service-level objectives",
+      "description": "Set availability, latency, durability, tick, reconnect, matchmaking, chat, patch, and support SLOs.",
+      "dependencies": [
+        "NET-008",
+        "DATA-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can set availability, latency, durability, tick, reconnect, matchmaking, chat, patch, and support SLOs. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "OPS-002",
+      "category": "Operations & SRE",
+      "categoryId": "OPS",
+      "discipline": "Site Reliability Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Observability standard",
+      "description": "Correlate client, gateway, service, shift, database, queue, economy, and deploy telemetry with bounded cost.",
+      "dependencies": [
+        "NET-008",
+        "OPS-001"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can correlate client, gateway, service, shift, database, queue, economy, and deploy telemetry with bounded cost. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "OPS-003",
+      "category": "Operations & SRE",
+      "categoryId": "OPS",
+      "discipline": "Site Reliability Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "M",
+      "title": "On-call and escalation",
+      "description": "Create rotations, severity, ownership, paging, handoff, incident command, and executive communication.",
+      "dependencies": [
+        "NET-008",
+        "OPS-002"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can create rotations, severity, ownership, paging, handoff, incident command, and executive communication. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "OPS-004",
+      "category": "Operations & SRE",
+      "categoryId": "OPS",
+      "discipline": "Site Reliability Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "XL",
+      "title": "Runbook library",
+      "description": "Document degraded regions, stuck shifts, ledger lag, auth outage, bad content, exploit, and rollback procedures.",
+      "dependencies": [
+        "NET-008",
+        "OPS-003"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can document degraded regions, stuck shifts, ledger lag, auth outage, bad content, exploit, and rollback procedures. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "OPS-005",
+      "category": "Operations & SRE",
+      "categoryId": "OPS",
+      "discipline": "Site Reliability Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "S",
+      "title": "Capacity forecasting",
+      "description": "Forecast concurrency, shifts, entities, bandwidth, storage, events, releases, and regional growth.",
+      "dependencies": [
+        "NET-008",
+        "OPS-004"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can forecast concurrency, shifts, entities, bandwidth, storage, events, releases, and regional growth. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "OPS-006",
+      "category": "Operations & SRE",
+      "categoryId": "OPS",
+      "discipline": "Site Reliability Engineering",
+      "priority": "Must",
+      "target": "V2.0",
+      "estimate": "L",
+      "title": "Disaster recovery exercise",
+      "description": "Lose a region and prove traffic, state, ledger, backup, communication, and recovery objectives.",
+      "dependencies": [
+        "NET-008",
+        "OPS-005"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can lose a region and prove traffic, state, ledger, backup, communication, and recovery objectives. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "OPS-007",
+      "category": "Operations & SRE",
+      "categoryId": "OPS",
+      "discipline": "Site Reliability Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "M",
+      "title": "Game status service",
+      "description": "Publish region, login, shift, social, store, patch, incident, and maintenance status independently.",
+      "dependencies": [
+        "NET-008",
+        "OPS-006"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can publish region, login, shift, social, store, patch, incident, and maintenance status independently. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "OPS-008",
+      "category": "Operations & SRE",
+      "categoryId": "OPS",
+      "discipline": "Site Reliability Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "L",
+      "title": "Cost allocation",
+      "description": "Attribute infrastructure and vendor cost by region, feature, environment, event, and cohort.",
+      "dependencies": [
+        "NET-008",
+        "OPS-007"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can attribute infrastructure and vendor cost by region, feature, environment, event, and cohort. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "OPS-009",
+      "category": "Operations & SRE",
+      "categoryId": "OPS",
+      "discipline": "Site Reliability Engineering",
+      "priority": "Should",
+      "target": "V2.1",
+      "estimate": "XL",
+      "title": "Support tooling",
+      "description": "Give least-privilege account, shift, purchase, restaurant, moderation, and recovery views with audit logs.",
+      "dependencies": [
+        "NET-008",
+        "OPS-008"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can give least-privilege account, shift, purchase, restaurant, moderation, and recovery views with audit logs. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    },
+    {
+      "id": "OPS-010",
+      "category": "Operations & SRE",
+      "categoryId": "OPS",
+      "discipline": "Site Reliability Engineering",
+      "priority": "Could",
+      "target": "V2.x",
+      "estimate": "M",
+      "title": "Live incident postmortems",
+      "description": "Publish blameless timelines, contributing factors, player impact, corrective owners, and verification.",
+      "dependencies": [
+        "NET-008",
+        "OPS-009"
+      ],
+      "acceptance": "A reviewed build or operational drill demonstrates that it can publish blameless timelines, contributing factors, player impact, corrective owners, and verification. Automated checks or measurable telemetry cover the critical failure path, and owner-facing documentation is updated.",
+      "status": "Unscheduled"
+    }
+  ]
+}

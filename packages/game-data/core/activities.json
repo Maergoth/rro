@@ -1,0 +1,4633 @@
+{
+  "schemaVersion": 1,
+  "activities": [
+    {
+      "id": "manager-lineup-deployment",
+      "roleId": "manager",
+      "label": "Lineup and Deployment",
+      "grammar": "allocation",
+      "lane": "admin",
+      "priority": 30,
+      "description": "Lineup and Deployment uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "forecast",
+          "prompt": "Read available resources and upcoming obligations.",
+          "actions": [
+            "forecast",
+            "spend-now"
+          ]
+        },
+        {
+          "id": "tradeoff",
+          "prompt": "Choose the tradeoff that protects the stated goal.",
+          "actions": [
+            "balanced-commit",
+            "overcommit"
+          ]
+        },
+        {
+          "id": "review",
+          "prompt": "Set a follow-up condition and reserve.",
+          "actions": [
+            "set-review",
+            "forget"
+          ]
+        }
+      ],
+      "successActions": [
+        "forecast",
+        "balanced-commit",
+        "set-review"
+      ],
+      "riskActions": [
+        "spend-now",
+        "overcommit",
+        "forget"
+      ],
+      "tags": [
+        "manager",
+        "allocation",
+        "admin",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "manager-operations-board",
+      "roleId": "manager",
+      "label": "Operations Board",
+      "grammar": "orchestration",
+      "lane": "now",
+      "priority": 71,
+      "description": "Operations Board uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "scan",
+          "prompt": "Inspect the live queue and its dependencies.",
+          "actions": [
+            "scan",
+            "guess"
+          ]
+        },
+        {
+          "id": "sequence",
+          "prompt": "Choose the next safe priority.",
+          "actions": [
+            "sequence",
+            "first-in-list"
+          ]
+        },
+        {
+          "id": "communicate",
+          "prompt": "Issue and confirm the handoff.",
+          "actions": [
+            "call-and-confirm",
+            "silent-change"
+          ]
+        }
+      ],
+      "successActions": [
+        "scan",
+        "sequence",
+        "call-and-confirm"
+      ],
+      "riskActions": [
+        "guess",
+        "first-in-list",
+        "silent-change"
+      ],
+      "tags": [
+        "manager",
+        "orchestration",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "manager-seating-throttle",
+      "roleId": "manager",
+      "label": "Seating Throttle",
+      "grammar": "orchestration",
+      "lane": "next",
+      "priority": 52,
+      "description": "Seating Throttle uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "scan",
+          "prompt": "Inspect the live queue and its dependencies.",
+          "actions": [
+            "scan",
+            "guess"
+          ]
+        },
+        {
+          "id": "sequence",
+          "prompt": "Choose the next safe priority.",
+          "actions": [
+            "sequence",
+            "first-in-list"
+          ]
+        },
+        {
+          "id": "communicate",
+          "prompt": "Issue and confirm the handoff.",
+          "actions": [
+            "call-and-confirm",
+            "silent-change"
+          ]
+        }
+      ],
+      "successActions": [
+        "scan",
+        "sequence",
+        "call-and-confirm"
+      ],
+      "riskActions": [
+        "guess",
+        "first-in-list",
+        "silent-change"
+      ],
+      "tags": [
+        "manager",
+        "orchestration",
+        "next",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "manager-labor-breaks",
+      "roleId": "manager",
+      "label": "Labor and Breaks",
+      "grammar": "scheduling",
+      "lane": "next",
+      "priority": 53,
+      "description": "Labor and Breaks uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "constraints",
+          "prompt": "Mark hard constraints and promised times.",
+          "actions": [
+            "map-constraints",
+            "ignore-constraint"
+          ]
+        },
+        {
+          "id": "fit",
+          "prompt": "Fit the work without creating a collision.",
+          "actions": [
+            "fit-with-buffer",
+            "tight-stack"
+          ]
+        },
+        {
+          "id": "publish",
+          "prompt": "Publish and communicate the plan.",
+          "actions": [
+            "publish-confirmed",
+            "publish-silent"
+          ]
+        }
+      ],
+      "successActions": [
+        "map-constraints",
+        "fit-with-buffer",
+        "publish-confirmed"
+      ],
+      "riskActions": [
+        "ignore-constraint",
+        "tight-stack",
+        "publish-silent"
+      ],
+      "tags": [
+        "manager",
+        "scheduling",
+        "next",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "manager-guest-recovery",
+      "roleId": "manager",
+      "label": "Guest Recovery",
+      "grammar": "dialogue",
+      "lane": "now",
+      "priority": 74,
+      "description": "Guest Recovery uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "observe",
+          "prompt": "Read the person and the current service evidence.",
+          "actions": [
+            "listen",
+            "rush"
+          ]
+        },
+        {
+          "id": "respond",
+          "prompt": "Choose a response that fits the stated need.",
+          "actions": [
+            "acknowledge",
+            "deflect"
+          ]
+        },
+        {
+          "id": "follow-up",
+          "prompt": "Confirm the next step and close the loop.",
+          "actions": [
+            "confirm",
+            "leave"
+          ]
+        }
+      ],
+      "successActions": [
+        "listen",
+        "acknowledge",
+        "confirm"
+      ],
+      "riskActions": [
+        "rush",
+        "deflect",
+        "leave"
+      ],
+      "tags": [
+        "manager",
+        "dialogue",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "manager-comp-void-control",
+      "roleId": "manager",
+      "label": "Comp and Void Control",
+      "grammar": "evidence",
+      "lane": "admin",
+      "priority": 35,
+      "description": "Comp and Void Control uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "collect",
+          "prompt": "Collect the relevant live records.",
+          "actions": [
+            "collect-records",
+            "assume"
+          ]
+        },
+        {
+          "id": "reconcile",
+          "prompt": "Resolve discrepancies against physical state.",
+          "actions": [
+            "reconcile",
+            "force-balance"
+          ]
+        },
+        {
+          "id": "sign",
+          "prompt": "Document the decision and owner.",
+          "actions": [
+            "sign-with-note",
+            "submit-blank"
+          ]
+        }
+      ],
+      "successActions": [
+        "collect-records",
+        "reconcile",
+        "sign-with-note"
+      ],
+      "riskActions": [
+        "assume",
+        "force-balance",
+        "submit-blank"
+      ],
+      "tags": [
+        "manager",
+        "evidence",
+        "admin",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "manager-sanitation-walk",
+      "roleId": "manager",
+      "label": "Sanitation Walk",
+      "grammar": "diagnosis",
+      "lane": "prevent",
+      "priority": 36,
+      "description": "Sanitation Walk uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "inspect",
+          "prompt": "Inspect observable symptoms before acting.",
+          "actions": [
+            "inspect",
+            "act-blind"
+          ]
+        },
+        {
+          "id": "test",
+          "prompt": "Choose a discriminating test or question.",
+          "actions": [
+            "test-cause",
+            "treat-symptom"
+          ]
+        },
+        {
+          "id": "correct",
+          "prompt": "Correct the cause and verify the result.",
+          "actions": [
+            "correct-and-verify",
+            "quick-fix"
+          ]
+        }
+      ],
+      "successActions": [
+        "inspect",
+        "test-cause",
+        "correct-and-verify"
+      ],
+      "riskActions": [
+        "act-blind",
+        "treat-symptom",
+        "quick-fix"
+      ],
+      "tags": [
+        "manager",
+        "diagnosis",
+        "prevent",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "manager-incident-command",
+      "roleId": "manager",
+      "label": "Incident Command",
+      "grammar": "orchestration",
+      "lane": "now",
+      "priority": 77,
+      "description": "Incident Command uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "scan",
+          "prompt": "Inspect the live queue and its dependencies.",
+          "actions": [
+            "scan",
+            "guess"
+          ]
+        },
+        {
+          "id": "sequence",
+          "prompt": "Choose the next safe priority.",
+          "actions": [
+            "sequence",
+            "first-in-list"
+          ]
+        },
+        {
+          "id": "communicate",
+          "prompt": "Issue and confirm the handoff.",
+          "actions": [
+            "call-and-confirm",
+            "silent-change"
+          ]
+        }
+      ],
+      "successActions": [
+        "scan",
+        "sequence",
+        "call-and-confirm"
+      ],
+      "riskActions": [
+        "guess",
+        "first-in-list",
+        "silent-change"
+      ],
+      "tags": [
+        "manager",
+        "orchestration",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "manager-incident-reconstruction",
+      "roleId": "manager",
+      "label": "Incident Reconstruction",
+      "grammar": "evidence",
+      "lane": "admin",
+      "priority": 38,
+      "description": "Incident Reconstruction uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "collect",
+          "prompt": "Collect the relevant live records.",
+          "actions": [
+            "collect-records",
+            "assume"
+          ]
+        },
+        {
+          "id": "reconcile",
+          "prompt": "Resolve discrepancies against physical state.",
+          "actions": [
+            "reconcile",
+            "force-balance"
+          ]
+        },
+        {
+          "id": "sign",
+          "prompt": "Document the decision and owner.",
+          "actions": [
+            "sign-with-note",
+            "submit-blank"
+          ]
+        }
+      ],
+      "successActions": [
+        "collect-records",
+        "reconcile",
+        "sign-with-note"
+      ],
+      "riskActions": [
+        "assume",
+        "force-balance",
+        "submit-blank"
+      ],
+      "tags": [
+        "manager",
+        "evidence",
+        "admin",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "manager-coaching-intervention",
+      "roleId": "manager",
+      "label": "Coaching Intervention",
+      "grammar": "dialogue",
+      "lane": "prevent",
+      "priority": 39,
+      "description": "Coaching Intervention uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "observe",
+          "prompt": "Read the person and the current service evidence.",
+          "actions": [
+            "listen",
+            "rush"
+          ]
+        },
+        {
+          "id": "respond",
+          "prompt": "Choose a response that fits the stated need.",
+          "actions": [
+            "acknowledge",
+            "deflect"
+          ]
+        },
+        {
+          "id": "follow-up",
+          "prompt": "Confirm the next step and close the loop.",
+          "actions": [
+            "confirm",
+            "leave"
+          ]
+        }
+      ],
+      "successActions": [
+        "listen",
+        "acknowledge",
+        "confirm"
+      ],
+      "riskActions": [
+        "rush",
+        "deflect",
+        "leave"
+      ],
+      "tags": [
+        "manager",
+        "dialogue",
+        "prevent",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "manager-close-control",
+      "roleId": "manager",
+      "label": "Close Control",
+      "grammar": "evidence",
+      "lane": "admin",
+      "priority": 40,
+      "description": "Close Control uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "collect",
+          "prompt": "Collect the relevant live records.",
+          "actions": [
+            "collect-records",
+            "assume"
+          ]
+        },
+        {
+          "id": "reconcile",
+          "prompt": "Resolve discrepancies against physical state.",
+          "actions": [
+            "reconcile",
+            "force-balance"
+          ]
+        },
+        {
+          "id": "sign",
+          "prompt": "Document the decision and owner.",
+          "actions": [
+            "sign-with-note",
+            "submit-blank"
+          ]
+        }
+      ],
+      "successActions": [
+        "collect-records",
+        "reconcile",
+        "sign-with-note"
+      ],
+      "riskActions": [
+        "assume",
+        "force-balance",
+        "submit-blank"
+      ],
+      "tags": [
+        "manager",
+        "evidence",
+        "admin",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "owner-cash-runway",
+      "roleId": "owner",
+      "label": "Cash Runway",
+      "grammar": "allocation",
+      "lane": "now",
+      "priority": 70,
+      "description": "Cash Runway uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "forecast",
+          "prompt": "Read available resources and upcoming obligations.",
+          "actions": [
+            "forecast",
+            "spend-now"
+          ]
+        },
+        {
+          "id": "tradeoff",
+          "prompt": "Choose the tradeoff that protects the stated goal.",
+          "actions": [
+            "balanced-commit",
+            "overcommit"
+          ]
+        },
+        {
+          "id": "review",
+          "prompt": "Set a follow-up condition and reserve.",
+          "actions": [
+            "set-review",
+            "forget"
+          ]
+        }
+      ],
+      "successActions": [
+        "forecast",
+        "balanced-commit",
+        "set-review"
+      ],
+      "riskActions": [
+        "spend-now",
+        "overcommit",
+        "forget"
+      ],
+      "tags": [
+        "owner",
+        "allocation",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "owner-capital-portfolio",
+      "roleId": "owner",
+      "label": "Capital Portfolio",
+      "grammar": "allocation",
+      "lane": "next",
+      "priority": 51,
+      "description": "Capital Portfolio uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "forecast",
+          "prompt": "Read available resources and upcoming obligations.",
+          "actions": [
+            "forecast",
+            "spend-now"
+          ]
+        },
+        {
+          "id": "tradeoff",
+          "prompt": "Choose the tradeoff that protects the stated goal.",
+          "actions": [
+            "balanced-commit",
+            "overcommit"
+          ]
+        },
+        {
+          "id": "review",
+          "prompt": "Set a follow-up condition and reserve.",
+          "actions": [
+            "set-review",
+            "forget"
+          ]
+        }
+      ],
+      "successActions": [
+        "forecast",
+        "balanced-commit",
+        "set-review"
+      ],
+      "riskActions": [
+        "spend-now",
+        "overcommit",
+        "forget"
+      ],
+      "tags": [
+        "owner",
+        "allocation",
+        "next",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "owner-vendor-negotiation",
+      "roleId": "owner",
+      "label": "Vendor Negotiation",
+      "grammar": "dialogue",
+      "lane": "now",
+      "priority": 72,
+      "description": "Vendor Negotiation uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "observe",
+          "prompt": "Read the person and the current service evidence.",
+          "actions": [
+            "listen",
+            "rush"
+          ]
+        },
+        {
+          "id": "respond",
+          "prompt": "Choose a response that fits the stated need.",
+          "actions": [
+            "acknowledge",
+            "deflect"
+          ]
+        },
+        {
+          "id": "follow-up",
+          "prompt": "Confirm the next step and close the loop.",
+          "actions": [
+            "confirm",
+            "leave"
+          ]
+        }
+      ],
+      "successActions": [
+        "listen",
+        "acknowledge",
+        "confirm"
+      ],
+      "riskActions": [
+        "rush",
+        "deflect",
+        "leave"
+      ],
+      "tags": [
+        "owner",
+        "dialogue",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "owner-purchase-authorization",
+      "roleId": "owner",
+      "label": "Purchase Authorization",
+      "grammar": "allocation",
+      "lane": "admin",
+      "priority": 33,
+      "description": "Purchase Authorization uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "forecast",
+          "prompt": "Read available resources and upcoming obligations.",
+          "actions": [
+            "forecast",
+            "spend-now"
+          ]
+        },
+        {
+          "id": "tradeoff",
+          "prompt": "Choose the tradeoff that protects the stated goal.",
+          "actions": [
+            "balanced-commit",
+            "overcommit"
+          ]
+        },
+        {
+          "id": "review",
+          "prompt": "Set a follow-up condition and reserve.",
+          "actions": [
+            "set-review",
+            "forget"
+          ]
+        }
+      ],
+      "successActions": [
+        "forecast",
+        "balanced-commit",
+        "set-review"
+      ],
+      "riskActions": [
+        "spend-now",
+        "overcommit",
+        "forget"
+      ],
+      "tags": [
+        "owner",
+        "allocation",
+        "admin",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "owner-menu-engineering",
+      "roleId": "owner",
+      "label": "Menu Engineering",
+      "grammar": "construction",
+      "lane": "prevent",
+      "priority": 34,
+      "description": "Menu Engineering uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "measure",
+          "prompt": "Measure space, utilities, and operational goal.",
+          "actions": [
+            "measure",
+            "eyeball"
+          ]
+        },
+        {
+          "id": "place",
+          "prompt": "Place with clearance and flow in mind.",
+          "actions": [
+            "place-with-flow",
+            "place-for-stat"
+          ]
+        },
+        {
+          "id": "simulate",
+          "prompt": "Run a route/utility check before committing.",
+          "actions": [
+            "simulate",
+            "commit-untested"
+          ]
+        }
+      ],
+      "successActions": [
+        "measure",
+        "place-with-flow",
+        "simulate"
+      ],
+      "riskActions": [
+        "eyeball",
+        "place-for-stat",
+        "commit-untested"
+      ],
+      "tags": [
+        "owner",
+        "construction",
+        "prevent",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "owner-brand-watch",
+      "roleId": "owner",
+      "label": "Brand Watch",
+      "grammar": "diagnosis",
+      "lane": "prevent",
+      "priority": 35,
+      "description": "Brand Watch uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "inspect",
+          "prompt": "Inspect observable symptoms before acting.",
+          "actions": [
+            "inspect",
+            "act-blind"
+          ]
+        },
+        {
+          "id": "test",
+          "prompt": "Choose a discriminating test or question.",
+          "actions": [
+            "test-cause",
+            "treat-symptom"
+          ]
+        },
+        {
+          "id": "correct",
+          "prompt": "Correct the cause and verify the result.",
+          "actions": [
+            "correct-and-verify",
+            "quick-fix"
+          ]
+        }
+      ],
+      "successActions": [
+        "inspect",
+        "test-cause",
+        "correct-and-verify"
+      ],
+      "riskActions": [
+        "act-blind",
+        "treat-symptom",
+        "quick-fix"
+      ],
+      "tags": [
+        "owner",
+        "diagnosis",
+        "prevent",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "owner-policy-desk",
+      "roleId": "owner",
+      "label": "Policy Desk",
+      "grammar": "evidence",
+      "lane": "admin",
+      "priority": 36,
+      "description": "Policy Desk uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "collect",
+          "prompt": "Collect the relevant live records.",
+          "actions": [
+            "collect-records",
+            "assume"
+          ]
+        },
+        {
+          "id": "reconcile",
+          "prompt": "Resolve discrepancies against physical state.",
+          "actions": [
+            "reconcile",
+            "force-balance"
+          ]
+        },
+        {
+          "id": "sign",
+          "prompt": "Document the decision and owner.",
+          "actions": [
+            "sign-with-note",
+            "submit-blank"
+          ]
+        }
+      ],
+      "successActions": [
+        "collect-records",
+        "reconcile",
+        "sign-with-note"
+      ],
+      "riskActions": [
+        "assume",
+        "force-balance",
+        "submit-blank"
+      ],
+      "tags": [
+        "owner",
+        "evidence",
+        "admin",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "owner-maintenance-portfolio",
+      "roleId": "owner",
+      "label": "Maintenance Portfolio",
+      "grammar": "allocation",
+      "lane": "next",
+      "priority": 57,
+      "description": "Maintenance Portfolio uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "forecast",
+          "prompt": "Read available resources and upcoming obligations.",
+          "actions": [
+            "forecast",
+            "spend-now"
+          ]
+        },
+        {
+          "id": "tradeoff",
+          "prompt": "Choose the tradeoff that protects the stated goal.",
+          "actions": [
+            "balanced-commit",
+            "overcommit"
+          ]
+        },
+        {
+          "id": "review",
+          "prompt": "Set a follow-up condition and reserve.",
+          "actions": [
+            "set-review",
+            "forget"
+          ]
+        }
+      ],
+      "successActions": [
+        "forecast",
+        "balanced-commit",
+        "set-review"
+      ],
+      "riskActions": [
+        "spend-now",
+        "overcommit",
+        "forget"
+      ],
+      "tags": [
+        "owner",
+        "allocation",
+        "next",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "owner-community-hosting",
+      "roleId": "owner",
+      "label": "Community and VIP Hosting",
+      "grammar": "dialogue",
+      "lane": "now",
+      "priority": 78,
+      "description": "Community and VIP Hosting uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "observe",
+          "prompt": "Read the person and the current service evidence.",
+          "actions": [
+            "listen",
+            "rush"
+          ]
+        },
+        {
+          "id": "respond",
+          "prompt": "Choose a response that fits the stated need.",
+          "actions": [
+            "acknowledge",
+            "deflect"
+          ]
+        },
+        {
+          "id": "follow-up",
+          "prompt": "Confirm the next step and close the loop.",
+          "actions": [
+            "confirm",
+            "leave"
+          ]
+        }
+      ],
+      "successActions": [
+        "listen",
+        "acknowledge",
+        "confirm"
+      ],
+      "riskActions": [
+        "rush",
+        "deflect",
+        "leave"
+      ],
+      "tags": [
+        "owner",
+        "dialogue",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "owner-insurance-lease",
+      "roleId": "owner",
+      "label": "Insurance and Lease Response",
+      "grammar": "evidence",
+      "lane": "admin",
+      "priority": 39,
+      "description": "Insurance and Lease Response uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "collect",
+          "prompt": "Collect the relevant live records.",
+          "actions": [
+            "collect-records",
+            "assume"
+          ]
+        },
+        {
+          "id": "reconcile",
+          "prompt": "Resolve discrepancies against physical state.",
+          "actions": [
+            "reconcile",
+            "force-balance"
+          ]
+        },
+        {
+          "id": "sign",
+          "prompt": "Document the decision and owner.",
+          "actions": [
+            "sign-with-note",
+            "submit-blank"
+          ]
+        }
+      ],
+      "successActions": [
+        "collect-records",
+        "reconcile",
+        "sign-with-note"
+      ],
+      "riskActions": [
+        "assume",
+        "force-balance",
+        "submit-blank"
+      ],
+      "tags": [
+        "owner",
+        "evidence",
+        "admin",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "owner-site-expansion",
+      "roleId": "owner",
+      "label": "Site and Expansion",
+      "grammar": "construction",
+      "lane": "prevent",
+      "priority": 40,
+      "description": "Site and Expansion uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "measure",
+          "prompt": "Measure space, utilities, and operational goal.",
+          "actions": [
+            "measure",
+            "eyeball"
+          ]
+        },
+        {
+          "id": "place",
+          "prompt": "Place with clearance and flow in mind.",
+          "actions": [
+            "place-with-flow",
+            "place-for-stat"
+          ]
+        },
+        {
+          "id": "simulate",
+          "prompt": "Run a route/utility check before committing.",
+          "actions": [
+            "simulate",
+            "commit-untested"
+          ]
+        }
+      ],
+      "successActions": [
+        "measure",
+        "place-with-flow",
+        "simulate"
+      ],
+      "riskActions": [
+        "eyeball",
+        "place-for-stat",
+        "commit-untested"
+      ],
+      "tags": [
+        "owner",
+        "construction",
+        "prevent",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "server-party-pre-read",
+      "roleId": "server",
+      "label": "Party Pre-Read",
+      "grammar": "memory",
+      "lane": "next",
+      "priority": 50,
+      "description": "Party Pre-Read uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "encode",
+          "prompt": "Encode positions, modifiers, and exceptions.",
+          "actions": [
+            "encode",
+            "skim"
+          ]
+        },
+        {
+          "id": "execute",
+          "prompt": "Apply the remembered state in order.",
+          "actions": [
+            "ordered-recall",
+            "approximate"
+          ]
+        },
+        {
+          "id": "verify",
+          "prompt": "Verify the high-risk detail.",
+          "actions": [
+            "verify",
+            "trust-memory"
+          ]
+        }
+      ],
+      "successActions": [
+        "encode",
+        "ordered-recall",
+        "verify"
+      ],
+      "riskActions": [
+        "skim",
+        "approximate",
+        "trust-memory"
+      ],
+      "tags": [
+        "server",
+        "memory",
+        "next",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "server-contextual-greeting",
+      "roleId": "server",
+      "label": "Contextual Greeting",
+      "grammar": "dialogue",
+      "lane": "now",
+      "priority": 71,
+      "description": "Contextual Greeting uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "observe",
+          "prompt": "Read the person and the current service evidence.",
+          "actions": [
+            "listen",
+            "rush"
+          ]
+        },
+        {
+          "id": "respond",
+          "prompt": "Choose a response that fits the stated need.",
+          "actions": [
+            "acknowledge",
+            "deflect"
+          ]
+        },
+        {
+          "id": "follow-up",
+          "prompt": "Confirm the next step and close the loop.",
+          "actions": [
+            "confirm",
+            "leave"
+          ]
+        }
+      ],
+      "successActions": [
+        "listen",
+        "acknowledge",
+        "confirm"
+      ],
+      "riskActions": [
+        "rush",
+        "deflect",
+        "leave"
+      ],
+      "tags": [
+        "server",
+        "dialogue",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "server-beverage-discovery",
+      "roleId": "server",
+      "label": "Beverage Discovery",
+      "grammar": "dialogue",
+      "lane": "now",
+      "priority": 72,
+      "description": "Beverage Discovery uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "observe",
+          "prompt": "Read the person and the current service evidence.",
+          "actions": [
+            "listen",
+            "rush"
+          ]
+        },
+        {
+          "id": "respond",
+          "prompt": "Choose a response that fits the stated need.",
+          "actions": [
+            "acknowledge",
+            "deflect"
+          ]
+        },
+        {
+          "id": "follow-up",
+          "prompt": "Confirm the next step and close the loop.",
+          "actions": [
+            "confirm",
+            "leave"
+          ]
+        }
+      ],
+      "successActions": [
+        "listen",
+        "acknowledge",
+        "confirm"
+      ],
+      "riskActions": [
+        "rush",
+        "deflect",
+        "leave"
+      ],
+      "tags": [
+        "server",
+        "dialogue",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "server-pour-setup",
+      "roleId": "server",
+      "label": "Pour and Setup",
+      "grammar": "precision",
+      "lane": "now",
+      "priority": 73,
+      "description": "Pour and Setup uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "setup",
+          "prompt": "Select the correct tool and working setup.",
+          "actions": [
+            "safe-setup",
+            "fast-setup"
+          ]
+        },
+        {
+          "id": "execute",
+          "prompt": "Perform the controlled gesture.",
+          "actions": [
+            "controlled-pass",
+            "force-pass"
+          ]
+        },
+        {
+          "id": "inspect",
+          "prompt": "Inspect and correct before handoff.",
+          "actions": [
+            "inspect-result",
+            "send-unchecked"
+          ]
+        }
+      ],
+      "successActions": [
+        "safe-setup",
+        "controlled-pass",
+        "inspect-result"
+      ],
+      "riskActions": [
+        "fast-setup",
+        "force-pass",
+        "send-unchecked"
+      ],
+      "tags": [
+        "server",
+        "precision",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "server-menu-interview",
+      "roleId": "server",
+      "label": "Menu Interview",
+      "grammar": "dialogue",
+      "lane": "now",
+      "priority": 74,
+      "description": "Menu Interview uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "observe",
+          "prompt": "Read the person and the current service evidence.",
+          "actions": [
+            "listen",
+            "rush"
+          ]
+        },
+        {
+          "id": "respond",
+          "prompt": "Choose a response that fits the stated need.",
+          "actions": [
+            "acknowledge",
+            "deflect"
+          ]
+        },
+        {
+          "id": "follow-up",
+          "prompt": "Confirm the next step and close the loop.",
+          "actions": [
+            "confirm",
+            "leave"
+          ]
+        }
+      ],
+      "successActions": [
+        "listen",
+        "acknowledge",
+        "confirm"
+      ],
+      "riskActions": [
+        "rush",
+        "deflect",
+        "leave"
+      ],
+      "tags": [
+        "server",
+        "dialogue",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "server-seat-order",
+      "roleId": "server",
+      "label": "Seat-Numbered Order",
+      "grammar": "memory",
+      "lane": "now",
+      "priority": 75,
+      "description": "Seat-Numbered Order uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "encode",
+          "prompt": "Encode positions, modifiers, and exceptions.",
+          "actions": [
+            "encode",
+            "skim"
+          ]
+        },
+        {
+          "id": "execute",
+          "prompt": "Apply the remembered state in order.",
+          "actions": [
+            "ordered-recall",
+            "approximate"
+          ]
+        },
+        {
+          "id": "verify",
+          "prompt": "Verify the high-risk detail.",
+          "actions": [
+            "verify",
+            "trust-memory"
+          ]
+        }
+      ],
+      "successActions": [
+        "encode",
+        "ordered-recall",
+        "verify"
+      ],
+      "riskActions": [
+        "skim",
+        "approximate",
+        "trust-memory"
+      ],
+      "tags": [
+        "server",
+        "memory",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "server-allergy-confirmation",
+      "roleId": "server",
+      "label": "Allergy Confirmation",
+      "grammar": "evidence",
+      "lane": "now",
+      "priority": 76,
+      "description": "Allergy Confirmation uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "collect",
+          "prompt": "Collect the relevant live records.",
+          "actions": [
+            "collect-records",
+            "assume"
+          ]
+        },
+        {
+          "id": "reconcile",
+          "prompt": "Resolve discrepancies against physical state.",
+          "actions": [
+            "reconcile",
+            "force-balance"
+          ]
+        },
+        {
+          "id": "sign",
+          "prompt": "Document the decision and owner.",
+          "actions": [
+            "sign-with-note",
+            "submit-blank"
+          ]
+        }
+      ],
+      "successActions": [
+        "collect-records",
+        "reconcile",
+        "sign-with-note"
+      ],
+      "riskActions": [
+        "assume",
+        "force-balance",
+        "submit-blank"
+      ],
+      "tags": [
+        "server",
+        "evidence",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "server-course-conductor",
+      "roleId": "server",
+      "label": "Course Conductor",
+      "grammar": "orchestration",
+      "lane": "next",
+      "priority": 57,
+      "description": "Course Conductor uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "scan",
+          "prompt": "Inspect the live queue and its dependencies.",
+          "actions": [
+            "scan",
+            "guess"
+          ]
+        },
+        {
+          "id": "sequence",
+          "prompt": "Choose the next safe priority.",
+          "actions": [
+            "sequence",
+            "first-in-list"
+          ]
+        },
+        {
+          "id": "communicate",
+          "prompt": "Issue and confirm the handoff.",
+          "actions": [
+            "call-and-confirm",
+            "silent-change"
+          ]
+        }
+      ],
+      "successActions": [
+        "scan",
+        "sequence",
+        "call-and-confirm"
+      ],
+      "riskActions": [
+        "guess",
+        "first-in-list",
+        "silent-change"
+      ],
+      "tags": [
+        "server",
+        "orchestration",
+        "next",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "server-tray-route",
+      "roleId": "server",
+      "label": "Tray Build and Route",
+      "grammar": "route",
+      "lane": "now",
+      "priority": 78,
+      "description": "Tray Build and Route uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "scan",
+          "prompt": "Read hazards, stops, and task claims.",
+          "actions": [
+            "scan-route",
+            "shortest-only"
+          ]
+        },
+        {
+          "id": "chain",
+          "prompt": "Build a safe multi-stop circuit.",
+          "actions": [
+            "chain-stops",
+            "single-rush"
+          ]
+        },
+        {
+          "id": "handoff",
+          "prompt": "Complete each stop and communicate exceptions.",
+          "actions": [
+            "complete-handoff",
+            "drop-and-go"
+          ]
+        }
+      ],
+      "successActions": [
+        "scan-route",
+        "chain-stops",
+        "complete-handoff"
+      ],
+      "riskActions": [
+        "shortest-only",
+        "single-rush",
+        "drop-and-go"
+      ],
+      "tags": [
+        "server",
+        "route",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "server-delivery-seat-match",
+      "roleId": "server",
+      "label": "Delivery and Seat Match",
+      "grammar": "memory",
+      "lane": "now",
+      "priority": 79,
+      "description": "Delivery and Seat Match uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "encode",
+          "prompt": "Encode positions, modifiers, and exceptions.",
+          "actions": [
+            "encode",
+            "skim"
+          ]
+        },
+        {
+          "id": "execute",
+          "prompt": "Apply the remembered state in order.",
+          "actions": [
+            "ordered-recall",
+            "approximate"
+          ]
+        },
+        {
+          "id": "verify",
+          "prompt": "Verify the high-risk detail.",
+          "actions": [
+            "verify",
+            "trust-memory"
+          ]
+        }
+      ],
+      "successActions": [
+        "encode",
+        "ordered-recall",
+        "verify"
+      ],
+      "riskActions": [
+        "skim",
+        "approximate",
+        "trust-memory"
+      ],
+      "tags": [
+        "server",
+        "memory",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "server-two-bite-check",
+      "roleId": "server",
+      "label": "Two-Bite Check",
+      "grammar": "diagnosis",
+      "lane": "next",
+      "priority": 60,
+      "description": "Two-Bite Check uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "inspect",
+          "prompt": "Inspect observable symptoms before acting.",
+          "actions": [
+            "inspect",
+            "act-blind"
+          ]
+        },
+        {
+          "id": "test",
+          "prompt": "Choose a discriminating test or question.",
+          "actions": [
+            "test-cause",
+            "treat-symptom"
+          ]
+        },
+        {
+          "id": "correct",
+          "prompt": "Correct the cause and verify the result.",
+          "actions": [
+            "correct-and-verify",
+            "quick-fix"
+          ]
+        }
+      ],
+      "successActions": [
+        "inspect",
+        "test-cause",
+        "correct-and-verify"
+      ],
+      "riskActions": [
+        "act-blind",
+        "treat-symptom",
+        "quick-fix"
+      ],
+      "tags": [
+        "server",
+        "diagnosis",
+        "next",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "server-attention-circuit",
+      "roleId": "server",
+      "label": "Attention Circuit",
+      "grammar": "route",
+      "lane": "now",
+      "priority": 81,
+      "description": "Attention Circuit uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "scan",
+          "prompt": "Read hazards, stops, and task claims.",
+          "actions": [
+            "scan-route",
+            "shortest-only"
+          ]
+        },
+        {
+          "id": "chain",
+          "prompt": "Build a safe multi-stop circuit.",
+          "actions": [
+            "chain-stops",
+            "single-rush"
+          ]
+        },
+        {
+          "id": "handoff",
+          "prompt": "Complete each stop and communicate exceptions.",
+          "actions": [
+            "complete-handoff",
+            "drop-and-go"
+          ]
+        }
+      ],
+      "successActions": [
+        "scan-route",
+        "chain-stops",
+        "complete-handoff"
+      ],
+      "riskActions": [
+        "shortest-only",
+        "single-rush",
+        "drop-and-go"
+      ],
+      "tags": [
+        "server",
+        "route",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "server-recovery-conversation",
+      "roleId": "server",
+      "label": "Recovery Conversation",
+      "grammar": "dialogue",
+      "lane": "now",
+      "priority": 82,
+      "description": "Recovery Conversation uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "observe",
+          "prompt": "Read the person and the current service evidence.",
+          "actions": [
+            "listen",
+            "rush"
+          ]
+        },
+        {
+          "id": "respond",
+          "prompt": "Choose a response that fits the stated need.",
+          "actions": [
+            "acknowledge",
+            "deflect"
+          ]
+        },
+        {
+          "id": "follow-up",
+          "prompt": "Confirm the next step and close the loop.",
+          "actions": [
+            "confirm",
+            "leave"
+          ]
+        }
+      ],
+      "successActions": [
+        "listen",
+        "acknowledge",
+        "confirm"
+      ],
+      "riskActions": [
+        "rush",
+        "deflect",
+        "leave"
+      ],
+      "tags": [
+        "server",
+        "dialogue",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "server-dessert-check-read",
+      "roleId": "server",
+      "label": "Dessert and Check Read",
+      "grammar": "diagnosis",
+      "lane": "next",
+      "priority": 63,
+      "description": "Dessert and Check Read uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "inspect",
+          "prompt": "Inspect observable symptoms before acting.",
+          "actions": [
+            "inspect",
+            "act-blind"
+          ]
+        },
+        {
+          "id": "test",
+          "prompt": "Choose a discriminating test or question.",
+          "actions": [
+            "test-cause",
+            "treat-symptom"
+          ]
+        },
+        {
+          "id": "correct",
+          "prompt": "Correct the cause and verify the result.",
+          "actions": [
+            "correct-and-verify",
+            "quick-fix"
+          ]
+        }
+      ],
+      "successActions": [
+        "inspect",
+        "test-cause",
+        "correct-and-verify"
+      ],
+      "riskActions": [
+        "act-blind",
+        "treat-symptom",
+        "quick-fix"
+      ],
+      "tags": [
+        "server",
+        "diagnosis",
+        "next",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "server-split-payment",
+      "roleId": "server",
+      "label": "Split and Payment",
+      "grammar": "evidence",
+      "lane": "now",
+      "priority": 84,
+      "description": "Split and Payment uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "collect",
+          "prompt": "Collect the relevant live records.",
+          "actions": [
+            "collect-records",
+            "assume"
+          ]
+        },
+        {
+          "id": "reconcile",
+          "prompt": "Resolve discrepancies against physical state.",
+          "actions": [
+            "reconcile",
+            "force-balance"
+          ]
+        },
+        {
+          "id": "sign",
+          "prompt": "Document the decision and owner.",
+          "actions": [
+            "sign-with-note",
+            "submit-blank"
+          ]
+        }
+      ],
+      "successActions": [
+        "collect-records",
+        "reconcile",
+        "sign-with-note"
+      ],
+      "riskActions": [
+        "assume",
+        "force-balance",
+        "submit-blank"
+      ],
+      "tags": [
+        "server",
+        "evidence",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "server-checkout-handoff",
+      "roleId": "server",
+      "label": "Checkout and Handoff",
+      "grammar": "evidence",
+      "lane": "admin",
+      "priority": 30,
+      "description": "Checkout and Handoff uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "collect",
+          "prompt": "Collect the relevant live records.",
+          "actions": [
+            "collect-records",
+            "assume"
+          ]
+        },
+        {
+          "id": "reconcile",
+          "prompt": "Resolve discrepancies against physical state.",
+          "actions": [
+            "reconcile",
+            "force-balance"
+          ]
+        },
+        {
+          "id": "sign",
+          "prompt": "Document the decision and owner.",
+          "actions": [
+            "sign-with-note",
+            "submit-blank"
+          ]
+        }
+      ],
+      "successActions": [
+        "collect-records",
+        "reconcile",
+        "sign-with-note"
+      ],
+      "riskActions": [
+        "assume",
+        "force-balance",
+        "submit-blank"
+      ],
+      "tags": [
+        "server",
+        "evidence",
+        "admin",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "dishwasher-intake-triage",
+      "roleId": "dishwasher",
+      "label": "Intake Triage",
+      "grammar": "diagnosis",
+      "lane": "now",
+      "priority": 70,
+      "description": "Intake Triage uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "inspect",
+          "prompt": "Inspect observable symptoms before acting.",
+          "actions": [
+            "inspect",
+            "act-blind"
+          ]
+        },
+        {
+          "id": "test",
+          "prompt": "Choose a discriminating test or question.",
+          "actions": [
+            "test-cause",
+            "treat-symptom"
+          ]
+        },
+        {
+          "id": "correct",
+          "prompt": "Correct the cause and verify the result.",
+          "actions": [
+            "correct-and-verify",
+            "quick-fix"
+          ]
+        }
+      ],
+      "successActions": [
+        "inspect",
+        "test-cause",
+        "correct-and-verify"
+      ],
+      "riskActions": [
+        "act-blind",
+        "treat-symptom",
+        "quick-fix"
+      ],
+      "tags": [
+        "dishwasher",
+        "diagnosis",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "dishwasher-scrape-waste",
+      "roleId": "dishwasher",
+      "label": "Scrape and Waste Sort",
+      "grammar": "precision",
+      "lane": "now",
+      "priority": 71,
+      "description": "Scrape and Waste Sort uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "setup",
+          "prompt": "Select the correct tool and working setup.",
+          "actions": [
+            "safe-setup",
+            "fast-setup"
+          ]
+        },
+        {
+          "id": "execute",
+          "prompt": "Perform the controlled gesture.",
+          "actions": [
+            "controlled-pass",
+            "force-pass"
+          ]
+        },
+        {
+          "id": "inspect",
+          "prompt": "Inspect and correct before handoff.",
+          "actions": [
+            "inspect-result",
+            "send-unchecked"
+          ]
+        }
+      ],
+      "successActions": [
+        "safe-setup",
+        "controlled-pass",
+        "inspect-result"
+      ],
+      "riskActions": [
+        "fast-setup",
+        "force-pass",
+        "send-unchecked"
+      ],
+      "tags": [
+        "dishwasher",
+        "precision",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "dishwasher-soil-treatment",
+      "roleId": "dishwasher",
+      "label": "Soil Treatment",
+      "grammar": "diagnosis",
+      "lane": "now",
+      "priority": 72,
+      "description": "Soil Treatment uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "inspect",
+          "prompt": "Inspect observable symptoms before acting.",
+          "actions": [
+            "inspect",
+            "act-blind"
+          ]
+        },
+        {
+          "id": "test",
+          "prompt": "Choose a discriminating test or question.",
+          "actions": [
+            "test-cause",
+            "treat-symptom"
+          ]
+        },
+        {
+          "id": "correct",
+          "prompt": "Correct the cause and verify the result.",
+          "actions": [
+            "correct-and-verify",
+            "quick-fix"
+          ]
+        }
+      ],
+      "successActions": [
+        "inspect",
+        "test-cause",
+        "correct-and-verify"
+      ],
+      "riskActions": [
+        "act-blind",
+        "treat-symptom",
+        "quick-fix"
+      ],
+      "tags": [
+        "dishwasher",
+        "diagnosis",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "dishwasher-rack-geometry",
+      "roleId": "dishwasher",
+      "label": "Rack Geometry",
+      "grammar": "packing",
+      "lane": "now",
+      "priority": 73,
+      "description": "Rack Geometry uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "sort",
+          "prompt": "Group items by compatibility and destination.",
+          "actions": [
+            "sort-compatible",
+            "mix-all"
+          ]
+        },
+        {
+          "id": "place",
+          "prompt": "Place for balance, access, and clearance.",
+          "actions": [
+            "place-balanced",
+            "pack-tight"
+          ]
+        },
+        {
+          "id": "verify",
+          "prompt": "Verify stability and downstream use.",
+          "actions": [
+            "verify-load",
+            "move-now"
+          ]
+        }
+      ],
+      "successActions": [
+        "sort-compatible",
+        "place-balanced",
+        "verify-load"
+      ],
+      "riskActions": [
+        "mix-all",
+        "pack-tight",
+        "move-now"
+      ],
+      "tags": [
+        "dishwasher",
+        "packing",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "dishwasher-machine-setup",
+      "roleId": "dishwasher",
+      "label": "Machine Setup",
+      "grammar": "process",
+      "lane": "prevent",
+      "priority": 34,
+      "description": "Machine Setup uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "setup",
+          "prompt": "Set safe starting conditions.",
+          "actions": [
+            "calibrate",
+            "start-cold"
+          ]
+        },
+        {
+          "id": "control",
+          "prompt": "Monitor and adjust concurrent state.",
+          "actions": [
+            "controlled-adjust",
+            "max-control"
+          ]
+        },
+        {
+          "id": "verify",
+          "prompt": "Verify completion before release.",
+          "actions": [
+            "verify-release",
+            "release-early"
+          ]
+        }
+      ],
+      "successActions": [
+        "calibrate",
+        "controlled-adjust",
+        "verify-release"
+      ],
+      "riskActions": [
+        "start-cold",
+        "max-control",
+        "release-early"
+      ],
+      "tags": [
+        "dishwasher",
+        "process",
+        "prevent",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "dishwasher-cycle-cadence",
+      "roleId": "dishwasher",
+      "label": "Cycle Cadence",
+      "grammar": "process",
+      "lane": "now",
+      "priority": 75,
+      "description": "Cycle Cadence uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "setup",
+          "prompt": "Set safe starting conditions.",
+          "actions": [
+            "calibrate",
+            "start-cold"
+          ]
+        },
+        {
+          "id": "control",
+          "prompt": "Monitor and adjust concurrent state.",
+          "actions": [
+            "controlled-adjust",
+            "max-control"
+          ]
+        },
+        {
+          "id": "verify",
+          "prompt": "Verify completion before release.",
+          "actions": [
+            "verify-release",
+            "release-early"
+          ]
+        }
+      ],
+      "successActions": [
+        "calibrate",
+        "controlled-adjust",
+        "verify-release"
+      ],
+      "riskActions": [
+        "start-cold",
+        "max-control",
+        "release-early"
+      ],
+      "tags": [
+        "dishwasher",
+        "process",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "dishwasher-clean-inspection",
+      "roleId": "dishwasher",
+      "label": "Clean Inspection",
+      "grammar": "diagnosis",
+      "lane": "now",
+      "priority": 76,
+      "description": "Clean Inspection uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "inspect",
+          "prompt": "Inspect observable symptoms before acting.",
+          "actions": [
+            "inspect",
+            "act-blind"
+          ]
+        },
+        {
+          "id": "test",
+          "prompt": "Choose a discriminating test or question.",
+          "actions": [
+            "test-cause",
+            "treat-symptom"
+          ]
+        },
+        {
+          "id": "correct",
+          "prompt": "Correct the cause and verify the result.",
+          "actions": [
+            "correct-and-verify",
+            "quick-fix"
+          ]
+        }
+      ],
+      "successActions": [
+        "inspect",
+        "test-cause",
+        "correct-and-verify"
+      ],
+      "riskActions": [
+        "act-blind",
+        "treat-symptom",
+        "quick-fix"
+      ],
+      "tags": [
+        "dishwasher",
+        "diagnosis",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "dishwasher-pit-priority",
+      "roleId": "dishwasher",
+      "label": "Pit Priority Board",
+      "grammar": "orchestration",
+      "lane": "now",
+      "priority": 77,
+      "description": "Pit Priority Board uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "scan",
+          "prompt": "Inspect the live queue and its dependencies.",
+          "actions": [
+            "scan",
+            "guess"
+          ]
+        },
+        {
+          "id": "sequence",
+          "prompt": "Choose the next safe priority.",
+          "actions": [
+            "sequence",
+            "first-in-list"
+          ]
+        },
+        {
+          "id": "communicate",
+          "prompt": "Issue and confirm the handoff.",
+          "actions": [
+            "call-and-confirm",
+            "silent-change"
+          ]
+        }
+      ],
+      "successActions": [
+        "scan",
+        "sequence",
+        "call-and-confirm"
+      ],
+      "riskActions": [
+        "guess",
+        "first-in-list",
+        "silent-change"
+      ],
+      "tags": [
+        "dishwasher",
+        "orchestration",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "dishwasher-clean-distribution",
+      "roleId": "dishwasher",
+      "label": "Clean Distribution",
+      "grammar": "route",
+      "lane": "next",
+      "priority": 58,
+      "description": "Clean Distribution uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "scan",
+          "prompt": "Read hazards, stops, and task claims.",
+          "actions": [
+            "scan-route",
+            "shortest-only"
+          ]
+        },
+        {
+          "id": "chain",
+          "prompt": "Build a safe multi-stop circuit.",
+          "actions": [
+            "chain-stops",
+            "single-rush"
+          ]
+        },
+        {
+          "id": "handoff",
+          "prompt": "Complete each stop and communicate exceptions.",
+          "actions": [
+            "complete-handoff",
+            "drop-and-go"
+          ]
+        }
+      ],
+      "successActions": [
+        "scan-route",
+        "chain-stops",
+        "complete-handoff"
+      ],
+      "riskActions": [
+        "shortest-only",
+        "single-rush",
+        "drop-and-go"
+      ],
+      "tags": [
+        "dishwasher",
+        "route",
+        "next",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "dishwasher-specialty-ware",
+      "roleId": "dishwasher",
+      "label": "Pots and Specialty Ware",
+      "grammar": "precision",
+      "lane": "now",
+      "priority": 79,
+      "description": "Pots and Specialty Ware uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "setup",
+          "prompt": "Select the correct tool and working setup.",
+          "actions": [
+            "safe-setup",
+            "fast-setup"
+          ]
+        },
+        {
+          "id": "execute",
+          "prompt": "Perform the controlled gesture.",
+          "actions": [
+            "controlled-pass",
+            "force-pass"
+          ]
+        },
+        {
+          "id": "inspect",
+          "prompt": "Inspect and correct before handoff.",
+          "actions": [
+            "inspect-result",
+            "send-unchecked"
+          ]
+        }
+      ],
+      "successActions": [
+        "safe-setup",
+        "controlled-pass",
+        "inspect-result"
+      ],
+      "riskActions": [
+        "fast-setup",
+        "force-pass",
+        "send-unchecked"
+      ],
+      "tags": [
+        "dishwasher",
+        "precision",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "dishwasher-breakage-containment",
+      "roleId": "dishwasher",
+      "label": "Breakage Containment",
+      "grammar": "diagnosis",
+      "lane": "now",
+      "priority": 80,
+      "description": "Breakage Containment uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "inspect",
+          "prompt": "Inspect observable symptoms before acting.",
+          "actions": [
+            "inspect",
+            "act-blind"
+          ]
+        },
+        {
+          "id": "test",
+          "prompt": "Choose a discriminating test or question.",
+          "actions": [
+            "test-cause",
+            "treat-symptom"
+          ]
+        },
+        {
+          "id": "correct",
+          "prompt": "Correct the cause and verify the result.",
+          "actions": [
+            "correct-and-verify",
+            "quick-fix"
+          ]
+        }
+      ],
+      "successActions": [
+        "inspect",
+        "test-cause",
+        "correct-and-verify"
+      ],
+      "riskActions": [
+        "act-blind",
+        "treat-symptom",
+        "quick-fix"
+      ],
+      "tags": [
+        "dishwasher",
+        "diagnosis",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "dishwasher-preventative-maintenance",
+      "roleId": "dishwasher",
+      "label": "Preventative Maintenance",
+      "grammar": "process",
+      "lane": "prevent",
+      "priority": 41,
+      "description": "Preventative Maintenance uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "setup",
+          "prompt": "Set safe starting conditions.",
+          "actions": [
+            "calibrate",
+            "start-cold"
+          ]
+        },
+        {
+          "id": "control",
+          "prompt": "Monitor and adjust concurrent state.",
+          "actions": [
+            "controlled-adjust",
+            "max-control"
+          ]
+        },
+        {
+          "id": "verify",
+          "prompt": "Verify completion before release.",
+          "actions": [
+            "verify-release",
+            "release-early"
+          ]
+        }
+      ],
+      "successActions": [
+        "calibrate",
+        "controlled-adjust",
+        "verify-release"
+      ],
+      "riskActions": [
+        "start-cold",
+        "max-control",
+        "release-early"
+      ],
+      "tags": [
+        "dishwasher",
+        "process",
+        "prevent",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "dishwasher-pit-close",
+      "roleId": "dishwasher",
+      "label": "Pit Close",
+      "grammar": "evidence",
+      "lane": "admin",
+      "priority": 42,
+      "description": "Pit Close uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "collect",
+          "prompt": "Collect the relevant live records.",
+          "actions": [
+            "collect-records",
+            "assume"
+          ]
+        },
+        {
+          "id": "reconcile",
+          "prompt": "Resolve discrepancies against physical state.",
+          "actions": [
+            "reconcile",
+            "force-balance"
+          ]
+        },
+        {
+          "id": "sign",
+          "prompt": "Document the decision and owner.",
+          "actions": [
+            "sign-with-note",
+            "submit-blank"
+          ]
+        }
+      ],
+      "successActions": [
+        "collect-records",
+        "reconcile",
+        "sign-with-note"
+      ],
+      "riskActions": [
+        "assume",
+        "force-balance",
+        "submit-blank"
+      ],
+      "tags": [
+        "dishwasher",
+        "evidence",
+        "admin",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "chef-line-check",
+      "roleId": "chef",
+      "label": "Line Check",
+      "grammar": "diagnosis",
+      "lane": "prevent",
+      "priority": 30,
+      "description": "Line Check uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "inspect",
+          "prompt": "Inspect observable symptoms before acting.",
+          "actions": [
+            "inspect",
+            "act-blind"
+          ]
+        },
+        {
+          "id": "test",
+          "prompt": "Choose a discriminating test or question.",
+          "actions": [
+            "test-cause",
+            "treat-symptom"
+          ]
+        },
+        {
+          "id": "correct",
+          "prompt": "Correct the cause and verify the result.",
+          "actions": [
+            "correct-and-verify",
+            "quick-fix"
+          ]
+        }
+      ],
+      "successActions": [
+        "inspect",
+        "test-cause",
+        "correct-and-verify"
+      ],
+      "riskActions": [
+        "act-blind",
+        "treat-symptom",
+        "quick-fix"
+      ],
+      "tags": [
+        "chef",
+        "diagnosis",
+        "prevent",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "chef-ticket-rail",
+      "roleId": "chef",
+      "label": "Ticket Rail",
+      "grammar": "orchestration",
+      "lane": "now",
+      "priority": 71,
+      "description": "Ticket Rail uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "scan",
+          "prompt": "Inspect the live queue and its dependencies.",
+          "actions": [
+            "scan",
+            "guess"
+          ]
+        },
+        {
+          "id": "sequence",
+          "prompt": "Choose the next safe priority.",
+          "actions": [
+            "sequence",
+            "first-in-list"
+          ]
+        },
+        {
+          "id": "communicate",
+          "prompt": "Issue and confirm the handoff.",
+          "actions": [
+            "call-and-confirm",
+            "silent-change"
+          ]
+        }
+      ],
+      "successActions": [
+        "scan",
+        "sequence",
+        "call-and-confirm"
+      ],
+      "riskActions": [
+        "guess",
+        "first-in-list",
+        "silent-change"
+      ],
+      "tags": [
+        "chef",
+        "orchestration",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "chef-call-acknowledgment",
+      "roleId": "chef",
+      "label": "Call and Acknowledgment",
+      "grammar": "memory",
+      "lane": "now",
+      "priority": 72,
+      "description": "Call and Acknowledgment uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "encode",
+          "prompt": "Encode positions, modifiers, and exceptions.",
+          "actions": [
+            "encode",
+            "skim"
+          ]
+        },
+        {
+          "id": "execute",
+          "prompt": "Apply the remembered state in order.",
+          "actions": [
+            "ordered-recall",
+            "approximate"
+          ]
+        },
+        {
+          "id": "verify",
+          "prompt": "Verify the high-risk detail.",
+          "actions": [
+            "verify",
+            "trust-memory"
+          ]
+        }
+      ],
+      "successActions": [
+        "encode",
+        "ordered-recall",
+        "verify"
+      ],
+      "riskActions": [
+        "skim",
+        "approximate",
+        "trust-memory"
+      ],
+      "tags": [
+        "chef",
+        "memory",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "chef-pickup-orchestration",
+      "roleId": "chef",
+      "label": "Pickup Orchestration",
+      "grammar": "process",
+      "lane": "now",
+      "priority": 73,
+      "description": "Pickup Orchestration uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "setup",
+          "prompt": "Set safe starting conditions.",
+          "actions": [
+            "calibrate",
+            "start-cold"
+          ]
+        },
+        {
+          "id": "control",
+          "prompt": "Monitor and adjust concurrent state.",
+          "actions": [
+            "controlled-adjust",
+            "max-control"
+          ]
+        },
+        {
+          "id": "verify",
+          "prompt": "Verify completion before release.",
+          "actions": [
+            "verify-release",
+            "release-early"
+          ]
+        }
+      ],
+      "successActions": [
+        "calibrate",
+        "controlled-adjust",
+        "verify-release"
+      ],
+      "riskActions": [
+        "start-cold",
+        "max-control",
+        "release-early"
+      ],
+      "tags": [
+        "chef",
+        "process",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "chef-plate-inspection",
+      "roleId": "chef",
+      "label": "Plate Inspection",
+      "grammar": "diagnosis",
+      "lane": "now",
+      "priority": 74,
+      "description": "Plate Inspection uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "inspect",
+          "prompt": "Inspect observable symptoms before acting.",
+          "actions": [
+            "inspect",
+            "act-blind"
+          ]
+        },
+        {
+          "id": "test",
+          "prompt": "Choose a discriminating test or question.",
+          "actions": [
+            "test-cause",
+            "treat-symptom"
+          ]
+        },
+        {
+          "id": "correct",
+          "prompt": "Correct the cause and verify the result.",
+          "actions": [
+            "correct-and-verify",
+            "quick-fix"
+          ]
+        }
+      ],
+      "successActions": [
+        "inspect",
+        "test-cause",
+        "correct-and-verify"
+      ],
+      "riskActions": [
+        "act-blind",
+        "treat-symptom",
+        "quick-fix"
+      ],
+      "tags": [
+        "chef",
+        "diagnosis",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "chef-taste-calibration",
+      "roleId": "chef",
+      "label": "Taste Calibration",
+      "grammar": "diagnosis",
+      "lane": "prevent",
+      "priority": 35,
+      "description": "Taste Calibration uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "inspect",
+          "prompt": "Inspect observable symptoms before acting.",
+          "actions": [
+            "inspect",
+            "act-blind"
+          ]
+        },
+        {
+          "id": "test",
+          "prompt": "Choose a discriminating test or question.",
+          "actions": [
+            "test-cause",
+            "treat-symptom"
+          ]
+        },
+        {
+          "id": "correct",
+          "prompt": "Correct the cause and verify the result.",
+          "actions": [
+            "correct-and-verify",
+            "quick-fix"
+          ]
+        }
+      ],
+      "successActions": [
+        "inspect",
+        "test-cause",
+        "correct-and-verify"
+      ],
+      "riskActions": [
+        "act-blind",
+        "treat-symptom",
+        "quick-fix"
+      ],
+      "tags": [
+        "chef",
+        "diagnosis",
+        "prevent",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "chef-refire-recovery",
+      "roleId": "chef",
+      "label": "Refire and Recovery",
+      "grammar": "orchestration",
+      "lane": "now",
+      "priority": 76,
+      "description": "Refire and Recovery uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "scan",
+          "prompt": "Inspect the live queue and its dependencies.",
+          "actions": [
+            "scan",
+            "guess"
+          ]
+        },
+        {
+          "id": "sequence",
+          "prompt": "Choose the next safe priority.",
+          "actions": [
+            "sequence",
+            "first-in-list"
+          ]
+        },
+        {
+          "id": "communicate",
+          "prompt": "Issue and confirm the handoff.",
+          "actions": [
+            "call-and-confirm",
+            "silent-change"
+          ]
+        }
+      ],
+      "successActions": [
+        "scan",
+        "sequence",
+        "call-and-confirm"
+      ],
+      "riskActions": [
+        "guess",
+        "first-in-list",
+        "silent-change"
+      ],
+      "tags": [
+        "chef",
+        "orchestration",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "chef-availability-control",
+      "roleId": "chef",
+      "label": "86 and Substitution Control",
+      "grammar": "allocation",
+      "lane": "next",
+      "priority": 57,
+      "description": "86 and Substitution Control uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "forecast",
+          "prompt": "Read available resources and upcoming obligations.",
+          "actions": [
+            "forecast",
+            "spend-now"
+          ]
+        },
+        {
+          "id": "tradeoff",
+          "prompt": "Choose the tradeoff that protects the stated goal.",
+          "actions": [
+            "balanced-commit",
+            "overcommit"
+          ]
+        },
+        {
+          "id": "review",
+          "prompt": "Set a follow-up condition and reserve.",
+          "actions": [
+            "set-review",
+            "forget"
+          ]
+        }
+      ],
+      "successActions": [
+        "forecast",
+        "balanced-commit",
+        "set-review"
+      ],
+      "riskActions": [
+        "spend-now",
+        "overcommit",
+        "forget"
+      ],
+      "tags": [
+        "chef",
+        "allocation",
+        "next",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "chef-haccp-decision",
+      "roleId": "chef",
+      "label": "HACCP Decision",
+      "grammar": "evidence",
+      "lane": "now",
+      "priority": 78,
+      "description": "HACCP Decision uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "collect",
+          "prompt": "Collect the relevant live records.",
+          "actions": [
+            "collect-records",
+            "assume"
+          ]
+        },
+        {
+          "id": "reconcile",
+          "prompt": "Resolve discrepancies against physical state.",
+          "actions": [
+            "reconcile",
+            "force-balance"
+          ]
+        },
+        {
+          "id": "sign",
+          "prompt": "Document the decision and owner.",
+          "actions": [
+            "sign-with-note",
+            "submit-blank"
+          ]
+        }
+      ],
+      "successActions": [
+        "collect-records",
+        "reconcile",
+        "sign-with-note"
+      ],
+      "riskActions": [
+        "assume",
+        "force-balance",
+        "submit-blank"
+      ],
+      "tags": [
+        "chef",
+        "evidence",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "chef-yield-order-guide",
+      "roleId": "chef",
+      "label": "Yield and Order Guide",
+      "grammar": "allocation",
+      "lane": "admin",
+      "priority": 39,
+      "description": "Yield and Order Guide uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "forecast",
+          "prompt": "Read available resources and upcoming obligations.",
+          "actions": [
+            "forecast",
+            "spend-now"
+          ]
+        },
+        {
+          "id": "tradeoff",
+          "prompt": "Choose the tradeoff that protects the stated goal.",
+          "actions": [
+            "balanced-commit",
+            "overcommit"
+          ]
+        },
+        {
+          "id": "review",
+          "prompt": "Set a follow-up condition and reserve.",
+          "actions": [
+            "set-review",
+            "forget"
+          ]
+        }
+      ],
+      "successActions": [
+        "forecast",
+        "balanced-commit",
+        "set-review"
+      ],
+      "riskActions": [
+        "spend-now",
+        "overcommit",
+        "forget"
+      ],
+      "tags": [
+        "chef",
+        "allocation",
+        "admin",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "chef-waste-review",
+      "roleId": "chef",
+      "label": "Waste Review",
+      "grammar": "evidence",
+      "lane": "admin",
+      "priority": 40,
+      "description": "Waste Review uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "collect",
+          "prompt": "Collect the relevant live records.",
+          "actions": [
+            "collect-records",
+            "assume"
+          ]
+        },
+        {
+          "id": "reconcile",
+          "prompt": "Resolve discrepancies against physical state.",
+          "actions": [
+            "reconcile",
+            "force-balance"
+          ]
+        },
+        {
+          "id": "sign",
+          "prompt": "Document the decision and owner.",
+          "actions": [
+            "sign-with-note",
+            "submit-blank"
+          ]
+        }
+      ],
+      "successActions": [
+        "collect-records",
+        "reconcile",
+        "sign-with-note"
+      ],
+      "riskActions": [
+        "assume",
+        "force-balance",
+        "submit-blank"
+      ],
+      "tags": [
+        "chef",
+        "evidence",
+        "admin",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "chef-kitchen-coaching",
+      "roleId": "chef",
+      "label": "Kitchen Coaching",
+      "grammar": "dialogue",
+      "lane": "prevent",
+      "priority": 41,
+      "description": "Kitchen Coaching uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "observe",
+          "prompt": "Read the person and the current service evidence.",
+          "actions": [
+            "listen",
+            "rush"
+          ]
+        },
+        {
+          "id": "respond",
+          "prompt": "Choose a response that fits the stated need.",
+          "actions": [
+            "acknowledge",
+            "deflect"
+          ]
+        },
+        {
+          "id": "follow-up",
+          "prompt": "Confirm the next step and close the loop.",
+          "actions": [
+            "confirm",
+            "leave"
+          ]
+        }
+      ],
+      "successActions": [
+        "listen",
+        "acknowledge",
+        "confirm"
+      ],
+      "riskActions": [
+        "rush",
+        "deflect",
+        "leave"
+      ],
+      "tags": [
+        "chef",
+        "dialogue",
+        "prevent",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "cook-product-rotation",
+      "roleId": "cook",
+      "label": "Product Pull and Rotation",
+      "grammar": "evidence",
+      "lane": "prevent",
+      "priority": 30,
+      "description": "Product Pull and Rotation uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "collect",
+          "prompt": "Collect the relevant live records.",
+          "actions": [
+            "collect-records",
+            "assume"
+          ]
+        },
+        {
+          "id": "reconcile",
+          "prompt": "Resolve discrepancies against physical state.",
+          "actions": [
+            "reconcile",
+            "force-balance"
+          ]
+        },
+        {
+          "id": "sign",
+          "prompt": "Document the decision and owner.",
+          "actions": [
+            "sign-with-note",
+            "submit-blank"
+          ]
+        }
+      ],
+      "successActions": [
+        "collect-records",
+        "reconcile",
+        "sign-with-note"
+      ],
+      "riskActions": [
+        "assume",
+        "force-balance",
+        "submit-blank"
+      ],
+      "tags": [
+        "cook",
+        "evidence",
+        "prevent",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "cook-mise-plan",
+      "roleId": "cook",
+      "label": "Mise Dependency Plan",
+      "grammar": "orchestration",
+      "lane": "next",
+      "priority": 51,
+      "description": "Mise Dependency Plan uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "scan",
+          "prompt": "Inspect the live queue and its dependencies.",
+          "actions": [
+            "scan",
+            "guess"
+          ]
+        },
+        {
+          "id": "sequence",
+          "prompt": "Choose the next safe priority.",
+          "actions": [
+            "sequence",
+            "first-in-list"
+          ]
+        },
+        {
+          "id": "communicate",
+          "prompt": "Issue and confirm the handoff.",
+          "actions": [
+            "call-and-confirm",
+            "silent-change"
+          ]
+        }
+      ],
+      "successActions": [
+        "scan",
+        "sequence",
+        "call-and-confirm"
+      ],
+      "riskActions": [
+        "guess",
+        "first-in-list",
+        "silent-change"
+      ],
+      "tags": [
+        "cook",
+        "orchestration",
+        "next",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "cook-knife-prep",
+      "roleId": "cook",
+      "label": "Knife and Prep Craft",
+      "grammar": "precision",
+      "lane": "now",
+      "priority": 72,
+      "description": "Knife and Prep Craft uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "setup",
+          "prompt": "Select the correct tool and working setup.",
+          "actions": [
+            "safe-setup",
+            "fast-setup"
+          ]
+        },
+        {
+          "id": "execute",
+          "prompt": "Perform the controlled gesture.",
+          "actions": [
+            "controlled-pass",
+            "force-pass"
+          ]
+        },
+        {
+          "id": "inspect",
+          "prompt": "Inspect and correct before handoff.",
+          "actions": [
+            "inspect-result",
+            "send-unchecked"
+          ]
+        }
+      ],
+      "successActions": [
+        "safe-setup",
+        "controlled-pass",
+        "inspect-result"
+      ],
+      "riskActions": [
+        "fast-setup",
+        "force-pass",
+        "send-unchecked"
+      ],
+      "tags": [
+        "cook",
+        "precision",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "cook-batch-scaling",
+      "roleId": "cook",
+      "label": "Batch Scaling",
+      "grammar": "memory",
+      "lane": "now",
+      "priority": 73,
+      "description": "Batch Scaling uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "encode",
+          "prompt": "Encode positions, modifiers, and exceptions.",
+          "actions": [
+            "encode",
+            "skim"
+          ]
+        },
+        {
+          "id": "execute",
+          "prompt": "Apply the remembered state in order.",
+          "actions": [
+            "ordered-recall",
+            "approximate"
+          ]
+        },
+        {
+          "id": "verify",
+          "prompt": "Verify the high-risk detail.",
+          "actions": [
+            "verify",
+            "trust-memory"
+          ]
+        }
+      ],
+      "successActions": [
+        "encode",
+        "ordered-recall",
+        "verify"
+      ],
+      "riskActions": [
+        "skim",
+        "approximate",
+        "trust-memory"
+      ],
+      "tags": [
+        "cook",
+        "memory",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "cook-station-setup",
+      "roleId": "cook",
+      "label": "Station Setup",
+      "grammar": "construction",
+      "lane": "prevent",
+      "priority": 34,
+      "description": "Station Setup uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "measure",
+          "prompt": "Measure space, utilities, and operational goal.",
+          "actions": [
+            "measure",
+            "eyeball"
+          ]
+        },
+        {
+          "id": "place",
+          "prompt": "Place with clearance and flow in mind.",
+          "actions": [
+            "place-with-flow",
+            "place-for-stat"
+          ]
+        },
+        {
+          "id": "simulate",
+          "prompt": "Run a route/utility check before committing.",
+          "actions": [
+            "simulate",
+            "commit-untested"
+          ]
+        }
+      ],
+      "successActions": [
+        "measure",
+        "place-with-flow",
+        "simulate"
+      ],
+      "riskActions": [
+        "eyeball",
+        "place-for-stat",
+        "commit-untested"
+      ],
+      "tags": [
+        "cook",
+        "construction",
+        "prevent",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "cook-heat-control",
+      "roleId": "cook",
+      "label": "Multi-Pan Heat Control",
+      "grammar": "process",
+      "lane": "now",
+      "priority": 75,
+      "description": "Multi-Pan Heat Control uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "setup",
+          "prompt": "Set safe starting conditions.",
+          "actions": [
+            "calibrate",
+            "start-cold"
+          ]
+        },
+        {
+          "id": "control",
+          "prompt": "Monitor and adjust concurrent state.",
+          "actions": [
+            "controlled-adjust",
+            "max-control"
+          ]
+        },
+        {
+          "id": "verify",
+          "prompt": "Verify completion before release.",
+          "actions": [
+            "verify-release",
+            "release-early"
+          ]
+        }
+      ],
+      "successActions": [
+        "calibrate",
+        "controlled-adjust",
+        "verify-release"
+      ],
+      "riskActions": [
+        "start-cold",
+        "max-control",
+        "release-early"
+      ],
+      "tags": [
+        "cook",
+        "process",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "cook-doneness-read",
+      "roleId": "cook",
+      "label": "Doneness and Sensory Read",
+      "grammar": "diagnosis",
+      "lane": "now",
+      "priority": 76,
+      "description": "Doneness and Sensory Read uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "inspect",
+          "prompt": "Inspect observable symptoms before acting.",
+          "actions": [
+            "inspect",
+            "act-blind"
+          ]
+        },
+        {
+          "id": "test",
+          "prompt": "Choose a discriminating test or question.",
+          "actions": [
+            "test-cause",
+            "treat-symptom"
+          ]
+        },
+        {
+          "id": "correct",
+          "prompt": "Correct the cause and verify the result.",
+          "actions": [
+            "correct-and-verify",
+            "quick-fix"
+          ]
+        }
+      ],
+      "successActions": [
+        "inspect",
+        "test-cause",
+        "correct-and-verify"
+      ],
+      "riskActions": [
+        "act-blind",
+        "treat-symptom",
+        "quick-fix"
+      ],
+      "tags": [
+        "cook",
+        "diagnosis",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "cook-allergy-lane",
+      "roleId": "cook",
+      "label": "Modifier and Allergy Lane",
+      "grammar": "process",
+      "lane": "now",
+      "priority": 77,
+      "description": "Modifier and Allergy Lane uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "setup",
+          "prompt": "Set safe starting conditions.",
+          "actions": [
+            "calibrate",
+            "start-cold"
+          ]
+        },
+        {
+          "id": "control",
+          "prompt": "Monitor and adjust concurrent state.",
+          "actions": [
+            "controlled-adjust",
+            "max-control"
+          ]
+        },
+        {
+          "id": "verify",
+          "prompt": "Verify completion before release.",
+          "actions": [
+            "verify-release",
+            "release-early"
+          ]
+        }
+      ],
+      "successActions": [
+        "calibrate",
+        "controlled-adjust",
+        "verify-release"
+      ],
+      "riskActions": [
+        "start-cold",
+        "max-control",
+        "release-early"
+      ],
+      "tags": [
+        "cook",
+        "process",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "cook-pickup-sync",
+      "roleId": "cook",
+      "label": "Pickup Synchronization",
+      "grammar": "process",
+      "lane": "now",
+      "priority": 78,
+      "description": "Pickup Synchronization uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "setup",
+          "prompt": "Set safe starting conditions.",
+          "actions": [
+            "calibrate",
+            "start-cold"
+          ]
+        },
+        {
+          "id": "control",
+          "prompt": "Monitor and adjust concurrent state.",
+          "actions": [
+            "controlled-adjust",
+            "max-control"
+          ]
+        },
+        {
+          "id": "verify",
+          "prompt": "Verify completion before release.",
+          "actions": [
+            "verify-release",
+            "release-early"
+          ]
+        }
+      ],
+      "successActions": [
+        "calibrate",
+        "controlled-adjust",
+        "verify-release"
+      ],
+      "riskActions": [
+        "start-cold",
+        "max-control",
+        "release-early"
+      ],
+      "tags": [
+        "cook",
+        "process",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "cook-plating-assembly",
+      "roleId": "cook",
+      "label": "Plating Assembly",
+      "grammar": "packing",
+      "lane": "now",
+      "priority": 79,
+      "description": "Plating Assembly uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "sort",
+          "prompt": "Group items by compatibility and destination.",
+          "actions": [
+            "sort-compatible",
+            "mix-all"
+          ]
+        },
+        {
+          "id": "place",
+          "prompt": "Place for balance, access, and clearance.",
+          "actions": [
+            "place-balanced",
+            "pack-tight"
+          ]
+        },
+        {
+          "id": "verify",
+          "prompt": "Verify stability and downstream use.",
+          "actions": [
+            "verify-load",
+            "move-now"
+          ]
+        }
+      ],
+      "successActions": [
+        "sort-compatible",
+        "place-balanced",
+        "verify-load"
+      ],
+      "riskActions": [
+        "mix-all",
+        "pack-tight",
+        "move-now"
+      ],
+      "tags": [
+        "cook",
+        "packing",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "cook-clean-as-you-go",
+      "roleId": "cook",
+      "label": "Clean as You Go",
+      "grammar": "route",
+      "lane": "prevent",
+      "priority": 40,
+      "description": "Clean as You Go uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "scan",
+          "prompt": "Read hazards, stops, and task claims.",
+          "actions": [
+            "scan-route",
+            "shortest-only"
+          ]
+        },
+        {
+          "id": "chain",
+          "prompt": "Build a safe multi-stop circuit.",
+          "actions": [
+            "chain-stops",
+            "single-rush"
+          ]
+        },
+        {
+          "id": "handoff",
+          "prompt": "Complete each stop and communicate exceptions.",
+          "actions": [
+            "complete-handoff",
+            "drop-and-go"
+          ]
+        }
+      ],
+      "successActions": [
+        "scan-route",
+        "chain-stops",
+        "complete-handoff"
+      ],
+      "riskActions": [
+        "shortest-only",
+        "single-rush",
+        "drop-and-go"
+      ],
+      "tags": [
+        "cook",
+        "route",
+        "prevent",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "cook-equipment-anomaly",
+      "roleId": "cook",
+      "label": "Equipment Anomaly",
+      "grammar": "diagnosis",
+      "lane": "now",
+      "priority": 81,
+      "description": "Equipment Anomaly uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "inspect",
+          "prompt": "Inspect observable symptoms before acting.",
+          "actions": [
+            "inspect",
+            "act-blind"
+          ]
+        },
+        {
+          "id": "test",
+          "prompt": "Choose a discriminating test or question.",
+          "actions": [
+            "test-cause",
+            "treat-symptom"
+          ]
+        },
+        {
+          "id": "correct",
+          "prompt": "Correct the cause and verify the result.",
+          "actions": [
+            "correct-and-verify",
+            "quick-fix"
+          ]
+        }
+      ],
+      "successActions": [
+        "inspect",
+        "test-cause",
+        "correct-and-verify"
+      ],
+      "riskActions": [
+        "act-blind",
+        "treat-symptom",
+        "quick-fix"
+      ],
+      "tags": [
+        "cook",
+        "diagnosis",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "cook-station-handoff",
+      "roleId": "cook",
+      "label": "Station Handoff and Close",
+      "grammar": "evidence",
+      "lane": "admin",
+      "priority": 42,
+      "description": "Station Handoff and Close uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "collect",
+          "prompt": "Collect the relevant live records.",
+          "actions": [
+            "collect-records",
+            "assume"
+          ]
+        },
+        {
+          "id": "reconcile",
+          "prompt": "Resolve discrepancies against physical state.",
+          "actions": [
+            "reconcile",
+            "force-balance"
+          ]
+        },
+        {
+          "id": "sign",
+          "prompt": "Document the decision and owner.",
+          "actions": [
+            "sign-with-note",
+            "submit-blank"
+          ]
+        }
+      ],
+      "successActions": [
+        "collect-records",
+        "reconcile",
+        "sign-with-note"
+      ],
+      "riskActions": [
+        "assume",
+        "force-balance",
+        "submit-blank"
+      ],
+      "tags": [
+        "cook",
+        "evidence",
+        "admin",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "host-busser-reservation-graph",
+      "roleId": "host-busser",
+      "label": "Reservation Graph",
+      "grammar": "scheduling",
+      "lane": "next",
+      "priority": 50,
+      "description": "Reservation Graph uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "constraints",
+          "prompt": "Mark hard constraints and promised times.",
+          "actions": [
+            "map-constraints",
+            "ignore-constraint"
+          ]
+        },
+        {
+          "id": "fit",
+          "prompt": "Fit the work without creating a collision.",
+          "actions": [
+            "fit-with-buffer",
+            "tight-stack"
+          ]
+        },
+        {
+          "id": "publish",
+          "prompt": "Publish and communicate the plan.",
+          "actions": [
+            "publish-confirmed",
+            "publish-silent"
+          ]
+        }
+      ],
+      "successActions": [
+        "map-constraints",
+        "fit-with-buffer",
+        "publish-confirmed"
+      ],
+      "riskActions": [
+        "ignore-constraint",
+        "tight-stack",
+        "publish-silent"
+      ],
+      "tags": [
+        "host-busser",
+        "scheduling",
+        "next",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "host-busser-wait-forecast",
+      "roleId": "host-busser",
+      "label": "Wait Forecast",
+      "grammar": "diagnosis",
+      "lane": "next",
+      "priority": 51,
+      "description": "Wait Forecast uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "inspect",
+          "prompt": "Inspect observable symptoms before acting.",
+          "actions": [
+            "inspect",
+            "act-blind"
+          ]
+        },
+        {
+          "id": "test",
+          "prompt": "Choose a discriminating test or question.",
+          "actions": [
+            "test-cause",
+            "treat-symptom"
+          ]
+        },
+        {
+          "id": "correct",
+          "prompt": "Correct the cause and verify the result.",
+          "actions": [
+            "correct-and-verify",
+            "quick-fix"
+          ]
+        }
+      ],
+      "successActions": [
+        "inspect",
+        "test-cause",
+        "correct-and-verify"
+      ],
+      "riskActions": [
+        "act-blind",
+        "treat-symptom",
+        "quick-fix"
+      ],
+      "tags": [
+        "host-busser",
+        "diagnosis",
+        "next",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "host-busser-arrival-dialogue",
+      "roleId": "host-busser",
+      "label": "Arrival Dialogue",
+      "grammar": "dialogue",
+      "lane": "now",
+      "priority": 72,
+      "description": "Arrival Dialogue uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "observe",
+          "prompt": "Read the person and the current service evidence.",
+          "actions": [
+            "listen",
+            "rush"
+          ]
+        },
+        {
+          "id": "respond",
+          "prompt": "Choose a response that fits the stated need.",
+          "actions": [
+            "acknowledge",
+            "deflect"
+          ]
+        },
+        {
+          "id": "follow-up",
+          "prompt": "Confirm the next step and close the loop.",
+          "actions": [
+            "confirm",
+            "leave"
+          ]
+        }
+      ],
+      "successActions": [
+        "listen",
+        "acknowledge",
+        "confirm"
+      ],
+      "riskActions": [
+        "rush",
+        "deflect",
+        "leave"
+      ],
+      "tags": [
+        "host-busser",
+        "dialogue",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "host-busser-seating-graph",
+      "roleId": "host-busser",
+      "label": "Seating Graph",
+      "grammar": "orchestration",
+      "lane": "now",
+      "priority": 73,
+      "description": "Seating Graph uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "scan",
+          "prompt": "Inspect the live queue and its dependencies.",
+          "actions": [
+            "scan",
+            "guess"
+          ]
+        },
+        {
+          "id": "sequence",
+          "prompt": "Choose the next safe priority.",
+          "actions": [
+            "sequence",
+            "first-in-list"
+          ]
+        },
+        {
+          "id": "communicate",
+          "prompt": "Issue and confirm the handoff.",
+          "actions": [
+            "call-and-confirm",
+            "silent-change"
+          ]
+        }
+      ],
+      "successActions": [
+        "scan",
+        "sequence",
+        "call-and-confirm"
+      ],
+      "riskActions": [
+        "guess",
+        "first-in-list",
+        "silent-change"
+      ],
+      "tags": [
+        "host-busser",
+        "orchestration",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "host-busser-escort-handoff",
+      "roleId": "host-busser",
+      "label": "Escort and Handoff",
+      "grammar": "route",
+      "lane": "now",
+      "priority": 74,
+      "description": "Escort and Handoff uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "scan",
+          "prompt": "Read hazards, stops, and task claims.",
+          "actions": [
+            "scan-route",
+            "shortest-only"
+          ]
+        },
+        {
+          "id": "chain",
+          "prompt": "Build a safe multi-stop circuit.",
+          "actions": [
+            "chain-stops",
+            "single-rush"
+          ]
+        },
+        {
+          "id": "handoff",
+          "prompt": "Complete each stop and communicate exceptions.",
+          "actions": [
+            "complete-handoff",
+            "drop-and-go"
+          ]
+        }
+      ],
+      "successActions": [
+        "scan-route",
+        "chain-stops",
+        "complete-handoff"
+      ],
+      "riskActions": [
+        "shortest-only",
+        "single-rush",
+        "drop-and-go"
+      ],
+      "tags": [
+        "host-busser",
+        "route",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "host-busser-table-combine",
+      "roleId": "host-busser",
+      "label": "Table Combine and Split",
+      "grammar": "construction",
+      "lane": "next",
+      "priority": 55,
+      "description": "Table Combine and Split uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "measure",
+          "prompt": "Measure space, utilities, and operational goal.",
+          "actions": [
+            "measure",
+            "eyeball"
+          ]
+        },
+        {
+          "id": "place",
+          "prompt": "Place with clearance and flow in mind.",
+          "actions": [
+            "place-with-flow",
+            "place-for-stat"
+          ]
+        },
+        {
+          "id": "simulate",
+          "prompt": "Run a route/utility check before committing.",
+          "actions": [
+            "simulate",
+            "commit-untested"
+          ]
+        }
+      ],
+      "successActions": [
+        "measure",
+        "place-with-flow",
+        "simulate"
+      ],
+      "riskActions": [
+        "eyeball",
+        "place-for-stat",
+        "commit-untested"
+      ],
+      "tags": [
+        "host-busser",
+        "construction",
+        "next",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "host-busser-room-scan",
+      "roleId": "host-busser",
+      "label": "Dining-Room Scan",
+      "grammar": "diagnosis",
+      "lane": "now",
+      "priority": 76,
+      "description": "Dining-Room Scan uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "inspect",
+          "prompt": "Inspect observable symptoms before acting.",
+          "actions": [
+            "inspect",
+            "act-blind"
+          ]
+        },
+        {
+          "id": "test",
+          "prompt": "Choose a discriminating test or question.",
+          "actions": [
+            "test-cause",
+            "treat-symptom"
+          ]
+        },
+        {
+          "id": "correct",
+          "prompt": "Correct the cause and verify the result.",
+          "actions": [
+            "correct-and-verify",
+            "quick-fix"
+          ]
+        }
+      ],
+      "successActions": [
+        "inspect",
+        "test-cause",
+        "correct-and-verify"
+      ],
+      "riskActions": [
+        "act-blind",
+        "treat-symptom",
+        "quick-fix"
+      ],
+      "tags": [
+        "host-busser",
+        "diagnosis",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "host-busser-prebus-circuit",
+      "roleId": "host-busser",
+      "label": "Pre-Bus Circuit",
+      "grammar": "route",
+      "lane": "now",
+      "priority": 77,
+      "description": "Pre-Bus Circuit uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "scan",
+          "prompt": "Read hazards, stops, and task claims.",
+          "actions": [
+            "scan-route",
+            "shortest-only"
+          ]
+        },
+        {
+          "id": "chain",
+          "prompt": "Build a safe multi-stop circuit.",
+          "actions": [
+            "chain-stops",
+            "single-rush"
+          ]
+        },
+        {
+          "id": "handoff",
+          "prompt": "Complete each stop and communicate exceptions.",
+          "actions": [
+            "complete-handoff",
+            "drop-and-go"
+          ]
+        }
+      ],
+      "successActions": [
+        "scan-route",
+        "chain-stops",
+        "complete-handoff"
+      ],
+      "riskActions": [
+        "shortest-only",
+        "single-rush",
+        "drop-and-go"
+      ],
+      "tags": [
+        "host-busser",
+        "route",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "host-busser-stack-balance",
+      "roleId": "host-busser",
+      "label": "Bus-Tub and Stack Balance",
+      "grammar": "packing",
+      "lane": "now",
+      "priority": 78,
+      "description": "Bus-Tub and Stack Balance uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "sort",
+          "prompt": "Group items by compatibility and destination.",
+          "actions": [
+            "sort-compatible",
+            "mix-all"
+          ]
+        },
+        {
+          "id": "place",
+          "prompt": "Place for balance, access, and clearance.",
+          "actions": [
+            "place-balanced",
+            "pack-tight"
+          ]
+        },
+        {
+          "id": "verify",
+          "prompt": "Verify stability and downstream use.",
+          "actions": [
+            "verify-load",
+            "move-now"
+          ]
+        }
+      ],
+      "successActions": [
+        "sort-compatible",
+        "place-balanced",
+        "verify-load"
+      ],
+      "riskActions": [
+        "mix-all",
+        "pack-tight",
+        "move-now"
+      ],
+      "tags": [
+        "host-busser",
+        "packing",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "host-busser-reset-sequence",
+      "roleId": "host-busser",
+      "label": "Reset Sequence",
+      "grammar": "process",
+      "lane": "now",
+      "priority": 79,
+      "description": "Reset Sequence uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "setup",
+          "prompt": "Set safe starting conditions.",
+          "actions": [
+            "calibrate",
+            "start-cold"
+          ]
+        },
+        {
+          "id": "control",
+          "prompt": "Monitor and adjust concurrent state.",
+          "actions": [
+            "controlled-adjust",
+            "max-control"
+          ]
+        },
+        {
+          "id": "verify",
+          "prompt": "Verify completion before release.",
+          "actions": [
+            "verify-release",
+            "release-early"
+          ]
+        }
+      ],
+      "successActions": [
+        "calibrate",
+        "controlled-adjust",
+        "verify-release"
+      ],
+      "riskActions": [
+        "start-cold",
+        "max-control",
+        "release-early"
+      ],
+      "tags": [
+        "host-busser",
+        "process",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "host-busser-spill-containment",
+      "roleId": "host-busser",
+      "label": "Spill Containment",
+      "grammar": "process",
+      "lane": "now",
+      "priority": 80,
+      "description": "Spill Containment uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "setup",
+          "prompt": "Set safe starting conditions.",
+          "actions": [
+            "calibrate",
+            "start-cold"
+          ]
+        },
+        {
+          "id": "control",
+          "prompt": "Monitor and adjust concurrent state.",
+          "actions": [
+            "controlled-adjust",
+            "max-control"
+          ]
+        },
+        {
+          "id": "verify",
+          "prompt": "Verify completion before release.",
+          "actions": [
+            "verify-release",
+            "release-early"
+          ]
+        }
+      ],
+      "successActions": [
+        "calibrate",
+        "controlled-adjust",
+        "verify-release"
+      ],
+      "riskActions": [
+        "start-cold",
+        "max-control",
+        "release-early"
+      ],
+      "tags": [
+        "host-busser",
+        "process",
+        "now",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "host-busser-restroom-entry-standard",
+      "roleId": "host-busser",
+      "label": "Restroom and Entry Standard",
+      "grammar": "diagnosis",
+      "lane": "prevent",
+      "priority": 41,
+      "description": "Restroom and Entry Standard uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "inspect",
+          "prompt": "Inspect observable symptoms before acting.",
+          "actions": [
+            "inspect",
+            "act-blind"
+          ]
+        },
+        {
+          "id": "test",
+          "prompt": "Choose a discriminating test or question.",
+          "actions": [
+            "test-cause",
+            "treat-symptom"
+          ]
+        },
+        {
+          "id": "correct",
+          "prompt": "Correct the cause and verify the result.",
+          "actions": [
+            "correct-and-verify",
+            "quick-fix"
+          ]
+        }
+      ],
+      "successActions": [
+        "inspect",
+        "test-cause",
+        "correct-and-verify"
+      ],
+      "riskActions": [
+        "act-blind",
+        "treat-symptom",
+        "quick-fix"
+      ],
+      "tags": [
+        "host-busser",
+        "diagnosis",
+        "prevent",
+        "authoritative",
+        "recoverable"
+      ]
+    },
+    {
+      "id": "host-busser-closing-room",
+      "roleId": "host-busser",
+      "label": "Closing Room",
+      "grammar": "route",
+      "lane": "admin",
+      "priority": 42,
+      "description": "Closing Room uses live restaurant state, can partially fail, and produces a crew or business consequence.",
+      "phases": [
+        {
+          "id": "scan",
+          "prompt": "Read hazards, stops, and task claims.",
+          "actions": [
+            "scan-route",
+            "shortest-only"
+          ]
+        },
+        {
+          "id": "chain",
+          "prompt": "Build a safe multi-stop circuit.",
+          "actions": [
+            "chain-stops",
+            "single-rush"
+          ]
+        },
+        {
+          "id": "handoff",
+          "prompt": "Complete each stop and communicate exceptions.",
+          "actions": [
+            "complete-handoff",
+            "drop-and-go"
+          ]
+        }
+      ],
+      "successActions": [
+        "scan-route",
+        "chain-stops",
+        "complete-handoff"
+      ],
+      "riskActions": [
+        "shortest-only",
+        "single-rush",
+        "drop-and-go"
+      ],
+      "tags": [
+        "host-busser",
+        "route",
+        "admin",
+        "authoritative",
+        "recoverable"
+      ]
+    }
+  ]
+}

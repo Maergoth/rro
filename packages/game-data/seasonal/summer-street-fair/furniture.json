@@ -1,0 +1,65 @@
+[
+  {
+    "id": "summer-patio-two",
+    "name": "Tomato Patio Two-Top",
+    "category": "Dining",
+    "style": "Diner",
+    "costCents": 52000,
+    "width": 2,
+    "height": 2,
+    "symbol": "☀",
+    "stats": {
+      "seats": 2,
+      "ambience": 4,
+      "turnover": 1
+    },
+    "tags": [
+      "outdoor",
+      "summer"
+    ],
+    "eventId": "street-fair-week",
+    "contentPackId": "summer-street-fair",
+    "packLabel": "Summer Street Fair"
+  },
+  {
+    "id": "summer-lemonade",
+    "name": "Street-Fair Drinks Cart",
+    "category": "Service",
+    "style": "Heritage",
+    "costCents": 88000,
+    "width": 2,
+    "height": 1,
+    "symbol": "L",
+    "stats": {
+      "revenue": 5,
+      "ambience": 3
+    },
+    "tags": [
+      "beverage",
+      "summer"
+    ],
+    "eventId": "street-fair-week",
+    "contentPackId": "summer-street-fair",
+    "packLabel": "Summer Street Fair"
+  },
+  {
+    "id": "summer-canopy",
+    "name": "Mustard Market Canopy",
+    "category": "Decor",
+    "style": "Natural",
+    "costCents": 69000,
+    "width": 3,
+    "height": 2,
+    "symbol": "⌂",
+    "stats": {
+      "ambience": 7
+    },
+    "tags": [
+      "outdoor",
+      "summer"
+    ],
+    "eventId": "street-fair-week",
+    "contentPackId": "summer-street-fair",
+    "packLabel": "Summer Street Fair"
+  }
+]

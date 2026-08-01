@@ -1,0 +1,285 @@
+[
+  {
+    "id": "table-two",
+    "name": "Walnut Two-Top",
+    "category": "Dining",
+    "style": "Heritage",
+    "costCents": 36000,
+    "width": 2,
+    "height": 2,
+    "symbol": "2",
+    "stats": {
+      "seats": 2,
+      "ambience": 2
+    },
+    "contentPackId": "core-hospitality",
+    "packLabel": "Core Hospitality",
+    "tags": [],
+    "eventId": null
+  },
+  {
+    "id": "table-four",
+    "name": "Oak Four-Top",
+    "category": "Dining",
+    "style": "Heritage",
+    "costCents": 62000,
+    "width": 3,
+    "height": 2,
+    "symbol": "4",
+    "stats": {
+      "seats": 4,
+      "ambience": 2
+    },
+    "contentPackId": "core-hospitality",
+    "packLabel": "Core Hospitality",
+    "tags": [],
+    "eventId": null
+  },
+  {
+    "id": "booth",
+    "name": "Tomato Vinyl Booth",
+    "category": "Dining",
+    "style": "Diner",
+    "costCents": 94000,
+    "width": 4,
+    "height": 2,
+    "symbol": "B",
+    "stats": {
+      "seats": 4,
+      "ambience": 5,
+      "turnover": -1
+    },
+    "contentPackId": "core-hospitality",
+    "packLabel": "Core Hospitality",
+    "tags": [],
+    "eventId": null
+  },
+  {
+    "id": "banquette",
+    "name": "Deep Teal Banquette",
+    "category": "Dining",
+    "style": "Modern",
+    "costCents": 126000,
+    "width": 5,
+    "height": 2,
+    "symbol": "B",
+    "stats": {
+      "seats": 6,
+      "ambience": 7
+    },
+    "contentPackId": "core-hospitality",
+    "packLabel": "Core Hospitality",
+    "tags": [],
+    "eventId": null
+  },
+  {
+    "id": "host-stand",
+    "name": "Host Stand",
+    "category": "Service",
+    "style": "Heritage",
+    "costCents": 48000,
+    "width": 2,
+    "height": 1,
+    "symbol": "H",
+    "stats": {
+      "turnover": 3
+    },
+    "contentPackId": "core-hospitality",
+    "packLabel": "Core Hospitality",
+    "tags": [],
+    "eventId": null
+  },
+  {
+    "id": "service-station",
+    "name": "Service Station",
+    "category": "Service",
+    "style": "Industrial",
+    "costCents": 78000,
+    "width": 2,
+    "height": 2,
+    "symbol": "S",
+    "stats": {
+      "turnover": 5
+    },
+    "contentPackId": "core-hospitality",
+    "packLabel": "Core Hospitality",
+    "tags": [],
+    "eventId": null
+  },
+  {
+    "id": "espresso",
+    "name": "Espresso Machine",
+    "category": "Service",
+    "style": "Modern",
+    "costCents": 165000,
+    "width": 2,
+    "height": 1,
+    "symbol": "E",
+    "stats": {
+      "revenue": 6,
+      "ambience": 1
+    },
+    "contentPackId": "core-hospitality",
+    "packLabel": "Core Hospitality",
+    "tags": [],
+    "eventId": null
+  },
+  {
+    "id": "range",
+    "name": "Six-Burner Range",
+    "category": "Kitchen",
+    "style": "Industrial",
+    "costCents": 240000,
+    "width": 3,
+    "height": 2,
+    "symbol": "R",
+    "stats": {
+      "kitchen": 10
+    },
+    "contentPackId": "core-hospitality",
+    "packLabel": "Core Hospitality",
+    "tags": [],
+    "eventId": null
+  },
+  {
+    "id": "prep",
+    "name": "Cold Prep Table",
+    "category": "Kitchen",
+    "style": "Industrial",
+    "costCents": 132000,
+    "width": 3,
+    "height": 1,
+    "symbol": "P",
+    "stats": {
+      "kitchen": 6,
+      "waste": -2
+    },
+    "contentPackId": "core-hospitality",
+    "packLabel": "Core Hospitality",
+    "tags": [],
+    "eventId": null
+  },
+  {
+    "id": "pass",
+    "name": "Heated Pass",
+    "category": "Kitchen",
+    "style": "Modern",
+    "costCents": 188000,
+    "width": 3,
+    "height": 1,
+    "symbol": "X",
+    "stats": {
+      "kitchen": 5,
+      "turnover": 4
+    },
+    "contentPackId": "core-hospitality",
+    "packLabel": "Core Hospitality",
+    "tags": [],
+    "eventId": null
+  },
+  {
+    "id": "dish-machine",
+    "name": "High-Temp Dish Machine",
+    "category": "Utility",
+    "style": "Industrial",
+    "costCents": 275000,
+    "width": 3,
+    "height": 2,
+    "symbol": "D",
+    "stats": {
+      "sanitation": 9,
+      "kitchen": 3
+    },
+    "contentPackId": "core-hospitality",
+    "packLabel": "Core Hospitality",
+    "tags": [],
+    "eventId": null
+  },
+  {
+    "id": "mop-sink",
+    "name": "Utility Sink",
+    "category": "Utility",
+    "style": "Industrial",
+    "costCents": 54000,
+    "width": 2,
+    "height": 2,
+    "symbol": "U",
+    "stats": {
+      "sanitation": 5
+    },
+    "contentPackId": "core-hospitality",
+    "packLabel": "Core Hospitality",
+    "tags": [],
+    "eventId": null
+  },
+  {
+    "id": "recycling",
+    "name": "Sorting Station",
+    "category": "Utility",
+    "style": "Modern",
+    "costCents": 68000,
+    "width": 2,
+    "height": 1,
+    "symbol": "♻",
+    "stats": {
+      "sanitation": 3,
+      "waste": -5
+    },
+    "contentPackId": "core-hospitality",
+    "packLabel": "Core Hospitality",
+    "tags": [],
+    "eventId": null
+  },
+  {
+    "id": "pendants",
+    "name": "Mustard Pendant Lights",
+    "category": "Decor",
+    "style": "Diner",
+    "costCents": 44000,
+    "width": 2,
+    "height": 1,
+    "symbol": "✦",
+    "stats": {
+      "ambience": 5
+    },
+    "contentPackId": "core-hospitality",
+    "packLabel": "Core Hospitality",
+    "tags": [],
+    "eventId": null
+  },
+  {
+    "id": "plants",
+    "name": "Window Herb Wall",
+    "category": "Decor",
+    "style": "Natural",
+    "costCents": 72000,
+    "width": 3,
+    "height": 1,
+    "symbol": "❋",
+    "stats": {
+      "ambience": 6,
+      "sanitation": 1
+    },
+    "contentPackId": "core-hospitality",
+    "packLabel": "Core Hospitality",
+    "tags": [],
+    "eventId": null
+  },
+  {
+    "id": "local-art",
+    "name": "Local Print Set",
+    "category": "Decor",
+    "style": "Heritage",
+    "costCents": 39000,
+    "width": 2,
+    "height": 1,
+    "symbol": "▣",
+    "stats": {
+      "ambience": 4
+    },
+    "contentPackId": "core-hospitality",
+    "packLabel": "Core Hospitality",
+    "tags": [],
+    "eventId": null
+  }
+]

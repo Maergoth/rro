@@ -1,0 +1,770 @@
+[
+  {
+    "id": "oak-two-top",
+    "name": "Oak Two-Top",
+    "category": "Dining",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 78000,
+    "width": 2,
+    "height": 2,
+    "symbol": "O",
+    "assetId": "table",
+    "upkeepCents": 312,
+    "durability": 92,
+    "utilities": [],
+    "stats": {
+      "seats": 2,
+      "ambience": 4,
+      "turnover": 2
+    },
+    "tags": [
+      "premium",
+      "dining",
+      "table"
+    ]
+  },
+  {
+    "id": "walnut-four-top",
+    "name": "Walnut Four-Top",
+    "category": "Dining",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 142000,
+    "width": 3,
+    "height": 3,
+    "symbol": "W",
+    "assetId": "table",
+    "upkeepCents": 568,
+    "durability": 92,
+    "utilities": [],
+    "stats": {
+      "seats": 4,
+      "ambience": 7,
+      "comfort": 6
+    },
+    "tags": [
+      "premium",
+      "dining",
+      "table"
+    ]
+  },
+  {
+    "id": "banquette-section",
+    "name": "Upholstered Banquette",
+    "category": "Dining",
+    "style": "Heritage",
+    "tier": "iconic",
+    "costCents": 265000,
+    "width": 4,
+    "height": 2,
+    "symbol": "U",
+    "assetId": "seating",
+    "upkeepCents": 1060,
+    "durability": 92,
+    "utilities": [],
+    "stats": {
+      "seats": 4,
+      "ambience": 10,
+      "comfort": 12
+    },
+    "tags": [
+      "iconic",
+      "dining",
+      "seating"
+    ]
+  },
+  {
+    "id": "commercial-chair",
+    "name": "Commercial Dining Chair",
+    "category": "Dining",
+    "style": "Modern",
+    "tier": "commercial",
+    "costCents": 24000,
+    "width": 1,
+    "height": 1,
+    "symbol": "C",
+    "assetId": "chair",
+    "upkeepCents": 96,
+    "durability": 78,
+    "utilities": [],
+    "stats": {
+      "seats": 1,
+      "comfort": 3,
+      "durability": 5
+    },
+    "tags": [
+      "commercial",
+      "dining",
+      "chair"
+    ]
+  },
+  {
+    "id": "premium-chair",
+    "name": "Premium Dining Chair",
+    "category": "Dining",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 52000,
+    "width": 1,
+    "height": 1,
+    "symbol": "P",
+    "assetId": "chair",
+    "upkeepCents": 208,
+    "durability": 92,
+    "utilities": [],
+    "stats": {
+      "seats": 1,
+      "comfort": 8,
+      "ambience": 3
+    },
+    "tags": [
+      "premium",
+      "dining",
+      "chair"
+    ]
+  },
+  {
+    "id": "host-stand-pro",
+    "name": "Reservation Host Stand",
+    "category": "Service",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 188000,
+    "width": 2,
+    "height": 2,
+    "symbol": "R",
+    "assetId": "host",
+    "upkeepCents": 752,
+    "durability": 92,
+    "utilities": [],
+    "stats": {
+      "turnover": 6,
+      "forecast": 8,
+      "ambience": 3
+    },
+    "tags": [
+      "premium",
+      "service",
+      "host"
+    ]
+  },
+  {
+    "id": "server-station-pro",
+    "name": "Integrated Server Station",
+    "category": "Service",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 236000,
+    "width": 3,
+    "height": 2,
+    "symbol": "I",
+    "assetId": "service",
+    "upkeepCents": 944,
+    "durability": 92,
+    "utilities": [],
+    "stats": {
+      "turnover": 8,
+      "storage": 8,
+      "route": 5
+    },
+    "tags": [
+      "premium",
+      "service",
+      "service"
+    ]
+  },
+  {
+    "id": "pos-terminal",
+    "name": "Commercial POS Terminal",
+    "category": "Service",
+    "style": "Modern",
+    "tier": "commercial",
+    "costCents": 94000,
+    "width": 1,
+    "height": 1,
+    "symbol": "C",
+    "assetId": "pos",
+    "upkeepCents": 376,
+    "durability": 78,
+    "utilities": [],
+    "stats": {
+      "accuracy": 6,
+      "payment": 8
+    },
+    "tags": [
+      "commercial",
+      "service",
+      "pos"
+    ]
+  },
+  {
+    "id": "expo-pass-heated",
+    "name": "Heated Expo Pass",
+    "category": "Kitchen",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 420000,
+    "width": 4,
+    "height": 2,
+    "symbol": "H",
+    "assetId": "expo",
+    "upkeepCents": 1680,
+    "durability": 92,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "kitchen": 12,
+      "hold": 12,
+      "quality": 8
+    },
+    "tags": [
+      "premium",
+      "kitchen",
+      "expo"
+    ]
+  },
+  {
+    "id": "six-burner-range",
+    "name": "Six-Burner Range",
+    "category": "Kitchen",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 685000,
+    "width": 4,
+    "height": 3,
+    "symbol": "S",
+    "assetId": "range",
+    "upkeepCents": 2740,
+    "durability": 92,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "kitchen": 18,
+      "capacity": 6,
+      "recovery": 8
+    },
+    "tags": [
+      "premium",
+      "kitchen",
+      "range"
+    ]
+  },
+  {
+    "id": "plancha-commercial",
+    "name": "Commercial Plancha",
+    "category": "Kitchen",
+    "style": "Modern",
+    "tier": "commercial",
+    "costCents": 348000,
+    "width": 3,
+    "height": 2,
+    "symbol": "C",
+    "assetId": "plancha",
+    "upkeepCents": 1392,
+    "durability": 78,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "kitchen": 10,
+      "consistency": 6
+    },
+    "tags": [
+      "commercial",
+      "kitchen",
+      "plancha"
+    ]
+  },
+  {
+    "id": "convection-oven",
+    "name": "Convection Oven",
+    "category": "Kitchen",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 575000,
+    "width": 3,
+    "height": 3,
+    "symbol": "C",
+    "assetId": "oven",
+    "upkeepCents": 2300,
+    "durability": 92,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "kitchen": 15,
+      "consistency": 10
+    },
+    "tags": [
+      "premium",
+      "kitchen",
+      "oven"
+    ]
+  },
+  {
+    "id": "prep-table-refrigerated",
+    "name": "Refrigerated Prep Table",
+    "category": "Kitchen",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 395000,
+    "width": 4,
+    "height": 2,
+    "symbol": "R",
+    "assetId": "prep",
+    "upkeepCents": 1580,
+    "durability": 92,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "kitchen": 8,
+      "sanitation": 7,
+      "storage": 10
+    },
+    "tags": [
+      "premium",
+      "kitchen",
+      "prep"
+    ]
+  },
+  {
+    "id": "walkin-rack",
+    "name": "Walk-In Storage Rack",
+    "category": "Storage",
+    "style": "Modern",
+    "tier": "commercial",
+    "costCents": 112000,
+    "width": 3,
+    "height": 1,
+    "symbol": "W",
+    "assetId": "storage",
+    "upkeepCents": 448,
+    "durability": 78,
+    "utilities": [],
+    "stats": {
+      "storage": 15,
+      "rotation": 6
+    },
+    "tags": [
+      "commercial",
+      "storage",
+      "storage"
+    ]
+  },
+  {
+    "id": "dry-storage-rack",
+    "name": "Dry Storage Rack",
+    "category": "Storage",
+    "style": "Modern",
+    "tier": "commercial",
+    "costCents": 76000,
+    "width": 3,
+    "height": 1,
+    "symbol": "D",
+    "assetId": "storage",
+    "upkeepCents": 304,
+    "durability": 78,
+    "utilities": [],
+    "stats": {
+      "storage": 12,
+      "organization": 5
+    },
+    "tags": [
+      "commercial",
+      "storage",
+      "storage"
+    ]
+  },
+  {
+    "id": "chemical-cabinet",
+    "name": "Locked Chemical Cabinet",
+    "category": "Utility",
+    "style": "Modern",
+    "tier": "commercial",
+    "costCents": 88000,
+    "width": 2,
+    "height": 1,
+    "symbol": "L",
+    "assetId": "utility",
+    "upkeepCents": 352,
+    "durability": 78,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "sanitation": 8,
+      "safety": 10
+    },
+    "tags": [
+      "commercial",
+      "utility",
+      "utility"
+    ]
+  },
+  {
+    "id": "dish-machine-high-temp",
+    "name": "High-Temperature Dish Machine",
+    "category": "Utility",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 820000,
+    "width": 4,
+    "height": 3,
+    "symbol": "H",
+    "assetId": "dish",
+    "upkeepCents": 3280,
+    "durability": 92,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "sanitation": 18,
+      "capacity": 12,
+      "speed": 10
+    },
+    "tags": [
+      "premium",
+      "utility",
+      "dish"
+    ]
+  },
+  {
+    "id": "three-comp-sink",
+    "name": "Three-Compartment Sink",
+    "category": "Utility",
+    "style": "Modern",
+    "tier": "commercial",
+    "costCents": 285000,
+    "width": 4,
+    "height": 2,
+    "symbol": "T",
+    "assetId": "sink",
+    "upkeepCents": 1140,
+    "durability": 78,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "sanitation": 12,
+      "recovery": 8
+    },
+    "tags": [
+      "commercial",
+      "utility",
+      "sink"
+    ]
+  },
+  {
+    "id": "glass-rack-system",
+    "name": "Glass Rack System",
+    "category": "Utility",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 145000,
+    "width": 2,
+    "height": 2,
+    "symbol": "G",
+    "assetId": "dish",
+    "upkeepCents": 580,
+    "durability": 92,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "breakage": -8,
+      "capacity": 8
+    },
+    "tags": [
+      "premium",
+      "utility",
+      "dish"
+    ]
+  },
+  {
+    "id": "floor-drain",
+    "name": "Floor Drain",
+    "category": "Utility",
+    "style": "Modern",
+    "tier": "commercial",
+    "costCents": 96000,
+    "width": 1,
+    "height": 1,
+    "symbol": "F",
+    "assetId": "drain",
+    "upkeepCents": 384,
+    "durability": 78,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "sanitation": 6,
+      "spill": 8
+    },
+    "tags": [
+      "commercial",
+      "utility",
+      "drain"
+    ]
+  },
+  {
+    "id": "oak-partition",
+    "name": "Oak Dining Partition",
+    "category": "Decor",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 74000,
+    "width": 2,
+    "height": 1,
+    "symbol": "O",
+    "assetId": "partition",
+    "upkeepCents": 296,
+    "durability": 92,
+    "utilities": [],
+    "stats": {
+      "ambience": 5,
+      "privacy": 7,
+      "noise": -3
+    },
+    "tags": [
+      "premium",
+      "decor",
+      "partition"
+    ]
+  },
+  {
+    "id": "large-planter",
+    "name": "Large Indoor Planter",
+    "category": "Decor",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 68000,
+    "width": 2,
+    "height": 2,
+    "symbol": "L",
+    "assetId": "plant",
+    "upkeepCents": 272,
+    "durability": 92,
+    "utilities": [],
+    "stats": {
+      "ambience": 6,
+      "noise": -2
+    },
+    "tags": [
+      "premium",
+      "decor",
+      "plant"
+    ]
+  },
+  {
+    "id": "wall-art-local",
+    "name": "Local Artist Feature",
+    "category": "Decor",
+    "style": "Heritage",
+    "tier": "iconic",
+    "costCents": 210000,
+    "width": 2,
+    "height": 1,
+    "symbol": "L",
+    "assetId": "art",
+    "upkeepCents": 840,
+    "durability": 92,
+    "utilities": [],
+    "stats": {
+      "ambience": 14,
+      "community": 8
+    },
+    "tags": [
+      "iconic",
+      "decor",
+      "art"
+    ]
+  },
+  {
+    "id": "acoustic-panel",
+    "name": "Decorative Acoustic Panel",
+    "category": "Decor",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 85000,
+    "width": 2,
+    "height": 1,
+    "symbol": "D",
+    "assetId": "decor",
+    "upkeepCents": 340,
+    "durability": 92,
+    "utilities": [],
+    "stats": {
+      "ambience": 4,
+      "noise": -8
+    },
+    "tags": [
+      "premium",
+      "decor",
+      "decor"
+    ]
+  },
+  {
+    "id": "pendant-light",
+    "name": "Dining Pendant Light",
+    "category": "Decor",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 64000,
+    "width": 1,
+    "height": 1,
+    "symbol": "D",
+    "assetId": "light",
+    "upkeepCents": 256,
+    "durability": 92,
+    "utilities": [],
+    "stats": {
+      "ambience": 5,
+      "visibility": 3
+    },
+    "tags": [
+      "premium",
+      "decor",
+      "light"
+    ]
+  },
+  {
+    "id": "wet-floor-station",
+    "name": "Spill Response Station",
+    "category": "Utility",
+    "style": "Modern",
+    "tier": "commercial",
+    "costCents": 128000,
+    "width": 2,
+    "height": 1,
+    "symbol": "S",
+    "assetId": "clean",
+    "upkeepCents": 512,
+    "durability": 78,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "sanitation": 8,
+      "spill": 12,
+      "recovery": 6
+    },
+    "tags": [
+      "commercial",
+      "utility",
+      "clean"
+    ]
+  },
+  {
+    "id": "linen-storage",
+    "name": "Linen and Reset Cabinet",
+    "category": "Service",
+    "style": "Modern",
+    "tier": "commercial",
+    "costCents": 108000,
+    "width": 2,
+    "height": 1,
+    "symbol": "L",
+    "assetId": "storage",
+    "upkeepCents": 432,
+    "durability": 78,
+    "utilities": [],
+    "stats": {
+      "turnover": 5,
+      "storage": 6
+    },
+    "tags": [
+      "commercial",
+      "service",
+      "storage"
+    ]
+  },
+  {
+    "id": "water-station",
+    "name": "Filtered Water Station",
+    "category": "Service",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 190000,
+    "width": 2,
+    "height": 2,
+    "symbol": "F",
+    "assetId": "service",
+    "upkeepCents": 760,
+    "durability": 92,
+    "utilities": [],
+    "stats": {
+      "turnover": 4,
+      "quality": 6,
+      "capacity": 5
+    },
+    "tags": [
+      "premium",
+      "service",
+      "service"
+    ]
+  },
+  {
+    "id": "office-desk",
+    "name": "Owner's Operations Desk",
+    "category": "Office",
+    "style": "Modern",
+    "tier": "commercial",
+    "costCents": 98000,
+    "width": 3,
+    "height": 2,
+    "symbol": "O",
+    "assetId": "office",
+    "upkeepCents": 392,
+    "durability": 78,
+    "utilities": [],
+    "stats": {
+      "forecast": 6,
+      "organization": 7
+    },
+    "tags": [
+      "commercial",
+      "office",
+      "office"
+    ]
+  },
+  {
+    "id": "manager-console",
+    "name": "Live Operations Console",
+    "category": "Office",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 260000,
+    "width": 3,
+    "height": 2,
+    "symbol": "L",
+    "assetId": "office",
+    "upkeepCents": 1040,
+    "durability": 92,
+    "utilities": [],
+    "stats": {
+      "forecast": 12,
+      "handoff": 8,
+      "organization": 8
+    },
+    "tags": [
+      "premium",
+      "office",
+      "office"
+    ]
+  }
+]

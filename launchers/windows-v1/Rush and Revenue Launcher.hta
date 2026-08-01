@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+  <title>Rush &amp; Revenue Online</title>
+  <hta:application id="launcher" applicationname="RROLauncherV1" border="none" caption="yes" maximizebutton="no" minimizebutton="yes" singleinstance="yes" sysmenu="yes" />
+  <meta http-equiv="x-ua-compatible" content="IE=9" />
+  <style>
+    html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#071012;color:#f0eddb;font:15px Segoe UI,Arial,sans-serif}
+    .hero{height:220px;background:linear-gradient(135deg,#102a2b,#142125 60%,#422e25);padding:42px 48px;border-bottom:1px solid #355153}
+    h1{font-size:41px;letter-spacing:2px;color:#efbc54;margin:0 0 8px}.tag{color:#7fd0b2;font-size:18px}.edition{color:#8fa0a0;margin-top:28px;font-size:12px;letter-spacing:1px}
+    .content{padding:34px 48px}.play{font-size:20px;background:#d7a84d;color:#172021;border:1px solid #f1c969;border-radius:8px;padding:18px 42px;cursor:pointer;display:inline-block;font-weight:700}
+    .play:hover{background:#edc35f}.secondary{display:inline-block;margin-left:12px;padding:16px 22px;background:#1d3034;border:1px solid #436167;border-radius:8px;cursor:pointer}
+    .server{margin-top:26px;padding:15px 17px;background:#101b1e;border:1px solid #2d4549;border-radius:7px}.dot{display:inline-block;width:10px;height:10px;background:#cc5b4b;border-radius:50%;margin-right:8px}.online .dot{background:#75c5a7;box-shadow:0 0 9px #75c5a7}
+    .news{margin-top:24px;color:#9aabaa;line-height:1.7}.news strong{color:#e7e5d3}.fine{position:absolute;left:48px;bottom:24px;color:#687c7e;font-size:11px}
+  </style>
+  <script language="VBScript">
+    Option Explicit
+    Dim fso, shell, root
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    Set shell = CreateObject("WScript.Shell")
+    root = Replace(document.location.pathname, "%20", " ")
+    If Left(root,1)="/" And Mid(root,3,1)=":" Then root=Mid(root,2)
+    root = fso.GetParentFolderName(Replace(root,"/","\"))
+
+    Sub Window_OnLoad
+      window.resizeTo 900, 690
+      window.moveTo (screen.availWidth-900)/2,(screen.availHeight-690)/2
+      RefreshStatus
+      window.setInterval "RefreshStatus", 1800
+    End Sub
+    Sub PlayGame
+      shell.Run Chr(34) & fso.BuildPath(root,"Play Rush and Revenue Online.vbs") & Chr(34),0,False
+    End Sub
+    Sub ServerControl
+      Dim controlPath
+      controlPath = fso.BuildPath(root,"RRO Server Control.hta")
+      If fso.FileExists(controlPath) Then
+        shell.Run "mshta.exe " & Chr(34) & controlPath & Chr(34),1,False
+      Else
+        MsgBox "The game and persistent world server are separate packages." & vbCrLf & vbCrLf & "Open RRO Server Control.hta from the extracted standalone server folder, start the world, then return here.", vbInformation, "Separate server package"
+      End If
+    End Sub
+    Sub RefreshStatus
+      On Error Resume Next
+      Dim http, healthy
+      Set http=CreateObject("WinHttp.WinHttpRequest.5.1")
+      http.SetTimeouts 250,250,250,250
+      http.Open "GET","http://127.0.0.1:8788/health",False
+      http.Send
+      healthy=(Err.Number=0 And http.Status=200)
+      Err.Clear
+      If healthy Then
+        statusBox.className="server online"
+        serverText.innerText="Local persistent world online · protocol rro.v1"
+      Else
+        statusBox.className="server"
+        serverText.innerText="Local world offline · Play starts it silently"
+      End If
+      On Error GoTo 0
+    End Sub
+  </script>
+</head>
+<body>
+  <div class="hero"><h1>RUSH &amp; REVENUE</h1><div class="tag">Crew the rush. Build the house. Earn the regulars.</div><div class="edition">NATIVE GODOT V1 · LOCAL PERSISTENT WORLD</div></div>
+  <div class="content">
+    <div><span class="play" onclick="PlayGame">PLAY</span><span class="secondary" onclick="ServerControl">SERVER SETUP</span></div>
+    <div id="statusBox" class="server"><span class="dot"></span><span id="serverText">Checking local world…</span></div>
+    <div class="news"><strong>V1 foundation</strong><br />Shared open shifts · role-owned workboards · multi-phase minigames · evidence reviews · guest influence · modular restaurant studio · seasonal data packs.</div>
+  </div>
+  <div class="fine">No browser shell · no visible command prompt · clean rro.v1 protocol · client and server remain separate distributions</div>
+</body>
+</html>

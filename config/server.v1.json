@@ -1,0 +1,9 @@
+{
+  "host": "127.0.0.1",
+  "port": 8788,
+  "database": "data/rro-v1.sqlite",
+  "tickRate": 10,
+  "snapshotRate": 5,
+  "autoOpenNpcShifts": true,
+  "logLevel": "info"
+}

@@ -1,0 +1,660 @@
+[
+  {
+    "id": "manager",
+    "label": "Manager",
+    "icon": "◆",
+    "color": "#6fb0a1",
+    "fantasy": "Keep the whole floor calm, staffed, legal, and profitable.",
+    "basePayCents": 2850,
+    "primaryGame": "Triage Board",
+    "branches": [
+      {
+        "id": "flow",
+        "label": "Flow Control",
+        "description": "Read bottlenecks and redirect labor before service slips."
+      },
+      {
+        "id": "people",
+        "label": "People Ops",
+        "description": "Raise morale, train faster, and recover tired crews."
+      },
+      {
+        "id": "compliance",
+        "label": "Compliance",
+        "description": "Master sanitation, inspections, and incident response."
+      }
+    ],
+    "skills": [
+      {
+        "id": "mgr-preflight",
+        "branch": "flow",
+        "label": "Preflight",
+        "cost": 1,
+        "description": "+8% setup speed during the first 15 minutes."
+      },
+      {
+        "id": "mgr-expedite",
+        "branch": "flow",
+        "label": "Expedite",
+        "cost": 2,
+        "requires": "mgr-preflight",
+        "description": "See one upcoming service incident before it enters the queue."
+      },
+      {
+        "id": "mgr-huddle",
+        "branch": "people",
+        "label": "Five-Minute Huddle",
+        "cost": 1,
+        "description": "Nearby NPC coworkers begin shifts with +10 morale."
+      },
+      {
+        "id": "mgr-coach",
+        "branch": "people",
+        "label": "In the Moment",
+        "cost": 2,
+        "requires": "mgr-huddle",
+        "description": "A perfect task grants a small XP pulse to the whole crew."
+      },
+      {
+        "id": "mgr-haccp",
+        "branch": "compliance",
+        "label": "HACCP Eyes",
+        "cost": 1,
+        "description": "Sanitation decay is 12% slower while you are present."
+      },
+      {
+        "id": "mgr-recovery",
+        "branch": "compliance",
+        "label": "Clean Recovery",
+        "cost": 2,
+        "requires": "mgr-haccp",
+        "description": "The first failed sanitation event each shift is downgraded."
+      }
+    ],
+    "kind": "base",
+    "parentRoleId": null,
+    "primaryTaskMode": "triage",
+    "employmentMode": "job",
+    "permissions": [
+      "manage-shift",
+      "view-compliance"
+    ],
+    "tags": [
+      "leadership",
+      "operations"
+    ],
+    "attributeWeights": {
+      "organization": 0.3,
+      "composure": 0.25,
+      "empathy": 0.2,
+      "memory": 0.15,
+      "stamina": 0.1
+    },
+    "contentPackId": "core-hospitality",
+    "schemaVersion": 1
+  },
+  {
+    "id": "owner",
+    "label": "Owner",
+    "icon": "◇",
+    "color": "#e3ad38",
+    "fantasy": "Turn a neighborhood idea into a durable hospitality business.",
+    "basePayCents": 0,
+    "primaryGame": "Capital Allocation",
+    "branches": [
+      {
+        "id": "hospitality",
+        "label": "Hospitality",
+        "description": "Build loyalty, identity, and repeat traffic."
+      },
+      {
+        "id": "capital",
+        "label": "Capital",
+        "description": "Stretch cash, negotiate leases, and invest at the right time."
+      },
+      {
+        "id": "expansion",
+        "label": "Expansion",
+        "description": "Operate multiple concepts without losing standards."
+      }
+    ],
+    "skills": [
+      {
+        "id": "own-regulars",
+        "branch": "hospitality",
+        "label": "Know the Regulars",
+        "cost": 1,
+        "description": "+5% repeat-customer chance."
+      },
+      {
+        "id": "own-identity",
+        "branch": "hospitality",
+        "label": "House Identity",
+        "cost": 2,
+        "requires": "own-regulars",
+        "description": "Matching decor sets gain an additional ambience bonus."
+      },
+      {
+        "id": "own-terms",
+        "branch": "capital",
+        "label": "Better Terms",
+        "cost": 1,
+        "description": "Regional suppliers require 5% less deposit."
+      },
+      {
+        "id": "own-float",
+        "branch": "capital",
+        "label": "Working Float",
+        "cost": 2,
+        "requires": "own-terms",
+        "description": "Unlock a small zero-interest emergency credit line."
+      },
+      {
+        "id": "own-playbook",
+        "branch": "expansion",
+        "label": "Opening Playbook",
+        "cost": 1,
+        "description": "New restaurants open with +10 sanitation and morale."
+      },
+      {
+        "id": "own-group",
+        "branch": "expansion",
+        "label": "Restaurant Group",
+        "cost": 2,
+        "requires": "own-playbook",
+        "description": "Unlock ownership of a second regional location."
+      }
+    ],
+    "kind": "base",
+    "parentRoleId": null,
+    "primaryTaskMode": "allocate",
+    "employmentMode": "ownership",
+    "permissions": [
+      "open-business",
+      "build-mode",
+      "procure"
+    ],
+    "tags": [
+      "leadership",
+      "capital"
+    ],
+    "attributeWeights": {
+      "organization": 0.3,
+      "memory": 0.2,
+      "empathy": 0.15,
+      "composure": 0.2,
+      "mechanical": 0.15
+    },
+    "contentPackId": "core-hospitality",
+    "schemaVersion": 1
+  },
+  {
+    "id": "server",
+    "label": "Server",
+    "icon": "●",
+    "color": "#d94c38",
+    "fantasy": "Orchestrate attention so every table feels like the only table.",
+    "basePayCents": 900,
+    "primaryGame": "Steps of Service",
+    "branches": [
+      {
+        "id": "timing",
+        "label": "Tablecraft",
+        "description": "Hit the natural windows for greetings, checks, and clears."
+      },
+      {
+        "id": "sales",
+        "label": "Menu Fluency",
+        "description": "Read guests and make useful, profitable suggestions."
+      },
+      {
+        "id": "recovery",
+        "label": "Service Recovery",
+        "description": "Turn mistakes into loyalty instead of bad reviews."
+      }
+    ],
+    "skills": [
+      {
+        "id": "srv-read",
+        "branch": "timing",
+        "label": "Read the Table",
+        "cost": 1,
+        "description": "Ideal timing windows are 10% wider."
+      },
+      {
+        "id": "srv-route",
+        "branch": "timing",
+        "label": "Full Hands",
+        "cost": 2,
+        "requires": "srv-read",
+        "description": "Perfect clears briefly boost movement speed."
+      },
+      {
+        "id": "srv-pair",
+        "branch": "sales",
+        "label": "Pairing Note",
+        "cost": 1,
+        "description": "Successful suggestions add 4% to check value."
+      },
+      {
+        "id": "srv-memory",
+        "branch": "sales",
+        "label": "Perfect Recall",
+        "cost": 2,
+        "requires": "srv-pair",
+        "description": "Order-entry sequences reveal one extra cue."
+      },
+      {
+        "id": "srv-listen",
+        "branch": "recovery",
+        "label": "Listen First",
+        "cost": 1,
+        "description": "Guest patience drains 15% slower during recovery."
+      },
+      {
+        "id": "srv-makegood",
+        "branch": "recovery",
+        "label": "Make It Right",
+        "cost": 2,
+        "requires": "srv-listen",
+        "description": "A perfect recovery can create a regular."
+      }
+    ],
+    "kind": "base",
+    "parentRoleId": null,
+    "primaryTaskMode": "serve",
+    "employmentMode": "job",
+    "permissions": [
+      "table-service"
+    ],
+    "tags": [
+      "front-of-house",
+      "tips"
+    ],
+    "attributeWeights": {
+      "empathy": 0.25,
+      "memory": 0.25,
+      "coordination": 0.2,
+      "composure": 0.2,
+      "stamina": 0.1
+    },
+    "contentPackId": "core-hospitality",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dishwasher",
+    "label": "Dishwasher",
+    "icon": "▦",
+    "color": "#69a7c2",
+    "fantasy": "Run the quiet machine that keeps every other station alive.",
+    "basePayCents": 1725,
+    "primaryGame": "Rack Logic",
+    "branches": [
+      {
+        "id": "flow",
+        "label": "Rack Flow",
+        "description": "Sort shapes and materials into high-throughput loads."
+      },
+      {
+        "id": "chemistry",
+        "label": "Chemistry",
+        "description": "Balance heat, detergent, soak, and sanitation."
+      },
+      {
+        "id": "reliability",
+        "label": "Reliability",
+        "description": "Prevent breakage and cover utility work without falling behind."
+      }
+    ],
+    "skills": [
+      {
+        "id": "dsh-sort",
+        "branch": "flow",
+        "label": "Pre-Sort",
+        "cost": 1,
+        "description": "Rack puzzles begin with one matching pair highlighted."
+      },
+      {
+        "id": "dsh-stack",
+        "branch": "flow",
+        "label": "Dense Rack",
+        "cost": 2,
+        "requires": "dsh-sort",
+        "description": "A full perfect rack yields +15% throughput."
+      },
+      {
+        "id": "dsh-dilution",
+        "branch": "chemistry",
+        "label": "Right Dilution",
+        "cost": 1,
+        "description": "Cleaning solution lasts 12% longer."
+      },
+      {
+        "id": "dsh-temp",
+        "branch": "chemistry",
+        "label": "Temp Discipline",
+        "cost": 2,
+        "requires": "dsh-dilution",
+        "description": "Perfect loads add a sanitation bonus."
+      },
+      {
+        "id": "dsh-catch",
+        "branch": "reliability",
+        "label": "Soft Catch",
+        "cost": 1,
+        "description": "The first wrong rack placement does not cause breakage."
+      },
+      {
+        "id": "dsh-utility",
+        "branch": "reliability",
+        "label": "Utility Player",
+        "cost": 2,
+        "requires": "dsh-catch",
+        "description": "Cleaning tasks award role XP and dish-flow combo."
+      }
+    ],
+    "kind": "base",
+    "parentRoleId": null,
+    "primaryTaskMode": "dishes",
+    "employmentMode": "job",
+    "permissions": [
+      "dish-pit",
+      "sanitation"
+    ],
+    "tags": [
+      "back-of-house",
+      "utility"
+    ],
+    "attributeWeights": {
+      "stamina": 0.3,
+      "organization": 0.2,
+      "coordination": 0.2,
+      "mechanical": 0.2,
+      "composure": 0.1
+    },
+    "contentPackId": "core-hospitality",
+    "schemaVersion": 1
+  },
+  {
+    "id": "chef",
+    "label": "Chef",
+    "icon": "▲",
+    "color": "#f0d59a",
+    "fantasy": "Call the line, protect the menu, and make the pass sing.",
+    "basePayCents": 3100,
+    "primaryGame": "Expo Rhythm",
+    "branches": [
+      {
+        "id": "cuisine",
+        "label": "Cuisine",
+        "description": "Improve recipes, specials, yield, and consistency."
+      },
+      {
+        "id": "expo",
+        "label": "Expo",
+        "description": "Synchronize stations and send complete tables together."
+      },
+      {
+        "id": "leadership",
+        "label": "Kitchen Leadership",
+        "description": "Develop cooks and stabilize a pressured line."
+      }
+    ],
+    "skills": [
+      {
+        "id": "chf-palate",
+        "branch": "cuisine",
+        "label": "Season by Instinct",
+        "cost": 1,
+        "description": "Plating sweet spots are 8% wider."
+      },
+      {
+        "id": "chf-special",
+        "branch": "cuisine",
+        "label": "Daily Special",
+        "cost": 2,
+        "requires": "chf-palate",
+        "description": "Unlock profitable rotating special orders."
+      },
+      {
+        "id": "chf-call",
+        "branch": "expo",
+        "label": "Clear Calls",
+        "cost": 1,
+        "description": "Upcoming ticket colors reveal their station."
+      },
+      {
+        "id": "chf-table",
+        "branch": "expo",
+        "label": "Whole Table",
+        "cost": 2,
+        "requires": "chf-call",
+        "description": "Perfect table sends earn an expo combo multiplier."
+      },
+      {
+        "id": "chf-calm",
+        "branch": "leadership",
+        "label": "Calm Voice",
+        "cost": 1,
+        "description": "Kitchen stress rises 10% slower."
+      },
+      {
+        "id": "chf-train",
+        "branch": "leadership",
+        "label": "Teach the Why",
+        "cost": 2,
+        "requires": "chf-calm",
+        "description": "NPC cooks gain proficiency during every shared shift."
+      }
+    ],
+    "kind": "base",
+    "parentRoleId": null,
+    "primaryTaskMode": "expo",
+    "employmentMode": "job",
+    "permissions": [
+      "expo",
+      "menu-authority"
+    ],
+    "tags": [
+      "back-of-house",
+      "leadership"
+    ],
+    "attributeWeights": {
+      "palate": 0.25,
+      "composure": 0.25,
+      "organization": 0.2,
+      "memory": 0.15,
+      "empathy": 0.15
+    },
+    "contentPackId": "core-hospitality",
+    "schemaVersion": 1
+  },
+  {
+    "id": "cook",
+    "label": "Cook",
+    "icon": "◒",
+    "color": "#ef7d4d",
+    "fantasy": "Build mise en place into a controlled, repeatable rush.",
+    "basePayCents": 2050,
+    "primaryGame": "Heat & Timing",
+    "branches": [
+      {
+        "id": "stations",
+        "label": "Station Mastery",
+        "description": "Own heat, timing, and parallel ticket work."
+      },
+      {
+        "id": "mise",
+        "label": "Mise en Place",
+        "description": "Prepare the right quantity with minimal waste."
+      },
+      {
+        "id": "tempo",
+        "label": "Rush Tempo",
+        "description": "Chain accurate actions without losing quality."
+      }
+    ],
+    "skills": [
+      {
+        "id": "ck-heat",
+        "branch": "stations",
+        "label": "Heat Sense",
+        "cost": 1,
+        "description": "The ideal cook zone is 10% wider."
+      },
+      {
+        "id": "ck-two",
+        "branch": "stations",
+        "label": "Two Pans",
+        "cost": 2,
+        "requires": "ck-heat",
+        "description": "Maintain a second active cook meter without combo loss."
+      },
+      {
+        "id": "ck-list",
+        "branch": "mise",
+        "label": "Prep List",
+        "cost": 1,
+        "description": "Mise targets show expected dinner demand."
+      },
+      {
+        "id": "ck-yield",
+        "branch": "mise",
+        "label": "Clean Yield",
+        "cost": 2,
+        "requires": "ck-list",
+        "description": "Perfect prep returns 8% ingredients to inventory."
+      },
+      {
+        "id": "ck-rhythm",
+        "branch": "tempo",
+        "label": "Find the Rhythm",
+        "cost": 1,
+        "description": "Accurate actions build Rush faster."
+      },
+      {
+        "id": "ck-zone",
+        "branch": "tempo",
+        "label": "In the Zone",
+        "cost": 2,
+        "requires": "ck-rhythm",
+        "description": "At five combo, movement and task speed increase."
+      }
+    ],
+    "kind": "base",
+    "parentRoleId": null,
+    "primaryTaskMode": "cook",
+    "employmentMode": "job",
+    "permissions": [
+      "line-station",
+      "prep"
+    ],
+    "tags": [
+      "back-of-house",
+      "production"
+    ],
+    "attributeWeights": {
+      "coordination": 0.3,
+      "composure": 0.2,
+      "stamina": 0.2,
+      "palate": 0.2,
+      "organization": 0.1
+    },
+    "contentPackId": "core-hospitality",
+    "schemaVersion": 1
+  },
+  {
+    "id": "host-busser",
+    "label": "Host / Busser",
+    "icon": "◆",
+    "color": "#a5b66f",
+    "fantasy": "Shape the room before a single order reaches the kitchen.",
+    "basePayCents": 1650,
+    "primaryGame": "Room Geometry",
+    "branches": [
+      {
+        "id": "door",
+        "label": "Doorcraft",
+        "description": "Quote waits honestly and match parties to the right tables."
+      },
+      {
+        "id": "room",
+        "label": "Dining Room",
+        "description": "Reset quickly, preserve pathways, and anticipate needs."
+      },
+      {
+        "id": "support",
+        "label": "Service Support",
+        "description": "Balance sections and rescue overloaded servers."
+      }
+    ],
+    "skills": [
+      {
+        "id": "hb-quote",
+        "branch": "door",
+        "label": "Accurate Quote",
+        "cost": 1,
+        "description": "Waiting parties lose patience 10% slower."
+      },
+      {
+        "id": "hb-fit",
+        "branch": "door",
+        "label": "Perfect Fit",
+        "cost": 2,
+        "requires": "hb-quote",
+        "description": "Exact-size seating grants a demand buffer."
+      },
+      {
+        "id": "hb-reset",
+        "branch": "room",
+        "label": "Reset Kit",
+        "cost": 1,
+        "description": "Table-reset cleaning uses one less solution."
+      },
+      {
+        "id": "hb-path",
+        "branch": "room",
+        "label": "Clear Path",
+        "cost": 2,
+        "requires": "hb-reset",
+        "description": "Good furniture layouts add movement efficiency."
+      },
+      {
+        "id": "hb-sections",
+        "branch": "support",
+        "label": "Read Sections",
+        "cost": 1,
+        "description": "Section load is visible while assigning parties."
+      },
+      {
+        "id": "hb-hands",
+        "branch": "support",
+        "label": "Helping Hands",
+        "cost": 2,
+        "requires": "hb-sections",
+        "description": "Support actions extend another player’s combo."
+      }
+    ],
+    "kind": "base",
+    "parentRoleId": null,
+    "primaryTaskMode": "seat",
+    "employmentMode": "job",
+    "permissions": [
+      "seat-guests",
+      "reset-tables"
+    ],
+    "tags": [
+      "front-of-house",
+      "utility"
+    ],
+    "attributeWeights": {
+      "empathy": 0.3,
+      "organization": 0.25,
+      "memory": 0.2,
+      "composure": 0.15,
+      "stamina": 0.1
+    },
+    "contentPackId": "core-hospitality",
+    "schemaVersion": 1
+  }
+]

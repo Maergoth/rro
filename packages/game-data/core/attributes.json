@@ -1,0 +1,42 @@
+[
+  {
+    "id": "composure",
+    "label": "Composure",
+    "description": "Maintains timing and decision quality under pressure."
+  },
+  {
+    "id": "coordination",
+    "label": "Coordination",
+    "description": "Improves physical sequencing, routing, and parallel work."
+  },
+  {
+    "id": "palate",
+    "label": "Palate",
+    "description": "Reads doneness, seasoning, aroma, and product quality."
+  },
+  {
+    "id": "stamina",
+    "label": "Stamina",
+    "description": "Sustains throughput across long, repetitive work."
+  },
+  {
+    "id": "memory",
+    "label": "Memory",
+    "description": "Retains orders, calls, reservations, labels, and procedures."
+  },
+  {
+    "id": "empathy",
+    "label": "Empathy",
+    "description": "Reads guests and coworkers and improves recovery choices."
+  },
+  {
+    "id": "organization",
+    "label": "Organization",
+    "description": "Controls mise en place, records, schedules, and queues."
+  },
+  {
+    "id": "mechanical",
+    "label": "Mechanical Sense",
+    "description": "Understands equipment, racks, repairs, and physical systems."
+  }
+]

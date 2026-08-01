@@ -1,0 +1,8 @@
+{
+  "id": "summer-street-fair",
+  "label": "Summer Street Fair",
+  "version": "1.0.0",
+  "type": "seasonal",
+  "schemaVersion": 1,
+  "priority": 20
+}

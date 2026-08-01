@@ -1,0 +1,282 @@
+class_name RestaurantFloor
+extends Control
+
+signal build_action_requested(action: String, payload: Dictionary)
+signal movement_input(direction: Vector2)
+signal object_selected(object_data: Dictionary)
+
+var snapshot: Dictionary = {}
+var content: Dictionary = {}
+var layout: Dictionary = {}
+var build_mode := false
+var build_tool := "select"
+var selected_catalog_id := ""
+var build_rotation := 0
+var cell_pixels := 34.0
+var camera_offset := Vector2(55, 55)
+var panning := false
+var pan_origin := Vector2.ZERO
+var camera_origin := Vector2.ZERO
+var painting := false
+var paint_cells: Dictionary = {}
+var dragging_object: Dictionary = {}
+var drag_preview_cell := Vector2i.ZERO
+var movement_send_cooldown := 0.0
+var texture_cache: Dictionary = {}
+
+const FLOOR_COLORS := {
+	"sealed-concrete": Color("586367"), "quarry-tile": Color("805f4b"), "white-hex": Color("d9d6ca"),
+	"slate-tile": Color("424d54"), "oak-plank": Color("8f6c48"), "walnut-plank": Color("5d4030"),
+	"terrazzo": Color("b7a78d"), "pattern-cement": Color("6d8191"), "commercial-vinyl": Color("8c907f"),
+	"rubber-kitchen": Color("27373c"), "entry-mat": Color("33383a"), "outdoor-paver": Color("85796a")
+}
+
+const CATEGORY_COLORS := {
+	"Dining": Color("b98551"), "Service": Color("4b8c83"), "Kitchen": Color("bd5548"),
+	"Utility": Color("52758f"), "Decor": Color("6e9364"), "Storage": Color("80705d"), "Office": Color("776487")
+}
+
+func _ready() -> void:
+	clip_contents = true
+	mouse_filter = Control.MOUSE_FILTER_STOP
+	set_process(true)
+	queue_redraw()
+
+func set_content(value: Dictionary) -> void:
+	content = value
+	queue_redraw()
+
+func set_snapshot(value: Dictionary) -> void:
+	snapshot = value
+	layout = value.get("layout", {})
+	queue_redraw()
+
+func set_layout(value: Dictionary) -> void:
+	layout = value
+	queue_redraw()
+
+func set_build_mode(enabled: bool) -> void:
+	build_mode = enabled
+	build_tool = "select"
+	selected_catalog_id = ""
+	queue_redraw()
+
+func select_tool(tool: String, catalog_id := "") -> void:
+	build_tool = tool
+	selected_catalog_id = catalog_id
+	dragging_object = {}
+	paint_cells.clear()
+	queue_redraw()
+
+func grid_to_screen(point: Vector2) -> Vector2:
+	return camera_offset + point * cell_pixels
+
+func screen_to_grid(point: Vector2) -> Vector2i:
+	var cell := (point - camera_offset) / cell_pixels
+	return Vector2i(floori(cell.x), floori(cell.y))
+
+func inside_grid(cell: Vector2i) -> bool:
+	return cell.x >= 0 and cell.y >= 0 and cell.x < int(layout.get("width", 0)) and cell.y < int(layout.get("height", 0))
+
+func furniture_definition(id: String) -> Dictionary:
+	for definition in content.get("furniture", []):
+		if str(definition.get("id", "")) == id:
+			return definition
+	return {}
+
+func object_at(cell: Vector2i) -> Dictionary:
+	var objects: Array = layout.get("objects", [])
+	for index in range(objects.size() - 1, -1, -1):
+		var object: Dictionary = objects[index]
+		var definition := furniture_definition(str(object.get("definitionId", "")))
+		if definition.is_empty(): continue
+		var width := int(definition.get("width", 1))
+		var height := int(definition.get("height", 1))
+		if int(object.get("rotation", 0)) in [90, 270]:
+			var swap := width; width = height; height = swap
+		if cell.x >= int(object.get("x", 0)) and cell.x < int(object.get("x", 0)) + width and cell.y >= int(object.get("y", 0)) and cell.y < int(object.get("y", 0)) + height:
+			return object
+	return {}
+
+func _process(delta: float) -> void:
+	if build_mode:
+		return
+	movement_send_cooldown -= delta
+	if movement_send_cooldown <= 0.0:
+		var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
+		movement_input.emit(direction)
+		movement_send_cooldown = 0.1
+
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
+		var before := screen_to_grid(event.position)
+		cell_pixels = clampf(cell_pixels * (1.12 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 0.89), 18.0, 76.0)
+		camera_offset += event.position - grid_to_screen(Vector2(before) + Vector2(0.5, 0.5))
+		queue_redraw(); accept_event(); return
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MIDDLE:
+		panning = event.pressed
+		pan_origin = event.position
+		camera_origin = camera_offset
+		accept_event(); return
+	if event is InputEventMouseMotion and panning:
+		camera_offset = camera_origin + event.position - pan_origin
+		queue_redraw(); accept_event(); return
+	if not build_mode:
+		return
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+		build_rotation = (build_rotation + 90) % 360
+		if not dragging_object.is_empty():
+			build_action_requested.emit("move", {"id": dragging_object.get("id", ""), "x": drag_preview_cell.x, "y": drag_preview_cell.y, "rotation": build_rotation})
+			dragging_object = {}
+		queue_redraw(); accept_event(); return
+	if event is InputEventKey and event.pressed and event.physical_keycode == KEY_R:
+		build_rotation = (build_rotation + 90) % 360
+		queue_redraw(); accept_event(); return
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		var cell := screen_to_grid(event.position)
+		if not inside_grid(cell): return
+		if event.pressed:
+			if build_tool == "floor":
+				painting = true; paint_cells.clear(); paint_cells["%d:%d" % [cell.x, cell.y]] = {"x": cell.x, "y": cell.y}; queue_redraw()
+			elif build_tool in ["wall", "door", "arch"]:
+				var cell_origin := grid_to_screen(Vector2(cell))
+				var local: Vector2 = (event.position - cell_origin) / cell_pixels
+				var distances := {"north": local.y, "south": 1.0-local.y, "west": local.x, "east": 1.0-local.x}
+				var edge := "north"
+				for candidate in distances.keys():
+					if float(distances[candidate]) < float(distances[edge]): edge = candidate
+				var opening := "solid" if build_tool == "wall" else ("service-door" if build_tool == "door" else "arch")
+				build_action_requested.emit("wall", {"x": cell.x, "y": cell.y, "edge": edge, "wallStyleId": selected_catalog_id, "openingType": opening, "rotation": build_rotation})
+			elif build_tool == "object" and not selected_catalog_id.is_empty():
+				build_action_requested.emit("place", {"definitionId": selected_catalog_id, "x": cell.x, "y": cell.y, "rotation": build_rotation})
+			else:
+				var object := object_at(cell)
+				if not object.is_empty():
+					dragging_object = object.duplicate(true)
+					drag_preview_cell = cell
+					build_rotation = int(object.get("rotation", 0))
+					object_selected.emit(object)
+		else:
+			if painting:
+				painting = false
+				build_action_requested.emit("floor", {"surfaceId": selected_catalog_id, "cells": paint_cells.values()})
+				paint_cells.clear()
+			elif not dragging_object.is_empty():
+				build_action_requested.emit("move", {"id": dragging_object.get("id", ""), "x": cell.x, "y": cell.y, "rotation": build_rotation})
+				dragging_object = {}
+		queue_redraw(); accept_event(); return
+	if event is InputEventMouseMotion:
+		var cell := screen_to_grid(event.position)
+		if painting and inside_grid(cell):
+			paint_cells["%d:%d" % [cell.x, cell.y]] = {"x": cell.x, "y": cell.y}
+			queue_redraw(); accept_event()
+		elif not dragging_object.is_empty() and inside_grid(cell):
+			drag_preview_cell = cell
+			queue_redraw(); accept_event()
+
+func _draw() -> void:
+	draw_rect(Rect2(Vector2.ZERO, size), Color("091114"), true)
+	if layout.is_empty():
+		draw_string(ThemeDB.fallback_font, Vector2(30, 50), "Waiting for authoritative layout…", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color("91a1a1"))
+		return
+	for cell in layout.get("cells", []):
+		var draw_position := grid_to_screen(Vector2(float(cell.get("x", 0)), float(cell.get("y", 0))))
+		var rect := Rect2(draw_position, Vector2.ONE * cell_pixels)
+		var color: Color = FLOOR_COLORS.get(str(cell.get("surfaceId", "sealed-concrete")), Color("586367"))
+		draw_rect(rect, color, true)
+		draw_rect(rect, Color(color).darkened(0.22), false, 1.0)
+	if painting:
+		for value in paint_cells.values():
+			var rect := Rect2(grid_to_screen(Vector2(value.x, value.y)), Vector2.ONE * cell_pixels)
+			draw_rect(rect.grow(-2), Color("efbc54", 0.55), true)
+	for wall in layout.get("walls", []):
+		draw_wall(wall)
+	for object in layout.get("objects", []):
+		if not dragging_object.is_empty() and str(object.get("id", "")) == str(dragging_object.get("id", "")): continue
+		draw_object(object)
+	if not dragging_object.is_empty():
+		var preview := dragging_object.duplicate()
+		preview.x = drag_preview_cell.x; preview.y = drag_preview_cell.y; preview.rotation = build_rotation
+		draw_object(preview, 0.65)
+	for incident in snapshot.get("incidents", []): draw_incident(incident)
+	for party in snapshot.get("parties", []): draw_party(party)
+	for avatar in snapshot.get("presences", []): draw_avatar(avatar)
+	draw_hud()
+
+func draw_wall(wall: Dictionary) -> void:
+	var x := float(wall.get("x", 0)); var y := float(wall.get("y", 0)); var edge := str(wall.get("edge", "north"))
+	var start := grid_to_screen(Vector2(x, y)); var finish := start
+	match edge:
+		"north": finish += Vector2(cell_pixels, 0)
+		"south": start += Vector2(0, cell_pixels); finish = start + Vector2(cell_pixels, 0)
+		"west": finish += Vector2(0, cell_pixels)
+		"east": start += Vector2(cell_pixels, 0); finish = start + Vector2(0, cell_pixels)
+	var opening := str(wall.get("openingType", "solid"))
+	var color := Color("d1cab5") if opening == "solid" else Color("82ccb1")
+	draw_line(start, finish, Color("172024"), 7)
+	if opening == "solid": draw_line(start, finish, color, 3)
+	else:
+		draw_line(start, start.lerp(finish, .28), color, 3); draw_line(start.lerp(finish, .72), finish, color, 3)
+
+func draw_object(object: Dictionary, alpha := 1.0) -> void:
+	var definition := furniture_definition(str(object.get("definitionId", "")))
+	if definition.is_empty(): return
+	var width := int(definition.get("width", 1)); var height := int(definition.get("height", 1))
+	if int(object.get("rotation", 0)) in [90, 270]:
+		var swap := width
+		width = height
+		height = swap
+	var rect := Rect2(grid_to_screen(Vector2(float(object.get("x", 0)), float(object.get("y", 0)))) + Vector2.ONE * 2, Vector2(width, height) * cell_pixels - Vector2.ONE * 4)
+	var color: Color = CATEGORY_COLORS.get(str(definition.get("category", "Decor")), Color("6e9364"))
+	color.a = alpha
+	draw_style_box(make_object_box(color), rect)
+	var texture := texture_for(definition)
+	if texture != null:
+		draw_texture_rect(texture, rect.grow(-4), false, Color(1, 1, 1, alpha))
+	var symbol := str(definition.get("symbol", str(definition.get("name", "?"))[0]))
+	if texture == null: draw_string(ThemeDB.fallback_font, rect.get_center() + Vector2(-5, 5), symbol, HORIZONTAL_ALIGNMENT_LEFT, -1, clampi(int(cell_pixels * .45), 11, 22), Color("f7f0db", alpha))
+	if cell_pixels > 30:
+		draw_string(ThemeDB.fallback_font, rect.position + Vector2(5, 14), str(definition.get("name", "")), HORIZONTAL_ALIGNMENT_LEFT, int(rect.size.x - 10), 10, Color("f7f0db", alpha * .92))
+
+func make_object_box(color: Color) -> StyleBoxFlat:
+	var box := StyleBoxFlat.new(); box.bg_color = color; box.border_color = Color(color).lightened(.25); box.set_border_width_all(2); box.set_corner_radius_all(5); return box
+
+func texture_for(definition: Dictionary) -> Texture2D:
+	var key := str(definition.get("id", ""))
+	var asset_key := str(definition.get("assetId", key))
+	var mapping := {"table-two": "table-two", "oak-two-top": "table-two", "table-four": "table-four", "walnut-four-top": "table-four", "host-stand": "host-stand", "host-stand-pro": "host-stand", "range": "range", "six-burner-range": "range", "prep": "prep-table", "prep-table-refrigerated": "prep-table", "dish-machine": "dish-machine", "dish-machine-high-temp": "dish-machine", "service-station": "service-station", "server-station-pro": "service-station", "plants": "plant", "large-planter": "plant"}
+	var file_name := str(mapping.get(key, mapping.get(asset_key, "")))
+	if file_name.is_empty(): return null
+	if texture_cache.has(file_name): return texture_cache[file_name]
+	var path := "res://assets/objects/%s.svg" % file_name
+	if not ResourceLoader.exists(path): return null
+	var texture := load(path) as Texture2D
+	texture_cache[file_name] = texture
+	return texture
+
+func draw_avatar(avatar: Dictionary) -> void:
+	var draw_position := grid_to_screen(Vector2(float(avatar.get("x", 0)), float(avatar.get("y", 0))))
+	var primary := Color(str(avatar.get("primaryColor", "#2f684f"))); var secondary := Color(str(avatar.get("secondaryColor", "#d6a84b")))
+	draw_circle(draw_position, 12, Color("101719")); draw_circle(draw_position, 10, primary); draw_arc(draw_position, 8, -PI*.1, PI*.9, 16, secondary, 4)
+	var direction := Vector2(float(avatar.get("directionX", 0)), float(avatar.get("directionY", 1)))
+	if direction.length() > .1: draw_line(draw_position, draw_position + direction.normalized() * 15, Color("f5e7c5"), 2)
+	draw_string(ThemeDB.fallback_font, draw_position + Vector2(-24, -16), str(avatar.get("name", "Player")), HORIZONTAL_ALIGNMENT_CENTER, 48, 10, Color("f1ecda"))
+
+func draw_party(party: Dictionary) -> void:
+	var index: int = absi(str(party.get("id", "")).hash()) % 8
+	var draw_position := grid_to_screen(Vector2(3 + index * 1.55, 5 + (index % 2) * 5))
+	draw_circle(draw_position, 7, Color("d7d0bd")); draw_circle(draw_position, 3, Color("573f36"))
+	if int(party.get("patience", 100)) < 40: draw_arc(draw_position, 12, 0, TAU, 24, Color("dc5b4a"), 2)
+
+func draw_incident(incident: Dictionary) -> void:
+	var draw_position := grid_to_screen(Vector2(float(incident.get("x", 0)), float(incident.get("y", 0))))
+	var radius := 13.0 + sin(Time.get_ticks_msec() / 160.0) * 3.0
+	draw_circle(draw_position, radius, Color("d6a348", .35)); draw_arc(draw_position, radius, 0, TAU, 24, Color("efbd54"), 3)
+	draw_string(ThemeDB.fallback_font, draw_position + Vector2(-7, 5), "!", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color("2a2117"))
+
+func draw_hud() -> void:
+	var mode := "BUILD MODE" if build_mode else "LIVE SERVICE"
+	draw_rect(Rect2(16, 16, 226, 54), Color("0c1518", .9), true)
+	draw_string(ThemeDB.fallback_font, Vector2(30, 40), mode, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color("7fd0b2") if not build_mode else Color("efbc54"))
+	var hint := "WASD move • wheel zoom • middle-drag pan" if not build_mode else "Left drag/place • drag objects • right-click/R rotate"
+	draw_string(ThemeDB.fallback_font, Vector2(30, 59), hint, HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color("9aabaa"))
