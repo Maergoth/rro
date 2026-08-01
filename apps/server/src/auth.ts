@@ -38,7 +38,7 @@ export function signup(db: Database, registry: ContentRegistry, body: Record<str
   if (!/^[A-Za-z0-9_-]{3,20}$/.test(username)) throw new ApiError(400, "Username must be 3–20 letters, numbers, dashes, or underscores.");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new ApiError(400, "Enter a valid email address.");
   if (name.length < 2) throw new ApiError(400, "Character name must be at least two characters.");
-  if (password.length < 10 || password.length > 128) throw new ApiError(400, "Password must be 10–128 characters.");
+  if (password.length < 6 || password.length > 128) throw new ApiError(400, "Password must be 6–128 characters.");
   if (db.prepare("SELECT 1 FROM accounts WHERE username = ? OR email = ?").get(username, email)) throw new ApiError(409, "That username or email is already registered.");
 
   const accountId = newId("account");

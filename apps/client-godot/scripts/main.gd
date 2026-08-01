@@ -171,22 +171,25 @@ func show_login() -> void:
 	var signup_username := make_field("New username", "", false); form.add_child(signup_username)
 	var email := make_field("Email", "", false); form.add_child(email)
 	var display_name := make_field("Character name", "", false); form.add_child(display_name)
-	var signup_password := make_field("Password (10+ characters)", "", true); form.add_child(signup_password)
+	var signup_password := make_field("Password (6+ characters)", "", true); form.add_child(signup_password)
 	var signup_button := Button.new(); signup_button.text = "Create account and character"; signup_button.custom_minimum_size.y = 48; form.add_child(signup_button)
 	status_label = Label.new(); status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; status_label.add_theme_color_override("font_color", Color("e68472")); form.add_child(status_label)
 	var build := Label.new(); build.text = "v%s · rro.v1" % CLIENT_VERSION; build.add_theme_color_override("font_color", Color("687b7d")); form.add_child(build)
-	login_button.pressed.connect(func() -> void:
+	var do_login := func() -> void:
 		show_status("Connecting…")
 		api.post_json("/v1/auth/login", {"login": username.text, "password": password.text}, func(ok: bool, data: Dictionary, _code: int) -> void:
 			if ok: accept_session(data)
 		)
-	)
-	signup_button.pressed.connect(func() -> void:
+	var do_signup := func() -> void:
 		show_status("Creating account…")
 		api.post_json("/v1/auth/signup", {"username": signup_username.text, "email": email.text, "displayName": display_name.text, "password": signup_password.text}, func(ok: bool, data: Dictionary, _code: int) -> void:
 			if ok: accept_session(data)
 		)
-	)
+	login_button.pressed.connect(do_login)
+	username.text_submitted.connect(func(_t: String) -> void: do_login.call())
+	password.text_submitted.connect(func(_t: String) -> void: do_login.call())
+	signup_button.pressed.connect(do_signup)
+	signup_password.text_submitted.connect(func(_t: String) -> void: do_signup.call())
 
 func make_field(placeholder: String, value: String, secret: bool) -> LineEdit:
 	var field := LineEdit.new(); field.placeholder_text = placeholder; field.text = value; field.secret = secret; field.custom_minimum_size.y = 44; return field
