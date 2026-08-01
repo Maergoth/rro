@@ -17,100 +17,81 @@ var current_builder: BuilderPalette
 var selected_builder_object: Dictionary = {}
 var status_label: Label
 var screen_root: Control
-var server_pid: int = -1
-var server_healthy := false
-var health_timer: Timer
+var debug_console: Control
+var debug_log: RichTextLabel
+var debug_visible := false
 
 func _ready() -> void:
 	get_window().title = "Rush & Revenue Online"
 	api = RroApiClient.new()
 	add_child(api)
-	api.request_failed.connect(show_status)
+	api.request_failed.connect(func(msg: String) -> void: show_status(msg); log_debug("[API] " + msg))
 	realtime = RroRealtimeClient.new()
 	add_child(realtime)
 	realtime.snapshot_received.connect(on_realtime_snapshot)
 	realtime.command_acknowledged.connect(on_command_ack)
-	realtime.realtime_error.connect(show_status)
+	realtime.realtime_error.connect(func(msg: String) -> void: show_status(msg); log_debug("[WS] " + msg))
 	realtime.shift_closed.connect(func(_id: String) -> void: show_status("The restaurant closed for the day."); leave_shift_ui())
 	theme = make_theme()
 	api.server_url = load_server_url()
 	api.session_token = store.load_token()
-	health_timer = Timer.new()
-	health_timer.wait_time = 2.0
-	health_timer.timeout.connect(poll_server_health)
-	add_child(health_timer)
-	start_embedded_server()
+	build_debug_console()
+	log_debug("Client v%s started" % CLIENT_VERSION)
+	log_debug("Server: %s" % api.server_url)
+	try_connect()
 
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		shutdown_embedded_server()
-		get_tree().quit()
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and event.keycode == KEY_F12:
+		debug_visible = not debug_visible
+		debug_console.visible = debug_visible
+		get_viewport().set_input_as_handled()
 
-func start_embedded_server() -> void:
-	var exe_dir := OS.get_executable_path().get_base_dir()
-	var node_path := exe_dir.path_join("server/runtime/node.exe")
-	var entry_path := exe_dir.path_join("server/app/server/index.js")
-	if not FileAccess.file_exists(node_path) or not FileAccess.file_exists(entry_path):
-		# No bundled server — direct connect mode (hosted server or dev)
-		check_connection_then_login()
-		return
-	var server_dir := exe_dir.path_join("server")
-	# Ensure data directories
-	DirAccess.make_dir_recursive_absolute(server_dir.path_join("data"))
-	DirAccess.make_dir_recursive_absolute(server_dir.path_join("run"))
-	DirAccess.make_dir_recursive_absolute(server_dir.path_join("logs"))
-	server_pid = OS.create_process(node_path, ["--no-warnings", entry_path], false)
-	health_timer.start()
-	show_startup_screen("Starting local world…")
+func build_debug_console() -> void:
+	debug_console = PanelContainer.new()
+	debug_console.visible = false
+	debug_console.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	debug_console.offset_top = -280
+	debug_console.z_index = 100
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0, 0, 0, 0.88)
+	style.set_border_width_all(1)
+	style.border_color = Color("3d585c")
+	debug_console.add_theme_stylebox_override("panel", style)
+	debug_log = RichTextLabel.new()
+	debug_log.bbcode_enabled = true
+	debug_log.scroll_following = true
+	debug_log.selection_enabled = true
+	debug_log.add_theme_font_size_override("normal_font_size", 12)
+	debug_console.add_child(debug_log)
+	add_child(debug_console)
 
-func shutdown_embedded_server() -> void:
-	if server_pid < 0:
-		return
-	# Graceful shutdown via control token
-	var exe_dir := OS.get_executable_path().get_base_dir()
-	var token_path := exe_dir.path_join("server/run/rro-control.token")
-	if FileAccess.file_exists(token_path):
-		var token := FileAccess.get_file_as_string(token_path).strip_edges()
-		if token.length() >= 32:
-			var http := HTTPRequest.new()
-			add_child(http)
-			http.request(api.server_url + "/v1/local-admin/shutdown", ["X-RRO-Control-Token: " + token, "Content-Type: application/json"], HTTPClient.METHOD_POST, "{}")
-			# Give it a moment to process
-			await get_tree().create_timer(0.3).timeout
-	OS.kill(server_pid)
-	server_pid = -1
+func log_debug(message: String) -> void:
+	var timestamp := Time.get_time_string_from_system()
+	var line := "[color=#7a8a8c]%s[/color]  %s" % [timestamp, message]
+	if is_instance_valid(debug_log):
+		debug_log.append_text(line + "\n")
+	print(message)
 
-func poll_server_health() -> void:
+func try_connect() -> void:
+	log_debug("Checking server health...")
 	var http := HTTPRequest.new()
 	add_child(http)
-	http.timeout = 2.0
+	http.timeout = 3.0
 	http.request_completed.connect(func(result: int, code: int, _headers: PackedStringArray, _body: PackedByteArray) -> void:
 		http.queue_free()
-		var was_healthy := server_healthy
-		server_healthy = (result == HTTPRequest.RESULT_SUCCESS and code == 200)
-		if server_healthy and not was_healthy:
-			health_timer.wait_time = 8.0
-			check_connection_then_login()
+		if result == HTTPRequest.RESULT_SUCCESS and code == 200:
+			log_debug("[color=#75c5a7]Server online[/color] — protocol rro.v1")
+			if api.session_token.is_empty():
+				show_login()
+			else:
+				load_bootstrap()
+		else:
+			var err := "result=%d code=%d" % [result, code]
+			log_debug("[color=#e68472]Server unreachable[/color] (%s)" % err)
+			show_login()
+			show_status("Server offline — start the server and try again")
 	)
 	http.request(api.server_url + "/health")
-
-func check_connection_then_login() -> void:
-	health_timer.stop()
-	if api.session_token.is_empty():
-		show_login()
-	else:
-		load_bootstrap()
-
-func show_startup_screen(message: String) -> void:
-	clear_screen(); add_background()
-	var center := VBoxContainer.new()
-	center.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
-	center.offset_left = -220; center.offset_right = 220; center.offset_top = -100; center.offset_bottom = 100
-	add_child(center)
-	var title := Label.new(); title.text = "RUSH & REVENUE"; title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; title.add_theme_font_size_override("font_size", 44); title.add_theme_color_override("font_color", Color("efbc54")); center.add_child(title)
-	var sub := Label.new(); sub.text = "ONLINE"; sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; sub.add_theme_font_size_override("font_size", 22); sub.add_theme_color_override("font_color", Color("80ceb2")); center.add_child(sub)
-	center.add_child(Control.new())
-	status_label = Label.new(); status_label.text = message; status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; status_label.add_theme_color_override("font_color", Color("9eacab")); center.add_child(status_label)
 
 func load_server_url() -> String:
 	# Check for server.cfg next to the executable (one line: host or host:port)
@@ -159,7 +140,7 @@ func make_theme() -> Theme:
 
 func clear_screen() -> void:
 	for child in get_children():
-		if child != api and child != realtime and child != health_timer: child.queue_free()
+		if child != api and child != realtime and child != debug_console: child.queue_free()
 	screen_root = null
 	status_label = null
 	current_floor = null
