@@ -617,7 +617,7 @@ func draw_character_preview(control: Control, primary: Color, secondary: Color) 
 func show_skills() -> void:
 	var root := make_shell("Role progression")
 	var top := HBoxContainer.new(); root.add_child(top); var role_option := OptionButton.new(); populate_roles(role_option, true); top.add_child(role_option); var points := Label.new(); points.text = "%d skill points available" % int(bootstrap.get("character", {}).get("skillPoints", 0)); points.add_theme_color_override("font_color", Color("efbc54")); top.add_child(points)
-	var scroll := ScrollContainer.new(); scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL; root.add_child(scroll); var tree := VBoxContainer.new(); tree.size_flags_horizontal = Control.SIZE_EXPAND_FILL; scroll.add_child(tree)
+	var scroll := ScrollContainer.new(); scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL; scroll.follow_focus = false; root.add_child(scroll); var tree := VBoxContainer.new(); tree.size_flags_horizontal = Control.SIZE_EXPAND_FILL; scroll.add_child(tree)
 	var render := func() -> void:
 		for child in tree.get_children(): child.queue_free()
 		var role_id := str(role_option.get_item_metadata(role_option.selected))
@@ -635,7 +635,7 @@ func show_skills() -> void:
 			var row := HBoxContainer.new(); tree.add_child(row)
 			for skill in role.get("skills", []):
 				if str(skill.get("branch", "fundamentals")) != branch_id: continue
-				var node := Button.new(); var is_unlocked := unlocked.has(str(skill.get("id", ""))); var requires := str(skill.get("requires", "")); var available := requires.is_empty() or unlocked.has(requires); node.text = "%s\n%d SP\n%s" % [("\u2713 " if is_unlocked else "") + str(skill.get("label", "Skill")), int(skill.get("cost", 1)), skill.get("description", "")]; node.custom_minimum_size = Vector2(188, 112); node.disabled = is_unlocked or not available
+				var node := Button.new(); var is_unlocked := unlocked.has(str(skill.get("id", ""))); var requires := str(skill.get("requires", "")); var available := requires.is_empty() or unlocked.has(requires); node.text = "%s\n%d SP\n%s" % [("\u2713 " if is_unlocked else "") + str(skill.get("label", "Skill")), int(skill.get("cost", 1)), skill.get("description", "")]; node.custom_minimum_size = Vector2(188, 112); node.disabled = is_unlocked or not available; node.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 				var effect: Dictionary = skill.get("effect", {})
 				var tip_parts: Array[String] = []
 				if effect.has("type"): tip_parts.append(str(effect.get("type", "")).capitalize())

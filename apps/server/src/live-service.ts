@@ -224,7 +224,10 @@ export class LiveService extends EventEmitter {
   openShift(restaurantId: string, account: AuthenticatedAccount | null): Record<string, unknown> {
     const restaurant = this.db.prepare("SELECT * FROM restaurants WHERE id = ? AND status = 'active'").get(restaurantId) as any;
     if (!restaurant) throw new ApiError(404, "Restaurant not found.");
-    if (account && restaurant.owner_character_id !== account.characterId) throw new ApiError(403, "Only the owner can open this restaurant's shift.");
+    if (account && restaurant.owner_character_id && restaurant.owner_character_id !== account.characterId) {
+      const emp = this.db.prepare("SELECT id FROM employments WHERE character_id = ? AND restaurant_id = ? AND status = 'active'").get(account.characterId, restaurantId) as any;
+      if (!emp) throw new ApiError(403, "You must be the owner or employed here to open a shift.");
+    }
     const existing = this.db.prepare("SELECT id FROM service_shifts WHERE restaurant_id = ? AND state IN ('crew-call','open','closing')").get(restaurantId) as any;
     if (existing) return this.shiftSummary(existing.id);
     ensureLayout(this.db, this.registry, restaurantId);
