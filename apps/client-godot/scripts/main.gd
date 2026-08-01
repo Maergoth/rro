@@ -643,18 +643,24 @@ func show_skills() -> void:
 				node.tooltip_text = " ".join(tip_parts) if not tip_parts.is_empty() else str(skill.get("description", ""))
 				var skill_id := str(skill.get("id", ""))
 				var unlock_role := role_id
-				node.pressed.connect(func() -> void:
-					log_debug("[SKILL] Unlocking %s for role %s" % [skill_id, unlock_role])
-					api.post_json("/v1/character/skills/unlock", {"roleId": unlock_role, "skillId": skill_id}, func(ok: bool, _data: Dictionary, _code: int) -> void:
-						if ok:
-							log_debug("[SKILL] Unlocked successfully")
-							load_bootstrap()
-						else:
-							log_debug("[SKILL] Unlock failed")
-					)
-				)
+				node.set_meta("skill_id", skill_id)
+				node.set_meta("role_id", unlock_role)
+				node.pressed.connect(unlock_skill.bind(node))
 				row.add_child(node)
 	role_option.item_selected.connect(func(_index: int) -> void: render.call()); render.call()
+
+func unlock_skill(button: Button) -> void:
+	var skill_id := str(button.get_meta("skill_id", ""))
+	var role_id := str(button.get_meta("role_id", ""))
+	log_debug("[SKILL] Unlocking %s for role %s" % [skill_id, role_id])
+	show_status("Unlocking...")
+	api.post_json("/v1/character/skills/unlock", {"roleId": role_id, "skillId": skill_id}, func(ok: bool, _data: Dictionary, _code: int) -> void:
+		if ok:
+			log_debug("[SKILL] Success")
+			load_bootstrap()
+		else:
+			log_debug("[SKILL] Failed")
+	)
 
 func log_out() -> void:
 	api.post_json("/v1/auth/logout", {}, func(_ok: bool, _data: Dictionary, _code: int) -> void:
