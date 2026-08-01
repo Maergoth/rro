@@ -33,7 +33,7 @@ func _ready() -> void:
 	realtime.realtime_error.connect(show_status)
 	realtime.shift_closed.connect(func(_id: String) -> void: show_status("The restaurant closed for the day."); leave_shift_ui())
 	theme = make_theme()
-	api.server_url = store.load_server_url()
+	api.server_url = load_server_url()
 	api.session_token = store.load_token()
 	health_timer = Timer.new()
 	health_timer.wait_time = 2.0
@@ -112,6 +112,28 @@ func show_startup_screen(message: String) -> void:
 	center.add_child(Control.new())
 	status_label = Label.new(); status_label.text = message; status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; status_label.add_theme_color_override("font_color", Color("9eacab")); center.add_child(status_label)
 
+func load_server_url() -> String:
+	# Check for server.cfg next to the executable (one line: host or host:port)
+	var cfg_path := OS.get_executable_path().get_base_dir().path_join("server.cfg")
+	if FileAccess.file_exists(cfg_path):
+		var line := FileAccess.get_file_as_string(cfg_path).strip_edges()
+		if not line.is_empty():
+			if not line.begins_with("http"):
+				line = "http://" + line
+			if line.count(":") < 2:
+				line = line + ":8788"
+			return line
+	# Check command-line --server=address
+	for arg in OS.get_cmdline_args():
+		if arg.begins_with("--server="):
+			var addr := arg.substr(9).strip_edges()
+			if not addr.begins_with("http"):
+				addr = "http://" + addr
+			if addr.count(":") < 2:
+				addr = addr + ":8788"
+			return addr
+	return "http://192.168.1.2:8788"
+
 func make_theme() -> Theme:
 	var result := Theme.new()
 	result.default_font_size = 14
@@ -160,31 +182,26 @@ func show_login() -> void:
 	var feature := Label.new(); feature.text = "NATIVE V1  ·  SHARED SHIFTS  ·  4× SERVICE TIME\n196 ROLE SKILLS  ·  89 MULTI-PHASE ACTIVITIES"; feature.position = Vector2(95, 335); feature.add_theme_font_size_override("font_size", 13); feature.add_theme_color_override("font_color", Color("87999a")); composition.add_child(feature)
 	var panel := PanelContainer.new(); panel.custom_minimum_size = Vector2(470, 610); panel.position = Vector2(size.x - 560, 90); panel.set_anchors_preset(Control.PRESET_TOP_RIGHT); panel.offset_left = -560; panel.offset_right = -90; panel.offset_top = 90; panel.offset_bottom = 790; composition.add_child(panel)
 	var form := VBoxContainer.new(); panel.add_child(form)
-	var heading := Label.new(); heading.text = "Enter the local world"; heading.add_theme_font_size_override("font_size", 26); form.add_child(heading)
-	var server_field := make_field("Local server", api.server_url, false); form.add_child(server_field)
+	var heading := Label.new(); heading.text = "Log in"; heading.add_theme_font_size_override("font_size", 26); form.add_child(heading)
 	var username := make_field("Username or email", "", false); form.add_child(username)
 	var password := make_field("Password", "", true); form.add_child(password)
 	var login_button := Button.new(); login_button.text = "Log in"; login_button.custom_minimum_size.y = 48; form.add_child(login_button)
-	form.add_child(labeled_rule("NEW TO THE WORLD"))
+	form.add_child(labeled_rule("NEW PLAYER"))
 	var signup_username := make_field("New username", "", false); form.add_child(signup_username)
 	var email := make_field("Email", "", false); form.add_child(email)
 	var display_name := make_field("Character name", "", false); form.add_child(display_name)
 	var signup_password := make_field("Password (10+ characters)", "", true); form.add_child(signup_password)
 	var signup_button := Button.new(); signup_button.text = "Create account and character"; signup_button.custom_minimum_size.y = 48; form.add_child(signup_button)
 	status_label = Label.new(); status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; status_label.add_theme_color_override("font_color", Color("e68472")); form.add_child(status_label)
-	var build := Label.new(); build.text = "Client %s · protocol rro.v1" % CLIENT_VERSION; build.add_theme_color_override("font_color", Color("687b7d")); form.add_child(build)
+	var build := Label.new(); build.text = "v%s · rro.v1" % CLIENT_VERSION; build.add_theme_color_override("font_color", Color("687b7d")); form.add_child(build)
 	login_button.pressed.connect(func() -> void:
-		api.server_url = server_field.text.strip_edges().trim_suffix("/")
-		store.save_server_url(api.server_url)
-		show_status("Contacting the persistent world…")
+		show_status("Connecting…")
 		api.post_json("/v1/auth/login", {"login": username.text, "password": password.text}, func(ok: bool, data: Dictionary, _code: int) -> void:
 			if ok: accept_session(data)
 		)
 	)
 	signup_button.pressed.connect(func() -> void:
-		api.server_url = server_field.text.strip_edges().trim_suffix("/")
-		store.save_server_url(api.server_url)
-		show_status("Creating a clean V1 account and randomized aptitudes…")
+		show_status("Creating account…")
 		api.post_json("/v1/auth/signup", {"username": signup_username.text, "email": email.text, "displayName": display_name.text, "password": signup_password.text}, func(ok: bool, data: Dictionary, _code: int) -> void:
 			if ok: accept_session(data)
 		)
