@@ -635,11 +635,22 @@ func show_skills() -> void:
 			var row := HBoxContainer.new(); tree.add_child(row)
 			for skill in role.get("skills", []):
 				if str(skill.get("branch", "fundamentals")) != branch_id: continue
-				var node := Button.new(); var is_unlocked := unlocked.has(str(skill.get("id", ""))); var requires := str(skill.get("requires", "")); var available := requires.is_empty() or unlocked.has(requires); node.text = "%s\n%d SP\n%s" % [("✓ " if is_unlocked else "") + str(skill.get("label", "Skill")), int(skill.get("cost", 1)), skill.get("description", "")]; node.custom_minimum_size = Vector2(188, 112); node.disabled = is_unlocked or not available; node.tooltip_text = str(skill.get("effect", {}))
+				var node := Button.new(); var is_unlocked := unlocked.has(str(skill.get("id", ""))); var requires := str(skill.get("requires", "")); var available := requires.is_empty() or unlocked.has(requires); node.text = "%s\n%d SP\n%s" % [("\u2713 " if is_unlocked else "") + str(skill.get("label", "Skill")), int(skill.get("cost", 1)), skill.get("description", "")]; node.custom_minimum_size = Vector2(188, 112); node.disabled = is_unlocked or not available
+				var effect: Dictionary = skill.get("effect", {})
+				var tip_parts: Array[String] = []
+				if effect.has("type"): tip_parts.append(str(effect.get("type", "")).capitalize())
+				if effect.has("value"): tip_parts.append("+%s" % str(effect.get("value", "")))
+				node.tooltip_text = " ".join(tip_parts) if not tip_parts.is_empty() else str(skill.get("description", ""))
 				var skill_id := str(skill.get("id", ""))
+				var unlock_role := role_id
 				node.pressed.connect(func() -> void:
-					api.post_json("/v1/character/skills/unlock", {"roleId": role_id, "skillId": skill_id}, func(ok: bool, _data: Dictionary, _code: int) -> void:
-						if ok: load_bootstrap()
+					log_debug("[SKILL] Unlocking %s for role %s" % [skill_id, unlock_role])
+					api.post_json("/v1/character/skills/unlock", {"roleId": unlock_role, "skillId": skill_id}, func(ok: bool, _data: Dictionary, _code: int) -> void:
+						if ok:
+							log_debug("[SKILL] Unlocked successfully")
+							load_bootstrap()
+						else:
+							log_debug("[SKILL] Unlock failed")
 					)
 				)
 				row.add_child(node)
