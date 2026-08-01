@@ -17,8 +17,12 @@ var current_builder: BuilderPalette
 var selected_builder_object: Dictionary = {}
 var status_label: Label
 var screen_root: Control
+var server_pid: int = -1
+var server_healthy := false
+var health_timer: Timer
 
 func _ready() -> void:
+	get_window().title = "Rush & Revenue Online"
 	api = RroApiClient.new()
 	add_child(api)
 	api.request_failed.connect(show_status)
@@ -29,9 +33,84 @@ func _ready() -> void:
 	realtime.realtime_error.connect(show_status)
 	realtime.shift_closed.connect(func(_id: String) -> void: show_status("The restaurant closed for the day."); leave_shift_ui())
 	theme = make_theme()
+	api.server_url = store.load_server_url()
 	api.session_token = store.load_token()
-	if api.session_token.is_empty(): show_login()
-	else: load_bootstrap()
+	health_timer = Timer.new()
+	health_timer.wait_time = 2.0
+	health_timer.timeout.connect(poll_server_health)
+	add_child(health_timer)
+	start_embedded_server()
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		shutdown_embedded_server()
+		get_tree().quit()
+
+func start_embedded_server() -> void:
+	var exe_dir := OS.get_executable_path().get_base_dir()
+	var node_path := exe_dir.path_join("server/runtime/node.exe")
+	var entry_path := exe_dir.path_join("server/app/server/index.js")
+	if not FileAccess.file_exists(node_path) or not FileAccess.file_exists(entry_path):
+		# No bundled server — direct connect mode (hosted server or dev)
+		check_connection_then_login()
+		return
+	var server_dir := exe_dir.path_join("server")
+	# Ensure data directories
+	DirAccess.make_dir_recursive_absolute(server_dir.path_join("data"))
+	DirAccess.make_dir_recursive_absolute(server_dir.path_join("run"))
+	DirAccess.make_dir_recursive_absolute(server_dir.path_join("logs"))
+	server_pid = OS.create_process(node_path, ["--no-warnings", entry_path], false)
+	health_timer.start()
+	show_startup_screen("Starting local world…")
+
+func shutdown_embedded_server() -> void:
+	if server_pid < 0:
+		return
+	# Graceful shutdown via control token
+	var exe_dir := OS.get_executable_path().get_base_dir()
+	var token_path := exe_dir.path_join("server/run/rro-control.token")
+	if FileAccess.file_exists(token_path):
+		var token := FileAccess.get_file_as_string(token_path).strip_edges()
+		if token.length() >= 32:
+			var http := HTTPRequest.new()
+			add_child(http)
+			http.request(api.server_url + "/v1/local-admin/shutdown", ["X-RRO-Control-Token: " + token, "Content-Type: application/json"], HTTPClient.METHOD_POST, "{}")
+			# Give it a moment to process
+			await get_tree().create_timer(0.3).timeout
+	OS.kill(server_pid)
+	server_pid = -1
+
+func poll_server_health() -> void:
+	var http := HTTPRequest.new()
+	add_child(http)
+	http.timeout = 2.0
+	http.request_completed.connect(func(result: int, code: int, _headers: PackedStringArray, _body: PackedByteArray) -> void:
+		http.queue_free()
+		var was_healthy := server_healthy
+		server_healthy = (result == HTTPRequest.RESULT_SUCCESS and code == 200)
+		if server_healthy and not was_healthy:
+			health_timer.wait_time = 8.0
+			check_connection_then_login()
+	)
+	http.request(api.server_url + "/health")
+
+func check_connection_then_login() -> void:
+	health_timer.stop()
+	if api.session_token.is_empty():
+		show_login()
+	else:
+		load_bootstrap()
+
+func show_startup_screen(message: String) -> void:
+	clear_screen(); add_background()
+	var center := VBoxContainer.new()
+	center.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	center.offset_left = -220; center.offset_right = 220; center.offset_top = -100; center.offset_bottom = 100
+	add_child(center)
+	var title := Label.new(); title.text = "RUSH & REVENUE"; title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; title.add_theme_font_size_override("font_size", 44); title.add_theme_color_override("font_color", Color("efbc54")); center.add_child(title)
+	var sub := Label.new(); sub.text = "ONLINE"; sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; sub.add_theme_font_size_override("font_size", 22); sub.add_theme_color_override("font_color", Color("80ceb2")); center.add_child(sub)
+	center.add_child(Control.new())
+	status_label = Label.new(); status_label.text = message; status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; status_label.add_theme_color_override("font_color", Color("9eacab")); center.add_child(status_label)
 
 func make_theme() -> Theme:
 	var result := Theme.new()
@@ -58,7 +137,7 @@ func make_theme() -> Theme:
 
 func clear_screen() -> void:
 	for child in get_children():
-		if child != api and child != realtime: child.queue_free()
+		if child != api and child != realtime and child != health_timer: child.queue_free()
 	screen_root = null
 	status_label = null
 	current_floor = null
@@ -96,6 +175,7 @@ func show_login() -> void:
 	var build := Label.new(); build.text = "Client %s · protocol rro.v1" % CLIENT_VERSION; build.add_theme_color_override("font_color", Color("687b7d")); form.add_child(build)
 	login_button.pressed.connect(func() -> void:
 		api.server_url = server_field.text.strip_edges().trim_suffix("/")
+		store.save_server_url(api.server_url)
 		show_status("Contacting the persistent world…")
 		api.post_json("/v1/auth/login", {"login": username.text, "password": password.text}, func(ok: bool, data: Dictionary, _code: int) -> void:
 			if ok: accept_session(data)
@@ -103,6 +183,7 @@ func show_login() -> void:
 	)
 	signup_button.pressed.connect(func() -> void:
 		api.server_url = server_field.text.strip_edges().trim_suffix("/")
+		store.save_server_url(api.server_url)
 		show_status("Creating a clean V1 account and randomized aptitudes…")
 		api.post_json("/v1/auth/signup", {"username": signup_username.text, "email": email.text, "displayName": display_name.text, "password": signup_password.text}, func(ok: bool, data: Dictionary, _code: int) -> void:
 			if ok: accept_session(data)
