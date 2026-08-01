@@ -340,17 +340,42 @@ func make_shell(section_title: String) -> VBoxContainer:
 
 func show_find_work() -> void:
 	var root := make_shell("Find Work")
-	var intro := Label.new(); intro.text = "Choose a region to browse restaurants. Apply to get hired — NPC restaurants accept immediately."; intro.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; intro.add_theme_color_override("font_color", Color("9eacab")); root.add_child(intro)
-	var scroll := ScrollContainer.new(); scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL; root.add_child(scroll)
-	var list := VBoxContainer.new(); list.size_flags_horizontal = Control.SIZE_EXPAND_FILL; scroll.add_child(list)
-	for country in bootstrap.get("world", {}).get("countries", []):
-		var country_label := Label.new(); country_label.text = "%s  %s" % [country.get("flag", ""), country.get("name", "")]; country_label.add_theme_font_size_override("font_size", 20); country_label.add_theme_color_override("font_color", Color("80ceb2")); list.add_child(country_label)
+	var split := HSplitContainer.new(); split.size_flags_vertical = Control.SIZE_EXPAND_FILL; root.add_child(split)
+	var globe := WorldGlobe.new(); globe.custom_minimum_size = Vector2(700, 580); globe.size_flags_horizontal = Control.SIZE_EXPAND_FILL; globe.set_countries(bootstrap.get("world", {}).get("countries", [])); split.add_child(globe)
+	var panel := PanelContainer.new(); panel.custom_minimum_size.x = 420; split.add_child(panel)
+	var panel_box := VBoxContainer.new(); panel_box.add_theme_constant_override("separation", 10); panel.add_child(panel_box)
+	var panel_title := Label.new(); panel_title.text = "SELECT A REGION"; panel_title.add_theme_font_size_override("font_size", 22); panel_title.add_theme_color_override("font_color", Color("7fd0b2")); panel_box.add_child(panel_title)
+	var panel_sub := Label.new(); panel_sub.text = "Click a country on the map. Each region has unique economic conditions that affect earnings, hiring, and competition."; panel_sub.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; panel_sub.add_theme_color_override("font_color", Color("8da0a2")); panel_box.add_child(panel_sub)
+	var region_scroll := ScrollContainer.new(); region_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL; panel_box.add_child(region_scroll)
+	var region_list := VBoxContainer.new(); region_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL; region_scroll.add_child(region_list)
+	globe.country_selected.connect(func(country: Dictionary) -> void:
+		panel_title.text = "%s  %s" % [country.get("flag", ""), country.get("name", "")]
+		panel_sub.text = ""
+		for child in region_list.get_children(): child.queue_free()
 		for region in country.get("regions", []):
 			var selected_region: Dictionary = region.duplicate(true)
-			var btn := Button.new(); btn.alignment = HORIZONTAL_ALIGNMENT_LEFT; btn.custom_minimum_size.y = 56
-			btn.text = "%s  ·  %d restaurants  ·  demand %d  ·  cost %d" % [region.get("name", "Region"), int(region.get("restaurantCount", 0)), int(region.get("demand", 0)), int(region.get("costIndex", 0))]
-			btn.pressed.connect(func() -> void: navigate_to(func() -> void: show_region_restaurants(selected_region)))
-			list.add_child(btn)
+			var card := PanelContainer.new(); card.custom_minimum_size.y = 110; region_list.add_child(card)
+			var card_box := VBoxContainer.new(); card.add_child(card_box)
+			var rname := Label.new(); rname.text = str(region.get("name", "Region")); rname.add_theme_font_size_override("font_size", 18); rname.add_theme_color_override("font_color", Color("efbc54")); card_box.add_child(rname)
+			var demand_val := int(region.get("demand", 50))
+			var demand_indicator := "HIGH" if demand_val >= 70 else ("MED" if demand_val >= 40 else "LOW")
+			var demand_color := Color("75c5a7") if demand_val >= 70 else (Color("e7e5d5") if demand_val >= 40 else Color("e68472"))
+			var metrics := HBoxContainer.new(); card_box.add_child(metrics)
+			var demand_lbl := Label.new(); demand_lbl.text = "Demand: %s" % demand_indicator; demand_lbl.add_theme_color_override("font_color", demand_color); metrics.add_child(demand_lbl)
+			var cost_lbl := Label.new(); cost_lbl.text = "  Cost: %d" % int(region.get("costIndex", 100)); metrics.add_child(cost_lbl)
+			var cap_lbl := Label.new(); cap_lbl.text = "  Slots: %d/%d" % [int(region.get("restaurantCount", 0)), int(region.get("capacity", 0))]; cap_lbl.add_theme_color_override("font_color", Color("8da0a2")); metrics.add_child(cap_lbl)
+			var resources: Dictionary = region.get("resources", {})
+			var res_parts: Array[String] = []
+			for key in resources.keys():
+				var val := int(resources[key])
+				var arrow := "^" if val >= 70 else ("=" if val >= 40 else "v")
+				res_parts.append("%s%s" % [str(key).left(4).capitalize(), arrow])
+			var res_label := Label.new(); res_label.text = "  ".join(res_parts); res_label.add_theme_font_size_override("font_size", 11); res_label.add_theme_color_override("font_color", Color("8da0a2")); card_box.add_child(res_label)
+			var browse := Button.new(); browse.text = "Browse jobs"; browse.custom_minimum_size.y = 34
+			browse.pressed.connect(func() -> void: navigate_to(func() -> void: show_region_restaurants(selected_region)))
+			card_box.add_child(browse)
+	)
+	var hint := Label.new(); hint.text = "Guest visits require employment in the same region."; hint.add_theme_color_override("font_color", Color("687b7d")); hint.add_theme_font_size_override("font_size", 11); panel_box.add_child(hint)
 
 func show_region_restaurants(region: Dictionary) -> void:
 	var root := make_shell(str(region.get("name", "Region")))
