@@ -17,6 +17,9 @@ var current_builder: BuilderPalette
 var selected_builder_object: Dictionary = {}
 var status_label: Label
 var screen_root: Control
+var shift_tasks_completed := 0
+var shift_start_cash := 0
+var shift_start_xp := 0
 var debug_console: Control
 var debug_log: RichTextLabel
 var debug_visible := false
@@ -395,7 +398,11 @@ func populate_roles(option: OptionButton, include_owner: bool) -> void:
 		if str(option.get_item_metadata(index)) == active: option.select(index)
 
 func join_shift(shift_id: String, kind: String, role_id: String) -> void:
-	show_status("Joining the live restaurant and negotiating the NPC handoff…")
+	show_status("Joining...")
+	var character: Dictionary = bootstrap.get("character", {})
+	shift_start_cash = int(character.get("cashCents", 0))
+	shift_start_xp = int(character.get("xp", 0))
+	shift_tasks_completed = 0
 	api.post_json("/v1/shifts/%s/join" % shift_id, {"kind": kind, "roleId": role_id, "partySize": 2}, func(ok: bool, data: Dictionary, _code: int) -> void:
 		if not ok: return
 		current_shift_id = shift_id; current_restaurant_id = str(data.get("restaurantId", "")); presence_kind = kind; current_role_id = str(data.get("roleId", role_id)); latest_snapshot = data.get("snapshot", {})
@@ -440,12 +447,38 @@ func on_realtime_snapshot(snapshot: Dictionary) -> void:
 	if is_instance_valid(current_task_panel): current_task_panel.set_state(snapshot, str(bootstrap.get("character", {}).get("id", "")), current_role_id)
 
 func on_command_ack(_command_id: String, result: Dictionary) -> void:
-	if result.has("score"): show_status("Authoritative result: %d/100 · %s" % [int(result.get("score", 0)), result.get("outcome", "resolved")])
+	if result.has("score"):
+		var score := int(result.get("score", 0))
+		var grade := "S" if score >= 95 else ("A" if score >= 85 else ("B" if score >= 70 else ("C" if score >= 55 else "F")))
+		if bool(result.get("completed", false)): shift_tasks_completed += 1
+		show_status("%s  %d/100  \u00b7  %s" % [grade, score, result.get("outcome", "resolved")])
+		log_debug("[TASK] Score %d (%s) — %s" % [score, grade, result.get("outcome", "")])
 	elif result.has("message"): show_status(str(result.message))
+	elif result.has("error"): show_status(str(result.get("error", {}).get("message", "Error")))
 
 func request_leave_shift() -> void:
 	if current_shift_id.is_empty(): leave_shift_ui(); return
-	api.post_json("/v1/shifts/%s/leave" % current_shift_id, {}, func(_ok: bool, _data: Dictionary, _code: int) -> void: leave_shift_ui())
+	api.post_json("/v1/shifts/%s/leave" % current_shift_id, {}, func(_ok: bool, _data: Dictionary, _code: int) -> void: show_shift_summary())
+
+func show_shift_summary() -> void:
+	realtime.close()
+	var _shift_id := current_shift_id
+	current_shift_id = ""; current_restaurant_id = ""
+	clear_screen(); add_background()
+	var center := VBoxContainer.new()
+	center.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	center.offset_left = -300; center.offset_right = 300; center.offset_top = -200; center.offset_bottom = 200
+	add_child(center)
+	var heading := Label.new(); heading.text = "SHIFT COMPLETE"; heading.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; heading.add_theme_font_size_override("font_size", 32); heading.add_theme_color_override("font_color", Color("efbc54")); center.add_child(heading)
+	center.add_child(HSeparator.new())
+	var role_line := Label.new(); role_line.text = "%s  \u00b7  %s" % [current_role_id.to_upper() if not current_role_id.is_empty() else "GUEST", presence_kind.to_upper()]; role_line.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; role_line.add_theme_font_size_override("font_size", 18); role_line.add_theme_color_override("font_color", Color("80ceb2")); center.add_child(role_line)
+	center.add_child(Control.new())
+	var tasks_line := Label.new(); tasks_line.text = "Tasks completed: %d" % shift_tasks_completed; tasks_line.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; tasks_line.add_theme_font_size_override("font_size", 20); center.add_child(tasks_line)
+	center.add_child(Control.new())
+	var cont := Button.new(); cont.text = "Continue"; cont.custom_minimum_size.y = 56; cont.add_theme_font_size_override("font_size", 20)
+	cont.pressed.connect(func() -> void: latest_snapshot = {}; load_bootstrap())
+	center.add_child(cont)
+	status_label = Label.new(); status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; status_label.add_theme_color_override("font_color", Color("9eacab")); center.add_child(status_label)
 
 func leave_shift_ui() -> void:
 	realtime.close(); current_shift_id = ""; current_restaurant_id = ""; latest_snapshot = {}; load_bootstrap()
@@ -530,7 +563,12 @@ func expand_builder(add_width: int, add_height: int) -> void:
 
 func show_character() -> void:
 	var root := make_shell("Character")
-	var character: Dictionary = bootstrap.get("character", {}); var split := HSplitContainer.new(); split.size_flags_vertical = Control.SIZE_EXPAND_FILL; root.add_child(split)
+	var character: Dictionary = bootstrap.get("character", {})
+	var nav := HBoxContainer.new(); root.add_child(nav)
+	var skills_btn := Button.new(); skills_btn.text = "Skill Trees"; skills_btn.custom_minimum_size.y = 44
+	skills_btn.pressed.connect(func() -> void: navigate_to(show_skills))
+	nav.add_child(skills_btn)
+	var split := HSplitContainer.new(); split.size_flags_vertical = Control.SIZE_EXPAND_FILL; root.add_child(split)
 	var stats_panel := PanelContainer.new(); split.add_child(stats_panel); var stats := VBoxContainer.new(); stats_panel.add_child(stats); var heading := Label.new(); heading.text = "RANDOMIZED APTITUDES"; heading.add_theme_font_size_override("font_size", 21); heading.add_theme_color_override("font_color", Color("7fd0b2")); stats.add_child(heading)
 	var explanation := Label.new(); explanation.text = "Every new character begins with two strengths, two weak areas, and mixed middle aptitude. This suggests roles; it never locks progression."; explanation.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; stats.add_child(explanation)
 	for attribute in character.get("attributes", []):
