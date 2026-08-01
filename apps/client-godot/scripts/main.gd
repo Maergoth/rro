@@ -200,12 +200,126 @@ func labeled_rule(label: String) -> HBoxContainer:
 func accept_session(data: Dictionary) -> void:
 	api.session_token = str(data.get("sessionToken", "")); store.save_token(api.session_token); load_bootstrap()
 
+var nav_stack: Array[Callable] = []
+
 func load_bootstrap() -> void:
 	api.get_json("/v1/bootstrap", func(ok: bool, data: Dictionary, _code: int) -> void:
 		if not ok:
 			store.clear(); api.session_token = ""; show_login(); show_status("Session expired. Log in again."); return
 		bootstrap = data
-		show_world()
+		var character: Dictionary = bootstrap.get("character", {})
+		if str(character.get("homeRegionId", "")).is_empty():
+			show_region_select()
+		else:
+			show_home()
+	)
+
+func navigate_to(screen: Callable) -> void:
+	nav_stack.push_back(screen)
+	screen.call()
+
+func navigate_back() -> void:
+	if nav_stack.size() > 1:
+		nav_stack.pop_back()
+		nav_stack.back().call()
+	else:
+		show_home()
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		if not current_shift_id.is_empty(): return
+		navigate_back()
+		get_viewport().set_input_as_handled()
+
+func show_region_select() -> void:
+	clear_screen(); add_background()
+	var center := VBoxContainer.new()
+	center.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	center.offset_left = -340; center.offset_right = 340; center.offset_top = -260; center.offset_bottom = 260
+	add_child(center)
+	var heading := Label.new(); heading.text = "CHOOSE YOUR REGION"; heading.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; heading.add_theme_font_size_override("font_size", 32); heading.add_theme_color_override("font_color", Color("efbc54")); center.add_child(heading)
+	var sub := Label.new(); sub.text = "This is where you'll live and work. Restaurants, jobs, and guest visits are all regional."; sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; sub.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; sub.add_theme_color_override("font_color", Color("9eacab")); center.add_child(sub)
+	center.add_child(HSeparator.new())
+	var scroll := ScrollContainer.new(); scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL; center.add_child(scroll)
+	var list := VBoxContainer.new(); list.size_flags_horizontal = Control.SIZE_EXPAND_FILL; scroll.add_child(list)
+	for country in bootstrap.get("world", {}).get("countries", []):
+		var country_label := Label.new(); country_label.text = "%s  %s" % [country.get("flag", ""), country.get("name", "")]; country_label.add_theme_font_size_override("font_size", 20); country_label.add_theme_color_override("font_color", Color("80ceb2")); list.add_child(country_label)
+		for region in country.get("regions", []):
+			var rid: String = str(region.get("id", ""))
+			var btn := Button.new(); btn.text = "%s  ·  %d restaurants  ·  demand %d  ·  cost %d" % [region.get("name", ""), int(region.get("restaurantCount", 0)), int(region.get("demand", 0)), int(region.get("costIndex", 0))]; btn.custom_minimum_size.y = 48; btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
+			btn.pressed.connect(func() -> void:
+				api.post_json("/v1/character/set-region", {"regionId": rid}, func(ok: bool, _data: Dictionary, _code: int) -> void:
+					if ok: load_bootstrap()
+				)
+			)
+			list.add_child(btn)
+	var spacer := Control.new(); spacer.custom_minimum_size.y = 12; center.add_child(spacer)
+	status_label = Label.new(); status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; status_label.add_theme_color_override("font_color", Color("e78874")); center.add_child(status_label)
+
+func show_home() -> void:
+	nav_stack.clear()
+	nav_stack.push_back(show_home)
+	clear_screen(); add_background()
+	var margin := MarginContainer.new(); margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); margin.add_theme_constant_override("margin_left", 48); margin.add_theme_constant_override("margin_right", 48); margin.add_theme_constant_override("margin_top", 36); margin.add_theme_constant_override("margin_bottom", 36); add_child(margin)
+	var root := VBoxContainer.new(); root.size_flags_horizontal = Control.SIZE_EXPAND_FILL; margin.add_child(root)
+	var character: Dictionary = bootstrap.get("character", {})
+	var employment = bootstrap.get("employment", null)
+	var top := HBoxContainer.new(); root.add_child(top)
+	var logo := Label.new(); logo.text = "RUSH & REVENUE ONLINE"; logo.add_theme_font_size_override("font_size", 28); logo.add_theme_color_override("font_color", Color("efbc54")); logo.size_flags_horizontal = Control.SIZE_EXPAND_FILL; top.add_child(logo)
+	var quit_btn := Button.new(); quit_btn.text = "Quit"; quit_btn.pressed.connect(func() -> void: get_tree().quit()); top.add_child(quit_btn)
+	var logout_btn := Button.new(); logout_btn.text = "Log out"; logout_btn.pressed.connect(log_out); top.add_child(logout_btn)
+	root.add_child(HSeparator.new())
+	var body := HBoxContainer.new(); body.size_flags_vertical = Control.SIZE_EXPAND_FILL; root.add_child(body)
+	# Left: character card
+	var card := PanelContainer.new(); card.custom_minimum_size.x = 380; body.add_child(card)
+	var card_box := VBoxContainer.new(); card.add_child(card_box)
+	var name_label := Label.new(); name_label.text = str(character.get("name", "Operator")); name_label.add_theme_font_size_override("font_size", 28); name_label.add_theme_color_override("font_color", Color("efbc54")); card_box.add_child(name_label)
+	var stats := Label.new(); stats.text = "Level %d  ·  $%.2f  ·  %d SP" % [int(character.get("level", 1)), float(character.get("cashCents", 0)) / 100.0, int(character.get("skillPoints", 0))]; stats.add_theme_color_override("font_color", Color("80ceb2")); card_box.add_child(stats)
+	var role_label := Label.new(); role_label.text = "Role: %s" % str(character.get("activeRoleId", "none")).capitalize(); card_box.add_child(role_label)
+	card_box.add_child(HSeparator.new())
+	if employment != null and employment is Dictionary:
+		var job := Label.new(); job.text = "EMPLOYED AT"; job.add_theme_font_size_override("font_size", 12); job.add_theme_color_override("font_color", Color("819193")); card_box.add_child(job)
+		var employer := Label.new(); employer.text = str(employment.get("restaurantName", "Unknown")); employer.add_theme_font_size_override("font_size", 22); employer.add_theme_color_override("font_color", Color("f1ecda")); card_box.add_child(employer)
+		var job_details := Label.new(); job_details.text = "%s  ·  ★ %.1f  ·  sanitation %d" % [str(employment.get("roleId", "")).capitalize(), float(employment.get("rating", 0)), int(employment.get("sanitation", 0))]; job_details.add_theme_color_override("font_color", Color("9eacab")); card_box.add_child(job_details)
+		var quit_job := Button.new(); quit_job.text = "Quit this job"
+		quit_job.pressed.connect(func() -> void:
+			api.post_json("/v1/character/quit-job", {}, func(ok: bool, _data: Dictionary, _code: int) -> void:
+				if ok: load_bootstrap()
+			)
+		)
+		card_box.add_child(quit_job)
+	else:
+		var no_job := Label.new(); no_job.text = "No current employment"; no_job.add_theme_color_override("font_color", Color("687b7d")); card_box.add_child(no_job)
+		var hint := Label.new(); hint.text = "Use Find Work to get hired at a restaurant."; hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; hint.add_theme_color_override("font_color", Color("819193")); card_box.add_child(hint)
+	# Right: action buttons
+	var actions := VBoxContainer.new(); actions.size_flags_horizontal = Control.SIZE_EXPAND_FILL; actions.add_theme_constant_override("separation", 16); body.add_child(actions)
+	var spacer := Control.new(); spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL; actions.add_child(spacer)
+	if employment != null and employment is Dictionary:
+		var clock_in := Button.new(); clock_in.text = "CLOCK IN — %s" % str(employment.get("restaurantName", "Work")); clock_in.custom_minimum_size.y = 72; clock_in.add_theme_font_size_override("font_size", 22)
+		clock_in.pressed.connect(func() -> void: clock_in_to_job(employment))
+		actions.add_child(clock_in)
+	var find_work := Button.new(); find_work.text = "Find Work"; find_work.custom_minimum_size.y = 56; find_work.add_theme_font_size_override("font_size", 18)
+	find_work.pressed.connect(func() -> void: navigate_to(show_find_work))
+	actions.add_child(find_work)
+	var owned: Array = bootstrap.get("ownedRestaurants", [])
+	if not owned.is_empty():
+		var my_rest := Button.new(); my_rest.text = "My Restaurant — %s" % str(owned[0].get("name", "")); my_rest.custom_minimum_size.y = 56; my_rest.add_theme_font_size_override("font_size", 18)
+		my_rest.pressed.connect(func() -> void: navigate_to(show_my_restaurant))
+		actions.add_child(my_rest)
+	var char_btn := Button.new(); char_btn.text = "Character & Skills"; char_btn.custom_minimum_size.y = 56; char_btn.add_theme_font_size_override("font_size", 18)
+	char_btn.pressed.connect(func() -> void: navigate_to(show_character))
+	actions.add_child(char_btn)
+	var spacer2 := Control.new(); spacer2.size_flags_vertical = Control.SIZE_EXPAND_FILL; actions.add_child(spacer2)
+	status_label = Label.new(); status_label.add_theme_color_override("font_color", Color("e78874")); root.add_child(status_label)
+	var build_label := Label.new(); build_label.text = "v%s · rro.v1" % CLIENT_VERSION; build_label.add_theme_color_override("font_color", Color("687b7d")); root.add_child(build_label)
+
+func clock_in_to_job(employment: Dictionary) -> void:
+	var restaurant_id := str(employment.get("restaurantId", ""))
+	var role_id := str(employment.get("roleId", ""))
+	show_status("Clocking in...")
+	api.post_json("/v1/restaurants/%s/shifts" % restaurant_id, {}, func(ok: bool, data: Dictionary, _code: int) -> void:
+		if not ok: return
+		join_shift(str(data.get("id", "")), "employee", role_id)
 	)
 
 func make_shell(section_title: String) -> VBoxContainer:
@@ -213,46 +327,31 @@ func make_shell(section_title: String) -> VBoxContainer:
 	var margin := MarginContainer.new(); margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); margin.add_theme_constant_override("margin_left", 24); margin.add_theme_constant_override("margin_right", 24); margin.add_theme_constant_override("margin_top", 18); margin.add_theme_constant_override("margin_bottom", 18); add_child(margin)
 	var root := VBoxContainer.new(); root.size_flags_horizontal = Control.SIZE_EXPAND_FILL; root.size_flags_vertical = Control.SIZE_EXPAND_FILL; margin.add_child(root)
 	var top := HBoxContainer.new(); root.add_child(top)
+	var back := Button.new(); back.text = "← Back"; back.pressed.connect(navigate_back); top.add_child(back)
 	var logo := Label.new(); logo.text = "R&R  /  %s" % section_title.to_upper(); logo.add_theme_font_size_override("font_size", 23); logo.add_theme_color_override("font_color", Color("efbc54")); logo.size_flags_horizontal = Control.SIZE_EXPAND_FILL; top.add_child(logo)
 	var character: Dictionary = bootstrap.get("character", {})
 	var identity := Label.new(); identity.text = "%s  ·  LV %d  ·  $%.2f" % [character.get("name", "Operator"), int(character.get("level", 1)), float(character.get("cashCents", 0))/100.0]; identity.add_theme_color_override("font_color", Color("83cdb2")); top.add_child(identity)
-	var quit := Button.new(); quit.text = "Quit"; quit.pressed.connect(func() -> void: get_tree().quit()); top.add_child(quit)
-	var navigation := HBoxContainer.new(); root.add_child(navigation)
-	add_nav(navigation, "Globe", show_world); add_nav(navigation, "Live shifts", show_live_shifts); add_nav(navigation, "Character", show_character); add_nav(navigation, "Skills", show_skills); add_nav(navigation, "My restaurant", show_my_restaurant)
-	var logout := Button.new(); logout.text = "Log out"; logout.pressed.connect(log_out); navigation.add_child(logout)
 	status_label = Label.new(); status_label.custom_minimum_size.y = 22; status_label.add_theme_color_override("font_color", Color("e78874")); root.add_child(status_label)
 	root.add_child(HSeparator.new())
 	return root
 
-func add_nav(parent: HBoxContainer, label: String, callback: Callable) -> void:
-	var button := Button.new(); button.text = label; button.pressed.connect(callback); parent.add_child(button)
-
-func show_world() -> void:
-	if bootstrap.is_empty(): return
-	var root := make_shell("World network")
-	var split := HSplitContainer.new(); split.size_flags_vertical = Control.SIZE_EXPAND_FILL; root.add_child(split)
-	var globe := WorldGlobe.new(); globe.custom_minimum_size = Vector2(780, 650); globe.size_flags_horizontal = Control.SIZE_EXPAND_FILL; globe.set_countries(bootstrap.get("world", {}).get("countries", [])); split.add_child(globe)
-	var region_panel := PanelContainer.new(); region_panel.custom_minimum_size.x = 410; split.add_child(region_panel)
-	var region_box := VBoxContainer.new(); region_panel.add_child(region_box)
-	var instruction := Label.new(); instruction.text = "SELECT A COUNTRY"; instruction.add_theme_font_size_override("font_size", 21); instruction.add_theme_color_override("font_color", Color("7fd0b2")); region_box.add_child(instruction)
-	var copy := Label.new(); copy.text = "The world begins at approximately 20% NPC restaurant occupancy. Locations compete for finite labor, produce, seafood, fuel, and sanitation capacity; businesses can fail and later be replaced."; copy.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; copy.add_theme_color_override("font_color", Color("9aa8a7")); region_box.add_child(copy)
-	var region_list := VBoxContainer.new(); region_box.add_child(region_list)
-	globe.country_selected.connect(func(country: Dictionary) -> void:
-		instruction.text = "%s  %s" % [country.get("flag", ""), country.get("name", "")]
-		for child in region_list.get_children(): child.queue_free()
+func show_find_work() -> void:
+	var root := make_shell("Find Work")
+	var intro := Label.new(); intro.text = "Choose a region to browse restaurants. Apply to get hired — NPC restaurants accept immediately."; intro.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; intro.add_theme_color_override("font_color", Color("9eacab")); root.add_child(intro)
+	var scroll := ScrollContainer.new(); scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL; root.add_child(scroll)
+	var list := VBoxContainer.new(); list.size_flags_horizontal = Control.SIZE_EXPAND_FILL; scroll.add_child(list)
+	for country in bootstrap.get("world", {}).get("countries", []):
+		var country_label := Label.new(); country_label.text = "%s  %s" % [country.get("flag", ""), country.get("name", "")]; country_label.add_theme_font_size_override("font_size", 20); country_label.add_theme_color_override("font_color", Color("80ceb2")); list.add_child(country_label)
 		for region in country.get("regions", []):
 			var selected_region: Dictionary = region.duplicate(true)
-			var button := Button.new(); button.alignment = HORIZONTAL_ALIGNMENT_LEFT; button.custom_minimum_size.y = 76
-			button.text = "%s\n%d/%d restaurants  ·  %d live  ·  demand %d  ·  cost %d" % [region.get("name", "Region"), int(region.get("restaurantCount", 0)), int(region.get("capacity", 0)), int(region.get("liveShifts", 0)), int(region.get("demand", 0)), int(region.get("costIndex", 0))]
-			button.pressed.connect(func() -> void: show_region_restaurants(selected_region))
-			region_list.add_child(button)
-	)
+			var btn := Button.new(); btn.alignment = HORIZONTAL_ALIGNMENT_LEFT; btn.custom_minimum_size.y = 56
+			btn.text = "%s  ·  %d restaurants  ·  demand %d  ·  cost %d" % [region.get("name", "Region"), int(region.get("restaurantCount", 0)), int(region.get("demand", 0)), int(region.get("costIndex", 0))]
+			btn.pressed.connect(func() -> void: navigate_to(func() -> void: show_region_restaurants(selected_region)))
+			list.add_child(btn)
 
 func show_region_restaurants(region: Dictionary) -> void:
 	var root := make_shell(str(region.get("name", "Region")))
-	var heading := HBoxContainer.new(); root.add_child(heading)
-	var resource := Label.new(); resource.text = "REGIONAL SUPPLY  ·  %s" % format_resources(region.get("resources", {})); resource.size_flags_horizontal = Control.SIZE_EXPAND_FILL; resource.add_theme_color_override("font_color", Color("80cdb1")); heading.add_child(resource)
-	var back := Button.new(); back.text = "Back to globe"; back.pressed.connect(show_world); heading.add_child(back)
+	var heading := Label.new(); heading.text = "REGIONAL SUPPLY  ·  %s" % format_resources(region.get("resources", {})); heading.add_theme_color_override("font_color", Color("80cdb1")); root.add_child(heading)
 	var scroll := ScrollContainer.new(); scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL; root.add_child(scroll)
 	var list := VBoxContainer.new(); list.size_flags_horizontal = Control.SIZE_EXPAND_FILL; scroll.add_child(list)
 	api.get_json("/v1/regions/%s/restaurants" % region.get("id", ""), func(ok: bool, data: Dictionary, _code: int) -> void:
@@ -261,28 +360,25 @@ func show_region_restaurants(region: Dictionary) -> void:
 	)
 
 func add_restaurant_card(parent: VBoxContainer, restaurant: Dictionary) -> void:
-	var panel := PanelContainer.new(); panel.custom_minimum_size.y = 148; parent.add_child(panel)
+	var panel := PanelContainer.new(); panel.custom_minimum_size.y = 120; parent.add_child(panel)
 	var row := HBoxContainer.new(); panel.add_child(row)
 	var info := VBoxContainer.new(); info.size_flags_horizontal = Control.SIZE_EXPAND_FILL; row.add_child(info)
-	var restaurant_name := Label.new(); restaurant_name.text = "%s  %s" % [restaurant.get("name", "Restaurant"), "[LIVE]" if restaurant.get("liveShift") != null else ""]; restaurant_name.add_theme_font_size_override("font_size", 22); restaurant_name.add_theme_color_override("font_color", Color("efbc54")); info.add_child(restaurant_name)
-	var details := Label.new(); details.text = "%s  ·  %s  ·  ★ %.2f  ·  sanitation %d  ·  generation %d" % [restaurant.get("concept", ""), restaurant.get("style", ""), float(restaurant.get("rating", 0)), int(restaurant.get("sanitation", 0)), int(restaurant.get("generation", 1))]; info.add_child(details)
-	var permanence := Label.new(); permanence.text = "NPC business" if restaurant.get("isNpc", false) else "Player-owned business"; permanence.add_theme_color_override("font_color", Color("8e9e9f")); info.add_child(permanence)
-	var controls := VBoxContainer.new(); controls.custom_minimum_size.x = 330; row.add_child(controls)
+	var restaurant_name := Label.new(); restaurant_name.text = str(restaurant.get("name", "Restaurant")); restaurant_name.add_theme_font_size_override("font_size", 22); restaurant_name.add_theme_color_override("font_color", Color("efbc54")); info.add_child(restaurant_name)
+	var details := Label.new(); details.text = "%s  ·  %s  ·  ★ %.2f  ·  sanitation %d" % [restaurant.get("concept", ""), restaurant.get("style", ""), float(restaurant.get("rating", 0)), int(restaurant.get("sanitation", 0))]; info.add_child(details)
+	var permanence := Label.new(); permanence.text = "NPC business" if restaurant.get("isNpc", false) else "Player-owned"; permanence.add_theme_color_override("font_color", Color("8e9e9f")); info.add_child(permanence)
+	var controls := VBoxContainer.new(); controls.custom_minimum_size.x = 300; row.add_child(controls)
 	var role := OptionButton.new(); populate_roles(role, false); controls.add_child(role)
-	var apply := Button.new(); apply.text = "Apply for selected role"; controls.add_child(apply)
-	apply.pressed.connect(func() -> void:
+	var apply_btn := Button.new(); apply_btn.text = "Apply for this job"; apply_btn.custom_minimum_size.y = 44
+	apply_btn.pressed.connect(func() -> void:
 		var role_id := str(role.get_item_metadata(role.selected))
-		api.post_json("/v1/restaurants/%s/applications" % restaurant.get("id", ""), {"roleId": role_id, "note": "Available for open crew calls and committed to role standards."}, func(ok: bool, _data: Dictionary, _code: int) -> void:
-			if ok: show_status("Application submitted. Open shifts remain drop-in while staffing is available.")
+		show_status("Applying...")
+		api.post_json("/v1/restaurants/%s/apply" % restaurant.get("id", ""), {"roleId": role_id}, func(ok: bool, _data: Dictionary, _code: int) -> void:
+			if ok:
+				show_status("Hired! Returning home...")
+				load_bootstrap()
 		)
 	)
-	var live = restaurant.get("liveShift")
-	if live != null:
-		var actions := HBoxContainer.new(); controls.add_child(actions)
-		var crew := Button.new(); crew.text = "Join crew"; crew.pressed.connect(func() -> void: join_shift(str(live.get("id", "")), "employee", str(role.get_item_metadata(role.selected)))); actions.add_child(crew)
-		var visit := Button.new(); visit.text = "Visit as guest"; visit.pressed.connect(func() -> void: join_shift(str(live.get("id", "")), "guest", "")); actions.add_child(visit)
-	else:
-		var closed := Label.new(); closed.text = "Not currently open for a shift"; closed.add_theme_color_override("font_color", Color("7f8c8e")); controls.add_child(closed)
+	controls.add_child(apply_btn)
 
 func format_resources(resources: Dictionary) -> String:
 	var parts: Array[String] = []
@@ -297,22 +393,6 @@ func populate_roles(option: OptionButton, include_owner: bool) -> void:
 	var active := str(bootstrap.get("character", {}).get("activeRoleId", ""))
 	for index in range(option.item_count):
 		if str(option.get_item_metadata(index)) == active: option.select(index)
-
-func show_live_shifts() -> void:
-	var root := make_shell("Open shifts")
-	var intro := Label.new(); intro.text = "Any open restaurant can be joined in progress. NPCs cover every duty until a player takes the slot; the handoff is persistent and server-authoritative."; intro.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; intro.add_theme_color_override("font_color", Color("9eacab")); root.add_child(intro)
-	var role := OptionButton.new(); populate_roles(role, true); root.add_child(role)
-	var scroll := ScrollContainer.new(); scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL; root.add_child(scroll)
-	var list := VBoxContainer.new(); list.size_flags_horizontal = Control.SIZE_EXPAND_FILL; scroll.add_child(list)
-	api.get_json("/v1/shifts", func(ok: bool, data: Dictionary, _code: int) -> void:
-		if not ok: return
-		for shift in data.get("shifts", []):
-			var selected_shift: Dictionary = shift.duplicate(true)
-			var row := PanelContainer.new(); list.add_child(row); var inner := HBoxContainer.new(); row.add_child(inner)
-			var label := Label.new(); label.size_flags_horizontal = Control.SIZE_EXPAND_FILL; label.text = "%s\n%s  ·  ★ %.2f  ·  sanitation %d  ·  %d open duties  ·  %d players" % [shift.get("restaurantName", "Restaurant"), shift.get("regionId", ""), float(shift.get("rating", 0)), int(shift.get("sanitation", 0)), int(shift.get("openSlots", 0)), int(shift.get("players", 0))]; label.add_theme_font_size_override("font_size", 16); inner.add_child(label)
-			var crew := Button.new(); crew.text = "Crew"; crew.pressed.connect(func() -> void: join_shift(str(selected_shift.get("id", "")), "employee", str(role.get_item_metadata(role.selected)))); inner.add_child(crew)
-			var guest := Button.new(); guest.text = "Guest PvP"; guest.pressed.connect(func() -> void: join_shift(str(selected_shift.get("id", "")), "guest", "")); inner.add_child(guest)
-	)
 
 func join_shift(shift_id: String, kind: String, role_id: String) -> void:
 	show_status("Joining the live restaurant and negotiating the NPC handoff…")

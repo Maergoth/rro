@@ -282,6 +282,16 @@ export class LiveService extends EventEmitter {
     const shift = activeShift(this.db, shiftId);
     const kind = String(body.kind ?? "employee");
     if (kind !== "employee" && kind !== "guest") throw new ApiError(400, "Join as employee or guest.");
+    const restaurant = this.db.prepare("SELECT id, region_id, owner_character_id FROM restaurants WHERE id = ?").get(shift.restaurant_id) as any;
+    const isOwner = restaurant.owner_character_id === account.characterId;
+    if (kind === "employee" && !isOwner) {
+      const emp = this.db.prepare("SELECT id FROM employments WHERE character_id = ? AND restaurant_id = ? AND status = 'active'").get(account.characterId, shift.restaurant_id) as any;
+      if (!emp) throw new ApiError(403, "You must be employed at this restaurant to work a shift.");
+    }
+    if (kind === "guest") {
+      const emp = this.db.prepare("SELECT region_id FROM employments WHERE character_id = ? AND status = 'active'").get(account.characterId) as any;
+      if (!emp || emp.region_id !== restaurant.region_id) throw new ApiError(403, "You can only visit restaurants in your employed region.");
+    }
     const now = Date.now();
     let roleId: string | null = null;
     let dutySlotId: string | null = null;

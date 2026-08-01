@@ -104,7 +104,8 @@ func _process(delta: float) -> void:
 	movement_send_cooldown -= delta
 	if movement_send_cooldown <= 0.0:
 		var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
-		movement_input.emit(direction)
+		if direction.length() > 0.05:
+			movement_input.emit(direction)
 		movement_send_cooldown = 0.1
 
 func _gui_input(event: InputEvent) -> void:

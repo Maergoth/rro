@@ -58,6 +58,7 @@ function characterPayload(db: Database, registry: ContentRegistry, account: Auth
     skillPoints: character.skill_points,
     homeCountryId: character.home_country_id,
     activeRoleId: character.active_role_id,
+    homeRegionId: character.home_region_id,
     appearance: { outfit: character.outfit, primaryColor: character.primary_color, secondaryColor: character.secondary_color, skinTone: character.skin_tone, hairStyle: character.hair_style, hairColor: character.hair_color },
     attributes,
     roleProgress,
@@ -136,11 +137,31 @@ export function createHttpServer(db: Database, registry: ContentRegistry, live: 
       const account = authenticateRequest(db, req);
       if (method === "GET" && url.pathname === "/v1/bootstrap") {
         const ownedRestaurants = db.prepare("SELECT id, name, region_id AS regionId, rating, sanitation, treasury_cents AS treasuryCents FROM restaurants WHERE owner_character_id = ? AND status = 'active'").all(account.characterId);
-        const applications = db.prepare("SELECT id, restaurant_id AS restaurantId, role_id AS roleId, note, status, submitted_at AS submittedAt FROM employment_applications WHERE character_id = ? ORDER BY submitted_at DESC").all(account.characterId);
-        return send(res, 200, { protocol: "rro.v1", account, character: characterPayload(db, registry, account), content: registry.content, contentManifest: registry.manifest, world: live.listWorld(), ownedRestaurants, applications, realtimePath: "/v1/realtime" });
+        const employment = db.prepare("SELECT e.id, e.restaurant_id AS restaurantId, e.region_id AS regionId, e.role_id AS roleId, e.status, e.hired_at AS hiredAt, r.name AS restaurantName, r.rating, r.sanitation FROM employments e JOIN restaurants r ON r.id = e.restaurant_id WHERE e.character_id = ? AND e.status = 'active'").get(account.characterId) as any ?? null;
+        return send(res, 200, { protocol: "rro.v1", account, character: characterPayload(db, registry, account), content: registry.content, contentManifest: registry.manifest, world: live.listWorld(), ownedRestaurants, employment, realtimePath: "/v1/realtime" });
       }
       if (method === "PATCH" && url.pathname === "/v1/character/appearance") return send(res, 200, updateAppearance(db, registry, account, await readBody(req)));
       if (method === "POST" && url.pathname === "/v1/character/skills/unlock") return send(res, 200, unlockSkill(db, registry, account, await readBody(req)));
+      if (method === "POST" && url.pathname === "/v1/character/set-region") {
+        const body = await readBody(req);
+        const regionId = String(body.regionId ?? "");
+        const character = db.prepare("SELECT home_region_id FROM characters WHERE id = ?").get(account.characterId) as any;
+        if (character.home_region_id) throw new ApiError(409, "Home region is already set.");
+        const region = db.prepare("SELECT id FROM regions WHERE id = ?").get(regionId);
+        if (!region) throw new ApiError(404, "Region not found.");
+        db.prepare("UPDATE characters SET home_region_id = ? WHERE id = ?").run(regionId, account.characterId);
+        return send(res, 200, { ok: true, regionId });
+      }
+      if (method === "GET" && url.pathname === "/v1/character/employment") {
+        const employment = db.prepare("SELECT e.id, e.restaurant_id AS restaurantId, e.region_id AS regionId, e.role_id AS roleId, e.status, e.hired_at AS hiredAt, r.name AS restaurantName, r.rating, r.sanitation FROM employments e JOIN restaurants r ON r.id = e.restaurant_id WHERE e.character_id = ? AND e.status = 'active'").get(account.characterId) ?? null;
+        return send(res, 200, { employment });
+      }
+      if (method === "POST" && url.pathname === "/v1/character/quit-job") {
+        const active = db.prepare("SELECT id FROM employments WHERE character_id = ? AND status = 'active'").get(account.characterId) as any;
+        if (!active) throw new ApiError(404, "No active employment.");
+        db.prepare("UPDATE employments SET status = 'quit', quit_at = ? WHERE id = ?").run(Date.now(), active.id);
+        return send(res, 200, { ok: true });
+      }
       if (method === "GET" && url.pathname === "/v1/world") return send(res, 200, live.listWorld());
       if (method === "GET" && url.pathname === "/v1/shifts") return send(res, 200, { shifts: live.listShifts(url.searchParams.get("regionId") ?? undefined) });
       if (method === "POST" && url.pathname === "/v1/restaurants") return send(res, 201, foundRestaurant(db, registry, account, await readBody(req)));
@@ -149,8 +170,21 @@ export function createHttpServer(db: Database, registry: ContentRegistry, live: 
       if (method === "GET" && match) return send(res, 200, { restaurants: live.listRestaurants(decodeURIComponent(match[1]!)) });
       match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)$/);
       if (method === "GET" && match) return send(res, 200, live.getRestaurant(decodeURIComponent(match[1]!)));
-      match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/applications$/);
-      if (method === "POST" && match) return send(res, 201, live.apply(account, decodeURIComponent(match[1]!), await readBody(req)));
+      match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/apply$/);
+      if (method === "POST" && match) {
+        const restaurantId = decodeURIComponent(match[1]!);
+        const body = await readBody(req);
+        const roleId = String(body.roleId ?? "");
+        if (!roleId) throw new ApiError(400, "roleId is required.");
+        const restaurant = db.prepare("SELECT id, region_id, is_npc FROM restaurants WHERE id = ? AND status = 'active'").get(restaurantId) as any;
+        if (!restaurant) throw new ApiError(404, "Restaurant not found.");
+        const existing = db.prepare("SELECT id FROM employments WHERE character_id = ? AND status = 'active'").get(account.characterId) as any;
+        if (existing) throw new ApiError(409, "Quit your current job first.");
+        const id = randomUUID();
+        db.prepare("INSERT INTO employments (id, character_id, restaurant_id, region_id, role_id, hired_at) VALUES (?, ?, ?, ?, ?, ?)").run(id, account.characterId, restaurantId, restaurant.region_id, roleId, Date.now());
+        const employment = db.prepare("SELECT e.id, e.restaurant_id AS restaurantId, e.region_id AS regionId, e.role_id AS roleId, e.status, e.hired_at AS hiredAt, r.name AS restaurantName, r.rating, r.sanitation FROM employments e JOIN restaurants r ON r.id = e.restaurant_id WHERE e.id = ?").get(id);
+        return send(res, 201, { employment });
+      }
       match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/layout$/);
       if (method === "GET" && match) return send(res, 200, getLayout(db, registry, decodeURIComponent(match[1]!)));
       match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/layout\/floor$/);

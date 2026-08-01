@@ -4,6 +4,7 @@ import { signup } from "../dist/server/auth.js";
 import { loadContent } from "../dist/server/content.js";
 import { createDatabase } from "../dist/server/database.js";
 import { LiveService } from "../dist/server/live-service.js";
+import { randomUUID } from "node:crypto";
 
 function fixture() {
   const registry = loadContent();
@@ -11,13 +12,15 @@ function fixture() {
   const live = new LiveService(db, registry, 10, 5);
   live.ensureNpcShifts();
   const auth = signup(db, registry, { username: `crew_${Date.now()}_${Math.floor(Math.random() * 9999)}`, email: `crew_${Date.now()}_${Math.floor(Math.random() * 9999)}@test.invalid`, displayName: "Crew Tester", password: "Production!234" });
-  return { registry, db, live, account: auth.account };
+  const shift = live.listShifts()[0];
+  const restaurant = db.prepare("SELECT id, region_id FROM restaurants WHERE id = (SELECT restaurant_id FROM service_shifts WHERE id = ?)").get(shift.id);
+  db.prepare("INSERT INTO employments (id, character_id, restaurant_id, region_id, role_id, hired_at) VALUES (?, ?, ?, ?, ?, ?)").run(randomUUID(), auth.account.characterId, restaurant.id, restaurant.region_id, "server", Date.now());
+  return { registry, db, live, account: auth.account, shift };
 }
 
 test("a player takes an NPC duty, performs a three-phase role task, and earns progression", () => {
-  const { db, live, account } = fixture();
+  const { db, live, account, shift } = fixture();
   try {
-    const shift = live.listShifts()[0];
     const joined = live.join(account, shift.id, { kind: "employee", roleId: "server" });
     assert.equal(joined.roleId, "server");
     assert.equal(joined.kind, "employee");
@@ -46,9 +49,8 @@ test("a player takes an NPC duty, performs a three-phase role task, and earns pr
 });
 
 test("off-role work is explicit and guest PvP spends money to add fair queue pressure", () => {
-  const { db, live, account } = fixture();
+  const { db, live, account, shift } = fixture();
   try {
-    const shift = live.listShifts()[0];
     const joined = live.join(account, shift.id, { kind: "employee", roleId: "cook" });
     const serverTask = joined.snapshot.tasks.find((value) => value.ownerRoleId === "server");
     const claim = live.handleCommand(account, { id: "off-role-claim", type: "task.claim", shiftId: shift.id, payload: { taskId: serverTask.id } });

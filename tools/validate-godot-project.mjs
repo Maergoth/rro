@@ -71,7 +71,7 @@ assert.deepEqual(errors, [], `GDScript analyzer errors:\n${errors.map((error) =>
 assert.deepEqual(warnings, [], `GDScript analyzer warnings:\n${warnings.map((warning) => `${warning.file}: ${warning.code} — ${warning.message}`).join("\n")}`);
 
 const main = readFileSync(resolve(CLIENT, "scripts/main.gd"), "utf8");
-for (const capability of ["show_login", "show_world", "show_live_shifts", "show_shift", "show_my_restaurant", "show_character", "show_skills", "guest.challenge"]) assert.ok(main.includes(capability), `Native client is missing ${capability}.`);
+for (const capability of ["show_login", "show_home", "show_find_work", "show_shift", "show_my_restaurant", "show_character", "show_skills", "guest.challenge"]) assert.ok(main.includes(capability), `Native client is missing ${capability}.`);
 const floor = readFileSync(resolve(CLIENT, "scripts/restaurant_floor.gd"), "utf8");
 for (const interaction of ["MOUSE_BUTTON_RIGHT", "MOUSE_BUTTON_MIDDLE", "build_action_requested", "movement_input", "draw_incident", "draw_avatar"]) assert.ok(floor.includes(interaction), `Floor implementation is missing ${interaction}.`);
 const minigames = readFileSync(resolve(CLIENT, "scripts/minigame_stage.gd"), "utf8");

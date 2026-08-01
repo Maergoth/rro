@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS characters (
   reputation INTEGER NOT NULL DEFAULT 50,
   skill_points INTEGER NOT NULL DEFAULT 5,
   home_country_id TEXT NOT NULL DEFAULT 'us',
+  home_region_id TEXT,
   active_role_id TEXT NOT NULL DEFAULT 'host-busser',
   outfit TEXT NOT NULL DEFAULT 'classic',
   primary_color TEXT NOT NULL DEFAULT '#2f684f',
@@ -177,6 +178,18 @@ CREATE TABLE IF NOT EXISTS employment_applications (
   submitted_at INTEGER NOT NULL,
   decided_at INTEGER,
   UNIQUE(restaurant_id, character_id, role_id)
+);
+
+CREATE TABLE IF NOT EXISTS employments (
+  id TEXT PRIMARY KEY,
+  character_id TEXT NOT NULL REFERENCES characters(id) ON DELETE CASCADE,
+  restaurant_id TEXT NOT NULL REFERENCES restaurants(id) ON DELETE CASCADE,
+  region_id TEXT NOT NULL,
+  role_id TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'active',
+  hired_at INTEGER NOT NULL,
+  quit_at INTEGER,
+  UNIQUE(character_id, restaurant_id)
 );
 
 CREATE TABLE IF NOT EXISTS duty_slots (
