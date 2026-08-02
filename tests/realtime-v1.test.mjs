@@ -22,6 +22,16 @@ function nextMessage(socket, expectedType, timeoutMs = 3000) {
   });
 }
 
+async function waitFor(check, description, timeoutMs = 3000) {
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    const value = check();
+    if (value) return value;
+    await new Promise((resolve) => setTimeout(resolve, 25));
+  }
+  throw new Error(`Timed out waiting for ${description}`);
+}
+
 test("HTTP authentication upgrades into an authenticated realtime snapshot stream", async () => {
   const registry = loadContent();
   const db = createDatabase(":memory:", registry);
@@ -69,7 +79,10 @@ test("HTTP authentication upgrades into an authenticated realtime snapshot strea
     socket.close();
     await once(socket, "close");
     socket = undefined;
-    const released = db.prepare("SELECT left_at FROM shift_presences WHERE service_shift_id = ? AND character_id = ?").get(shift.id, auth.account.characterId);
+    const released = await waitFor(() => {
+      const row = db.prepare("SELECT left_at FROM shift_presences WHERE service_shift_id = ? AND character_id = ?").get(shift.id, auth.account.characterId);
+      return row?.left_at ? row : undefined;
+    }, "server-side realtime presence release");
     assert.ok(released.left_at, "closing realtime must release presence instead of leaving a ghost player");
   } finally {
     socket?.close();
