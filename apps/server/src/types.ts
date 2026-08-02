@@ -70,11 +70,52 @@ export interface FurnitureDefinition {
   height: number;
   symbol: string;
   assetId?: string;
+  legacyAssetId?: string;
+  inventoryScope?: "restaurant";
   upkeepCents?: number;
   durability?: number;
+  breakageHorizonShifts?: number;
+  wearPerShift?: number;
+  repairCostCents?: number;
+  roleEffects?: Record<string, number>;
   utilities?: string[];
   stats: Record<string, number>;
   tags?: string[];
+}
+
+export type RoleEquipmentKind = "equipment" | "consumable";
+export type RoleEquipmentTier = "basic" | "professional" | "specialist" | "premium";
+
+export interface RoleEquipmentSlotDefinition {
+  id: string;
+  label: string;
+  description: string;
+}
+
+export interface RoleEquipmentDefinition {
+  id: string;
+  name: string;
+  description: string;
+  iconId: string;
+  category: string;
+  kind: RoleEquipmentKind;
+  qualityTier: RoleEquipmentTier;
+  priceCents: number;
+  stackLimit: number;
+  allowedRoleIds: string[];
+  requiredRoleLevel: number;
+  equipSlots: string[];
+  modifiers: Record<string, number>;
+  useEffects?: Record<string, number>;
+  durability?: number;
+  tags: string[];
+}
+
+export interface RoleEquipmentCatalog {
+  schemaVersion: 1;
+  slots: RoleEquipmentSlotDefinition[];
+  roleSlots: Record<string, string[]>;
+  items: RoleEquipmentDefinition[];
 }
 
 export interface ConstructionContent {
@@ -101,6 +142,7 @@ export interface GameContent {
   roles: RoleDefinition[];
   activities: ActivityDefinition[];
   furniture: FurnitureDefinition[];
+  roleEquipment: RoleEquipmentCatalog;
   construction: ConstructionContent;
   appearance: {
     schemaVersion: number;

@@ -132,7 +132,7 @@ try {
   const planningName = `RRO-V2-AAA-Production-Plan-${VERSION}`;
   const planningRoot = resolve(planningParent, planningName);
   mkdirSync(planningRoot, { recursive: true });
-  for (const name of ["docs/GAME_DESIGN_DOCUMENT.md", "docs/PRODUCTION_READINESS_AND_ROADMAP.md", "docs/ROLE_GAMEPLAY_OPEN_SHIFTS.md", "docs/V1_RELEASE_GATE.md", "docs/V2_AAA_ROADMAP.md", "docs/V2_TEAM_BACKLOG.md", "planning/v2-backlog.json", "README.md"]) {
+  for (const name of ["docs/GAME_DESIGN_DOCUMENT.md", "docs/PRODUCTION_READINESS_AND_ROADMAP.md", "docs/PRODUCTION_AUDIT_AND_ROADMAP.md", "docs/ROLE_GAMEPLAY_OPEN_SHIFTS.md", "docs/V1_RELEASE_GATE.md", "docs/V2_AAA_ROADMAP.md", "docs/V2_TEAM_BACKLOG.md", "planning/v2-backlog.json", "planning/next-steps.json", "planning/art-production.json", "README.md"]) {
     const source = resolve(ROOT, name);
     if (existsSync(source)) copy(source, resolve(planningRoot, basename(source)));
   }

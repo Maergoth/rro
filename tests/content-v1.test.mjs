@@ -10,7 +10,9 @@ test("V1 content compiles to the production baseline", () => {
   assert.equal(baseRoles.length, 7);
   assert.equal(baseRoles.reduce((sum, role) => sum + role.skills.length, 0), 196);
   assert.equal(registry.content.activities.length, 89);
-  assert.ok(registry.content.furniture.length >= 45);
+  assert.equal(registry.content.furniture.length, 229);
+  assert.equal(registry.content.roleEquipment.items.length, 45);
+  assert.equal(registry.manifest.counts.roleEquipment, 45);
   assert.ok(registry.content.construction.surfaces.length >= 12);
   assert.ok(registry.content.events.length >= 1);
   for (const role of baseRoles) {

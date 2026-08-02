@@ -79,6 +79,38 @@ CREATE TABLE IF NOT EXISTS skill_unlocks (
   PRIMARY KEY(character_id, skill_id)
 );
 
+CREATE TABLE IF NOT EXISTS character_inventory (
+  character_id TEXT NOT NULL REFERENCES characters(id) ON DELETE CASCADE,
+  item_id TEXT NOT NULL,
+  quantity INTEGER NOT NULL CHECK(quantity BETWEEN 1 AND 999),
+  acquired_at INTEGER NOT NULL,
+  updated_at INTEGER NOT NULL,
+  PRIMARY KEY(character_id, item_id)
+);
+
+CREATE TABLE IF NOT EXISTS character_role_loadouts (
+  character_id TEXT NOT NULL REFERENCES characters(id) ON DELETE CASCADE,
+  role_id TEXT NOT NULL,
+  slot_id TEXT NOT NULL,
+  item_id TEXT NOT NULL,
+  equipped_at INTEGER NOT NULL,
+  PRIMARY KEY(character_id, role_id, slot_id),
+  UNIQUE(character_id, role_id, item_id),
+  FOREIGN KEY(character_id, item_id) REFERENCES character_inventory(character_id, item_id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS character_inventory_events (
+  id TEXT PRIMARY KEY,
+  character_id TEXT NOT NULL REFERENCES characters(id) ON DELETE CASCADE,
+  item_id TEXT NOT NULL,
+  role_id TEXT NOT NULL,
+  action TEXT NOT NULL,
+  quantity_delta INTEGER NOT NULL,
+  cash_delta_cents INTEGER NOT NULL DEFAULT 0,
+  metadata_json TEXT NOT NULL DEFAULT '{}',
+  created_at INTEGER NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS countries (
   id TEXT PRIMARY KEY,
   name TEXT NOT NULL,
@@ -322,6 +354,9 @@ CREATE TABLE IF NOT EXISTS command_log (
 );
 
 CREATE INDEX IF NOT EXISTS sessions_token_idx ON sessions(token_hash);
+CREATE INDEX IF NOT EXISTS character_inventory_item_idx ON character_inventory(item_id, character_id);
+CREATE INDEX IF NOT EXISTS character_loadouts_role_idx ON character_role_loadouts(character_id, role_id);
+CREATE INDEX IF NOT EXISTS character_inventory_events_idx ON character_inventory_events(character_id, created_at DESC);
 CREATE INDEX IF NOT EXISTS restaurants_region_idx ON restaurants(region_id, status);
 CREATE INDEX IF NOT EXISTS service_shifts_state_idx ON service_shifts(state, closes_at);
 CREATE INDEX IF NOT EXISTS employment_restaurant_idx ON employment_applications(restaurant_id, status);

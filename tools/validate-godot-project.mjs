@@ -20,7 +20,7 @@ assert.match(project, /config\/features=PackedStringArray\("4\.4"/);
 assert.doesNotMatch(project, /WebView|JavaScript|browser/i);
 
 const scripts = walk(resolve(CLIENT, "scripts")).filter((path) => extname(path) === ".gd");
-const required = ["main.gd", "api_client.gd", "realtime_client.gd", "world_globe.gd", "restaurant_floor.gd", "task_panel.gd", "minigame_stage.gd", "builder_palette.gd"];
+const required = ["main.gd", "api_client.gd", "realtime_client.gd", "world_globe.gd", "restaurant_floor.gd", "task_panel.gd", "minigame_stage.gd", "builder_palette.gd", "inventory_panel.gd"];
 for (const name of required) assert.ok(scripts.some((p) => p.endsWith(`/${name}`) || p.endsWith(`\\${name}`)), `Missing ${name}.`);
 
 function validateBalanced(source, label) {
@@ -71,14 +71,71 @@ assert.deepEqual(errors, [], `GDScript analyzer errors:\n${errors.map((error) =>
 assert.deepEqual(warnings, [], `GDScript analyzer warnings:\n${warnings.map((warning) => `${warning.file}: ${warning.code} — ${warning.message}`).join("\n")}`);
 
 const main = readFileSync(resolve(CLIENT, "scripts/main.gd"), "utf8");
-for (const capability of ["show_login", "show_home", "show_find_work", "show_shift", "show_my_restaurant", "show_character", "show_skills", "guest.challenge"]) assert.ok(main.includes(capability), `Native client is missing ${capability}.`);
+for (const capability of ["show_login", "show_home", "show_find_work", "show_shift", "show_my_restaurant", "show_character", "show_skills", "show_inventory", "send_guest_challenge", "targetTaskId", "dimension", "intensity", "repair_selected_builder_object", "guest.challenge"]) assert.ok(main.includes(capability), `Native client is missing ${capability}.`);
 const floor = readFileSync(resolve(CLIENT, "scripts/restaurant_floor.gd"), "utf8");
 for (const interaction of ["MOUSE_BUTTON_RIGHT", "MOUSE_BUTTON_MIDDLE", "build_action_requested", "movement_input", "draw_incident", "draw_avatar"]) assert.ok(floor.includes(interaction), `Floor implementation is missing ${interaction}.`);
+const builder = readFileSync(resolve(CLIENT, "scripts/builder_palette.gd"), "utf8");
+for (const interaction of ["repair_selected_requested", "wear", "state"]) assert.ok(builder.includes(interaction), `Builder implementation is missing ${interaction}.`);
 const minigames = readFileSync(resolve(CLIENT, "scripts/minigame_stage.gd"), "utf8");
 for (const grammar of ["dialogue", "orchestration", "allocation", "scheduling", "evidence", "diagnosis", "memory", "precision", "packing", "route", "process", "construction"]) assert.ok(minigames.includes(`draw_${grammar}`), `Minigame grammar ${grammar} is missing.`);
 
 const svgs = walk(resolve(CLIENT, "assets")).filter((path) => extname(path) === ".svg");
 assert.ok(svgs.length >= 10, "At least ten individual native SVG assets are required.");
-assert.equal(walk(CLIENT).filter((path) => /\.(png|jpe?g|webp)$/i.test(path)).length, 0, "The V1 client must not ship a baked restaurant/world background.");
+const rasterAssets = walk(resolve(CLIENT, "assets")).filter((path) => /\.(png|jpe?g|webp)$/i.test(path));
+const approvedRasterRoots = [
+  resolve(CLIENT, "assets/objects/generated"),
+  resolve(CLIENT, "assets/items"),
+  resolve(CLIENT, "assets/ui"),
+];
+const unscopedRasters = rasterAssets.filter((path) => !approvedRasterRoots.some((root) => path.startsWith(`${root}/`) || path.startsWith(`${root}\\`)));
+assert.deepEqual(unscopedRasters, [], "Raster art must remain modular object, item, or UI art; baked restaurant/world backgrounds are forbidden.");
+const coreFurniture = JSON.parse(readFileSync(resolve(ROOT, "packages/game-data/core/furniture.json"), "utf8"));
+for (const item of coreFurniture) {
+  assert.ok(existsSync(resolve(CLIENT, "assets/objects/generated", `${item.id}.png`)), `Core furniture ${item.id} is missing its individual production sprite.`);
+}
 
-console.log(JSON.stringify({ ok: true, engine: "Godot 4.4+", scripts: scripts.length, globalClasses: classNames.length, analyzerErrors: errors.length, analyzerWarnings: warnings.length, modularSvgAssets: svgs.length, minigameGrammars: 12, bakedBackgrounds: 0 }, null, 2));
+const dataRoot = resolve(ROOT, "packages/game-data");
+const contentManifest = JSON.parse(readFileSync(resolve(dataRoot, "manifest.json"), "utf8"));
+const furnitureById = new Map();
+for (const pack of contentManifest.packs.filter((entry) => entry.enabled)) {
+  const directory = resolve(dataRoot, pack.directory);
+  for (const fileName of ["furniture.json", "furniture-production.json"]) {
+    const path = resolve(directory, fileName);
+    if (!existsSync(path)) continue;
+    for (const item of JSON.parse(readFileSync(path, "utf8"))) furnitureById.set(item.id, item);
+  }
+}
+const generatedFurnitureRoot = resolve(CLIENT, "assets/objects/generated");
+const furnitureWithArtwork = [...furnitureById.values()].filter((item) => {
+  const candidates = [...new Set([item.assetId, item.id].filter(Boolean))];
+  return candidates.some((candidate) => existsSync(resolve(generatedFurnitureRoot, `${candidate}.png`)));
+});
+const furnitureArtwork = {
+  complete: furnitureWithArtwork.length,
+  total: furnitureById.size,
+  remaining: furnitureById.size - furnitureWithArtwork.length,
+  coveragePercent: Math.round((furnitureWithArtwork.length / furnitureById.size) * 1_000) / 10,
+};
+
+const roleEquipment = JSON.parse(readFileSync(resolve(dataRoot, "core/role-equipment.json"), "utf8"));
+const roleEquipmentWithArtwork = roleEquipment.items.filter((item) => {
+  const fileName = String(item.iconId).replaceAll(".", "-").replaceAll("/", "-");
+  return existsSync(resolve(CLIENT, "assets/items", `${fileName}.png`));
+});
+const roleEquipmentArtwork = {
+  complete: roleEquipmentWithArtwork.length,
+  total: roleEquipment.items.length,
+  remaining: roleEquipment.items.length - roleEquipmentWithArtwork.length,
+  proceduralFallbacks: roleEquipment.items.length - roleEquipmentWithArtwork.length,
+};
+
+const artProduction = JSON.parse(readFileSync(resolve(ROOT, "planning/art-production.json"), "utf8"));
+assert.equal(artProduction.schemaVersion, 1, "Art-production queue has an unsupported schema.");
+assert.equal(artProduction.furniture.length, furnitureById.size, "Art-production queue must cover every furniture ID.");
+assert.equal(artProduction.roleItems.length, roleEquipment.items.length, "Art-production queue must cover every role-item icon ID.");
+assert.equal(artProduction.counts.furniture.generated, furnitureArtwork.complete, "Art-production furniture status is stale; run npm run generate:art.");
+assert.equal(artProduction.counts.furniture.remaining, furnitureArtwork.remaining, "Art-production furniture queue is stale; run npm run generate:art.");
+assert.equal(artProduction.counts.roleItems.generated, roleEquipmentArtwork.complete, "Art-production role-item status is stale; run npm run generate:art.");
+assert.equal(artProduction.counts.roleItems.remaining, roleEquipmentArtwork.remaining, "Art-production role-item queue is stale; run npm run generate:art.");
+
+console.log(JSON.stringify({ ok: true, engine: "Godot 4.4+", scripts: scripts.length, globalClasses: classNames.length, analyzerErrors: errors.length, analyzerWarnings: warnings.length, modularSvgAssets: svgs.length, modularRasterAssets: rasterAssets.length, coreFurnitureSprites: coreFurniture.length, furnitureArtwork, roleEquipmentArtwork, artProductionQueue: artProduction.furniture.length + artProduction.roleItems.length, minigameGrammars: 12, bakedBackgrounds: 0 }, null, 2));

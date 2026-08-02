@@ -1,6 +1,6 @@
 {
   "name": "rush-revenue-online",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "private": true,
   "type": "module",
   "displayName": "Rush & Revenue Online",
@@ -9,10 +9,11 @@
   },
   "scripts": {
     "generate:data": "node tools/generate-production-data.mjs",
+    "generate:art": "node tools/generate-art-production.mjs",
     "generate:backlog": "node tools/generate-v2-backlog.mjs",
     "dev:server": "npm run build:server && node --no-warnings dist/server/index.js",
     "build:server": "tsc -p apps/server/tsconfig.json",
-    "build": "npm run generate:data && npm run generate:backlog && npm run build:server",
+    "build": "npm run generate:data && npm run generate:art && npm run generate:backlog && npm run build:server",
     "typecheck": "tsc -p apps/server/tsconfig.json --noEmit",
     "validate:data": "node tools/validate-data.mjs",
     "validate:godot": "node tools/validate-godot-project.mjs",

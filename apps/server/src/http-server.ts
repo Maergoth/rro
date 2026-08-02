@@ -2,7 +2,9 @@ import { createServer, type IncomingMessage, type ServerResponse } from "node:ht
 import { randomUUID } from "node:crypto";
 import type { ContentRegistry } from "./content.js";
 import { authenticateRequest, login, logout, signup } from "./auth.js";
-import { expandRestaurant, foundRestaurant, getLayout, moveObject, paintFloor, placeObject, sellObject, upsertWall } from "./layout-service.js";
+import { transaction } from "./database.js";
+import { expandRestaurant, foundRestaurant, getLayout, moveObject, paintFloor, placeObject, repairObject, sellObject, upsertWall } from "./layout-service.js";
+import { equipInventoryItem, getInventoryCatalog, getInventoryState, purchaseInventoryItem, unequipInventoryItem, useInventoryItem } from "./inventory-service.js";
 import type { LiveService } from "./live-service.js";
 import { ApiError, type AuthenticatedAccount, type Database } from "./types.js";
 
@@ -138,10 +140,16 @@ export function createHttpServer(db: Database, registry: ContentRegistry, live: 
       if (method === "GET" && url.pathname === "/v1/bootstrap") {
         const ownedRestaurants = db.prepare("SELECT id, name, region_id AS regionId, rating, sanitation, treasury_cents AS treasuryCents FROM restaurants WHERE owner_character_id = ? AND status = 'active'").all(account.characterId);
         const employment = db.prepare("SELECT e.id, e.restaurant_id AS restaurantId, e.region_id AS regionId, e.role_id AS roleId, e.status, e.hired_at AS hiredAt, r.name AS restaurantName, r.rating, r.sanitation FROM employments e JOIN restaurants r ON r.id = e.restaurant_id WHERE e.character_id = ? AND e.status = 'active'").get(account.characterId) as any ?? null;
-        return send(res, 200, { protocol: "rro.v1", account, character: characterPayload(db, registry, account), content: registry.content, contentManifest: registry.manifest, world: live.listWorld(), ownedRestaurants, employment, realtimePath: "/v1/realtime" });
+        return send(res, 200, { protocol: "rro.v1", account, character: characterPayload(db, registry, account), inventory: getInventoryState(db, account), content: registry.content, contentManifest: registry.manifest, world: live.listWorld(), ownedRestaurants, employment, realtimePath: "/v1/realtime" });
       }
       if (method === "PATCH" && url.pathname === "/v1/character/appearance") return send(res, 200, updateAppearance(db, registry, account, await readBody(req)));
       if (method === "POST" && url.pathname === "/v1/character/skills/unlock") return send(res, 200, unlockSkill(db, registry, account, await readBody(req)));
+      if (method === "GET" && url.pathname === "/v1/character/inventory") return send(res, 200, getInventoryState(db, account));
+      if (method === "GET" && url.pathname === "/v1/character/inventory/catalog") return send(res, 200, getInventoryCatalog(db, registry, account));
+      if (method === "POST" && url.pathname === "/v1/character/inventory/purchase") return send(res, 201, purchaseInventoryItem(db, registry, account, await readBody(req)));
+      if (method === "POST" && url.pathname === "/v1/character/inventory/equip") return send(res, 200, equipInventoryItem(db, registry, account, await readBody(req)));
+      if (method === "POST" && url.pathname === "/v1/character/inventory/unequip") return send(res, 200, unequipInventoryItem(db, registry, account, await readBody(req)));
+      if (method === "POST" && url.pathname === "/v1/character/inventory/use") return send(res, 200, useInventoryItem(db, registry, account, await readBody(req)));
       if (method === "POST" && url.pathname === "/v1/character/set-region") {
         const body = await readBody(req);
         const regionId = String(body.regionId ?? "");
@@ -175,13 +183,24 @@ export function createHttpServer(db: Database, registry: ContentRegistry, live: 
         const restaurantId = decodeURIComponent(match[1]!);
         const body = await readBody(req);
         const roleId = String(body.roleId ?? "");
-        if (!roleId) throw new ApiError(400, "roleId is required.");
+        const role = registry.roleById.get(roleId);
+        if (!role || role.employmentMode !== "job") throw new ApiError(400, "Choose a valid employable role.");
         const restaurant = db.prepare("SELECT id, region_id, is_npc FROM restaurants WHERE id = ? AND status = 'active'").get(restaurantId) as any;
         if (!restaurant) throw new ApiError(404, "Restaurant not found.");
         const existing = db.prepare("SELECT id FROM employments WHERE character_id = ? AND status = 'active'").get(account.characterId) as any;
         if (existing) throw new ApiError(409, "Quit your current job first.");
-        const id = randomUUID();
-        db.prepare("INSERT INTO employments (id, character_id, restaurant_id, region_id, role_id, hired_at) VALUES (?, ?, ?, ?, ?, ?)").run(id, account.characterId, restaurantId, restaurant.region_id, roleId, Date.now());
+        const prior = db.prepare("SELECT id FROM employments WHERE character_id = ? AND restaurant_id = ?").get(account.characterId, restaurantId) as any;
+        const id = prior?.id ?? randomUUID();
+        const now = Date.now();
+        transaction(db, () => {
+          if (prior) {
+            db.prepare("UPDATE employments SET region_id = ?, role_id = ?, status = 'active', hired_at = ?, quit_at = NULL WHERE id = ?")
+              .run(restaurant.region_id, roleId, now, id);
+          } else {
+            db.prepare("INSERT INTO employments (id, character_id, restaurant_id, region_id, role_id, hired_at) VALUES (?, ?, ?, ?, ?, ?)")
+              .run(id, account.characterId, restaurantId, restaurant.region_id, roleId, now);
+          }
+        });
         const employment = db.prepare("SELECT e.id, e.restaurant_id AS restaurantId, e.region_id AS regionId, e.role_id AS roleId, e.status, e.hired_at AS hiredAt, r.name AS restaurantName, r.rating, r.sanitation FROM employments e JOIN restaurants r ON r.id = e.restaurant_id WHERE e.id = ?").get(id);
         return send(res, 201, { employment });
       }
@@ -196,6 +215,8 @@ export function createHttpServer(db: Database, registry: ContentRegistry, live: 
       match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/layout\/objects\/([^/]+)$/);
       if (method === "PATCH" && match) return send(res, 200, moveObject(db, registry, account, decodeURIComponent(match[1]!), decodeURIComponent(match[2]!), await readBody(req)));
       if (method === "DELETE" && match) return send(res, 200, sellObject(db, registry, account, decodeURIComponent(match[1]!), decodeURIComponent(match[2]!)));
+      match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/layout\/objects\/([^/]+)\/repair$/);
+      if (method === "POST" && match) return send(res, 200, repairObject(db, registry, account, decodeURIComponent(match[1]!), decodeURIComponent(match[2]!)));
       match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/layout\/expand$/);
       if (method === "POST" && match) return send(res, 200, expandRestaurant(db, registry, account, decodeURIComponent(match[1]!), await readBody(req)));
       match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/shifts$/);

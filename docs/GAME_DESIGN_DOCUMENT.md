@@ -21,7 +21,7 @@ Every meaningful action is playable. Starting a pan is not a “complete cook ta
 
 The local release is designed to be fully playable with one account and one connected player. NPC staff fill every unoccupied class so the complete restaurant simulation remains active. The architecture preserves authoritative server state, durable identities, content packs, class inheritance, and additive event modifiers so the same world can grow into a concurrent online service.
 
-This document is both the product design and the implementation contract. Sections explicitly labeled **V1 implemented** describe code present in this repository. Unqualified systems describe the intended complete game. The repository version is `1.0.0-alpha.1`; it is a substantial vertical-slice foundation, not a claim that a small codebase is already an operated AAA MMO. The exact release gate is maintained in `docs/V1_RELEASE_GATE.md`, and the assignable V2 inventory is maintained in `planning/v2-backlog.json`.
+This document is both the product design and the implementation contract. Sections explicitly labeled **V1 implemented** describe code present in this repository. Unqualified systems describe the intended complete game. The repository version is `1.0.0-alpha.2`; it is a substantial vertical-slice foundation, not a claim that a small codebase is already an operated AAA MMO. The exact release gate is maintained in `docs/V1_RELEASE_GATE.md`, and the assignable V2 inventory is maintained in `planning/v2-backlog.json`.
 
 ### Product promise
 
@@ -610,7 +610,7 @@ The V1 alpha begins players with $35,000 personal cash. Opening costs $10,000 an
 
 ### 13.2 Build grid
 
-The launch build surface is a 24×16 collision-checked grid with add-on expansion to 64×64. Floor cells, room tags, wall edges, doors/arches, and object instances are persisted separately. Items declare width, height, four-way rotation, cost, tier, upkeep, durability, utilities, style, pack, tags, and stat effects.
+The launch build surface is a 24×16 collision-checked grid with add-on expansion to 64×64. Floor cells, room tags, wall edges, doors/arches, and object instances are persisted separately. The alpha-2 registry contains 229 stable furniture definitions: 16 core, 210 generated production-catalog, and three seasonal. Items declare width, height, four-way rotation, cost, tier, upkeep, repair cost, durability, wear per shift, breakage horizon, utilities, style, pack, tags, stat effects, role effects, and a one-to-one asset ID.
 
 Launch item stats include:
 
@@ -622,7 +622,9 @@ Launch item stats include:
 - waste;
 - revenue.
 
-Selling returns a wear-adjusted 40% of purchase cost. This prevents consequence-free layout swapping during service while keeping experimentation recoverable.
+Production definitions also expose comfort, appearance, cleanability, and reliability as independent dimensions. Price and stat total may broadly rise together, but upgrades are not a linear ladder: a costly showpiece can be hard to clean, an inexpensive commercial chair can be durable but plain, and specialist equipment can trade comfort or ambience for throughput. Duplicate benefits taper so a healthy restaurant inventory favors a deliberate portfolio; physical seats and storage remain additive.
+
+Placed inventory feeds the live restaurant, not just the builder card. It changes effective public rating, arriving-party happiness, visible per-role workload, maintenance-task volume, reliability risk, role/task support, food/service/cleanliness/value/ambience review baselines, revenue multiplier, upkeep and repair reserve. Wear advances at shift settlement, changes state at worn/broken thresholds, reduces contribution, adds role-authentic maintenance pressure, and can be repaired by the owner with audited treasury spending. Selling returns a wear-adjusted 40% of purchase cost. This prevents consequence-free layout swapping during service while keeping experimentation recoverable.
 
 ### 13.3 Styles and sets
 
@@ -665,6 +667,12 @@ Restaurants progress through:
 - regional standing;
 - concept mastery and awards.
 
+### 14.4 Persistent role inventory — V1 implemented slice
+
+Personal cash also buys class-specific tools and consumables. The alpha-2 catalog has 45 stable items across all seven base roles, with at least nine choices available to each role. Every role has four persistent loadout slots; item definitions declare allowed roles, compatible slots, role-level requirement, price, ownership/stack limit, durability for equipment, modifiers, consumable use effects, description, quality tier, and a unique icon ID.
+
+Purchases, equips, unequips, and uses are server-authoritative, persisted by character, and written to an inventory audit stream. The native inventory/shop screen exposes owned quantities, eligibility, loadouts, prices, tradeoffs, combined displayed modifiers, and personal cash. Deterministic badge icons keep all 45 items visually identifiable while bespoke raster icons remain in production. Applying every equipment modifier and consumable effect to live minigame resolution—and adding equipment wear/repair—is a promotion requirement, not an alpha-2 claim.
+
 ---
 
 ## 15. Applications and employment
@@ -682,6 +690,12 @@ Restaurant public cards display:
 The local alpha accepts seeded restaurant applications immediately so a solo player can enter a trial shift. Hosted production adds application questions, schedule fit, owner response windows, trial shifts, contracts, and anti-discrimination constraints.
 
 Employment is persistent but non-exclusive. A player may hold multiple accepted opportunities and select a workplace when clocking in.
+
+### 15.1 Local restaurant rivalry — V1 implemented slice
+
+A player who works at or owns a restaurant may spend earned personal cash while physically seated as a guest at another restaurant in the same region. They choose one of five legitimate service requests, optionally target an untouched live task attached to their own party, choose a difficulty dimension—timing, precision, memory/order, coordination/handoff, or interruptions—and select light, focused, or expert intensity.
+
+The server owns price, eligibility, target validation, pressure, due-window/priority changes, party patience, ledger evidence, cooldown, per-visit/party/shift caps, and outcome. The target crew sees the rival restaurant, request, dimension, telegraph, required response and counterplay. Controlled work can mitigate the modifier; overcoming it grants bounded cash/XP and positive review evidence. Own-workplace challenges, cross-region attacks, stacked or in-progress targets, fake reviews, vandalism, invisible sabotage and unbounded stat damage are rejected.
 
 ---
 
@@ -838,6 +852,8 @@ The selected direction is an inviting adult management sim presented through tac
 - walnut, tile, steel, plaster, and scale-model material cues;
 - condensed editorial display type with compact humanist body text.
 
+Furniture artwork uses individual transparent, direct-overhead raster sprites so rotation, collision footprint and simulation identity stay aligned. The alpha-2 measured baseline is 20/229: all 16 core objects plus four production-catalog objects. The remaining 209 furniture sprites and 45 bespoke role-item icons are an explicit production queue in `planning/art-production.json`, with stable outputs and per-item prompt briefs. The validator reports coverage and forbids baked restaurant/world backgrounds; generated art does not silently turn a missing modular asset into a complete scene.
+
 ### 20.2 Strategic versus ground views
 
 - The globe is spacious, slow, and strategic.
@@ -931,11 +947,12 @@ Important balance measures:
 - persistent shared shifts, 13 automatically available regional shifts, public employee/guest joining, NPC duty coverage, join-in-progress handoff, and authoritative snapshots;
 - server-owned movement/collision, task claims, three-phase actions, scores, off-role penalties, earnings, role XP, incidents, satisfaction evidence, and reviews;
 - seven base classes, exactly 28 nodes each (196 total), 89 continuous-work activities, four work lanes, and 12 reusable minigame grammars;
-- legitimate guest influence with paid allergy, special-request, pacing, tasting, and payment complexity rather than invisible sabotage;
-- restaurant founding, treasury, 24×16 modular layouts, floor painting, room tags, snapped walls/openings, four-way object rotation, drag/move, collision, resale, and footprint expansion;
-- 49 catalog items, 12 surfaces, six wall styles, decoration, tiered prices/modifiers, individual SVG assets, procedural avatars, two-color outfits, movement, and incident animation;
+- targeted local-rival guest influence with five paid requests, manual live-task/dimension/intensity selection, telegraphing, caps, counterplay and positive staff upside rather than invisible sabotage;
+- restaurant founding, treasury, 24×16 modular layouts, floor painting, room tags, snapped walls/openings, four-way object/art rotation, drag/move, collision, resale, repair and footprint expansion;
+- 229 furniture definitions with non-linear tradeoffs, live ratings/happiness/work/economic effects, upkeep, wear and breakage; 20 measured production sprites with all 16 core objects covered;
+- 45 persistent purchasable role tools/consumables, four-slot loadouts, stable icons and native shop/inventory UI;
 - seasonal pack loading, role inheritance hooks, content hashing, forward-compatible stable IDs, and static validation;
-- zero-error/zero-warning GDScript analysis, strict TypeScript checks, content invariant checks, HTTP/WebSocket integration tests, builder tests, and live-role tests;
+- zero-error/zero-warning GDScript analysis, a Godot 4.4.1 Linux import/main-scene launch plus Windows export, strict TypeScript/content checks, explicit art coverage and 29 integration tests;
 - a hidden Windows server controller with health checks and graceful tokenized shutdown, plus separate server/source/client release boundaries.
 
 ### 24.2 V1 release-candidate gate — required before calling the binary 1.0
@@ -974,9 +991,12 @@ V2 is not a feature pile. It is the staffed production program that turns the V1
 15. The registry can resolve a subclass through parent-role inheritance without modifying simulation switches.
 16. A fresh world contains 23 restaurants across 115 slots; tests assert exact 20% occupancy.
 17. Insolvent, critically unsafe, or poorly rated NPC restaurants can close permanently; underfilled regions can sprout a distinct generation while old database identity remains closed.
-18. Automated checks cover content counts and occupancy, strict TypeScript, zero-error/zero-warning GDScript analysis, authentication, HTTP-to-WebSocket upgrade, shared snapshots, role and off-role work, guest pressure, and modular building.
+18. Automated checks cover content counts and occupancy, strict TypeScript, zero-error/zero-warning GDScript analysis, artwork coverage, authentication, HTTP-to-WebSocket upgrade, shared snapshots, role/off-role work, furniture simulation, persistent equipment, targeted rivalry, and modular building.
 19. The release system produces a runnable standalone server ZIP, a GitHub-friendly clean source ZIP, and only labels a client ZIP runnable when a real Godot export exists.
 20. The old web client, V0 database, V0 routes, and V0 Windows launchers are excluded from V1 release artifacts.
+21. A character can purchase role equipment and consumables, maintain separate four-slot loadouts, use a consumable, restart the server, and recover the same quantities and loadouts.
+22. Mixed placed furniture changes live rating, party satisfaction, role/task support, review baselines and settlement; wear reaches worn/broken state and owner repair restores condition with an audited cost.
+23. A visiting local rival can choose one of their party's untouched minigames, select dimension/intensity, spend once, and expose visible counterplay; self-targets, stacking, cooldown and caps are enforced without extra spend.
 
 ---
 

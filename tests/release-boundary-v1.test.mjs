@@ -59,12 +59,14 @@ test("release tooling preserves the clean V1 artifact boundary", () => {
   const rootReadme = text("README.md");
   const gdd = text("docs/GAME_DESIGN_DOCUMENT.md");
 
-  assert.equal(packageJson.version, "1.0.0-alpha.1");
+  assert.equal(packageJson.version, "1.0.0-alpha.2");
   assert.doesNotMatch(JSON.stringify(packageJson.scripts), /legacy|apps\/client(?!-godot)/);
   assert.match(release, /"legacy"/);
   assert.match(release, /RRO-Standalone-Server/);
   assert.match(release, /RRO-GitHub-Source/);
   assert.match(release, /RRO-Godot-Client-Source/);
+  assert.match(release, /PRODUCTION_AUDIT_AND_ROADMAP/);
+  assert.match(release, /planning\/next-steps\.json/);
   assert.match(release, /if \(existsSync\(gameExe\)\)/);
   assert.match(rootReadme, /comprehensive design document/i);
   assert.match(gdd, /Document version:\*\* 2\.0/);

@@ -1,7 +1,19 @@
 import { EventEmitter } from "node:events";
 import type { ContentRegistry } from "./content.js";
 import { newId, transaction } from "./database.js";
-import { ensureLayout, getLayout } from "./layout-service.js";
+import type { FurnitureEffectsSummary } from "./furniture-effects.js";
+import { ensureLayout, getFurnitureEffects, getLayout } from "./layout-service.js";
+import {
+  RIVALRY_LIMITS,
+  assessRivalryCaps,
+  assessRivalryTarget,
+  assessRivalryVisit,
+  calculateRivalryActionEffect,
+  isRivalryMetadata,
+  resolveRivalryOutcome,
+  selectRivalryChallenge,
+  type RivalryMetadata,
+} from "./rivalry.js";
 import { ApiError, type AuthenticatedAccount, type CommandEnvelope, type Database, type Snapshot } from "./types.js";
 
 const SHIFT_DURATION_MS = 4 * 60 * 60 * 1000;
@@ -53,6 +65,86 @@ function cleanNote(value: unknown): string {
   return String(value ?? "").replace(/[<>\u0000-\u001f]/g, "").replace(/\s+/g, " ").trim().slice(0, 300);
 }
 
+function clamp(value: number, minimum: number, maximum: number): number {
+  return Math.max(minimum, Math.min(maximum, value));
+}
+
+function round(value: number, precision = 1): number {
+  const factor = 10 ** precision;
+  return Math.round(value * factor) / factor;
+}
+
+function effectiveRestaurantRating(reviewRating: number, furnitureRating: number): number {
+  return round(clamp(reviewRating * 0.72 + furnitureRating * 0.28, 1, 5));
+}
+
+function furnitureTaskModifier(effects: FurnitureEffectsSummary, roleId: string): number {
+  const roleSupport = effects.roleModifiers[roleId] ?? 0;
+  let operationalSupport = effects.serviceModifiers.frontOfHouse;
+  if (roleId === "cook" || roleId === "chef") {
+    operationalSupport = effects.serviceModifiers.kitchenThroughput * 0.65 + effects.serviceModifiers.foodQuality * 0.35;
+  } else if (roleId === "dishwasher") {
+    operationalSupport = effects.serviceModifiers.sanitation * 0.7 + effects.dimensions.cleanability * 0.3;
+  } else if (roleId === "owner") {
+    operationalSupport = effects.serviceModifiers.revenue * 0.5 + effects.serviceModifiers.frontOfHouse * 0.5;
+  }
+  return Math.round(clamp(roleSupport * 0.42 + operationalSupport * 0.24, -10, 10));
+}
+
+function furnitureWorkloadPressure(effects: FurnitureEffectsSummary, roleId: string): number {
+  const reliabilityPressure = effects.reliabilityRisk * 0.2 + effects.inventory.brokenCount * 2.5;
+  let pressure = reliabilityPressure;
+  if (roleId === "dishwasher") {
+    pressure += effects.cleaningWorkload * 0.22
+      - effects.serviceModifiers.sanitation * 0.25
+      - effects.dimensions.cleanability * 0.18;
+  } else if (roleId === "host-busser") {
+    pressure += effects.cleaningWorkload * 0.08
+      - effects.serviceModifiers.turnover * 0.22
+      - effects.serviceModifiers.frontOfHouse * 0.12;
+  } else if (roleId === "cook" || roleId === "chef") {
+    pressure -= effects.serviceModifiers.kitchenThroughput * 0.3
+      + effects.serviceModifiers.foodQuality * 0.12;
+  } else if (roleId === "server") {
+    pressure -= effects.serviceModifiers.frontOfHouse * 0.28
+      + effects.serviceModifiers.turnover * 0.18;
+  } else if (roleId === "owner") {
+    pressure += effects.inventory.upkeepCentsPerShift / 12_000
+      + effects.inventory.repairReserveCentsPerShift / 8_000;
+  } else if (roleId === "manager") {
+    pressure += effects.inventory.brokenCount * 1.5;
+  }
+  return round(clamp(pressure, -20, 35));
+}
+
+function roleQueueTarget(effects: FurnitureEffectsSummary, roleId: string): number {
+  const base = roleId === "server" || roleId === "host-busser" || roleId === "cook" ? 4 : 2;
+  if (roleId === "dishwasher") {
+    const cleaningTasks = Math.ceil(Math.max(0, effects.cleaningWorkload - 55) / 35);
+    return Math.min(6, base + cleaningTasks + (effects.inventory.brokenCount > 0 ? 1 : 0));
+  }
+  if (roleId === "host-busser" && effects.cleaningWorkload >= 140) return Math.min(6, base + 1);
+  if ((roleId === "owner" || roleId === "manager") && effects.inventory.brokenCount > 0) return Math.min(4, base + 1);
+  return base;
+}
+
+function initialFurnitureHappiness(effects: FurnitureEffectsSummary): number {
+  return Math.round(clamp(45 + effects.customerHappiness * 0.5, 45, 95));
+}
+
+function furnitureReviewBaselines(effects: FurnitureEffectsSummary): Record<string, number> {
+  const baseline = (primary: number, secondary: number, primaryScale: number, secondaryScale: number): number => (
+    round(clamp(3.55 + primary / primaryScale + secondary / secondaryScale, 2.7, 4.5), 2)
+  );
+  return {
+    food: baseline(effects.serviceModifiers.foodQuality, effects.serviceModifiers.kitchenThroughput, 75, 150),
+    service: baseline(effects.serviceModifiers.frontOfHouse, effects.dimensions.comfort, 70, 180),
+    cleanliness: baseline(effects.dimensions.cleanability, effects.serviceModifiers.sanitation, 75, 100),
+    value: baseline(effects.dimensions.comfort, effects.dimensions.reliability, 130, 180),
+    ambience: baseline(effects.dimensions.appearance, effects.dimensions.comfort, 65, 180),
+  };
+}
+
 function activeShift(db: Database, shiftId: string): any {
   const row = db.prepare("SELECT * FROM service_shifts WHERE id = ? AND state IN ('crew-call', 'open', 'closing')").get(shiftId);
   if (!row) throw new ApiError(404, "Live shift not found.");
@@ -65,7 +157,9 @@ function presence(db: Database, shiftId: string, characterId: string): any {
   return row;
 }
 
-function publicRestaurantRow(row: any): Record<string, unknown> {
+function publicRestaurantRow(row: any, furnitureEffects: FurnitureEffectsSummary): Record<string, unknown> {
+  const reviewRating = Number(row.rating);
+  const furnitureRating = furnitureEffects.restaurantRating;
   return {
     id: row.id,
     regionId: row.region_id,
@@ -73,7 +167,10 @@ function publicRestaurantRow(row: any): Record<string, unknown> {
     concept: row.concept,
     style: row.style,
     status: row.status,
-    rating: row.rating,
+    rating: effectiveRestaurantRating(reviewRating, furnitureRating),
+    reviewRating,
+    furnitureRating,
+    furnitureEffects,
     sanitation: row.sanitation,
     treasuryCents: row.treasury_cents,
     buildWidth: row.build_width,
@@ -179,11 +276,14 @@ export class LiveService extends EventEmitter {
       WHERE r.region_id = ? AND r.status = 'active'
       ORDER BY s.id IS NOT NULL DESC, r.rating DESC, r.name
     `).all(regionId) as any[];
-    return rows.map((row) => ({
-      ...publicRestaurantRow(row),
-      reviewCount: row.review_count,
-      liveShift: row.live_shift_id ? { id: row.live_shift_id, state: row.shift_state, openedAt: row.shift_opened_at, closesAt: row.shift_closes_at, openDutySlots: row.open_duty_slots } : null,
-    }));
+    return rows.map((row) => {
+      const furnitureEffects = getFurnitureEffects(this.db, this.registry, row.id);
+      return {
+        ...publicRestaurantRow(row, furnitureEffects),
+        reviewCount: row.review_count,
+        liveShift: row.live_shift_id ? { id: row.live_shift_id, state: row.shift_state, openedAt: row.shift_opened_at, closesAt: row.shift_closes_at, openDutySlots: row.open_duty_slots } : null,
+      };
+    });
   }
 
   getRestaurant(restaurantId: string): Record<string, unknown> {
@@ -197,8 +297,9 @@ export class LiveService extends EventEmitter {
     if (!row) throw new ApiError(404, "Restaurant not found.");
     const applications = this.db.prepare("SELECT role_id, status, COUNT(*) AS count FROM employment_applications WHERE restaurant_id = ? GROUP BY role_id, status").all(restaurantId);
     const reviews = this.db.prepare("SELECT id, rating, dimensions_json AS dimensions, summary, created_at AS createdAt FROM restaurant_reviews WHERE restaurant_id = ? ORDER BY created_at DESC LIMIT 10").all(restaurantId) as any[];
+    const furnitureEffects = getFurnitureEffects(this.db, this.registry, row.id);
     return {
-      ...publicRestaurantRow(row),
+      ...publicRestaurantRow(row, furnitureEffects),
       regionName: row.region_name,
       countryName: row.country_name,
       liveShift: row.live_shift_id ? { id: row.live_shift_id, state: row.shift_state, openedAt: row.shift_opened_at, closesAt: row.shift_closes_at } : null,
@@ -262,7 +363,25 @@ export class LiveService extends EventEmitter {
       FROM service_shifts s JOIN restaurants r ON r.id = s.restaurant_id
       WHERE s.state IN ('crew-call','open','closing') ORDER BY s.opened_at DESC
     `).all()) as any[];
-    return rows.map((row) => ({ id: row.id, restaurantId: row.restaurant_id, restaurantName: row.restaurant_name, regionId: row.region_id, state: row.state, openedAt: row.opened_at, closesAt: row.closes_at, rating: row.rating, sanitation: row.sanitation, openSlots: row.open_slots, players: row.players }));
+    return rows.map((row) => {
+      const furnitureEffects = getFurnitureEffects(this.db, this.registry, row.restaurant_id);
+      return {
+        id: row.id,
+        restaurantId: row.restaurant_id,
+        restaurantName: row.restaurant_name,
+        regionId: row.region_id,
+        state: row.state,
+        openedAt: row.opened_at,
+        closesAt: row.closes_at,
+        rating: effectiveRestaurantRating(Number(row.rating), furnitureEffects.restaurantRating),
+        reviewRating: Number(row.rating),
+        furnitureRating: furnitureEffects.restaurantRating,
+        furnitureEffects,
+        sanitation: row.sanitation,
+        openSlots: row.open_slots,
+        players: row.players,
+      };
+    });
   }
 
   shiftSummary(shiftId: string): Record<string, unknown> {
@@ -277,7 +396,7 @@ export class LiveService extends EventEmitter {
       openedAt: row.opened_at,
       closesAt: row.closes_at,
       version: row.version,
-      dutySlots: this.db.prepare("SELECT id, role_id AS roleId, slot_index AS slotIndex, label, occupant_character_id AS occupantCharacterId, staffing, handoff_state AS handoffState, workload FROM duty_slots WHERE service_shift_id = ? ORDER BY role_id, slot_index").all(shiftId),
+      dutySlots: this.liveDutySlots(shiftId),
     };
   }
 
@@ -295,6 +414,7 @@ export class LiveService extends EventEmitter {
       const emp = this.db.prepare("SELECT region_id FROM employments WHERE character_id = ? AND status = 'active'").get(account.characterId) as any;
       if (!emp || emp.region_id !== restaurant.region_id) throw new ApiError(403, "You can only visit restaurants in your employed region.");
     }
+    const spawn = this.findSafeSpawn(shift.restaurant_id, account.characterId);
     const now = Date.now();
     let roleId: string | null = null;
     let dutySlotId: string | null = null;
@@ -318,9 +438,9 @@ export class LiveService extends EventEmitter {
       }
       this.db.prepare(`INSERT INTO shift_presences
         (service_shift_id, character_id, kind, role_id, duty_slot_id, position_x, position_y, joined_at, last_seen_at, left_at)
-        VALUES (?, ?, ?, ?, ?, 2.5, 2.5, ?, ?, NULL)
-        ON CONFLICT(service_shift_id, character_id) DO UPDATE SET kind = excluded.kind, role_id = excluded.role_id, duty_slot_id = excluded.duty_slot_id, position_x = 2.5, position_y = 2.5, joined_at = excluded.joined_at, last_seen_at = excluded.last_seen_at, left_at = NULL`)
-        .run(shiftId, account.characterId, kind, roleId, dutySlotId, now, now);
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NULL)
+        ON CONFLICT(service_shift_id, character_id) DO UPDATE SET kind = excluded.kind, role_id = excluded.role_id, duty_slot_id = excluded.duty_slot_id, position_x = excluded.position_x, position_y = excluded.position_y, joined_at = excluded.joined_at, last_seen_at = excluded.last_seen_at, left_at = NULL`)
+        .run(shiftId, account.characterId, kind, roleId, dutySlotId, spawn.x, spawn.y, now, now);
       this.bump(shiftId);
     });
     this.emitSnapshot(shiftId);
@@ -368,12 +488,14 @@ export class LiveService extends EventEmitter {
     const shift = this.db.prepare("SELECT * FROM service_shifts WHERE id = ?").get(shiftId) as any;
     if (!shift) throw new ApiError(404, "Shift not found.");
     const restaurant = this.db.prepare("SELECT * FROM restaurants WHERE id = ?").get(shift.restaurant_id) as any;
+    const layout = getLayout(this.db, this.registry, shift.restaurant_id);
+    const furnitureEffects = layout.furnitureEffects as FurnitureEffectsSummary;
     return {
       protocol: "rro.v1",
       shift: { id: shift.id, restaurantId: shift.restaurant_id, state: shift.state, serviceMode: shift.service_mode, openedAt: shift.opened_at, closesAt: shift.closes_at, version: shift.version },
-      restaurant: publicRestaurantRow(restaurant),
-      layout: getLayout(this.db, this.registry, shift.restaurant_id),
-      dutySlots: this.db.prepare("SELECT id, role_id AS roleId, slot_index AS slotIndex, label, occupant_character_id AS occupantCharacterId, staffing, handoff_state AS handoffState, workload FROM duty_slots WHERE service_shift_id = ? ORDER BY role_id, slot_index").all(shiftId) as any[],
+      restaurant: publicRestaurantRow(restaurant, furnitureEffects),
+      layout,
+      dutySlots: this.liveDutySlots(shiftId, furnitureEffects),
       presences: this.db.prepare(`SELECT p.character_id AS characterId, c.name, p.kind, p.role_id AS roleId, p.duty_slot_id AS dutySlotId,
         p.position_x AS x, p.position_y AS y, p.direction_x AS directionX, p.direction_y AS directionY,
         c.primary_color AS primaryColor, c.secondary_color AS secondaryColor, c.outfit
@@ -388,6 +510,7 @@ export class LiveService extends EventEmitter {
 
   private publicTask(row: any): Record<string, unknown> {
     const activity = this.registry.activityById.get(row.activity_id);
+    const context = json<Record<string, unknown>>(row.context_json, {});
     return {
       id: row.id,
       partyId: row.party_id,
@@ -405,7 +528,8 @@ export class LiveService extends EventEmitter {
       claimedByCharacterId: row.claimed_by_character_id,
       scoreTotal: row.score_total,
       actionCount: row.action_count,
-      context: json(row.context_json, {}),
+      context,
+      rivalry: isRivalryMetadata(context.rivalry) ? context.rivalry : null,
       createdAt: row.created_at,
       dueAt: row.due_at,
     };
@@ -422,6 +546,12 @@ export class LiveService extends EventEmitter {
     if (!Number.isFinite(x) || !Number.isFinite(y)) throw new ApiError(400, "Movement input must be finite.");
     const magnitude = Math.hypot(x, y);
     if (magnitude > 1) { x /= magnitude; y /= magnitude; }
+    if (magnitude <= 0.001) {
+      this.moveIntents.delete(`${shiftId}:${characterId}`);
+      this.db.prepare("UPDATE shift_presences SET direction_x = 0, direction_y = 0, last_seen_at = ? WHERE service_shift_id = ? AND character_id = ? AND left_at IS NULL")
+        .run(Date.now(), shiftId, characterId);
+      return { accepted: true, x: 0, y: 0 };
+    }
     this.moveIntents.set(`${shiftId}:${characterId}`, { shiftId, characterId, x, y, at: Date.now() });
     return { accepted: true, x, y };
   }
@@ -456,48 +586,257 @@ export class LiveService extends EventEmitter {
     const context = { ...json<Record<string, unknown>>(task.context_json, {}) };
     const offRole = current.role_id !== task.owner_role_id;
     const attributeBonus = this.attributeBonus(account.characterId, task.owner_role_id);
+    const taskShift = activeShift(this.db, shiftId);
+    const furnitureEffects = getFurnitureEffects(this.db, this.registry, taskShift.restaurant_id);
+    const furnitureModifier = furnitureTaskModifier(furnitureEffects, task.owner_role_id);
+    context.furnitureSupport = {
+      scoreModifier: furnitureModifier,
+      roleModifier: furnitureEffects.roleModifiers[task.owner_role_id] ?? 0,
+      frontOfHouse: furnitureEffects.serviceModifiers.frontOfHouse,
+      kitchenThroughput: furnitureEffects.serviceModifiers.kitchenThroughput,
+      foodQuality: furnitureEffects.serviceModifiers.foodQuality,
+      sanitation: furnitureEffects.serviceModifiers.sanitation,
+    };
     const latePenalty = Math.min(28, Math.max(0, Math.floor((now - task.due_at) / 5000) * 3));
-    const score = Math.max(5, Math.min(100, (actionIndex === 0 ? 88 : 43) + attributeBonus - latePenalty - (offRole ? 18 : 0)));
+    const activeRivalry = isRivalryMetadata(context.rivalry) && context.rivalry.status === "active" ? context.rivalry : null;
+    const rivalryAction = activeRivalry
+      ? calculateRivalryActionEffect(activeRivalry, { controlled: actionIndex === 0, offRole })
+      : null;
+    const score = Math.max(5, Math.min(100, (actionIndex === 0 ? 88 : 43) + attributeBonus + furnitureModifier - latePenalty - (offRole ? 18 : 0) - (rivalryAction?.scorePenalty ?? 0)));
     const history = json<any[]>(task.history_json, []);
-    history.push({ phaseId: phase.id, action, score, at: now, characterId: account.characterId, offRole });
+    history.push({
+      phaseId: phase.id,
+      action,
+      score,
+      at: now,
+      characterId: account.characterId,
+      offRole,
+      furnitureModifier,
+      controlled: actionIndex === 0,
+      rivalry: rivalryAction ? {
+        challengeId: activeRivalry?.challengeId,
+        dimension: activeRivalry?.dimension,
+        intensity: activeRivalry?.intensity,
+        pressure: rivalryAction.pressure,
+        mitigation: rivalryAction.mitigation,
+        scorePenalty: rivalryAction.scorePenalty,
+        mitigated: rivalryAction.mitigated,
+      } : null,
+    });
     const finalPhase = task.phase_index + 1 >= activity.phases.length;
+    if (finalPhase && activeRivalry) {
+      const scores = history.map((entry) => Number(entry.score)).filter((score) => Number.isFinite(score));
+      const controlledActions = history.filter((entry) => entry.controlled === true).length;
+      const resolution = resolveRivalryOutcome(activeRivalry, { scores, controlledActions, totalActions: history.length });
+      context.rivalry = {
+        ...activeRivalry,
+        status: resolution.overcome ? "overcome" : "pressure-landed",
+        resolution: { ...resolution, resolvedAt: now },
+      } satisfies RivalryMetadata;
+    }
     transaction(this.db, () => {
       this.db.prepare(`UPDATE service_tasks SET state = ?, phase_index = ?, claimed_by_character_id = ?, score_total = score_total + ?,
         action_count = action_count + 1, context_json = ?, history_json = ?, updated_at = ?, completed_at = ? WHERE id = ?`)
         .run(finalPhase ? "completed" : "claimed", finalPhase ? task.phase_index : task.phase_index + 1, account.characterId, score, JSON.stringify({ ...context, offRole, rolePenalty: offRole ? 18 : 0 }), JSON.stringify(history), now, finalPhase ? now : null, task.id);
-      if (finalPhase) this.finishTask(task, activity, account.characterId, Math.round((task.score_total + score) / (task.action_count + 1)), actionIndex > 0);
+      if (finalPhase) this.finishTask({ ...task, context_json: JSON.stringify(context), history_json: JSON.stringify(history) }, activity, account.characterId, Math.round((task.score_total + score) / (task.action_count + 1)), actionIndex > 0);
       this.bump(shiftId);
     });
     if (!finalPhase && actionIndex > 0 && ["route", "precision", "process"].includes(activity.grammar)) this.maybeCreateIncident(shiftId, task.party_id, task.id, activity.grammar, score);
     this.emitSnapshot(shiftId);
-    return { taskId: task.id, phaseId: phase.id, score, outcome: actionIndex === 0 ? "controlled" : "risky", completed: finalPhase, nextPhaseIndex: finalPhase ? null : task.phase_index + 1 };
+    return {
+      taskId: task.id,
+      phaseId: phase.id,
+      score,
+      outcome: actionIndex === 0 ? "controlled" : "risky",
+      completed: finalPhase,
+      nextPhaseIndex: finalPhase ? null : task.phase_index + 1,
+      furnitureModifier,
+      rivalry: rivalryAction ? {
+        challengeId: activeRivalry?.challengeId,
+        dimension: activeRivalry?.dimension,
+        intensity: activeRivalry?.intensity,
+        scorePenalty: rivalryAction.scorePenalty,
+        mitigated: rivalryAction.mitigated,
+        counterplay: rivalryAction.strategy,
+        resolution: finalPhase && isRivalryMetadata(context.rivalry) ? context.rivalry.resolution ?? null : null,
+      } : null,
+    };
   }
 
   private guestChallenge(account: AuthenticatedAccount, current: any, shiftId: string, payload: Record<string, unknown>): Record<string, unknown> {
-    if (current.kind !== "guest") throw new ApiError(403, "Only a seated guest may create a service challenge.");
+    const shift = activeShift(this.db, shiftId);
+    const targetRestaurant = this.db.prepare("SELECT * FROM restaurants WHERE id = ? AND status = 'active'").get(shift.restaurant_id) as any;
+    if (!targetRestaurant) throw new ApiError(404, "Restaurant not found.");
     const party = this.db.prepare("SELECT * FROM parties WHERE service_shift_id = ? AND guest_character_id = ? AND departed_at IS NULL").get(shiftId, account.characterId) as any;
     if (!party) throw new ApiError(409, "Your guest party is not active.");
-    const challenge = String(payload.challenge ?? "");
-    const options: Record<string, { cost: number; activityId: string; priority: number; label: string }> = {
-      "special-request": { cost: 800, activityId: "server-menu-interview", priority: 92, label: "Off-menu preference" },
-      "allergy-declaration": { cost: 500, activityId: "server-allergy-confirmation", priority: 100, label: "Allergy protocol" },
-      "split-check": { cost: 1200, activityId: "server-split-payment", priority: 86, label: "Complex split check" },
-      "impatient-pace": { cost: 1800, activityId: "manager-guest-recovery", priority: 96, label: "Accelerated pacing request" },
-      "tasting-menu": { cost: 2500, activityId: "chef-taste-calibration", priority: 88, label: "Chef-guided tasting request" },
-    };
-    const selected = options[challenge];
-    if (!selected) throw new ApiError(400, "Unknown guest challenge.");
+
+    const employedAtTarget = Boolean(this.db.prepare("SELECT 1 FROM employments WHERE character_id = ? AND restaurant_id = ? AND status = 'active'").get(account.characterId, targetRestaurant.id));
+    const origin = this.db.prepare(`
+      SELECT r.id, r.name, r.region_id FROM employments e
+      JOIN restaurants r ON r.id = e.restaurant_id
+      WHERE e.character_id = ? AND e.status = 'active' AND r.status = 'active' AND r.region_id = ? AND r.id <> ?
+      UNION ALL
+      SELECT r.id, r.name, r.region_id FROM restaurants r
+      WHERE r.owner_character_id = ? AND r.status = 'active' AND r.region_id = ? AND r.id <> ?
+      LIMIT 1
+    `).get(account.characterId, targetRestaurant.region_id, targetRestaurant.id, account.characterId, targetRestaurant.region_id, targetRestaurant.id) as any;
+    const visitDecision = assessRivalryVisit({
+      presenceKind: String(current.kind),
+      originRestaurantId: origin?.id ?? null,
+      originRegionId: origin?.region_id ?? null,
+      targetRestaurantId: targetRestaurant.id,
+      targetRegionId: targetRestaurant.region_id,
+      ownsTarget: targetRestaurant.owner_character_id === account.characterId,
+      employedAtTarget,
+    });
+    if (!visitDecision.ok) throw new ApiError(403, visitDecision.message);
+
+    const selected = selectRivalryChallenge(payload.challenge, payload.dimension, payload.intensity);
+    if (!selected.ok) throw new ApiError(400, selected.message);
+
+    const priorChallengeRows = this.db.prepare("SELECT party_id, context_json FROM service_tasks WHERE service_shift_id = ?").all(shiftId) as any[];
+    const priorChallenges = priorChallengeRows.flatMap((row) => {
+      const context = json<Record<string, unknown>>(row.context_json, {});
+      return isRivalryMetadata(context.rivalry) ? [{ partyId: row.party_id, rivalry: context.rivalry }] : [];
+    });
+    const lastCommand = this.db.prepare("SELECT MAX(created_at) AS created_at FROM command_log WHERE character_id = ? AND command_type = 'guest.challenge'").get(account.characterId) as any;
+    const visitCount = Number((this.db.prepare(`SELECT COUNT(*) AS count FROM command_log
+      WHERE service_shift_id = ? AND character_id = ? AND command_type = 'guest.challenge' AND created_at >= ?`)
+      .get(shiftId, account.characterId, current.joined_at) as any).count);
+    const capDecision = assessRivalryCaps({
+      now: Date.now(),
+      lastChallengeAt: lastCommand?.created_at === null || lastCommand?.created_at === undefined ? null : Number(lastCommand.created_at),
+      visitCount,
+      partyCount: priorChallenges.filter((entry) => entry.rivalry.source.partyId === party.id).length,
+      shiftCount: priorChallenges.length,
+    });
+    if (!capDecision.ok) throw new ApiError(429, capDecision.message);
+
+    const explicitTarget = payload.targetTaskId !== undefined && payload.targetTaskId !== null;
+    let targetTask = explicitTarget
+      ? this.db.prepare("SELECT * FROM service_tasks WHERE id = ?").get(String(payload.targetTaskId ?? "")) as any
+      : null;
+    if (explicitTarget) {
+      if (!targetTask) throw new ApiError(404, "Target service task not found.");
+      const targetContext = json<Record<string, unknown>>(targetTask.context_json, {});
+      const targetDecision = assessRivalryTarget({
+        requestedTaskId: String(payload.targetTaskId ?? ""),
+        taskShiftId: String(targetTask.service_shift_id),
+        activeShiftId: shiftId,
+        taskPartyId: targetTask.party_id ?? null,
+        sourcePartyId: party.id,
+        taskState: String(targetTask.state),
+        actionCount: Number(targetTask.action_count),
+        alreadyModified: isRivalryMetadata(targetContext.rivalry),
+      });
+      if (!targetDecision.ok) {
+        const status = targetDecision.code === "challenge-stacked" || targetDecision.code === "challenge-in-progress" ? 409 : 400;
+        throw new ApiError(status, targetDecision.message);
+      }
+    }
+
     const character = this.db.prepare("SELECT cash_cents FROM characters WHERE id = ?").get(account.characterId) as any;
-    if (character.cash_cents < selected.cost) throw new ApiError(409, "You cannot afford this guest experience.");
+    if (character.cash_cents < selected.costCents) throw new ApiError(409, "You cannot afford this guest experience.");
     let taskId = "";
+    let rivalry: RivalryMetadata | null = null;
+    const now = Date.now();
     transaction(this.db, () => {
-      this.db.prepare("UPDATE characters SET cash_cents = cash_cents - ? WHERE id = ?").run(selected.cost, account.characterId);
-      taskId = this.createTask(shiftId, selected.activityId, party.id, null, { guestChallenge: challenge, requestedBy: account.characterId, label: selected.label }, selected.priority);
-      this.db.prepare("UPDATE parties SET patience = MAX(20, patience - 5), service_phase = 'custom-request' WHERE id = ?").run(party.id);
+      const spend = this.db.prepare("UPDATE characters SET cash_cents = cash_cents - ? WHERE id = ? AND cash_cents >= ?")
+        .run(selected.costCents, account.characterId, selected.costCents);
+      if (spend.changes !== 1) throw new ApiError(409, "You cannot afford this guest experience.");
+
+      if (!targetTask) {
+        taskId = this.createTask(shiftId, selected.challenge.activityId, party.id, null, {
+          guestChallenge: selected.challenge.id,
+          requestedBy: account.characterId,
+          label: selected.challenge.label,
+          compatibilityMode: true,
+        }, selected.challenge.priority);
+        targetTask = this.db.prepare("SELECT * FROM service_tasks WHERE id = ?").get(taskId) as any;
+      } else {
+        taskId = targetTask.id;
+      }
+      if (!targetTask) throw new ApiError(409, "The challenge target could not be created.");
+      const targetActivity = this.registry.activityById.get(targetTask.activity_id);
+      if (!targetActivity) throw new ApiError(409, "The target minigame content is unavailable.");
+      rivalry = {
+        schemaVersion: 1,
+        status: "active",
+        challengeId: selected.challenge.id,
+        challengeLabel: selected.challenge.label,
+        dimension: selected.dimension.id,
+        dimensionLabel: selected.dimension.label,
+        intensity: selected.intensity.id,
+        intensityRank: selected.intensity.rank,
+        costCents: selected.costCents,
+        appliedAt: now,
+        source: {
+          characterId: account.characterId,
+          displayName: account.displayName,
+          partyId: party.id,
+          originRestaurantId: origin.id,
+          originRestaurantName: origin.name,
+          targetRestaurantId: targetRestaurant.id,
+          targetRestaurantName: targetRestaurant.name,
+        },
+        target: {
+          taskId,
+          activityId: targetTask.activity_id,
+          activityLabel: targetActivity.label,
+          ownerRoleId: targetTask.owner_role_id,
+        },
+        effect: selected.effect,
+        telegraph: {
+          visible: true,
+          title: `${selected.intensity.label} ${selected.dimension.label} challenge`,
+          message: `${account.displayName} of ${origin.name} added ${selected.challenge.label} to ${targetActivity.label}. ${selected.dimension.telegraph}`,
+        },
+        counterplay: {
+          strategy: selected.dimension.counterplay,
+          overcomeScore: selected.intensity.overcomeScore,
+        },
+        rewards: {
+          bonusCashCents: selected.intensity.bonusCashCents,
+          bonusXp: selected.intensity.bonusXp,
+          reviewBonus: selected.intensity.reviewBonus,
+        },
+      };
+      const targetContext = { ...json<Record<string, unknown>>(targetTask.context_json, {}), rivalry };
+      const dueAt = Math.max(now + 5_000, Number(targetTask.due_at) - selected.effect.dueWindowReductionMs);
+      const priority = Math.min(100, Number(targetTask.priority) + selected.effect.priorityBoost);
+      this.db.prepare("UPDATE service_tasks SET context_json = ?, priority = ?, due_at = ?, updated_at = ? WHERE id = ?")
+        .run(JSON.stringify(targetContext), priority, dueAt, now, taskId);
+      this.db.prepare("UPDATE parties SET patience = MAX(20, patience - ?), service_phase = 'custom-request' WHERE id = ?")
+        .run(4 + selected.intensity.rank, party.id);
+      this.db.prepare(`INSERT INTO ledger_entries
+        (id, restaurant_id, character_id, category, amount_cents, reference_type, reference_id, created_at)
+        VALUES (?, ?, ?, 'rivalry-challenge-spend', ?, 'service-task', ?, ?)`)
+        .run(newId("ledger"), targetRestaurant.id, account.characterId, -selected.costCents, taskId, now);
       this.bump(shiftId);
     });
+    const persistedTask = this.db.prepare("SELECT context_json FROM service_tasks WHERE id = ?").get(taskId) as any;
+    const persistedContext = json<Record<string, unknown>>(persistedTask?.context_json, {});
+    const publishedRivalry = isRivalryMetadata(persistedContext.rivalry) ? persistedContext.rivalry : null;
     this.emitSnapshot(shiftId);
-    return { challenge, costCents: selected.cost, taskId, message: `${selected.label} entered the crew's live service queue.` };
+    return {
+      challenge: selected.challenge.id,
+      costCents: selected.costCents,
+      taskId,
+      targetMode: explicitTarget ? "selected-task" : "created-task",
+      dimension: selected.dimension.id,
+      intensity: selected.intensity.id,
+      modifier: publishedRivalry?.effect ?? selected.effect,
+      telegraph: publishedRivalry?.telegraph ?? null,
+      counterplay: publishedRivalry?.counterplay ?? null,
+      rewards: publishedRivalry?.rewards ?? null,
+      limits: {
+        cooldownMs: RIVALRY_LIMITS.cooldownMs,
+        visitRemaining: Math.max(0, RIVALRY_LIMITS.perVisit - visitCount - 1),
+        partyRemaining: Math.max(0, RIVALRY_LIMITS.perParty - priorChallenges.filter((entry) => entry.rivalry.source.partyId === party.id).length - 1),
+        shiftRemaining: Math.max(0, RIVALRY_LIMITS.perShift - priorChallenges.length - 1),
+      },
+      message: `${selected.challenge.label} entered the crew's live service queue with a visible ${selected.dimension.label.toLowerCase()} modifier.`,
+    };
   }
 
   private attributeBonus(characterId: string, roleId: string): number {
@@ -516,19 +855,38 @@ export class LiveService extends EventEmitter {
 
   private finishTask(task: any, activity: any, characterId: string | null, score: number, risky: boolean): void {
     const dimension = DIMENSION_BY_ROLE[task.owner_role_id] ?? "service";
+    const context = json<Record<string, unknown>>(task.context_json, {});
+    const rivalry = isRivalryMetadata(context.rivalry) ? context.rivalry : null;
+    const rivalryResolution = rivalry?.resolution?.overcome ? rivalry.resolution : null;
     if (task.party_id) {
       const delta = Math.max(-8, Math.min(8, Math.round((score - 60) / 5)));
       this.db.prepare("INSERT INTO review_evidence (id, service_shift_id, party_id, dimension, delta, fact, source_task_id, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")
         .run(newId("evidence"), task.service_shift_id, task.party_id, dimension, delta, `${activity.label}: ${score}/100${risky ? " after a risky choice" : ""}`, task.id, Date.now());
       this.db.prepare("UPDATE parties SET satisfaction = MAX(0, MIN(100, satisfaction + ?)) WHERE id = ?").run(delta, task.party_id);
+      if (rivalryResolution && rivalry) {
+        this.db.prepare("INSERT INTO review_evidence (id, service_shift_id, party_id, dimension, delta, fact, source_task_id, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")
+          .run(
+            newId("evidence"),
+            task.service_shift_id,
+            task.party_id,
+            dimension,
+            rivalryResolution.reviewBonus,
+            `${activity.label}: crew overcame ${rivalry.intensity} ${rivalry.dimension} pressure from ${rivalry.source.displayName}`,
+            task.id,
+            Date.now(),
+          );
+        this.db.prepare("UPDATE parties SET satisfaction = MIN(100, satisfaction + ?) WHERE id = ?")
+          .run(rivalryResolution.reviewBonus, task.party_id);
+      }
       this.advanceParty(task.party_id, task.activity_id);
     }
     if (characterId) {
-      const xp = Math.max(8, Math.round(score / 4));
+      const xp = Math.max(8, Math.round(score / 4)) + (rivalryResolution?.bonusXp ?? 0);
+      const cashReward = 150 + Math.round(score * 3) + (rivalryResolution?.bonusCashCents ?? 0);
       this.db.prepare("UPDATE role_progress SET xp = xp + ?, tasks_completed = tasks_completed + 1, level = MIN(50, 1 + CAST((xp + ?) / 500 AS INTEGER)) WHERE character_id = ? AND role_id = ?")
         .run(xp, xp, characterId, task.owner_role_id);
       this.db.prepare("UPDATE characters SET xp = xp + ?, level = MIN(100, 1 + CAST((xp + ?) / 1000 AS INTEGER)), cash_cents = cash_cents + ? WHERE id = ?")
-        .run(xp, xp, 150 + Math.round(score * 3), characterId);
+        .run(xp, xp, cashReward, characterId);
     }
     if (task.incident_id) {
       this.db.prepare("UPDATE incidents SET state = 'resolved', resolved_at = ? WHERE id = ?").run(Date.now(), task.incident_id);
@@ -556,13 +914,17 @@ export class LiveService extends EventEmitter {
     const party = this.db.prepare("SELECT * FROM parties WHERE id = ?").get(partyId) as any;
     if (!party) return;
     const evidence = this.db.prepare("SELECT dimension, SUM(delta) AS delta FROM review_evidence WHERE party_id = ? GROUP BY dimension").all(partyId) as any[];
-    const dimensions: Record<string, number> = { food: 3.6, service: 3.6, cleanliness: 3.6, value: 3.6, ambience: 3.6 };
-    for (const row of evidence) dimensions[row.dimension] = Math.max(1, Math.min(5, 3.6 + row.delta / 10));
+    const restaurantId = (this.db.prepare("SELECT restaurant_id FROM service_shifts WHERE id = ?").get(party.service_shift_id) as any).restaurant_id;
+    const furnitureEffects = getFurnitureEffects(this.db, this.registry, restaurantId);
+    const dimensions = furnitureReviewBaselines(furnitureEffects);
+    for (const row of evidence) {
+      const baseline = dimensions[row.dimension] ?? 3.6;
+      dimensions[row.dimension] = round(clamp(baseline + Number(row.delta) / 10, 1, 5), 2);
+    }
     const rating = Math.round((Object.values(dimensions).reduce((sum, value) => sum + value, 0) / 5) * 10) / 10;
     const strongest = Object.entries(dimensions).sort((a, b) => b[1] - a[1])[0]?.[0] ?? "hospitality";
     const weakest = Object.entries(dimensions).sort((a, b) => a[1] - b[1])[0]?.[0] ?? "service";
     const summary = rating >= 4.2 ? `A confident service with standout ${strongest}.` : rating >= 3.2 ? `A solid visit; ${weakest} left the clearest opportunity.` : `The team struggled to recover ${weakest} during this visit.`;
-    const restaurantId = (this.db.prepare("SELECT restaurant_id FROM service_shifts WHERE id = ?").get(party.service_shift_id) as any).restaurant_id;
     this.db.prepare("INSERT INTO restaurant_reviews (id, restaurant_id, party_id, rating, dimensions_json, summary, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)")
       .run(newId("review"), restaurantId, partyId, rating, JSON.stringify(dimensions), summary, Date.now());
     this.db.prepare("UPDATE restaurants SET rating = ROUND((rating * 20 + ?) / 21, 2) WHERE id = ?").run(rating, restaurantId);
@@ -585,11 +947,18 @@ export class LiveService extends EventEmitter {
     const occasions = ["quick meal", "business dinner", "birthday", "date night", "regular visit"];
     const traits = ["patient", "menu-curious", "time-sensitive", "quiet", "high-touch"];
     const now = Date.now();
+    const shift = activeShift(this.db, shiftId);
+    const furnitureEffects = getFurnitureEffects(this.db, this.registry, shift.restaurant_id);
+    const initialSatisfaction = initialFurnitureHappiness(furnitureEffects);
     this.db.prepare(`INSERT INTO parties
       (id, service_shift_id, guest_character_id, party_kind, size, state, service_phase, table_label, satisfaction, patience, occasion, traits_json, created_at)
-      VALUES (?, ?, ?, ?, ?, 'waiting', ?, ?, 70, 100, ?, ?, ?)`)
-      .run(id, shiftId, guestCharacterId, partyKind, Math.round(size), PARTY_CHAIN[0]!, `T${1 + Math.floor(Math.random() * 18)}`, occasions[Math.floor(Math.random() * occasions.length)] ?? "regular visit", JSON.stringify([traits[Math.floor(Math.random() * traits.length)] ?? "patient"]), now);
-    this.createTask(shiftId, PARTY_CHAIN[0]!, id, null, { chainIndex: 0 }, 90);
+      VALUES (?, ?, ?, ?, ?, 'waiting', ?, ?, ?, 100, ?, ?, ?)`)
+      .run(id, shiftId, guestCharacterId, partyKind, Math.round(size), PARTY_CHAIN[0]!, `T${1 + Math.floor(Math.random() * 18)}`, initialSatisfaction, occasions[Math.floor(Math.random() * occasions.length)] ?? "regular visit", JSON.stringify([traits[Math.floor(Math.random() * traits.length)] ?? "patient"]), now);
+    this.createTask(shiftId, PARTY_CHAIN[0]!, id, null, {
+      chainIndex: 0,
+      arrivalFurnitureHappiness: initialSatisfaction,
+      arrivalFurnitureRating: furnitureEffects.restaurantRating,
+    }, 90);
     return id;
   }
 
@@ -605,18 +974,60 @@ export class LiveService extends EventEmitter {
     return id;
   }
 
+  private liveDutySlots(shiftId: string, suppliedEffects?: FurnitureEffectsSummary): any[] {
+    const shift = this.db.prepare("SELECT restaurant_id FROM service_shifts WHERE id = ?").get(shiftId) as any;
+    if (!shift) return [];
+    const effects = suppliedEffects ?? getFurnitureEffects(this.db, this.registry, shift.restaurant_id);
+    const now = Date.now();
+    const activeParties = Number((this.db.prepare("SELECT COUNT(*) AS count FROM parties WHERE service_shift_id = ? AND departed_at IS NULL").get(shiftId) as any)?.count ?? 0);
+    const taskRows = this.db.prepare("SELECT owner_role_id AS roleId, state, due_at AS dueAt FROM service_tasks WHERE service_shift_id = ? AND state IN ('open','claimed')").all(shiftId) as any[];
+    const slots = this.db.prepare("SELECT id, role_id AS roleId, slot_index AS slotIndex, label, occupant_character_id AS occupantCharacterId, staffing, handoff_state AS handoffState, workload FROM duty_slots WHERE service_shift_id = ? ORDER BY role_id, slot_index").all(shiftId) as any[];
+    const slotsPerRole = new Map<string, number>();
+    for (const slot of slots) slotsPerRole.set(slot.roleId, (slotsPerRole.get(slot.roleId) ?? 0) + 1);
+    const update = this.db.prepare("UPDATE duty_slots SET workload = ?, updated_at = ? WHERE id = ? AND workload <> ?");
+    const workloadByRole = new Map<string, { workload: number; furniturePressure: number }>();
+    for (const role of this.registry.content.roles.filter((entry) => entry.kind === "base")) {
+      const roleTasks = taskRows.filter((task) => task.roleId === role.id);
+      const openTasks = roleTasks.filter((task) => task.state === "open").length;
+      const claimedTasks = roleTasks.length - openTasks;
+      const overdueTasks = roleTasks.filter((task) => Number(task.dueAt) < now).length;
+      const slotCount = Math.max(1, slotsPerRole.get(role.id) ?? 1);
+      const furniturePressure = furnitureWorkloadPressure(effects, role.id);
+      const queuePressure = (openTasks * 14 + claimedTasks * 9 + overdueTasks * 12) / slotCount;
+      const workload = Math.round(clamp(16 + activeParties * 2 + queuePressure + furniturePressure, 0, 100));
+      workloadByRole.set(role.id, { workload, furniturePressure });
+    }
+    return slots.map((slot) => {
+      const current = workloadByRole.get(slot.roleId) ?? { workload: Number(slot.workload) || 0, furniturePressure: 0 };
+      if (Number(slot.workload) !== current.workload) update.run(current.workload, now, slot.id, current.workload);
+      return { ...slot, workload: current.workload, furniturePressure: current.furniturePressure };
+    });
+  }
+
   private fillRoleQueues(shiftId: string): void {
+    const shift = activeShift(this.db, shiftId);
+    const furnitureEffects = getFurnitureEffects(this.db, this.registry, shift.restaurant_id);
     for (const role of this.registry.content.roles.filter((entry) => entry.kind === "base")) {
       const count = (this.db.prepare("SELECT COUNT(*) AS count FROM service_tasks WHERE service_shift_id = ? AND owner_role_id = ? AND state IN ('open','claimed')").get(shiftId, role.id) as any).count as number;
-      const target = role.id === "server" || role.id === "host-busser" || role.id === "cook" ? 4 : 2;
+      const target = roleQueueTarget(furnitureEffects, role.id);
       for (let index = count; index < target; index += 1) {
         const activityId = role.activityIds[(index + Math.floor(Date.now() / 10_000)) % role.activityIds.length]!;
-        this.createTask(shiftId, activityId, null, null, { proactive: true, queueSlot: index });
+        this.createTask(shiftId, activityId, null, null, {
+          proactive: true,
+          queueSlot: index,
+          furnitureWorkload: {
+            pressure: furnitureWorkloadPressure(furnitureEffects, role.id),
+            cleaningWorkload: furnitureEffects.cleaningWorkload,
+            brokenCount: furnitureEffects.inventory.brokenCount,
+          },
+        });
       }
     }
   }
 
   private simulateNpc(shiftId: string): void {
+    const shift = activeShift(this.db, shiftId);
+    const furnitureEffects = getFurnitureEffects(this.db, this.registry, shift.restaurant_id);
     const playerRoles = new Set((this.db.prepare("SELECT role_id FROM shift_presences WHERE service_shift_id = ? AND kind = 'employee' AND left_at IS NULL").all(shiftId) as any[]).map((row) => row.role_id));
     for (const role of this.registry.content.roles.filter((entry) => entry.kind === "base")) {
       if (playerRoles.has(role.id)) continue;
@@ -624,10 +1035,53 @@ export class LiveService extends EventEmitter {
       if (!task) continue;
       const activity = this.registry.activityById.get(task.activity_id);
       if (!activity) continue;
-      const score = 68 + Math.floor(Math.random() * 24);
-      this.db.prepare("UPDATE service_tasks SET state = 'completed', phase_index = ?, score_total = ?, action_count = ?, history_json = ?, updated_at = ?, completed_at = ? WHERE id = ?")
-        .run(Math.max(0, activity.phases.length - 1), score * activity.phases.length, activity.phases.length, JSON.stringify(activity.phases.map((phase) => ({ phaseId: phase.id, action: phase.actions[0], score, npc: true, at: Date.now() }))), Date.now(), Date.now(), task.id);
-      this.finishTask(task, activity, null, score, false);
+      const now = Date.now();
+      const context = { ...json<Record<string, unknown>>(task.context_json, {}) };
+      const rivalry = isRivalryMetadata(context.rivalry) && context.rivalry.status === "active" ? context.rivalry : null;
+      const rivalryAction = rivalry ? calculateRivalryActionEffect(rivalry, { controlled: true, offRole: false }) : null;
+      const furnitureModifier = furnitureTaskModifier(furnitureEffects, task.owner_role_id);
+      context.furnitureSupport = {
+        scoreModifier: furnitureModifier,
+        roleModifier: furnitureEffects.roleModifiers[task.owner_role_id] ?? 0,
+        frontOfHouse: furnitureEffects.serviceModifiers.frontOfHouse,
+        kitchenThroughput: furnitureEffects.serviceModifiers.kitchenThroughput,
+        foodQuality: furnitureEffects.serviceModifiers.foodQuality,
+        sanitation: furnitureEffects.serviceModifiers.sanitation,
+      };
+      const score = Math.max(5, Math.min(100, 68 + Math.floor(Math.random() * 24) + furnitureModifier - (rivalryAction?.scorePenalty ?? 0)));
+      const history = activity.phases.map((phase) => ({
+        phaseId: phase.id,
+        action: phase.actions[0],
+        score,
+        npc: true,
+        controlled: true,
+        furnitureModifier,
+        at: now,
+        rivalry: rivalryAction ? {
+          challengeId: rivalry?.challengeId,
+          dimension: rivalry?.dimension,
+          intensity: rivalry?.intensity,
+          pressure: rivalryAction.pressure,
+          mitigation: rivalryAction.mitigation,
+          scorePenalty: rivalryAction.scorePenalty,
+          mitigated: true,
+        } : null,
+      }));
+      if (rivalry) {
+        const resolution = resolveRivalryOutcome(rivalry, {
+          scores: history.map((entry) => entry.score),
+          controlledActions: history.length,
+          totalActions: history.length,
+        });
+        context.rivalry = {
+          ...rivalry,
+          status: resolution.overcome ? "overcome" : "pressure-landed",
+          resolution: { ...resolution, resolvedAt: now },
+        } satisfies RivalryMetadata;
+      }
+      this.db.prepare("UPDATE service_tasks SET state = 'completed', phase_index = ?, score_total = ?, action_count = ?, context_json = ?, history_json = ?, updated_at = ?, completed_at = ? WHERE id = ?")
+        .run(Math.max(0, activity.phases.length - 1), score * activity.phases.length, activity.phases.length, JSON.stringify(context), JSON.stringify(history), now, now, task.id);
+      this.finishTask({ ...task, context_json: JSON.stringify(context), history_json: JSON.stringify(history) }, activity, null, score, false);
       this.bump(shiftId);
     }
   }
@@ -643,11 +1097,77 @@ export class LiveService extends EventEmitter {
       const speed = 4.5;
       const nextX = Math.max(0.35, Math.min(row.build_width - 0.35, row.position_x + intent.x * speed * deltaSeconds));
       const nextY = Math.max(0.35, Math.min(row.build_height - 0.35, row.position_y + intent.y * speed * deltaSeconds));
-      if (!this.collides(row.restaurant_id, nextX, nextY)) {
+      const distance = Math.hypot(nextX - row.position_x, nextY - row.position_y);
+      const steps = Math.max(1, Math.ceil(distance / 0.2));
+      let acceptedX = Number(row.position_x);
+      let acceptedY = Number(row.position_y);
+      for (let step = 1; step <= steps; step += 1) {
+        const candidateX = Number(row.position_x) + (nextX - Number(row.position_x)) * step / steps;
+        const candidateY = Number(row.position_y) + (nextY - Number(row.position_y)) * step / steps;
+        if (!this.canTraverse(row.restaurant_id, acceptedX, acceptedY, candidateX, candidateY)) break;
+        acceptedX = candidateX;
+        acceptedY = candidateY;
+      }
+      if (acceptedX !== Number(row.position_x) || acceptedY !== Number(row.position_y)) {
         this.db.prepare("UPDATE shift_presences SET position_x = ?, position_y = ?, direction_x = ?, direction_y = ?, last_seen_at = ? WHERE service_shift_id = ? AND character_id = ?")
-          .run(nextX, nextY, intent.x, intent.y, now, intent.shiftId, intent.characterId);
+          .run(acceptedX, acceptedY, intent.x, intent.y, now, intent.shiftId, intent.characterId);
       }
     }
+  }
+
+  private canTraverse(restaurantId: string, fromX: number, fromY: number, toX: number, toY: number): boolean {
+    if (this.collides(restaurantId, toX, toY)) return false;
+    const fromCell = { x: Math.floor(fromX), y: Math.floor(fromY) };
+    const toCell = { x: Math.floor(toX), y: Math.floor(toY) };
+    const walkable = this.db.prepare("SELECT walkable FROM floor_cells WHERE restaurant_id = ? AND grid_x = ? AND grid_y = ?")
+      .get(restaurantId, toCell.x, toCell.y) as any;
+    if (!walkable || Number(walkable.walkable) !== 1) return false;
+    if (toCell.x > fromCell.x && this.blockingWallBetween(restaurantId, fromCell.x, fromCell.y, "east", toCell.x, toCell.y, "west")) return false;
+    if (toCell.x < fromCell.x && this.blockingWallBetween(restaurantId, fromCell.x, fromCell.y, "west", toCell.x, toCell.y, "east")) return false;
+    if (toCell.y > fromCell.y && this.blockingWallBetween(restaurantId, fromCell.x, fromCell.y, "south", toCell.x, toCell.y, "north")) return false;
+    if (toCell.y < fromCell.y && this.blockingWallBetween(restaurantId, fromCell.x, fromCell.y, "north", toCell.x, toCell.y, "south")) return false;
+    return true;
+  }
+
+  private blockingWallBetween(restaurantId: string, ax: number, ay: number, edgeA: string, bx: number, by: number, edgeB: string): boolean {
+    const blocks = (x: number, y: number, edge: string): boolean => {
+      const wall = this.db.prepare("SELECT opening_type FROM wall_edges WHERE restaurant_id = ? AND grid_x = ? AND grid_y = ? AND edge = ?")
+        .get(restaurantId, x, y, edge) as any;
+      return Boolean(wall && !["door", "service-door", "arch"].includes(String(wall.opening_type)));
+    };
+    return blocks(ax, ay, edgeA) || blocks(bx, by, edgeB);
+  }
+
+  private findSafeSpawn(restaurantId: string, characterId: string): { x: number; y: number } {
+    ensureLayout(this.db, this.registry, restaurantId);
+    const openings = this.db.prepare(`SELECT grid_x AS x, grid_y AS y
+      FROM wall_edges
+      WHERE restaurant_id = ? AND opening_type IN ('door', 'service-door', 'arch')
+      ORDER BY CASE opening_type WHEN 'door' THEN 0 WHEN 'service-door' THEN 1 ELSE 2 END, grid_y, grid_x`)
+      .all(restaurantId) as any[];
+    const preferred = openings.length
+      ? openings.map((opening) => ({ x: Number(opening.x) + 0.5, y: Number(opening.y) + 0.5 }))
+      : [{ x: 0.5, y: 0.5 }];
+    const occupied = this.db.prepare(`SELECT p.position_x AS x, p.position_y AS y
+      FROM shift_presences p JOIN service_shifts s ON s.id = p.service_shift_id
+      WHERE s.restaurant_id = ? AND p.character_id <> ? AND p.left_at IS NULL`)
+      .all(restaurantId, characterId) as any[];
+    const candidates = this.db.prepare(`SELECT grid_x AS x, grid_y AS y
+      FROM floor_cells WHERE restaurant_id = ? AND walkable = 1`).all(restaurantId) as any[];
+    candidates.sort((left, right) => {
+      const distance = (candidate: any): number => Math.min(...preferred.map((target) => (
+        Math.abs(Number(candidate.x) + 0.5 - target.x) + Math.abs(Number(candidate.y) + 0.5 - target.y)
+      )));
+      return distance(left) - distance(right) || Number(left.y) - Number(right.y) || Number(left.x) - Number(right.x);
+    });
+    for (const candidate of candidates) {
+      const x = Number(candidate.x) + 0.5;
+      const y = Number(candidate.y) + 0.5;
+      if (this.collides(restaurantId, x, y)) continue;
+      if (occupied.some((other) => Math.hypot(x - Number(other.x), y - Number(other.y)) < 0.8)) continue;
+      return { x, y };
+    }
+    throw new ApiError(409, "This restaurant has no safe, walkable entry point. Move furniture away from a door before opening the shift.");
   }
 
   private collides(restaurantId: string, x: number, y: number): boolean {
@@ -702,14 +1222,20 @@ export class LiveService extends EventEmitter {
   }
 
   private closeShift(shiftId: string): void {
-    const shift = this.db.prepare("SELECT * FROM service_shifts WHERE id = ?").get(shiftId) as any;
-    if (!shift || shift.state === "closed") return;
-    transaction(this.db, () => {
-      this.db.prepare("UPDATE service_shifts SET state = 'closed', closed_at = ?, version = version + 1 WHERE id = ?").run(Date.now(), shiftId);
-      this.db.prepare("UPDATE shift_presences SET left_at = COALESCE(left_at, ?), last_seen_at = ? WHERE service_shift_id = ?").run(Date.now(), Date.now(), shiftId);
-      this.db.prepare("UPDATE duty_slots SET occupant_character_id = NULL, staffing = 'npc', handoff_state = 'steady', updated_at = ? WHERE service_shift_id = ?").run(Date.now(), shiftId);
+    const closed = transaction(this.db, () => {
+      const shift = this.db.prepare("SELECT * FROM service_shifts WHERE id = ?").get(shiftId) as any;
+      if (!shift || shift.state === "closed") return false;
+      this.settleShift(shiftId);
+      const now = Date.now();
+      this.db.prepare("UPDATE service_shifts SET state = 'closed', closed_at = ?, version = version + 1 WHERE id = ?").run(now, shiftId);
+      this.db.prepare("UPDATE shift_presences SET left_at = COALESCE(left_at, ?), last_seen_at = ? WHERE service_shift_id = ?").run(now, now, shiftId);
+      this.db.prepare("UPDATE duty_slots SET occupant_character_id = NULL, staffing = 'npc', handoff_state = 'steady', updated_at = ? WHERE service_shift_id = ?").run(now, shiftId);
+      return true;
     });
-    this.settleShift(shiftId);
+    if (!closed) return;
+    for (const key of this.moveIntents.keys()) {
+      if (key.startsWith(`${shiftId}:`)) this.moveIntents.delete(key);
+    }
     this.emit("shift-closed", shiftId);
   }
 
@@ -724,16 +1250,51 @@ export class LiveService extends EventEmitter {
     const incidents = Number((this.db.prepare("SELECT COUNT(*) AS count FROM incidents WHERE service_shift_id = ? AND state <> 'resolved'").get(shiftId) as any).count);
     const resources = json<Record<string, number>>(shift.resources_json, {});
     const supplyPressure = Math.max(0, 100 - ((resources.produce ?? 50) + (resources.labor ?? 50) + (resources.fuel ?? 50)) / 3);
-    const revenue = Math.round(covers * (1700 + shift.demand * 11) * (0.75 + taskQuality / 200));
+    const furnitureEffects = getFurnitureEffects(this.db, this.registry, shift.restaurant_id);
+    const furnitureRevenueMultiplier = clamp(1 + furnitureEffects.serviceModifiers.revenue / 100, 0.75, 1.3);
+    const revenue = Math.round(covers * (1700 + shift.demand * 11) * (0.75 + taskQuality / 200) * furnitureRevenueMultiplier);
     const operatingCost = Math.round(62_000 + covers * (640 + shift.cost_index * 3 + supplyPressure * 2));
     const unresolvedCost = incidents * 18_000;
-    const net = revenue - operatingCost - unresolvedCost;
+    const furnitureUpkeep = Math.max(0, Math.round(furnitureEffects.inventory.upkeepCentsPerShift));
+    const furnitureCleaning = Math.max(0, Math.round(clamp(furnitureEffects.cleaningWorkload, 0, 500) * 30));
+    const furnitureRepairReserve = Math.max(0, Math.round(furnitureEffects.inventory.repairReserveCentsPerShift));
+    const furnitureOperatingCost = furnitureUpkeep + furnitureCleaning + furnitureRepairReserve;
+    const net = revenue - operatingCost - unresolvedCost - furnitureOperatingCost;
     const now = Date.now();
-    transaction(this.db, () => {
-      this.db.prepare("UPDATE restaurants SET treasury_cents = treasury_cents + ?, sanitation = MAX(0, sanitation - ?) WHERE id = ?").run(net, incidents * 2, shift.restaurant_id);
-      this.db.prepare("INSERT INTO ledger_entries (id, restaurant_id, category, amount_cents, reference_type, reference_id, created_at) VALUES (?, ?, 'shift-revenue', ?, 'shift', ?, ?)").run(newId("ledger"), shift.restaurant_id, revenue, shiftId, now);
-      this.db.prepare("INSERT INTO ledger_entries (id, restaurant_id, category, amount_cents, reference_type, reference_id, created_at) VALUES (?, ?, 'shift-costs', ?, 'shift', ?, ?)").run(newId("ledger"), shift.restaurant_id, -(operatingCost + unresolvedCost), shiftId, now);
-    });
+    this.db.prepare("UPDATE restaurants SET treasury_cents = treasury_cents + ?, sanitation = MAX(0, sanitation - ?) WHERE id = ?").run(net, incidents * 2, shift.restaurant_id);
+    this.db.prepare("INSERT INTO ledger_entries (id, restaurant_id, category, amount_cents, reference_type, reference_id, created_at) VALUES (?, ?, 'shift-revenue', ?, 'shift', ?, ?)").run(newId("ledger"), shift.restaurant_id, revenue, shiftId, now);
+    this.db.prepare("INSERT INTO ledger_entries (id, restaurant_id, category, amount_cents, reference_type, reference_id, created_at) VALUES (?, ?, 'shift-costs', ?, 'shift', ?, ?)").run(newId("ledger"), shift.restaurant_id, -(operatingCost + unresolvedCost), shiftId, now);
+    if (furnitureUpkeep > 0) {
+      this.db.prepare("INSERT INTO ledger_entries (id, restaurant_id, category, amount_cents, reference_type, reference_id, created_at) VALUES (?, ?, 'furniture-upkeep', ?, 'shift', ?, ?)")
+        .run(newId("ledger"), shift.restaurant_id, -furnitureUpkeep, shiftId, now);
+    }
+    if (furnitureCleaning > 0) {
+      this.db.prepare("INSERT INTO ledger_entries (id, restaurant_id, category, amount_cents, reference_type, reference_id, created_at) VALUES (?, ?, 'furniture-cleaning', ?, 'shift', ?, ?)")
+        .run(newId("ledger"), shift.restaurant_id, -furnitureCleaning, shiftId, now);
+    }
+    if (furnitureRepairReserve > 0) {
+      this.db.prepare("INSERT INTO ledger_entries (id, restaurant_id, category, amount_cents, reference_type, reference_id, created_at) VALUES (?, ?, 'furniture-repair-reserve', ?, 'shift', ?, ?)")
+        .run(newId("ledger"), shift.restaurant_id, -furnitureRepairReserve, shiftId, now);
+    }
+    this.advanceFurnitureWear(shift.restaurant_id, now);
+  }
+
+  private advanceFurnitureWear(restaurantId: string, now: number): void {
+    const objects = this.db.prepare("SELECT id, definition_id, state, wear FROM object_instances WHERE restaurant_id = ? ORDER BY id").all(restaurantId) as any[];
+    const update = this.db.prepare("UPDATE object_instances SET wear = ?, state = ?, updated_at = ? WHERE id = ?");
+    for (const object of objects) {
+      const definition = this.registry.furnitureById.get(object.definition_id) as any;
+      if (!definition) continue;
+      const configuredWear = Number(definition.wearPerShift ?? (100 / Math.max(20, Number(definition.breakageHorizonShifts) || 500)));
+      const wearPerShift = clamp(Number.isFinite(configuredWear) ? configuredWear : 0.2, 0.01, 5);
+      const nextWear = object.state === "broken" ? 100 : round(clamp(Number(object.wear) + wearPerShift, 0, 100), 3);
+      const nextState = nextWear >= 100 || object.state === "broken"
+        ? "broken"
+        : nextWear >= 60 || object.state === "worn"
+          ? "worn"
+          : "placed";
+      update.run(nextWear, nextState, now, object.id);
+    }
   }
 
   private runNpcEcology(): void {

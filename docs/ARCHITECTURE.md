@@ -1,6 +1,6 @@
 # Runtime architecture
 
-**Baseline:** `1.0.0-alpha.1`  
+**Baseline:** `1.0.0-alpha.2`
 **Wire contract:** `rro.v1`  
 **Persistence schema:** clean V1, schema 1  
 **Client engine:** Godot 4.4.1+  
@@ -35,11 +35,11 @@ The server owns:
 
 - account authentication and session expiry;
 - the clock, random outcomes, shift state, and snapshot version;
-- character attributes, roles, skills, money, wages, XP, and ledgers;
-- restaurant ownership, applications, construction validation, and resale;
+- character attributes, roles, skills, personal inventory/loadouts, money, wages, XP, and ledgers;
+- restaurant ownership, applications, construction validation, furniture condition/repair, and resale;
 - duty slots, NPC coverage, player presence, parties, tasks, and incidents;
 - movement bounds, collision, task claims, phase order, scoring, and consequences;
-- sanitation, patience, satisfaction, review evidence, reviews, and restaurant ecology.
+- sanitation, patience, satisfaction, targeted rivalry rules, furniture effects, review evidence, reviews, and restaurant ecology.
 
 There is no command that accepts a final player score. A work item is created by the server, claimed by a character, resolved through ordered phase actions, scored by the authority, and recorded under an idempotency key.
 
@@ -65,7 +65,7 @@ Public endpoints are intentionally small:
 | POST | `/v1/auth/login` | Create a bearer session |
 | GET | `/v1/content/manifest` | Content compatibility metadata |
 
-Authenticated endpoints cover bootstrap, logout, appearance, skill unlocks, world/region browsing, applications, restaurant founding, layouts, shifts, joining, leaving, and snapshots. Mutating routes validate ownership and domain rules server-side.
+Authenticated endpoints cover bootstrap, logout, appearance, skill unlocks, persistent role-inventory catalog/state/purchase/equip/unequip/use, world/region browsing, applications, restaurant founding, layouts/repair, shifts, joining, leaving, and snapshots. Mutating routes validate ownership and domain rules server-side.
 
 `POST /v1/local-admin/shutdown` is not a gameplay API. It accepts only loopback requests carrying the random `X-RRO-Control-Token` written for that process under `run/`.
 
@@ -86,7 +86,7 @@ Current authoritative command types are:
 | `move` | Normalized movement vector; authority applies speed, bounds, and collision |
 | `task.claim` | Claim an available task; server marks off-role work and its penalty |
 | `task.action` | Choose the next permitted phase action; server scores and propagates effects |
-| `guest.challenge` | Purchase a legitimate visible service complication while visiting |
+| `guest.challenge` | While visiting a local rival, purchase a visible modifier for a chosen party task, dimension, and intensity |
 
 The server emits `ready`, full `snapshot`, `command.ack`, `shift.closed`, and structured `error` messages. Messages are limited to 64 KiB, a connection is limited to 40 incoming messages per second, and heartbeat pings remove dead clients. V1 sends full JSON snapshots; delta encoding, input sequencing, prediction/reconciliation, and reconnect restoration are V2 networking work.
 
@@ -96,11 +96,12 @@ An open restaurant is a shared crewed system:
 
 - seven role duty slots remain covered by NPC simulation until claimed;
 - an employee join transfers a selected slot without resetting the restaurant;
-- guests become physical parties and can spend earnings on bounded challenges;
+- guests become physical parties and can spend earnings on same-region, task-targeted, capped challenges with visible counterplay;
 - each role receives work in `now`, `next`, `prevent`, and `admin` lanes;
 - every activity has three phases and maps to one of 12 reusable minigame grammars;
 - incidents create spatial or operational debt rather than a detached popup;
-- shift settlement writes wages, XP, revenue/cost evidence, reviews, and viability effects;
+- placed furniture changes arrival satisfaction, role/task support, review baselines and effective public rating;
+- shift settlement writes wages, XP, furniture-adjusted revenue, itemized upkeep/cleaning/repair reserve, wear transitions, reviews, and viability effects;
 - unsuccessful NPC restaurants can close permanently, and underserved regions can spawn replacements.
 
 The current tick is a production-oriented vertical-slice loop, not a horizontally scalable MMO shard. V2 adds isolated shift workers, regional routing, interest management, deltas, deterministic replay, and hosted datastores.
@@ -112,7 +113,7 @@ SQLite tables are grouped by domain:
 | Domain | Records |
 |---|---|
 | Identity | accounts, sessions, characters, character attributes |
-| Progression | role progress, skill unlocks |
+| Progression | role progress, skill unlocks, character inventory, role loadouts, inventory audit events |
 | World | countries, regions, restaurants, applications |
 | Construction | floor cells, wall edges, object instances |
 | Live service | shifts, duty slots, presences, parties, tasks, incidents |
@@ -123,7 +124,7 @@ The database is a single-player/local-world storage choice. It is not the V2 hos
 
 ## Content architecture
 
-`packages/game-data/manifest.json` selects enabled content packs. The server compiles a single deterministic runtime registry and content hash. Today, enabled packs can contribute furniture and seasonal events; the role resolver supports inheritance for subclasses. Generated core data supplies 196 skill nodes, 89 activities, construction surfaces, avatar palettes, and production furniture.
+`packages/game-data/manifest.json` selects enabled content packs. The server compiles a single deterministic runtime registry and content hash. Today, enabled packs can contribute furniture, role equipment, and seasonal events; the role resolver supports inheritance for subclasses. Generated core data supplies 196 skill nodes, 89 activities, construction surfaces, avatar palettes, a 229-item furniture registry, and 45 role-equipment definitions.
 
 Stable IDs are persistent references. Pack order must never be used as identity. A content removal that would orphan a saved reference is a schema/content migration and cannot be shipped as a silent deletion.
 
@@ -135,8 +136,9 @@ The restaurant is persisted as simulation primitives, not a background image:
 
 - floor cells include surface and room tag;
 - wall-edge records represent walls, doors, and arches;
-- object instances reference stable furniture IDs, coordinates, footprint, and one of four rotations;
-- the server validates plot bounds, overlap, affordability, ownership, and resale;
+- object instances reference stable furniture IDs, coordinates, footprint, condition/wear, and one of four rotations;
+- the server validates plot bounds, overlap, affordability, ownership, resale and repair;
+- a pure bounded aggregator turns the current mixed-condition inventory into rating, happiness, cleaning/reliability, role/service and operating-economy effects with duplicate tapering;
 - add-ons increase the editable parcel within hard limits.
 
 The Godot canvas provides explicit pointer, floor, wall/opening, object, drag, and rotation modes. Utilities, egress/code compliance, flow heatmaps, undo/history, and multi-user blueprint editing remain V2 work.
@@ -160,7 +162,7 @@ Dependencies point inward from runtime adapters toward domain code and stable da
 
 ## Verification and release
 
-`npm run verify` regenerates deterministic data/backlog outputs, validates game data, runs full GDScript static analysis, strict-checks TypeScript, builds the server, and executes integration tests. CI adds a real headless Godot editor import on Linux and Windows. Tagged release CI installs Windows export templates and exports the native client before packaging.
+`npm run verify` regenerates deterministic data/backlog outputs, validates game data and explicit artwork coverage, runs full GDScript static analysis, strict-checks TypeScript, builds the server, and executes 29 integration tests. Godot 4.4.1 Linux headless import, main-scene launch, and Windows client export are recorded for alpha 2. CI repeats real editor imports on Linux/Windows; tagged release CI installs Windows export templates and exports the native client before packaging.
 
 The local release script refuses to label client source as a runnable game. If a real Godot export is absent, it emits `RRO-Godot-Client-Source-…zip`; only a present export produces `RRO-Game-Client-…zip`.
 

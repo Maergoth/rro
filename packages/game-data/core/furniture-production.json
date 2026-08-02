@@ -9,20 +9,33 @@
     "width": 2,
     "height": 2,
     "symbol": "O",
-    "assetId": "table",
-    "upkeepCents": 312,
+    "legacyAssetId": "table",
     "durability": 92,
     "utilities": [],
     "stats": {
-      "seats": 2,
+      "comfort": 4,
       "ambience": 4,
+      "cleanability": 8,
+      "reliability": 9,
+      "seats": 2,
       "turnover": 2
     },
     "tags": [
+      "launch-baseline",
       "premium",
       "dining",
-      "table"
-    ]
+      "asset:furniture-oak-two-top"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-oak-two-top",
+    "upkeepCents": 337,
+    "breakageHorizonShifts": 547,
+    "wearPerShift": 0.183,
+    "repairCostCents": 13728,
+    "roleEffects": {
+      "server": 4,
+      "host-busser": 3
+    }
   },
   {
     "id": "walnut-four-top",
@@ -34,20 +47,32 @@
     "width": 3,
     "height": 3,
     "symbol": "W",
-    "assetId": "table",
-    "upkeepCents": 568,
+    "legacyAssetId": "table",
     "durability": 92,
     "utilities": [],
     "stats": {
-      "seats": 4,
+      "comfort": 6,
       "ambience": 7,
-      "comfort": 6
+      "cleanability": 5,
+      "reliability": 8,
+      "seats": 4
     },
     "tags": [
+      "launch-baseline",
       "premium",
       "dining",
-      "table"
-    ]
+      "asset:furniture-walnut-four-top"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-walnut-four-top",
+    "upkeepCents": 616,
+    "breakageHorizonShifts": 538,
+    "wearPerShift": 0.186,
+    "repairCostCents": 24992,
+    "roleEffects": {
+      "server": 4,
+      "host-busser": 3
+    }
   },
   {
     "id": "banquette-section",
@@ -59,20 +84,32 @@
     "width": 4,
     "height": 2,
     "symbol": "U",
-    "assetId": "seating",
-    "upkeepCents": 1060,
+    "legacyAssetId": "seating",
     "durability": 92,
     "utilities": [],
     "stats": {
-      "seats": 4,
+      "comfort": 12,
       "ambience": 10,
-      "comfort": 12
+      "cleanability": 2,
+      "reliability": 7,
+      "seats": 4
     },
     "tags": [
+      "launch-baseline",
       "iconic",
       "dining",
-      "seating"
-    ]
+      "asset:furniture-banquette-section"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-banquette-section",
+    "upkeepCents": 1155,
+    "breakageHorizonShifts": 529,
+    "wearPerShift": 0.189,
+    "repairCostCents": 46640,
+    "roleEffects": {
+      "server": 4,
+      "host-busser": 3
+    }
   },
   {
     "id": "commercial-chair",
@@ -84,20 +121,33 @@
     "width": 1,
     "height": 1,
     "symbol": "C",
-    "assetId": "chair",
-    "upkeepCents": 96,
+    "legacyAssetId": "chair",
     "durability": 78,
     "utilities": [],
     "stats": {
-      "seats": 1,
       "comfort": 3,
+      "ambience": 1,
+      "cleanability": 10,
+      "reliability": 12,
+      "seats": 1,
       "durability": 5
     },
     "tags": [
+      "launch-baseline",
       "commercial",
       "dining",
-      "chair"
-    ]
+      "asset:furniture-commercial-chair"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-commercial-chair",
+    "upkeepCents": 102,
+    "breakageHorizonShifts": 516,
+    "wearPerShift": 0.194,
+    "repairCostCents": 4896,
+    "roleEffects": {
+      "server": 4,
+      "host-busser": 3
+    }
   },
   {
     "id": "premium-chair",
@@ -109,20 +159,32 @@
     "width": 1,
     "height": 1,
     "symbol": "P",
-    "assetId": "chair",
-    "upkeepCents": 208,
+    "legacyAssetId": "chair",
     "durability": 92,
     "utilities": [],
     "stats": {
-      "seats": 1,
       "comfort": 8,
-      "ambience": 3
+      "ambience": 3,
+      "cleanability": 6,
+      "reliability": 9,
+      "seats": 1
     },
     "tags": [
+      "launch-baseline",
       "premium",
       "dining",
-      "chair"
-    ]
+      "asset:furniture-premium-chair"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-premium-chair",
+    "upkeepCents": 225,
+    "breakageHorizonShifts": 547,
+    "wearPerShift": 0.183,
+    "repairCostCents": 9152,
+    "roleEffects": {
+      "server": 4,
+      "host-busser": 3
+    }
   },
   {
     "id": "host-stand-pro",
@@ -134,20 +196,34 @@
     "width": 2,
     "height": 2,
     "symbol": "R",
-    "assetId": "host",
-    "upkeepCents": 752,
+    "legacyAssetId": "host",
     "durability": 92,
     "utilities": [],
     "stats": {
+      "comfort": 4,
+      "ambience": 3,
+      "cleanability": 8,
+      "reliability": 10,
       "turnover": 6,
-      "forecast": 8,
-      "ambience": 3
+      "forecast": 8
     },
     "tags": [
+      "launch-baseline",
       "premium",
       "service",
-      "host"
-    ]
+      "asset:furniture-host-stand-pro"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-host-stand-pro",
+    "upkeepCents": 808,
+    "breakageHorizonShifts": 556,
+    "wearPerShift": 0.18,
+    "repairCostCents": 33088,
+    "roleEffects": {
+      "server": 7,
+      "host-busser": 6,
+      "manager": 5
+    }
   },
   {
     "id": "server-station-pro",
@@ -159,20 +235,35 @@
     "width": 3,
     "height": 2,
     "symbol": "I",
-    "assetId": "service",
-    "upkeepCents": 944,
+    "legacyAssetId": "service",
     "durability": 92,
     "utilities": [],
     "stats": {
+      "comfort": 5,
+      "ambience": 2,
+      "cleanability": 9,
+      "reliability": 11,
       "turnover": 8,
       "storage": 8,
       "route": 5
     },
     "tags": [
+      "launch-baseline",
       "premium",
       "service",
-      "service"
-    ]
+      "asset:furniture-server-station-pro"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-server-station-pro",
+    "upkeepCents": 1010,
+    "breakageHorizonShifts": 565,
+    "wearPerShift": 0.177,
+    "repairCostCents": 41536,
+    "roleEffects": {
+      "server": 7,
+      "host-busser": 6,
+      "manager": 5
+    }
   },
   {
     "id": "pos-terminal",
@@ -184,19 +275,34 @@
     "width": 1,
     "height": 1,
     "symbol": "C",
-    "assetId": "pos",
-    "upkeepCents": 376,
+    "legacyAssetId": "pos",
     "durability": 78,
     "utilities": [],
     "stats": {
+      "comfort": 3,
+      "ambience": 0,
+      "cleanability": 7,
+      "reliability": 8,
       "accuracy": 6,
       "payment": 8
     },
     "tags": [
+      "launch-baseline",
       "commercial",
       "service",
-      "pos"
-    ]
+      "asset:furniture-pos-terminal"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-pos-terminal",
+    "upkeepCents": 408,
+    "breakageHorizonShifts": 480,
+    "wearPerShift": 0.208,
+    "repairCostCents": 19176,
+    "roleEffects": {
+      "server": 7,
+      "host-busser": 6,
+      "manager": 5
+    }
   },
   {
     "id": "expo-pass-heated",
@@ -208,23 +314,37 @@
     "width": 4,
     "height": 2,
     "symbol": "H",
-    "assetId": "expo",
-    "upkeepCents": 1680,
+    "legacyAssetId": "expo",
     "durability": 92,
     "utilities": [
       "power",
       "ventilation"
     ],
     "stats": {
+      "comfort": 4,
+      "ambience": 1,
+      "cleanability": 7,
+      "reliability": 10,
       "kitchen": 12,
       "hold": 12,
       "quality": 8
     },
     "tags": [
+      "launch-baseline",
       "premium",
       "kitchen",
-      "expo"
-    ]
+      "asset:furniture-expo-pass-heated"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-expo-pass-heated",
+    "upkeepCents": 1806,
+    "breakageHorizonShifts": 556,
+    "wearPerShift": 0.18,
+    "repairCostCents": 73920,
+    "roleEffects": {
+      "cook": 9,
+      "chef": 8
+    }
   },
   {
     "id": "six-burner-range",
@@ -236,23 +356,37 @@
     "width": 4,
     "height": 3,
     "symbol": "S",
-    "assetId": "range",
-    "upkeepCents": 2740,
+    "legacyAssetId": "range",
     "durability": 92,
     "utilities": [
       "power",
       "ventilation"
     ],
     "stats": {
+      "comfort": 3,
+      "ambience": 0,
+      "cleanability": 5,
+      "reliability": 12,
       "kitchen": 18,
       "capacity": 6,
       "recovery": 8
     },
     "tags": [
+      "launch-baseline",
       "premium",
       "kitchen",
-      "range"
-    ]
+      "asset:furniture-six-burner-range"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-six-burner-range",
+    "upkeepCents": 2918,
+    "breakageHorizonShifts": 574,
+    "wearPerShift": 0.174,
+    "repairCostCents": 120560,
+    "roleEffects": {
+      "cook": 12,
+      "chef": 11
+    }
   },
   {
     "id": "plancha-commercial",
@@ -264,22 +398,36 @@
     "width": 3,
     "height": 2,
     "symbol": "C",
-    "assetId": "plancha",
-    "upkeepCents": 1392,
+    "legacyAssetId": "plancha",
     "durability": 78,
     "utilities": [
       "power",
       "ventilation"
     ],
     "stats": {
+      "comfort": 3,
+      "ambience": -1,
+      "cleanability": 8,
+      "reliability": 13,
       "kitchen": 10,
       "consistency": 6
     },
     "tags": [
+      "launch-baseline",
       "commercial",
       "kitchen",
-      "plancha"
-    ]
+      "asset:furniture-plancha-commercial"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-plancha-commercial",
+    "upkeepCents": 1476,
+    "breakageHorizonShifts": 525,
+    "wearPerShift": 0.19,
+    "repairCostCents": 70992,
+    "roleEffects": {
+      "cook": 8,
+      "chef": 7
+    }
   },
   {
     "id": "convection-oven",
@@ -291,22 +439,36 @@
     "width": 3,
     "height": 3,
     "symbol": "C",
-    "assetId": "oven",
-    "upkeepCents": 2300,
+    "legacyAssetId": "oven",
     "durability": 92,
     "utilities": [
       "power",
       "ventilation"
     ],
     "stats": {
+      "comfort": 3,
+      "ambience": 0,
+      "cleanability": 7,
+      "reliability": 11,
       "kitchen": 15,
       "consistency": 10
     },
     "tags": [
+      "launch-baseline",
       "premium",
       "kitchen",
-      "oven"
-    ]
+      "asset:furniture-convection-oven"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-convection-oven",
+    "upkeepCents": 2461,
+    "breakageHorizonShifts": 565,
+    "wearPerShift": 0.177,
+    "repairCostCents": 101200,
+    "roleEffects": {
+      "cook": 10,
+      "chef": 9
+    }
   },
   {
     "id": "prep-table-refrigerated",
@@ -318,23 +480,37 @@
     "width": 4,
     "height": 2,
     "symbol": "R",
-    "assetId": "prep",
-    "upkeepCents": 1580,
+    "legacyAssetId": "prep",
     "durability": 92,
     "utilities": [
       "power",
       "ventilation"
     ],
     "stats": {
+      "comfort": 4,
+      "ambience": 0,
+      "cleanability": 10,
+      "reliability": 10,
       "kitchen": 8,
       "sanitation": 7,
       "storage": 10
     },
     "tags": [
+      "launch-baseline",
       "premium",
       "kitchen",
-      "prep"
-    ]
+      "asset:furniture-prep-table-refrigerated"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-prep-table-refrigerated",
+    "upkeepCents": 1699,
+    "breakageHorizonShifts": 556,
+    "wearPerShift": 0.18,
+    "repairCostCents": 69520,
+    "roleEffects": {
+      "cook": 8,
+      "chef": 7
+    }
   },
   {
     "id": "walkin-rack",
@@ -346,19 +522,33 @@
     "width": 3,
     "height": 1,
     "symbol": "W",
-    "assetId": "storage",
-    "upkeepCents": 448,
+    "legacyAssetId": "storage",
     "durability": 78,
     "utilities": [],
     "stats": {
+      "comfort": 2,
+      "ambience": -1,
+      "cleanability": 8,
+      "reliability": 14,
       "storage": 15,
       "rotation": 6
     },
     "tags": [
+      "launch-baseline",
       "commercial",
       "storage",
-      "storage"
-    ]
+      "asset:furniture-walkin-rack"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-walkin-rack",
+    "upkeepCents": 473,
+    "breakageHorizonShifts": 534,
+    "wearPerShift": 0.187,
+    "repairCostCents": 22848,
+    "roleEffects": {
+      "cook": 10,
+      "dishwasher": 9
+    }
   },
   {
     "id": "dry-storage-rack",
@@ -370,19 +560,33 @@
     "width": 3,
     "height": 1,
     "symbol": "D",
-    "assetId": "storage",
-    "upkeepCents": 304,
+    "legacyAssetId": "storage",
     "durability": 78,
     "utilities": [],
     "stats": {
+      "comfort": 2,
+      "ambience": 0,
+      "cleanability": 9,
+      "reliability": 13,
       "storage": 12,
       "organization": 5
     },
     "tags": [
+      "launch-baseline",
       "commercial",
       "storage",
-      "storage"
-    ]
+      "asset:furniture-dry-storage-rack"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-dry-storage-rack",
+    "upkeepCents": 322,
+    "breakageHorizonShifts": 525,
+    "wearPerShift": 0.19,
+    "repairCostCents": 15504,
+    "roleEffects": {
+      "cook": 9,
+      "dishwasher": 8
+    }
   },
   {
     "id": "chemical-cabinet",
@@ -394,22 +598,36 @@
     "width": 2,
     "height": 1,
     "symbol": "L",
-    "assetId": "utility",
-    "upkeepCents": 352,
+    "legacyAssetId": "utility",
     "durability": 78,
     "utilities": [
       "water",
       "drain"
     ],
     "stats": {
+      "comfort": 2,
+      "ambience": -2,
+      "cleanability": 12,
+      "reliability": 13,
       "sanitation": 8,
       "safety": 10
     },
     "tags": [
+      "launch-baseline",
       "commercial",
       "utility",
-      "utility"
-    ]
+      "asset:furniture-chemical-cabinet"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-chemical-cabinet",
+    "upkeepCents": 373,
+    "breakageHorizonShifts": 525,
+    "wearPerShift": 0.19,
+    "repairCostCents": 17952,
+    "roleEffects": {
+      "dishwasher": 8,
+      "host-busser": 7
+    }
   },
   {
     "id": "dish-machine-high-temp",
@@ -421,23 +639,37 @@
     "width": 4,
     "height": 3,
     "symbol": "H",
-    "assetId": "dish",
-    "upkeepCents": 3280,
+    "legacyAssetId": "dish",
     "durability": 92,
     "utilities": [
       "water",
       "drain"
     ],
     "stats": {
+      "comfort": 3,
+      "ambience": -2,
+      "cleanability": 9,
+      "reliability": 11,
       "sanitation": 18,
       "capacity": 12,
       "speed": 10
     },
     "tags": [
+      "launch-baseline",
       "premium",
       "utility",
-      "dish"
-    ]
+      "asset:furniture-dish-machine-high-temp"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-dish-machine-high-temp",
+    "upkeepCents": 3510,
+    "breakageHorizonShifts": 565,
+    "wearPerShift": 0.177,
+    "repairCostCents": 144320,
+    "roleEffects": {
+      "dishwasher": 12,
+      "host-busser": 11
+    }
   },
   {
     "id": "three-comp-sink",
@@ -449,22 +681,36 @@
     "width": 4,
     "height": 2,
     "symbol": "T",
-    "assetId": "sink",
-    "upkeepCents": 1140,
+    "legacyAssetId": "sink",
     "durability": 78,
     "utilities": [
       "water",
       "drain"
     ],
     "stats": {
+      "comfort": 3,
+      "ambience": -2,
+      "cleanability": 12,
+      "reliability": 14,
       "sanitation": 12,
       "recovery": 8
     },
     "tags": [
+      "launch-baseline",
       "commercial",
       "utility",
-      "sink"
-    ]
+      "asset:furniture-three-comp-sink"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-three-comp-sink",
+    "upkeepCents": 1203,
+    "breakageHorizonShifts": 534,
+    "wearPerShift": 0.187,
+    "repairCostCents": 58140,
+    "roleEffects": {
+      "dishwasher": 9,
+      "host-busser": 8
+    }
   },
   {
     "id": "glass-rack-system",
@@ -476,22 +722,36 @@
     "width": 2,
     "height": 2,
     "symbol": "G",
-    "assetId": "dish",
-    "upkeepCents": 580,
+    "legacyAssetId": "dish",
     "durability": 92,
     "utilities": [
       "water",
       "drain"
     ],
     "stats": {
+      "comfort": 3,
+      "ambience": 0,
+      "cleanability": 10,
+      "reliability": 12,
       "breakage": -8,
       "capacity": 8
     },
     "tags": [
+      "launch-baseline",
       "premium",
       "utility",
-      "dish"
-    ]
+      "asset:furniture-glass-rack-system"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-glass-rack-system",
+    "upkeepCents": 618,
+    "breakageHorizonShifts": 574,
+    "wearPerShift": 0.174,
+    "repairCostCents": 25520,
+    "roleEffects": {
+      "dishwasher": 7,
+      "host-busser": 6
+    }
   },
   {
     "id": "floor-drain",
@@ -503,22 +763,36 @@
     "width": 1,
     "height": 1,
     "symbol": "F",
-    "assetId": "drain",
-    "upkeepCents": 384,
+    "legacyAssetId": "drain",
     "durability": 78,
     "utilities": [
       "water",
       "drain"
     ],
     "stats": {
+      "comfort": 1,
+      "ambience": -2,
+      "cleanability": 15,
+      "reliability": 15,
       "sanitation": 6,
       "spill": 8
     },
     "tags": [
+      "launch-baseline",
       "commercial",
       "utility",
-      "drain"
-    ]
+      "asset:furniture-floor-drain"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-floor-drain",
+    "upkeepCents": 403,
+    "breakageHorizonShifts": 543,
+    "wearPerShift": 0.184,
+    "repairCostCents": 19584,
+    "roleEffects": {
+      "dishwasher": 7,
+      "host-busser": 6
+    }
   },
   {
     "id": "oak-partition",
@@ -530,20 +804,34 @@
     "width": 2,
     "height": 1,
     "symbol": "O",
-    "assetId": "partition",
-    "upkeepCents": 296,
+    "legacyAssetId": "partition",
     "durability": 92,
     "utilities": [],
     "stats": {
+      "comfort": 3,
       "ambience": 5,
+      "cleanability": 6,
+      "reliability": 10,
       "privacy": 7,
       "noise": -3
     },
     "tags": [
+      "launch-baseline",
       "premium",
       "decor",
-      "partition"
-    ]
+      "asset:furniture-oak-partition"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-oak-partition",
+    "upkeepCents": 318,
+    "breakageHorizonShifts": 556,
+    "wearPerShift": 0.18,
+    "repairCostCents": 13024,
+    "roleEffects": {
+      "host-busser": 4,
+      "server": 3,
+      "owner": 2
+    }
   },
   {
     "id": "large-planter",
@@ -555,19 +843,33 @@
     "width": 2,
     "height": 2,
     "symbol": "L",
-    "assetId": "plant",
-    "upkeepCents": 272,
+    "legacyAssetId": "plant",
     "durability": 92,
     "utilities": [],
     "stats": {
+      "comfort": 3,
       "ambience": 6,
+      "cleanability": 2,
+      "reliability": 6,
       "noise": -2
     },
     "tags": [
+      "launch-baseline",
       "premium",
       "decor",
-      "plant"
-    ]
+      "asset:furniture-large-planter"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-large-planter",
+    "upkeepCents": 298,
+    "breakageHorizonShifts": 520,
+    "wearPerShift": 0.192,
+    "repairCostCents": 11968,
+    "roleEffects": {
+      "host-busser": 4,
+      "server": 3,
+      "owner": 2
+    }
   },
   {
     "id": "wall-art-local",
@@ -579,19 +881,33 @@
     "width": 2,
     "height": 1,
     "symbol": "L",
-    "assetId": "art",
-    "upkeepCents": 840,
+    "legacyAssetId": "art",
     "durability": 92,
     "utilities": [],
     "stats": {
+      "comfort": 2,
       "ambience": 14,
+      "cleanability": 3,
+      "reliability": 8,
       "community": 8
     },
     "tags": [
+      "launch-baseline",
       "iconic",
       "decor",
-      "art"
-    ]
+      "asset:furniture-wall-art-local"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-wall-art-local",
+    "upkeepCents": 911,
+    "breakageHorizonShifts": 538,
+    "wearPerShift": 0.186,
+    "repairCostCents": 36960,
+    "roleEffects": {
+      "host-busser": 7,
+      "server": 6,
+      "owner": 5
+    }
   },
   {
     "id": "acoustic-panel",
@@ -603,19 +919,33 @@
     "width": 2,
     "height": 1,
     "symbol": "D",
-    "assetId": "decor",
-    "upkeepCents": 340,
+    "legacyAssetId": "decor",
     "durability": 92,
     "utilities": [],
     "stats": {
+      "comfort": 4,
       "ambience": 4,
+      "cleanability": 8,
+      "reliability": 10,
       "noise": -8
     },
     "tags": [
+      "launch-baseline",
       "premium",
       "decor",
-      "decor"
-    ]
+      "asset:furniture-acoustic-panel"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-acoustic-panel",
+    "upkeepCents": 366,
+    "breakageHorizonShifts": 556,
+    "wearPerShift": 0.18,
+    "repairCostCents": 14960,
+    "roleEffects": {
+      "host-busser": 4,
+      "server": 3,
+      "owner": 2
+    }
   },
   {
     "id": "pendant-light",
@@ -627,19 +957,33 @@
     "width": 1,
     "height": 1,
     "symbol": "D",
-    "assetId": "light",
-    "upkeepCents": 256,
+    "legacyAssetId": "light",
     "durability": 92,
     "utilities": [],
     "stats": {
+      "comfort": 3,
       "ambience": 5,
+      "cleanability": 7,
+      "reliability": 9,
       "visibility": 3
     },
     "tags": [
+      "launch-baseline",
       "premium",
       "decor",
-      "light"
-    ]
+      "asset:furniture-pendant-light"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-pendant-light",
+    "upkeepCents": 276,
+    "breakageHorizonShifts": 547,
+    "wearPerShift": 0.183,
+    "repairCostCents": 11264,
+    "roleEffects": {
+      "host-busser": 4,
+      "server": 3,
+      "owner": 2
+    }
   },
   {
     "id": "wet-floor-station",
@@ -651,23 +995,37 @@
     "width": 2,
     "height": 1,
     "symbol": "S",
-    "assetId": "clean",
-    "upkeepCents": 512,
+    "legacyAssetId": "clean",
     "durability": 78,
     "utilities": [
       "water",
       "drain"
     ],
     "stats": {
+      "comfort": 4,
+      "ambience": 0,
+      "cleanability": 13,
+      "reliability": 12,
       "sanitation": 8,
       "spill": 12,
       "recovery": 6
     },
     "tags": [
+      "launch-baseline",
       "commercial",
       "utility",
-      "clean"
-    ]
+      "asset:furniture-wet-floor-station"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-wet-floor-station",
+    "upkeepCents": 545,
+    "breakageHorizonShifts": 516,
+    "wearPerShift": 0.194,
+    "repairCostCents": 26112,
+    "roleEffects": {
+      "dishwasher": 9,
+      "host-busser": 8
+    }
   },
   {
     "id": "linen-storage",
@@ -679,19 +1037,34 @@
     "width": 2,
     "height": 1,
     "symbol": "L",
-    "assetId": "storage",
-    "upkeepCents": 432,
+    "legacyAssetId": "storage",
     "durability": 78,
     "utilities": [],
     "stats": {
+      "comfort": 4,
+      "ambience": 1,
+      "cleanability": 11,
+      "reliability": 12,
       "turnover": 5,
       "storage": 6
     },
     "tags": [
+      "launch-baseline",
       "commercial",
       "service",
-      "storage"
-    ]
+      "asset:furniture-linen-storage"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-linen-storage",
+    "upkeepCents": 460,
+    "breakageHorizonShifts": 516,
+    "wearPerShift": 0.194,
+    "repairCostCents": 22032,
+    "roleEffects": {
+      "server": 6,
+      "host-busser": 5,
+      "manager": 4
+    }
   },
   {
     "id": "water-station",
@@ -703,20 +1076,35 @@
     "width": 2,
     "height": 2,
     "symbol": "F",
-    "assetId": "service",
-    "upkeepCents": 760,
+    "legacyAssetId": "service",
     "durability": 92,
     "utilities": [],
     "stats": {
+      "comfort": 5,
+      "ambience": 3,
+      "cleanability": 9,
+      "reliability": 9,
       "turnover": 4,
       "quality": 6,
       "capacity": 5
     },
     "tags": [
+      "launch-baseline",
       "premium",
       "service",
-      "service"
-    ]
+      "asset:furniture-water-station"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-water-station",
+    "upkeepCents": 821,
+    "breakageHorizonShifts": 547,
+    "wearPerShift": 0.183,
+    "repairCostCents": 33440,
+    "roleEffects": {
+      "server": 6,
+      "host-busser": 5,
+      "manager": 4
+    }
   },
   {
     "id": "office-desk",
@@ -728,19 +1116,35 @@
     "width": 3,
     "height": 2,
     "symbol": "O",
-    "assetId": "office",
-    "upkeepCents": 392,
+    "legacyAssetId": "office",
     "durability": 78,
-    "utilities": [],
+    "utilities": [
+      "power"
+    ],
     "stats": {
+      "comfort": 7,
+      "ambience": 2,
+      "cleanability": 7,
+      "reliability": 11,
       "forecast": 6,
       "organization": 7
     },
     "tags": [
+      "launch-baseline",
       "commercial",
       "office",
-      "office"
-    ]
+      "asset:furniture-office-desk"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-office-desk",
+    "upkeepCents": 419,
+    "breakageHorizonShifts": 507,
+    "wearPerShift": 0.197,
+    "repairCostCents": 19992,
+    "roleEffects": {
+      "manager": 6,
+      "owner": 5
+    }
   },
   {
     "id": "manager-console",
@@ -752,19 +1156,7265 @@
     "width": 3,
     "height": 2,
     "symbol": "L",
-    "assetId": "office",
-    "upkeepCents": 1040,
+    "legacyAssetId": "office",
     "durability": 92,
-    "utilities": [],
+    "utilities": [
+      "power"
+    ],
     "stats": {
+      "comfort": 6,
+      "ambience": 3,
+      "cleanability": 6,
+      "reliability": 9,
       "forecast": 12,
       "handoff": 8,
       "organization": 8
     },
     "tags": [
+      "launch-baseline",
       "premium",
       "office",
-      "office"
-    ]
+      "asset:furniture-manager-console"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-manager-console",
+    "upkeepCents": 1123,
+    "breakageHorizonShifts": 547,
+    "wearPerShift": 0.183,
+    "repairCostCents": 45760,
+    "roleEffects": {
+      "manager": 9,
+      "owner": 8
+    }
+  },
+  {
+    "id": "essential-cafe-two-top",
+    "name": "Essential Cafe Two-Top",
+    "category": "Dining",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 44600,
+    "width": 2,
+    "height": 2,
+    "symbol": "C",
+    "durability": 68,
+    "utilities": [],
+    "stats": {
+      "comfort": 3,
+      "ambience": 1,
+      "cleanability": 11,
+      "reliability": 8,
+      "seats": 2,
+      "turnover": 3
+    },
+    "tags": [
+      "table",
+      "collection:essential",
+      "value",
+      "dining",
+      "asset:furniture-essential-cafe-two-top"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-cafe-two-top",
+    "upkeepCents": 194,
+    "breakageHorizonShifts": 438,
+    "wearPerShift": 0.228,
+    "repairCostCents": 9990,
+    "roleEffects": {
+      "server": 4,
+      "host-busser": 3
+    }
+  },
+  {
+    "id": "craftsman-cafe-two-top",
+    "name": "Craftsman Cafe Two-Top",
+    "category": "Dining",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 79400,
+    "width": 2,
+    "height": 2,
+    "symbol": "C",
+    "durability": 74,
+    "utilities": [],
+    "stats": {
+      "comfort": 7,
+      "ambience": 8,
+      "cleanability": 4,
+      "reliability": 7,
+      "seats": 2,
+      "turnover": 3
+    },
+    "tags": [
+      "table",
+      "collection:craftsman",
+      "premium",
+      "dining",
+      "asset:furniture-craftsman-cafe-two-top"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-cafe-two-top",
+    "upkeepCents": 346,
+    "breakageHorizonShifts": 454,
+    "wearPerShift": 0.22,
+    "repairCostCents": 16833,
+    "roleEffects": {
+      "server": 4,
+      "host-busser": 3
+    }
+  },
+  {
+    "id": "endurance-cafe-two-top",
+    "name": "Endurance Cafe Two-Top",
+    "category": "Dining",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 69400,
+    "width": 2,
+    "height": 2,
+    "symbol": "C",
+    "durability": 82,
+    "utilities": [],
+    "stats": {
+      "comfort": 3,
+      "ambience": 2,
+      "cleanability": 9,
+      "reliability": 13,
+      "seats": 2,
+      "turnover": 3
+    },
+    "tags": [
+      "table",
+      "collection:endurance",
+      "commercial",
+      "dining",
+      "asset:furniture-endurance-cafe-two-top"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-cafe-two-top",
+    "upkeepCents": 294,
+    "breakageHorizonShifts": 541,
+    "wearPerShift": 0.185,
+    "repairCostCents": 13602,
+    "roleEffects": {
+      "server": 4,
+      "host-busser": 3
+    }
+  },
+  {
+    "id": "hospitality-cafe-two-top",
+    "name": "Hospitality Cafe Two-Top",
+    "category": "Dining",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 73200,
+    "width": 2,
+    "height": 2,
+    "symbol": "C",
+    "durability": 72,
+    "utilities": [],
+    "stats": {
+      "comfort": 9,
+      "ambience": 5,
+      "cleanability": 6,
+      "reliability": 5,
+      "seats": 2,
+      "turnover": 3
+    },
+    "tags": [
+      "table",
+      "collection:hospitality",
+      "premium",
+      "dining",
+      "asset:furniture-hospitality-cafe-two-top"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-cafe-two-top",
+    "upkeepCents": 322,
+    "breakageHorizonShifts": 427,
+    "wearPerShift": 0.234,
+    "repairCostCents": 15811,
+    "roleEffects": {
+      "server": 5,
+      "host-busser": 4
+    }
+  },
+  {
+    "id": "precision-cafe-two-top",
+    "name": "Precision Cafe Two-Top",
+    "category": "Dining",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 89900,
+    "width": 2,
+    "height": 2,
+    "symbol": "C",
+    "durability": 75,
+    "utilities": [],
+    "stats": {
+      "comfort": 5,
+      "ambience": 3,
+      "cleanability": 7,
+      "reliability": 6,
+      "seats": 3,
+      "turnover": 4
+    },
+    "tags": [
+      "table",
+      "collection:precision",
+      "iconic",
+      "dining",
+      "asset:furniture-precision-cafe-two-top"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-cafe-two-top",
+    "upkeepCents": 394,
+    "breakageHorizonShifts": 449,
+    "wearPerShift": 0.223,
+    "repairCostCents": 18879,
+    "roleEffects": {
+      "server": 6,
+      "host-busser": 5
+    }
+  },
+  {
+    "id": "reclaimed-cafe-two-top",
+    "name": "Reclaimed Cafe Two-Top",
+    "category": "Dining",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 60800,
+    "width": 2,
+    "height": 2,
+    "symbol": "C",
+    "durability": 64,
+    "utilities": [],
+    "stats": {
+      "comfort": 5,
+      "ambience": 9,
+      "cleanability": 3,
+      "reliability": 3,
+      "seats": 2,
+      "turnover": 3
+    },
+    "tags": [
+      "table",
+      "collection:reclaimed",
+      "artisan",
+      "dining",
+      "asset:furniture-reclaimed-cafe-two-top"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-cafe-two-top",
+    "upkeepCents": 270,
+    "breakageHorizonShifts": 376,
+    "wearPerShift": 0.266,
+    "repairCostCents": 14106,
+    "roleEffects": {
+      "server": 4,
+      "host-busser": 3
+    }
+  },
+  {
+    "id": "essential-family-four-top",
+    "name": "Essential Family Four-Top",
+    "category": "Dining",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 77800,
+    "width": 3,
+    "height": 2,
+    "symbol": "F",
+    "durability": 72,
+    "utilities": [],
+    "stats": {
+      "comfort": 4,
+      "ambience": 2,
+      "cleanability": 10,
+      "reliability": 9,
+      "seats": 4,
+      "turnover": 1
+    },
+    "tags": [
+      "table",
+      "collection:essential",
+      "value",
+      "dining",
+      "asset:furniture-essential-family-four-top"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-family-four-top",
+    "upkeepCents": 336,
+    "breakageHorizonShifts": 463,
+    "wearPerShift": 0.216,
+    "repairCostCents": 16805,
+    "roleEffects": {
+      "server": 4,
+      "host-busser": 3
+    }
+  },
+  {
+    "id": "craftsman-family-four-top",
+    "name": "Craftsman Family Four-Top",
+    "category": "Dining",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 138200,
+    "width": 3,
+    "height": 2,
+    "symbol": "F",
+    "durability": 78,
+    "utilities": [],
+    "stats": {
+      "comfort": 8,
+      "ambience": 9,
+      "cleanability": 3,
+      "reliability": 8,
+      "seats": 4,
+      "turnover": 1
+    },
+    "tags": [
+      "table",
+      "collection:craftsman",
+      "premium",
+      "dining",
+      "asset:furniture-craftsman-family-four-top"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-family-four-top",
+    "upkeepCents": 600,
+    "breakageHorizonShifts": 480,
+    "wearPerShift": 0.208,
+    "repairCostCents": 28193,
+    "roleEffects": {
+      "server": 4,
+      "host-busser": 3
+    }
+  },
+  {
+    "id": "endurance-family-four-top",
+    "name": "Endurance Family Four-Top",
+    "category": "Dining",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 121000,
+    "width": 3,
+    "height": 2,
+    "symbol": "F",
+    "durability": 86,
+    "utilities": [],
+    "stats": {
+      "comfort": 4,
+      "ambience": 3,
+      "cleanability": 8,
+      "reliability": 14,
+      "seats": 4,
+      "turnover": 1
+    },
+    "tags": [
+      "table",
+      "collection:endurance",
+      "commercial",
+      "dining",
+      "asset:furniture-endurance-family-four-top"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-family-four-top",
+    "upkeepCents": 511,
+    "breakageHorizonShifts": 567,
+    "wearPerShift": 0.176,
+    "repairCostCents": 22748,
+    "roleEffects": {
+      "server": 4,
+      "host-busser": 3
+    }
+  },
+  {
+    "id": "hospitality-family-four-top",
+    "name": "Hospitality Family Four-Top",
+    "category": "Dining",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 127400,
+    "width": 3,
+    "height": 2,
+    "symbol": "F",
+    "durability": 76,
+    "utilities": [],
+    "stats": {
+      "comfort": 10,
+      "ambience": 6,
+      "cleanability": 5,
+      "reliability": 6,
+      "seats": 4,
+      "turnover": 1
+    },
+    "tags": [
+      "table",
+      "collection:hospitality",
+      "premium",
+      "dining",
+      "asset:furniture-hospitality-family-four-top"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-family-four-top",
+    "upkeepCents": 558,
+    "breakageHorizonShifts": 453,
+    "wearPerShift": 0.221,
+    "repairCostCents": 26499,
+    "roleEffects": {
+      "server": 5,
+      "host-busser": 4
+    }
+  },
+  {
+    "id": "precision-family-four-top",
+    "name": "Precision Family Four-Top",
+    "category": "Dining",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 156600,
+    "width": 3,
+    "height": 2,
+    "symbol": "F",
+    "durability": 79,
+    "utilities": [],
+    "stats": {
+      "comfort": 6,
+      "ambience": 4,
+      "cleanability": 6,
+      "reliability": 7,
+      "seats": 5,
+      "turnover": 1
+    },
+    "tags": [
+      "table",
+      "collection:precision",
+      "iconic",
+      "dining",
+      "asset:furniture-precision-family-four-top"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-family-four-top",
+    "upkeepCents": 683,
+    "breakageHorizonShifts": 475,
+    "wearPerShift": 0.211,
+    "repairCostCents": 31633,
+    "roleEffects": {
+      "server": 6,
+      "host-busser": 5
+    }
+  },
+  {
+    "id": "reclaimed-family-four-top",
+    "name": "Reclaimed Family Four-Top",
+    "category": "Dining",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 105800,
+    "width": 3,
+    "height": 2,
+    "symbol": "F",
+    "durability": 68,
+    "utilities": [],
+    "stats": {
+      "comfort": 6,
+      "ambience": 10,
+      "cleanability": 2,
+      "reliability": 4,
+      "seats": 4,
+      "turnover": 1
+    },
+    "tags": [
+      "table",
+      "collection:reclaimed",
+      "artisan",
+      "dining",
+      "asset:furniture-reclaimed-family-four-top"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-family-four-top",
+    "upkeepCents": 468,
+    "breakageHorizonShifts": 402,
+    "wearPerShift": 0.249,
+    "repairCostCents": 23699,
+    "roleEffects": {
+      "server": 4,
+      "host-busser": 3
+    }
+  },
+  {
+    "id": "essential-communal-table",
+    "name": "Essential Communal Table",
+    "category": "Dining",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 142600,
+    "width": 5,
+    "height": 2,
+    "symbol": "C",
+    "durability": 76,
+    "utilities": [],
+    "stats": {
+      "comfort": 5,
+      "ambience": 5,
+      "cleanability": 8,
+      "reliability": 10,
+      "seats": 7,
+      "community": 5,
+      "turnover": -2
+    },
+    "tags": [
+      "table",
+      "collection:essential",
+      "value",
+      "dining",
+      "asset:furniture-essential-communal-table"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-communal-table",
+    "upkeepCents": 613,
+    "breakageHorizonShifts": 489,
+    "wearPerShift": 0.204,
+    "repairCostCents": 29661,
+    "roleEffects": {
+      "server": 5,
+      "host-busser": 4
+    }
+  },
+  {
+    "id": "craftsman-communal-table",
+    "name": "Craftsman Communal Table",
+    "category": "Dining",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 253400,
+    "width": 5,
+    "height": 2,
+    "symbol": "C",
+    "durability": 82,
+    "utilities": [],
+    "stats": {
+      "comfort": 9,
+      "ambience": 12,
+      "cleanability": 1,
+      "reliability": 9,
+      "seats": 8,
+      "community": 6,
+      "turnover": -2
+    },
+    "tags": [
+      "table",
+      "collection:craftsman",
+      "premium",
+      "dining",
+      "asset:furniture-craftsman-communal-table"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-communal-table",
+    "upkeepCents": 1095,
+    "breakageHorizonShifts": 505,
+    "wearPerShift": 0.198,
+    "repairCostCents": 49666,
+    "roleEffects": {
+      "server": 6,
+      "host-busser": 5
+    }
+  },
+  {
+    "id": "endurance-communal-table",
+    "name": "Endurance Communal Table",
+    "category": "Dining",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 221800,
+    "width": 5,
+    "height": 2,
+    "symbol": "C",
+    "durability": 90,
+    "utilities": [],
+    "stats": {
+      "comfort": 5,
+      "ambience": 6,
+      "cleanability": 6,
+      "reliability": 15,
+      "seats": 8,
+      "community": 6,
+      "turnover": -2
+    },
+    "tags": [
+      "table",
+      "collection:endurance",
+      "commercial",
+      "dining",
+      "asset:furniture-endurance-communal-table"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-communal-table",
+    "upkeepCents": 932,
+    "breakageHorizonShifts": 593,
+    "wearPerShift": 0.169,
+    "repairCostCents": 39924,
+    "roleEffects": {
+      "server": 6,
+      "host-busser": 5
+    }
+  },
+  {
+    "id": "hospitality-communal-table",
+    "name": "Hospitality Communal Table",
+    "category": "Dining",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 233600,
+    "width": 5,
+    "height": 2,
+    "symbol": "C",
+    "durability": 80,
+    "utilities": [],
+    "stats": {
+      "comfort": 11,
+      "ambience": 9,
+      "cleanability": 3,
+      "reliability": 7,
+      "seats": 8,
+      "community": 6,
+      "turnover": -2
+    },
+    "tags": [
+      "table",
+      "collection:hospitality",
+      "premium",
+      "dining",
+      "asset:furniture-hospitality-communal-table"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-communal-table",
+    "upkeepCents": 1018,
+    "breakageHorizonShifts": 479,
+    "wearPerShift": 0.209,
+    "repairCostCents": 46720,
+    "roleEffects": {
+      "server": 6,
+      "host-busser": 5
+    }
+  },
+  {
+    "id": "precision-communal-table",
+    "name": "Precision Communal Table",
+    "category": "Dining",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 287100,
+    "width": 5,
+    "height": 2,
+    "symbol": "C",
+    "durability": 83,
+    "utilities": [],
+    "stats": {
+      "comfort": 7,
+      "ambience": 7,
+      "cleanability": 4,
+      "reliability": 8,
+      "seats": 10,
+      "community": 8,
+      "turnover": -3
+    },
+    "tags": [
+      "table",
+      "collection:precision",
+      "iconic",
+      "dining",
+      "asset:furniture-precision-communal-table"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-communal-table",
+    "upkeepCents": 1246,
+    "breakageHorizonShifts": 501,
+    "wearPerShift": 0.2,
+    "repairCostCents": 55697,
+    "roleEffects": {
+      "server": 9,
+      "host-busser": 8
+    }
+  },
+  {
+    "id": "reclaimed-communal-table",
+    "name": "Reclaimed Communal Table",
+    "category": "Dining",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 194000,
+    "width": 5,
+    "height": 2,
+    "symbol": "C",
+    "durability": 72,
+    "utilities": [],
+    "stats": {
+      "comfort": 7,
+      "ambience": 13,
+      "cleanability": 0,
+      "reliability": 5,
+      "seats": 7,
+      "community": 5,
+      "turnover": -2
+    },
+    "tags": [
+      "table",
+      "collection:reclaimed",
+      "artisan",
+      "dining",
+      "asset:furniture-reclaimed-communal-table"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-communal-table",
+    "upkeepCents": 854,
+    "breakageHorizonShifts": 427,
+    "wearPerShift": 0.234,
+    "repairCostCents": 41904,
+    "roleEffects": {
+      "server": 5,
+      "host-busser": 4
+    }
+  },
+  {
+    "id": "essential-dining-chair",
+    "name": "Essential Dining Chair",
+    "category": "Dining",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 22300,
+    "width": 1,
+    "height": 1,
+    "symbol": "D",
+    "durability": 64,
+    "utilities": [],
+    "stats": {
+      "comfort": 4,
+      "ambience": 0,
+      "cleanability": 12,
+      "reliability": 8,
+      "seats": 1,
+      "turnover": 1
+    },
+    "tags": [
+      "chair",
+      "collection:essential",
+      "value",
+      "dining",
+      "asset:furniture-essential-dining-chair"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-dining-chair",
+    "upkeepCents": 97,
+    "breakageHorizonShifts": 421,
+    "wearPerShift": 0.238,
+    "repairCostCents": 5174,
+    "roleEffects": {
+      "server": 4,
+      "host-busser": 3
+    }
+  },
+  {
+    "id": "craftsman-dining-chair",
+    "name": "Craftsman Dining Chair",
+    "category": "Dining",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 39700,
+    "width": 1,
+    "height": 1,
+    "symbol": "D",
+    "durability": 70,
+    "utilities": [],
+    "stats": {
+      "comfort": 8,
+      "ambience": 7,
+      "cleanability": 5,
+      "reliability": 7,
+      "seats": 1,
+      "turnover": 1
+    },
+    "tags": [
+      "chair",
+      "collection:craftsman",
+      "premium",
+      "dining",
+      "asset:furniture-craftsman-dining-chair"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-dining-chair",
+    "upkeepCents": 173,
+    "breakageHorizonShifts": 437,
+    "wearPerShift": 0.229,
+    "repairCostCents": 8734,
+    "roleEffects": {
+      "server": 4,
+      "host-busser": 3
+    }
+  },
+  {
+    "id": "endurance-dining-chair",
+    "name": "Endurance Dining Chair",
+    "category": "Dining",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 34700,
+    "width": 1,
+    "height": 1,
+    "symbol": "D",
+    "durability": 78,
+    "utilities": [],
+    "stats": {
+      "comfort": 4,
+      "ambience": 1,
+      "cleanability": 10,
+      "reliability": 13,
+      "seats": 1,
+      "turnover": 1
+    },
+    "tags": [
+      "chair",
+      "collection:endurance",
+      "commercial",
+      "dining",
+      "asset:furniture-endurance-dining-chair"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-dining-chair",
+    "upkeepCents": 147,
+    "breakageHorizonShifts": 525,
+    "wearPerShift": 0.19,
+    "repairCostCents": 7079,
+    "roleEffects": {
+      "server": 4,
+      "host-busser": 3
+    }
+  },
+  {
+    "id": "hospitality-dining-chair",
+    "name": "Hospitality Dining Chair",
+    "category": "Dining",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 36600,
+    "width": 1,
+    "height": 1,
+    "symbol": "D",
+    "durability": 68,
+    "utilities": [],
+    "stats": {
+      "comfort": 10,
+      "ambience": 4,
+      "cleanability": 7,
+      "reliability": 5,
+      "seats": 1,
+      "turnover": 1
+    },
+    "tags": [
+      "chair",
+      "collection:hospitality",
+      "premium",
+      "dining",
+      "asset:furniture-hospitality-dining-chair"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-dining-chair",
+    "upkeepCents": 161,
+    "breakageHorizonShifts": 411,
+    "wearPerShift": 0.243,
+    "repairCostCents": 8198,
+    "roleEffects": {
+      "server": 5,
+      "host-busser": 4
+    }
+  },
+  {
+    "id": "precision-dining-chair",
+    "name": "Precision Dining Chair",
+    "category": "Dining",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 45000,
+    "width": 1,
+    "height": 1,
+    "symbol": "D",
+    "durability": 71,
+    "utilities": [],
+    "stats": {
+      "comfort": 6,
+      "ambience": 2,
+      "cleanability": 8,
+      "reliability": 6,
+      "seats": 1,
+      "turnover": 1
+    },
+    "tags": [
+      "chair",
+      "collection:precision",
+      "iconic",
+      "dining",
+      "asset:furniture-precision-dining-chair"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-dining-chair",
+    "upkeepCents": 197,
+    "breakageHorizonShifts": 432,
+    "wearPerShift": 0.231,
+    "repairCostCents": 9810,
+    "roleEffects": {
+      "server": 6,
+      "host-busser": 5
+    }
+  },
+  {
+    "id": "reclaimed-dining-chair",
+    "name": "Reclaimed Dining Chair",
+    "category": "Dining",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 30400,
+    "width": 1,
+    "height": 1,
+    "symbol": "D",
+    "durability": 60,
+    "utilities": [],
+    "stats": {
+      "comfort": 6,
+      "ambience": 8,
+      "cleanability": 4,
+      "reliability": 3,
+      "seats": 1,
+      "turnover": 1
+    },
+    "tags": [
+      "chair",
+      "collection:reclaimed",
+      "artisan",
+      "dining",
+      "asset:furniture-reclaimed-dining-chair"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-dining-chair",
+    "upkeepCents": 135,
+    "breakageHorizonShifts": 359,
+    "wearPerShift": 0.279,
+    "repairCostCents": 7296,
+    "roleEffects": {
+      "server": 4,
+      "host-busser": 3
+    }
+  },
+  {
+    "id": "essential-dining-booth",
+    "name": "Essential Dining Booth",
+    "category": "Dining",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 110900,
+    "width": 4,
+    "height": 2,
+    "symbol": "D",
+    "durability": 70,
+    "utilities": [],
+    "stats": {
+      "comfort": 8,
+      "ambience": 4,
+      "cleanability": 7,
+      "reliability": 8,
+      "seats": 4,
+      "privacy": 5,
+      "turnover": -1
+    },
+    "tags": [
+      "booth",
+      "collection:essential",
+      "value",
+      "dining",
+      "asset:furniture-essential-dining-booth"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-dining-booth",
+    "upkeepCents": 481,
+    "breakageHorizonShifts": 446,
+    "wearPerShift": 0.224,
+    "repairCostCents": 24398,
+    "roleEffects": {
+      "server": 4,
+      "host-busser": 3
+    }
+  },
+  {
+    "id": "craftsman-dining-booth",
+    "name": "Craftsman Dining Booth",
+    "category": "Dining",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 197100,
+    "width": 4,
+    "height": 2,
+    "symbol": "D",
+    "durability": 76,
+    "utilities": [],
+    "stats": {
+      "comfort": 12,
+      "ambience": 11,
+      "cleanability": 0,
+      "reliability": 7,
+      "seats": 4,
+      "privacy": 5,
+      "turnover": -1
+    },
+    "tags": [
+      "booth",
+      "collection:craftsman",
+      "premium",
+      "dining",
+      "asset:furniture-craftsman-dining-booth"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-dining-booth",
+    "upkeepCents": 859,
+    "breakageHorizonShifts": 462,
+    "wearPerShift": 0.216,
+    "repairCostCents": 40997,
+    "roleEffects": {
+      "server": 4,
+      "host-busser": 3
+    }
+  },
+  {
+    "id": "endurance-dining-booth",
+    "name": "Endurance Dining Booth",
+    "category": "Dining",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 172500,
+    "width": 4,
+    "height": 2,
+    "symbol": "D",
+    "durability": 84,
+    "utilities": [],
+    "stats": {
+      "comfort": 8,
+      "ambience": 5,
+      "cleanability": 5,
+      "reliability": 13,
+      "seats": 4,
+      "privacy": 5,
+      "turnover": -1
+    },
+    "tags": [
+      "booth",
+      "collection:endurance",
+      "commercial",
+      "dining",
+      "asset:furniture-endurance-dining-booth"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-dining-booth",
+    "upkeepCents": 731,
+    "breakageHorizonShifts": 550,
+    "wearPerShift": 0.182,
+    "repairCostCents": 33120,
+    "roleEffects": {
+      "server": 4,
+      "host-busser": 3
+    }
+  },
+  {
+    "id": "hospitality-dining-booth",
+    "name": "Hospitality Dining Booth",
+    "category": "Dining",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 181700,
+    "width": 4,
+    "height": 2,
+    "symbol": "D",
+    "durability": 74,
+    "utilities": [],
+    "stats": {
+      "comfort": 14,
+      "ambience": 8,
+      "cleanability": 2,
+      "reliability": 5,
+      "seats": 4,
+      "privacy": 5,
+      "turnover": -1
+    },
+    "tags": [
+      "booth",
+      "collection:hospitality",
+      "premium",
+      "dining",
+      "asset:furniture-hospitality-dining-booth"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-dining-booth",
+    "upkeepCents": 799,
+    "breakageHorizonShifts": 436,
+    "wearPerShift": 0.229,
+    "repairCostCents": 38520,
+    "roleEffects": {
+      "server": 5,
+      "host-busser": 4
+    }
+  },
+  {
+    "id": "precision-dining-booth",
+    "name": "Precision Dining Booth",
+    "category": "Dining",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 223300,
+    "width": 4,
+    "height": 2,
+    "symbol": "D",
+    "durability": 77,
+    "utilities": [],
+    "stats": {
+      "comfort": 10,
+      "ambience": 6,
+      "cleanability": 3,
+      "reliability": 6,
+      "seats": 5,
+      "privacy": 7,
+      "turnover": -1
+    },
+    "tags": [
+      "booth",
+      "collection:precision",
+      "iconic",
+      "dining",
+      "asset:furniture-precision-dining-booth"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-dining-booth",
+    "upkeepCents": 978,
+    "breakageHorizonShifts": 457,
+    "wearPerShift": 0.219,
+    "repairCostCents": 46000,
+    "roleEffects": {
+      "server": 6,
+      "host-busser": 5
+    }
+  },
+  {
+    "id": "reclaimed-dining-booth",
+    "name": "Reclaimed Dining Booth",
+    "category": "Dining",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 150900,
+    "width": 4,
+    "height": 2,
+    "symbol": "D",
+    "durability": 66,
+    "utilities": [],
+    "stats": {
+      "comfort": 10,
+      "ambience": 12,
+      "cleanability": -1,
+      "reliability": 3,
+      "seats": 4,
+      "privacy": 5,
+      "turnover": -1
+    },
+    "tags": [
+      "booth",
+      "collection:reclaimed",
+      "artisan",
+      "dining",
+      "asset:furniture-reclaimed-dining-booth"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-dining-booth",
+    "upkeepCents": 670,
+    "breakageHorizonShifts": 384,
+    "wearPerShift": 0.26,
+    "repairCostCents": 34405,
+    "roleEffects": {
+      "server": 4,
+      "host-busser": 3
+    }
+  },
+  {
+    "id": "essential-host-podium",
+    "name": "Essential Host Podium",
+    "category": "Service",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 66200,
+    "width": 2,
+    "height": 1,
+    "symbol": "H",
+    "durability": 72,
+    "utilities": [],
+    "stats": {
+      "comfort": 3,
+      "ambience": 1,
+      "cleanability": 12,
+      "reliability": 10,
+      "turnover": 5,
+      "forecast": 4,
+      "accessibility": 2
+    },
+    "tags": [
+      "hosting",
+      "collection:essential",
+      "value",
+      "service",
+      "asset:furniture-essential-host-podium"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-host-podium",
+    "upkeepCents": 285,
+    "breakageHorizonShifts": 472,
+    "wearPerShift": 0.212,
+    "repairCostCents": 14299,
+    "roleEffects": {
+      "server": 5,
+      "host-busser": 4,
+      "manager": 3
+    }
+  },
+  {
+    "id": "craftsman-host-podium",
+    "name": "Craftsman Host Podium",
+    "category": "Service",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 117800,
+    "width": 2,
+    "height": 1,
+    "symbol": "H",
+    "durability": 78,
+    "utilities": [],
+    "stats": {
+      "comfort": 7,
+      "ambience": 8,
+      "cleanability": 5,
+      "reliability": 9,
+      "turnover": 5,
+      "forecast": 4,
+      "accessibility": 2
+    },
+    "tags": [
+      "hosting",
+      "collection:craftsman",
+      "premium",
+      "service",
+      "asset:furniture-craftsman-host-podium"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-host-podium",
+    "upkeepCents": 509,
+    "breakageHorizonShifts": 489,
+    "wearPerShift": 0.204,
+    "repairCostCents": 24031,
+    "roleEffects": {
+      "server": 5,
+      "host-busser": 4,
+      "manager": 3
+    }
+  },
+  {
+    "id": "endurance-host-podium",
+    "name": "Endurance Host Podium",
+    "category": "Service",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 103000,
+    "width": 2,
+    "height": 1,
+    "symbol": "H",
+    "durability": 86,
+    "utilities": [],
+    "stats": {
+      "comfort": 3,
+      "ambience": 2,
+      "cleanability": 10,
+      "reliability": 15,
+      "turnover": 5,
+      "forecast": 4,
+      "accessibility": 2
+    },
+    "tags": [
+      "hosting",
+      "collection:endurance",
+      "commercial",
+      "service",
+      "asset:furniture-endurance-host-podium"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-host-podium",
+    "upkeepCents": 433,
+    "breakageHorizonShifts": 576,
+    "wearPerShift": 0.174,
+    "repairCostCents": 19364,
+    "roleEffects": {
+      "server": 5,
+      "host-busser": 4,
+      "manager": 3
+    }
+  },
+  {
+    "id": "hospitality-host-podium",
+    "name": "Hospitality Host Podium",
+    "category": "Service",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 108600,
+    "width": 2,
+    "height": 1,
+    "symbol": "H",
+    "durability": 76,
+    "utilities": [],
+    "stats": {
+      "comfort": 9,
+      "ambience": 5,
+      "cleanability": 7,
+      "reliability": 7,
+      "turnover": 5,
+      "forecast": 4,
+      "accessibility": 2
+    },
+    "tags": [
+      "hosting",
+      "collection:hospitality",
+      "premium",
+      "service",
+      "asset:furniture-hospitality-host-podium"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-host-podium",
+    "upkeepCents": 473,
+    "breakageHorizonShifts": 462,
+    "wearPerShift": 0.216,
+    "repairCostCents": 22589,
+    "roleEffects": {
+      "server": 6,
+      "host-busser": 5,
+      "manager": 4
+    }
+  },
+  {
+    "id": "precision-host-podium",
+    "name": "Precision Host Podium",
+    "category": "Service",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 133400,
+    "width": 2,
+    "height": 1,
+    "symbol": "H",
+    "durability": 79,
+    "utilities": [],
+    "stats": {
+      "comfort": 5,
+      "ambience": 3,
+      "cleanability": 8,
+      "reliability": 8,
+      "turnover": 7,
+      "forecast": 5,
+      "accessibility": 3
+    },
+    "tags": [
+      "hosting",
+      "collection:precision",
+      "iconic",
+      "service",
+      "asset:furniture-precision-host-podium"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-host-podium",
+    "upkeepCents": 579,
+    "breakageHorizonShifts": 484,
+    "wearPerShift": 0.207,
+    "repairCostCents": 26947,
+    "roleEffects": {
+      "server": 8,
+      "host-busser": 7,
+      "manager": 6
+    }
+  },
+  {
+    "id": "reclaimed-host-podium",
+    "name": "Reclaimed Host Podium",
+    "category": "Service",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 90200,
+    "width": 2,
+    "height": 1,
+    "symbol": "H",
+    "durability": 68,
+    "utilities": [],
+    "stats": {
+      "comfort": 5,
+      "ambience": 9,
+      "cleanability": 4,
+      "reliability": 5,
+      "turnover": 5,
+      "forecast": 4,
+      "accessibility": 2
+    },
+    "tags": [
+      "hosting",
+      "collection:reclaimed",
+      "artisan",
+      "service",
+      "asset:furniture-reclaimed-host-podium"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-host-podium",
+    "upkeepCents": 397,
+    "breakageHorizonShifts": 411,
+    "wearPerShift": 0.243,
+    "repairCostCents": 20205,
+    "roleEffects": {
+      "server": 5,
+      "host-busser": 4,
+      "manager": 3
+    }
+  },
+  {
+    "id": "essential-server-console",
+    "name": "Essential Server Console",
+    "category": "Service",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 106600,
+    "width": 3,
+    "height": 2,
+    "symbol": "S",
+    "durability": 74,
+    "utilities": [],
+    "stats": {
+      "comfort": 4,
+      "ambience": -1,
+      "cleanability": 13,
+      "reliability": 11,
+      "route": 5,
+      "accuracy": 3,
+      "turnover": 4
+    },
+    "tags": [
+      "service",
+      "collection:essential",
+      "value",
+      "asset:furniture-essential-server-console"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-server-console",
+    "upkeepCents": 456,
+    "breakageHorizonShifts": 490,
+    "wearPerShift": 0.204,
+    "repairCostCents": 22599,
+    "roleEffects": {
+      "server": 5,
+      "host-busser": 4,
+      "manager": 3
+    }
+  },
+  {
+    "id": "craftsman-server-console",
+    "name": "Craftsman Server Console",
+    "category": "Service",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 189400,
+    "width": 3,
+    "height": 2,
+    "symbol": "S",
+    "durability": 80,
+    "utilities": [],
+    "stats": {
+      "comfort": 8,
+      "ambience": 6,
+      "cleanability": 6,
+      "reliability": 10,
+      "route": 5,
+      "accuracy": 3,
+      "turnover": 4
+    },
+    "tags": [
+      "service",
+      "collection:craftsman",
+      "premium",
+      "asset:furniture-craftsman-server-console"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-server-console",
+    "upkeepCents": 814,
+    "breakageHorizonShifts": 506,
+    "wearPerShift": 0.198,
+    "repairCostCents": 37880,
+    "roleEffects": {
+      "server": 5,
+      "host-busser": 4,
+      "manager": 3
+    }
+  },
+  {
+    "id": "endurance-server-console",
+    "name": "Endurance Server Console",
+    "category": "Service",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 165800,
+    "width": 3,
+    "height": 2,
+    "symbol": "S",
+    "durability": 88,
+    "utilities": [],
+    "stats": {
+      "comfort": 4,
+      "ambience": 0,
+      "cleanability": 11,
+      "reliability": 16,
+      "route": 5,
+      "accuracy": 3,
+      "turnover": 4
+    },
+    "tags": [
+      "service",
+      "collection:endurance",
+      "commercial",
+      "asset:furniture-endurance-server-console"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-server-console",
+    "upkeepCents": 693,
+    "breakageHorizonShifts": 594,
+    "wearPerShift": 0.168,
+    "repairCostCents": 30507,
+    "roleEffects": {
+      "server": 5,
+      "host-busser": 4,
+      "manager": 3
+    }
+  },
+  {
+    "id": "hospitality-server-console",
+    "name": "Hospitality Server Console",
+    "category": "Service",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 174600,
+    "width": 3,
+    "height": 2,
+    "symbol": "S",
+    "durability": 78,
+    "utilities": [],
+    "stats": {
+      "comfort": 10,
+      "ambience": 3,
+      "cleanability": 8,
+      "reliability": 8,
+      "route": 5,
+      "accuracy": 3,
+      "turnover": 4
+    },
+    "tags": [
+      "service",
+      "collection:hospitality",
+      "premium",
+      "asset:furniture-hospitality-server-console"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-server-console",
+    "upkeepCents": 758,
+    "breakageHorizonShifts": 480,
+    "wearPerShift": 0.208,
+    "repairCostCents": 35618,
+    "roleEffects": {
+      "server": 6,
+      "host-busser": 5,
+      "manager": 4
+    }
+  },
+  {
+    "id": "precision-server-console",
+    "name": "Precision Server Console",
+    "category": "Service",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 214600,
+    "width": 3,
+    "height": 2,
+    "symbol": "S",
+    "durability": 81,
+    "utilities": [],
+    "stats": {
+      "comfort": 6,
+      "ambience": 1,
+      "cleanability": 9,
+      "reliability": 9,
+      "route": 7,
+      "accuracy": 4,
+      "turnover": 5
+    },
+    "tags": [
+      "service",
+      "collection:precision",
+      "iconic",
+      "asset:furniture-precision-server-console"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-server-console",
+    "upkeepCents": 927,
+    "breakageHorizonShifts": 501,
+    "wearPerShift": 0.2,
+    "repairCostCents": 42491,
+    "roleEffects": {
+      "server": 8,
+      "host-busser": 7,
+      "manager": 6
+    }
+  },
+  {
+    "id": "reclaimed-server-console",
+    "name": "Reclaimed Server Console",
+    "category": "Service",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 145000,
+    "width": 3,
+    "height": 2,
+    "symbol": "S",
+    "durability": 70,
+    "utilities": [],
+    "stats": {
+      "comfort": 6,
+      "ambience": 7,
+      "cleanability": 5,
+      "reliability": 6,
+      "route": 5,
+      "accuracy": 3,
+      "turnover": 4
+    },
+    "tags": [
+      "service",
+      "collection:reclaimed",
+      "artisan",
+      "asset:furniture-reclaimed-server-console"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-server-console",
+    "upkeepCents": 635,
+    "breakageHorizonShifts": 428,
+    "wearPerShift": 0.234,
+    "repairCostCents": 31900,
+    "roleEffects": {
+      "server": 5,
+      "host-busser": 4,
+      "manager": 3
+    }
+  },
+  {
+    "id": "essential-beverage-station",
+    "name": "Essential Beverage Station",
+    "category": "Service",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 132500,
+    "width": 3,
+    "height": 2,
+    "symbol": "B",
+    "durability": 66,
+    "utilities": [],
+    "stats": {
+      "comfort": 4,
+      "ambience": 1,
+      "cleanability": 10,
+      "reliability": 7,
+      "turnover": 4,
+      "revenue": 4,
+      "quality": 3
+    },
+    "tags": [
+      "beverage",
+      "collection:essential",
+      "value",
+      "service",
+      "asset:furniture-essential-beverage-station"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-beverage-station",
+    "upkeepCents": 578,
+    "breakageHorizonShifts": 420,
+    "wearPerShift": 0.238,
+    "repairCostCents": 30210,
+    "roleEffects": {
+      "server": 4,
+      "host-busser": 3,
+      "manager": 3
+    }
+  },
+  {
+    "id": "craftsman-beverage-station",
+    "name": "Craftsman Beverage Station",
+    "category": "Service",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 235500,
+    "width": 3,
+    "height": 2,
+    "symbol": "B",
+    "durability": 72,
+    "utilities": [],
+    "stats": {
+      "comfort": 8,
+      "ambience": 8,
+      "cleanability": 3,
+      "reliability": 6,
+      "turnover": 4,
+      "revenue": 4,
+      "quality": 3
+    },
+    "tags": [
+      "beverage",
+      "collection:craftsman",
+      "premium",
+      "service",
+      "asset:furniture-craftsman-beverage-station"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-beverage-station",
+    "upkeepCents": 1031,
+    "breakageHorizonShifts": 436,
+    "wearPerShift": 0.229,
+    "repairCostCents": 50868,
+    "roleEffects": {
+      "server": 5,
+      "host-busser": 4,
+      "manager": 3
+    }
+  },
+  {
+    "id": "endurance-beverage-station",
+    "name": "Endurance Beverage Station",
+    "category": "Service",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 206100,
+    "width": 3,
+    "height": 2,
+    "symbol": "B",
+    "durability": 80,
+    "utilities": [],
+    "stats": {
+      "comfort": 4,
+      "ambience": 2,
+      "cleanability": 8,
+      "reliability": 12,
+      "turnover": 4,
+      "revenue": 4,
+      "quality": 3
+    },
+    "tags": [
+      "beverage",
+      "collection:endurance",
+      "commercial",
+      "service",
+      "asset:furniture-endurance-beverage-station"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-beverage-station",
+    "upkeepCents": 878,
+    "breakageHorizonShifts": 524,
+    "wearPerShift": 0.191,
+    "repairCostCents": 41220,
+    "roleEffects": {
+      "server": 5,
+      "host-busser": 4,
+      "manager": 3
+    }
+  },
+  {
+    "id": "hospitality-beverage-station",
+    "name": "Hospitality Beverage Station",
+    "category": "Service",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 217100,
+    "width": 3,
+    "height": 2,
+    "symbol": "B",
+    "durability": 70,
+    "utilities": [],
+    "stats": {
+      "comfort": 10,
+      "ambience": 5,
+      "cleanability": 5,
+      "reliability": 4,
+      "turnover": 4,
+      "revenue": 4,
+      "quality": 3
+    },
+    "tags": [
+      "beverage",
+      "collection:hospitality",
+      "premium",
+      "service",
+      "asset:furniture-hospitality-beverage-station"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-beverage-station",
+    "upkeepCents": 960,
+    "breakageHorizonShifts": 410,
+    "wearPerShift": 0.244,
+    "repairCostCents": 47762,
+    "roleEffects": {
+      "server": 5,
+      "host-busser": 4,
+      "manager": 3
+    }
+  },
+  {
+    "id": "precision-beverage-station",
+    "name": "Precision Beverage Station",
+    "category": "Service",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 266800,
+    "width": 3,
+    "height": 2,
+    "symbol": "B",
+    "durability": 73,
+    "utilities": [],
+    "stats": {
+      "comfort": 6,
+      "ambience": 3,
+      "cleanability": 6,
+      "reliability": 5,
+      "turnover": 5,
+      "revenue": 5,
+      "quality": 4
+    },
+    "tags": [
+      "beverage",
+      "collection:precision",
+      "iconic",
+      "service",
+      "asset:furniture-precision-beverage-station"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-beverage-station",
+    "upkeepCents": 1174,
+    "breakageHorizonShifts": 432,
+    "wearPerShift": 0.231,
+    "repairCostCents": 57095,
+    "roleEffects": {
+      "server": 7,
+      "host-busser": 6,
+      "manager": 4
+    }
+  },
+  {
+    "id": "reclaimed-beverage-station",
+    "name": "Reclaimed Beverage Station",
+    "category": "Service",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 180300,
+    "width": 3,
+    "height": 2,
+    "symbol": "B",
+    "durability": 62,
+    "utilities": [],
+    "stats": {
+      "comfort": 6,
+      "ambience": 9,
+      "cleanability": 2,
+      "reliability": 2,
+      "turnover": 4,
+      "revenue": 4,
+      "quality": 3
+    },
+    "tags": [
+      "beverage",
+      "collection:reclaimed",
+      "artisan",
+      "service",
+      "asset:furniture-reclaimed-beverage-station"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-beverage-station",
+    "upkeepCents": 804,
+    "breakageHorizonShifts": 358,
+    "wearPerShift": 0.279,
+    "repairCostCents": 42551,
+    "roleEffects": {
+      "server": 5,
+      "host-busser": 4,
+      "manager": 3
+    }
+  },
+  {
+    "id": "essential-pos-workstation",
+    "name": "Essential POS Workstation",
+    "category": "Service",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 90700,
+    "width": 2,
+    "height": 1,
+    "symbol": "P",
+    "durability": 63,
+    "utilities": [],
+    "stats": {
+      "comfort": 3,
+      "ambience": -2,
+      "cleanability": 11,
+      "reliability": 7,
+      "accuracy": 7,
+      "payment": 7
+    },
+    "tags": [
+      "technology",
+      "collection:essential",
+      "value",
+      "service",
+      "asset:furniture-essential-pos-workstation"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-pos-workstation",
+    "upkeepCents": 395,
+    "breakageHorizonShifts": 408,
+    "wearPerShift": 0.245,
+    "repairCostCents": 21224,
+    "roleEffects": {
+      "server": 6,
+      "host-busser": 5,
+      "manager": 4
+    }
+  },
+  {
+    "id": "craftsman-pos-workstation",
+    "name": "Craftsman POS Workstation",
+    "category": "Service",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 161300,
+    "width": 2,
+    "height": 1,
+    "symbol": "P",
+    "durability": 69,
+    "utilities": [],
+    "stats": {
+      "comfort": 7,
+      "ambience": 5,
+      "cleanability": 4,
+      "reliability": 6,
+      "accuracy": 8,
+      "payment": 8
+    },
+    "tags": [
+      "technology",
+      "collection:craftsman",
+      "premium",
+      "service",
+      "asset:furniture-craftsman-pos-workstation"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-pos-workstation",
+    "upkeepCents": 706,
+    "breakageHorizonShifts": 424,
+    "wearPerShift": 0.236,
+    "repairCostCents": 35809,
+    "roleEffects": {
+      "server": 7,
+      "host-busser": 6,
+      "manager": 5
+    }
+  },
+  {
+    "id": "endurance-pos-workstation",
+    "name": "Endurance POS Workstation",
+    "category": "Service",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 141100,
+    "width": 2,
+    "height": 1,
+    "symbol": "P",
+    "durability": 77,
+    "utilities": [],
+    "stats": {
+      "comfort": 3,
+      "ambience": -1,
+      "cleanability": 9,
+      "reliability": 12,
+      "accuracy": 8,
+      "payment": 8
+    },
+    "tags": [
+      "technology",
+      "collection:endurance",
+      "commercial",
+      "service",
+      "asset:furniture-endurance-pos-workstation"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-pos-workstation",
+    "upkeepCents": 601,
+    "breakageHorizonShifts": 511,
+    "wearPerShift": 0.196,
+    "repairCostCents": 29067,
+    "roleEffects": {
+      "server": 7,
+      "host-busser": 6,
+      "manager": 5
+    }
+  },
+  {
+    "id": "hospitality-pos-workstation",
+    "name": "Hospitality POS Workstation",
+    "category": "Service",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 148700,
+    "width": 2,
+    "height": 1,
+    "symbol": "P",
+    "durability": 67,
+    "utilities": [],
+    "stats": {
+      "comfort": 9,
+      "ambience": 2,
+      "cleanability": 6,
+      "reliability": 4,
+      "accuracy": 8,
+      "payment": 8
+    },
+    "tags": [
+      "technology",
+      "collection:hospitality",
+      "premium",
+      "service",
+      "asset:furniture-hospitality-pos-workstation"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-pos-workstation",
+    "upkeepCents": 657,
+    "breakageHorizonShifts": 397,
+    "wearPerShift": 0.252,
+    "repairCostCents": 33606,
+    "roleEffects": {
+      "server": 7,
+      "host-busser": 6,
+      "manager": 5
+    }
+  },
+  {
+    "id": "precision-pos-workstation",
+    "name": "Precision POS Workstation",
+    "category": "Service",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 182700,
+    "width": 2,
+    "height": 1,
+    "symbol": "P",
+    "durability": 70,
+    "utilities": [],
+    "stats": {
+      "comfort": 5,
+      "ambience": 0,
+      "cleanability": 7,
+      "reliability": 5,
+      "accuracy": 10,
+      "payment": 10
+    },
+    "tags": [
+      "technology",
+      "collection:precision",
+      "iconic",
+      "service",
+      "asset:furniture-precision-pos-workstation"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-pos-workstation",
+    "upkeepCents": 804,
+    "breakageHorizonShifts": 419,
+    "wearPerShift": 0.239,
+    "repairCostCents": 40194,
+    "roleEffects": {
+      "server": 10,
+      "host-busser": 9,
+      "manager": 8
+    }
+  },
+  {
+    "id": "reclaimed-pos-workstation",
+    "name": "Reclaimed POS Workstation",
+    "category": "Service",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 123500,
+    "width": 2,
+    "height": 1,
+    "symbol": "P",
+    "durability": 59,
+    "utilities": [],
+    "stats": {
+      "comfort": 5,
+      "ambience": 6,
+      "cleanability": 3,
+      "reliability": 2,
+      "accuracy": 7,
+      "payment": 7
+    },
+    "tags": [
+      "technology",
+      "collection:reclaimed",
+      "artisan",
+      "service",
+      "asset:furniture-reclaimed-pos-workstation"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-pos-workstation",
+    "upkeepCents": 551,
+    "breakageHorizonShifts": 346,
+    "wearPerShift": 0.289,
+    "repairCostCents": 29887,
+    "roleEffects": {
+      "server": 6,
+      "host-busser": 5,
+      "manager": 4
+    }
+  },
+  {
+    "id": "essential-bussing-station",
+    "name": "Essential Bussing Station",
+    "category": "Service",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 70600,
+    "width": 2,
+    "height": 2,
+    "symbol": "B",
+    "durability": 78,
+    "utilities": [],
+    "stats": {
+      "comfort": 3,
+      "ambience": -2,
+      "cleanability": 15,
+      "reliability": 13,
+      "turnover": 6,
+      "route": 5,
+      "sanitation": 2
+    },
+    "tags": [
+      "service",
+      "collection:essential",
+      "value",
+      "asset:furniture-essential-bussing-station"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-bussing-station",
+    "upkeepCents": 299,
+    "breakageHorizonShifts": 525,
+    "wearPerShift": 0.19,
+    "repairCostCents": 14402,
+    "roleEffects": {
+      "server": 5,
+      "host-busser": 4,
+      "manager": 3
+    }
+  },
+  {
+    "id": "craftsman-bussing-station",
+    "name": "Craftsman Bussing Station",
+    "category": "Service",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 125400,
+    "width": 2,
+    "height": 2,
+    "symbol": "B",
+    "durability": 84,
+    "utilities": [],
+    "stats": {
+      "comfort": 7,
+      "ambience": 5,
+      "cleanability": 8,
+      "reliability": 12,
+      "turnover": 7,
+      "route": 6,
+      "sanitation": 2
+    },
+    "tags": [
+      "service",
+      "collection:craftsman",
+      "premium",
+      "asset:furniture-craftsman-bussing-station"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-bussing-station",
+    "upkeepCents": 534,
+    "breakageHorizonShifts": 541,
+    "wearPerShift": 0.185,
+    "repairCostCents": 24077,
+    "roleEffects": {
+      "server": 6,
+      "host-busser": 5,
+      "manager": 4
+    }
+  },
+  {
+    "id": "endurance-bussing-station",
+    "name": "Endurance Bussing Station",
+    "category": "Service",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 109800,
+    "width": 2,
+    "height": 2,
+    "symbol": "B",
+    "durability": 92,
+    "utilities": [],
+    "stats": {
+      "comfort": 3,
+      "ambience": -1,
+      "cleanability": 13,
+      "reliability": 18,
+      "turnover": 7,
+      "route": 6,
+      "sanitation": 2
+    },
+    "tags": [
+      "service",
+      "collection:endurance",
+      "commercial",
+      "asset:furniture-endurance-bussing-station"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-bussing-station",
+    "upkeepCents": 455,
+    "breakageHorizonShifts": 628,
+    "wearPerShift": 0.159,
+    "repairCostCents": 19325,
+    "roleEffects": {
+      "server": 6,
+      "host-busser": 5,
+      "manager": 4
+    }
+  },
+  {
+    "id": "hospitality-bussing-station",
+    "name": "Hospitality Bussing Station",
+    "category": "Service",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 115600,
+    "width": 2,
+    "height": 2,
+    "symbol": "B",
+    "durability": 82,
+    "utilities": [],
+    "stats": {
+      "comfort": 9,
+      "ambience": 2,
+      "cleanability": 10,
+      "reliability": 10,
+      "turnover": 7,
+      "route": 6,
+      "sanitation": 2
+    },
+    "tags": [
+      "service",
+      "collection:hospitality",
+      "premium",
+      "asset:furniture-hospitality-bussing-station"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-bussing-station",
+    "upkeepCents": 497,
+    "breakageHorizonShifts": 514,
+    "wearPerShift": 0.195,
+    "repairCostCents": 22658,
+    "roleEffects": {
+      "server": 7,
+      "host-busser": 6,
+      "manager": 5
+    }
+  },
+  {
+    "id": "precision-bussing-station",
+    "name": "Precision Bussing Station",
+    "category": "Service",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 142100,
+    "width": 2,
+    "height": 2,
+    "symbol": "B",
+    "durability": 85,
+    "utilities": [],
+    "stats": {
+      "comfort": 5,
+      "ambience": 0,
+      "cleanability": 11,
+      "reliability": 11,
+      "turnover": 9,
+      "route": 8,
+      "sanitation": 3
+    },
+    "tags": [
+      "service",
+      "collection:precision",
+      "iconic",
+      "asset:furniture-precision-bussing-station"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-bussing-station",
+    "upkeepCents": 608,
+    "breakageHorizonShifts": 536,
+    "wearPerShift": 0.187,
+    "repairCostCents": 26999,
+    "roleEffects": {
+      "server": 10,
+      "host-busser": 8,
+      "manager": 7
+    }
+  },
+  {
+    "id": "reclaimed-bussing-station",
+    "name": "Reclaimed Bussing Station",
+    "category": "Service",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 96000,
+    "width": 2,
+    "height": 2,
+    "symbol": "B",
+    "durability": 74,
+    "utilities": [],
+    "stats": {
+      "comfort": 5,
+      "ambience": 6,
+      "cleanability": 7,
+      "reliability": 8,
+      "turnover": 6,
+      "route": 5,
+      "sanitation": 2
+    },
+    "tags": [
+      "service",
+      "collection:reclaimed",
+      "artisan",
+      "asset:furniture-reclaimed-bussing-station"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-bussing-station",
+    "upkeepCents": 417,
+    "breakageHorizonShifts": 463,
+    "wearPerShift": 0.216,
+    "repairCostCents": 20352,
+    "roleEffects": {
+      "server": 5,
+      "host-busser": 4,
+      "manager": 4
+    }
+  },
+  {
+    "id": "essential-restaurant-range",
+    "name": "Essential Restaurant Range",
+    "category": "Kitchen",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 315400,
+    "width": 4,
+    "height": 3,
+    "symbol": "R",
+    "durability": 75,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 2,
+      "ambience": -2,
+      "cleanability": 9,
+      "reliability": 11,
+      "kitchen": 9,
+      "capacity": 5,
+      "speed": 2
+    },
+    "tags": [
+      "hot-line",
+      "collection:essential",
+      "value",
+      "kitchen",
+      "asset:furniture-essential-restaurant-range"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-restaurant-range",
+    "upkeepCents": 1350,
+    "breakageHorizonShifts": 494,
+    "wearPerShift": 0.202,
+    "repairCostCents": 66234,
+    "roleEffects": {
+      "cook": 6,
+      "chef": 6
+    }
+  },
+  {
+    "id": "craftsman-restaurant-range",
+    "name": "Craftsman Restaurant Range",
+    "category": "Kitchen",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 560600,
+    "width": 4,
+    "height": 3,
+    "symbol": "R",
+    "durability": 81,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 6,
+      "ambience": 5,
+      "cleanability": 2,
+      "reliability": 10,
+      "kitchen": 10,
+      "capacity": 5,
+      "speed": 2
+    },
+    "tags": [
+      "hot-line",
+      "collection:craftsman",
+      "premium",
+      "kitchen",
+      "asset:furniture-craftsman-restaurant-range"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-restaurant-range",
+    "upkeepCents": 2411,
+    "breakageHorizonShifts": 510,
+    "wearPerShift": 0.196,
+    "repairCostCents": 110999,
+    "roleEffects": {
+      "cook": 8,
+      "chef": 7
+    }
+  },
+  {
+    "id": "endurance-restaurant-range",
+    "name": "Endurance Restaurant Range",
+    "category": "Kitchen",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 490600,
+    "width": 4,
+    "height": 3,
+    "symbol": "R",
+    "durability": 89,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 2,
+      "ambience": -1,
+      "cleanability": 7,
+      "reliability": 16,
+      "kitchen": 10,
+      "capacity": 5,
+      "speed": 2
+    },
+    "tags": [
+      "hot-line",
+      "collection:endurance",
+      "commercial",
+      "kitchen",
+      "asset:furniture-endurance-restaurant-range"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-restaurant-range",
+    "upkeepCents": 2051,
+    "breakageHorizonShifts": 598,
+    "wearPerShift": 0.167,
+    "repairCostCents": 89289,
+    "roleEffects": {
+      "cook": 7,
+      "chef": 7
+    }
+  },
+  {
+    "id": "hospitality-restaurant-range",
+    "name": "Hospitality Restaurant Range",
+    "category": "Kitchen",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 516800,
+    "width": 4,
+    "height": 3,
+    "symbol": "R",
+    "durability": 79,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 8,
+      "ambience": 2,
+      "cleanability": 4,
+      "reliability": 8,
+      "kitchen": 11,
+      "capacity": 5,
+      "speed": 2
+    },
+    "tags": [
+      "hot-line",
+      "collection:hospitality",
+      "premium",
+      "kitchen",
+      "asset:furniture-hospitality-restaurant-range"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-restaurant-range",
+    "upkeepCents": 2243,
+    "breakageHorizonShifts": 484,
+    "wearPerShift": 0.207,
+    "repairCostCents": 104394,
+    "roleEffects": {
+      "cook": 9,
+      "chef": 8
+    }
+  },
+  {
+    "id": "precision-restaurant-range",
+    "name": "Precision Restaurant Range",
+    "category": "Kitchen",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 635100,
+    "width": 4,
+    "height": 3,
+    "symbol": "R",
+    "durability": 82,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 4,
+      "ambience": 0,
+      "cleanability": 5,
+      "reliability": 9,
+      "kitchen": 13,
+      "capacity": 7,
+      "speed": 3
+    },
+    "tags": [
+      "hot-line",
+      "collection:precision",
+      "iconic",
+      "kitchen",
+      "asset:furniture-precision-restaurant-range"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-restaurant-range",
+    "upkeepCents": 2744,
+    "breakageHorizonShifts": 505,
+    "wearPerShift": 0.198,
+    "repairCostCents": 124480,
+    "roleEffects": {
+      "cook": 12,
+      "chef": 11
+    }
+  },
+  {
+    "id": "reclaimed-restaurant-range",
+    "name": "Reclaimed Restaurant Range",
+    "category": "Kitchen",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 429200,
+    "width": 4,
+    "height": 3,
+    "symbol": "R",
+    "durability": 71,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 4,
+      "ambience": 6,
+      "cleanability": 1,
+      "reliability": 6,
+      "kitchen": 9,
+      "capacity": 5,
+      "speed": 2
+    },
+    "tags": [
+      "hot-line",
+      "collection:reclaimed",
+      "artisan",
+      "kitchen",
+      "asset:furniture-reclaimed-restaurant-range"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-restaurant-range",
+    "upkeepCents": 1880,
+    "breakageHorizonShifts": 432,
+    "wearPerShift": 0.231,
+    "repairCostCents": 93566,
+    "roleEffects": {
+      "cook": 7,
+      "chef": 6
+    }
+  },
+  {
+    "id": "essential-convection-oven-line",
+    "name": "Essential Convection Oven",
+    "category": "Kitchen",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 275000,
+    "width": 3,
+    "height": 3,
+    "symbol": "C",
+    "durability": 73,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 2,
+      "ambience": -2,
+      "cleanability": 11,
+      "reliability": 10,
+      "kitchen": 7,
+      "consistency": 7
+    },
+    "tags": [
+      "hot-line",
+      "collection:essential",
+      "value",
+      "kitchen",
+      "asset:furniture-essential-convection-oven-line"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-convection-oven-line",
+    "upkeepCents": 1183,
+    "breakageHorizonShifts": 477,
+    "wearPerShift": 0.21,
+    "repairCostCents": 58850,
+    "roleEffects": {
+      "cook": 6,
+      "chef": 5
+    }
+  },
+  {
+    "id": "craftsman-convection-oven-line",
+    "name": "Craftsman Convection Oven",
+    "category": "Kitchen",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 489000,
+    "width": 3,
+    "height": 3,
+    "symbol": "C",
+    "durability": 79,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 6,
+      "ambience": 5,
+      "cleanability": 4,
+      "reliability": 9,
+      "kitchen": 8,
+      "consistency": 8
+    },
+    "tags": [
+      "hot-line",
+      "collection:craftsman",
+      "premium",
+      "kitchen",
+      "asset:furniture-craftsman-convection-oven-line"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-convection-oven-line",
+    "upkeepCents": 2112,
+    "breakageHorizonShifts": 493,
+    "wearPerShift": 0.203,
+    "repairCostCents": 98778,
+    "roleEffects": {
+      "cook": 7,
+      "chef": 6
+    }
+  },
+  {
+    "id": "endurance-convection-oven-line",
+    "name": "Endurance Convection Oven",
+    "category": "Kitchen",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 427800,
+    "width": 3,
+    "height": 3,
+    "symbol": "C",
+    "durability": 87,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 2,
+      "ambience": -1,
+      "cleanability": 9,
+      "reliability": 15,
+      "kitchen": 8,
+      "consistency": 8
+    },
+    "tags": [
+      "hot-line",
+      "collection:endurance",
+      "commercial",
+      "kitchen",
+      "asset:furniture-endurance-convection-oven-line"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-convection-oven-line",
+    "upkeepCents": 1797,
+    "breakageHorizonShifts": 580,
+    "wearPerShift": 0.172,
+    "repairCostCents": 79571,
+    "roleEffects": {
+      "cook": 7,
+      "chef": 6
+    }
+  },
+  {
+    "id": "hospitality-convection-oven-line",
+    "name": "Hospitality Convection Oven",
+    "category": "Kitchen",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 450800,
+    "width": 3,
+    "height": 3,
+    "symbol": "C",
+    "durability": 77,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 8,
+      "ambience": 2,
+      "cleanability": 6,
+      "reliability": 7,
+      "kitchen": 8,
+      "consistency": 8
+    },
+    "tags": [
+      "hot-line",
+      "collection:hospitality",
+      "premium",
+      "kitchen",
+      "asset:furniture-hospitality-convection-oven-line"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-convection-oven-line",
+    "upkeepCents": 1965,
+    "breakageHorizonShifts": 466,
+    "wearPerShift": 0.215,
+    "repairCostCents": 92865,
+    "roleEffects": {
+      "cook": 7,
+      "chef": 6
+    }
+  },
+  {
+    "id": "precision-convection-oven-line",
+    "name": "Precision Convection Oven",
+    "category": "Kitchen",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 553900,
+    "width": 3,
+    "height": 3,
+    "symbol": "C",
+    "durability": 80,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 4,
+      "ambience": 0,
+      "cleanability": 7,
+      "reliability": 8,
+      "kitchen": 10,
+      "consistency": 10
+    },
+    "tags": [
+      "hot-line",
+      "collection:precision",
+      "iconic",
+      "kitchen",
+      "asset:furniture-precision-convection-oven-line"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-convection-oven-line",
+    "upkeepCents": 2404,
+    "breakageHorizonShifts": 488,
+    "wearPerShift": 0.205,
+    "repairCostCents": 110780,
+    "roleEffects": {
+      "cook": 10,
+      "chef": 9
+    }
+  },
+  {
+    "id": "reclaimed-convection-oven-line",
+    "name": "Reclaimed Convection Oven",
+    "category": "Kitchen",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 374400,
+    "width": 3,
+    "height": 3,
+    "symbol": "C",
+    "durability": 69,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 4,
+      "ambience": 6,
+      "cleanability": 3,
+      "reliability": 5,
+      "kitchen": 7,
+      "consistency": 7
+    },
+    "tags": [
+      "hot-line",
+      "collection:reclaimed",
+      "artisan",
+      "kitchen",
+      "asset:furniture-reclaimed-convection-oven-line"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-convection-oven-line",
+    "upkeepCents": 1647,
+    "breakageHorizonShifts": 415,
+    "wearPerShift": 0.241,
+    "repairCostCents": 83117,
+    "roleEffects": {
+      "cook": 6,
+      "chef": 5
+    }
+  },
+  {
+    "id": "essential-plancha-griddle",
+    "name": "Essential Plancha Griddle",
+    "category": "Kitchen",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 211700,
+    "width": 3,
+    "height": 2,
+    "symbol": "P",
+    "durability": 80,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 2,
+      "ambience": -3,
+      "cleanability": 13,
+      "reliability": 13,
+      "kitchen": 8,
+      "speed": 5,
+      "consistency": 4
+    },
+    "tags": [
+      "hot-line",
+      "collection:essential",
+      "value",
+      "kitchen",
+      "asset:furniture-essential-plancha-griddle"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-plancha-griddle",
+    "upkeepCents": 898,
+    "breakageHorizonShifts": 533,
+    "wearPerShift": 0.188,
+    "repairCostCents": 42340,
+    "roleEffects": {
+      "cook": 6,
+      "chef": 5
+    }
+  },
+  {
+    "id": "craftsman-plancha-griddle",
+    "name": "Craftsman Plancha Griddle",
+    "category": "Kitchen",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 376300,
+    "width": 3,
+    "height": 2,
+    "symbol": "P",
+    "durability": 86,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 6,
+      "ambience": 4,
+      "cleanability": 6,
+      "reliability": 12,
+      "kitchen": 9,
+      "speed": 5,
+      "consistency": 4
+    },
+    "tags": [
+      "hot-line",
+      "collection:craftsman",
+      "premium",
+      "kitchen",
+      "asset:furniture-craftsman-plancha-griddle"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-plancha-griddle",
+    "upkeepCents": 1603,
+    "breakageHorizonShifts": 549,
+    "wearPerShift": 0.182,
+    "repairCostCents": 70744,
+    "roleEffects": {
+      "cook": 7,
+      "chef": 6
+    }
+  },
+  {
+    "id": "endurance-plancha-griddle",
+    "name": "Endurance Plancha Griddle",
+    "category": "Kitchen",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 329300,
+    "width": 3,
+    "height": 2,
+    "symbol": "P",
+    "durability": 94,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 2,
+      "ambience": -2,
+      "cleanability": 11,
+      "reliability": 18,
+      "kitchen": 9,
+      "speed": 5,
+      "consistency": 4
+    },
+    "tags": [
+      "hot-line",
+      "collection:endurance",
+      "commercial",
+      "kitchen",
+      "asset:furniture-endurance-plancha-griddle"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-plancha-griddle",
+    "upkeepCents": 1363,
+    "breakageHorizonShifts": 637,
+    "wearPerShift": 0.157,
+    "repairCostCents": 56640,
+    "roleEffects": {
+      "cook": 7,
+      "chef": 6
+    }
+  },
+  {
+    "id": "hospitality-plancha-griddle",
+    "name": "Hospitality Plancha Griddle",
+    "category": "Kitchen",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 346900,
+    "width": 3,
+    "height": 2,
+    "symbol": "P",
+    "durability": 84,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 8,
+      "ambience": 1,
+      "cleanability": 8,
+      "reliability": 10,
+      "kitchen": 10,
+      "speed": 5,
+      "consistency": 4
+    },
+    "tags": [
+      "hot-line",
+      "collection:hospitality",
+      "premium",
+      "kitchen",
+      "asset:furniture-hospitality-plancha-griddle"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-plancha-griddle",
+    "upkeepCents": 1492,
+    "breakageHorizonShifts": 523,
+    "wearPerShift": 0.191,
+    "repairCostCents": 66605,
+    "roleEffects": {
+      "cook": 8,
+      "chef": 7
+    }
+  },
+  {
+    "id": "precision-plancha-griddle",
+    "name": "Precision Plancha Griddle",
+    "category": "Kitchen",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 426300,
+    "width": 3,
+    "height": 2,
+    "symbol": "P",
+    "durability": 87,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 4,
+      "ambience": -1,
+      "cleanability": 9,
+      "reliability": 11,
+      "kitchen": 12,
+      "speed": 7,
+      "consistency": 5
+    },
+    "tags": [
+      "hot-line",
+      "collection:precision",
+      "iconic",
+      "kitchen",
+      "asset:furniture-precision-plancha-griddle"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-plancha-griddle",
+    "upkeepCents": 1825,
+    "breakageHorizonShifts": 544,
+    "wearPerShift": 0.184,
+    "repairCostCents": 79292,
+    "roleEffects": {
+      "cook": 12,
+      "chef": 10
+    }
+  },
+  {
+    "id": "reclaimed-plancha-griddle",
+    "name": "Reclaimed Plancha Griddle",
+    "category": "Kitchen",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 288100,
+    "width": 3,
+    "height": 2,
+    "symbol": "P",
+    "durability": 76,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 4,
+      "ambience": 5,
+      "cleanability": 5,
+      "reliability": 8,
+      "kitchen": 8,
+      "speed": 5,
+      "consistency": 4
+    },
+    "tags": [
+      "hot-line",
+      "collection:reclaimed",
+      "artisan",
+      "kitchen",
+      "asset:furniture-reclaimed-plancha-griddle"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-plancha-griddle",
+    "upkeepCents": 1250,
+    "breakageHorizonShifts": 471,
+    "wearPerShift": 0.212,
+    "repairCostCents": 59925,
+    "roleEffects": {
+      "cook": 6,
+      "chef": 5
+    }
+  },
+  {
+    "id": "essential-fry-station",
+    "name": "Essential Fry Station",
+    "category": "Kitchen",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 236200,
+    "width": 3,
+    "height": 2,
+    "symbol": "F",
+    "durability": 67,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 1,
+      "ambience": -4,
+      "cleanability": 8,
+      "reliability": 7,
+      "kitchen": 9,
+      "recovery": 5,
+      "capacity": 4
+    },
+    "tags": [
+      "hot-line",
+      "collection:essential",
+      "value",
+      "kitchen",
+      "asset:furniture-essential-fry-station"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-fry-station",
+    "upkeepCents": 1030,
+    "breakageHorizonShifts": 424,
+    "wearPerShift": 0.236,
+    "repairCostCents": 53381,
+    "roleEffects": {
+      "cook": 6,
+      "chef": 6
+    }
+  },
+  {
+    "id": "craftsman-fry-station",
+    "name": "Craftsman Fry Station",
+    "category": "Kitchen",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 419800,
+    "width": 3,
+    "height": 2,
+    "symbol": "F",
+    "durability": 73,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 5,
+      "ambience": 3,
+      "cleanability": 1,
+      "reliability": 6,
+      "kitchen": 10,
+      "recovery": 5,
+      "capacity": 4
+    },
+    "tags": [
+      "hot-line",
+      "collection:craftsman",
+      "premium",
+      "kitchen",
+      "asset:furniture-craftsman-fry-station"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-fry-station",
+    "upkeepCents": 1839,
+    "breakageHorizonShifts": 441,
+    "wearPerShift": 0.227,
+    "repairCostCents": 89837,
+    "roleEffects": {
+      "cook": 8,
+      "chef": 7
+    }
+  },
+  {
+    "id": "endurance-fry-station",
+    "name": "Endurance Fry Station",
+    "category": "Kitchen",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 367400,
+    "width": 3,
+    "height": 2,
+    "symbol": "F",
+    "durability": 81,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 1,
+      "ambience": -3,
+      "cleanability": 6,
+      "reliability": 12,
+      "kitchen": 10,
+      "recovery": 5,
+      "capacity": 4
+    },
+    "tags": [
+      "hot-line",
+      "collection:endurance",
+      "commercial",
+      "kitchen",
+      "asset:furniture-endurance-fry-station"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-fry-station",
+    "upkeepCents": 1565,
+    "breakageHorizonShifts": 528,
+    "wearPerShift": 0.189,
+    "repairCostCents": 72745,
+    "roleEffects": {
+      "cook": 7,
+      "chef": 7
+    }
+  },
+  {
+    "id": "hospitality-fry-station",
+    "name": "Hospitality Fry Station",
+    "category": "Kitchen",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 387000,
+    "width": 3,
+    "height": 2,
+    "symbol": "F",
+    "durability": 71,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 7,
+      "ambience": 0,
+      "cleanability": 3,
+      "reliability": 4,
+      "kitchen": 11,
+      "recovery": 5,
+      "capacity": 4
+    },
+    "tags": [
+      "hot-line",
+      "collection:hospitality",
+      "premium",
+      "kitchen",
+      "asset:furniture-hospitality-fry-station"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-fry-station",
+    "upkeepCents": 1711,
+    "breakageHorizonShifts": 414,
+    "wearPerShift": 0.242,
+    "repairCostCents": 84366,
+    "roleEffects": {
+      "cook": 9,
+      "chef": 8
+    }
+  },
+  {
+    "id": "precision-fry-station",
+    "name": "Precision Fry Station",
+    "category": "Kitchen",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 475600,
+    "width": 3,
+    "height": 2,
+    "symbol": "F",
+    "durability": 74,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 3,
+      "ambience": -2,
+      "cleanability": 4,
+      "reliability": 5,
+      "kitchen": 13,
+      "recovery": 7,
+      "capacity": 5
+    },
+    "tags": [
+      "hot-line",
+      "collection:precision",
+      "iconic",
+      "kitchen",
+      "asset:furniture-precision-fry-station"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-fry-station",
+    "upkeepCents": 2093,
+    "breakageHorizonShifts": 436,
+    "wearPerShift": 0.229,
+    "repairCostCents": 100827,
+    "roleEffects": {
+      "cook": 12,
+      "chef": 11
+    }
+  },
+  {
+    "id": "reclaimed-fry-station",
+    "name": "Reclaimed Fry Station",
+    "category": "Kitchen",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 321400,
+    "width": 3,
+    "height": 2,
+    "symbol": "F",
+    "durability": 63,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 3,
+      "ambience": 4,
+      "cleanability": 0,
+      "reliability": 2,
+      "kitchen": 9,
+      "recovery": 5,
+      "capacity": 4
+    },
+    "tags": [
+      "hot-line",
+      "collection:reclaimed",
+      "artisan",
+      "kitchen",
+      "asset:furniture-reclaimed-fry-station"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-fry-station",
+    "upkeepCents": 1433,
+    "breakageHorizonShifts": 363,
+    "wearPerShift": 0.275,
+    "repairCostCents": 75208,
+    "roleEffects": {
+      "cook": 7,
+      "chef": 6
+    }
+  },
+  {
+    "id": "essential-prep-counter",
+    "name": "Essential Prep Counter",
+    "category": "Kitchen",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 161300,
+    "width": 4,
+    "height": 2,
+    "symbol": "P",
+    "durability": 82,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 4,
+      "ambience": -2,
+      "cleanability": 15,
+      "reliability": 14,
+      "kitchen": 5,
+      "sanitation": 5,
+      "storage": 5,
+      "waste": -3
+    },
+    "tags": [
+      "prep",
+      "collection:essential",
+      "value",
+      "kitchen",
+      "asset:furniture-essential-prep-counter"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-prep-counter",
+    "upkeepCents": 681,
+    "breakageHorizonShifts": 550,
+    "wearPerShift": 0.182,
+    "repairCostCents": 31615,
+    "roleEffects": {
+      "cook": 5,
+      "chef": 4
+    }
+  },
+  {
+    "id": "craftsman-prep-counter",
+    "name": "Craftsman Prep Counter",
+    "category": "Kitchen",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 286700,
+    "width": 4,
+    "height": 2,
+    "symbol": "P",
+    "durability": 88,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 8,
+      "ambience": 5,
+      "cleanability": 8,
+      "reliability": 13,
+      "kitchen": 6,
+      "sanitation": 5,
+      "storage": 6,
+      "waste": -3
+    },
+    "tags": [
+      "prep",
+      "collection:craftsman",
+      "premium",
+      "kitchen",
+      "asset:furniture-craftsman-prep-counter"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-prep-counter",
+    "upkeepCents": 1216,
+    "breakageHorizonShifts": 567,
+    "wearPerShift": 0.176,
+    "repairCostCents": 52753,
+    "roleEffects": {
+      "cook": 6,
+      "chef": 5
+    }
+  },
+  {
+    "id": "endurance-prep-counter",
+    "name": "Endurance Prep Counter",
+    "category": "Kitchen",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 250900,
+    "width": 4,
+    "height": 2,
+    "symbol": "P",
+    "durability": 96,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 4,
+      "ambience": -1,
+      "cleanability": 13,
+      "reliability": 19,
+      "kitchen": 6,
+      "sanitation": 5,
+      "storage": 6,
+      "waste": -3
+    },
+    "tags": [
+      "prep",
+      "collection:endurance",
+      "commercial",
+      "kitchen",
+      "asset:furniture-endurance-prep-counter"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-prep-counter",
+    "upkeepCents": 1034,
+    "breakageHorizonShifts": 654,
+    "wearPerShift": 0.153,
+    "repairCostCents": 42151,
+    "roleEffects": {
+      "cook": 6,
+      "chef": 5
+    }
+  },
+  {
+    "id": "hospitality-prep-counter",
+    "name": "Hospitality Prep Counter",
+    "category": "Kitchen",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 264300,
+    "width": 4,
+    "height": 2,
+    "symbol": "P",
+    "durability": 86,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 10,
+      "ambience": 2,
+      "cleanability": 10,
+      "reliability": 11,
+      "kitchen": 6,
+      "sanitation": 5,
+      "storage": 6,
+      "waste": -3
+    },
+    "tags": [
+      "prep",
+      "collection:hospitality",
+      "premium",
+      "kitchen",
+      "asset:furniture-hospitality-prep-counter"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-prep-counter",
+    "upkeepCents": 1131,
+    "breakageHorizonShifts": 540,
+    "wearPerShift": 0.185,
+    "repairCostCents": 49688,
+    "roleEffects": {
+      "cook": 6,
+      "chef": 5
+    }
+  },
+  {
+    "id": "precision-prep-counter",
+    "name": "Precision Prep Counter",
+    "category": "Kitchen",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 324800,
+    "width": 4,
+    "height": 2,
+    "symbol": "P",
+    "durability": 89,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 6,
+      "ambience": 0,
+      "cleanability": 11,
+      "reliability": 12,
+      "kitchen": 8,
+      "sanitation": 7,
+      "storage": 8,
+      "waste": -4
+    },
+    "tags": [
+      "prep",
+      "collection:precision",
+      "iconic",
+      "kitchen",
+      "asset:furniture-precision-prep-counter"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-prep-counter",
+    "upkeepCents": 1384,
+    "breakageHorizonShifts": 562,
+    "wearPerShift": 0.178,
+    "repairCostCents": 59114,
+    "roleEffects": {
+      "cook": 9,
+      "chef": 8
+    }
+  },
+  {
+    "id": "reclaimed-prep-counter",
+    "name": "Reclaimed Prep Counter",
+    "category": "Kitchen",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 219500,
+    "width": 4,
+    "height": 2,
+    "symbol": "P",
+    "durability": 78,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 6,
+      "ambience": 6,
+      "cleanability": 7,
+      "reliability": 9,
+      "kitchen": 5,
+      "sanitation": 5,
+      "storage": 5,
+      "waste": -3
+    },
+    "tags": [
+      "prep",
+      "collection:reclaimed",
+      "artisan",
+      "kitchen",
+      "asset:furniture-reclaimed-prep-counter"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-prep-counter",
+    "upkeepCents": 948,
+    "breakageHorizonShifts": 489,
+    "wearPerShift": 0.204,
+    "repairCostCents": 44778,
+    "roleEffects": {
+      "cook": 5,
+      "chef": 4
+    }
+  },
+  {
+    "id": "essential-expo-pass",
+    "name": "Essential Expo Pass",
+    "category": "Kitchen",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 205900,
+    "width": 4,
+    "height": 1,
+    "symbol": "E",
+    "durability": 70,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 3,
+      "ambience": -1,
+      "cleanability": 11,
+      "reliability": 9,
+      "kitchen": 5,
+      "hold": 7,
+      "quality": 5,
+      "turnover": 4
+    },
+    "tags": [
+      "expo",
+      "collection:essential",
+      "value",
+      "kitchen",
+      "asset:furniture-essential-expo-pass"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-expo-pass",
+    "upkeepCents": 889,
+    "breakageHorizonShifts": 455,
+    "wearPerShift": 0.22,
+    "repairCostCents": 45298,
+    "roleEffects": {
+      "cook": 6,
+      "chef": 5
+    }
+  },
+  {
+    "id": "craftsman-expo-pass",
+    "name": "Craftsman Expo Pass",
+    "category": "Kitchen",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 366100,
+    "width": 4,
+    "height": 1,
+    "symbol": "E",
+    "durability": 76,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 7,
+      "ambience": 6,
+      "cleanability": 4,
+      "reliability": 8,
+      "kitchen": 6,
+      "hold": 8,
+      "quality": 5,
+      "turnover": 4
+    },
+    "tags": [
+      "expo",
+      "collection:craftsman",
+      "premium",
+      "kitchen",
+      "asset:furniture-craftsman-expo-pass"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-expo-pass",
+    "upkeepCents": 1589,
+    "breakageHorizonShifts": 471,
+    "wearPerShift": 0.212,
+    "repairCostCents": 76149,
+    "roleEffects": {
+      "cook": 7,
+      "chef": 6
+    }
+  },
+  {
+    "id": "endurance-expo-pass",
+    "name": "Endurance Expo Pass",
+    "category": "Kitchen",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 320300,
+    "width": 4,
+    "height": 1,
+    "symbol": "E",
+    "durability": 84,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 3,
+      "ambience": 0,
+      "cleanability": 9,
+      "reliability": 14,
+      "kitchen": 6,
+      "hold": 8,
+      "quality": 5,
+      "turnover": 4
+    },
+    "tags": [
+      "expo",
+      "collection:endurance",
+      "commercial",
+      "kitchen",
+      "asset:furniture-endurance-expo-pass"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-expo-pass",
+    "upkeepCents": 1352,
+    "breakageHorizonShifts": 559,
+    "wearPerShift": 0.179,
+    "repairCostCents": 61498,
+    "roleEffects": {
+      "cook": 7,
+      "chef": 6
+    }
+  },
+  {
+    "id": "hospitality-expo-pass",
+    "name": "Hospitality Expo Pass",
+    "category": "Kitchen",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 337500,
+    "width": 4,
+    "height": 1,
+    "symbol": "E",
+    "durability": 74,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 9,
+      "ambience": 3,
+      "cleanability": 6,
+      "reliability": 6,
+      "kitchen": 6,
+      "hold": 8,
+      "quality": 5,
+      "turnover": 4
+    },
+    "tags": [
+      "expo",
+      "collection:hospitality",
+      "premium",
+      "kitchen",
+      "asset:furniture-hospitality-expo-pass"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-expo-pass",
+    "upkeepCents": 1478,
+    "breakageHorizonShifts": 445,
+    "wearPerShift": 0.225,
+    "repairCostCents": 71550,
+    "roleEffects": {
+      "cook": 7,
+      "chef": 6
+    }
+  },
+  {
+    "id": "precision-expo-pass",
+    "name": "Precision Expo Pass",
+    "category": "Kitchen",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 414700,
+    "width": 4,
+    "height": 1,
+    "symbol": "E",
+    "durability": 77,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 5,
+      "ambience": 1,
+      "cleanability": 7,
+      "reliability": 7,
+      "kitchen": 8,
+      "hold": 10,
+      "quality": 7,
+      "turnover": 5
+    },
+    "tags": [
+      "expo",
+      "collection:precision",
+      "iconic",
+      "kitchen",
+      "asset:furniture-precision-expo-pass"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-expo-pass",
+    "upkeepCents": 1808,
+    "breakageHorizonShifts": 466,
+    "wearPerShift": 0.215,
+    "repairCostCents": 85428,
+    "roleEffects": {
+      "cook": 10,
+      "chef": 9
+    }
+  },
+  {
+    "id": "reclaimed-expo-pass",
+    "name": "Reclaimed Expo Pass",
+    "category": "Kitchen",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 280300,
+    "width": 4,
+    "height": 1,
+    "symbol": "E",
+    "durability": 66,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 5,
+      "ambience": 7,
+      "cleanability": 3,
+      "reliability": 4,
+      "kitchen": 5,
+      "hold": 7,
+      "quality": 5,
+      "turnover": 4
+    },
+    "tags": [
+      "expo",
+      "collection:reclaimed",
+      "artisan",
+      "kitchen",
+      "asset:furniture-reclaimed-expo-pass"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-expo-pass",
+    "upkeepCents": 1239,
+    "breakageHorizonShifts": 393,
+    "wearPerShift": 0.254,
+    "repairCostCents": 63908,
+    "roleEffects": {
+      "cook": 6,
+      "chef": 5
+    }
+  },
+  {
+    "id": "essential-combi-oven",
+    "name": "Essential Combi Oven",
+    "category": "Kitchen",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 440600,
+    "width": 3,
+    "height": 3,
+    "symbol": "C",
+    "durability": 65,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 2,
+      "ambience": -2,
+      "cleanability": 12,
+      "reliability": 7,
+      "kitchen": 11,
+      "consistency": 9,
+      "capacity": 5
+    },
+    "tags": [
+      "hot-line",
+      "technology",
+      "collection:essential",
+      "value",
+      "kitchen",
+      "asset:furniture-essential-combi-oven"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-combi-oven",
+    "upkeepCents": 1921,
+    "breakageHorizonShifts": 416,
+    "wearPerShift": 0.24,
+    "repairCostCents": 101338,
+    "roleEffects": {
+      "cook": 7,
+      "chef": 6
+    }
+  },
+  {
+    "id": "craftsman-combi-oven",
+    "name": "Craftsman Combi Oven",
+    "category": "Kitchen",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 783400,
+    "width": 3,
+    "height": 3,
+    "symbol": "C",
+    "durability": 71,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 6,
+      "ambience": 5,
+      "cleanability": 5,
+      "reliability": 6,
+      "kitchen": 12,
+      "consistency": 10,
+      "capacity": 5
+    },
+    "tags": [
+      "hot-line",
+      "technology",
+      "collection:craftsman",
+      "premium",
+      "kitchen",
+      "asset:furniture-craftsman-combi-oven"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-combi-oven",
+    "upkeepCents": 3431,
+    "breakageHorizonShifts": 432,
+    "wearPerShift": 0.231,
+    "repairCostCents": 170781,
+    "roleEffects": {
+      "cook": 9,
+      "chef": 8
+    }
+  },
+  {
+    "id": "endurance-combi-oven",
+    "name": "Endurance Combi Oven",
+    "category": "Kitchen",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 685400,
+    "width": 3,
+    "height": 3,
+    "symbol": "C",
+    "durability": 79,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 2,
+      "ambience": -1,
+      "cleanability": 10,
+      "reliability": 12,
+      "kitchen": 12,
+      "consistency": 10,
+      "capacity": 5
+    },
+    "tags": [
+      "hot-line",
+      "technology",
+      "collection:endurance",
+      "commercial",
+      "kitchen",
+      "asset:furniture-endurance-combi-oven"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-combi-oven",
+    "upkeepCents": 2920,
+    "breakageHorizonShifts": 520,
+    "wearPerShift": 0.192,
+    "repairCostCents": 138451,
+    "roleEffects": {
+      "cook": 8,
+      "chef": 7
+    }
+  },
+  {
+    "id": "hospitality-combi-oven",
+    "name": "Hospitality Combi Oven",
+    "category": "Kitchen",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 722200,
+    "width": 3,
+    "height": 3,
+    "symbol": "C",
+    "durability": 69,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 8,
+      "ambience": 2,
+      "cleanability": 7,
+      "reliability": 4,
+      "kitchen": 13,
+      "consistency": 11,
+      "capacity": 5
+    },
+    "tags": [
+      "hot-line",
+      "technology",
+      "collection:hospitality",
+      "premium",
+      "kitchen",
+      "asset:furniture-hospitality-combi-oven"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-combi-oven",
+    "upkeepCents": 3192,
+    "breakageHorizonShifts": 406,
+    "wearPerShift": 0.246,
+    "repairCostCents": 160328,
+    "roleEffects": {
+      "cook": 10,
+      "chef": 9
+    }
+  },
+  {
+    "id": "precision-combi-oven",
+    "name": "Precision Combi Oven",
+    "category": "Kitchen",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 887400,
+    "width": 3,
+    "height": 3,
+    "symbol": "C",
+    "durability": 72,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 4,
+      "ambience": 0,
+      "cleanability": 8,
+      "reliability": 5,
+      "kitchen": 16,
+      "consistency": 13,
+      "capacity": 7
+    },
+    "tags": [
+      "hot-line",
+      "technology",
+      "collection:precision",
+      "iconic",
+      "kitchen",
+      "asset:furniture-precision-combi-oven"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-combi-oven",
+    "upkeepCents": 3905,
+    "breakageHorizonShifts": 427,
+    "wearPerShift": 0.234,
+    "repairCostCents": 191678,
+    "roleEffects": {
+      "cook": 14,
+      "chef": 13
+    }
+  },
+  {
+    "id": "reclaimed-combi-oven",
+    "name": "Reclaimed Combi Oven",
+    "category": "Kitchen",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 599800,
+    "width": 3,
+    "height": 3,
+    "symbol": "C",
+    "durability": 61,
+    "utilities": [
+      "power",
+      "ventilation"
+    ],
+    "stats": {
+      "comfort": 4,
+      "ambience": 6,
+      "cleanability": 4,
+      "reliability": 2,
+      "kitchen": 11,
+      "consistency": 9,
+      "capacity": 5
+    },
+    "tags": [
+      "hot-line",
+      "technology",
+      "collection:reclaimed",
+      "artisan",
+      "kitchen",
+      "asset:furniture-reclaimed-combi-oven"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-combi-oven",
+    "upkeepCents": 2675,
+    "breakageHorizonShifts": 354,
+    "wearPerShift": 0.282,
+    "repairCostCents": 142752,
+    "roleEffects": {
+      "cook": 8,
+      "chef": 7
+    }
+  },
+  {
+    "id": "essential-dish-machine",
+    "name": "Essential Dish Machine",
+    "category": "Utility",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 393100,
+    "width": 4,
+    "height": 3,
+    "symbol": "D",
+    "durability": 71,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 2,
+      "ambience": -4,
+      "cleanability": 14,
+      "reliability": 9,
+      "sanitation": 9,
+      "capacity": 7,
+      "speed": 5,
+      "breakage": -3
+    },
+    "tags": [
+      "dish-pit",
+      "collection:essential",
+      "value",
+      "utility",
+      "asset:furniture-essential-dish-machine"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-dish-machine",
+    "upkeepCents": 1698,
+    "breakageHorizonShifts": 459,
+    "wearPerShift": 0.218,
+    "repairCostCents": 85696,
+    "roleEffects": {
+      "dishwasher": 6,
+      "host-busser": 6
+    }
+  },
+  {
+    "id": "craftsman-dish-machine",
+    "name": "Craftsman Dish Machine",
+    "category": "Utility",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 698900,
+    "width": 4,
+    "height": 3,
+    "symbol": "D",
+    "durability": 77,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 6,
+      "ambience": 3,
+      "cleanability": 7,
+      "reliability": 8,
+      "sanitation": 10,
+      "capacity": 8,
+      "speed": 6,
+      "breakage": -3
+    },
+    "tags": [
+      "dish-pit",
+      "collection:craftsman",
+      "premium",
+      "utility",
+      "asset:furniture-craftsman-dish-machine"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-dish-machine",
+    "upkeepCents": 3033,
+    "breakageHorizonShifts": 475,
+    "wearPerShift": 0.211,
+    "repairCostCents": 143973,
+    "roleEffects": {
+      "dishwasher": 8,
+      "host-busser": 7
+    }
+  },
+  {
+    "id": "endurance-dish-machine",
+    "name": "Endurance Dish Machine",
+    "category": "Utility",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 611500,
+    "width": 4,
+    "height": 3,
+    "symbol": "D",
+    "durability": 85,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 2,
+      "ambience": -3,
+      "cleanability": 12,
+      "reliability": 14,
+      "sanitation": 10,
+      "capacity": 8,
+      "speed": 6,
+      "breakage": -3
+    },
+    "tags": [
+      "dish-pit",
+      "collection:endurance",
+      "commercial",
+      "utility",
+      "asset:furniture-endurance-dish-machine"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-dish-machine",
+    "upkeepCents": 2581,
+    "breakageHorizonShifts": 563,
+    "wearPerShift": 0.178,
+    "repairCostCents": 116185,
+    "roleEffects": {
+      "dishwasher": 7,
+      "host-busser": 7
+    }
+  },
+  {
+    "id": "hospitality-dish-machine",
+    "name": "Hospitality Dish Machine",
+    "category": "Utility",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 644300,
+    "width": 4,
+    "height": 3,
+    "symbol": "D",
+    "durability": 75,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 8,
+      "ambience": 0,
+      "cleanability": 9,
+      "reliability": 6,
+      "sanitation": 11,
+      "capacity": 8,
+      "speed": 6,
+      "breakage": -3
+    },
+    "tags": [
+      "dish-pit",
+      "collection:hospitality",
+      "premium",
+      "utility",
+      "asset:furniture-hospitality-dish-machine"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-dish-machine",
+    "upkeepCents": 2822,
+    "breakageHorizonShifts": 449,
+    "wearPerShift": 0.223,
+    "repairCostCents": 135303,
+    "roleEffects": {
+      "dishwasher": 9,
+      "host-busser": 8
+    }
+  },
+  {
+    "id": "precision-dish-machine",
+    "name": "Precision Dish Machine",
+    "category": "Utility",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 791700,
+    "width": 4,
+    "height": 3,
+    "symbol": "D",
+    "durability": 78,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 4,
+      "ambience": -2,
+      "cleanability": 10,
+      "reliability": 7,
+      "sanitation": 13,
+      "capacity": 10,
+      "speed": 8,
+      "breakage": -4
+    },
+    "tags": [
+      "dish-pit",
+      "collection:precision",
+      "iconic",
+      "utility",
+      "asset:furniture-precision-dish-machine"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-dish-machine",
+    "upkeepCents": 3452,
+    "breakageHorizonShifts": 471,
+    "wearPerShift": 0.212,
+    "repairCostCents": 161507,
+    "roleEffects": {
+      "dishwasher": 12,
+      "host-busser": 11
+    }
+  },
+  {
+    "id": "reclaimed-dish-machine",
+    "name": "Reclaimed Dish Machine",
+    "category": "Utility",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 535100,
+    "width": 4,
+    "height": 3,
+    "symbol": "D",
+    "durability": 67,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 4,
+      "ambience": 4,
+      "cleanability": 6,
+      "reliability": 4,
+      "sanitation": 9,
+      "capacity": 7,
+      "speed": 5,
+      "breakage": -3
+    },
+    "tags": [
+      "dish-pit",
+      "collection:reclaimed",
+      "artisan",
+      "utility",
+      "asset:furniture-reclaimed-dish-machine"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-dish-machine",
+    "upkeepCents": 2365,
+    "breakageHorizonShifts": 397,
+    "wearPerShift": 0.252,
+    "repairCostCents": 120933,
+    "roleEffects": {
+      "dishwasher": 7,
+      "host-busser": 6
+    }
+  },
+  {
+    "id": "essential-pot-wash-sink",
+    "name": "Essential Pot-Wash Sink",
+    "category": "Utility",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 157000,
+    "width": 4,
+    "height": 2,
+    "symbol": "P",
+    "durability": 84,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 3,
+      "ambience": -4,
+      "cleanability": 17,
+      "reliability": 15,
+      "sanitation": 6,
+      "recovery": 5,
+      "safety": 4
+    },
+    "tags": [
+      "dish-pit",
+      "collection:essential",
+      "value",
+      "utility",
+      "asset:furniture-essential-pot-wash-sink"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-pot-wash-sink",
+    "upkeepCents": 659,
+    "breakageHorizonShifts": 568,
+    "wearPerShift": 0.176,
+    "repairCostCents": 30144,
+    "roleEffects": {
+      "dishwasher": 5,
+      "host-busser": 4
+    }
+  },
+  {
+    "id": "craftsman-pot-wash-sink",
+    "name": "Craftsman Pot-Wash Sink",
+    "category": "Utility",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 279000,
+    "width": 4,
+    "height": 2,
+    "symbol": "P",
+    "durability": 90,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 7,
+      "ambience": 3,
+      "cleanability": 10,
+      "reliability": 14,
+      "sanitation": 7,
+      "recovery": 6,
+      "safety": 4
+    },
+    "tags": [
+      "dish-pit",
+      "collection:craftsman",
+      "premium",
+      "utility",
+      "asset:furniture-craftsman-pot-wash-sink"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-pot-wash-sink",
+    "upkeepCents": 1177,
+    "breakageHorizonShifts": 584,
+    "wearPerShift": 0.171,
+    "repairCostCents": 50220,
+    "roleEffects": {
+      "dishwasher": 6,
+      "host-busser": 5
+    }
+  },
+  {
+    "id": "endurance-pot-wash-sink",
+    "name": "Endurance Pot-Wash Sink",
+    "category": "Utility",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 244200,
+    "width": 4,
+    "height": 2,
+    "symbol": "P",
+    "durability": 98,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 3,
+      "ambience": -3,
+      "cleanability": 15,
+      "reliability": 20,
+      "sanitation": 7,
+      "recovery": 6,
+      "safety": 4
+    },
+    "tags": [
+      "dish-pit",
+      "collection:endurance",
+      "commercial",
+      "utility",
+      "asset:furniture-endurance-pot-wash-sink"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-pot-wash-sink",
+    "upkeepCents": 1001,
+    "breakageHorizonShifts": 672,
+    "wearPerShift": 0.149,
+    "repairCostCents": 40049,
+    "roleEffects": {
+      "dishwasher": 6,
+      "host-busser": 5
+    }
+  },
+  {
+    "id": "hospitality-pot-wash-sink",
+    "name": "Hospitality Pot-Wash Sink",
+    "category": "Utility",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 257200,
+    "width": 4,
+    "height": 2,
+    "symbol": "P",
+    "durability": 88,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 9,
+      "ambience": 0,
+      "cleanability": 12,
+      "reliability": 12,
+      "sanitation": 7,
+      "recovery": 6,
+      "safety": 4
+    },
+    "tags": [
+      "dish-pit",
+      "collection:hospitality",
+      "premium",
+      "utility",
+      "asset:furniture-hospitality-pot-wash-sink"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-pot-wash-sink",
+    "upkeepCents": 1096,
+    "breakageHorizonShifts": 558,
+    "wearPerShift": 0.179,
+    "repairCostCents": 47325,
+    "roleEffects": {
+      "dishwasher": 7,
+      "host-busser": 6
+    }
+  },
+  {
+    "id": "precision-pot-wash-sink",
+    "name": "Precision Pot-Wash Sink",
+    "category": "Utility",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 316100,
+    "width": 4,
+    "height": 2,
+    "symbol": "P",
+    "durability": 91,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 5,
+      "ambience": -2,
+      "cleanability": 13,
+      "reliability": 13,
+      "sanitation": 9,
+      "recovery": 8,
+      "safety": 5
+    },
+    "tags": [
+      "dish-pit",
+      "collection:precision",
+      "iconic",
+      "utility",
+      "asset:furniture-precision-pot-wash-sink"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-pot-wash-sink",
+    "upkeepCents": 1340,
+    "breakageHorizonShifts": 579,
+    "wearPerShift": 0.173,
+    "repairCostCents": 56266,
+    "roleEffects": {
+      "dishwasher": 10,
+      "host-busser": 8
+    }
+  },
+  {
+    "id": "reclaimed-pot-wash-sink",
+    "name": "Reclaimed Pot-Wash Sink",
+    "category": "Utility",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 213600,
+    "width": 4,
+    "height": 2,
+    "symbol": "P",
+    "durability": 80,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 5,
+      "ambience": 4,
+      "cleanability": 9,
+      "reliability": 10,
+      "sanitation": 6,
+      "recovery": 5,
+      "safety": 4
+    },
+    "tags": [
+      "dish-pit",
+      "collection:reclaimed",
+      "artisan",
+      "utility",
+      "asset:furniture-reclaimed-pot-wash-sink"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-pot-wash-sink",
+    "upkeepCents": 918,
+    "breakageHorizonShifts": 506,
+    "wearPerShift": 0.198,
+    "repairCostCents": 42720,
+    "roleEffects": {
+      "dishwasher": 5,
+      "host-busser": 4
+    }
+  },
+  {
+    "id": "essential-mop-basin",
+    "name": "Essential Mop Basin",
+    "category": "Utility",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 54700,
+    "width": 2,
+    "height": 2,
+    "symbol": "M",
+    "durability": 87,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 1,
+      "ambience": -5,
+      "cleanability": 19,
+      "reliability": 16,
+      "sanitation": 6,
+      "spill": 7
+    },
+    "tags": [
+      "cleaning",
+      "collection:essential",
+      "value",
+      "utility",
+      "asset:furniture-essential-mop-basin"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-mop-basin",
+    "upkeepCents": 229,
+    "breakageHorizonShifts": 589,
+    "wearPerShift": 0.17,
+    "repairCostCents": 10174,
+    "roleEffects": {
+      "dishwasher": 6,
+      "host-busser": 5
+    }
+  },
+  {
+    "id": "craftsman-mop-basin",
+    "name": "Craftsman Mop Basin",
+    "category": "Utility",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 97300,
+    "width": 2,
+    "height": 2,
+    "symbol": "M",
+    "durability": 93,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 5,
+      "ambience": 2,
+      "cleanability": 12,
+      "reliability": 15,
+      "sanitation": 7,
+      "spill": 8
+    },
+    "tags": [
+      "cleaning",
+      "collection:craftsman",
+      "premium",
+      "utility",
+      "asset:furniture-craftsman-mop-basin"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-mop-basin",
+    "upkeepCents": 409,
+    "breakageHorizonShifts": 606,
+    "wearPerShift": 0.165,
+    "repairCostCents": 16930,
+    "roleEffects": {
+      "dishwasher": 7,
+      "host-busser": 6
+    }
+  },
+  {
+    "id": "endurance-mop-basin",
+    "name": "Endurance Mop Basin",
+    "category": "Utility",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 85100,
+    "width": 2,
+    "height": 2,
+    "symbol": "M",
+    "durability": 100,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 1,
+      "ambience": -4,
+      "cleanability": 17,
+      "reliability": 20,
+      "sanitation": 7,
+      "spill": 8
+    },
+    "tags": [
+      "cleaning",
+      "collection:endurance",
+      "commercial",
+      "utility",
+      "asset:furniture-endurance-mop-basin"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-mop-basin",
+    "upkeepCents": 349,
+    "breakageHorizonShifts": 680,
+    "wearPerShift": 0.147,
+    "repairCostCents": 13616,
+    "roleEffects": {
+      "dishwasher": 7,
+      "host-busser": 6
+    }
+  },
+  {
+    "id": "hospitality-mop-basin",
+    "name": "Hospitality Mop Basin",
+    "category": "Utility",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 89700,
+    "width": 2,
+    "height": 2,
+    "symbol": "M",
+    "durability": 91,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 7,
+      "ambience": -1,
+      "cleanability": 14,
+      "reliability": 13,
+      "sanitation": 7,
+      "spill": 8
+    },
+    "tags": [
+      "cleaning",
+      "collection:hospitality",
+      "premium",
+      "utility",
+      "asset:furniture-hospitality-mop-basin"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-mop-basin",
+    "upkeepCents": 380,
+    "breakageHorizonShifts": 579,
+    "wearPerShift": 0.173,
+    "repairCostCents": 15967,
+    "roleEffects": {
+      "dishwasher": 7,
+      "host-busser": 6
+    }
+  },
+  {
+    "id": "precision-mop-basin",
+    "name": "Precision Mop Basin",
+    "category": "Utility",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 110200,
+    "width": 2,
+    "height": 2,
+    "symbol": "M",
+    "durability": 94,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 3,
+      "ambience": -3,
+      "cleanability": 15,
+      "reliability": 14,
+      "sanitation": 9,
+      "spill": 10
+    },
+    "tags": [
+      "cleaning",
+      "collection:precision",
+      "iconic",
+      "utility",
+      "asset:furniture-precision-mop-basin"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-mop-basin",
+    "upkeepCents": 465,
+    "breakageHorizonShifts": 601,
+    "wearPerShift": 0.166,
+    "repairCostCents": 18954,
+    "roleEffects": {
+      "dishwasher": 10,
+      "host-busser": 9
+    }
+  },
+  {
+    "id": "reclaimed-mop-basin",
+    "name": "Reclaimed Mop Basin",
+    "category": "Utility",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 74500,
+    "width": 2,
+    "height": 2,
+    "symbol": "M",
+    "durability": 83,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 3,
+      "ambience": 3,
+      "cleanability": 11,
+      "reliability": 11,
+      "sanitation": 6,
+      "spill": 7
+    },
+    "tags": [
+      "cleaning",
+      "collection:reclaimed",
+      "artisan",
+      "utility",
+      "asset:furniture-reclaimed-mop-basin"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-mop-basin",
+    "upkeepCents": 319,
+    "breakageHorizonShifts": 528,
+    "wearPerShift": 0.189,
+    "repairCostCents": 14453,
+    "roleEffects": {
+      "dishwasher": 6,
+      "host-busser": 5
+    }
+  },
+  {
+    "id": "essential-waste-sorter",
+    "name": "Essential Waste Sorter",
+    "category": "Utility",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 80600,
+    "width": 3,
+    "height": 2,
+    "symbol": "W",
+    "durability": 76,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 2,
+      "ambience": -2,
+      "cleanability": 14,
+      "reliability": 13,
+      "sanitation": 5,
+      "waste": -6,
+      "organization": 3
+    },
+    "tags": [
+      "waste",
+      "collection:essential",
+      "value",
+      "utility",
+      "asset:furniture-essential-waste-sorter"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-waste-sorter",
+    "upkeepCents": 342,
+    "breakageHorizonShifts": 516,
+    "wearPerShift": 0.194,
+    "repairCostCents": 16765,
+    "roleEffects": {
+      "dishwasher": 5,
+      "host-busser": 4
+    }
+  },
+  {
+    "id": "craftsman-waste-sorter",
+    "name": "Craftsman Waste Sorter",
+    "category": "Utility",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 143400,
+    "width": 3,
+    "height": 2,
+    "symbol": "W",
+    "durability": 82,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 6,
+      "ambience": 5,
+      "cleanability": 7,
+      "reliability": 12,
+      "sanitation": 5,
+      "waste": -7,
+      "organization": 3
+    },
+    "tags": [
+      "waste",
+      "collection:craftsman",
+      "premium",
+      "utility",
+      "asset:furniture-craftsman-waste-sorter"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-waste-sorter",
+    "upkeepCents": 611,
+    "breakageHorizonShifts": 532,
+    "wearPerShift": 0.188,
+    "repairCostCents": 28106,
+    "roleEffects": {
+      "dishwasher": 5,
+      "host-busser": 4
+    }
+  },
+  {
+    "id": "endurance-waste-sorter",
+    "name": "Endurance Waste Sorter",
+    "category": "Utility",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 125400,
+    "width": 3,
+    "height": 2,
+    "symbol": "W",
+    "durability": 90,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 2,
+      "ambience": -1,
+      "cleanability": 12,
+      "reliability": 18,
+      "sanitation": 5,
+      "waste": -7,
+      "organization": 3
+    },
+    "tags": [
+      "waste",
+      "collection:endurance",
+      "commercial",
+      "utility",
+      "asset:furniture-endurance-waste-sorter"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-waste-sorter",
+    "upkeepCents": 519,
+    "breakageHorizonShifts": 620,
+    "wearPerShift": 0.161,
+    "repairCostCents": 22572,
+    "roleEffects": {
+      "dishwasher": 5,
+      "host-busser": 4
+    }
+  },
+  {
+    "id": "hospitality-waste-sorter",
+    "name": "Hospitality Waste Sorter",
+    "category": "Utility",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 132200,
+    "width": 3,
+    "height": 2,
+    "symbol": "W",
+    "durability": 80,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 8,
+      "ambience": 2,
+      "cleanability": 9,
+      "reliability": 10,
+      "sanitation": 5,
+      "waste": -7,
+      "organization": 3
+    },
+    "tags": [
+      "waste",
+      "collection:hospitality",
+      "premium",
+      "utility",
+      "asset:furniture-hospitality-waste-sorter"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-waste-sorter",
+    "upkeepCents": 568,
+    "breakageHorizonShifts": 506,
+    "wearPerShift": 0.198,
+    "repairCostCents": 26440,
+    "roleEffects": {
+      "dishwasher": 6,
+      "host-busser": 5
+    }
+  },
+  {
+    "id": "precision-waste-sorter",
+    "name": "Precision Waste Sorter",
+    "category": "Utility",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 162400,
+    "width": 3,
+    "height": 2,
+    "symbol": "W",
+    "durability": 83,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 4,
+      "ambience": 0,
+      "cleanability": 10,
+      "reliability": 11,
+      "sanitation": 7,
+      "waste": -9,
+      "organization": 4
+    },
+    "tags": [
+      "waste",
+      "collection:precision",
+      "iconic",
+      "utility",
+      "asset:furniture-precision-waste-sorter"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-waste-sorter",
+    "upkeepCents": 695,
+    "breakageHorizonShifts": 528,
+    "wearPerShift": 0.189,
+    "repairCostCents": 31506,
+    "roleEffects": {
+      "dishwasher": 8,
+      "host-busser": 7
+    }
+  },
+  {
+    "id": "reclaimed-waste-sorter",
+    "name": "Reclaimed Waste Sorter",
+    "category": "Utility",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 109800,
+    "width": 3,
+    "height": 2,
+    "symbol": "W",
+    "durability": 72,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 4,
+      "ambience": 6,
+      "cleanability": 6,
+      "reliability": 8,
+      "sanitation": 5,
+      "waste": -6,
+      "organization": 3
+    },
+    "tags": [
+      "waste",
+      "collection:reclaimed",
+      "artisan",
+      "utility",
+      "asset:furniture-reclaimed-waste-sorter"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-waste-sorter",
+    "upkeepCents": 477,
+    "breakageHorizonShifts": 454,
+    "wearPerShift": 0.22,
+    "repairCostCents": 23717,
+    "roleEffects": {
+      "dishwasher": 5,
+      "host-busser": 4
+    }
+  },
+  {
+    "id": "essential-spill-cart",
+    "name": "Essential Spill Cart",
+    "category": "Utility",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 60500,
+    "width": 2,
+    "height": 1,
+    "symbol": "S",
+    "durability": 69,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 3,
+      "ambience": -2,
+      "cleanability": 16,
+      "reliability": 10,
+      "sanitation": 5,
+      "spill": 9,
+      "recovery": 5
+    },
+    "tags": [
+      "cleaning",
+      "collection:essential",
+      "value",
+      "utility",
+      "asset:furniture-essential-spill-cart"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-spill-cart",
+    "upkeepCents": 260,
+    "breakageHorizonShifts": 460,
+    "wearPerShift": 0.217,
+    "repairCostCents": 13431,
+    "roleEffects": {
+      "dishwasher": 6,
+      "host-busser": 6
+    }
+  },
+  {
+    "id": "craftsman-spill-cart",
+    "name": "Craftsman Spill Cart",
+    "category": "Utility",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 107500,
+    "width": 2,
+    "height": 1,
+    "symbol": "S",
+    "durability": 75,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 7,
+      "ambience": 5,
+      "cleanability": 9,
+      "reliability": 9,
+      "sanitation": 6,
+      "spill": 10,
+      "recovery": 5
+    },
+    "tags": [
+      "cleaning",
+      "collection:craftsman",
+      "premium",
+      "utility",
+      "asset:furniture-craftsman-spill-cart"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-spill-cart",
+    "upkeepCents": 464,
+    "breakageHorizonShifts": 476,
+    "wearPerShift": 0.21,
+    "repairCostCents": 22575,
+    "roleEffects": {
+      "dishwasher": 8,
+      "host-busser": 7
+    }
+  },
+  {
+    "id": "endurance-spill-cart",
+    "name": "Endurance Spill Cart",
+    "category": "Utility",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 94100,
+    "width": 2,
+    "height": 1,
+    "symbol": "S",
+    "durability": 83,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 3,
+      "ambience": -1,
+      "cleanability": 14,
+      "reliability": 15,
+      "sanitation": 6,
+      "spill": 10,
+      "recovery": 5
+    },
+    "tags": [
+      "cleaning",
+      "collection:endurance",
+      "commercial",
+      "utility",
+      "asset:furniture-endurance-spill-cart"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-spill-cart",
+    "upkeepCents": 395,
+    "breakageHorizonShifts": 564,
+    "wearPerShift": 0.177,
+    "repairCostCents": 18255,
+    "roleEffects": {
+      "dishwasher": 7,
+      "host-busser": 7
+    }
+  },
+  {
+    "id": "hospitality-spill-cart",
+    "name": "Hospitality Spill Cart",
+    "category": "Utility",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 99100,
+    "width": 2,
+    "height": 1,
+    "symbol": "S",
+    "durability": 73,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 9,
+      "ambience": 2,
+      "cleanability": 11,
+      "reliability": 7,
+      "sanitation": 6,
+      "spill": 11,
+      "recovery": 5
+    },
+    "tags": [
+      "cleaning",
+      "collection:hospitality",
+      "premium",
+      "utility",
+      "asset:furniture-hospitality-spill-cart"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-spill-cart",
+    "upkeepCents": 432,
+    "breakageHorizonShifts": 450,
+    "wearPerShift": 0.222,
+    "repairCostCents": 21207,
+    "roleEffects": {
+      "dishwasher": 9,
+      "host-busser": 8
+    }
+  },
+  {
+    "id": "precision-spill-cart",
+    "name": "Precision Spill Cart",
+    "category": "Utility",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 121800,
+    "width": 2,
+    "height": 1,
+    "symbol": "S",
+    "durability": 76,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 5,
+      "ambience": 0,
+      "cleanability": 12,
+      "reliability": 8,
+      "sanitation": 8,
+      "spill": 13,
+      "recovery": 7
+    },
+    "tags": [
+      "cleaning",
+      "collection:precision",
+      "iconic",
+      "utility",
+      "asset:furniture-precision-spill-cart"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-spill-cart",
+    "upkeepCents": 529,
+    "breakageHorizonShifts": 471,
+    "wearPerShift": 0.212,
+    "repairCostCents": 25334,
+    "roleEffects": {
+      "dishwasher": 12,
+      "host-busser": 11
+    }
+  },
+  {
+    "id": "reclaimed-spill-cart",
+    "name": "Reclaimed Spill Cart",
+    "category": "Utility",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 82300,
+    "width": 2,
+    "height": 1,
+    "symbol": "S",
+    "durability": 65,
+    "utilities": [
+      "water",
+      "drain"
+    ],
+    "stats": {
+      "comfort": 5,
+      "ambience": 6,
+      "cleanability": 8,
+      "reliability": 5,
+      "sanitation": 5,
+      "spill": 9,
+      "recovery": 5
+    },
+    "tags": [
+      "cleaning",
+      "collection:reclaimed",
+      "artisan",
+      "utility",
+      "asset:furniture-reclaimed-spill-cart"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-spill-cart",
+    "upkeepCents": 362,
+    "breakageHorizonShifts": 398,
+    "wearPerShift": 0.251,
+    "repairCostCents": 18929,
+    "roleEffects": {
+      "dishwasher": 7,
+      "host-busser": 6
+    }
+  },
+  {
+    "id": "essential-dry-rack-line",
+    "name": "Essential Dry Storage Rack",
+    "category": "Storage",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 66200,
+    "width": 3,
+    "height": 1,
+    "symbol": "D",
+    "durability": 86,
+    "utilities": [],
+    "stats": {
+      "comfort": 1,
+      "ambience": -3,
+      "cleanability": 14,
+      "reliability": 16,
+      "storage": 9,
+      "organization": 5,
+      "rotation": 3
+    },
+    "tags": [
+      "storage",
+      "collection:essential",
+      "value",
+      "asset:furniture-essential-dry-rack-line"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-dry-rack-line",
+    "upkeepCents": 277,
+    "breakageHorizonShifts": 585,
+    "wearPerShift": 0.171,
+    "repairCostCents": 12446,
+    "roleEffects": {
+      "cook": 6,
+      "dishwasher": 6
+    }
+  },
+  {
+    "id": "craftsman-dry-rack-line",
+    "name": "Craftsman Dry Storage Rack",
+    "category": "Storage",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 117800,
+    "width": 3,
+    "height": 1,
+    "symbol": "D",
+    "durability": 92,
+    "utilities": [],
+    "stats": {
+      "comfort": 5,
+      "ambience": 4,
+      "cleanability": 7,
+      "reliability": 15,
+      "storage": 10,
+      "organization": 5,
+      "rotation": 3
+    },
+    "tags": [
+      "storage",
+      "collection:craftsman",
+      "premium",
+      "asset:furniture-craftsman-dry-rack-line"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-dry-rack-line",
+    "upkeepCents": 495,
+    "breakageHorizonShifts": 601,
+    "wearPerShift": 0.166,
+    "repairCostCents": 20733,
+    "roleEffects": {
+      "cook": 8,
+      "dishwasher": 7
+    }
+  },
+  {
+    "id": "endurance-dry-rack-line",
+    "name": "Endurance Dry Storage Rack",
+    "category": "Storage",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 103000,
+    "width": 3,
+    "height": 1,
+    "symbol": "D",
+    "durability": 100,
+    "utilities": [],
+    "stats": {
+      "comfort": 1,
+      "ambience": -2,
+      "cleanability": 12,
+      "reliability": 20,
+      "storage": 10,
+      "organization": 5,
+      "rotation": 3
+    },
+    "tags": [
+      "storage",
+      "collection:endurance",
+      "commercial",
+      "asset:furniture-endurance-dry-rack-line"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-dry-rack-line",
+    "upkeepCents": 422,
+    "breakageHorizonShifts": 680,
+    "wearPerShift": 0.147,
+    "repairCostCents": 16480,
+    "roleEffects": {
+      "cook": 7,
+      "dishwasher": 7
+    }
+  },
+  {
+    "id": "hospitality-dry-rack-line",
+    "name": "Hospitality Dry Storage Rack",
+    "category": "Storage",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 108600,
+    "width": 3,
+    "height": 1,
+    "symbol": "D",
+    "durability": 90,
+    "utilities": [],
+    "stats": {
+      "comfort": 7,
+      "ambience": 1,
+      "cleanability": 9,
+      "reliability": 13,
+      "storage": 11,
+      "organization": 5,
+      "rotation": 3
+    },
+    "tags": [
+      "storage",
+      "collection:hospitality",
+      "premium",
+      "asset:furniture-hospitality-dry-rack-line"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-dry-rack-line",
+    "upkeepCents": 460,
+    "breakageHorizonShifts": 575,
+    "wearPerShift": 0.174,
+    "repairCostCents": 19548,
+    "roleEffects": {
+      "cook": 9,
+      "dishwasher": 8
+    }
+  },
+  {
+    "id": "precision-dry-rack-line",
+    "name": "Precision Dry Storage Rack",
+    "category": "Storage",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 133400,
+    "width": 3,
+    "height": 1,
+    "symbol": "D",
+    "durability": 93,
+    "utilities": [],
+    "stats": {
+      "comfort": 3,
+      "ambience": -1,
+      "cleanability": 10,
+      "reliability": 14,
+      "storage": 13,
+      "organization": 7,
+      "rotation": 4
+    },
+    "tags": [
+      "storage",
+      "collection:precision",
+      "iconic",
+      "asset:furniture-precision-dry-rack-line"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-dry-rack-line",
+    "upkeepCents": 563,
+    "breakageHorizonShifts": 597,
+    "wearPerShift": 0.168,
+    "repairCostCents": 23212,
+    "roleEffects": {
+      "cook": 12,
+      "dishwasher": 11
+    }
+  },
+  {
+    "id": "reclaimed-dry-rack-line",
+    "name": "Reclaimed Dry Storage Rack",
+    "category": "Storage",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 90200,
+    "width": 3,
+    "height": 1,
+    "symbol": "D",
+    "durability": 82,
+    "utilities": [],
+    "stats": {
+      "comfort": 3,
+      "ambience": 5,
+      "cleanability": 6,
+      "reliability": 11,
+      "storage": 9,
+      "organization": 5,
+      "rotation": 3
+    },
+    "tags": [
+      "storage",
+      "collection:reclaimed",
+      "artisan",
+      "asset:furniture-reclaimed-dry-rack-line"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-dry-rack-line",
+    "upkeepCents": 386,
+    "breakageHorizonShifts": 523,
+    "wearPerShift": 0.191,
+    "repairCostCents": 17679,
+    "roleEffects": {
+      "cook": 7,
+      "dishwasher": 6
+    }
+  },
+  {
+    "id": "essential-cold-rack",
+    "name": "Essential Cold Storage Rack",
+    "category": "Storage",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 106600,
+    "width": 3,
+    "height": 1,
+    "symbol": "C",
+    "durability": 78,
+    "utilities": [],
+    "stats": {
+      "comfort": 1,
+      "ambience": -3,
+      "cleanability": 13,
+      "reliability": 12,
+      "storage": 8,
+      "rotation": 6,
+      "sanitation": 3
+    },
+    "tags": [
+      "storage",
+      "collection:essential",
+      "value",
+      "asset:furniture-essential-cold-rack"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-cold-rack",
+    "upkeepCents": 454,
+    "breakageHorizonShifts": 516,
+    "wearPerShift": 0.194,
+    "repairCostCents": 21746,
+    "roleEffects": {
+      "cook": 6,
+      "dishwasher": 5
+    }
+  },
+  {
+    "id": "craftsman-cold-rack",
+    "name": "Craftsman Cold Storage Rack",
+    "category": "Storage",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 189400,
+    "width": 3,
+    "height": 1,
+    "symbol": "C",
+    "durability": 84,
+    "utilities": [],
+    "stats": {
+      "comfort": 5,
+      "ambience": 4,
+      "cleanability": 6,
+      "reliability": 11,
+      "storage": 9,
+      "rotation": 7,
+      "sanitation": 3
+    },
+    "tags": [
+      "storage",
+      "collection:craftsman",
+      "premium",
+      "asset:furniture-craftsman-cold-rack"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-cold-rack",
+    "upkeepCents": 811,
+    "breakageHorizonShifts": 532,
+    "wearPerShift": 0.188,
+    "repairCostCents": 36365,
+    "roleEffects": {
+      "cook": 7,
+      "dishwasher": 6
+    }
+  },
+  {
+    "id": "endurance-cold-rack",
+    "name": "Endurance Cold Storage Rack",
+    "category": "Storage",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 165800,
+    "width": 3,
+    "height": 1,
+    "symbol": "C",
+    "durability": 92,
+    "utilities": [],
+    "stats": {
+      "comfort": 1,
+      "ambience": -2,
+      "cleanability": 11,
+      "reliability": 17,
+      "storage": 9,
+      "rotation": 7,
+      "sanitation": 3
+    },
+    "tags": [
+      "storage",
+      "collection:endurance",
+      "commercial",
+      "asset:furniture-endurance-cold-rack"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-cold-rack",
+    "upkeepCents": 690,
+    "breakageHorizonShifts": 619,
+    "wearPerShift": 0.162,
+    "repairCostCents": 29181,
+    "roleEffects": {
+      "cook": 7,
+      "dishwasher": 6
+    }
+  },
+  {
+    "id": "hospitality-cold-rack",
+    "name": "Hospitality Cold Storage Rack",
+    "category": "Storage",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 174600,
+    "width": 3,
+    "height": 1,
+    "symbol": "C",
+    "durability": 82,
+    "utilities": [],
+    "stats": {
+      "comfort": 7,
+      "ambience": 1,
+      "cleanability": 8,
+      "reliability": 9,
+      "storage": 10,
+      "rotation": 7,
+      "sanitation": 3
+    },
+    "tags": [
+      "storage",
+      "collection:hospitality",
+      "premium",
+      "asset:furniture-hospitality-cold-rack"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-cold-rack",
+    "upkeepCents": 754,
+    "breakageHorizonShifts": 505,
+    "wearPerShift": 0.198,
+    "repairCostCents": 34222,
+    "roleEffects": {
+      "cook": 8,
+      "dishwasher": 7
+    }
+  },
+  {
+    "id": "precision-cold-rack",
+    "name": "Precision Cold Storage Rack",
+    "category": "Storage",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 214600,
+    "width": 3,
+    "height": 1,
+    "symbol": "C",
+    "durability": 85,
+    "utilities": [],
+    "stats": {
+      "comfort": 3,
+      "ambience": -1,
+      "cleanability": 9,
+      "reliability": 10,
+      "storage": 12,
+      "rotation": 9,
+      "sanitation": 4
+    },
+    "tags": [
+      "storage",
+      "collection:precision",
+      "iconic",
+      "asset:furniture-precision-cold-rack"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-cold-rack",
+    "upkeepCents": 923,
+    "breakageHorizonShifts": 527,
+    "wearPerShift": 0.19,
+    "repairCostCents": 40774,
+    "roleEffects": {
+      "cook": 12,
+      "dishwasher": 10
+    }
+  },
+  {
+    "id": "reclaimed-cold-rack",
+    "name": "Reclaimed Cold Storage Rack",
+    "category": "Storage",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 145000,
+    "width": 3,
+    "height": 1,
+    "symbol": "C",
+    "durability": 74,
+    "utilities": [],
+    "stats": {
+      "comfort": 3,
+      "ambience": 5,
+      "cleanability": 5,
+      "reliability": 7,
+      "storage": 8,
+      "rotation": 6,
+      "sanitation": 3
+    },
+    "tags": [
+      "storage",
+      "collection:reclaimed",
+      "artisan",
+      "asset:furniture-reclaimed-cold-rack"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-cold-rack",
+    "upkeepCents": 632,
+    "breakageHorizonShifts": 454,
+    "wearPerShift": 0.22,
+    "repairCostCents": 30740,
+    "roleEffects": {
+      "cook": 6,
+      "dishwasher": 5
+    }
+  },
+  {
+    "id": "essential-linen-cabinet",
+    "name": "Essential Linen Cabinet",
+    "category": "Storage",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 63400,
+    "width": 2,
+    "height": 1,
+    "symbol": "L",
+    "durability": 75,
+    "utilities": [],
+    "stats": {
+      "comfort": 3,
+      "ambience": -1,
+      "cleanability": 15,
+      "reliability": 12,
+      "storage": 7,
+      "turnover": 5,
+      "sanitation": 2
+    },
+    "tags": [
+      "storage",
+      "service",
+      "collection:essential",
+      "value",
+      "asset:furniture-essential-linen-cabinet"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-linen-cabinet",
+    "upkeepCents": 270,
+    "breakageHorizonShifts": 503,
+    "wearPerShift": 0.199,
+    "repairCostCents": 13314,
+    "roleEffects": {
+      "cook": 6,
+      "dishwasher": 5
+    }
+  },
+  {
+    "id": "craftsman-linen-cabinet",
+    "name": "Craftsman Linen Cabinet",
+    "category": "Storage",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 112600,
+    "width": 2,
+    "height": 1,
+    "symbol": "L",
+    "durability": 81,
+    "utilities": [],
+    "stats": {
+      "comfort": 7,
+      "ambience": 6,
+      "cleanability": 8,
+      "reliability": 11,
+      "storage": 8,
+      "turnover": 5,
+      "sanitation": 2
+    },
+    "tags": [
+      "storage",
+      "service",
+      "collection:craftsman",
+      "premium",
+      "asset:furniture-craftsman-linen-cabinet"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-linen-cabinet",
+    "upkeepCents": 482,
+    "breakageHorizonShifts": 519,
+    "wearPerShift": 0.193,
+    "repairCostCents": 22295,
+    "roleEffects": {
+      "cook": 7,
+      "dishwasher": 6
+    }
+  },
+  {
+    "id": "endurance-linen-cabinet",
+    "name": "Endurance Linen Cabinet",
+    "category": "Storage",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 98600,
+    "width": 2,
+    "height": 1,
+    "symbol": "L",
+    "durability": 89,
+    "utilities": [],
+    "stats": {
+      "comfort": 3,
+      "ambience": 0,
+      "cleanability": 13,
+      "reliability": 17,
+      "storage": 8,
+      "turnover": 5,
+      "sanitation": 2
+    },
+    "tags": [
+      "storage",
+      "service",
+      "collection:endurance",
+      "commercial",
+      "asset:furniture-endurance-linen-cabinet"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-linen-cabinet",
+    "upkeepCents": 410,
+    "breakageHorizonShifts": 607,
+    "wearPerShift": 0.165,
+    "repairCostCents": 17945,
+    "roleEffects": {
+      "cook": 7,
+      "dishwasher": 6
+    }
+  },
+  {
+    "id": "hospitality-linen-cabinet",
+    "name": "Hospitality Linen Cabinet",
+    "category": "Storage",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 103800,
+    "width": 2,
+    "height": 1,
+    "symbol": "L",
+    "durability": 79,
+    "utilities": [],
+    "stats": {
+      "comfort": 9,
+      "ambience": 3,
+      "cleanability": 10,
+      "reliability": 9,
+      "storage": 8,
+      "turnover": 5,
+      "sanitation": 2
+    },
+    "tags": [
+      "storage",
+      "service",
+      "collection:hospitality",
+      "premium",
+      "asset:furniture-hospitality-linen-cabinet"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-linen-cabinet",
+    "upkeepCents": 448,
+    "breakageHorizonShifts": 493,
+    "wearPerShift": 0.203,
+    "repairCostCents": 20968,
+    "roleEffects": {
+      "cook": 7,
+      "dishwasher": 6
+    }
+  },
+  {
+    "id": "precision-linen-cabinet",
+    "name": "Precision Linen Cabinet",
+    "category": "Storage",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 127600,
+    "width": 2,
+    "height": 1,
+    "symbol": "L",
+    "durability": 82,
+    "utilities": [],
+    "stats": {
+      "comfort": 5,
+      "ambience": 1,
+      "cleanability": 11,
+      "reliability": 10,
+      "storage": 10,
+      "turnover": 7,
+      "sanitation": 3
+    },
+    "tags": [
+      "storage",
+      "service",
+      "collection:precision",
+      "iconic",
+      "asset:furniture-precision-linen-cabinet"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-linen-cabinet",
+    "upkeepCents": 549,
+    "breakageHorizonShifts": 514,
+    "wearPerShift": 0.195,
+    "repairCostCents": 25010,
+    "roleEffects": {
+      "cook": 10,
+      "dishwasher": 9
+    }
+  },
+  {
+    "id": "reclaimed-linen-cabinet",
+    "name": "Reclaimed Linen Cabinet",
+    "category": "Storage",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 86200,
+    "width": 2,
+    "height": 1,
+    "symbol": "L",
+    "durability": 71,
+    "utilities": [],
+    "stats": {
+      "comfort": 5,
+      "ambience": 7,
+      "cleanability": 7,
+      "reliability": 7,
+      "storage": 7,
+      "turnover": 5,
+      "sanitation": 2
+    },
+    "tags": [
+      "storage",
+      "service",
+      "collection:reclaimed",
+      "artisan",
+      "asset:furniture-reclaimed-linen-cabinet"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-linen-cabinet",
+    "upkeepCents": 376,
+    "breakageHorizonShifts": 441,
+    "wearPerShift": 0.227,
+    "repairCostCents": 18792,
+    "roleEffects": {
+      "cook": 6,
+      "dishwasher": 5
+    }
+  },
+  {
+    "id": "essential-room-divider",
+    "name": "Essential Room Divider",
+    "category": "Decor",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 49000,
+    "width": 2,
+    "height": 1,
+    "symbol": "R",
+    "durability": 72,
+    "utilities": [],
+    "stats": {
+      "comfort": 3,
+      "ambience": 4,
+      "cleanability": 11,
+      "reliability": 10,
+      "privacy": 5,
+      "noise": -4
+    },
+    "tags": [
+      "decor",
+      "collection:essential",
+      "value",
+      "asset:furniture-essential-room-divider"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-room-divider",
+    "upkeepCents": 211,
+    "breakageHorizonShifts": 472,
+    "wearPerShift": 0.212,
+    "repairCostCents": 10584,
+    "roleEffects": {
+      "host-busser": 4,
+      "server": 3,
+      "owner": 2
+    }
+  },
+  {
+    "id": "craftsman-room-divider",
+    "name": "Craftsman Room Divider",
+    "category": "Decor",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 87000,
+    "width": 2,
+    "height": 1,
+    "symbol": "R",
+    "durability": 78,
+    "utilities": [],
+    "stats": {
+      "comfort": 7,
+      "ambience": 11,
+      "cleanability": 4,
+      "reliability": 9,
+      "privacy": 6,
+      "noise": -4
+    },
+    "tags": [
+      "decor",
+      "collection:craftsman",
+      "premium",
+      "asset:furniture-craftsman-room-divider"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-room-divider",
+    "upkeepCents": 376,
+    "breakageHorizonShifts": 489,
+    "wearPerShift": 0.204,
+    "repairCostCents": 17748,
+    "roleEffects": {
+      "host-busser": 4,
+      "server": 3,
+      "owner": 2
+    }
+  },
+  {
+    "id": "endurance-room-divider",
+    "name": "Endurance Room Divider",
+    "category": "Decor",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 76200,
+    "width": 2,
+    "height": 1,
+    "symbol": "R",
+    "durability": 86,
+    "utilities": [],
+    "stats": {
+      "comfort": 3,
+      "ambience": 5,
+      "cleanability": 9,
+      "reliability": 15,
+      "privacy": 6,
+      "noise": -4
+    },
+    "tags": [
+      "decor",
+      "collection:endurance",
+      "commercial",
+      "asset:furniture-endurance-room-divider"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-room-divider",
+    "upkeepCents": 320,
+    "breakageHorizonShifts": 576,
+    "wearPerShift": 0.174,
+    "repairCostCents": 14326,
+    "roleEffects": {
+      "host-busser": 4,
+      "server": 3,
+      "owner": 2
+    }
+  },
+  {
+    "id": "hospitality-room-divider",
+    "name": "Hospitality Room Divider",
+    "category": "Decor",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 80200,
+    "width": 2,
+    "height": 1,
+    "symbol": "R",
+    "durability": 76,
+    "utilities": [],
+    "stats": {
+      "comfort": 9,
+      "ambience": 8,
+      "cleanability": 6,
+      "reliability": 7,
+      "privacy": 6,
+      "noise": -4
+    },
+    "tags": [
+      "decor",
+      "collection:hospitality",
+      "premium",
+      "asset:furniture-hospitality-room-divider"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-room-divider",
+    "upkeepCents": 350,
+    "breakageHorizonShifts": 462,
+    "wearPerShift": 0.216,
+    "repairCostCents": 16682,
+    "roleEffects": {
+      "host-busser": 5,
+      "server": 4,
+      "owner": 3
+    }
+  },
+  {
+    "id": "precision-room-divider",
+    "name": "Precision Room Divider",
+    "category": "Decor",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 98600,
+    "width": 2,
+    "height": 1,
+    "symbol": "R",
+    "durability": 79,
+    "utilities": [],
+    "stats": {
+      "comfort": 5,
+      "ambience": 6,
+      "cleanability": 7,
+      "reliability": 8,
+      "privacy": 8,
+      "noise": -5
+    },
+    "tags": [
+      "decor",
+      "collection:precision",
+      "iconic",
+      "asset:furniture-precision-room-divider"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-room-divider",
+    "upkeepCents": 428,
+    "breakageHorizonShifts": 484,
+    "wearPerShift": 0.207,
+    "repairCostCents": 19917,
+    "roleEffects": {
+      "host-busser": 6,
+      "server": 5,
+      "owner": 3
+    }
+  },
+  {
+    "id": "reclaimed-room-divider",
+    "name": "Reclaimed Room Divider",
+    "category": "Decor",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 66600,
+    "width": 2,
+    "height": 1,
+    "symbol": "R",
+    "durability": 68,
+    "utilities": [],
+    "stats": {
+      "comfort": 5,
+      "ambience": 12,
+      "cleanability": 3,
+      "reliability": 5,
+      "privacy": 5,
+      "noise": -4
+    },
+    "tags": [
+      "decor",
+      "collection:reclaimed",
+      "artisan",
+      "asset:furniture-reclaimed-room-divider"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-room-divider",
+    "upkeepCents": 293,
+    "breakageHorizonShifts": 411,
+    "wearPerShift": 0.243,
+    "repairCostCents": 14918,
+    "roleEffects": {
+      "host-busser": 4,
+      "server": 3,
+      "owner": 2
+    }
+  },
+  {
+    "id": "essential-planter-feature",
+    "name": "Essential Planter Feature",
+    "category": "Decor",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 53300,
+    "width": 2,
+    "height": 2,
+    "symbol": "P",
+    "durability": 54,
+    "utilities": [],
+    "stats": {
+      "comfort": 3,
+      "ambience": 6,
+      "cleanability": 6,
+      "reliability": 5,
+      "community": 4,
+      "noise": -2
+    },
+    "tags": [
+      "decor",
+      "plant",
+      "collection:essential",
+      "value",
+      "asset:furniture-essential-planter-feature"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-planter-feature",
+    "upkeepCents": 235,
+    "breakageHorizonShifts": 352,
+    "wearPerShift": 0.284,
+    "repairCostCents": 13432,
+    "roleEffects": {
+      "host-busser": 4,
+      "server": 3,
+      "owner": 3
+    }
+  },
+  {
+    "id": "craftsman-planter-feature",
+    "name": "Craftsman Planter Feature",
+    "category": "Decor",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 94700,
+    "width": 2,
+    "height": 2,
+    "symbol": "P",
+    "durability": 60,
+    "utilities": [],
+    "stats": {
+      "comfort": 7,
+      "ambience": 13,
+      "cleanability": -1,
+      "reliability": 4,
+      "community": 4,
+      "noise": -2
+    },
+    "tags": [
+      "decor",
+      "plant",
+      "collection:craftsman",
+      "premium",
+      "asset:furniture-craftsman-planter-feature"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-planter-feature",
+    "upkeepCents": 419,
+    "breakageHorizonShifts": 368,
+    "wearPerShift": 0.272,
+    "repairCostCents": 22728,
+    "roleEffects": {
+      "host-busser": 5,
+      "server": 4,
+      "owner": 3
+    }
+  },
+  {
+    "id": "endurance-planter-feature",
+    "name": "Endurance Planter Feature",
+    "category": "Decor",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 82900,
+    "width": 2,
+    "height": 2,
+    "symbol": "P",
+    "durability": 68,
+    "utilities": [],
+    "stats": {
+      "comfort": 3,
+      "ambience": 7,
+      "cleanability": 4,
+      "reliability": 10,
+      "community": 4,
+      "noise": -2
+    },
+    "tags": [
+      "decor",
+      "plant",
+      "collection:endurance",
+      "commercial",
+      "asset:furniture-endurance-planter-feature"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-planter-feature",
+    "upkeepCents": 356,
+    "breakageHorizonShifts": 456,
+    "wearPerShift": 0.219,
+    "repairCostCents": 18570,
+    "roleEffects": {
+      "host-busser": 5,
+      "server": 4,
+      "owner": 3
+    }
+  },
+  {
+    "id": "hospitality-planter-feature",
+    "name": "Hospitality Planter Feature",
+    "category": "Decor",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 87300,
+    "width": 2,
+    "height": 2,
+    "symbol": "P",
+    "durability": 58,
+    "utilities": [],
+    "stats": {
+      "comfort": 9,
+      "ambience": 10,
+      "cleanability": 1,
+      "reliability": 2,
+      "community": 4,
+      "noise": -2
+    },
+    "tags": [
+      "decor",
+      "plant",
+      "collection:hospitality",
+      "premium",
+      "asset:furniture-hospitality-planter-feature"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-planter-feature",
+    "upkeepCents": 389,
+    "breakageHorizonShifts": 342,
+    "wearPerShift": 0.292,
+    "repairCostCents": 21301,
+    "roleEffects": {
+      "host-busser": 5,
+      "server": 4,
+      "owner": 3
+    }
+  },
+  {
+    "id": "precision-planter-feature",
+    "name": "Precision Planter Feature",
+    "category": "Decor",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 107300,
+    "width": 2,
+    "height": 2,
+    "symbol": "P",
+    "durability": 61,
+    "utilities": [],
+    "stats": {
+      "comfort": 5,
+      "ambience": 8,
+      "cleanability": 2,
+      "reliability": 3,
+      "community": 5,
+      "noise": -3
+    },
+    "tags": [
+      "decor",
+      "plant",
+      "collection:precision",
+      "iconic",
+      "asset:furniture-precision-planter-feature"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-planter-feature",
+    "upkeepCents": 476,
+    "breakageHorizonShifts": 363,
+    "wearPerShift": 0.275,
+    "repairCostCents": 25537,
+    "roleEffects": {
+      "host-busser": 7,
+      "server": 6,
+      "owner": 4
+    }
+  },
+  {
+    "id": "reclaimed-planter-feature",
+    "name": "Reclaimed Planter Feature",
+    "category": "Decor",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 72500,
+    "width": 2,
+    "height": 2,
+    "symbol": "P",
+    "durability": 50,
+    "utilities": [],
+    "stats": {
+      "comfort": 5,
+      "ambience": 14,
+      "cleanability": -2,
+      "reliability": 0,
+      "community": 4,
+      "noise": -2
+    },
+    "tags": [
+      "decor",
+      "plant",
+      "collection:reclaimed",
+      "artisan",
+      "asset:furniture-reclaimed-planter-feature"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-planter-feature",
+    "upkeepCents": 326,
+    "breakageHorizonShifts": 290,
+    "wearPerShift": 0.345,
+    "repairCostCents": 18850,
+    "roleEffects": {
+      "host-busser": 5,
+      "server": 4,
+      "owner": 3
+    }
+  },
+  {
+    "id": "essential-acoustic-light",
+    "name": "Essential Acoustic Light",
+    "category": "Decor",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 83500,
+    "width": 2,
+    "height": 1,
+    "symbol": "A",
+    "durability": 60,
+    "utilities": [],
+    "stats": {
+      "comfort": 3,
+      "ambience": 5,
+      "cleanability": 10,
+      "reliability": 7,
+      "visibility": 5,
+      "noise": -5
+    },
+    "tags": [
+      "decor",
+      "lighting",
+      "collection:essential",
+      "value",
+      "asset:furniture-essential-acoustic-light"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-acoustic-light",
+    "upkeepCents": 364,
+    "breakageHorizonShifts": 395,
+    "wearPerShift": 0.253,
+    "repairCostCents": 20040,
+    "roleEffects": {
+      "host-busser": 4,
+      "server": 3,
+      "owner": 2
+    }
+  },
+  {
+    "id": "craftsman-acoustic-light",
+    "name": "Craftsman Acoustic Light",
+    "category": "Decor",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 148500,
+    "width": 2,
+    "height": 1,
+    "symbol": "A",
+    "durability": 66,
+    "utilities": [],
+    "stats": {
+      "comfort": 7,
+      "ambience": 12,
+      "cleanability": 3,
+      "reliability": 6,
+      "visibility": 6,
+      "noise": -6
+    },
+    "tags": [
+      "decor",
+      "lighting",
+      "collection:craftsman",
+      "premium",
+      "asset:furniture-craftsman-acoustic-light"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-acoustic-light",
+    "upkeepCents": 650,
+    "breakageHorizonShifts": 411,
+    "wearPerShift": 0.243,
+    "repairCostCents": 33858,
+    "roleEffects": {
+      "host-busser": 4,
+      "server": 3,
+      "owner": 2
+    }
+  },
+  {
+    "id": "endurance-acoustic-light",
+    "name": "Endurance Acoustic Light",
+    "category": "Decor",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 129900,
+    "width": 2,
+    "height": 1,
+    "symbol": "A",
+    "durability": 74,
+    "utilities": [],
+    "stats": {
+      "comfort": 3,
+      "ambience": 6,
+      "cleanability": 8,
+      "reliability": 12,
+      "visibility": 6,
+      "noise": -6
+    },
+    "tags": [
+      "decor",
+      "lighting",
+      "collection:endurance",
+      "commercial",
+      "asset:furniture-endurance-acoustic-light"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-acoustic-light",
+    "upkeepCents": 553,
+    "breakageHorizonShifts": 499,
+    "wearPerShift": 0.2,
+    "repairCostCents": 27539,
+    "roleEffects": {
+      "host-busser": 4,
+      "server": 3,
+      "owner": 2
+    }
+  },
+  {
+    "id": "hospitality-acoustic-light",
+    "name": "Hospitality Acoustic Light",
+    "category": "Decor",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 136900,
+    "width": 2,
+    "height": 1,
+    "symbol": "A",
+    "durability": 64,
+    "utilities": [],
+    "stats": {
+      "comfort": 9,
+      "ambience": 9,
+      "cleanability": 5,
+      "reliability": 4,
+      "visibility": 6,
+      "noise": -6
+    },
+    "tags": [
+      "decor",
+      "lighting",
+      "collection:hospitality",
+      "premium",
+      "asset:furniture-hospitality-acoustic-light"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-acoustic-light",
+    "upkeepCents": 605,
+    "breakageHorizonShifts": 385,
+    "wearPerShift": 0.26,
+    "repairCostCents": 31761,
+    "roleEffects": {
+      "host-busser": 5,
+      "server": 4,
+      "owner": 3
+    }
+  },
+  {
+    "id": "precision-acoustic-light",
+    "name": "Precision Acoustic Light",
+    "category": "Decor",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 168200,
+    "width": 2,
+    "height": 1,
+    "symbol": "A",
+    "durability": 67,
+    "utilities": [],
+    "stats": {
+      "comfort": 5,
+      "ambience": 7,
+      "cleanability": 6,
+      "reliability": 5,
+      "visibility": 8,
+      "noise": -8
+    },
+    "tags": [
+      "decor",
+      "lighting",
+      "collection:precision",
+      "iconic",
+      "asset:furniture-precision-acoustic-light"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-acoustic-light",
+    "upkeepCents": 740,
+    "breakageHorizonShifts": 406,
+    "wearPerShift": 0.246,
+    "repairCostCents": 38013,
+    "roleEffects": {
+      "host-busser": 6,
+      "server": 5,
+      "owner": 3
+    }
+  },
+  {
+    "id": "reclaimed-acoustic-light",
+    "name": "Reclaimed Acoustic Light",
+    "category": "Decor",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 113700,
+    "width": 2,
+    "height": 1,
+    "symbol": "A",
+    "durability": 56,
+    "utilities": [],
+    "stats": {
+      "comfort": 5,
+      "ambience": 13,
+      "cleanability": 2,
+      "reliability": 2,
+      "visibility": 5,
+      "noise": -5
+    },
+    "tags": [
+      "decor",
+      "lighting",
+      "collection:reclaimed",
+      "artisan",
+      "asset:furniture-reclaimed-acoustic-light"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-acoustic-light",
+    "upkeepCents": 507,
+    "breakageHorizonShifts": 333,
+    "wearPerShift": 0.3,
+    "repairCostCents": 28198,
+    "roleEffects": {
+      "host-busser": 4,
+      "server": 3,
+      "owner": 2
+    }
+  },
+  {
+    "id": "essential-manager-desk-line",
+    "name": "Essential Manager Desk",
+    "category": "Office",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 89300,
+    "width": 3,
+    "height": 2,
+    "symbol": "M",
+    "durability": 74,
+    "utilities": [
+      "power"
+    ],
+    "stats": {
+      "comfort": 6,
+      "ambience": 0,
+      "cleanability": 11,
+      "reliability": 11,
+      "forecast": 5,
+      "organization": 6
+    },
+    "tags": [
+      "office",
+      "collection:essential",
+      "value",
+      "asset:furniture-essential-manager-desk-line"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-manager-desk-line",
+    "upkeepCents": 382,
+    "breakageHorizonShifts": 490,
+    "wearPerShift": 0.204,
+    "repairCostCents": 18932,
+    "roleEffects": {
+      "manager": 5,
+      "owner": 4
+    }
+  },
+  {
+    "id": "craftsman-manager-desk-line",
+    "name": "Craftsman Manager Desk",
+    "category": "Office",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 158700,
+    "width": 3,
+    "height": 2,
+    "symbol": "M",
+    "durability": 80,
+    "utilities": [
+      "power"
+    ],
+    "stats": {
+      "comfort": 10,
+      "ambience": 7,
+      "cleanability": 4,
+      "reliability": 10,
+      "forecast": 6,
+      "organization": 7
+    },
+    "tags": [
+      "office",
+      "collection:craftsman",
+      "premium",
+      "asset:furniture-craftsman-manager-desk-line"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-manager-desk-line",
+    "upkeepCents": 682,
+    "breakageHorizonShifts": 506,
+    "wearPerShift": 0.198,
+    "repairCostCents": 31740,
+    "roleEffects": {
+      "manager": 6,
+      "owner": 5
+    }
+  },
+  {
+    "id": "endurance-manager-desk-line",
+    "name": "Endurance Manager Desk",
+    "category": "Office",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 138900,
+    "width": 3,
+    "height": 2,
+    "symbol": "M",
+    "durability": 88,
+    "utilities": [
+      "power"
+    ],
+    "stats": {
+      "comfort": 6,
+      "ambience": 1,
+      "cleanability": 9,
+      "reliability": 16,
+      "forecast": 6,
+      "organization": 7
+    },
+    "tags": [
+      "office",
+      "collection:endurance",
+      "commercial",
+      "asset:furniture-endurance-manager-desk-line"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-manager-desk-line",
+    "upkeepCents": 581,
+    "breakageHorizonShifts": 594,
+    "wearPerShift": 0.168,
+    "repairCostCents": 25558,
+    "roleEffects": {
+      "manager": 6,
+      "owner": 5
+    }
+  },
+  {
+    "id": "hospitality-manager-desk-line",
+    "name": "Hospitality Manager Desk",
+    "category": "Office",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 146300,
+    "width": 3,
+    "height": 2,
+    "symbol": "M",
+    "durability": 78,
+    "utilities": [
+      "power"
+    ],
+    "stats": {
+      "comfort": 12,
+      "ambience": 4,
+      "cleanability": 6,
+      "reliability": 8,
+      "forecast": 6,
+      "organization": 7
+    },
+    "tags": [
+      "office",
+      "collection:hospitality",
+      "premium",
+      "asset:furniture-hospitality-manager-desk-line"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-manager-desk-line",
+    "upkeepCents": 635,
+    "breakageHorizonShifts": 480,
+    "wearPerShift": 0.208,
+    "repairCostCents": 29845,
+    "roleEffects": {
+      "manager": 7,
+      "owner": 6
+    }
+  },
+  {
+    "id": "precision-manager-desk-line",
+    "name": "Precision Manager Desk",
+    "category": "Office",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 179800,
+    "width": 3,
+    "height": 2,
+    "symbol": "M",
+    "durability": 81,
+    "utilities": [
+      "power"
+    ],
+    "stats": {
+      "comfort": 8,
+      "ambience": 2,
+      "cleanability": 7,
+      "reliability": 9,
+      "forecast": 8,
+      "organization": 9
+    },
+    "tags": [
+      "office",
+      "collection:precision",
+      "iconic",
+      "asset:furniture-precision-manager-desk-line"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-manager-desk-line",
+    "upkeepCents": 777,
+    "breakageHorizonShifts": 501,
+    "wearPerShift": 0.2,
+    "repairCostCents": 35600,
+    "roleEffects": {
+      "manager": 10,
+      "owner": 8
+    }
+  },
+  {
+    "id": "reclaimed-manager-desk-line",
+    "name": "Reclaimed Manager Desk",
+    "category": "Office",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 121500,
+    "width": 3,
+    "height": 2,
+    "symbol": "M",
+    "durability": 70,
+    "utilities": [
+      "power"
+    ],
+    "stats": {
+      "comfort": 8,
+      "ambience": 8,
+      "cleanability": 3,
+      "reliability": 6,
+      "forecast": 5,
+      "organization": 6
+    },
+    "tags": [
+      "office",
+      "collection:reclaimed",
+      "artisan",
+      "asset:furniture-reclaimed-manager-desk-line"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-manager-desk-line",
+    "upkeepCents": 532,
+    "breakageHorizonShifts": 428,
+    "wearPerShift": 0.234,
+    "repairCostCents": 26730,
+    "roleEffects": {
+      "manager": 5,
+      "owner": 4
+    }
+  },
+  {
+    "id": "essential-scheduling-board",
+    "name": "Essential Scheduling Board",
+    "category": "Office",
+    "style": "Modern",
+    "tier": "value",
+    "costCents": 61900,
+    "width": 2,
+    "height": 1,
+    "symbol": "S",
+    "durability": 68,
+    "utilities": [
+      "power"
+    ],
+    "stats": {
+      "comfort": 3,
+      "ambience": -1,
+      "cleanability": 13,
+      "reliability": 9,
+      "handoff": 6,
+      "forecast": 5,
+      "organization": 5
+    },
+    "tags": [
+      "office",
+      "collection:essential",
+      "value",
+      "asset:furniture-essential-scheduling-board"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-essential-scheduling-board",
+    "upkeepCents": 267,
+    "breakageHorizonShifts": 447,
+    "wearPerShift": 0.224,
+    "repairCostCents": 13866,
+    "roleEffects": {
+      "manager": 5,
+      "owner": 4
+    }
+  },
+  {
+    "id": "craftsman-scheduling-board",
+    "name": "Craftsman Scheduling Board",
+    "category": "Office",
+    "style": "Heritage",
+    "tier": "premium",
+    "costCents": 110100,
+    "width": 2,
+    "height": 1,
+    "symbol": "S",
+    "durability": 74,
+    "utilities": [
+      "power"
+    ],
+    "stats": {
+      "comfort": 7,
+      "ambience": 6,
+      "cleanability": 6,
+      "reliability": 8,
+      "handoff": 7,
+      "forecast": 5,
+      "organization": 5
+    },
+    "tags": [
+      "office",
+      "collection:craftsman",
+      "premium",
+      "asset:furniture-craftsman-scheduling-board"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-craftsman-scheduling-board",
+    "upkeepCents": 478,
+    "breakageHorizonShifts": 463,
+    "wearPerShift": 0.216,
+    "repairCostCents": 23341,
+    "roleEffects": {
+      "manager": 6,
+      "owner": 5
+    }
+  },
+  {
+    "id": "endurance-scheduling-board",
+    "name": "Endurance Scheduling Board",
+    "category": "Office",
+    "style": "Industrial",
+    "tier": "commercial",
+    "costCents": 96300,
+    "width": 2,
+    "height": 1,
+    "symbol": "S",
+    "durability": 82,
+    "utilities": [
+      "power"
+    ],
+    "stats": {
+      "comfort": 3,
+      "ambience": 0,
+      "cleanability": 11,
+      "reliability": 14,
+      "handoff": 7,
+      "forecast": 5,
+      "organization": 5
+    },
+    "tags": [
+      "office",
+      "collection:endurance",
+      "commercial",
+      "asset:furniture-endurance-scheduling-board"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-endurance-scheduling-board",
+    "upkeepCents": 406,
+    "breakageHorizonShifts": 550,
+    "wearPerShift": 0.182,
+    "repairCostCents": 18875,
+    "roleEffects": {
+      "manager": 6,
+      "owner": 5
+    }
+  },
+  {
+    "id": "hospitality-scheduling-board",
+    "name": "Hospitality Scheduling Board",
+    "category": "Office",
+    "style": "Modern",
+    "tier": "premium",
+    "costCents": 101500,
+    "width": 2,
+    "height": 1,
+    "symbol": "S",
+    "durability": 72,
+    "utilities": [
+      "power"
+    ],
+    "stats": {
+      "comfort": 9,
+      "ambience": 3,
+      "cleanability": 8,
+      "reliability": 6,
+      "handoff": 7,
+      "forecast": 5,
+      "organization": 5
+    },
+    "tags": [
+      "office",
+      "collection:hospitality",
+      "premium",
+      "asset:furniture-hospitality-scheduling-board"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-hospitality-scheduling-board",
+    "upkeepCents": 445,
+    "breakageHorizonShifts": 436,
+    "wearPerShift": 0.229,
+    "repairCostCents": 21924,
+    "roleEffects": {
+      "manager": 7,
+      "owner": 6
+    }
+  },
+  {
+    "id": "precision-scheduling-board",
+    "name": "Precision Scheduling Board",
+    "category": "Office",
+    "style": "Contemporary",
+    "tier": "iconic",
+    "costCents": 124700,
+    "width": 2,
+    "height": 1,
+    "symbol": "S",
+    "durability": 75,
+    "utilities": [
+      "power"
+    ],
+    "stats": {
+      "comfort": 5,
+      "ambience": 1,
+      "cleanability": 9,
+      "reliability": 7,
+      "handoff": 9,
+      "forecast": 7,
+      "organization": 7
+    },
+    "tags": [
+      "office",
+      "collection:precision",
+      "iconic",
+      "asset:furniture-precision-scheduling-board"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-precision-scheduling-board",
+    "upkeepCents": 544,
+    "breakageHorizonShifts": 458,
+    "wearPerShift": 0.218,
+    "repairCostCents": 26187,
+    "roleEffects": {
+      "manager": 10,
+      "owner": 8
+    }
+  },
+  {
+    "id": "reclaimed-scheduling-board",
+    "name": "Reclaimed Scheduling Board",
+    "category": "Office",
+    "style": "Natural",
+    "tier": "artisan",
+    "costCents": 84300,
+    "width": 2,
+    "height": 1,
+    "symbol": "S",
+    "durability": 64,
+    "utilities": [
+      "power"
+    ],
+    "stats": {
+      "comfort": 5,
+      "ambience": 7,
+      "cleanability": 5,
+      "reliability": 4,
+      "handoff": 6,
+      "forecast": 5,
+      "organization": 5
+    },
+    "tags": [
+      "office",
+      "collection:reclaimed",
+      "artisan",
+      "asset:furniture-reclaimed-scheduling-board"
+    ],
+    "inventoryScope": "restaurant",
+    "assetId": "furniture-reclaimed-scheduling-board",
+    "upkeepCents": 373,
+    "breakageHorizonShifts": 385,
+    "wearPerShift": 0.26,
+    "repairCostCents": 19558,
+    "roleEffects": {
+      "manager": 5,
+      "owner": 4
+    }
   }
 ]

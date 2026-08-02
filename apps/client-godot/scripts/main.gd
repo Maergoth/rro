@@ -1,6 +1,6 @@
 extends Control
 
-const CLIENT_VERSION := "1.0.0-alpha.1"
+const CLIENT_VERSION := "1.0.0-alpha.2"
 
 var api: RroApiClient
 var realtime: RroRealtimeClient
@@ -14,6 +14,8 @@ var latest_snapshot: Dictionary = {}
 var current_floor: RestaurantFloor
 var current_task_panel: TaskPanel
 var current_builder: BuilderPalette
+var current_inventory_panel: InventoryPanel
+var pending_inventory_catalog: Dictionary = {}
 var selected_builder_object: Dictionary = {}
 var status_label: Label
 var screen_root: Control
@@ -116,7 +118,7 @@ func load_server_url() -> String:
 			if addr.count(":") < 2:
 				addr = addr + ":8788"
 			return addr
-	return "http://192.168.1.2:8788"
+	return "http://127.0.0.1:8788"
 
 func make_theme() -> Theme:
 	var result := Theme.new()
@@ -149,6 +151,7 @@ func clear_screen() -> void:
 	current_floor = null
 	current_task_panel = null
 	current_builder = null
+	current_inventory_panel = null
 
 func add_background() -> void:
 	var background := ColorRect.new()
@@ -206,9 +209,13 @@ func accept_session(data: Dictionary) -> void:
 var nav_stack: Array[Callable] = []
 
 func load_bootstrap() -> void:
-	api.get_json("/v1/bootstrap", func(ok: bool, data: Dictionary, _code: int) -> void:
+	api.get_json("/v1/bootstrap", func(ok: bool, data: Dictionary, code: int) -> void:
 		if not ok:
-			store.clear(); api.session_token = ""; show_login(); show_status("Session expired. Log in again."); return
+			if code in [401, 403]:
+				store.clear(); api.session_token = ""; show_login(); show_status("Session expired. Log in again.")
+			else:
+				show_login(); show_status("Could not load the game right now. Your saved session was kept; retry when the server is available.")
+			return
 		bootstrap = data
 		var character: Dictionary = bootstrap.get("character", {})
 		if str(character.get("homeRegionId", "")).is_empty():
@@ -250,14 +257,15 @@ func show_region_select() -> void:
 		for region in country.get("regions", []):
 			var rid: String = str(region.get("id", ""))
 			var btn := Button.new(); btn.text = "%s  ·  %d restaurants  ·  demand %d  ·  cost %d" % [region.get("name", ""), int(region.get("restaurantCount", 0)), int(region.get("demand", 0)), int(region.get("costIndex", 0))]; btn.custom_minimum_size.y = 48; btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
-			btn.pressed.connect(func() -> void:
-				api.post_json("/v1/character/set-region", {"regionId": rid}, func(ok: bool, _data: Dictionary, _code: int) -> void:
-					if ok: load_bootstrap()
-				)
-			)
+			btn.pressed.connect(set_home_region.bind(rid))
 			list.add_child(btn)
 	var spacer := Control.new(); spacer.custom_minimum_size.y = 12; center.add_child(spacer)
 	status_label = Label.new(); status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER; status_label.add_theme_color_override("font_color", Color("e78874")); center.add_child(status_label)
+
+func set_home_region(region_id: String) -> void:
+	api.post_json("/v1/character/set-region", {"regionId": region_id}, func(ok: bool, _data: Dictionary, _code: int) -> void:
+		if ok: load_bootstrap()
+	)
 
 func show_home() -> void:
 	nav_stack.clear()
@@ -309,9 +317,16 @@ func show_home() -> void:
 		var my_rest := Button.new(); my_rest.text = "My Restaurant — %s" % str(owned[0].get("name", "")); my_rest.custom_minimum_size.y = 56; my_rest.add_theme_font_size_override("font_size", 18)
 		my_rest.pressed.connect(func() -> void: navigate_to(show_my_restaurant))
 		actions.add_child(my_rest)
+	else:
+		var found_rest := Button.new(); found_rest.text = "Found a Restaurant"; found_rest.custom_minimum_size.y = 56; found_rest.add_theme_font_size_override("font_size", 18)
+		found_rest.pressed.connect(func() -> void: navigate_to(show_found_restaurant))
+		actions.add_child(found_rest)
 	var char_btn := Button.new(); char_btn.text = "Character & Skills"; char_btn.custom_minimum_size.y = 56; char_btn.add_theme_font_size_override("font_size", 18)
 	char_btn.pressed.connect(func() -> void: navigate_to(show_character))
 	actions.add_child(char_btn)
+	var inventory_btn := Button.new(); inventory_btn.text = "Role Inventory & Shop"; inventory_btn.custom_minimum_size.y = 56; inventory_btn.add_theme_font_size_override("font_size", 18)
+	inventory_btn.pressed.connect(func() -> void: navigate_to(show_inventory))
+	actions.add_child(inventory_btn)
 	var spacer2 := Control.new(); spacer2.size_flags_vertical = Control.SIZE_EXPAND_FILL; actions.add_child(spacer2)
 	status_label = Label.new(); status_label.add_theme_color_override("font_color", Color("e78874")); root.add_child(status_label)
 	var build_label := Label.new(); build_label.text = "v%s · rro.v1" % CLIENT_VERSION; build_label.add_theme_color_override("font_color", Color("687b7d")); root.add_child(build_label)
@@ -372,10 +387,13 @@ func show_find_work() -> void:
 				res_parts.append("%s%s" % [str(key).left(4).capitalize(), arrow])
 			var res_label := Label.new(); res_label.text = "  ".join(res_parts); res_label.add_theme_font_size_override("font_size", 11); res_label.add_theme_color_override("font_color", Color("8da0a2")); card_box.add_child(res_label)
 			var browse := Button.new(); browse.text = "Browse jobs"; browse.custom_minimum_size.y = 34
-			browse.pressed.connect(func() -> void: navigate_to(func() -> void: show_region_restaurants(selected_region)))
+			browse.pressed.connect(open_region.bind(selected_region))
 			card_box.add_child(browse)
 	)
 	var hint := Label.new(); hint.text = "Guest visits require employment in the same region."; hint.add_theme_color_override("font_color", Color("687b7d")); hint.add_theme_font_size_override("font_size", 11); panel_box.add_child(hint)
+
+func open_region(region: Dictionary) -> void:
+	navigate_to(show_region_restaurants.bind(region.duplicate(true)))
 
 func show_region_restaurants(region: Dictionary) -> void:
 	var root := make_shell(str(region.get("name", "Region")))
@@ -396,7 +414,7 @@ func add_restaurant_card(parent: VBoxContainer, restaurant: Dictionary) -> void:
 	var permanence := Label.new(); permanence.text = "NPC business" if restaurant.get("isNpc", false) else "Player-owned"; permanence.add_theme_color_override("font_color", Color("8e9e9f")); info.add_child(permanence)
 	var controls := VBoxContainer.new(); controls.custom_minimum_size.x = 300; row.add_child(controls)
 	var role := OptionButton.new(); populate_roles(role, false); controls.add_child(role)
-	var apply_btn := Button.new(); apply_btn.text = "Apply for this job"; apply_btn.custom_minimum_size.y = 44
+	var apply_btn := Button.new(); apply_btn.text = "Accept this job"; apply_btn.tooltip_text = "Alpha hiring is immediate; quitting is required before accepting another job."; apply_btn.custom_minimum_size.y = 44
 	apply_btn.pressed.connect(func() -> void:
 		var role_id := str(role.get_item_metadata(role.selected))
 		show_status("Applying...")
@@ -407,6 +425,11 @@ func add_restaurant_card(parent: VBoxContainer, restaurant: Dictionary) -> void:
 		)
 	)
 	controls.add_child(apply_btn)
+	var live_shift: Dictionary = restaurant.get("liveShift", {}) if restaurant.get("liveShift", null) is Dictionary else {}
+	if not live_shift.is_empty():
+		var visit := Button.new(); visit.text = "Visit live shift as a guest"; visit.custom_minimum_size.y = 40
+		visit.pressed.connect(join_shift.bind(str(live_shift.get("id", "")), "guest", ""))
+		controls.add_child(visit)
 
 func format_resources(resources: Dictionary) -> String:
 	var parts: Array[String] = []
@@ -450,14 +473,61 @@ func show_shift() -> void:
 
 func make_guest_panel() -> VBoxContainer:
 	var box := VBoxContainer.new(); var title := Label.new(); title.text = "GUEST INFLUENCE"; title.add_theme_font_size_override("font_size", 20); title.add_theme_color_override("font_color", Color("efbc54")); box.add_child(title)
-	var copy := Label.new(); copy.text = "Spend earned money on a real visit. Requests add fair, visible pressure to crew queues—never hidden sabotage. Staff success can turn your challenge into a better review."; copy.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; box.add_child(copy)
-	var challenges := [["special-request", "$8  ·  off-menu preference"], ["allergy-declaration", "$5  ·  allergy protocol"], ["split-check", "$12  ·  complex split"], ["impatient-pace", "$18  ·  accelerated pacing"], ["tasting-menu", "$25  ·  chef-guided tasting"]]
+	var copy := Label.new(); copy.text = "Spend earned money during a real local visit. Choose one of your party's untouched service minigames, then add visible difficulty with staff counterplay—never hidden sabotage."; copy.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; box.add_child(copy)
+	var challenge_option := OptionButton.new()
+	var challenges := [["allergy-declaration", "$5  ·  allergy protocol"], ["special-request", "$8  ·  off-menu preference"], ["split-check", "$12  ·  complex split"], ["impatient-pace", "$18  ·  accelerated pacing"], ["tasting-menu", "$25  ·  chef-guided tasting"]]
 	for option in challenges:
-		var challenge_id := str(option[0])
-		var challenge_label := str(option[1])
-		var button := Button.new(); button.text = challenge_label; button.pressed.connect(func() -> void: realtime.send_command("guest.challenge", current_shift_id, {"challenge": challenge_id})); box.add_child(button)
+		challenge_option.add_item(str(option[1]))
+		challenge_option.set_item_metadata(challenge_option.item_count - 1, str(option[0]))
+	box.add_child(challenge_option)
+
+	var target_option := OptionButton.new()
+	target_option.add_item("Create a new request for my party")
+	target_option.set_item_metadata(0, "")
+	var guest_party_id := ""
+	var character_id := str(bootstrap.get("character", {}).get("id", ""))
+	for party_value in latest_snapshot.get("parties", []):
+		var party: Dictionary = party_value
+		if str(party.get("guestCharacterId", "")) == character_id:
+			guest_party_id = str(party.get("id", ""))
+			break
+	for task_value in latest_snapshot.get("tasks", []):
+		var task: Dictionary = task_value
+		if str(task.get("partyId", "")) != guest_party_id or int(task.get("actionCount", 0)) > 0 or task.get("rivalry", null) != null: continue
+		target_option.add_item("Target: %s  ·  %s" % [str(task.get("label", "Service task")), str(task.get("ownerRoleId", "crew")).replace("-", " ").capitalize()])
+		target_option.set_item_metadata(target_option.item_count - 1, str(task.get("id", "")))
+	box.add_child(target_option)
+
+	var dimension_option := OptionButton.new()
+	var dimensions := [["timing-window", "Timing window"], ["precision", "Precision"], ["memory-order", "Memory & order"], ["coordination-handoff", "Coordination & handoff"], ["interruptions", "Interruptions"]]
+	for option in dimensions:
+		dimension_option.add_item(str(option[1]))
+		dimension_option.set_item_metadata(dimension_option.item_count - 1, str(option[0]))
+	box.add_child(dimension_option)
+
+	var intensity_option := OptionButton.new()
+	for option in [["light", "Light  ·  1× cost"], ["focused", "Focused  ·  1.6× cost"], ["expert", "Expert  ·  2.4× cost"]]:
+		intensity_option.add_item(str(option[1]))
+		intensity_option.set_item_metadata(intensity_option.item_count - 1, str(option[0]))
+	box.add_child(intensity_option)
+
+	var apply := Button.new()
+	apply.text = "Spend cash and apply challenge"
+	apply.custom_minimum_size.y = 48
+	apply.pressed.connect(send_guest_challenge.bind(challenge_option, target_option, dimension_option, intensity_option))
+	box.add_child(apply)
 	var evidence := Label.new(); evidence.text = "Live party satisfaction and patience are visible on the floor. Your eventual review is generated from recorded food, service, cleanliness, value, and ambience evidence."; evidence.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; evidence.add_theme_color_override("font_color", Color("8fa1a1")); box.add_child(evidence)
 	return box
+
+func send_guest_challenge(challenge_option: OptionButton, target_option: OptionButton, dimension_option: OptionButton, intensity_option: OptionButton) -> void:
+	var payload := {
+		"challenge": str(challenge_option.get_item_metadata(challenge_option.selected)),
+		"dimension": str(dimension_option.get_item_metadata(dimension_option.selected)),
+		"intensity": str(intensity_option.get_item_metadata(intensity_option.selected))
+	}
+	var target_task_id := str(target_option.get_item_metadata(target_option.selected))
+	if not target_task_id.is_empty(): payload["targetTaskId"] = target_task_id
+	realtime.send_command("guest.challenge", current_shift_id, payload)
 
 func shift_clock() -> String:
 	var closes := int(latest_snapshot.get("shift", {}).get("closesAt", 0)); var remaining := maxi(0, int((closes - Time.get_unix_time_from_system()*1000.0)/1000.0)); return "%02d:%02d remaining" % [floori(float(remaining)/60.0), remaining%60]
@@ -483,7 +553,9 @@ func on_command_ack(_command_id: String, result: Dictionary) -> void:
 
 func request_leave_shift() -> void:
 	if current_shift_id.is_empty(): leave_shift_ui(); return
-	api.post_json("/v1/shifts/%s/leave" % current_shift_id, {}, func(_ok: bool, _data: Dictionary, _code: int) -> void: show_shift_summary())
+	api.post_json("/v1/shifts/%s/leave" % current_shift_id, {}, func(ok: bool, _data: Dictionary, _code: int) -> void:
+		if ok: show_shift_summary()
+	)
 
 func show_shift_summary() -> void:
 	realtime.close()
@@ -529,7 +601,7 @@ func show_my_restaurant() -> void:
 		if is_instance_valid(current_builder): current_builder.set_selected_object(object)
 	)
 	split.add_child(current_floor)
-	var panel := PanelContainer.new(); panel.custom_minimum_size.x = 390; split.add_child(panel); current_builder = BuilderPalette.new(); current_builder.set_content(bootstrap.get("content", {})); current_builder.tool_selected.connect(func(tool: String, id: String) -> void: current_floor.select_tool(tool, id)); current_builder.sell_selected_requested.connect(sell_selected_builder_object); current_builder.expand_requested.connect(expand_builder); panel.add_child(current_builder)
+	var panel := PanelContainer.new(); panel.custom_minimum_size.x = 390; split.add_child(panel); current_builder = BuilderPalette.new(); current_builder.set_content(bootstrap.get("content", {})); current_builder.tool_selected.connect(func(tool: String, id: String) -> void: current_floor.select_tool(tool, id)); current_builder.repair_selected_requested.connect(repair_selected_builder_object); current_builder.sell_selected_requested.connect(sell_selected_builder_object); current_builder.expand_requested.connect(expand_builder); panel.add_child(current_builder)
 	api.get_json("/v1/restaurants/%s/layout" % current_restaurant_id, func(ok: bool, data: Dictionary, _code: int) -> void:
 		if ok and is_instance_valid(current_floor): current_floor.set_layout(data)
 	)
@@ -545,6 +617,9 @@ func show_found_restaurant() -> void:
 	for country in bootstrap.get("world", {}).get("countries", []):
 		for value in country.get("regions", []):
 			if int(value.get("restaurantCount", 0)) < int(value.get("capacity", 0)): region.add_item("%s / %s  ·  %d licenses left" % [country.get("name", ""), value.get("name", ""), int(value.get("capacity", 0))-int(value.get("restaurantCount", 0))]); region.set_item_metadata(region.item_count-1, value.get("id", ""))
+	if region.item_count == 0:
+		region.add_item("No restaurant licenses are currently available")
+		region.disabled = true
 	var concept := OptionButton.new()
 	for value in bootstrap.get("content", {}).get("concepts", []): concept.add_item(str(value))
 	box.add_child(concept)
@@ -552,7 +627,9 @@ func show_found_restaurant() -> void:
 	for value in bootstrap.get("content", {}).get("styles", []): style.add_item(str(value))
 	box.add_child(style)
 	var found := Button.new(); found.text = "Purchase license and open design studio"; found.custom_minimum_size.y = 52; box.add_child(found)
+	found.disabled = region.disabled
 	found.pressed.connect(func() -> void:
+		if region.disabled: return
 		api.post_json("/v1/restaurants", {"name": restaurant_name.text, "regionId": region.get_item_metadata(region.selected), "concept": concept.get_item_text(concept.selected), "style": style.get_item_text(style.selected)}, func(ok: bool, _data: Dictionary, _code: int) -> void:
 			if ok: load_bootstrap()
 		)
@@ -576,8 +653,61 @@ func sell_selected_builder_object() -> void:
 		if ok: selected_builder_object = {}; current_floor.set_layout(data.get("layout", {})); show_status("Object sold back at its wear-adjusted recovery value.")
 	)
 
+func repair_selected_builder_object() -> void:
+	if selected_builder_object.is_empty(): show_status("Select a worn or broken object first."); return
+	api.post_json("/v1/restaurants/%s/layout/objects/%s/repair" % [current_restaurant_id, selected_builder_object.get("id", "")], {}, func(ok: bool, data: Dictionary, _code: int) -> void:
+		if ok:
+			selected_builder_object = {}
+			current_floor.set_layout(data.get("layout", {}))
+			show_status("Furniture restored for $%.2f from restaurant treasury." % (float(data.get("costCents", 0)) / 100.0))
+	)
+
 func expand_builder(add_width: int, add_height: int) -> void:
 	api.post_json("/v1/restaurants/%s/layout/expand" % current_restaurant_id, {"addWidth": add_width, "addHeight": add_height}, build_response)
+
+func show_inventory() -> void:
+	var root := make_shell("Role Inventory")
+	current_inventory_panel = InventoryPanel.new()
+	current_inventory_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	current_inventory_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	current_inventory_panel.action_requested.connect(handle_inventory_action)
+	root.add_child(current_inventory_panel)
+	refresh_inventory_screen()
+
+func refresh_inventory_screen() -> void:
+	if not is_instance_valid(current_inventory_panel): return
+	show_status("Loading persistent inventory…")
+	api.get_json("/v1/character/inventory/catalog", accept_inventory_catalog)
+
+func accept_inventory_catalog(ok: bool, data: Dictionary, _code: int) -> void:
+	if not ok: return
+	pending_inventory_catalog = data
+	api.get_json("/v1/character/inventory", accept_inventory_state)
+
+func accept_inventory_state(ok: bool, data: Dictionary, _code: int) -> void:
+	if not ok or not is_instance_valid(current_inventory_panel): return
+	bootstrap["inventory"] = data
+	var preferred_role: String = current_inventory_panel.selected_role_id
+	if preferred_role.is_empty(): preferred_role = str(bootstrap.get("character", {}).get("activeRoleId", "host-busser"))
+	current_inventory_panel.set_data(pending_inventory_catalog, data, preferred_role)
+	show_status("")
+
+func handle_inventory_action(action: String, payload: Dictionary) -> void:
+	var endpoints := {
+		"purchase": "/v1/character/inventory/purchase",
+		"equip": "/v1/character/inventory/equip",
+		"unequip": "/v1/character/inventory/unequip",
+		"use": "/v1/character/inventory/use"
+	}
+	var endpoint := str(endpoints.get(action, ""))
+	if endpoint.is_empty(): return
+	show_status("Updating inventory…")
+	api.post_json(endpoint, payload, accept_inventory_action)
+
+func accept_inventory_action(ok: bool, _data: Dictionary, _code: int) -> void:
+	if ok:
+		show_status("Inventory updated.")
+		refresh_inventory_screen()
 
 func show_character() -> void:
 	var root := make_shell("Character")
@@ -599,6 +729,11 @@ func show_character() -> void:
 	for value in bootstrap.get("content", {}).get("appearance", {}).get("outfitSilhouettes", []):
 		outfit.add_item(str(value).capitalize())
 		outfit.set_item_metadata(outfit.item_count-1, value)
+	var saved_outfit := str(character.get("appearance", {}).get("outfit", ""))
+	for outfit_index in range(outfit.item_count):
+		if str(outfit.get_item_metadata(outfit_index)) == saved_outfit:
+			outfit.select(outfit_index)
+			break
 	appearance.add_child(outfit)
 	var primary := ColorPickerButton.new(); primary.text = "Primary outfit color"; primary.color = Color(str(character.get("appearance", {}).get("primaryColor", "#2f684f"))); appearance.add_child(primary)
 	var secondary := ColorPickerButton.new(); secondary.text = "Secondary outfit color"; secondary.color = Color(str(character.get("appearance", {}).get("secondaryColor", "#d6a84b"))); appearance.add_child(secondary)
