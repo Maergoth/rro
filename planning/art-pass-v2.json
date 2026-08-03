@@ -13,8 +13,8 @@
     "equipmentIcons": { "catalogTotal": 45, "accepted": 0 },
     "characterSystem": {
       "status": "in_progress",
-      "acceptedBodyPresentations": 1,
-      "acceptedIdleDirectionalFiles": 8,
+      "acceptedBodyPresentations": 2,
+      "acceptedIdleDirectionalFiles": 16,
       "required": ["body_skin", "face", "hair_headwear", "base_outfit", "role_layer", "footwear", "accessory", "carried_object", "effects", "skin_masks", "primary_color_masks", "secondary_color_masks"]
     }
   },
@@ -33,6 +33,14 @@
       "qa": "passed",
       "sourcePromptMode": "built-in image generation; one combined 4x2 elevated eight-direction atlas",
       "notes": "Accepted as body presentation A using the elevated orthographic isometric camera lock. Additional body presentations and skin/color masks remain required."
+    },
+    {
+      "id": "character-foundation-002",
+      "assets": ["body-base-b-idle-isometric"],
+      "files": 8,
+      "qa": "passed",
+      "sourcePromptMode": "built-in image generation; one combined 4x2 elevated eight-direction atlas",
+      "notes": "Accepted as body presentation B under the same elevated camera, scale, and directional framing."
     }
   ]
 }
