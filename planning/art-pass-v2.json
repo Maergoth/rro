@@ -16,9 +16,9 @@
       "acceptedBodyPresentations": 2,
       "acceptedIdleDirectionalFiles": 16,
       "acceptedSkinRuntimeFiles": 32,
-      "acceptedOutfitDesigns": 1,
-      "acceptedOutfitBodyVariants": 2,
-      "acceptedOutfitRuntimeFiles": 48,
+      "acceptedOutfitDesigns": 2,
+      "acceptedOutfitBodyVariants": 4,
+      "acceptedOutfitRuntimeFiles": 96,
       "required": ["body_skin", "face", "hair_headwear", "base_outfit", "role_layer", "footwear", "accessory", "carried_object", "effects", "skin_masks", "primary_color_masks", "secondary_color_masks"]
     }
   },
@@ -53,6 +53,17 @@
       "qa": "passed",
       "sourcePromptMode": "built-in image generation; identity-preserving 4x2 edits with local chroma removal, direction correction, body-anchor fitting, and red/blue tint extraction",
       "notes": "Corrected the original body-atlas direction bindings. Classic uniform is a true body-presentation-fitted modular layer with neutral diffuse, primary mask, and secondary mask for every elevated direction; ten skin palettes are shader-driven from the independent skin mask."
+    },
+    {
+      "id": "character-modular-apron-001",
+      "assets": [
+        "outfit-apron-base-a",
+        "outfit-apron-base-b"
+      ],
+      "files": 48,
+      "qa": "passed",
+      "sourcePromptMode": "built-in image generation; identity-preserving 4x2 edits with local chroma removal, body-anchor fitting, and red/blue tint extraction",
+      "notes": "Apron uniform is independently fitted to both accepted elevated body presentations. Runtime composites and calibration masks pass all eight-direction gameplay-scale review; footwear remains a separate swappable layer."
     }
   ]
 }
