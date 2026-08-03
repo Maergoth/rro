@@ -17,6 +17,7 @@
     "typecheck": "tsc -p apps/server/tsconfig.json --noEmit",
     "validate:data": "node tools/validate-data.mjs",
     "validate:godot": "node tools/validate-godot-project.mjs",
+    "validate:art-pass": "node tools/validate-art-pass-v2.mjs",
     "smoke:server": "npm run build:server && node tools/smoke-local-server.mjs",
     "test": "npm run build && node --test tests/*.test.mjs",
     "verify": "npm run validate:data && npm run validate:godot && npm run typecheck && npm test",

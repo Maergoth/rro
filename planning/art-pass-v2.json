@@ -15,6 +15,10 @@
       "status": "in_progress",
       "acceptedBodyPresentations": 2,
       "acceptedIdleDirectionalFiles": 16,
+      "acceptedSkinRuntimeFiles": 32,
+      "acceptedOutfitDesigns": 1,
+      "acceptedOutfitBodyVariants": 2,
+      "acceptedOutfitRuntimeFiles": 48,
       "required": ["body_skin", "face", "hair_headwear", "base_outfit", "role_layer", "footwear", "accessory", "carried_object", "effects", "skin_masks", "primary_color_masks", "secondary_color_masks"]
     }
   },
@@ -41,6 +45,14 @@
       "qa": "passed",
       "sourcePromptMode": "built-in image generation; one combined 4x2 elevated eight-direction atlas",
       "notes": "Accepted as body presentation B under the same elevated camera, scale, and directional framing."
+    },
+    {
+      "id": "character-modular-classic-001",
+      "assets": ["body-skin-masks-base-a", "body-skin-masks-base-b", "outfit-classic-base-a", "outfit-classic-base-b"],
+      "files": 80,
+      "qa": "passed",
+      "sourcePromptMode": "built-in image generation; identity-preserving 4x2 edits with local chroma removal, direction correction, body-anchor fitting, and red/blue tint extraction",
+      "notes": "Corrected the original body-atlas direction bindings. Classic uniform is a true body-presentation-fitted modular layer with neutral diffuse, primary mask, and secondary mask for every elevated direction; ten skin palettes are shader-driven from the independent skin mask."
     }
   ]
 }

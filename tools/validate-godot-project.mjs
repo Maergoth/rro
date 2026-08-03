@@ -84,6 +84,8 @@ assert.ok(svgs.length >= 10, "At least ten individual native SVG assets are requ
 const rasterAssets = walk(resolve(CLIENT, "assets")).filter((path) => /\.(png|jpe?g|webp)$/i.test(path));
 const approvedRasterRoots = [
   resolve(CLIENT, "assets/objects/generated"),
+  resolve(CLIENT, "assets/objects/directional"),
+  resolve(CLIENT, "assets/characters"),
   resolve(CLIENT, "assets/items"),
   resolve(CLIENT, "assets/ui"),
 ];
