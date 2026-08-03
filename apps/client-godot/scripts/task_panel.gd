@@ -11,6 +11,7 @@ var selected_task: Dictionary = {}
 var queue_box: VBoxContainer
 var detail_box: VBoxContainer
 var title_label: Label
+var workload_label: Label
 var role_label: Label
 var prompt_label: Label
 var consequence_label: Label
@@ -24,6 +25,10 @@ func _ready() -> void:
 	title_label.add_theme_font_size_override("font_size", 20)
 	title_label.add_theme_color_override("font_color", Color("7fd0b2"))
 	add_child(title_label)
+	workload_label = Label.new()
+	workload_label.add_theme_font_size_override("font_size", 12)
+	workload_label.add_theme_color_override("font_color", Color("8fa1a1"))
+	add_child(workload_label)
 	var queue_scroll := ScrollContainer.new()
 	queue_scroll.custom_minimum_size = Vector2(330, 215)
 	queue_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -60,6 +65,7 @@ func set_state(snapshot: Dictionary, own_character_id: String, role_id: String) 
 	character_id = own_character_id
 	current_role_id = role_id
 	tasks = snapshot.get("tasks", [])
+	refresh_workload(snapshot)
 	refresh_queue()
 	if not selected_task.is_empty():
 		for task in tasks:
@@ -68,6 +74,25 @@ func set_state(snapshot: Dictionary, own_character_id: String, role_id: String) 
 				return
 		selected_task = {}
 		show_empty_detail()
+
+func refresh_workload(snapshot: Dictionary) -> void:
+	var selected_slot: Dictionary = {}
+	for slot_value in snapshot.get("dutySlots", []):
+		var slot: Dictionary = slot_value
+		if str(slot.get("occupantCharacterId", "")) == character_id:
+			selected_slot = slot
+			break
+		if selected_slot.is_empty() and str(slot.get("roleId", "")) == current_role_id:
+			selected_slot = slot
+	if selected_slot.is_empty():
+		workload_label.text = "LIVE WORKLOAD CALCULATING"
+		return
+	var workload := int(selected_slot.get("workload", 0))
+	var furniture_pressure := float(selected_slot.get("furniturePressure", 0))
+	var band := "STEADY" if workload < 45 else ("BUSY" if workload < 70 else ("PEAK" if workload < 90 else "RECOVERY"))
+	var sign_text := "+" if furniture_pressure >= 0 else ""
+	workload_label.text = "LIVE WORKLOAD %d%%  ·  %s  ·  FURNITURE %s%.1f" % [workload, band, sign_text, furniture_pressure]
+	workload_label.add_theme_color_override("font_color", Color("80cdb1") if workload < 70 else (Color("efbc54") if workload < 90 else Color("e68b7e")))
 
 func refresh_queue() -> void:
 	for child in queue_box.get_children(): child.queue_free()
@@ -86,7 +111,7 @@ func refresh_queue() -> void:
 		button.custom_minimum_size = Vector2(315, 52)
 		button.disabled = unavailable
 		button.tooltip_text = "This interaction belongs to %s." % task_role if off_role else "Owned responsibility."
-		button.pressed.connect(func() -> void: select_task(task))
+		button.pressed.connect(select_task.bind(task.duplicate(true)))
 		queue_box.add_child(button)
 	if tasks.is_empty():
 		var empty := Label.new()
@@ -118,7 +143,7 @@ func select_task(task: Dictionary) -> void:
 		claim.custom_minimum_size.y = 52
 		claim.add_theme_font_size_override("font_size", 18)
 		claim.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		claim.pressed.connect(func() -> void: task_claim_requested.emit(str(task.get("id", ""))))
+		claim.pressed.connect(request_claim.bind(str(task.get("id", ""))))
 		action_box.add_child(claim)
 	elif claimed_by == character_id:
 		var actions: Array = phase.get("actions", [])
@@ -129,12 +154,18 @@ func select_task(task: Dictionary) -> void:
 			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			button.add_theme_color_override("font_color", Color("f3e8c8") if index == 0 else Color("e68b7e"))
 			button.tooltip_text = "Controlled response" if index == 0 else "Faster/riskier response; failure can create incidents and review evidence."
-			button.pressed.connect(func() -> void: task_action_requested.emit(str(task.get("id", "")), action))
+			button.pressed.connect(request_action.bind(str(task.get("id", "")), action))
 			action_box.add_child(button)
 	else:
 		var coworker := Label.new()
 		coworker.text = "Claimed by a coworker"
 		action_box.add_child(coworker)
+
+func request_claim(task_id: String) -> void:
+	task_claim_requested.emit(task_id)
+
+func request_action(task_id: String, action: String) -> void:
+	task_action_requested.emit(task_id, action)
 
 func show_empty_detail() -> void:
 	role_label.text = "SELECT OWNED WORK"

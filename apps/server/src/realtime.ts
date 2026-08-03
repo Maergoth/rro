@@ -12,8 +12,15 @@ type SessionSocket = WebSocket & {
   windowMessages?: number;
 };
 
+const MAX_BUFFERED_BYTES = 1024 * 1024;
+
 function transmit(socket: WebSocket, payload: unknown): void {
-  if (socket.readyState === WebSocket.OPEN) socket.send(JSON.stringify(payload));
+  if (socket.readyState !== WebSocket.OPEN) return;
+  if (socket.bufferedAmount > MAX_BUFFERED_BYTES) {
+    socket.close(4408, "Realtime client is too far behind");
+    return;
+  }
+  socket.send(JSON.stringify(payload));
 }
 
 export function attachRealtime(server: HttpServer, db: Database, live: LiveService): { close: () => Promise<void> } {
@@ -49,7 +56,11 @@ export function attachRealtime(server: HttpServer, db: Database, live: LiveServi
           return;
         }
         if (message.type === "subscribe") {
-          socket.subscribedShiftId = String(message.shiftId ?? "");
+          const shiftId = String(message.shiftId ?? "");
+          const joined = db.prepare("SELECT 1 FROM shift_presences WHERE service_shift_id = ? AND character_id = ? AND left_at IS NULL")
+            .get(shiftId, socket.account.characterId);
+          if (!joined) throw new ApiError(403, "Join this shift before subscribing to its live state.");
+          socket.subscribedShiftId = shiftId;
           transmit(socket, { type: "snapshot", data: live.snapshot(socket.subscribedShiftId) });
           return;
         }
@@ -66,7 +77,11 @@ export function attachRealtime(server: HttpServer, db: Database, live: LiveServi
         if (status === 401 || status === 429) socket.close(status === 401 ? 4401 : 4429, "Realtime policy violation");
       }
     });
-    socket.on("close", () => clearTimeout(authTimeout));
+    socket.on("close", () => {
+      clearTimeout(authTimeout);
+      if (!socket.account || !socket.subscribedShiftId) return;
+      try { live.leave(socket.account, socket.subscribedShiftId); } catch { /* Presence may already be released by HTTP leave or shift close. */ }
+    });
   });
 
   const snapshotListener = (shiftId: string, snapshot: Snapshot): void => {

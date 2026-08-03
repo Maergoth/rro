@@ -1,5 +1,6 @@
 import type { ContentRegistry } from "./content.js";
 import { newId, transaction } from "./database.js";
+import { aggregateFurnitureEffects, type FurnitureEffectsSummary } from "./furniture-effects.js";
 import { ApiError, type AuthenticatedAccount, type Database, type FurnitureDefinition } from "./types.js";
 
 type CellInput = { x: number; y: number };
@@ -109,7 +110,14 @@ export function getLayout(db: Database, registry: ContentRegistry, restaurantId:
     cells: db.prepare("SELECT grid_x AS x, grid_y AS y, surface_id AS surfaceId, room_tag AS roomTag, walkable FROM floor_cells WHERE restaurant_id = ? ORDER BY grid_y, grid_x").all(restaurantId),
     walls: db.prepare("SELECT id, grid_x AS x, grid_y AS y, edge, wall_style_id AS wallStyleId, opening_type AS openingType, rotation FROM wall_edges WHERE restaurant_id = ? ORDER BY grid_y, grid_x").all(restaurantId),
     objects: db.prepare("SELECT id, definition_id AS definitionId, grid_x AS x, grid_y AS y, rotation, state, wear, primary_color AS primaryColor, secondary_color AS secondaryColor FROM object_instances WHERE restaurant_id = ? ORDER BY placed_at").all(restaurantId),
+    furnitureEffects: getFurnitureEffects(db, registry, restaurantId),
   };
+}
+
+export function getFurnitureEffects(db: Database, registry: ContentRegistry, restaurantId: string): FurnitureEffectsSummary {
+  restaurantRow(db, restaurantId);
+  const instances = db.prepare("SELECT definition_id AS definitionId, wear, state FROM object_instances WHERE restaurant_id = ? ORDER BY placed_at").all(restaurantId) as Array<{ definitionId: string; wear: number; state: string }>;
+  return aggregateFurnitureEffects(registry.content.furniture, instances);
 }
 
 export function foundRestaurant(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, body: Record<string, unknown>): Record<string, unknown> {
@@ -228,6 +236,29 @@ export function moveObject(db: Database, registry: ContentRegistry, account: Aut
   assertClear(db, registry, restaurantId, x, y, size.width, size.height, objectId);
   db.prepare("UPDATE object_instances SET grid_x = ?, grid_y = ?, rotation = ?, updated_at = ? WHERE id = ?").run(x, y, rotation, Date.now(), objectId);
   return { id: objectId, layout: getLayout(db, registry, restaurantId) };
+}
+
+export function repairObject(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string, objectId: string): Record<string, unknown> {
+  const restaurant = assertOwner(db, restaurantId, account);
+  const object = db.prepare("SELECT * FROM object_instances WHERE id = ? AND restaurant_id = ?").get(objectId, restaurantId) as any;
+  if (!object) throw new ApiError(404, "Placed object not found.");
+  const definition = registry.furnitureById.get(object.definition_id);
+  if (!definition) throw new ApiError(409, "This object's content definition is unavailable.");
+  const wear = Math.max(0, Math.min(100, Number(object.wear) || 0));
+  const broken = object.state === "broken" || wear >= 100;
+  if (!broken && wear <= 0 && object.state === "operational") throw new ApiError(409, "This object does not need repair.");
+  const fullRepairCost = Math.max(1, Math.round(definition.repairCostCents ?? definition.costCents * 0.22));
+  const repairFraction = broken ? 1 : Math.max(0.05, wear / 100);
+  const cost = Math.max(1, Math.round(fullRepairCost * repairFraction));
+  if (restaurant.treasury_cents < cost) throw new ApiError(409, "Restaurant treasury cannot cover this repair.");
+  const now = Date.now();
+  transaction(db, () => {
+    db.prepare("UPDATE restaurants SET treasury_cents = treasury_cents - ? WHERE id = ?").run(cost, restaurantId);
+    db.prepare("UPDATE object_instances SET state = 'operational', wear = 0, updated_at = ? WHERE id = ? AND restaurant_id = ?").run(now, objectId, restaurantId);
+    db.prepare("INSERT INTO ledger_entries (id, restaurant_id, character_id, category, amount_cents, reference_type, reference_id, created_at) VALUES (?, ?, ?, 'furniture-repair', ?, 'object', ?, ?)")
+      .run(newId("ledger"), restaurantId, account.characterId, -cost, objectId, now);
+  });
+  return { id: objectId, costCents: cost, state: "operational", wear: 0, layout: getLayout(db, registry, restaurantId) };
 }
 
 export function sellObject(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string, objectId: string): Record<string, unknown> {

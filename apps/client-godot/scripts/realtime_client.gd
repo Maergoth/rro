@@ -12,7 +12,9 @@ var token := ""
 var server_url := "http://127.0.0.1:8788"
 var subscribed_shift_id := ""
 var authenticated := false
+var auth_sent := false
 var connection_started := false
+var pending_commands: Array[Dictionary] = []
 
 func connect_world(base_url: String, session_token: String) -> void:
 	close()
@@ -33,7 +35,13 @@ func subscribe(shift_id: String) -> void:
 
 func send_command(command_type: String, shift_id: String, payload: Dictionary) -> String:
 	var command_id := "%s-%d-%d" % [command_type, Time.get_ticks_msec(), randi()]
-	send_message({"type": "command", "command": {"id": command_id, "type": command_type, "shiftId": shift_id, "payload": payload}})
+	var message := {"type": "command", "command": {"id": command_id, "type": command_type, "shiftId": shift_id, "payload": payload}}
+	if authenticated:
+		send_message(message)
+	elif connection_started:
+		pending_commands.push_back(message)
+		if pending_commands.size() > 64:
+			pending_commands.pop_front()
 	return command_id
 
 func send_message(message: Dictionary) -> void:
@@ -45,7 +53,9 @@ func close() -> void:
 		socket.close(1000, "Client leaving")
 	socket = WebSocketPeer.new()
 	authenticated = false
+	auth_sent = false
 	connection_started = false
+	pending_commands.clear()
 	set_process(false)
 
 func _process(_delta: float) -> void:
@@ -53,12 +63,14 @@ func _process(_delta: float) -> void:
 		return
 	socket.poll()
 	var state := socket.get_ready_state()
-	if state == WebSocketPeer.STATE_OPEN and not authenticated:
+	if state == WebSocketPeer.STATE_OPEN and not auth_sent:
 		send_message({"type": "auth", "token": token})
-		authenticated = true
+		auth_sent = true
 	elif state == WebSocketPeer.STATE_CLOSED:
 		var reason := socket.get_close_reason()
 		connection_started = false
+		authenticated = false
+		auth_sent = false
 		set_process(false)
 		if not reason.is_empty() and reason != "Client leaving":
 			realtime_error.emit("Realtime disconnected: %s" % reason)
@@ -69,9 +81,13 @@ func _process(_delta: float) -> void:
 			continue
 		match str(message.get("type", "")):
 			"ready":
+				authenticated = true
 				connected_to_world.emit()
 				if not subscribed_shift_id.is_empty():
 					send_message({"type": "subscribe", "shiftId": subscribed_shift_id})
+				for pending in pending_commands:
+					send_message(pending)
+				pending_commands.clear()
 			"snapshot":
 				snapshot_received.emit(message.get("data", {}))
 			"command.ack":

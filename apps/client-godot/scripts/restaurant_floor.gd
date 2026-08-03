@@ -22,6 +22,7 @@ var paint_cells: Dictionary = {}
 var dragging_object: Dictionary = {}
 var drag_preview_cell := Vector2i.ZERO
 var movement_send_cooldown := 0.0
+var last_sent_direction := Vector2.ZERO
 var texture_cache: Dictionary = {}
 
 const FLOOR_COLORS := {
@@ -104,9 +105,21 @@ func _process(delta: float) -> void:
 	movement_send_cooldown -= delta
 	if movement_send_cooldown <= 0.0:
 		var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
-		if direction.length() > 0.05:
+		if direction.length() <= 0.05:
+			direction = Vector2.ZERO
+		if direction != last_sent_direction or direction != Vector2.ZERO:
 			movement_input.emit(direction)
+			last_sent_direction = direction
 		movement_send_cooldown = 0.1
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_APPLICATION_FOCUS_OUT and not build_mode and last_sent_direction != Vector2.ZERO:
+		last_sent_direction = Vector2.ZERO
+		movement_input.emit(Vector2.ZERO)
+
+func _exit_tree() -> void:
+	if not build_mode and last_sent_direction != Vector2.ZERO:
+		movement_input.emit(Vector2.ZERO)
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
@@ -222,22 +235,36 @@ func draw_wall(wall: Dictionary) -> void:
 func draw_object(object: Dictionary, alpha := 1.0) -> void:
 	var definition := furniture_definition(str(object.get("definitionId", "")))
 	if definition.is_empty(): return
-	var width := int(definition.get("width", 1)); var height := int(definition.get("height", 1))
-	if int(object.get("rotation", 0)) in [90, 270]:
+	var source_width := int(definition.get("width", 1)); var source_height := int(definition.get("height", 1))
+	var width := source_width; var height := source_height
+	var item_rotation := int(object.get("rotation", 0)) % 360
+	if item_rotation in [90, 270]:
 		var swap := width
 		width = height
 		height = swap
 	var rect := Rect2(grid_to_screen(Vector2(float(object.get("x", 0)), float(object.get("y", 0)))) + Vector2.ONE * 2, Vector2(width, height) * cell_pixels - Vector2.ONE * 4)
 	var color: Color = CATEGORY_COLORS.get(str(definition.get("category", "Decor")), Color("6e9364"))
+	var condition := str(object.get("state", "operational"))
+	var wear := float(object.get("wear", 0))
+	if condition == "broken": color = Color("7b3e3e")
+	elif condition == "worn": color = color.darkened(.24)
 	color.a = alpha
 	draw_style_box(make_object_box(color), rect)
 	var texture := texture_for(definition)
 	if texture != null:
-		draw_texture_rect(texture, rect.grow(-4), false, Color(1, 1, 1, alpha))
+		var source_size := Vector2(source_width, source_height) * cell_pixels - Vector2.ONE * 8
+		var condition_tint := Color(1, 1, 1, alpha)
+		if condition == "broken": condition_tint = Color(.62, .43, .40, alpha)
+		elif condition == "worn": condition_tint = Color(.78, .72, .65, alpha)
+		draw_set_transform(rect.get_center(), deg_to_rad(float(item_rotation)), Vector2.ONE)
+		draw_texture_rect(texture, Rect2(-source_size * .5, source_size), false, condition_tint)
+		draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 	var symbol := str(definition.get("symbol", str(definition.get("name", "?"))[0]))
 	if texture == null: draw_string(ThemeDB.fallback_font, rect.get_center() + Vector2(-5, 5), symbol, HORIZONTAL_ALIGNMENT_LEFT, -1, clampi(int(cell_pixels * .45), 11, 22), Color("f7f0db", alpha))
 	if cell_pixels > 30:
 		draw_string(ThemeDB.fallback_font, rect.position + Vector2(5, 14), str(definition.get("name", "")), HORIZONTAL_ALIGNMENT_LEFT, int(rect.size.x - 10), 10, Color("f7f0db", alpha * .92))
+		if condition in ["worn", "broken"]:
+			draw_string(ThemeDB.fallback_font, rect.position + Vector2(5, rect.size.y - 5), "%s · %.0f%%" % [condition.to_upper(), wear], HORIZONTAL_ALIGNMENT_LEFT, int(rect.size.x - 10), 10, Color("ffc6a5", alpha))
 
 func make_object_box(color: Color) -> StyleBoxFlat:
 	var box := StyleBoxFlat.new(); box.bg_color = color; box.border_color = Color(color).lightened(.25); box.set_border_width_all(2); box.set_corner_radius_all(5); return box
@@ -245,6 +272,13 @@ func make_object_box(color: Color) -> StyleBoxFlat:
 func texture_for(definition: Dictionary) -> Texture2D:
 	var key := str(definition.get("id", ""))
 	var asset_key := str(definition.get("assetId", key))
+	for generated_key in [asset_key, key]:
+		var generated_path := "res://assets/objects/generated/%s.png" % generated_key
+		if ResourceLoader.exists(generated_path):
+			if texture_cache.has(generated_path): return texture_cache[generated_path]
+			var generated_texture := load(generated_path) as Texture2D
+			texture_cache[generated_path] = generated_texture
+			return generated_texture
 	var mapping := {"table-two": "table-two", "oak-two-top": "table-two", "table-four": "table-four", "walnut-four-top": "table-four", "host-stand": "host-stand", "host-stand-pro": "host-stand", "range": "range", "six-burner-range": "range", "prep": "prep-table", "prep-table-refrigerated": "prep-table", "dish-machine": "dish-machine", "dish-machine-high-temp": "dish-machine", "service-station": "service-station", "server-station-pro": "service-station", "plants": "plant", "large-planter": "plant"}
 	var file_name := str(mapping.get(key, mapping.get(asset_key, "")))
 	if file_name.is_empty(): return null

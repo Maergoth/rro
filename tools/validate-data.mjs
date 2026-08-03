@@ -18,7 +18,11 @@ const rules = read("core/world-rules.json");
 const roles = read("core/roles.json");
 const progression = read("core/role-progression.json");
 const activities = read("core/activities.json").activities;
-const furniture = [...read("core/furniture.json"), ...read("core/furniture-production.json"), ...read("seasonal/summer-street-fair/furniture.json")];
+const coreFurniture = read("core/furniture.json");
+const productionFurniture = read("core/furniture-production.json");
+const seasonalFurniture = read("seasonal/summer-street-fair/furniture.json");
+const furniture = [...coreFurniture, ...productionFurniture, ...seasonalFurniture];
+const roleEquipment = read("core/role-equipment.json");
 const construction = read("core/construction.json");
 const appearance = read("core/appearance.json");
 const attributes = read("core/attributes.json");
@@ -41,6 +45,9 @@ unique(restaurants.map((value) => value.id), "Restaurant");
 unique(roles.map((value) => value.id), "Role");
 unique(activities.map((value) => value.id), "Activity");
 unique(furniture.map((value) => value.id), "Furniture");
+unique(roleEquipment.items.map((value) => value.id), "Role equipment");
+unique(roleEquipment.items.map((value) => value.iconId), "Role equipment icon");
+unique(roleEquipment.slots.map((value) => value.id), "Role equipment slot");
 unique(construction.surfaces.map((value) => value.id), "Surface");
 unique(attributes.map((value) => value.id), "Attribute");
 
@@ -53,10 +60,17 @@ for (const role of baseRoles) {
   assert.equal(skills, 28, `${role.id} needs 28 skill nodes.`);
   const roleActivities = activities.filter((activity) => activity.roleId === role.id);
   assert.ok(roleActivities.length >= 10, `${role.id} needs at least ten continuous activities.`);
+  const equipmentChoices = roleEquipment.items.filter((item) => item.allowedRoleIds.includes(role.id));
+  assert.ok(equipmentChoices.length >= 9, `${role.id} needs at least nine personal equipment/consumable choices.`);
+  assert.equal((roleEquipment.roleSlots[role.id] ?? []).length, 4, `${role.id} needs four persistent loadout slots.`);
 }
 assert.equal(baseRoles.length, 7);
 assert.equal(progression.roles.reduce((sum, role) => sum + role.fundamentals.length + Object.values(role.branches).flat().length, 0), 196);
 assert.equal(activities.length, 89);
+assert.equal(roleEquipment.schemaVersion, 1);
+assert.equal(roleEquipment.items.length, 45);
+assert.equal(roleEquipment.items.filter((item) => item.kind === "equipment").length, 31);
+assert.equal(roleEquipment.items.filter((item) => item.kind === "consumable").length, 14);
 for (const activity of activities) {
   assert.equal(activity.phases.length, 3, `${activity.id} must be multi-phase.`);
   assert.ok(activity.phases.every((phase) => Array.isArray(phase.actions) && phase.actions.length === 2));
@@ -66,7 +80,51 @@ for (const item of furniture) {
   assert.ok(Number.isInteger(item.costCents) && item.costCents >= 0, `${item.id} price`);
   assert.ok(Number.isInteger(item.width) && item.width > 0 && Number.isInteger(item.height) && item.height > 0, `${item.id} footprint`);
   assert.ok(item.stats && Object.keys(item.stats).length > 0, `${item.id} modifiers`);
+  assert.ok(Object.values(item.stats).every((value) => Number.isFinite(value)), `${item.id} modifiers must be finite numbers`);
 }
+assert.ok(furniture.length >= 200, `Production catalog must expose at least 200 total furniture definitions; got ${furniture.length}.`);
+assert.ok(productionFurniture.length >= 180, `Generated production furniture must contain at least 180 definitions; got ${productionFurniture.length}.`);
+unique(productionFurniture.map((item) => item.name), "Production furniture name");
+unique(productionFurniture.map((item) => item.assetId), "Production furniture asset");
+
+const canonicalFurnitureStats = ["comfort", "ambience", "cleanability", "reliability"];
+const operationalFurnitureStats = new Set([
+  "seats", "turnover", "route", "accuracy", "payment", "forecast", "handoff", "accessibility", "revenue", "quality",
+  "kitchen", "capacity", "recovery", "speed", "hold", "consistency", "sanitation", "storage", "organization", "rotation",
+  "waste", "breakage", "spill", "safety", "privacy", "noise", "community", "visibility",
+]);
+const supportedFurnitureRoles = new Set(["manager", "owner", "server", "dishwasher", "chef", "cook", "host-busser"]);
+for (const item of productionFurniture) {
+  assert.match(item.id, /^[a-z0-9]+(?:-[a-z0-9]+)*$/, `${item.id} stable id`);
+  assert.equal(item.inventoryScope, "restaurant", `${item.id} persistent inventory scope`);
+  assert.equal(item.assetId, `furniture-${item.id}`, `${item.id} must have a one-to-one sprite key`);
+  assert.match(item.assetId, /^furniture-[a-z0-9]+(?:-[a-z0-9]+)*$/, `${item.id} asset id`);
+  assert.ok(Number.isInteger(item.durability) && item.durability >= 25 && item.durability <= 100, `${item.id} durability`);
+  assert.ok(Number.isInteger(item.breakageHorizonShifts) && item.breakageHorizonShifts >= 80 && item.breakageHorizonShifts <= 1200, `${item.id} breakage horizon`);
+  assert.ok(Number.isFinite(item.wearPerShift) && item.wearPerShift > 0 && item.wearPerShift <= 2, `${item.id} wear rate`);
+  assert.ok(Math.abs(item.wearPerShift - 100 / item.breakageHorizonShifts) <= 0.001, `${item.id} wear rate must match breakage horizon`);
+  assert.ok(Number.isInteger(item.upkeepCents) && item.upkeepCents >= 0, `${item.id} upkeep`);
+  assert.ok(Number.isInteger(item.repairCostCents) && item.repairCostCents >= 0 && item.repairCostCents <= item.costCents, `${item.id} repair cost`);
+  for (const key of canonicalFurnitureStats) {
+    assert.ok(Number.isInteger(item.stats[key]) && item.stats[key] >= -8 && item.stats[key] <= 20, `${item.id} ${key}`);
+  }
+  assert.ok(Object.keys(item.stats).some((key) => operationalFurnitureStats.has(key)), `${item.id} needs a role, service, kitchen, capacity, or guest-facing effect`);
+  assert.ok(item.roleEffects && Object.keys(item.roleEffects).length >= 1, `${item.id} role effects`);
+  for (const [roleId, value] of Object.entries(item.roleEffects)) {
+    assert.ok(supportedFurnitureRoles.has(roleId), `${item.id} has unsupported role effect ${roleId}`);
+    assert.ok(Number.isInteger(value) && value >= 1 && value <= 20, `${item.id}/${roleId} role effect`);
+  }
+}
+
+// Price is intentionally not a one-dimensional upgrade score. Prove the data
+// contains real tradeoffs: cheaper pieces can win individual axes and even
+// total quality, while the range still includes genuinely stronger pieces.
+const qualityTotal = (item) => canonicalFurnitureStats.reduce((sum, key) => sum + item.stats[key], 0);
+const qualityTotals = productionFurniture.map(qualityTotal);
+assert.ok(Math.max(...qualityTotals) - Math.min(...qualityTotals) >= 20, "Furniture must include meaningful total-quality tiers.");
+assert.ok(productionFurniture.some((cheaper) => productionFurniture.some((costlier) => cheaper.costCents < costlier.costCents && cheaper.stats.cleanability > costlier.stats.cleanability)), "Cheaper furniture must sometimes be easier to clean.");
+assert.ok(productionFurniture.some((cheaper) => productionFurniture.some((costlier) => cheaper.costCents < costlier.costCents && qualityTotal(cheaper) > qualityTotal(costlier))), "Furniture price must not be a linear total-stat ladder.");
+assert.ok(new Set(productionFurniture.map((item) => canonicalFurnitureStats.map((key) => item.stats[key]).join(":"))).size >= 100, "Furniture needs broad canonical stat variety.");
 assert.ok(construction.surfaces.length >= 12);
 assert.ok(construction.wallStyles.length >= 6);
 assert.ok(appearance.outfitSilhouettes.length >= 5);
@@ -77,4 +135,4 @@ for (const event of events) {
   assert.ok(Date.parse(event.startsAt) < Date.parse(event.endsAt));
 }
 
-console.log(JSON.stringify({ ok: true, countries: world.length, regions: regions.length, seededRestaurants: restaurants.length, capacity, occupancy: restaurants.length / capacity, roles: baseRoles.length, skills: 196, activities: activities.length, furniture: furniture.length, surfaces: construction.surfaces.length, events: events.length }, null, 2));
+console.log(JSON.stringify({ ok: true, countries: world.length, regions: regions.length, seededRestaurants: restaurants.length, capacity, occupancy: restaurants.length / capacity, roles: baseRoles.length, skills: 196, activities: activities.length, furniture: furniture.length, roleEquipment: roleEquipment.items.length, surfaces: construction.surfaces.length, events: events.length }, null, 2));

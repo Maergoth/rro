@@ -23,6 +23,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run verify
+      - name: Generated files are current
+        shell: bash
+        run: git diff --exit-code
       - uses: chickensoft-games/setup-godot@v2.4.1
         with:
           version: 4.4.1

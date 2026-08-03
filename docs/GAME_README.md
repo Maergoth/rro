@@ -7,7 +7,7 @@ Rush & Revenue Online is a native Godot 4 desktop client for the separate `rro.v
 | Archive | Contains | Player-ready? |
 |---|---|---|
 | `RRO-Game-Client-<version>-windows-x64.zip` | A real Godot Windows export plus graphical launcher | Yes, after the separate server is started |
-| `RRO-Godot-Client-Source-<version>.zip` | Godot project, GDScript, scenes, modular SVGs, export preset | No; export it with Godot 4.4.1+ |
+| `RRO-Godot-Client-Source-<version>.zip` | Godot project, GDScript, scenes, modular SVG/PNG assets, export preset | No; export it with Godot 4.4.1+ |
 
 The release tool never renames source into a fake executable. Tagged GitHub release CI installs the pinned Godot export templates and creates the native game-client archive.
 
@@ -33,11 +33,13 @@ The launcher can start a co-located server package for development convenience, 
 - role workboards that distinguish owned, coworker-owned, and off-role tasks;
 - three-phase work interactions rendered through 12 minigame grammars;
 - emergent incidents, visible spills, satisfaction/patience, sanitation, failure, and recovery;
-- paid guest requests that add legitimate visible pressure instead of sabotage;
+- paid local-rival guest requests with manual live-task, difficulty-dimension and intensity selection, visible counterplay and server caps;
 - randomized aptitudes, calculated role fit, seven independent 28-node skill trees;
+- a persistent personal shop/inventory with 45 role-specific tools and consumables, four equipment slots per role, stable icons and session-to-session loadouts;
 - outfit silhouette plus primary and secondary color customization;
 - restaurant founding and a persistent modular design studio;
-- floor painting/zoning, snapped walls/doors/arches, object placement, drag/move, four rotations, sale, and add-on area.
+- floor painting/zoning, snapped walls/doors/arches, object placement, drag/move, four rotations, sale, repair, and add-on area;
+- a 229-item furniture economy whose condition and mixed stat portfolio affect rating, happiness, role work, cleanliness, revenue, upkeep and breakdown risk.
 
 This is a source alpha/vertical-slice foundation. It is not yet a content-complete or operated AAA MMO. See `V1_RELEASE_GATE.md` for the exact boundary and `V2_AAA_ROADMAP.md` for the production program.
 
@@ -70,8 +72,8 @@ Right click is handled only inside the restaurant canvas. It does not open an un
 5. Claim work marked for your role. Off-role work remains possible but is visibly labeled and carries a small performance penalty.
 6. Complete each phase by reading the live state and choosing a controlled or riskier response.
 7. Recover spills, late work, sanitation problems, or guest dissatisfaction before they cascade into review evidence.
-8. Spend earned money visiting another restaurant as a guest, or save toward founding a restaurant.
-9. Founding unlocks the design studio, where layout affects movement and operational flow rather than decorating a flat image.
+8. Spend earned money on role tools/consumables, or visit another local restaurant and add a bounded visible modifier to one of your party's minigames.
+9. Founding unlocks the design studio, where furniture mix, condition and layout affect ratings, workload, shift economics and movement rather than decorating a flat image.
 
 ## Work and minigames
 
@@ -96,13 +98,17 @@ The server supplies the phase, permitted actions, deadlines, context, ownership,
 
 ## Character and role progression
 
-All seven base roles progress separately: Manager, Owner, Server, Dishwasher, Chef, Cook, and Host/Busser. Each has 28 data-driven nodes with prerequisites and costs. Random starting stats make some roles easier at first but do not prevent mastery in any role.
+All seven base roles progress separately: Manager, Owner, Server, Dishwasher, Chef, Cook, and Host/Busser. Each has 28 data-driven nodes with prerequisites and costs. Random starting stats make some roles easier at first but do not prevent mastery in any role. Each role also owns a four-slot persistent loadout and at least nine equipment/consumable choices; prices buy situational tradeoffs rather than a single linear best item.
 
 The current data/runtime can resolve inherited subclass definitions. Production subclass animation, matchmaking, equipment, authoring, balance, and migration support are V2 tasks—not a claim that all subclasses already ship.
 
 ## Restaurant design studio
 
-The starting shell is 24×16 cells and can expand to the configured limit. Floors, wall edges, openings, and furniture instances persist separately. Furniture has a footprint, price, style/tier, modifiers, utility tags, durability/upkeep metadata, rotation, and modular asset ID. More expensive equipment generally supplies stronger or more specialized modifiers; resale returns only a fraction, so layout experiments have economic consequences.
+The starting shell is 24×16 cells and can expand to the configured limit. Floors, wall edges, openings, and furniture instances persist separately. The 229-item furniture catalog has a footprint, price, upkeep, repair cost, style/tier, comfort, appearance, cleanability, reliability, role/service modifiers, durability, breakage horizon, rotation, and stable one-to-one asset ID. Some expensive pieces have better total stats, but the catalog deliberately mixes strengths, drawbacks and niches; duplicate benefits taper while physical capacity remains additive.
+
+Placed items immediately change effective restaurant rating, arriving-party happiness, visible role workload, maintenance-task volume, reliability risk, task support, review baselines and shift economics. Wear advances at settlement, transitions through worn and broken states, raises role-authentic maintenance pressure, and can be repaired by the owner with audited treasury spending.
+
+Artwork is still a measured production track: all 16 core pieces and four production-catalog pieces have unique generated top-down raster sprites. The validator reports 20/229 furniture coverage, so the remaining 209 sprites and 45 bespoke role-item icons are explicit blockers rather than silent fallback claims. Role items currently render unique deterministic badge icons until their raster icon exists.
 
 Current studio validation covers plot bounds, footprint overlap, owner authority, cost, four rotations, and sale. Utility routing, building-code clearance, undo/history, floor switching, collaborative blueprints, and flow heatmaps remain roadmap work.
 
@@ -131,5 +137,6 @@ The export preset is source-controlled. The tagged GitHub workflow runs the same
 - **Source package says export required:** this is expected; it contains no fabricated executable.
 - **Login fails after deleting the world:** accounts live in the deleted V1 database; create a new local account or restore a stopped backup.
 - **Furniture will not place:** check bounds, overlap, rotation, and restaurant treasury.
+- **Furniture underperforms:** inspect its wear/broken state and the room's duplicated stat mix; owners can repair placed objects from the authoritative layout API.
 - **Task cannot be claimed:** another coworker may own it, or the player is a guest.
 - **Old folder cannot be deleted:** use the server package's **Stop gracefully**; the game client itself owns no background host process.
