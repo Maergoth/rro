@@ -12,7 +12,9 @@
     "furniture": { "catalogTotal": 229, "acceptedSets": 1, "acceptedDirectionalFiles": 4 },
     "equipmentIcons": { "catalogTotal": 45, "accepted": 0 },
     "characterSystem": {
-      "status": "contracted",
+      "status": "in_progress",
+      "acceptedBodyPresentations": 1,
+      "acceptedIdleDirectionalFiles": 8,
       "required": ["body_skin", "face", "hair_headwear", "base_outfit", "role_layer", "footwear", "accessory", "carried_object", "effects", "skin_masks", "primary_color_masks", "secondary_color_masks"]
     }
   },
@@ -23,6 +25,14 @@
       "files": 4,
       "qa": "passed",
       "sourcePromptMode": "built-in image generation; one combined 2x2 sheet"
+    },
+    {
+      "id": "character-foundation-001",
+      "assets": ["body-base-a-idle-isometric"],
+      "files": 8,
+      "qa": "passed",
+      "sourcePromptMode": "built-in image generation; one combined 4x2 elevated eight-direction atlas",
+      "notes": "Accepted as body presentation A using the elevated orthographic isometric camera lock. Additional body presentations and skin/color masks remain required."
     }
   ]
 }
