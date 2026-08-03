@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "branch": "agent/complete-production-art",
+  "completionRule": "accepted runtime files committed and uploaded to GitHub",
+  "artDirection": {
+    "camera": "orthographic semi-isometric",
+    "furnitureDirections": ["north", "east", "south", "west"],
+    "characterDirections": ["north", "north_east", "east", "south_east", "south", "south_west", "west", "north_west"],
+    "transparency": "flat chroma-key source with locally validated alpha runtime files"
+  },
+  "coverage": {
+    "furniture": { "catalogTotal": 229, "acceptedSets": 1, "acceptedDirectionalFiles": 4 },
+    "equipmentIcons": { "catalogTotal": 45, "accepted": 0 },
+    "characterSystem": {
+      "status": "contracted",
+      "required": ["body_skin", "face", "hair_headwear", "base_outfit", "role_layer", "footwear", "accessory", "carried_object", "effects", "skin_masks", "primary_color_masks", "secondary_color_masks"]
+    }
+  },
+  "acceptedBatches": [
+    {
+      "id": "furniture-pilot-001",
+      "assets": ["furniture-six-burner-range"],
+      "files": 4,
+      "qa": "passed",
+      "sourcePromptMode": "built-in image generation; one combined 2x2 sheet"
+    }
+  ]
+}
