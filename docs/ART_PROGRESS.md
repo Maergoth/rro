@@ -20,7 +20,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
-| Furniture directional sets | 229 | 25 | 25 | 25 | 22 |
+| Furniture directional sets | 229 | 28 | 28 | 25 | 22 |
 | Equipment inventory icons | 45 | 45 | 45 | 45 | 45 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
@@ -35,7 +35,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 | Activity → animation bindings | 89 | 0 | 0 | 0 | 0 |
 
 45 equipment icons and 22 furniture directional sets are production-complete because their exact reviewed bytes are visually accepted, runtime-bound, remotely verified, and CI-green. Character art and the other missing lanes remain explicit below.
-Directional furniture texture selection is yes and projection alignment is yes. Latest native review `runtime-isometric-integration-001-attempt-004` accepted 22/25 present sets; its durable review checkpoint is remote-verified: yes. `local-art`, `pendants`, `plants` remain blocked on legal wall/ceiling mounting. No source-accepted directional sets are pending their first native four-rotation gameplay composite.
+Directional furniture texture selection is yes and projection alignment is yes. Latest native review `runtime-isometric-integration-001-attempt-004` accepted 22/28 present sets; its durable review checkpoint is remote-verified: yes. `local-art`, `pendants`, `plants` remain blocked on legal wall/ceiling mounting. `furniture-expo-pass-heated`, `furniture-plancha-commercial`, `furniture-convection-oven` are source-accepted but pending their first native four-rotation gameplay composite; 3/3 are also local-only pending an immutable remote checkpoint and green hosted CI.
 
 ## Character truth
 
@@ -101,13 +101,21 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 | furniture-core-directional-006 | 28 | passed | mixed-native-gameplay-composite-attempt-002-mount-blocked | `185ca50` | planning/art-qa/furniture-core-directional-006/contact-627-dark.png |
 | furniture-core-directional-007 | 28 | passed | passed-native-gameplay-composite-attempt-003 | `98e479e` | planning/art-qa/furniture-core-directional-007/contact-627-dark.png |
 
+## Accepted locally, remote checkpoint pending
+
+These batches have passed source/composite QA but deliberately do not count as remotely verified or production-complete until their immutable GitHub commit and hosted CI are recorded.
+
+| Batch | Files | Source QA | Runtime/composite QA | Evidence |
+|---|---:|---|---|---|
+| furniture-core-directional-009 | 28 | passed | pending-native-four-rotation-gameplay-composite | planning/art-qa/furniture-core-directional-009/contact-627-dark.png |
+
 ## Missing furniture directional sets
 
-25 of 229 elevated four-direction sets are present. The 20 attractive overhead singles are preserved as references but do not satisfy this camera contract.
+28 of 229 elevated four-direction sets are present. The 20 attractive overhead singles are preserved as references but do not satisfy this camera contract.
 
-### Kitchen — 46 missing
+### Kitchen — 43 missing
 
-`furniture-expo-pass-heated`, `furniture-plancha-commercial`, `furniture-convection-oven`, `furniture-prep-table-refrigerated`, `furniture-essential-restaurant-range`, `furniture-craftsman-restaurant-range`, `furniture-endurance-restaurant-range`, `furniture-hospitality-restaurant-range`, `furniture-precision-restaurant-range`, `furniture-reclaimed-restaurant-range`, `furniture-essential-convection-oven-line`, `furniture-craftsman-convection-oven-line`, `furniture-endurance-convection-oven-line`, `furniture-hospitality-convection-oven-line`, `furniture-precision-convection-oven-line`, `furniture-reclaimed-convection-oven-line`, `furniture-essential-plancha-griddle`, `furniture-craftsman-plancha-griddle`, `furniture-endurance-plancha-griddle`, `furniture-hospitality-plancha-griddle`, `furniture-precision-plancha-griddle`, `furniture-reclaimed-plancha-griddle`, `furniture-essential-fry-station`, `furniture-craftsman-fry-station`, `furniture-endurance-fry-station`, `furniture-hospitality-fry-station`, `furniture-precision-fry-station`, `furniture-reclaimed-fry-station`, `furniture-essential-prep-counter`, `furniture-craftsman-prep-counter`, `furniture-endurance-prep-counter`, `furniture-hospitality-prep-counter`, `furniture-precision-prep-counter`, `furniture-reclaimed-prep-counter`, `furniture-essential-expo-pass`, `furniture-craftsman-expo-pass`, `furniture-endurance-expo-pass`, `furniture-hospitality-expo-pass`, `furniture-precision-expo-pass`, `furniture-reclaimed-expo-pass`, `furniture-essential-combi-oven`, `furniture-craftsman-combi-oven`, `furniture-endurance-combi-oven`, `furniture-hospitality-combi-oven`, `furniture-precision-combi-oven`, `furniture-reclaimed-combi-oven`
+`furniture-prep-table-refrigerated`, `furniture-essential-restaurant-range`, `furniture-craftsman-restaurant-range`, `furniture-endurance-restaurant-range`, `furniture-hospitality-restaurant-range`, `furniture-precision-restaurant-range`, `furniture-reclaimed-restaurant-range`, `furniture-essential-convection-oven-line`, `furniture-craftsman-convection-oven-line`, `furniture-endurance-convection-oven-line`, `furniture-hospitality-convection-oven-line`, `furniture-precision-convection-oven-line`, `furniture-reclaimed-convection-oven-line`, `furniture-essential-plancha-griddle`, `furniture-craftsman-plancha-griddle`, `furniture-endurance-plancha-griddle`, `furniture-hospitality-plancha-griddle`, `furniture-precision-plancha-griddle`, `furniture-reclaimed-plancha-griddle`, `furniture-essential-fry-station`, `furniture-craftsman-fry-station`, `furniture-endurance-fry-station`, `furniture-hospitality-fry-station`, `furniture-precision-fry-station`, `furniture-reclaimed-fry-station`, `furniture-essential-prep-counter`, `furniture-craftsman-prep-counter`, `furniture-endurance-prep-counter`, `furniture-hospitality-prep-counter`, `furniture-precision-prep-counter`, `furniture-reclaimed-prep-counter`, `furniture-essential-expo-pass`, `furniture-craftsman-expo-pass`, `furniture-endurance-expo-pass`, `furniture-hospitality-expo-pass`, `furniture-precision-expo-pass`, `furniture-reclaimed-expo-pass`, `furniture-essential-combi-oven`, `furniture-craftsman-combi-oven`, `furniture-endurance-combi-oven`, `furniture-hospitality-combi-oven`, `furniture-precision-combi-oven`, `furniture-reclaimed-combi-oven`
 
 ### Storage — 20 missing
 
@@ -202,7 +210,7 @@ This JSON block is part of this same authoritative document and contains every c
       "projectionAligned": true,
       "runtimeCompositeAccepted": false,
       "productionComplete": false,
-      "remainingVisualGate": "Preserve and visually validate legal wall and ceiling placement, mount-specific anchors, picking, and depth for local-art, plants, and pendants in a new exact four-rotation native Godot gameplay capture.",
+      "remainingVisualGate": "Run and visually accept an exact four-rotation native Godot gameplay capture for furniture-convection-oven, furniture-expo-pass-heated, and furniture-plancha-commercial; also preserve and visually validate legal wall and ceiling placement, mount-specific anchors, picking, and depth for local-art, plants, and pendants.",
       "acceptedDirectionalAssetIds": [
         "banquette",
         "booth",
@@ -210,8 +218,11 @@ This JSON block is part of this same authoritative document and contains every c
         "espresso",
         "furniture-banquette-section",
         "furniture-commercial-chair",
+        "furniture-convection-oven",
+        "furniture-expo-pass-heated",
         "furniture-host-stand-pro",
         "furniture-oak-two-top",
+        "furniture-plancha-commercial",
         "furniture-pos-terminal",
         "furniture-premium-chair",
         "furniture-server-station-pro",
@@ -259,7 +270,11 @@ This JSON block is part of this same authoritative document and contains every c
         "pendants",
         "plants"
       ],
-      "runtimeCompositePendingAssetIds": [],
+      "runtimeCompositePendingAssetIds": [
+        "furniture-convection-oven",
+        "furniture-expo-pass-heated",
+        "furniture-plancha-commercial"
+      ],
       "runtimeReviewRemoteVerified": true
     }
   },
@@ -267,8 +282,8 @@ This JSON block is part of this same authoritative document and contains every c
     {
       "lane": "Furniture directional sets",
       "required": 229,
-      "present": 25,
-      "sourceAccepted": 25,
+      "present": 28,
+      "sourceAccepted": 28,
       "remoteVerified": 25,
       "productionComplete": 22
     },
@@ -1735,42 +1750,46 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-expo-pass-heated/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "9396dabbac70a8f4c9c18147635a4378e491152ebb33168e5b1a7ac5f76f05e7"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-expo-pass-heated/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "399418809574baafd3a89cd0739c16f2878bffd06cf1015ea74afe1b9a015b3c"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-expo-pass-heated/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "ed4a51037e585d0ed9e7182b67648369dcd18fdff8a61f8dffac0c2863d7799c"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-expo-pass-heated/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "06d56bae044a984d9afcc8bf6f8aa6c49e3a987c9c39c6e8af792b5341ad903a"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "furniture-core-directional-009",
+      "review": "passed",
+      "runtimeQa": "pending-native-four-rotation-gameplay-composite",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "placement": null,
-      "placementDeclared": false,
-      "sourceAccepted": false,
-      "directionalSelectionBound": false,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-009/contact-627-dark.png",
+      "qaEvidencePresent": true,
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "placementDeclared": true,
+      "sourceAccepted": true,
+      "directionalSelectionBound": true,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": false,
+      "runtimeCompositePending": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "six-burner-range",
@@ -1843,42 +1862,46 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-plancha-commercial/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "9ccf71dec03d360f155e13b38b4a91e064110189878b0f14540cc1dbd63b3f8b"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-plancha-commercial/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "973cf690a53c656d21856d7d384b516cfbaaeb4fd3b64394b7874b8968624baf"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-plancha-commercial/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "801110c95e963969acedd46ab5dd6cb748d98205cb178002c840f8c11dd355ea"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-plancha-commercial/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "6d5862faedc907f238f04700c2b26b686f5e3d238dc33dfdae25ef6726c58bae"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "furniture-core-directional-009",
+      "review": "passed",
+      "runtimeQa": "pending-native-four-rotation-gameplay-composite",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "placement": null,
-      "placementDeclared": false,
-      "sourceAccepted": false,
-      "directionalSelectionBound": false,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-009/contact-627-dark.png",
+      "qaEvidencePresent": true,
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "placementDeclared": true,
+      "sourceAccepted": true,
+      "directionalSelectionBound": true,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": false,
+      "runtimeCompositePending": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "convection-oven",
@@ -1895,42 +1918,46 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-convection-oven/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "d8f114f8a09aaa4000fd165a798efe10a30bcdabc78bc74a59a16766f15d9abe"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-convection-oven/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "697af1b5bc14c3d2bd4a259ed075bc8eeb232bcb73f0e0e12c359aa2eb76e0f0"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-convection-oven/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "09922d2e65fc71657d844636f29ef8251447a6aa2e2a2cac0a1204250f38ac46"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-convection-oven/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "950e4f18f10962467eff11d56507a0efc92f4c6c57edbe70ae13e554754e0806"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "furniture-core-directional-009",
+      "review": "passed",
+      "runtimeQa": "pending-native-four-rotation-gameplay-composite",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "placement": null,
-      "placementDeclared": false,
-      "sourceAccepted": false,
-      "directionalSelectionBound": false,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-009/contact-627-dark.png",
+      "qaEvidencePresent": true,
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "placementDeclared": true,
+      "sourceAccepted": true,
+      "directionalSelectionBound": true,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": false,
+      "runtimeCompositePending": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "prep-table-refrigerated",
@@ -16501,7 +16528,26 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": true
     }
   ],
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "furniture-core-directional-009",
+      "assets": [
+        "furniture-expo-pass-heated",
+        "furniture-plancha-commercial",
+        "furniture-convection-oven"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "pending-native-four-rotation-gameplay-composite",
+      "sourcePromptMode": "built-in image generation; three separately prompted rigid elevated-isometric four-direction kitchen equipment atlases with rejected attempts quarantined, chroma removal, common-pivot normalization, and full/gameplay-scale contact review",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-009/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-009/qa.json",
+      "notes": "Heated expo pass, commercial plancha, and convection oven are source-accepted in durable local QA only. They remain outside remote and production-complete counts until this exact package is remotely preserved with green hosted CI and accepted in an exact native four-rotation gameplay composite.",
+      "qaEvidencePresent": true,
+      "remoteVerified": false,
+      "preservationPending": true
+    }
+  ],
   "runtimeQaAttempts": [
     {
       "id": "runtime-isometric-integration-001-attempt-001",

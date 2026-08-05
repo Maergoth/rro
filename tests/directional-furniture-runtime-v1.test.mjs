@@ -16,6 +16,7 @@ const furnitureBatch005Qa = JSON.parse(read("planning/art-qa/furniture-core-dire
 const furnitureBatch006Qa = JSON.parse(read("planning/art-qa/furniture-core-directional-006/qa.json"));
 const furnitureBatch007Qa = JSON.parse(read("planning/art-qa/furniture-core-directional-007/qa.json"));
 const furnitureBatch008Qa = JSON.parse(read("planning/art-qa/furniture-core-directional-008/qa.json"));
+const furnitureBatch009Qa = JSON.parse(read("planning/art-qa/furniture-core-directional-009/qa.json"));
 
 const canonicalRotation = (rotation) => ((rotation % 360) + 360) % 360;
 const directionForRotation = (rotation) => contract.directionsByRotation[String(canonicalRotation(rotation))] ?? "";
@@ -28,7 +29,7 @@ const directionalPath = (assetId, rotation) => {
 test("accepted furniture resolves exact directional paths for canonical rotations", () => {
   assert.equal(contract.schemaVersion, 1);
   assert.deepEqual(contract.directionsByRotation, { "0": "north", "90": "east", "180": "south", "270": "west" });
-  assert.deepEqual(contract.acceptedDirectionalAssetIds, ["banquette", "booth", "dish-machine", "espresso", "furniture-banquette-section", "furniture-commercial-chair", "furniture-host-stand-pro", "furniture-oak-two-top", "furniture-pos-terminal", "furniture-premium-chair", "furniture-server-station-pro", "furniture-six-burner-range", "furniture-walnut-four-top", "host-stand", "local-art", "mop-sink", "pass", "pendants", "plants", "prep", "range", "recycling", "service-station", "table-four", "table-two"]);
+  assert.deepEqual(contract.acceptedDirectionalAssetIds, ["banquette", "booth", "dish-machine", "espresso", "furniture-banquette-section", "furniture-commercial-chair", "furniture-convection-oven", "furniture-expo-pass-heated", "furniture-host-stand-pro", "furniture-oak-two-top", "furniture-plancha-commercial", "furniture-pos-terminal", "furniture-premium-chair", "furniture-server-station-pro", "furniture-six-burner-range", "furniture-walnut-four-top", "host-stand", "local-art", "mop-sink", "pass", "pendants", "plants", "prep", "range", "recycling", "service-station", "table-four", "table-two"]);
 
   const expectedDirections = [[0, "north"], [90, "east"], [180, "south"], [270, "west"]];
   for (const assetId of contract.acceptedDirectionalAssetIds) {
@@ -57,7 +58,7 @@ test("accepted furniture resolves exact directional paths for canonical rotation
 test("the runtime contract covers every source-accepted directional set without inflating production completion", () => {
   const accepted = new Set();
   const sourceAcceptedBatches = [...artPass.batches, ...(artPass.pendingBatches ?? [])];
-  for (const qa of [furnitureBatch002Qa, furnitureBatch003Qa, furnitureBatch004Qa, furnitureBatch005Qa, furnitureBatch006Qa, furnitureBatch007Qa, furnitureBatch008Qa]) {
+  for (const qa of [furnitureBatch002Qa, furnitureBatch003Qa, furnitureBatch004Qa, furnitureBatch005Qa, furnitureBatch006Qa, furnitureBatch007Qa, furnitureBatch008Qa, furnitureBatch009Qa]) {
     if (sourceAcceptedBatches.some((batch) => batch.id === qa.batchId)) continue;
     sourceAcceptedBatches.push({
       id: qa.batchId,
@@ -83,7 +84,7 @@ test("the runtime contract covers every source-accepted directional set without 
   assert.equal(contract.capability.productionComplete, false);
   assert.deepEqual(contract.runtimeCompositeAcceptedAssetIds, ["banquette", "booth", "dish-machine", "espresso", "furniture-banquette-section", "furniture-commercial-chair", "furniture-host-stand-pro", "furniture-oak-two-top", "furniture-pos-terminal", "furniture-premium-chair", "furniture-server-station-pro", "furniture-six-burner-range", "furniture-walnut-four-top", "host-stand", "mop-sink", "pass", "prep", "range", "recycling", "service-station", "table-four", "table-two"]);
   assert.deepEqual(contract.runtimeCompositeBlockedAssetIds, ["local-art", "pendants", "plants"]);
-  assert.deepEqual(contract.runtimeCompositePendingAssetIds, []);
+  assert.deepEqual(contract.runtimeCompositePendingAssetIds, ["furniture-convection-oven", "furniture-expo-pass-heated", "furniture-plancha-commercial"]);
   assert.deepEqual(
     [...contract.runtimeCompositeAcceptedAssetIds, ...contract.runtimeCompositeBlockedAssetIds, ...contract.runtimeCompositePendingAssetIds].sort(),
     [...contract.acceptedDirectionalAssetIds].sort(),
@@ -93,7 +94,7 @@ test("the runtime contract covers every source-accepted directional set without 
     ...contract.runtimeCompositeBlockedAssetIds,
     ...contract.runtimeCompositePendingAssetIds,
   ]).size, contract.acceptedDirectionalAssetIds.length, "runtime states must be pairwise disjoint");
-  assert.match(contract.capability.remainingVisualGate, /wall and ceiling placement.*local-art.*plants.*pendants.*four-rotation native Godot gameplay capture/i);
+  assert.match(contract.capability.remainingVisualGate, /four-rotation native Godot gameplay capture.*furniture-convection-oven.*furniture-expo-pass-heated.*furniture-plancha-commercial.*wall and ceiling placement.*local-art.*plants.*pendants/i);
 });
 
 test("common floor-contact anchoring uses uniform scale and never stretches directional textures", () => {

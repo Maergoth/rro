@@ -115,7 +115,7 @@ for (const batch of pass.batches) {
 }
 
 for (const batch of pass.pendingBatches ?? []) {
-  if (batch.remoteCommit || batch.remoteTree) invalid.push(`${batch.id}: pending batch must not claim remote verification`);
+  if (batch.remoteCommit || batch.remoteTree || batch.ci) invalid.push(`${batch.id}: pending batch must not claim remote verification or hosted CI`);
   if (!batch.qaEvidence || !png(batch.qaEvidence, `pending-qa:${batch.id}`)) invalid.push(`${batch.id}: pending batch is missing durable QA evidence`);
   if (!batch.qaManifest || !file(batch.qaManifest)) { invalid.push(`${batch.id}: pending batch is missing its QA manifest`); continue; }
   const manifest = read(batch.qaManifest);
@@ -129,6 +129,28 @@ for (const batch of pass.pendingBatches ?? []) {
   if (JSON.stringify(manifestAssets) !== JSON.stringify([...batch.assets].sort())) invalid.push(`${batch.id}: pending QA assets do not exactly match the batch`);
   const visualEvidence = [...(manifest.contactSheets ?? []), ...(manifest.visualEvidence ?? [])];
   if (!visualEvidence.some((sheet) => sheet.path === batch.qaEvidence)) invalid.push(`${batch.id}: pending primary QA evidence is absent from its manifest`);
+  for (const sheet of visualEvidence) {
+    if (!sheet.path || !file(sheet.path)) { invalid.push(`${batch.id}: missing pending visual evidence ${sheet.path ?? "<unnamed>"}`); continue; }
+    if (sheet.sha256) {
+      const digest = createHash("sha256").update(readFileSync(resolve(ROOT, sheet.path))).digest("hex");
+      if (digest !== sheet.sha256) invalid.push(`${batch.id}: pending visual evidence hash mismatch for ${sheet.path}`);
+    }
+  }
+  for (const item of manifest.items ?? []) {
+    const runtimeFiles = item.runtimePath
+      ? [{ path: item.runtimePath, sha256: item.sha256 ?? item.runtimeSha256, label: item.catalogId }]
+      : (item.directions ?? []).map((direction) => ({
+          path: direction.path,
+          sha256: direction.sha256,
+          label: `${item.catalogId}:${direction.direction}`,
+        }));
+    if (runtimeFiles.length === 0) invalid.push(`${batch.id}: pending QA manifest has no runtime files for ${item.catalogId}`);
+    for (const runtime of runtimeFiles) {
+      if (!file(runtime.path)) { invalid.push(`${batch.id}: pending QA runtime file is missing: ${runtime.path}`); continue; }
+      const digest = createHash("sha256").update(readFileSync(resolve(ROOT, runtime.path))).digest("hex");
+      if (digest !== runtime.sha256) invalid.push(`${batch.id}: pending QA hash mismatch for ${runtime.label}`);
+    }
+  }
   for (const asset of batch.assets) acceptedAssets.set(asset, batch.assetReviews?.[asset] ?? batch.qa);
 }
 
@@ -348,6 +370,17 @@ const coverage = {
   reviewedBatches: pass.batches.length,
   uniqueCheckedPngs: hashes.size,
 };
+
+const declaredFurnitureCoverage = pass.coverage?.furniture ?? {};
+const expectedFurnitureCoverage = {
+  catalogTotal: production.furniture.length,
+  acceptedSets: furnitureSourceAccepted,
+  acceptedDirectionalFiles: furnitureSourceAccepted * pass.artDirection.furnitureDirections.length,
+  runtimeCompositeAcceptedSets: runtimeCompositeAcceptedAssetIds.size,
+};
+if (JSON.stringify(declaredFurnitureCoverage) !== JSON.stringify(expectedFurnitureCoverage)) {
+  invalid.push(`declared furniture coverage does not match validated files/reviews/runtime state: expected ${JSON.stringify(expectedFurnitureCoverage)}`);
+}
 
 const productionComplete = furnitureSetsPresent === production.furniture.length
   && furnitureSourceAccepted === production.furniture.length

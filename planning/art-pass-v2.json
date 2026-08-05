@@ -30,7 +30,7 @@
     ]
   },
   "coverage": {
-    "furniture": { "catalogTotal": 229, "acceptedSets": 25, "acceptedDirectionalFiles": 100, "runtimeCompositeAcceptedSets": 22 },
+    "furniture": { "catalogTotal": 229, "acceptedSets": 28, "acceptedDirectionalFiles": 112, "runtimeCompositeAcceptedSets": 22 },
     "equipmentIcons": { "catalogTotal": 45, "accepted": 45 },
     "characterSystem": {
       "status": "in_progress",
@@ -181,7 +181,23 @@
       "productionComplete": false
     }
   ],
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "furniture-core-directional-009",
+      "assets": [
+        "furniture-expo-pass-heated",
+        "furniture-plancha-commercial",
+        "furniture-convection-oven"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "pending-native-four-rotation-gameplay-composite",
+      "sourcePromptMode": "built-in image generation; three separately prompted rigid elevated-isometric four-direction kitchen equipment atlases with rejected attempts quarantined, chroma removal, common-pivot normalization, and full/gameplay-scale contact review",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-009/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-009/qa.json",
+      "notes": "Heated expo pass, commercial plancha, and convection oven are source-accepted in durable local QA only. They remain outside remote and production-complete counts until this exact package is remotely preserved with green hosted CI and accepted in an exact native four-rotation gameplay composite."
+    }
+  ],
   "batches": [
     {
       "id": "furniture-core-directional-008",

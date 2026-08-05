@@ -68,7 +68,20 @@ test("the authoritative art ledger cannot hide missing, failed, local-only, or u
   assert.ok(art.preservedReferences.some((entry) => entry.productionStatus === "preserved-reference-wrong-camera"));
   assert.ok(art.characters.prototypeOutfits.filter((entry) => entry.outfit === "classic").every((entry) => entry.status === "source_accepted_runtime_blocked"));
   assert.ok(art.characters.prototypeOutfits.filter((entry) => entry.outfit === "apron").every((entry) => entry.status === "qa_failed_needs_remediation"));
-  assert.deepEqual(art.pendingBatches, []);
+  assert.equal(art.pendingBatches.length, 1);
+  assert.deepEqual({
+    id: art.pendingBatches[0].id,
+    assets: art.pendingBatches[0].assets,
+    runtimeQa: art.pendingBatches[0].runtimeQa,
+    remoteVerified: art.pendingBatches[0].remoteVerified,
+    preservationPending: art.pendingBatches[0].preservationPending,
+  }, {
+    id: "furniture-core-directional-009",
+    assets: ["furniture-expo-pass-heated", "furniture-plancha-commercial", "furniture-convection-oven"],
+    runtimeQa: "pending-native-four-rotation-gameplay-composite",
+    remoteVerified: false,
+    preservationPending: true,
+  });
   assert.ok(art.reviewedBatches.some((entry) => entry.id === "furniture-core-directional-006" && entry.remoteVerified));
   assert.ok(art.reviewedBatches.some((entry) => entry.id === "furniture-core-directional-007"
     && entry.qaEvidencePresent && entry.remoteVerified));
@@ -106,8 +119,8 @@ test("the authoritative art ledger cannot hide missing, failed, local-only, or u
   assert.equal(equipmentSummary.sourceAccepted, 45);
   assert.equal(equipmentSummary.remoteVerified, 45);
   assert.equal(equipmentSummary.productionComplete, 45);
-  assert.equal(furnitureSummary.present, 25);
-  assert.equal(furnitureSummary.sourceAccepted, 25);
+  assert.equal(furnitureSummary.present, 28);
+  assert.equal(furnitureSummary.sourceAccepted, 28);
   assert.equal(furnitureSummary.remoteVerified, 25);
   assert.equal(furnitureSummary.productionComplete, 22);
   assert.equal(art.runtimeCapabilities.directionalFurniture.directionalTextureSelection, true);
@@ -115,15 +128,18 @@ test("the authoritative art ledger cannot hide missing, failed, local-only, or u
   assert.equal(art.runtimeCapabilities.directionalFurniture.runtimeCompositeAccepted, false);
   assert.equal(art.runtimeCapabilities.directionalFurniture.runtimeCompositeAcceptedAssetIds.length, 22);
   assert.deepEqual(art.runtimeCapabilities.directionalFurniture.runtimeCompositeBlockedAssetIds, ["local-art", "pendants", "plants"]);
-  assert.deepEqual(art.runtimeCapabilities.directionalFurniture.runtimeCompositePendingAssetIds, []);
+  assert.deepEqual(art.runtimeCapabilities.directionalFurniture.runtimeCompositePendingAssetIds, ["furniture-convection-oven", "furniture-expo-pass-heated", "furniture-plancha-commercial"]);
   assert.equal(art.runtimeCapabilities.directionalFurniture.runtimeReviewRemoteVerified, true);
   assert.ok(art.furniture.filter((entry) => entry.present).every((entry) => entry.directionalSelectionBound === true && entry.placementDeclared === true));
   assert.equal(art.furniture.filter((entry) => entry.runtimeBound).length, 22);
   assert.equal(art.furniture.filter((entry) => entry.productionComplete).length, 22);
   assert.deepEqual(
     art.furniture.filter((entry) => entry.present && !entry.runtimeBound).map((entry) => entry.assetId).sort(),
-    ["local-art", "pendants", "plants"],
+    ["furniture-convection-oven", "furniture-expo-pass-heated", "furniture-plancha-commercial", "local-art", "pendants", "plants"],
   );
+  assert.ok(art.furniture.filter((entry) => entry.runtimeCompositePending).every((entry) =>
+    entry.sourceAccepted && !entry.remoteVerified && !entry.runtimeBound && !entry.productionComplete
+      && entry.status === "source_accepted_local_only"));
   assert.ok(art.furniture.filter((entry) => entry.runtimeCompositeAccepted).every((entry) =>
     entry.sourceAccepted && entry.remoteVerified && entry.runtimeBound && entry.productionComplete
       && entry.status === "production_complete"));

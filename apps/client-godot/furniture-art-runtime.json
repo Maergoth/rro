@@ -22,8 +22,11 @@
     "espresso",
     "furniture-banquette-section",
     "furniture-commercial-chair",
+    "furniture-convection-oven",
+    "furniture-expo-pass-heated",
     "furniture-host-stand-pro",
     "furniture-oak-two-top",
+    "furniture-plancha-commercial",
     "furniture-pos-terminal",
     "furniture-premium-chair",
     "furniture-server-station-pro",
@@ -71,7 +74,11 @@
     "pendants",
     "plants"
   ],
-  "runtimeCompositePendingAssetIds": [],
+  "runtimeCompositePendingAssetIds": [
+    "furniture-convection-oven",
+    "furniture-expo-pass-heated",
+    "furniture-plancha-commercial"
+  ],
   "capability": {
     "directionalTextureSelection": true,
     "commonFloorContactPivot": true,
@@ -82,6 +89,6 @@
     "projectionAligned": true,
     "runtimeCompositeAccepted": false,
     "productionComplete": false,
-    "remainingVisualGate": "Preserve and visually validate legal wall and ceiling placement, mount-specific anchors, picking, and depth for local-art, plants, and pendants in a new exact four-rotation native Godot gameplay capture."
+    "remainingVisualGate": "Run and visually accept an exact four-rotation native Godot gameplay capture for furniture-convection-oven, furniture-expo-pass-heated, and furniture-plancha-commercial; also preserve and visually validate legal wall and ceiling placement, mount-specific anchors, picking, and depth for local-art, plants, and pendants."
   }
 }

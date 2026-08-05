@@ -60,7 +60,7 @@ const mirroredWallKey = (x, y, edge) => {
 };
 
 test("native mounted review uses exactly the published nonblocking placement contracts", () => {
-  const mounted = definitions.filter((definition) => definition.placement?.mount !== undefined);
+  const mounted = definitions.filter((definition) => (definition.placement?.mount ?? "floor") !== "floor");
   assert.deepEqual(mounted.map(({ assetId }) => assetId).sort(), ["local-art", "pendants", "plants"]);
   for (const definition of mounted) {
     const catalogDefinition = catalog.find(({ id }) => id === definition.id);

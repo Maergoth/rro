@@ -37,6 +37,7 @@ test("restaurant floor delegates every grid transform and pick to the elevated i
   assert.equal(contract.capability.runtimeCompositeAccepted, false, "mounted assets still require native gameplay QA");
   assert.equal(contract.runtimeCompositeAcceptedAssetIds.length, 22);
   assert.deepEqual(contract.runtimeCompositeBlockedAssetIds, ["local-art", "pendants", "plants"]);
+  assert.deepEqual(contract.runtimeCompositePendingAssetIds, ["furniture-convection-oven", "furniture-expo-pass-heated", "furniture-plancha-commercial"]);
 });
 
 test("zoom keeps the exact fractional world point under the cursor", () => {

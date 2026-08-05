@@ -323,8 +323,10 @@ lines.push("|---|---:|---:|---:|---:|---:|");
 for (const row of summaries) lines.push(`| ${row.lane} | ${row.required} | ${row.present} | ${row.sourceAccepted} | ${row.remoteVerified} | ${row.productionComplete} |`);
 lines.push("");
 lines.push(`${equipmentIcons.filter((item) => item.productionComplete).length} equipment icons and ${furniture.filter((item) => item.productionComplete).length} furniture directional sets are production-complete because their exact reviewed bytes are visually accepted, runtime-bound, remotely verified, and CI-green. Character art and the other missing lanes remain explicit below.`);
-const pendingRuntimeSummary = runtimeCompositePendingAssetIds.size > 0
-  ? `${[...runtimeCompositePendingAssetIds].map((id) => `\`${id}\``).join(", ")} are source-accepted but pending their first native four-rotation gameplay composite.`
+const pendingRuntimeEntries = furniture.filter((item) => item.runtimeCompositePending);
+const localOnlyPendingRuntimeEntries = pendingRuntimeEntries.filter((item) => !item.remoteVerified);
+const pendingRuntimeSummary = pendingRuntimeEntries.length > 0
+  ? `${pendingRuntimeEntries.map((item) => `\`${item.assetId}\``).join(", ")} are source-accepted but pending their first native four-rotation gameplay composite; ${localOnlyPendingRuntimeEntries.length}/${pendingRuntimeEntries.length} are also local-only pending an immutable remote checkpoint and green hosted CI.`
   : "No source-accepted directional sets are pending their first native four-rotation gameplay composite.";
 lines.push(`Directional furniture texture selection is ${yes(directionalSelectionBound)} and projection alignment is ${yes(projectionAligned)}. Latest native review \`${latestFurnitureRuntimeQa?.id ?? "unavailable"}\` accepted ${runtimeCompositeAcceptedAssetIds.size}/${furniture.filter((item) => item.present).length} present sets; its durable review checkpoint is remote-verified: ${yes(runtimeReviewRemoteVerified)}. ${[...runtimeCompositeBlockedAssetIds].map((id) => `\`${id}\``).join(", ")} remain blocked on legal wall/ceiling mounting. ${pendingRuntimeSummary}`);
 lines.push("");

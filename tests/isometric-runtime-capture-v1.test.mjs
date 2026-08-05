@@ -25,7 +25,7 @@ test("native Godot QA fixture renders every accepted directional furniture ident
     .map((match) => [match[1], { x: Number(match[2]), y: Number(match[3]) }]));
   assert.deepEqual(fixtureIds, contract.acceptedDirectionalAssetIds);
   assert.equal(new Set(fixtureIds).size, fixtureIds.length);
-  assert.equal(floorPositions.size, 22, "the 22 accepted floor identities retain explicit positions");
+  assert.equal(floorPositions.size, 25, "the 22 previously accepted and 3 pending floor identities retain explicit positions");
   assert.deepEqual(Object.fromEntries(floorPositions), {
     banquette: { x: 2, y: 2 },
     booth: { x: 9, y: 2 },
@@ -33,8 +33,11 @@ test("native Godot QA fixture renders every accepted directional furniture ident
     espresso: { x: 21, y: 2 },
     "furniture-banquette-section": { x: 4, y: 6 },
     "furniture-commercial-chair": { x: 10, y: 6 },
+    "furniture-convection-oven": { x: 26, y: 19 },
+    "furniture-expo-pass-heated": { x: 3, y: 14 },
     "furniture-host-stand-pro": { x: 16, y: 6 },
     "furniture-oak-two-top": { x: 22, y: 6 },
+    "furniture-plancha-commercial": { x: 18, y: 1 },
     "furniture-pos-terminal": { x: 2, y: 12 },
     "furniture-premium-chair": { x: 8, y: 12 },
     "furniture-server-station-pro": { x: 14, y: 12 },
@@ -68,9 +71,10 @@ test("native Godot QA fixture renders every accepted directional furniture ident
       width: catalogDefinition.width,
       height: catalogDefinition.height,
     });
-    const mount = definition.placement?.mount ?? "floor";
+    const fixturePlacement = definition.placement ?? { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" };
+    assert.deepEqual(fixturePlacement, catalogDefinition.placement, `${definition.assetId}: fixture placement contract must match the catalog exactly`);
+    const mount = fixturePlacement.mount;
     if (mount !== "floor") {
-      assert.deepEqual(definition.placement, catalogDefinition.placement, `${definition.assetId}: fixture mount contract must match the catalog exactly`);
       assert.equal(floorPositions.has(definition.assetId), false, `${definition.assetId}: mounted review identity must not have a floor placeholder`);
       continue;
     }
@@ -80,13 +84,30 @@ test("native Godot QA fixture renders every accepted directional furniture ident
     assert.ok(position.x + definition.width <= 29 && position.y + definition.height <= 22, `${definition.assetId}: fixture footprint crosses the south/east perimeter`);
   }
   const floorDefinitions = definitions.filter((definition) => (definition.placement?.mount ?? "floor") === "floor");
-  for (let left = 0; left < floorDefinitions.length; left += 1) {
-    for (let right = left + 1; right < floorDefinitions.length; right += 1) {
-      const a = { ...floorDefinitions[left], ...floorPositions.get(floorDefinitions[left].assetId) };
-      const b = { ...floorDefinitions[right], ...floorPositions.get(floorDefinitions[right].assetId) };
-      const overlaps = a.x < b.x + b.width && b.x < a.x + a.width
-        && a.y < b.y + b.height && b.y < a.y + a.height;
-      assert.equal(overlaps, false, `${a.assetId} overlaps ${b.assetId} in the native fixture`);
+  const pendingRuntimeIds = new Set(contract.runtimeCompositePendingAssetIds);
+  for (const rotation of [0, 90, 180, 270]) {
+    const rotated = floorDefinitions.map((definition) => {
+      const position = floorPositions.get(definition.assetId);
+      const quarterTurn = rotation === 90 || rotation === 270;
+      return {
+        ...definition,
+        ...position,
+        width: quarterTurn ? definition.height : definition.width,
+        height: quarterTurn ? definition.width : definition.height,
+      };
+    });
+    for (const definition of rotated.filter((item) => pendingRuntimeIds.has(item.assetId))) {
+      assert.ok(definition.x >= 1 && definition.y >= 1, `${definition.assetId}/${rotation}: fixture footprint crosses the north/west perimeter`);
+      assert.ok(definition.x + definition.width <= 29 && definition.y + definition.height <= 22, `${definition.assetId}/${rotation}: fixture footprint crosses the south/east perimeter`);
+    }
+    for (let left = 0; left < rotated.length; left += 1) {
+      for (let right = left + 1; right < rotated.length; right += 1) {
+        const a = rotated[left];
+        const b = rotated[right];
+        const overlaps = a.x < b.x + b.width && b.x < a.x + a.width
+          && a.y < b.y + b.height && b.y < a.y + a.height;
+        assert.equal(overlaps, false, `${a.assetId} overlaps ${b.assetId} in the native fixture at rotation ${rotation}`);
+      }
     }
   }
   assert.match(capture, /const ROTATIONS := \[0, 90, 180, 270\]/);
@@ -102,6 +123,9 @@ test("native Godot QA fixture renders every accepted directional furniture ident
   assert.match(capture, /watchdog\.timeout\.connect\(capture_timed_out\)/);
   assert.match(capture, /func finish_capture\(exit_code: int\)/);
   assert.match(capture, /"mountedPlacements": mounted_placement_records\(objects\)/);
+  assert.match(capture, /"runtimeCompositeAcceptedAssetIds": FurnitureArtBinding\.contract\(\)\.runtimeCompositeAcceptedAssetIds/);
+  assert.match(capture, /"runtimeCompositeBlockedAssetIds": FurnitureArtBinding\.contract\(\)\.runtimeCompositeBlockedAssetIds/);
+  assert.match(capture, /"runtimeCompositePendingAssetIds": FurnitureArtBinding\.contract\(\)\.runtimeCompositePendingAssetIds/);
   assert.match(capture, /"productionComplete": false/);
   assert.match(capture, /Human visual acceptance.*native Godot captures.*durable repository preservation/);
   assert.match(validator, /resolve\(CLIENT, "tests"\)/, "the capture harness must pass the same analyzer as runtime GDScript");
