@@ -12,15 +12,15 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 - Branch: `agent/complete-production-art`
 - Draft PR: https://github.com/Maergoth/rro/pull/2
-- Last verified remote head before this ledger check-in: `595907c77f53cb69f56f4f7710a7f1a17103863b`
-- Verified tree: `b8ef42ba52ca435cfb9152968625432860ee87bf`
-- CI: https://github.com/Maergoth/rro/actions/runs/30986120182
+- Last verified remote head before this ledger check-in: `565869f5c09529d5da7dc30c0a31c042669c5291`
+- Verified tree: `5bdfdc178b6ebf5ce9f7719f63a417391f4b9ef6`
+- CI: https://github.com/Maergoth/rro/actions/runs/30996475549
 
 ## Launch coverage
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
-| Furniture directional sets | 229 | 16 | 16 | 13 | 0 |
+| Furniture directional sets | 229 | 16 | 16 | 16 | 0 |
 | Equipment inventory icons | 45 | 45 | 45 | 45 | 45 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
@@ -82,17 +82,10 @@ Directional furniture texture selection is yes; final projection alignment is no
 | equipment-icons-dish-chef-004 | 20 | passed | passed-full-gameplay-and-cross-batch-scale | `961fc31` | planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png |
 | equipment-icons-chef-cook-host-005 | 20 | passed | passed-full-gameplay-and-cross-batch-scale | `e15aa00` | planning/art-qa/equipment-icons-chef-cook-host-005/contact-128-dark.png |
 | equipment-icons-host-006 | 14 | passed | passed-full-gameplay-and-cross-batch-scale | `dd8c059` | planning/art-qa/equipment-icons-host-006/contact-128-dark.png |
-| furniture-core-directional-002 | 28 | passed | blocked-orthogonal-projection-and-gameplay-composite | `daef2aa` | planning/art-qa/furniture-core-directional-002/contact-627-dark.png |
-| furniture-core-directional-003 | 28 | passed | blocked-orthogonal-projection-and-gameplay-composite | `998a2e5` | planning/art-qa/furniture-core-directional-003/contact-627-dark.png |
-| furniture-core-directional-004 | 28 | passed | blocked-orthogonal-projection-and-gameplay-composite | `708642f` | planning/art-qa/furniture-core-directional-004/contact-627-dark.png |
-
-## Accepted locally, remote checkpoint pending
-
-These batches have passed source/composite QA but deliberately do not count as remotely verified or production-complete until their immutable GitHub commit and hosted CI are recorded.
-
-| Batch | Files | Source QA | Runtime/composite QA | Evidence |
-|---|---:|---|---|---|
-| furniture-core-directional-005 | 28 | passed | blocked-orthogonal-projection-and-gameplay-composite | planning/art-qa/furniture-core-directional-005/contact-627-dark.png |
+| furniture-core-directional-002 | 28 | passed | blocked-native-gameplay-composite-acceptance | `daef2aa` | planning/art-qa/furniture-core-directional-002/contact-627-dark.png |
+| furniture-core-directional-003 | 28 | passed | blocked-native-gameplay-composite-acceptance | `998a2e5` | planning/art-qa/furniture-core-directional-003/contact-627-dark.png |
+| furniture-core-directional-004 | 28 | passed | blocked-native-gameplay-composite-acceptance | `708642f` | planning/art-qa/furniture-core-directional-004/contact-627-dark.png |
+| furniture-core-directional-005 | 28 | passed | blocked-native-gameplay-composite-acceptance | `565869f` | planning/art-qa/furniture-core-directional-005/contact-627-dark.png |
 
 ## Missing furniture directional sets
 
@@ -170,9 +163,9 @@ This JSON block is part of this same authoritative document and contains every c
   "durableBaseline": {
     "branch": "agent/complete-production-art",
     "pullRequest": "https://github.com/Maergoth/rro/pull/2",
-    "commit": "595907c77f53cb69f56f4f7710a7f1a17103863b",
-    "tree": "b8ef42ba52ca435cfb9152968625432860ee87bf",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30986120182"
+    "commit": "565869f5c09529d5da7dc30c0a31c042669c5291",
+    "tree": "5bdfdc178b6ebf5ce9f7719f63a417391f4b9ef6",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30996475549"
   },
   "completionPipeline": [
     "generated",
@@ -190,11 +183,12 @@ This JSON block is part of this same authoritative document and contains every c
       "commonFloorContactPivot": true,
       "uniformScaleWithoutStretching": true,
       "stableFurnitureDrawOrder": true,
-      "runtimeProjection": "orthogonal-grid",
+      "runtimeProjection": "elevated-orthographic-isometric-grid",
+      "projectionIntegrated": true,
       "projectionAligned": false,
       "runtimeCompositeAccepted": false,
       "productionComplete": false,
-      "remainingVisualGate": "Render the accepted directional sets in a real Godot gameplay scene after the floor is converted to the final elevated isometric projection; review footprint alignment, occlusion, and gameplay-scale legibility."
+      "remainingVisualGate": "Capture the integrated elevated-isometric restaurant in a real Godot gameplay scene and accept footprint alignment, wall edges, mixed world depth, occlusion, and gameplay-scale legibility."
     }
   },
   "summaries": [
@@ -203,7 +197,7 @@ This JSON block is part of this same authoritative document and contains every c
       "required": 229,
       "present": 16,
       "sourceAccepted": 16,
-      "remoteVerified": 13,
+      "remoteVerified": 16,
       "productionComplete": 0
     },
     {
@@ -433,7 +427,7 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-002",
       "review": "passed",
-      "runtimeQa": "blocked-orthogonal-projection-and-gameplay-composite",
+      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
       "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-002/contact-627-dark.png",
       "qaEvidencePresent": true,
@@ -479,7 +473,7 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-002",
       "review": "passed",
-      "runtimeQa": "blocked-orthogonal-projection-and-gameplay-composite",
+      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
       "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-002/contact-627-dark.png",
       "qaEvidencePresent": true,
@@ -571,7 +565,7 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-002",
       "review": "passed",
-      "runtimeQa": "blocked-orthogonal-projection-and-gameplay-composite",
+      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
       "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-002/contact-627-dark.png",
       "qaEvidencePresent": true,
@@ -617,7 +611,7 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-004",
       "review": "passed",
-      "runtimeQa": "blocked-orthogonal-projection-and-gameplay-composite",
+      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
       "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-004/contact-627-dark.png",
       "qaEvidencePresent": true,
@@ -663,7 +657,7 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-003",
       "review": "passed",
-      "runtimeQa": "blocked-orthogonal-projection-and-gameplay-composite",
+      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
       "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-003/contact-627-dark.png",
       "qaEvidencePresent": true,
@@ -709,7 +703,7 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-003",
       "review": "passed",
-      "runtimeQa": "blocked-orthogonal-projection-and-gameplay-composite",
+      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
       "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-003/contact-627-dark.png",
       "qaEvidencePresent": true,
@@ -755,7 +749,7 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-003",
       "review": "passed",
-      "runtimeQa": "blocked-orthogonal-projection-and-gameplay-composite",
+      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
       "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-003/contact-627-dark.png",
       "qaEvidencePresent": true,
@@ -801,7 +795,7 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-004",
       "review": "passed",
-      "runtimeQa": "blocked-orthogonal-projection-and-gameplay-composite",
+      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
       "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-004/contact-627-dark.png",
       "qaEvidencePresent": true,
@@ -847,7 +841,7 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-004",
       "review": "passed",
-      "runtimeQa": "blocked-orthogonal-projection-and-gameplay-composite",
+      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
       "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-004/contact-627-dark.png",
       "qaEvidencePresent": true,
@@ -893,14 +887,14 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-005",
       "review": "passed",
-      "runtimeQa": "blocked-orthogonal-projection-and-gameplay-composite",
-      "remoteVerified": false,
+      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
+      "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-005/contact-627-dark.png",
       "qaEvidencePresent": true,
       "directionalSelectionBound": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "source_accepted_local_only"
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "pendants",
@@ -939,14 +933,14 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-005",
       "review": "passed",
-      "runtimeQa": "blocked-orthogonal-projection-and-gameplay-composite",
-      "remoteVerified": false,
+      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
+      "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-005/contact-627-dark.png",
       "qaEvidencePresent": true,
       "directionalSelectionBound": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "source_accepted_local_only"
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "plants",
@@ -985,14 +979,14 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-005",
       "review": "passed",
-      "runtimeQa": "blocked-orthogonal-projection-and-gameplay-composite",
-      "remoteVerified": false,
+      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
+      "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-005/contact-627-dark.png",
       "qaEvidencePresent": true,
       "directionalSelectionBound": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "source_accepted_local_only"
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "local-art",
@@ -14823,14 +14817,14 @@ This JSON block is part of this same authoritative document and contains every c
       ],
       "files": 28,
       "qa": "passed",
-      "runtimeQa": "blocked-orthogonal-projection-and-gameplay-composite",
+      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
       "sourcePromptMode": "built-in image generation; identity-locked elevated four-direction sets with chroma removal, common-pivot normalization, rigid-count review, and full/gameplay-scale contact sheets",
       "remoteCommit": "daef2aa572f0f855ac95d92402b9af19cc76bc9f",
       "remoteTree": "36fbf6d8740e2f07f29527ff6e506cf541684b51",
       "ci": "https://github.com/Maergoth/rro/actions/runs/30980689257",
       "qaEvidence": "planning/art-qa/furniture-core-directional-002/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-002/qa.json",
-      "notes": "Booth, banquette, and service-station each pass exact catalog identity, coherent quarter-turns, 627x627 sRGBA, common y=590 floor-contact pivot, transparent-border, unique-content, full-scale, and 128px review. Their exact 28-file art/evidence package and runtime-contract integration are remotely verified with green Windows and Ubuntu CI; final orthographic-to-isometric projection and real gameplay composite acceptance remain blocking.",
+      "notes": "Booth, banquette, and service-station each pass exact catalog identity, coherent quarter-turns, 627x627 sRGBA, common y=590 floor-contact pivot, transparent-border, unique-content, full-scale, and 128px review. Their exact 28-file art/evidence package and runtime-contract integration are remotely verified with green Windows and Ubuntu CI. The elevated-isometric runtime is integrated; native gameplay capture and composite acceptance remain blocking.",
       "qaEvidencePresent": true,
       "remoteVerified": true
     },
@@ -14843,14 +14837,14 @@ This JSON block is part of this same authoritative document and contains every c
       ],
       "files": 28,
       "qa": "passed",
-      "runtimeQa": "blocked-orthogonal-projection-and-gameplay-composite",
+      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
       "sourcePromptMode": "built-in image generation; three separately prompted rigid 2x2 elevated-direction atlases with chroma removal, common-pivot normalization, exact feature-count review, and full/gameplay-scale contact sheets",
       "remoteCommit": "998a2e5bf5914debaa1a997de1fc19a275f0ff69",
       "remoteTree": "c95cdd7d0825bdbf6769a10a329aa5dc08ce8457",
       "ci": "https://github.com/Maergoth/rro/actions/runs/30982693857",
       "qaEvidence": "planning/art-qa/furniture-core-directional-003/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-003/qa.json",
-      "notes": "Range, prep, and pass each pass exact catalog identity, coherent quarter-turns, 627x627 sRGBA, common y=590 floor-contact pivot, transparent-border, unique-content, full-scale, and 128px review. One rejected prep attempt remains hash-recorded but excluded. Their exact 28-file art/evidence package and runtime-contract integration are remotely verified with green Windows and Ubuntu CI; final orthographic-to-isometric projection and real gameplay composite acceptance remain blocking.",
+      "notes": "Range, prep, and pass each pass exact catalog identity, coherent quarter-turns, 627x627 sRGBA, common y=590 floor-contact pivot, transparent-border, unique-content, full-scale, and 128px review. One rejected prep attempt remains hash-recorded but excluded. Their exact 28-file art/evidence package and runtime-contract integration are remotely verified with green Windows and Ubuntu CI. The elevated-isometric runtime is integrated; native gameplay capture and composite acceptance remain blocking.",
       "qaEvidencePresent": true,
       "remoteVerified": true
     },
@@ -14863,19 +14857,17 @@ This JSON block is part of this same authoritative document and contains every c
       ],
       "files": 28,
       "qa": "passed",
-      "runtimeQa": "blocked-orthogonal-projection-and-gameplay-composite",
+      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
       "sourcePromptMode": "built-in image generation; three separately prompted identity-locked elevated four-direction atlases with chroma removal, common-pivot normalization, exact feature-count review, and full/gameplay-scale contact sheets",
       "remoteCommit": "708642ffce26407b44daa47d4029e434e6166368",
       "remoteTree": "9ee2f7817c4e9f11aae59bcf2ae469a6e126d4d4",
       "ci": "https://github.com/Maergoth/rro/actions/runs/30985234904",
       "qaEvidence": "planning/art-qa/furniture-core-directional-004/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-004/qa.json",
-      "notes": "Espresso machine, dish machine, and mop sink each pass exact catalog identity, coherent quarter-turns, 627x627 sRGBA, common y=590 floor-contact pivot, transparent-border, unique-content, full-scale, and 128px review. Their exact 28-file art/evidence package and runtime-contract integration are remotely verified with green Windows and Ubuntu CI; final orthographic-to-isometric projection and real gameplay composite acceptance remain blocking.",
+      "notes": "Espresso machine, dish machine, and mop sink each pass exact catalog identity, coherent quarter-turns, 627x627 sRGBA, common y=590 floor-contact pivot, transparent-border, unique-content, full-scale, and 128px review. Their exact 28-file art/evidence package and runtime-contract integration are remotely verified with green Windows and Ubuntu CI. The elevated-isometric runtime is integrated; native gameplay capture and composite acceptance remain blocking.",
       "qaEvidencePresent": true,
       "remoteVerified": true
-    }
-  ],
-  "pendingBatches": [
+    },
     {
       "id": "furniture-core-directional-005",
       "assets": [
@@ -14885,16 +14877,19 @@ This JSON block is part of this same authoritative document and contains every c
       ],
       "files": 28,
       "qa": "passed",
-      "runtimeQa": "blocked-orthogonal-projection-and-gameplay-composite",
+      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
       "sourcePromptMode": "built-in image generation; identity-locked elevated four-direction atlases with targeted retries, chroma removal, common-pivot normalization, exact feature-count review, and full/gameplay-scale contact sheets",
+      "remoteCommit": "565869f5c09529d5da7dc30c0a31c042669c5291",
+      "remoteTree": "5bdfdc178b6ebf5ce9f7719f63a417391f4b9ef6",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30996475549",
       "qaEvidence": "planning/art-qa/furniture-core-directional-005/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-005/qa.json",
-      "notes": "Recycling station, pendant-light set, and herb wall each pass exact catalog identity, coherent quarter-turns, 627x627 sRGBA, common y=590 floor-contact pivot, transparent-border, unique-content, full-scale, and 128px review. Three rejected generator attempts remain hash-recorded but excluded. The accepted package remains pending until its exact art/evidence/runtime-contract tree is remotely verified with green hosted CI; final orthographic-to-isometric projection and real gameplay composite acceptance remain blocking.",
+      "notes": "Recycling station, pendant-light set, and herb wall each pass exact catalog identity, coherent quarter-turns, 627x627 sRGBA, common y=590 floor-contact pivot, transparent-border, unique-content, full-scale, and 128px review. Three rejected generator attempts remain hash-recorded but excluded. Their exact art, evidence, runtime-contract, and ledger bytes are remotely verified with green Windows and Ubuntu CI. The elevated-isometric runtime is integrated; native gameplay capture and composite acceptance remain blocking.",
       "qaEvidencePresent": true,
-      "remoteVerified": false,
-      "preservationPending": true
+      "remoteVerified": true
     }
   ],
+  "pendingBatches": [],
   "preservedReferences": [
     {
       "id": "alpha2-overhead-furniture",

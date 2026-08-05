@@ -38,10 +38,11 @@
     "commonFloorContactPivot": true,
     "uniformScaleWithoutStretching": true,
     "stableFurnitureDrawOrder": true,
-    "runtimeProjection": "orthogonal-grid",
+    "runtimeProjection": "elevated-orthographic-isometric-grid",
+    "projectionIntegrated": true,
     "projectionAligned": false,
     "runtimeCompositeAccepted": false,
     "productionComplete": false,
-    "remainingVisualGate": "Render the accepted directional sets in a real Godot gameplay scene after the floor is converted to the final elevated isometric projection; review footprint alignment, occlusion, and gameplay-scale legibility."
+    "remainingVisualGate": "Capture the integrated elevated-isometric restaurant in a real Godot gameplay scene and accept footprint alignment, wall edges, mixed world depth, occlusion, and gameplay-scale legibility."
   }
 }

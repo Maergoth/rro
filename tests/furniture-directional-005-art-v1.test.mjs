@@ -8,7 +8,7 @@ import { inflateSync } from "node:zlib";
 const ROOT = resolve(import.meta.dirname, "..");
 const QA_ROOT = "planning/art-qa/furniture-core-directional-005";
 const QA_PATH = `${QA_ROOT}/qa.json`;
-const EXPECTED_QA_SHA256 = "c18c96b129fae6089b8c7ca5d4828e464efc2289d0d497115fa0e5744bc0e47d";
+const EXPECTED_QA_SHA256 = "32dcfb53c0cd99ce7f775dd04df890989fec75dd4c9aa86e93b0569f3c84ff30";
 const DIRECTIONS = ["north", "east", "south", "west"];
 const ASSETS = ["recycling", "pendants", "plants"];
 const EXPECTED_CATALOG = {
@@ -141,21 +141,17 @@ test("furniture directional batch 005 has exact durable provenance and no transi
   assert.deepEqual(qa.assets, ASSETS);
   assert.equal(qa.artReviewStatus, "accepted");
   assert.equal(qa.productionComplete, false);
-  assert.deepEqual(qa.repositoryPromotion, {
-    status: "promoted-local-pending-remote-verification",
-    runtimeFiles: 12,
-    alphaSourceFiles: 12,
-    contactSheets: 2,
-    provenanceDocuments: 2,
-    totalFiles: 28,
+  assert.equal(qa.repositoryPromotion, "remote-verified");
+  assert.deepEqual(qa.remotePreservation, {
+    commit: "565869f5c09529d5da7dc30c0a31c042669c5291",
+    tree: "5bdfdc178b6ebf5ce9f7719f63a417391f4b9ef6",
+    ci: "https://github.com/Maergoth/rro/actions/runs/30996475549",
   });
-  assert.equal(qa.remotePreservation, null);
   assert.deepEqual(qa.promotionScope, {
     runtimeFiles: 12, alphaSourceFiles: 12, contactSheets: 2, provenanceDocuments: 2, totalFiles: 28,
   });
-  assert.equal(qa.productionCompletionBlockers.length, 2);
-  assert.match(qa.productionCompletionBlockers[0], /orthogonal.*elevated-isometric.*gameplay-composite/i);
-  assert.match(qa.productionCompletionBlockers[1], /remote tree verification.*hosted CI.*pending/i);
+  assert.equal(qa.productionCompletionBlockers.length, 1);
+  assert.match(qa.productionCompletionBlockers[0], /elevated-isometric.*native Godot gameplay capture.*composite review/i);
   assert.doesNotMatch(JSON.stringify(qa), /\/tmp\//, "durable QA must not reference transient storage");
   assert.equal(fileSha256(qa.source.promptLog), qa.source.promptLogSha256);
   assert.equal(qa.source.promptLogSha256, "10cf821e0390ca832883636fdbda59c0b1b2729a7d0c30dd3c015bc4a1019103");

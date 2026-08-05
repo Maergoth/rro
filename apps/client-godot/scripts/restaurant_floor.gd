@@ -12,8 +12,8 @@ var build_mode := false
 var build_tool := "select"
 var selected_catalog_id := ""
 var build_rotation := 0
-var cell_pixels := 34.0
-var camera_offset := Vector2(55, 55)
+var cell_pixels := 64.0
+var camera_offset := Vector2(440, 55)
 var panning := false
 var pan_origin := Vector2.ZERO
 var camera_origin := Vector2.ZERO
@@ -70,11 +70,65 @@ func select_tool(tool: String, catalog_id := "") -> void:
 	queue_redraw()
 
 func grid_to_screen(point: Vector2) -> Vector2:
-	return camera_offset + point * cell_pixels
+	return IsometricGridProjection.grid_to_screen(point, camera_offset, cell_pixels)
 
 func screen_to_grid(point: Vector2) -> Vector2i:
-	var cell := (point - camera_offset) / cell_pixels
-	return Vector2i(floori(cell.x), floori(cell.y))
+	return IsometricGridProjection.screen_to_cell(point, camera_offset, cell_pixels)
+
+func screen_to_grid_fractional(point: Vector2) -> Vector2:
+	return IsometricGridProjection.screen_to_grid_fractional(point, camera_offset, cell_pixels)
+
+func grid_footprint(x: float, y: float, width: float, height: float) -> Rect2:
+	return Rect2(Vector2(x, y), Vector2(width, height))
+
+func object_footprint(object: Dictionary, definition: Dictionary) -> Rect2:
+	var width := int(definition.get("width", 1))
+	var height := int(definition.get("height", 1))
+	if int(object.get("rotation", 0)) % 180 != 0:
+		var swap := width
+		width = height
+		height = swap
+	return grid_footprint(float(object.get("x", 0)), float(object.get("y", 0)), float(width), float(height))
+
+func footprint_polygon(footprint: Rect2) -> PackedVector2Array:
+	return IsometricGridProjection.footprint_corners(footprint, camera_offset, cell_pixels)
+
+func closed_polygon(points: PackedVector2Array) -> PackedVector2Array:
+	var closed := points.duplicate()
+	if not closed.is_empty():
+		closed.append(closed[0])
+	return closed
+
+func polygon_bounds(points: PackedVector2Array) -> Rect2:
+	if points.is_empty():
+		return Rect2()
+	var bounds := Rect2(points[0], Vector2.ZERO)
+	for point in points:
+		bounds = bounds.expand(point)
+	return bounds
+
+func distance_to_segment(point: Vector2, start: Vector2, finish: Vector2) -> float:
+	var segment := finish - start
+	var length_squared := segment.length_squared()
+	if length_squared <= 0.000001:
+		return point.distance_to(start)
+	var amount := clampf((point - start).dot(segment) / length_squared, 0.0, 1.0)
+	return point.distance_to(start + segment * amount)
+
+func nearest_cell_edge(cell: Vector2i, screen_point: Vector2) -> String:
+	var polygon := IsometricGridProjection.cell_polygon(cell, camera_offset, cell_pixels)
+	var edges := {
+		"north": [polygon[0], polygon[1]],
+		"east": [polygon[1], polygon[2]],
+		"south": [polygon[2], polygon[3]],
+		"west": [polygon[3], polygon[0]],
+	}
+	var nearest := "north"
+	for edge in edges:
+		var segment: Array = edges[edge]
+		if distance_to_segment(screen_point, segment[0], segment[1]) < distance_to_segment(screen_point, edges[nearest][0], edges[nearest][1]):
+			nearest = edge
+	return nearest
 
 func inside_grid(cell: Vector2i) -> bool:
 	return cell.x >= 0 and cell.y >= 0 and cell.x < int(layout.get("width", 0)) and cell.y < int(layout.get("height", 0))
@@ -123,9 +177,9 @@ func _exit_tree() -> void:
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
-		var before := screen_to_grid(event.position)
-		cell_pixels = clampf(cell_pixels * (1.12 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 0.89), 18.0, 76.0)
-		camera_offset += event.position - grid_to_screen(Vector2(before) + Vector2(0.5, 0.5))
+		var before := screen_to_grid_fractional(event.position)
+		cell_pixels = clampf(cell_pixels * (1.12 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 0.89), 24.0, 128.0)
+		camera_offset += event.position - grid_to_screen(before)
 		queue_redraw(); accept_event(); return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MIDDLE:
 		panning = event.pressed
@@ -153,12 +207,7 @@ func _gui_input(event: InputEvent) -> void:
 			if build_tool == "floor":
 				painting = true; paint_cells.clear(); paint_cells["%d:%d" % [cell.x, cell.y]] = {"x": cell.x, "y": cell.y}; queue_redraw()
 			elif build_tool in ["wall", "door", "arch"]:
-				var cell_origin := grid_to_screen(Vector2(cell))
-				var local: Vector2 = (event.position - cell_origin) / cell_pixels
-				var distances := {"north": local.y, "south": 1.0-local.y, "west": local.x, "east": 1.0-local.x}
-				var edge := "north"
-				for candidate in distances.keys():
-					if float(distances[candidate]) < float(distances[edge]): edge = candidate
+				var edge := nearest_cell_edge(cell, event.position)
 				var opening := "solid" if build_tool == "wall" else ("service-door" if build_tool == "door" else "arch")
 				build_action_requested.emit("wall", {"x": cell.x, "y": cell.y, "edge": edge, "wallStyleId": selected_catalog_id, "openingType": opening, "rotation": build_rotation})
 			elif build_tool == "object" and not selected_catalog_id.is_empty():
@@ -194,39 +243,75 @@ func _draw() -> void:
 		draw_string(ThemeDB.fallback_font, Vector2(30, 50), "Waiting for authoritative layout…", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color("91a1a1"))
 		return
 	for cell in layout.get("cells", []):
-		var draw_position := grid_to_screen(Vector2(float(cell.get("x", 0)), float(cell.get("y", 0))))
-		var rect := Rect2(draw_position, Vector2.ONE * cell_pixels)
+		var polygon := IsometricGridProjection.cell_polygon(Vector2i(int(cell.get("x", 0)), int(cell.get("y", 0))), camera_offset, cell_pixels)
 		var color: Color = FLOOR_COLORS.get(str(cell.get("surfaceId", "sealed-concrete")), Color("586367"))
-		draw_rect(rect, color, true)
-		draw_rect(rect, Color(color).darkened(0.22), false, 1.0)
+		draw_colored_polygon(polygon, color)
+		draw_polyline(closed_polygon(polygon), Color(color).darkened(0.22), 1.0, true)
 	if painting:
 		for value in paint_cells.values():
-			var rect := Rect2(grid_to_screen(Vector2(value.x, value.y)), Vector2.ONE * cell_pixels)
-			draw_rect(rect.grow(-2), Color("efbc54", 0.55), true)
+			var polygon := IsometricGridProjection.cell_polygon(Vector2i(int(value.x), int(value.y)), camera_offset, cell_pixels)
+			draw_colored_polygon(polygon, Color("efbc54", 0.55))
+			draw_polyline(closed_polygon(polygon), Color("ffd982", 0.8), 2.0, true)
+	var world_items: Array = []
 	for wall in layout.get("walls", []):
-		draw_wall(wall)
+		world_items.append(world_item("wall", wall, wall_grid_position(wall)))
 	var objects: Array = layout.get("objects", []).duplicate(true)
-	objects.sort_custom(object_draws_before)
 	for object in objects:
 		if not dragging_object.is_empty() and str(object.get("id", "")) == str(dragging_object.get("id", "")): continue
-		draw_object(object)
+		var definition := furniture_definition(str(object.get("definitionId", "")))
+		if not definition.is_empty():
+			world_items.append(world_item("object", object, object_footprint(object, definition).end))
 	if not dragging_object.is_empty():
 		var preview := dragging_object.duplicate()
 		preview.x = drag_preview_cell.x; preview.y = drag_preview_cell.y; preview.rotation = build_rotation
-		draw_object(preview, 0.65)
-	for incident in snapshot.get("incidents", []): draw_incident(incident)
-	for party in snapshot.get("parties", []): draw_party(party)
-	for avatar in snapshot.get("presences", []): draw_avatar(avatar)
+		var preview_definition := furniture_definition(str(preview.get("definitionId", "")))
+		if not preview_definition.is_empty():
+			world_items.append(world_item("object-preview", preview, object_footprint(preview, preview_definition).end))
+	for incident in snapshot.get("incidents", []):
+		world_items.append(world_item("incident", incident, Vector2(float(incident.get("x", 0)), float(incident.get("y", 0)))))
+	for party in snapshot.get("parties", []):
+		world_items.append(world_item("party", party, party_grid_position(party)))
+	for avatar in snapshot.get("presences", []):
+		world_items.append(world_item("avatar", avatar, Vector2(float(avatar.get("x", 0)), float(avatar.get("y", 0)))))
+	world_items.sort_custom(world_item_draws_before)
+	for item in world_items:
+		match str(item.get("kind", "")):
+			"wall": draw_wall(item.data)
+			"object": draw_object(item.data)
+			"object-preview": draw_object(item.data, 0.65)
+			"incident": draw_incident(item.data)
+			"party": draw_party(item.data)
+			"avatar": draw_avatar(item.data)
 	draw_hud()
+
+func world_item(kind: String, data: Dictionary, grid_position: Vector2) -> Dictionary:
+	return {
+		"kind": kind,
+		"data": data,
+		"depth": IsometricGridProjection.depth_key(Rect2(grid_position, Vector2.ZERO), "%s:%s" % [kind, str(data.get("id", data.get("characterId", "")))]),
+	}
+
+func world_item_draws_before(left: Dictionary, right: Dictionary) -> bool:
+	return IsometricGridProjection.depth_key_draws_before(left.get("depth", {}), right.get("depth", {}))
+
+func wall_grid_position(wall: Dictionary) -> Vector2:
+	var x := float(wall.get("x", 0)); var y := float(wall.get("y", 0))
+	match str(wall.get("edge", "north")):
+		"north": return Vector2(x + 0.5, y)
+		"east": return Vector2(x + 1.0, y + 0.5)
+		"south": return Vector2(x + 0.5, y + 1.0)
+		"west": return Vector2(x, y + 0.5)
+	return Vector2(x, y)
 
 func draw_wall(wall: Dictionary) -> void:
 	var x := float(wall.get("x", 0)); var y := float(wall.get("y", 0)); var edge := str(wall.get("edge", "north"))
-	var start := grid_to_screen(Vector2(x, y)); var finish := start
+	var polygon := footprint_polygon(grid_footprint(x, y, 1.0, 1.0))
+	var start := polygon[0]; var finish := polygon[1]
 	match edge:
-		"north": finish += Vector2(cell_pixels, 0)
-		"south": start += Vector2(0, cell_pixels); finish = start + Vector2(cell_pixels, 0)
-		"west": finish += Vector2(0, cell_pixels)
-		"east": start += Vector2(cell_pixels, 0); finish = start + Vector2(0, cell_pixels)
+		"north": start = polygon[0]; finish = polygon[1]
+		"east": start = polygon[1]; finish = polygon[2]
+		"south": start = polygon[2]; finish = polygon[3]
+		"west": start = polygon[3]; finish = polygon[0]
 	var opening := str(wall.get("openingType", "solid"))
 	var color := Color("d1cab5") if opening == "solid" else Color("82ccb1")
 	draw_line(start, finish, Color("172024"), 7)
@@ -237,27 +322,9 @@ func draw_wall(wall: Dictionary) -> void:
 func object_draws_before(left: Dictionary, right: Dictionary) -> bool:
 	var left_definition := furniture_definition(str(left.get("definitionId", "")))
 	var right_definition := furniture_definition(str(right.get("definitionId", "")))
-	var left_width := int(left_definition.get("width", 1))
-	var left_height := int(left_definition.get("height", 1))
-	var right_width := int(right_definition.get("width", 1))
-	var right_height := int(right_definition.get("height", 1))
-	if int(left.get("rotation", 0)) % 180 != 0:
-		var left_swap := left_width
-		left_width = left_height
-		left_height = left_swap
-	if int(right.get("rotation", 0)) % 180 != 0:
-		var right_swap := right_width
-		right_width = right_height
-		right_height = right_swap
-	var left_bottom := int(left.get("y", 0)) + left_height
-	var right_bottom := int(right.get("y", 0)) + right_height
-	if left_bottom != right_bottom:
-		return left_bottom < right_bottom
-	var left_right_edge := int(left.get("x", 0)) + left_width
-	var right_right_edge := int(right.get("x", 0)) + right_width
-	if left_right_edge != right_right_edge:
-		return left_right_edge < right_right_edge
-	return str(left.get("id", "")) < str(right.get("id", ""))
+	var left_key := IsometricGridProjection.depth_key(object_footprint(left, left_definition), str(left.get("id", "")))
+	var right_key := IsometricGridProjection.depth_key(object_footprint(right, right_definition), str(right.get("id", "")))
+	return IsometricGridProjection.depth_key_draws_before(left_key, right_key)
 
 func draw_object(object: Dictionary, alpha := 1.0) -> void:
 	var definition := furniture_definition(str(object.get("definitionId", "")))
@@ -269,14 +336,17 @@ func draw_object(object: Dictionary, alpha := 1.0) -> void:
 		var swap := width
 		width = height
 		height = swap
-	var rect := Rect2(grid_to_screen(Vector2(float(object.get("x", 0)), float(object.get("y", 0)))) + Vector2.ONE * 2, Vector2(width, height) * cell_pixels - Vector2.ONE * 4)
+	var footprint := grid_footprint(float(object.get("x", 0)), float(object.get("y", 0)), float(width), float(height))
+	var polygon := footprint_polygon(footprint)
+	var bounds := polygon_bounds(polygon)
 	var color: Color = CATEGORY_COLORS.get(str(definition.get("category", "Decor")), Color("6e9364"))
 	var condition := str(object.get("state", "operational"))
 	var wear := float(object.get("wear", 0))
 	if condition == "broken": color = Color("7b3e3e")
 	elif condition == "worn": color = color.darkened(.24)
 	color.a = alpha
-	draw_style_box(make_object_box(color), rect)
+	draw_colored_polygon(polygon, color)
+	draw_polyline(closed_polygon(polygon), Color(color).lightened(.25), 2.0, true)
 	var texture_binding := texture_binding_for(definition, item_rotation)
 	var texture: Texture2D = texture_binding.get("texture")
 	if texture != null:
@@ -284,19 +354,20 @@ func draw_object(object: Dictionary, alpha := 1.0) -> void:
 		if condition == "broken": condition_tint = Color(.62, .43, .40, alpha)
 		elif condition == "worn": condition_tint = Color(.78, .72, .65, alpha)
 		if bool(texture_binding.get("directional", false)):
-			var directional_rect := FurnitureArtBinding.draw_rect_for_floor_contact(texture.get_size(), rect)
+			var floor_contact := IsometricGridProjection.floor_contact_target(footprint, camera_offset, cell_pixels)
+			var directional_rect := FurnitureArtBinding.draw_rect_for_floor_contact_target(texture.get_size(), floor_contact, bounds.size)
 			draw_texture_rect(texture, directional_rect, false, condition_tint)
 		else:
-			var source_size := Vector2(source_width, source_height) * cell_pixels - Vector2.ONE * 8
-			draw_set_transform(rect.get_center(), deg_to_rad(float(item_rotation)), Vector2.ONE)
+			var source_size := bounds.size - Vector2.ONE * 8
+			draw_set_transform(bounds.get_center(), deg_to_rad(float(item_rotation)), Vector2.ONE)
 			draw_texture_rect(texture, Rect2(-source_size * .5, source_size), false, condition_tint)
 			draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 	var symbol := str(definition.get("symbol", str(definition.get("name", "?"))[0]))
-	if texture == null: draw_string(ThemeDB.fallback_font, rect.get_center() + Vector2(-5, 5), symbol, HORIZONTAL_ALIGNMENT_LEFT, -1, clampi(int(cell_pixels * .45), 11, 22), Color("f7f0db", alpha))
+	if texture == null: draw_string(ThemeDB.fallback_font, bounds.get_center() + Vector2(-5, 5), symbol, HORIZONTAL_ALIGNMENT_LEFT, -1, clampi(int(cell_pixels * .35), 11, 22), Color("f7f0db", alpha))
 	if cell_pixels > 30:
-		draw_string(ThemeDB.fallback_font, rect.position + Vector2(5, 14), str(definition.get("name", "")), HORIZONTAL_ALIGNMENT_LEFT, int(rect.size.x - 10), 10, Color("f7f0db", alpha * .92))
+		draw_string(ThemeDB.fallback_font, bounds.position + Vector2(5, 14), str(definition.get("name", "")), HORIZONTAL_ALIGNMENT_LEFT, int(bounds.size.x - 10), 10, Color("f7f0db", alpha * .92))
 		if condition in ["worn", "broken"]:
-			draw_string(ThemeDB.fallback_font, rect.position + Vector2(5, rect.size.y - 5), "%s · %.0f%%" % [condition.to_upper(), wear], HORIZONTAL_ALIGNMENT_LEFT, int(rect.size.x - 10), 10, Color("ffc6a5", alpha))
+			draw_string(ThemeDB.fallback_font, bounds.position + Vector2(5, bounds.size.y - 5), "%s · %.0f%%" % [condition.to_upper(), wear], HORIZONTAL_ALIGNMENT_LEFT, int(bounds.size.x - 10), 10, Color("ffc6a5", alpha))
 
 func make_object_box(color: Color) -> StyleBoxFlat:
 	var box := StyleBoxFlat.new(); box.bg_color = color; box.border_color = Color(color).lightened(.25); box.set_border_width_all(2); box.set_corner_radius_all(5); return box
@@ -334,14 +405,19 @@ func draw_avatar(avatar: Dictionary) -> void:
 	var primary := Color(str(avatar.get("primaryColor", "#2f684f"))); var secondary := Color(str(avatar.get("secondaryColor", "#d6a84b")))
 	draw_circle(draw_position, 12, Color("101719")); draw_circle(draw_position, 10, primary); draw_arc(draw_position, 8, -PI*.1, PI*.9, 16, secondary, 4)
 	var direction := Vector2(float(avatar.get("directionX", 0)), float(avatar.get("directionY", 1)))
-	if direction.length() > .1: draw_line(draw_position, draw_position + direction.normalized() * 15, Color("f5e7c5"), 2)
+	if direction.length() > .1:
+		var projected_direction := IsometricGridProjection.basis_x(cell_pixels) * direction.x + IsometricGridProjection.basis_y(cell_pixels) * direction.y
+		draw_line(draw_position, draw_position + projected_direction.normalized() * 15, Color("f5e7c5"), 2)
 	draw_string(ThemeDB.fallback_font, draw_position + Vector2(-24, -16), str(avatar.get("name", "Player")), HORIZONTAL_ALIGNMENT_CENTER, 48, 10, Color("f1ecda"))
 
 func draw_party(party: Dictionary) -> void:
-	var index: int = absi(str(party.get("id", "")).hash()) % 8
-	var draw_position := grid_to_screen(Vector2(3 + index * 1.55, 5 + (index % 2) * 5))
+	var draw_position := grid_to_screen(party_grid_position(party))
 	draw_circle(draw_position, 7, Color("d7d0bd")); draw_circle(draw_position, 3, Color("573f36"))
 	if int(party.get("patience", 100)) < 40: draw_arc(draw_position, 12, 0, TAU, 24, Color("dc5b4a"), 2)
+
+func party_grid_position(party: Dictionary) -> Vector2:
+	var index: int = absi(str(party.get("id", "")).hash()) % 8
+	return Vector2(3 + index * 1.55, 5 + (index % 2) * 5)
 
 func draw_incident(incident: Dictionary) -> void:
 	var draw_position := grid_to_screen(Vector2(float(incident.get("x", 0)), float(incident.get("y", 0))))

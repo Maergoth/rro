@@ -73,11 +73,12 @@ test("the runtime contract covers every source-accepted directional set without 
   }
   assert.deepEqual([...contract.acceptedDirectionalAssetIds].sort(), [...accepted].sort());
   assert.equal(contract.capability.directionalTextureSelection, true);
-  assert.equal(contract.capability.runtimeProjection, "orthogonal-grid");
+  assert.equal(contract.capability.runtimeProjection, "elevated-orthographic-isometric-grid");
+  assert.equal(contract.capability.projectionIntegrated, true);
   assert.equal(contract.capability.projectionAligned, false);
   assert.equal(contract.capability.runtimeCompositeAccepted, false);
   assert.equal(contract.capability.productionComplete, false);
-  assert.match(contract.capability.remainingVisualGate, /real Godot gameplay scene.*final elevated isometric projection/i);
+  assert.match(contract.capability.remainingVisualGate, /real Godot gameplay scene.*footprint alignment/i);
 });
 
 test("common floor-contact anchoring uses uniform scale and never stretches directional textures", () => {
@@ -99,6 +100,8 @@ test("common floor-contact anchoring uses uniform scale and never stretches dire
   }
 
   assert.match(binding, /footprint_rect\.get_center\(\)\.x, footprint_rect\.end\.y/);
+  assert.match(binding, /draw_rect_for_floor_contact_target\(texture_size, Vector2\(footprint_rect\.get_center\(\)\.x, footprint_rect\.end\.y\), footprint_rect\.size\)/);
+  assert.match(binding, /floor_contact - source_pivot \* uniform_scale/);
   assert.match(binding, /texture_size \* uniform_scale/);
   assert.doesNotMatch(binding, /Vector2\([^\n]*\/ canvas_width[^\n]*\/ canvas_height/);
 });
@@ -107,17 +110,20 @@ test("directional textures are not rotated and legacy generated/SVG fallback rem
   const directionalBranch = runtime.match(/if bool\(texture_binding\.get\("directional", false\)\):([\s\S]+?)\n\t\telse:([\s\S]+?)\n\tvar symbol/);
   assert.ok(directionalBranch, "directional and legacy draw branches are missing");
   assert.doesNotMatch(directionalBranch[1], /draw_set_transform|deg_to_rad/, "directional texture must not be rotated again");
-  assert.match(directionalBranch[1], /FurnitureArtBinding\.draw_rect_for_floor_contact/);
-  assert.match(directionalBranch[2], /draw_set_transform\(rect\.get_center\(\), deg_to_rad\(float\(item_rotation\)\)/);
+  assert.match(directionalBranch[1], /FurnitureArtBinding\.draw_rect_for_floor_contact_target/);
+  assert.match(directionalBranch[1], /IsometricGridProjection\.floor_contact_target/);
+  assert.match(directionalBranch[2], /draw_set_transform\(bounds\.get_center\(\), deg_to_rad\(float\(item_rotation\)\)/);
   assert.match(runtime, /res:\/\/assets\/objects\/generated\/%s\.png/);
   assert.match(runtime, /res:\/\/assets\/objects\/%s\.svg/);
   assert.match(runtime, /return \{"texture": texture_for\(definition\), "directional": false/);
   assert.ok(runtime.indexOf("directional_texture_path(definition, item_rotation)") < runtime.indexOf("return {\"texture\": texture_for(definition)"));
 });
 
-test("furniture draw order is deterministic by occupied bottom edge, right edge, then instance id", () => {
-  assert.match(runtime, /objects\.sort_custom\(object_draws_before\)/);
-  assert.match(runtime, /left_bottom < right_bottom/);
-  assert.match(runtime, /left_right_edge < right_right_edge/);
-  assert.match(runtime, /str\(left\.get\("id", ""\)\) < str\(right\.get\("id", ""\)\)/);
+test("walls, furniture, incidents, parties, and avatars share deterministic isometric depth ordering", () => {
+  assert.match(runtime, /world_items\.sort_custom\(world_item_draws_before\)/);
+  assert.match(runtime, /IsometricGridProjection\.depth_key\(/);
+  assert.match(runtime, /IsometricGridProjection\.depth_key_draws_before\(/);
+  for (const kind of ["wall", "object", "object-preview", "incident", "party", "avatar"]) {
+    assert.match(runtime, new RegExp(`"${kind}"`));
+  }
 });
