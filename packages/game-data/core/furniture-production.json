@@ -26,6 +26,11 @@
       "dining",
       "asset:furniture-oak-two-top"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-oak-two-top",
     "upkeepCents": 337,
@@ -63,6 +68,11 @@
       "dining",
       "asset:furniture-walnut-four-top"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-walnut-four-top",
     "upkeepCents": 616,
@@ -377,6 +387,11 @@
       "kitchen",
       "asset:furniture-six-burner-range"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-six-burner-range",
     "upkeepCents": 2918,

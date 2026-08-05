@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import type { ActivityDefinition, FurnitureDefinition, GameContent, RoleDefinition, RoleEquipmentCatalog, RoleEquipmentDefinition, RoleEquipmentSlotDefinition, SeasonalEventDefinition, SkillDefinition } from "./types.js";
+import type { ActivityDefinition, FurnitureDefinition, FurniturePlacement, GameContent, RoleDefinition, RoleEquipmentCatalog, RoleEquipmentDefinition, RoleEquipmentSlotDefinition, SeasonalEventDefinition, SkillDefinition } from "./types.js";
 
 function readJson<T>(path: string): T {
   return JSON.parse(readFileSync(path, "utf8")) as T;
@@ -9,6 +9,77 @@ function readJson<T>(path: string): T {
 
 function readOptional<T>(path: string, fallback: T): T {
   return existsSync(path) ? readJson<T>(path) : fallback;
+}
+
+type FurnitureDefinitionInput = Omit<FurnitureDefinition, "placement"> & { placement?: unknown };
+
+const FURNITURE_PLACEMENT_KEYS = new Set(["mount", "occupancy", "serviceAccess", "allowedWallOpenings"]);
+const FURNITURE_MOUNTS = new Set(["floor", "wall", "ceiling"]);
+const FURNITURE_OCCUPANCIES = new Set(["blocking", "nonblocking"]);
+const FURNITURE_SERVICE_ACCESS = new Set(["adjacent", "none"]);
+const FURNITURE_WALL_OPENINGS = new Set(["solid", "window"]);
+
+/** Wall-object rotation identifies its room-side supporting edge. */
+export const FURNITURE_WALL_EDGE_BY_ROTATION = Object.freeze({
+  0: "north",
+  90: "east",
+  180: "south",
+  270: "west",
+} as const);
+
+/**
+ * Produces the authoritative placement contract used by the server and client
+ * content surfaces. An absent contract remains backward compatible; a present
+ * contract is strict so misspellings cannot silently become floor furniture.
+ */
+export function normalizeFurniturePlacement(definition: { id: string; height: number; placement?: unknown }): FurniturePlacement {
+  if (definition.placement === undefined) {
+    return { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" };
+  }
+  if (!definition.placement || typeof definition.placement !== "object" || Array.isArray(definition.placement)) {
+    throw new Error(`${definition.id} placement must be an object.`);
+  }
+  const input = definition.placement as Record<string, unknown>;
+  for (const key of Object.keys(input)) {
+    if (!FURNITURE_PLACEMENT_KEYS.has(key)) throw new Error(`${definition.id} placement has unknown field ${key}.`);
+  }
+  const mount = String(input.mount ?? "");
+  const occupancy = String(input.occupancy ?? "");
+  const serviceAccess = String(input.serviceAccess ?? "");
+  if (!FURNITURE_MOUNTS.has(mount)) throw new Error(`${definition.id} placement has invalid mount ${mount || "(missing)"}.`);
+  if (!FURNITURE_OCCUPANCIES.has(occupancy)) throw new Error(`${definition.id} placement has invalid occupancy ${occupancy || "(missing)"}.`);
+  if (!FURNITURE_SERVICE_ACCESS.has(serviceAccess)) throw new Error(`${definition.id} placement has invalid serviceAccess ${serviceAccess || "(missing)"}.`);
+  if (mount !== "floor" && occupancy !== "nonblocking") throw new Error(`${definition.id} ${mount} placement must be nonblocking.`);
+
+  const hasWallOpenings = Object.hasOwn(input, "allowedWallOpenings");
+  if (mount !== "wall" && hasWallOpenings) throw new Error(`${definition.id} allowedWallOpenings is only valid for wall placement.`);
+  if (mount === "wall") {
+    if (definition.height !== 1) throw new Error(`${definition.id} wall placement must have height 1; width is its edge span.`);
+    if (!Array.isArray(input.allowedWallOpenings) || input.allowedWallOpenings.length === 0) {
+      throw new Error(`${definition.id} wall placement requires at least one allowedWallOpening.`);
+    }
+    const openings = input.allowedWallOpenings.map(String);
+    for (const opening of openings) {
+      if (!FURNITURE_WALL_OPENINGS.has(opening)) throw new Error(`${definition.id} wall placement has invalid opening ${opening}.`);
+    }
+    if (new Set(openings).size !== openings.length) throw new Error(`${definition.id} wall placement has duplicate allowedWallOpenings.`);
+    return {
+      mount: "wall",
+      occupancy: "nonblocking",
+      serviceAccess: serviceAccess as FurniturePlacement["serviceAccess"],
+      allowedWallOpenings: openings as NonNullable<FurniturePlacement["allowedWallOpenings"]>,
+    };
+  }
+  return {
+    mount: mount as FurniturePlacement["mount"],
+    occupancy: occupancy as FurniturePlacement["occupancy"],
+    serviceAccess: serviceAccess as FurniturePlacement["serviceAccess"],
+  };
+}
+
+function normalizeFurnitureDefinition(input: FurnitureDefinitionInput): FurnitureDefinition {
+  const { placement: _placement, ...definition } = input;
+  return { ...definition, placement: normalizeFurniturePlacement(input) };
 }
 
 export interface ContentRegistry {
@@ -39,8 +110,14 @@ export function loadContent(dataRoot = resolve(process.cwd(), "packages/game-dat
   for (const pack of manifest.packs.filter((entry) => entry.enabled)) {
     const directory = resolve(dataRoot, pack.directory);
     for (const role of readOptional<Array<Record<string, unknown>>>(resolve(directory, "roles.json"), [])) rawRoles.set(String(role.id), role);
-    for (const item of readOptional<FurnitureDefinition[]>(resolve(directory, "furniture.json"), [])) furniture.set(item.id, item);
-    for (const item of readOptional<FurnitureDefinition[]>(resolve(directory, "furniture-production.json"), [])) furniture.set(item.id, item);
+    for (const input of readOptional<FurnitureDefinitionInput[]>(resolve(directory, "furniture.json"), [])) {
+      const item = normalizeFurnitureDefinition(input);
+      furniture.set(item.id, item);
+    }
+    for (const input of readOptional<FurnitureDefinitionInput[]>(resolve(directory, "furniture-production.json"), [])) {
+      const item = normalizeFurnitureDefinition(input);
+      furniture.set(item.id, item);
+    }
     const equipmentCatalog = readOptional<RoleEquipmentCatalog>(resolve(directory, "role-equipment.json"), { schemaVersion: 1, slots: [], roleSlots: {}, items: [] });
     if (equipmentCatalog.schemaVersion !== 1) throw new Error(`${pack.id} has an unsupported role-equipment schema.`);
     for (const slot of equipmentCatalog.slots) roleEquipmentSlots.set(slot.id, slot);

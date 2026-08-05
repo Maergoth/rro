@@ -269,6 +269,15 @@ const utilityDefaults = {
   Dining: [], Service: [], Kitchen: ["power", "ventilation"], Utility: ["water", "drain"], Storage: [], Decor: [], Office: ["power"],
 };
 
+// Placement metadata is explicit only after its art identity and intended
+// mounting plane have been reviewed. The other generated definitions retain
+// the content loader's backward-compatible floor/blocking/adjacent default.
+const acceptedFurniturePlacements = {
+  "oak-two-top": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "walnut-four-top": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "six-burner-range": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+};
+
 function operationalStrength(stats) {
   const keys = ["turnover", "route", "accuracy", "payment", "forecast", "handoff", "kitchen", "capacity", "recovery", "speed", "hold", "quality", "consistency", "sanitation", "storage", "organization", "spill", "safety", "rotation", "community"];
   return clamp(Math.max(3, ...keys.map((key) => Math.abs(Number(stats[key] ?? 0)))), 3, 20);
@@ -284,6 +293,7 @@ function finishFurniture(item, profile, roleScale = 1) {
   const roleEffects = Object.fromEntries(roles.map((role, index) => [role, clamp(Math.round((3 + strength * 0.48 - index) * roleScale), 1, 20)]));
   return {
     ...item,
+    ...(acceptedFurniturePlacements[item.id] ? { placement: acceptedFurniturePlacements[item.id] } : {}),
     inventoryScope: "restaurant",
     assetId: `furniture-${item.id}`,
     stats,
