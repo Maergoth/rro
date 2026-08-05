@@ -21,7 +21,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
 | Furniture directional sets | 229 | 1 | 1 | 1 | 0 |
-| Equipment inventory icons | 45 | 0 | 0 | 0 | 0 |
+| Equipment inventory icons | 45 | 8 | 0 | 0 | 0 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
 | Utility overlays | 5 | 0 | 0 | 0 | 0 |
@@ -172,7 +172,7 @@ This JSON block is part of this same authoritative document and contains every c
     {
       "lane": "Equipment inventory icons",
       "required": 45,
-      "present": 0,
+      "present": 8,
       "sourceAccepted": 0,
       "remoteVerified": 0,
       "productionComplete": 0
@@ -10590,20 +10590,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-shared-economy-nonslip-shoes.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "19085b0b94220e310b84a4ea1d2e85aee736d2a67435affe1e585ad35957ab69"
         }
       ],
-      "present": false,
+      "present": true,
       "batchId": null,
       "review": "unreviewed",
       "runtimeQa": "not-reviewed",
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "runtime_bound_unreviewed"
     },
     {
       "id": "compression-service-shoes",
@@ -10621,20 +10621,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-shared-compression-service-shoes.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "56d7f5a838a412dbc76458206111ef78244bfebc95de3f5960685a7a211da906"
         }
       ],
-      "present": false,
+      "present": true,
       "batchId": null,
       "review": "unreviewed",
       "runtimeQa": "not-reviewed",
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "runtime_bound_unreviewed"
     },
     {
       "id": "magnetic-pocket-flashlight",
@@ -10652,20 +10652,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-shared-magnetic-pocket-flashlight.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "67f655abe4a576309b336956fd3b6bfdfc4f0c377b86138bce7845d6fcb2c1c4"
         }
       ],
-      "present": false,
+      "present": true,
       "batchId": null,
       "review": "unreviewed",
       "runtimeQa": "not-reviewed",
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "runtime_bound_unreviewed"
     },
     {
       "id": "manager-service-clipboard",
@@ -10677,20 +10677,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-manager-service-grid-clipboard.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "34cd52e77abbabb83bc9d74b0c62bccf38e7732647853a2f9122a53ebc4a71e1"
         }
       ],
-      "present": false,
+      "present": true,
       "batchId": null,
       "review": "unreviewed",
       "runtimeQa": "not-reviewed",
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "runtime_bound_unreviewed"
     },
     {
       "id": "manager-radio-headset",
@@ -10702,20 +10702,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-manager-single-ear-floor-radio.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "4f3eb1a3f230b81772b7d3724b03857f9e3c988027a2f71a0f6f18ab372f3862"
         }
       ],
-      "present": false,
+      "present": true,
       "batchId": null,
       "review": "unreviewed",
       "runtimeQa": "not-reviewed",
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "runtime_bound_unreviewed"
     },
     {
       "id": "manager-floor-plan-folio",
@@ -10727,20 +10727,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-manager-floor-plan-folio.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "7bc1d0c8bc9e7318e342772a0135eb2ed98b5671a9c4a8e163cd1dc75c9b5226"
         }
       ],
-      "present": false,
+      "present": true,
       "batchId": null,
       "review": "unreviewed",
       "runtimeQa": "not-reviewed",
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "runtime_bound_unreviewed"
     },
     {
       "id": "manager-recovery-cards",
@@ -10752,20 +10752,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-manager-service-recovery-cards.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "5ba08d3e287685633c058bdb6c278a20c7f96cd06e102d4c06a6018a4fbea266"
         }
       ],
-      "present": false,
+      "present": true,
       "batchId": null,
       "review": "unreviewed",
       "runtimeQa": "not-reviewed",
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "runtime_bound_unreviewed"
     },
     {
       "id": "manager-morale-candy-tin",
@@ -10777,20 +10777,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-manager-morale-candy-tin.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "f44512d4e194adf5aec40346ad0be93723f3ab6adcd1635fe44dfa9475eff2ce"
         }
       ],
-      "present": false,
+      "present": true,
       "batchId": null,
       "review": "unreviewed",
       "runtimeQa": "not-reviewed",
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "runtime_bound_unreviewed"
     },
     {
       "id": "manager-incident-seal-kit",

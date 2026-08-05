@@ -26,8 +26,8 @@
     },
     "roleItems": {
       "total": 45,
-      "generated": 0,
-      "remaining": 45
+      "generated": 8,
+      "remaining": 37
     }
   },
   "furniture": [
@@ -5833,7 +5833,7 @@
         "host-busser"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-shared-economy-nonslip-shoes.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Economy Nonslip Shoes for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -5853,7 +5853,7 @@
         "host-busser"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-shared-compression-service-shoes.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Compression Service Shoes for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -5873,7 +5873,7 @@
         "host-busser"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-shared-magnetic-pocket-flashlight.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Magnetic Pocket Flashlight for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -5887,7 +5887,7 @@
         "manager"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-manager-service-grid-clipboard.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Service Grid Clipboard for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -5901,7 +5901,7 @@
         "manager"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-manager-single-ear-floor-radio.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Single-Ear Floor Radio for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -5915,7 +5915,7 @@
         "manager"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-manager-floor-plan-folio.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Floor Plan Folio for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -5929,7 +5929,7 @@
         "manager"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-manager-service-recovery-cards.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Service Recovery Cards for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -5943,7 +5943,7 @@
         "manager"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-manager-morale-candy-tin.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Morale Candy Tin for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {

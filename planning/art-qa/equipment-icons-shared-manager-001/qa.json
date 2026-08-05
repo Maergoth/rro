@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "batchId": "equipment-icons-shared-manager-001",
+  "status": "accepted",
+  "source": {
+    "generator": "OpenAI built-in image generation",
+    "background": "flat magenta chroma key",
+    "matteProcess": "remove_chroma_key.py --auto-key border --soft-matte --transparent-threshold 12 --opaque-threshold 220 --despill",
+    "runtimeResize": "subject scaled proportionally to at most 116x116 and centered on a 128x128 transparent canvas",
+    "notes": "The alpha-source files are retained as QA/edit evidence. Runtime assets are the 128x128 PNGs under apps/client-godot/assets/items."
+  },
+  "gates": {
+    "dimensions": "128x128",
+    "colorMode": "sRGBA",
+    "minimumTransparentMarginPixels": 3,
+    "actualMinimumTransparentMarginPixels": 6,
+    "allCornersTransparent": true,
+    "uniqueContentHashes": true,
+    "noLettersNumbersBrandsOrWatermarks": true,
+    "visualReviewAtFullScale": "pass",
+    "visualReviewAtGameplayScale": "pass",
+    "duplicateOrAmbiguousSilhouettes": "none"
+  },
+  "contactSheets": [
+    {
+      "path": "planning/art-qa/equipment-icons-shared-manager-001/contact-128-dark.png",
+      "purpose": "128px runtime icons on a dark checkerboard",
+      "sha256": "8de1340d55baeb58eea6dbda13645fd2d5132e860e0fe82ece0425ea9432882d"
+    },
+    {
+      "path": "planning/art-qa/equipment-icons-shared-manager-001/contact-66-light.png",
+      "purpose": "66px gameplay-scale icons on a light checkerboard",
+      "sha256": "afa3e2d6364772bd3eeb4812110f79f47297dffe3d49be5a4bbd67a7b1d083ab"
+    }
+  ],
+  "items": [
+    {
+      "catalogId": "economy-nonslip-shoes",
+      "iconId": "role-equipment.shared.economy-nonslip-shoes",
+      "name": "Economy Nonslip Shoes",
+      "kind": "equipment",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-shared-economy-nonslip-shoes.png",
+      "sha256": "19085b0b94220e310b84a4ea1d2e85aee736d2a67435affe1e585ad35957ab69",
+      "opaqueBounds": "116x76+6+25",
+      "transparentMargins": { "left": 6, "right": 6, "top": 25, "bottom": 27 },
+      "semanticVerdict": "pass: plain black rubber-soled work shoes with a practical budget silhouette",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "catalogId": "compression-service-shoes",
+      "iconId": "role-equipment.shared.compression-service-shoes",
+      "name": "Compression Service Shoes",
+      "kind": "equipment",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-shared-compression-service-shoes.png",
+      "sha256": "56d7f5a838a412dbc76458206111ef78244bfebc95de3f5960685a7a211da906",
+      "opaqueBounds": "116x74+6+27",
+      "transparentMargins": { "left": 6, "right": 6, "top": 27, "bottom": 27 },
+      "semanticVerdict": "pass: premium knit service shoes with visibly cushioned supportive soles, distinct from the economy pair",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "catalogId": "magnetic-pocket-flashlight",
+      "iconId": "role-equipment.shared.magnetic-pocket-flashlight",
+      "name": "Magnetic Pocket Flashlight",
+      "kind": "equipment",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-shared-magnetic-pocket-flashlight.png",
+      "sha256": "67f655abe4a576309b336956fd3b6bfdfc4f0c377b86138bce7845d6fcb2c1c4",
+      "opaqueBounds": "106x82+11+21",
+      "transparentMargins": { "left": 11, "right": 11, "top": 21, "bottom": 25 },
+      "semanticVerdict": "pass: compact magnetic inspection light with a clear side work-light panel and tail magnet",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "catalogId": "manager-service-clipboard",
+      "iconId": "role-equipment.manager.service-grid-clipboard",
+      "name": "Service Grid Clipboard",
+      "kind": "equipment",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-manager-service-grid-clipboard.png",
+      "sha256": "34cd52e77abbabb83bc9d74b0c62bccf38e7732647853a2f9122a53ebc4a71e1",
+      "opaqueBounds": "93x116+15+6",
+      "transparentMargins": { "left": 15, "right": 20, "top": 6, "bottom": 6 },
+      "semanticVerdict": "pass: wipe-clean service clipboard with a visible planning grid and no readable writing",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "catalogId": "manager-radio-headset",
+      "iconId": "role-equipment.manager.single-ear-floor-radio",
+      "name": "Single-Ear Floor Radio",
+      "kind": "equipment",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-manager-single-ear-floor-radio.png",
+      "sha256": "4f3eb1a3f230b81772b7d3724b03857f9e3c988027a2f71a0f6f18ab372f3862",
+      "opaqueBounds": "89x105+18+11",
+      "transparentMargins": { "left": 18, "right": 21, "top": 11, "bottom": 12 },
+      "semanticVerdict": "pass: discreet single-ear headset with boom microphone and push-to-talk radio body",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "catalogId": "manager-floor-plan-folio",
+      "iconId": "role-equipment.manager.floor-plan-folio",
+      "name": "Floor Plan Folio",
+      "kind": "equipment",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-manager-floor-plan-folio.png",
+      "sha256": "7bc1d0c8bc9e7318e342772a0135eb2ed98b5671a9c4a8e163cd1dc75c9b5226",
+      "opaqueBounds": "100x109+13+10",
+      "transparentMargins": { "left": 13, "right": 15, "top": 10, "bottom": 9 },
+      "semanticVerdict": "pass: pocket folio with laminated floor-plan pages, visually distinct from the clipboard and card deck",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "catalogId": "manager-recovery-cards",
+      "iconId": "role-equipment.manager.service-recovery-cards",
+      "name": "Service Recovery Cards",
+      "kind": "equipment",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-manager-service-recovery-cards.png",
+      "sha256": "5ba08d3e287685633c058bdb6c278a20c7f96cd06e102d4c06a6018a4fbea266",
+      "opaqueBounds": "109x89+11+21",
+      "transparentMargins": { "left": 11, "right": 8, "top": 21, "bottom": 18 },
+      "semanticVerdict": "pass: compact fanned scenario-card deck with pictorial service prompts and no legible text",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "catalogId": "manager-morale-candy-tin",
+      "iconId": "role-equipment.manager.morale-candy-tin",
+      "name": "Morale Candy Tin",
+      "kind": "consumable",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-manager-morale-candy-tin.png",
+      "sha256": "f44512d4e194adf5aec40346ad0be93723f3ab6adcd1635fe44dfa9475eff2ce",
+      "opaqueBounds": "89x112+17+7",
+      "transparentMargins": { "left": 17, "right": 22, "top": 7, "bottom": 9 },
+      "semanticVerdict": "pass: open metal tin of individually wrapped citrus candies, immediately distinct from tools and references",
+      "gameplayLegibility": "pass"
+    }
+  ]
+}
