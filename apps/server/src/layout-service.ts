@@ -1,9 +1,17 @@
-import type { ContentRegistry } from "./content.js";
+import { FURNITURE_WALL_EDGE_BY_ROTATION, type ContentRegistry } from "./content.js";
 import { newId, transaction } from "./database.js";
 import { aggregateFurnitureEffects, type FurnitureEffectsSummary } from "./furniture-effects.js";
 import { ApiError, type AuthenticatedAccount, type Database, type FurnitureDefinition } from "./types.js";
 
 type CellInput = { x: number; y: number };
+type CardinalEdge = "north" | "east" | "south" | "west";
+type PlacedObjectRow = {
+  id: string;
+  definition_id: string;
+  grid_x: number;
+  grid_y: number;
+  rotation: number;
+};
 type LayoutState = {
   width: number;
   height: number;
@@ -29,6 +37,114 @@ function dimensions(definition: FurnitureDefinition, rotation: number): { width:
   return rotation === 90 || rotation === 270
     ? { width: definition.height, height: definition.width }
     : { width: definition.width, height: definition.height };
+}
+
+function wallMountEdge(rotation: number): CardinalEdge {
+  const edge = FURNITURE_WALL_EDGE_BY_ROTATION[rotation as keyof typeof FURNITURE_WALL_EDGE_BY_ROTATION];
+  if (!edge) throw new ApiError(409, "A wall-mounted object has an invalid persisted rotation.");
+  return edge;
+}
+
+function footprintCells(definition: FurnitureDefinition, x: number, y: number, rotation: number): CellInput[] {
+  if (definition.placement.mount === "wall") {
+    const edge = wallMountEdge(rotation);
+    const horizontal = edge === "north" || edge === "south";
+    return Array.from({ length: definition.width }, (_, offset) => ({
+      x: x + (horizontal ? offset : 0),
+      y: y + (horizontal ? 0 : offset),
+    }));
+  }
+  const size = dimensions(definition, rotation);
+  const cells: CellInput[] = [];
+  for (let cy = y; cy < y + size.height; cy += 1) {
+    for (let cx = x; cx < x + size.width; cx += 1) cells.push({ x: cx, y: cy });
+  }
+  return cells;
+}
+
+function wallKey(x: number, y: number, edge: CardinalEdge): string {
+  return `${x}:${y}:${edge}`;
+}
+
+function mirroredWallKey(x: number, y: number, edge: CardinalEdge): string {
+  switch (edge) {
+    case "north": return wallKey(x, y - 1, "south");
+    case "east": return wallKey(x + 1, y, "west");
+    case "south": return wallKey(x, y + 1, "north");
+    case "west": return wallKey(x - 1, y, "east");
+  }
+}
+
+function wallMapForRestaurant(db: Database, restaurantId: string): Map<string, string> {
+  const walls = db.prepare("SELECT grid_x, grid_y, edge, opening_type FROM wall_edges WHERE restaurant_id = ?").all(restaurantId) as any[];
+  return new Map(walls.map((wall) => [wallKey(Number(wall.grid_x), Number(wall.grid_y), String(wall.edge) as CardinalEdge), String(wall.opening_type)]));
+}
+
+function wallSupportFailure(
+  definition: FurnitureDefinition,
+  x: number,
+  y: number,
+  rotation: number,
+  wallMap: Map<string, string>,
+): { kind: "missing" | "opening"; x: number; y: number; edge: CardinalEdge; opening?: string } | null {
+  if (definition.placement.mount !== "wall") return null;
+  const edge = wallMountEdge(rotation);
+  const allowed = new Set<string>(definition.placement.allowedWallOpenings ?? []);
+  for (const cell of footprintCells(definition, x, y, rotation)) {
+    const exact = wallMap.get(wallKey(cell.x, cell.y, edge));
+    const opening = exact ?? wallMap.get(mirroredWallKey(cell.x, cell.y, edge));
+    if (opening === undefined) return { kind: "missing", x: cell.x, y: cell.y, edge };
+    if (!allowed.has(opening)) return { kind: "opening", x: cell.x, y: cell.y, edge, opening };
+  }
+  return null;
+}
+
+function assertLegalMountSupport(
+  db: Database,
+  restaurantId: string,
+  definition: FurnitureDefinition,
+  x: number,
+  y: number,
+  rotation: number,
+): void {
+  const failure = wallSupportFailure(definition, x, y, rotation, wallMapForRestaurant(db, restaurantId));
+  if (!failure) return;
+  if (failure.kind === "missing") {
+    throw new ApiError(409, "A wall-mounted object requires a supporting wall along its full span.");
+  }
+  throw new ApiError(409, `A ${failure.opening} opening cannot support this wall-mounted object.`);
+}
+
+function wallSupportKeys(definition: FurnitureDefinition, x: number, y: number, rotation: number): Set<string> {
+  if (definition.placement.mount !== "wall") return new Set();
+  const edge = wallMountEdge(rotation);
+  return new Set(footprintCells(definition, x, y, rotation).flatMap((cell) => [
+    wallKey(cell.x, cell.y, edge),
+    mirroredWallKey(cell.x, cell.y, edge),
+  ]));
+}
+
+function assertWallChangePreservesMountedObjects(
+  db: Database,
+  registry: ContentRegistry,
+  restaurantId: string,
+  x: number,
+  y: number,
+  edge: CardinalEdge,
+  opening: string,
+): void {
+  const changedKey = wallKey(x, y, edge);
+  const wallMap = wallMapForRestaurant(db, restaurantId);
+  wallMap.set(changedKey, opening);
+  const objects = db.prepare("SELECT id, definition_id, grid_x, grid_y, rotation FROM object_instances WHERE restaurant_id = ?").all(restaurantId) as PlacedObjectRow[];
+  for (const object of objects) {
+    const definition = registry.furnitureById.get(object.definition_id);
+    if (!definition || definition.placement.mount !== "wall") continue;
+    if (!wallSupportKeys(definition, object.grid_x, object.grid_y, object.rotation).has(changedKey)) continue;
+    if (wallSupportFailure(definition, object.grid_x, object.grid_y, object.rotation, wallMap)) {
+      throw new ApiError(409, "That wall change would leave a mounted object without legal support.");
+    }
+  }
 }
 
 function restaurantRow(db: Database, restaurantId: string): any {
@@ -99,23 +215,33 @@ const CARDINAL_STEPS = [
 function validateLayoutState(db: Database, registry: ContentRegistry, restaurantId: string): Record<string, unknown> {
   const restaurant = restaurantRow(db, restaurantId);
   const walls = db.prepare("SELECT grid_x, grid_y, edge, opening_type FROM wall_edges WHERE restaurant_id = ?").all(restaurantId) as any[];
-  const objects = db.prepare("SELECT id, definition_id, grid_x, grid_y, rotation FROM object_instances WHERE restaurant_id = ?").all(restaurantId) as any[];
-  const wallMap = new Map(walls.map((wall) => [`${wall.grid_x}:${wall.grid_y}:${wall.edge}`, String(wall.opening_type)]));
+  const objects = db.prepare("SELECT id, definition_id, grid_x, grid_y, rotation FROM object_instances WHERE restaurant_id = ?").all(restaurantId) as PlacedObjectRow[];
+  const wallMap = new Map(walls.map((wall) => [wallKey(Number(wall.grid_x), Number(wall.grid_y), String(wall.edge) as CardinalEdge), String(wall.opening_type)]));
   const blocked = new Set<string>();
   const objectFootprints = new Map<string, Set<string>>();
+  const invalidMountObjectIds: string[] = [];
+  const overlappingObjectIds = new Set<string>();
+  const occupiedByMount = new Map<string, Map<string, string>>();
   for (const object of objects) {
     const definition = registry.furnitureById.get(object.definition_id);
     if (!definition) continue;
-    const size = dimensions(definition, object.rotation);
     const footprint = new Set<string>();
-    for (let y = object.grid_y; y < object.grid_y + size.height; y += 1) {
-      for (let x = object.grid_x; x < object.grid_x + size.width; x += 1) {
-        const key = `${x}:${y}`;
-        blocked.add(key);
-        footprint.add(key);
+    const mountOccupancy = occupiedByMount.get(definition.placement.mount) ?? new Map<string, string>();
+    occupiedByMount.set(definition.placement.mount, mountOccupancy);
+    for (const cell of footprintCells(definition, object.grid_x, object.grid_y, object.rotation)) {
+      const key = `${cell.x}:${cell.y}`;
+      if (definition.placement.mount === "floor" && definition.placement.occupancy === "blocking") blocked.add(key);
+      const previousObjectId = mountOccupancy.get(key);
+      if (previousObjectId) {
+        overlappingObjectIds.add(previousObjectId);
+        overlappingObjectIds.add(object.id);
+      } else {
+        mountOccupancy.set(key, object.id);
       }
+      footprint.add(key);
     }
     objectFootprints.set(object.id, footprint);
+    if (wallSupportFailure(definition, object.grid_x, object.grid_y, object.rotation, wallMap)) invalidMountObjectIds.push(object.id);
   }
 
   const missingPerimeter: string[] = [];
@@ -158,6 +284,8 @@ function validateLayoutState(db: Database, registry: ContentRegistry, restaurant
 
   const walkableCells = restaurant.build_width * restaurant.build_height - blocked.size;
   const inaccessibleObjects = objects.filter((object) => {
+    const definition = registry.furnitureById.get(object.definition_id);
+    if (!definition || definition.placement.serviceAccess === "none") return false;
     const footprint = objectFootprints.get(object.id) ?? new Set<string>();
     for (const key of footprint) {
       const [x = 0, y = 0] = key.split(":").map(Number);
@@ -173,6 +301,8 @@ function validateLayoutState(db: Database, registry: ContentRegistry, restaurant
   else if (usableExits.length < 2) warnings.push({ code: "single-egress", message: "Only one usable exterior exit remains." });
   if (reachable.size < walkableCells) errors.push({ code: "unreachable-floor", message: "Some unoccupied floor cells cannot reach an exterior exit.", count: walkableCells - reachable.size });
   if (inaccessibleObjects.length) errors.push({ code: "inaccessible-object", message: "Some placed objects have no reachable interaction edge.", count: inaccessibleObjects.length });
+  if (invalidMountObjectIds.length) errors.push({ code: "invalid-object-mount", message: "Some mounted objects have missing or incompatible support.", count: invalidMountObjectIds.length });
+  if (overlappingObjectIds.size) errors.push({ code: "overlapping-object", message: "Some objects overlap another object in the same mount layer.", count: overlappingObjectIds.size });
   return {
     validForService: errors.length === 0,
     errors,
@@ -183,6 +313,8 @@ function validateLayoutState(db: Database, registry: ContentRegistry, restaurant
     walkableCells,
     missingPerimeterEdges: missingPerimeter.length,
     inaccessibleObjectIds: inaccessibleObjects,
+    invalidMountObjectIds,
+    overlappingObjectIds: [...overlappingObjectIds],
   };
 }
 
@@ -209,26 +341,21 @@ function ensureInside(row: any, x: number, y: number, width = 1, height = 1): vo
   }
 }
 
-function occupiedCells(db: Database, registry: ContentRegistry, restaurantId: string, exceptId?: string): Set<string> {
+function occupiedCells(db: Database, registry: ContentRegistry, restaurantId: string, mount: FurnitureDefinition["placement"]["mount"], exceptId?: string): Set<string> {
   const occupied = new Set<string>();
-  const rows = db.prepare("SELECT * FROM object_instances WHERE restaurant_id = ? AND id <> ?").all(restaurantId, exceptId ?? "") as any[];
+  const rows = db.prepare("SELECT * FROM object_instances WHERE restaurant_id = ? AND id <> ?").all(restaurantId, exceptId ?? "") as PlacedObjectRow[];
   for (const row of rows) {
     const definition = registry.furnitureById.get(row.definition_id);
-    if (!definition) continue;
-    const size = dimensions(definition, row.rotation);
-    for (let y = row.grid_y; y < row.grid_y + size.height; y += 1) {
-      for (let x = row.grid_x; x < row.grid_x + size.width; x += 1) occupied.add(`${x}:${y}`);
-    }
+    if (!definition || definition.placement.mount !== mount) continue;
+    for (const cell of footprintCells(definition, row.grid_x, row.grid_y, row.rotation)) occupied.add(`${cell.x}:${cell.y}`);
   }
   return occupied;
 }
 
-function assertClear(db: Database, registry: ContentRegistry, restaurantId: string, x: number, y: number, width: number, height: number, exceptId?: string): void {
-  const occupied = occupiedCells(db, registry, restaurantId, exceptId);
-  for (let cy = y; cy < y + height; cy += 1) {
-    for (let cx = x; cx < x + width; cx += 1) {
-      if (occupied.has(`${cx}:${cy}`)) throw new ApiError(409, "That footprint overlaps another object.");
-    }
+function assertClear(db: Database, registry: ContentRegistry, restaurantId: string, definition: FurnitureDefinition, x: number, y: number, rotation: number, exceptId?: string): void {
+  const occupied = occupiedCells(db, registry, restaurantId, definition.placement.mount, exceptId);
+  for (const cell of footprintCells(definition, x, y, rotation)) {
+    if (occupied.has(`${cell.x}:${cell.y}`)) throw new ApiError(409, `That ${definition.placement.mount}-mount footprint overlaps another object.`);
   }
 }
 
@@ -259,7 +386,7 @@ export function ensureLayout(db: Database, registry: ContentRegistry, restaurant
     const starter: Array<[string, number, number, number]> = [
       ["host-stand", 2, 2, 0], ["table-two", 3, 6, 0], ["table-four", 8, 5, 0], ["table-two", 4, 11, 0],
       ["service-station", 11, 10, 0], ["range", row.build_width - 8, 3, 0], ["prep", row.build_width - 8, 8, 0],
-      ["pass", row.build_width - 9, 12, 0], ["dish-machine", row.build_width - 4, 11, 90], ["plants", 1, row.build_height - 3, 0],
+      ["pass", row.build_width - 9, 12, 0], ["dish-machine", row.build_width - 4, 11, 90], ["plants", 3, 0, 0],
     ];
     for (const [definitionId, x, y, rotation] of starter) {
       if (!registry.furnitureById.has(definitionId)) continue;
@@ -357,13 +484,15 @@ export function upsertWall(db: Database, registry: ContentRegistry, account: Aut
   if (!style) throw new ApiError(400, "Unknown wall style.");
   const opening = String(body.openingType ?? "solid");
   if (!["solid", "door", "service-door", "window", "arch"].includes(opening)) throw new ApiError(400, "Unknown wall opening.");
+  const rotation = normalizeRotation(body.rotation);
+  assertWallChangePreservesMountedObjects(db, registry, restaurantId, x, y, edge as CardinalEdge, opening);
   if (restaurant.treasury_cents < style.costCents) throw new ApiError(409, "Restaurant treasury cannot cover this wall purchase.");
   const now = Date.now();
   recordLayoutMutation(db, restaurantId, account, opening === "solid" ? "build wall" : `build ${opening}`, () => {
     db.prepare(`INSERT INTO wall_edges (id, restaurant_id, grid_x, grid_y, edge, wall_style_id, opening_type, rotation, updated_at)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
       ON CONFLICT(restaurant_id, grid_x, grid_y, edge) DO UPDATE SET wall_style_id = excluded.wall_style_id, opening_type = excluded.opening_type, rotation = excluded.rotation, updated_at = excluded.updated_at`)
-      .run(newId("wall"), restaurantId, x, y, edge, styleId, opening, normalizeRotation(body.rotation), now);
+      .run(newId("wall"), restaurantId, x, y, edge, styleId, opening, rotation, now);
     db.prepare("UPDATE restaurants SET treasury_cents = treasury_cents - ? WHERE id = ?").run(style.costCents, restaurantId);
   });
   return { costCents: style.costCents, layout: getLayout(db, registry, restaurantId) };
@@ -377,9 +506,9 @@ export function placeObject(db: Database, registry: ContentRegistry, account: Au
   const x = integer(body.x, "x");
   const y = integer(body.y, "y");
   const rotation = normalizeRotation(body.rotation);
-  const size = dimensions(definition, rotation);
-  ensureInside(restaurant, x, y, size.width, size.height);
-  assertClear(db, registry, restaurantId, x, y, size.width, size.height);
+  for (const cell of footprintCells(definition, x, y, rotation)) ensureInside(restaurant, cell.x, cell.y);
+  assertClear(db, registry, restaurantId, definition, x, y, rotation);
+  assertLegalMountSupport(db, restaurantId, definition, x, y, rotation);
   if (restaurant.treasury_cents < definition.costCents) throw new ApiError(409, "Restaurant treasury cannot cover this purchase.");
   const id = newId("object");
   const now = Date.now();
@@ -405,9 +534,9 @@ export function moveObject(db: Database, registry: ContentRegistry, account: Aut
   const x = integer(body.x, "x");
   const y = integer(body.y, "y");
   const rotation = normalizeRotation(body.rotation);
-  const size = dimensions(definition, rotation);
-  ensureInside(restaurant, x, y, size.width, size.height);
-  assertClear(db, registry, restaurantId, x, y, size.width, size.height, objectId);
+  for (const cell of footprintCells(definition, x, y, rotation)) ensureInside(restaurant, cell.x, cell.y);
+  assertClear(db, registry, restaurantId, definition, x, y, rotation, objectId);
+  assertLegalMountSupport(db, restaurantId, definition, x, y, rotation);
   recordLayoutMutation(db, restaurantId, account, "move object", () => {
     db.prepare("UPDATE object_instances SET grid_x = ?, grid_y = ?, rotation = ?, updated_at = ? WHERE id = ?").run(x, y, rotation, Date.now(), objectId);
   });

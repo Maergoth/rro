@@ -1175,6 +1175,7 @@ export class LiveService extends EventEmitter {
     for (const object of objects) {
       const definition = this.registry.furnitureById.get(object.definition_id);
       if (!definition) continue;
+      if (definition.placement.mount !== "floor" || definition.placement.occupancy !== "blocking") continue;
       const width = object.rotation === 90 || object.rotation === 270 ? definition.height : definition.width;
       const height = object.rotation === 90 || object.rotation === 270 ? definition.width : definition.height;
       if (x > object.grid_x - 0.2 && x < object.grid_x + width + 0.2 && y > object.grid_y - 0.2 && y < object.grid_y + height + 0.2) return true;
