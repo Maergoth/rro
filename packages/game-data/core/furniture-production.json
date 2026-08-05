@@ -110,6 +110,11 @@
       "dining",
       "asset:furniture-banquette-section"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-banquette-section",
     "upkeepCents": 1155,
@@ -148,6 +153,11 @@
       "dining",
       "asset:furniture-commercial-chair"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-commercial-chair",
     "upkeepCents": 102,
@@ -185,6 +195,11 @@
       "dining",
       "asset:furniture-premium-chair"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-premium-chair",
     "upkeepCents": 225,

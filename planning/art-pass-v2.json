@@ -30,7 +30,7 @@
     ]
   },
   "coverage": {
-    "furniture": { "catalogTotal": 229, "acceptedSets": 19, "acceptedDirectionalFiles": 76, "runtimeCompositeAcceptedSets": 16 },
+    "furniture": { "catalogTotal": 229, "acceptedSets": 22, "acceptedDirectionalFiles": 88, "runtimeCompositeAcceptedSets": 16 },
     "equipmentIcons": { "catalogTotal": 45, "accepted": 45 },
     "characterSystem": {
       "status": "in_progress",
@@ -98,7 +98,23 @@
       "productionComplete": false
     }
   ],
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "furniture-core-directional-007",
+      "assets": [
+        "furniture-banquette-section",
+        "furniture-commercial-chair",
+        "furniture-premium-chair"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "pending-native-gameplay-composite",
+      "sourcePromptMode": "built-in image generation; identity-referenced rigid four-direction elevated isometric sets with chroma removal and common-pivot normalization",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-007/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-007/qa.json",
+      "notes": "Three source-accepted floor furniture sets pass exact raster hashes, catalog identity, unique-content, alpha, common-pivot, full-resolution, and 128px review. Remote preservation and an exact native Godot four-rotation gameplay composite remain required before runtime or production completion."
+    }
+  ],
   "batches": [
     {
       "id": "furniture-pilot-001",

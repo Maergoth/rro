@@ -20,7 +20,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
-| Furniture directional sets | 229 | 19 | 19 | 19 | 16 |
+| Furniture directional sets | 229 | 22 | 22 | 19 | 16 |
 | Equipment inventory icons | 45 | 45 | 45 | 45 | 45 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
@@ -35,7 +35,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 | Activity → animation bindings | 89 | 0 | 0 | 0 | 0 |
 
 45 equipment icons and 16 furniture directional sets are production-complete because their exact reviewed bytes are visually accepted, runtime-bound, remotely verified, and CI-green. Character art and the other missing lanes remain explicit below.
-Directional furniture texture selection is yes and projection alignment is yes. Native attempt 002 accepted 16/19 present sets; its durable review checkpoint is remote-verified: yes. `local-art`, `pendants`, `plants` remain blocked on legal wall/ceiling mounting.
+Directional furniture texture selection is yes and projection alignment is yes. Native attempt 002 accepted 16/22 present sets; its durable review checkpoint is remote-verified: yes. `local-art`, `pendants`, `plants` remain blocked on legal wall/ceiling mounting. `furniture-banquette-section`, `furniture-commercial-chair`, `furniture-premium-chair` are source-accepted but pending their first native four-rotation gameplay composite.
 
 ## Character truth
 
@@ -97,13 +97,17 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 | furniture-core-directional-005 | 28 | passed | mixed-native-gameplay-composite-attempt-002-mount-blocked | `565869f` | planning/art-qa/furniture-core-directional-005/contact-627-dark.png |
 | furniture-core-directional-006 | 28 | passed | mixed-native-gameplay-composite-attempt-002-mount-blocked | `185ca50` | planning/art-qa/furniture-core-directional-006/contact-627-dark.png |
 
+## Accepted locally, remote checkpoint pending
+
+These batches have passed source/composite QA but deliberately do not count as remotely verified or production-complete until their immutable GitHub commit and hosted CI are recorded.
+
+| Batch | Files | Source QA | Runtime/composite QA | Evidence |
+|---|---:|---|---|---|
+| furniture-core-directional-007 | 28 | passed | pending-native-gameplay-composite | planning/art-qa/furniture-core-directional-007/contact-627-dark.png |
+
 ## Missing furniture directional sets
 
-19 of 229 elevated four-direction sets are present. The 20 attractive overhead singles are preserved as references but do not satisfy this camera contract.
-
-### Dining — 34 missing
-
-`furniture-banquette-section`, `furniture-commercial-chair`, `furniture-premium-chair`, `furniture-essential-cafe-two-top`, `furniture-craftsman-cafe-two-top`, `furniture-endurance-cafe-two-top`, `furniture-hospitality-cafe-two-top`, `furniture-precision-cafe-two-top`, `furniture-reclaimed-cafe-two-top`, `furniture-essential-family-four-top`, `furniture-craftsman-family-four-top`, `furniture-endurance-family-four-top`, `furniture-hospitality-family-four-top`, `furniture-precision-family-four-top`, `furniture-reclaimed-family-four-top`, `furniture-essential-communal-table`, `furniture-craftsman-communal-table`, `furniture-endurance-communal-table`, `furniture-hospitality-communal-table`, `furniture-precision-communal-table`, `furniture-reclaimed-communal-table`, `furniture-essential-dining-chair`, `furniture-craftsman-dining-chair`, `furniture-endurance-dining-chair`, `furniture-hospitality-dining-chair`, `furniture-precision-dining-chair`, `furniture-reclaimed-dining-chair`, `furniture-essential-dining-booth`, `furniture-craftsman-dining-booth`, `furniture-endurance-dining-booth`, `furniture-hospitality-dining-booth`, `furniture-precision-dining-booth`, `furniture-reclaimed-dining-booth`, `summer-patio-two`
+22 of 229 elevated four-direction sets are present. The 20 attractive overhead singles are preserved as references but do not satisfy this camera contract.
 
 ### Service — 36 missing
 
@@ -129,6 +133,10 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 
 `furniture-office-desk`, `furniture-manager-console`, `furniture-essential-manager-desk-line`, `furniture-craftsman-manager-desk-line`, `furniture-endurance-manager-desk-line`, `furniture-hospitality-manager-desk-line`, `furniture-precision-manager-desk-line`, `furniture-reclaimed-manager-desk-line`, `furniture-essential-scheduling-board`, `furniture-craftsman-scheduling-board`, `furniture-endurance-scheduling-board`, `furniture-hospitality-scheduling-board`, `furniture-precision-scheduling-board`, `furniture-reclaimed-scheduling-board`
 
+### Dining — 31 missing
+
+`furniture-essential-cafe-two-top`, `furniture-craftsman-cafe-two-top`, `furniture-endurance-cafe-two-top`, `furniture-hospitality-cafe-two-top`, `furniture-precision-cafe-two-top`, `furniture-reclaimed-cafe-two-top`, `furniture-essential-family-four-top`, `furniture-craftsman-family-four-top`, `furniture-endurance-family-four-top`, `furniture-hospitality-family-four-top`, `furniture-precision-family-four-top`, `furniture-reclaimed-family-four-top`, `furniture-essential-communal-table`, `furniture-craftsman-communal-table`, `furniture-endurance-communal-table`, `furniture-hospitality-communal-table`, `furniture-precision-communal-table`, `furniture-reclaimed-communal-table`, `furniture-essential-dining-chair`, `furniture-craftsman-dining-chair`, `furniture-endurance-dining-chair`, `furniture-hospitality-dining-chair`, `furniture-precision-dining-chair`, `furniture-reclaimed-dining-chair`, `furniture-essential-dining-booth`, `furniture-craftsman-dining-booth`, `furniture-endurance-dining-booth`, `furniture-hospitality-dining-booth`, `furniture-precision-dining-booth`, `furniture-reclaimed-dining-booth`, `summer-patio-two`
+
 ## Other exact incomplete catalogs
 
 - Equipment icons (0): none
@@ -147,7 +155,7 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 ## Contract gaps blocking a truthful 100% denominator
 
 - Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.
-- Complete mounted-object server placement, builder snapping, runtime anchors, and depth, then pass a third native Godot composite for local-art, plants, and pendants; attempt 002 accepted the other sixteen floor assets.
+- Run exact four-rotation native Godot composite review for furniture-banquette-section, furniture-commercial-chair, and furniture-premium-chair; complete mounted-object server placement, builder snapping, runtime anchors, and depth before re-reviewing local-art, plants, and pendants.
 - Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.
 - Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete.
 
@@ -198,13 +206,16 @@ This JSON block is part of this same authoritative document and contains every c
       "projectionAligned": true,
       "runtimeCompositeAccepted": false,
       "productionComplete": false,
-      "remainingVisualGate": "Implement legal wall and ceiling mounting plus mount-specific anchors and depth for local-art, plants, and pendants, then pass another exact four-rotation native Godot gameplay capture.",
+      "remainingVisualGate": "Pass an exact four-rotation native Godot gameplay capture for furniture-banquette-section, furniture-commercial-chair, and furniture-premium-chair; separately implement legal wall and ceiling mounting plus mount-specific anchors and depth for local-art, plants, and pendants.",
       "acceptedDirectionalAssetIds": [
         "banquette",
         "booth",
         "dish-machine",
         "espresso",
+        "furniture-banquette-section",
+        "furniture-commercial-chair",
         "furniture-oak-two-top",
+        "furniture-premium-chair",
         "furniture-six-burner-range",
         "furniture-walnut-four-top",
         "host-stand",
@@ -243,6 +254,11 @@ This JSON block is part of this same authoritative document and contains every c
         "pendants",
         "plants"
       ],
+      "runtimeCompositePendingAssetIds": [
+        "furniture-banquette-section",
+        "furniture-commercial-chair",
+        "furniture-premium-chair"
+      ],
       "runtimeReviewRemoteVerified": true
     }
   },
@@ -250,8 +266,8 @@ This JSON block is part of this same authoritative document and contains every c
     {
       "lane": "Furniture directional sets",
       "required": 229,
-      "present": 19,
-      "sourceAccepted": 19,
+      "present": 22,
+      "sourceAccepted": 22,
       "remoteVerified": 19,
       "productionComplete": 16
     },
@@ -404,6 +420,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": true,
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": true,
       "productionComplete": true,
       "status": "production_complete"
@@ -459,6 +476,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": true,
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": true,
       "productionComplete": true,
       "status": "production_complete"
@@ -514,6 +532,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": true,
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": true,
       "productionComplete": true,
       "status": "production_complete"
@@ -569,6 +588,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": true,
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": true,
       "productionComplete": true,
       "status": "production_complete"
@@ -624,6 +644,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": true,
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": true,
       "productionComplete": true,
       "status": "production_complete"
@@ -679,6 +700,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": true,
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": true,
       "productionComplete": true,
       "status": "production_complete"
@@ -734,6 +756,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": true,
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": true,
       "productionComplete": true,
       "status": "production_complete"
@@ -789,6 +812,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": true,
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": true,
       "productionComplete": true,
       "status": "production_complete"
@@ -844,6 +868,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": true,
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": true,
       "productionComplete": true,
       "status": "production_complete"
@@ -899,6 +924,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": true,
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": true,
       "productionComplete": true,
       "status": "production_complete"
@@ -954,6 +980,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": true,
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": true,
       "productionComplete": true,
       "status": "production_complete"
@@ -1009,6 +1036,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": true,
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": true,
       "productionComplete": true,
       "status": "production_complete"
@@ -1064,6 +1092,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": true,
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": true,
       "productionComplete": true,
       "status": "production_complete"
@@ -1119,6 +1148,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": true,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": true,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "source_accepted_runtime_blocked"
@@ -1177,6 +1207,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": true,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": true,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "source_accepted_runtime_blocked"
@@ -1235,6 +1266,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": true,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": true,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "source_accepted_runtime_blocked"
@@ -1290,6 +1322,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": true,
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": true,
       "productionComplete": true,
       "status": "production_complete"
@@ -1345,6 +1378,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": true,
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": true,
       "productionComplete": true,
       "status": "production_complete"
@@ -1364,41 +1398,46 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-banquette-section/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "d937914dcb32264e8e723e0c0328ecf26de92697d9bce15065ab483f945d6fa0"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-banquette-section/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "f7949286866ec30801a108662e07cb7371f0de4f0d49111b33b558cd369e63b7"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-banquette-section/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "84a9bf4870b8d78d7aece2b878c97bec7eb15df6de186dd033b1fb70da86cb53"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-banquette-section/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "8b5929a6981b4ffa341e055b571dc8dbb3ccb4b5d210ee4355ef1937f1c8b693"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "furniture-core-directional-007",
+      "review": "passed",
+      "runtimeQa": "pending-native-gameplay-composite",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "placement": null,
-      "placementDeclared": false,
-      "sourceAccepted": false,
-      "directionalSelectionBound": false,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-007/contact-627-dark.png",
+      "qaEvidencePresent": true,
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "placementDeclared": true,
+      "sourceAccepted": true,
+      "directionalSelectionBound": true,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "commercial-chair",
@@ -1415,41 +1454,46 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-commercial-chair/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "0d261ce08b2631d480a91ef2273676449542fa00cc3a3bb032910c3e87cf6c8c"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-commercial-chair/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "be3a2dc2a277ed916638bdbc3dc5110961b33775e086eacbe252dee52f230de9"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-commercial-chair/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "aef6b7508f0954a9ad19b66475d5e985c71c4186cec9fbed5b618db378fb0997"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-commercial-chair/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "e16f1e98fe0ff708a4e503e02a57ad340c1df03c5193f2c510cf2f9f62d4892d"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "furniture-core-directional-007",
+      "review": "passed",
+      "runtimeQa": "pending-native-gameplay-composite",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "placement": null,
-      "placementDeclared": false,
-      "sourceAccepted": false,
-      "directionalSelectionBound": false,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-007/contact-627-dark.png",
+      "qaEvidencePresent": true,
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "placementDeclared": true,
+      "sourceAccepted": true,
+      "directionalSelectionBound": true,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "premium-chair",
@@ -1466,41 +1510,46 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-premium-chair/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "3a73aaea575414ee3cb1f0aa31152786ffee7b6c7b67f855ba82fc12ed178377"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-premium-chair/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "02be7d1338faa6f69cc07cb49d8b156faa995be65bde9fc92bbb4004ba6d46bc"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-premium-chair/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "087a230b15866c590a00c301dfb6a3d9671dfac420952528a01954beaebe2239"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-premium-chair/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "aea1e2a84edc667480935766281ed0c168aa4ad7ac054b4a6cb12c6bb7863a85"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "furniture-core-directional-007",
+      "review": "passed",
+      "runtimeQa": "pending-native-gameplay-composite",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "placement": null,
-      "placementDeclared": false,
-      "sourceAccepted": false,
-      "directionalSelectionBound": false,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-007/contact-627-dark.png",
+      "qaEvidencePresent": true,
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "placementDeclared": true,
+      "sourceAccepted": true,
+      "directionalSelectionBound": true,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "host-stand-pro",
@@ -1549,6 +1598,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1600,6 +1650,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1651,6 +1702,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1702,6 +1754,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1757,6 +1810,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": true,
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": true,
       "productionComplete": true,
       "status": "production_complete"
@@ -1808,6 +1862,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1859,6 +1914,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1910,6 +1966,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1961,6 +2018,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2012,6 +2070,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2063,6 +2122,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2114,6 +2174,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2165,6 +2226,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2216,6 +2278,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2267,6 +2330,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2318,6 +2382,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2369,6 +2434,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2420,6 +2486,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2471,6 +2538,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2522,6 +2590,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2573,6 +2642,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2624,6 +2694,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2675,6 +2746,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2726,6 +2798,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2777,6 +2850,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2828,6 +2902,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2879,6 +2954,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2930,6 +3006,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2981,6 +3058,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3032,6 +3110,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3083,6 +3162,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3134,6 +3214,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3185,6 +3266,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3236,6 +3318,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3287,6 +3370,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3338,6 +3422,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3389,6 +3474,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3440,6 +3526,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3491,6 +3578,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3542,6 +3630,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3593,6 +3682,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3644,6 +3734,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3695,6 +3786,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3746,6 +3838,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3797,6 +3890,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3848,6 +3942,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3899,6 +3994,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3950,6 +4046,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4001,6 +4098,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4052,6 +4150,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4103,6 +4202,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4154,6 +4254,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4205,6 +4306,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4256,6 +4358,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4307,6 +4410,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4358,6 +4462,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4409,6 +4514,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4460,6 +4566,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4511,6 +4618,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4562,6 +4670,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4613,6 +4722,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4664,6 +4774,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4715,6 +4826,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4766,6 +4878,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4817,6 +4930,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4868,6 +4982,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4919,6 +5034,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4970,6 +5086,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5021,6 +5138,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5072,6 +5190,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5123,6 +5242,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5174,6 +5294,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5225,6 +5346,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5276,6 +5398,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5327,6 +5450,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5378,6 +5502,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5429,6 +5554,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5480,6 +5606,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5531,6 +5658,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5582,6 +5710,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5633,6 +5762,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5684,6 +5814,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5735,6 +5866,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5786,6 +5918,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5837,6 +5970,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5888,6 +6022,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5939,6 +6074,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5990,6 +6126,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6041,6 +6178,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6092,6 +6230,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6143,6 +6282,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6194,6 +6334,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6245,6 +6386,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6296,6 +6438,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6347,6 +6490,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6398,6 +6542,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6449,6 +6594,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6500,6 +6646,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6551,6 +6698,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6602,6 +6750,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6653,6 +6802,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6704,6 +6854,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6755,6 +6906,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6806,6 +6958,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6857,6 +7010,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6908,6 +7062,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6959,6 +7114,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7010,6 +7166,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7061,6 +7218,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7112,6 +7270,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7163,6 +7322,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7214,6 +7374,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7265,6 +7426,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7316,6 +7478,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7367,6 +7530,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7418,6 +7582,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7469,6 +7634,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7520,6 +7686,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7571,6 +7738,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7622,6 +7790,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7673,6 +7842,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7724,6 +7894,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7775,6 +7946,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7826,6 +7998,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7877,6 +8050,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7928,6 +8102,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7979,6 +8154,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8030,6 +8206,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8081,6 +8258,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8132,6 +8310,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8183,6 +8362,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8234,6 +8414,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8285,6 +8466,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8336,6 +8518,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8387,6 +8570,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8438,6 +8622,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8489,6 +8674,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8540,6 +8726,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8591,6 +8778,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8642,6 +8830,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8693,6 +8882,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8744,6 +8934,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8795,6 +8986,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8846,6 +9038,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8897,6 +9090,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8948,6 +9142,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8999,6 +9194,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9050,6 +9246,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9101,6 +9298,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9152,6 +9350,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9203,6 +9402,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9254,6 +9454,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9305,6 +9506,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9356,6 +9558,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9407,6 +9610,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9458,6 +9662,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9509,6 +9714,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9560,6 +9766,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9611,6 +9818,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9662,6 +9870,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9713,6 +9922,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9764,6 +9974,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9815,6 +10026,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9866,6 +10078,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9917,6 +10130,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9968,6 +10182,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10019,6 +10234,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10070,6 +10286,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10121,6 +10338,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10172,6 +10390,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10223,6 +10442,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10274,6 +10494,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10325,6 +10546,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10376,6 +10598,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10427,6 +10650,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10478,6 +10702,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10529,6 +10754,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10580,6 +10806,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10631,6 +10858,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10682,6 +10910,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10733,6 +10962,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10784,6 +11014,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10835,6 +11066,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10886,6 +11118,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10937,6 +11170,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10988,6 +11222,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11039,6 +11274,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11090,6 +11326,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11141,6 +11378,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11192,6 +11430,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11243,6 +11482,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11294,6 +11534,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11345,6 +11586,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11396,6 +11638,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11447,6 +11690,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11498,6 +11742,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11549,6 +11794,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11600,6 +11846,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11651,6 +11898,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11702,6 +11950,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11753,6 +12002,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11804,6 +12054,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11855,6 +12106,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11906,6 +12158,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11957,6 +12210,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -12008,6 +12262,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -12059,6 +12314,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -12110,6 +12366,7 @@ This JSON block is part of this same authoritative document and contains every c
       "directionalSelectionBound": false,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
+      "runtimeCompositePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -16191,7 +16448,26 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": true
     }
   ],
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "furniture-core-directional-007",
+      "assets": [
+        "furniture-banquette-section",
+        "furniture-commercial-chair",
+        "furniture-premium-chair"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "pending-native-gameplay-composite",
+      "sourcePromptMode": "built-in image generation; identity-referenced rigid four-direction elevated isometric sets with chroma removal and common-pivot normalization",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-007/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-007/qa.json",
+      "notes": "Three source-accepted floor furniture sets pass exact raster hashes, catalog identity, unique-content, alpha, common-pivot, full-resolution, and 128px review. Remote preservation and an exact native Godot four-rotation gameplay composite remain required before runtime or production completion.",
+      "qaEvidencePresent": true,
+      "remoteVerified": false,
+      "preservationPending": true
+    }
+  ],
   "runtimeQaAttempts": [
     {
       "id": "runtime-isometric-integration-001-attempt-001",
@@ -16310,7 +16586,7 @@ This JSON block is part of this same authoritative document and contains every c
   ],
   "contractGaps": [
     "Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.",
-    "Complete mounted-object server placement, builder snapping, runtime anchors, and depth, then pass a third native Godot composite for local-art, plants, and pendants; attempt 002 accepted the other sixteen floor assets.",
+    "Run exact four-rotation native Godot composite review for furniture-banquette-section, furniture-commercial-chair, and furniture-premium-chair; complete mounted-object server placement, builder snapping, runtime anchors, and depth before re-reviewing local-art, plants, and pendants.",
     "Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.",
     "Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete."
   ]

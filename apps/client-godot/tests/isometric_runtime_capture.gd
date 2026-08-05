@@ -13,7 +13,10 @@ const DEFINITIONS := [
 	{"id": "booth", "assetId": "booth", "name": "Tomato Vinyl Booth", "category": "Dining", "width": 4, "height": 2},
 	{"id": "dish-machine", "assetId": "dish-machine", "name": "High-Temp Dish Machine", "category": "Utility", "width": 3, "height": 2},
 	{"id": "espresso", "assetId": "espresso", "name": "Espresso Machine", "category": "Service", "width": 2, "height": 1},
+	{"id": "banquette-section", "assetId": "furniture-banquette-section", "name": "Upholstered Banquette", "category": "Dining", "width": 4, "height": 2},
+	{"id": "commercial-chair", "assetId": "furniture-commercial-chair", "name": "Commercial Dining Chair", "category": "Dining", "width": 1, "height": 1},
 	{"id": "oak-two-top", "assetId": "furniture-oak-two-top", "name": "Oak Two-Top", "category": "Dining", "width": 2, "height": 2},
+	{"id": "premium-chair", "assetId": "furniture-premium-chair", "name": "Premium Dining Chair", "category": "Dining", "width": 1, "height": 1},
 	{"id": "six-burner-range", "assetId": "furniture-six-burner-range", "name": "Six-Burner Range", "category": "Kitchen", "width": 4, "height": 3},
 	{"id": "walnut-four-top", "assetId": "furniture-walnut-four-top", "name": "Walnut Four-Top", "category": "Dining", "width": 3, "height": 3},
 	{"id": "host-stand", "assetId": "host-stand", "name": "Host Stand", "category": "Service", "width": 2, "height": 1},
@@ -78,7 +81,8 @@ func make_objects() -> Array:
 		Vector2i(4, 6), Vector2i(10, 6), Vector2i(16, 6), Vector2i(22, 6),
 		Vector2i(2, 12), Vector2i(8, 12), Vector2i(14, 12), Vector2i(20, 12),
 		Vector2i(5, 16), Vector2i(11, 16), Vector2i(17, 16), Vector2i(23, 16),
-		Vector2i(8, 20), Vector2i(15, 20), Vector2i(22, 20),
+		Vector2i(8, 20), Vector2i(15, 20), Vector2i(22, 20), Vector2i(2, 20),
+		Vector2i(1, 16), Vector2i(25, 12),
 	]
 	var objects: Array = []
 	for index in range(DEFINITIONS.size()):

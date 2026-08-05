@@ -20,7 +20,10 @@
     "booth",
     "dish-machine",
     "espresso",
+    "furniture-banquette-section",
+    "furniture-commercial-chair",
     "furniture-oak-two-top",
+    "furniture-premium-chair",
     "furniture-six-burner-range",
     "furniture-walnut-four-top",
     "host-stand",
@@ -59,6 +62,11 @@
     "pendants",
     "plants"
   ],
+  "runtimeCompositePendingAssetIds": [
+    "furniture-banquette-section",
+    "furniture-commercial-chair",
+    "furniture-premium-chair"
+  ],
   "capability": {
     "directionalTextureSelection": true,
     "commonFloorContactPivot": true,
@@ -69,6 +77,6 @@
     "projectionAligned": true,
     "runtimeCompositeAccepted": false,
     "productionComplete": false,
-    "remainingVisualGate": "Implement legal wall and ceiling mounting plus mount-specific anchors and depth for local-art, plants, and pendants, then pass another exact four-rotation native Godot gameplay capture."
+    "remainingVisualGate": "Pass an exact four-rotation native Godot gameplay capture for furniture-banquette-section, furniture-commercial-chair, and furniture-premium-chair; separately implement legal wall and ceiling mounting plus mount-specific anchors and depth for local-art, plants, and pendants."
   }
 }

@@ -275,6 +275,9 @@ const utilityDefaults = {
 const acceptedFurniturePlacements = {
   "oak-two-top": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
   "walnut-four-top": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "banquette-section": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "commercial-chair": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "premium-chair": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
   "six-burner-range": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
 };
 

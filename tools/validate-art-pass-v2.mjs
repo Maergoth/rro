@@ -20,6 +20,7 @@ const furnitureDefinitions = [
 const furnitureDefinitionByAssetId = new Map(furnitureDefinitions.map((item) => [item.assetId ?? item.id, item]));
 const runtimeCompositeAcceptedAssetIds = new Set(furnitureRuntimeContract.runtimeCompositeAcceptedAssetIds ?? []);
 const runtimeCompositeBlockedAssetIds = new Set(furnitureRuntimeContract.runtimeCompositeBlockedAssetIds ?? []);
+const runtimeCompositePendingAssetIds = new Set(furnitureRuntimeContract.runtimeCompositePendingAssetIds ?? []);
 const directionalSelectionBound = furnitureRuntimeContract.capability.directionalTextureSelection === true;
 const latestFurnitureRuntimeQa = [...(pass.runtimeQaAttempts ?? [])].reverse().find((attempt) => Array.isArray(attempt.acceptedAssetIds));
 const runtimeReviewRemoteVerified = Boolean(
@@ -120,6 +121,10 @@ for (const batch of pass.pendingBatches ?? []) {
   const manifest = read(batch.qaManifest);
   const manifestStatus = String(manifest.status ?? manifest.artReviewStatus ?? "");
   if ((manifest.batchId ?? manifest.batch) !== batch.id || !manifestStatus.startsWith("accepted")) invalid.push(`${batch.id}: pending QA identity/status mismatch`);
+  if (manifest.repositoryPromotion?.status !== "local-verified-pending-remote") invalid.push(`${batch.id}: pending QA must declare local verification with remote preservation still pending`);
+  if (manifest.remotePreservation !== null) invalid.push(`${batch.id}: pending QA must not claim remote preservation`);
+  if (manifest.promotionScope?.totalFiles !== batch.files) invalid.push(`${batch.id}: pending QA promotion file count does not match batch.files`);
+  if (JSON.stringify(manifest).includes("/tmp/")) invalid.push(`${batch.id}: pending durable QA contains a transient /tmp path`);
   const manifestAssets = [...(manifest.assets ?? [])].sort();
   if (JSON.stringify(manifestAssets) !== JSON.stringify([...batch.assets].sort())) invalid.push(`${batch.id}: pending QA assets do not exactly match the batch`);
   const visualEvidence = [...(manifest.contactSheets ?? []), ...(manifest.visualEvidence ?? [])];
@@ -157,12 +162,23 @@ for (const item of production.furniture) {
 for (const assetId of runtimeCompositeAcceptedAssetIds) {
   if (!furnitureRuntimeContract.acceptedDirectionalAssetIds.includes(assetId)) invalid.push(`${assetId}: runtime composite acceptance is not a directional source-accepted asset`);
   if (runtimeCompositeBlockedAssetIds.has(assetId)) invalid.push(`${assetId}: cannot be both runtime-composite accepted and blocked`);
+  if (runtimeCompositePendingAssetIds.has(assetId)) invalid.push(`${assetId}: cannot be both runtime-composite accepted and pending`);
 }
 for (const assetId of runtimeCompositeBlockedAssetIds) {
   if (!furnitureRuntimeContract.acceptedDirectionalAssetIds.includes(assetId)) invalid.push(`${assetId}: runtime composite blocker is not a directional source-accepted asset`);
+  if (runtimeCompositePendingAssetIds.has(assetId)) invalid.push(`${assetId}: cannot be both runtime-composite blocked and pending`);
 }
-if (runtimeCompositeAcceptedAssetIds.size + runtimeCompositeBlockedAssetIds.size !== furnitureRuntimeContract.acceptedDirectionalAssetIds.length) {
-  invalid.push("directional furniture runtime-composite accepted and blocked sets must exactly partition acceptedDirectionalAssetIds");
+for (const assetId of runtimeCompositePendingAssetIds) {
+  if (!furnitureRuntimeContract.acceptedDirectionalAssetIds.includes(assetId)) invalid.push(`${assetId}: runtime composite pending review is not a directional source-accepted asset`);
+}
+const runtimeStateAssetIds = new Set([
+  ...runtimeCompositeAcceptedAssetIds,
+  ...runtimeCompositeBlockedAssetIds,
+  ...runtimeCompositePendingAssetIds,
+]);
+if (runtimeStateAssetIds.size !== furnitureRuntimeContract.acceptedDirectionalAssetIds.length
+    || [...runtimeStateAssetIds].some((assetId) => !furnitureRuntimeContract.acceptedDirectionalAssetIds.includes(assetId))) {
+  invalid.push("directional furniture runtime-composite accepted, blocked, and pending sets must exactly partition acceptedDirectionalAssetIds");
 }
 if (!latestFurnitureRuntimeQa?.evidence || !file(latestFurnitureRuntimeQa.evidence)) {
   invalid.push("directional furniture runtime-composite acceptance requires durable native-review evidence");
@@ -174,6 +190,12 @@ if (!latestFurnitureRuntimeQa?.evidence || !file(latestFurnitureRuntimeQa.eviden
   }
   if (JSON.stringify(blockedFromEvidence) !== JSON.stringify([...runtimeCompositeBlockedAssetIds].sort())) {
     invalid.push("runtimeCompositeBlockedAssetIds do not match the latest durable native review");
+  }
+  const pendingFromEvidence = furnitureRuntimeContract.acceptedDirectionalAssetIds
+    .filter((assetId) => !acceptedFromEvidence.includes(assetId) && !blockedFromEvidence.includes(assetId))
+    .sort();
+  if (JSON.stringify(pendingFromEvidence) !== JSON.stringify([...runtimeCompositePendingAssetIds].sort())) {
+    invalid.push("runtimeCompositePendingAssetIds must contain exactly the source-accepted assets absent from the latest durable native review");
   }
 }
 

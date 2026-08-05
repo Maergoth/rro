@@ -14,6 +14,7 @@ const furnitureBatch003Qa = JSON.parse(read("planning/art-qa/furniture-core-dire
 const furnitureBatch004Qa = JSON.parse(read("planning/art-qa/furniture-core-directional-004/qa.json"));
 const furnitureBatch005Qa = JSON.parse(read("planning/art-qa/furniture-core-directional-005/qa.json"));
 const furnitureBatch006Qa = JSON.parse(read("planning/art-qa/furniture-core-directional-006/qa.json"));
+const furnitureBatch007Qa = JSON.parse(read("planning/art-qa/furniture-core-directional-007/qa.json"));
 
 const canonicalRotation = (rotation) => ((rotation % 360) + 360) % 360;
 const directionForRotation = (rotation) => contract.directionsByRotation[String(canonicalRotation(rotation))] ?? "";
@@ -26,7 +27,7 @@ const directionalPath = (assetId, rotation) => {
 test("accepted furniture resolves exact directional paths for canonical rotations", () => {
   assert.equal(contract.schemaVersion, 1);
   assert.deepEqual(contract.directionsByRotation, { "0": "north", "90": "east", "180": "south", "270": "west" });
-  assert.deepEqual(contract.acceptedDirectionalAssetIds, ["banquette", "booth", "dish-machine", "espresso", "furniture-oak-two-top", "furniture-six-burner-range", "furniture-walnut-four-top", "host-stand", "local-art", "mop-sink", "pass", "pendants", "plants", "prep", "range", "recycling", "service-station", "table-four", "table-two"]);
+  assert.deepEqual(contract.acceptedDirectionalAssetIds, ["banquette", "booth", "dish-machine", "espresso", "furniture-banquette-section", "furniture-commercial-chair", "furniture-oak-two-top", "furniture-premium-chair", "furniture-six-burner-range", "furniture-walnut-four-top", "host-stand", "local-art", "mop-sink", "pass", "pendants", "plants", "prep", "range", "recycling", "service-station", "table-four", "table-two"]);
 
   const expectedDirections = [[0, "north"], [90, "east"], [180, "south"], [270, "west"]];
   for (const assetId of contract.acceptedDirectionalAssetIds) {
@@ -55,7 +56,7 @@ test("accepted furniture resolves exact directional paths for canonical rotation
 test("the runtime contract covers every source-accepted directional set without inflating production completion", () => {
   const accepted = new Set();
   const sourceAcceptedBatches = [...artPass.batches, ...(artPass.pendingBatches ?? [])];
-  for (const qa of [furnitureBatch002Qa, furnitureBatch003Qa, furnitureBatch004Qa, furnitureBatch005Qa, furnitureBatch006Qa]) {
+  for (const qa of [furnitureBatch002Qa, furnitureBatch003Qa, furnitureBatch004Qa, furnitureBatch005Qa, furnitureBatch006Qa, furnitureBatch007Qa]) {
     if (sourceAcceptedBatches.some((batch) => batch.id === qa.batchId)) continue;
     sourceAcceptedBatches.push({
       id: qa.batchId,
@@ -81,10 +82,17 @@ test("the runtime contract covers every source-accepted directional set without 
   assert.equal(contract.capability.productionComplete, false);
   assert.deepEqual(contract.runtimeCompositeAcceptedAssetIds, ["banquette", "booth", "dish-machine", "espresso", "furniture-oak-two-top", "furniture-six-burner-range", "furniture-walnut-four-top", "host-stand", "mop-sink", "pass", "prep", "range", "recycling", "service-station", "table-four", "table-two"]);
   assert.deepEqual(contract.runtimeCompositeBlockedAssetIds, ["local-art", "pendants", "plants"]);
+  assert.deepEqual(contract.runtimeCompositePendingAssetIds, ["furniture-banquette-section", "furniture-commercial-chair", "furniture-premium-chair"]);
   assert.deepEqual(
-    [...contract.runtimeCompositeAcceptedAssetIds, ...contract.runtimeCompositeBlockedAssetIds].sort(),
+    [...contract.runtimeCompositeAcceptedAssetIds, ...contract.runtimeCompositeBlockedAssetIds, ...contract.runtimeCompositePendingAssetIds].sort(),
     [...contract.acceptedDirectionalAssetIds].sort(),
   );
+  assert.equal(new Set([
+    ...contract.runtimeCompositeAcceptedAssetIds,
+    ...contract.runtimeCompositeBlockedAssetIds,
+    ...contract.runtimeCompositePendingAssetIds,
+  ]).size, contract.acceptedDirectionalAssetIds.length, "runtime states must be pairwise disjoint");
+  assert.match(contract.capability.remainingVisualGate, /four-rotation native Godot gameplay capture.*furniture-banquette-section.*furniture-commercial-chair.*furniture-premium-chair/i);
   assert.match(contract.capability.remainingVisualGate, /wall and ceiling mounting.*local-art.*plants.*pendants/i);
 });
 
