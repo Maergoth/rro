@@ -26,8 +26,8 @@
     },
     "roleItems": {
       "total": 45,
-      "generated": 16,
-      "remaining": 29
+      "generated": 24,
+      "remaining": 21
     }
   },
   "furniture": [
@@ -6069,7 +6069,7 @@
         "server"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-server-waterproof-order-pad.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Waterproof Order Pad for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6083,7 +6083,7 @@
         "server"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-server-double-hinge-corkscrew.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Double-Hinge Waiter's Corkscrew for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6097,7 +6097,7 @@
         "server"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-server-high-grip-cork-tray.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of High-Grip Cork Tray for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6111,7 +6111,7 @@
         "server"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-server-unscented-palate-mints.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Unscented Palate Mints for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6125,7 +6125,7 @@
         "server"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-server-tablecloth-rescue-pen.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Tablecloth Rescue Pen for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6139,7 +6139,7 @@
         "dishwasher"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-dish-focused-pre-rinse-nozzle.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Focused Pre-Rinse Nozzle for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6153,7 +6153,7 @@
         "dishwasher"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-dish-silicone-rack-hook.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Silicone Rack Hook for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6167,7 +6167,7 @@
         "dishwasher"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-dish-digital-sanitizer-test-reader.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Digital Sanitizer Test Reader for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {

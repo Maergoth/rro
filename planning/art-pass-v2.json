@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "e53f8758628ff1f23c515d9d7b5c5c38278b3f4d",
-    "tree": "55728466efb98fa6e3bedd9bdaac0d86830f43ae",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30974095159"
+    "commit": "47a039559d7155d8962e9df99808f07919db7892",
+    "tree": "b26aa20960471caf701cf57c326ff4a5f6450842",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30974850931"
   },
   "completionRule": "generated, processed, raster-validated, visually accepted, runtime-bound assets whose exact reviewed bytes are remotely verified on GitHub with green CI",
   "artDirection": {
@@ -46,7 +46,28 @@
       "required": ["body_skin", "face", "hair_headwear", "base_outfit", "role_layer", "footwear", "accessory", "carried_object", "effects", "skin_masks", "primary_color_masks", "secondary_color_masks"]
     }
   },
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "equipment-icons-server-dish-003",
+      "assets": [
+        "server-waterproof-order-pad",
+        "server-waiters-corkscrew",
+        "server-cork-tray",
+        "server-palate-mints",
+        "server-stain-rescue-pen",
+        "dish-high-pressure-nozzle",
+        "dish-silicone-rack-hook",
+        "dish-digital-test-reader"
+      ],
+      "files": 20,
+      "qa": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
+      "sourcePromptMode": "built-in image generation; eight bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
+      "qaEvidence": "planning/art-qa/equipment-icons-server-dish-003/contact-128-dark.png",
+      "qaManifest": "planning/art-qa/equipment-icons-server-dish-003/qa.json",
+      "notes": "Eight server and dish icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-24 cross-batch comparison gates. They remain pending until this exact 20-file package is remotely verified and hosted CI is green."
+    }
+  ],
   "batches": [
     {
       "id": "furniture-pilot-001",

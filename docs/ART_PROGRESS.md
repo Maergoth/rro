@@ -12,16 +12,16 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 - Branch: `agent/complete-production-art`
 - Draft PR: https://github.com/Maergoth/rro/pull/2
-- Last verified remote head before this ledger check-in: `e53f8758628ff1f23c515d9d7b5c5c38278b3f4d`
-- Verified tree: `55728466efb98fa6e3bedd9bdaac0d86830f43ae`
-- CI: https://github.com/Maergoth/rro/actions/runs/30974095159
+- Last verified remote head before this ledger check-in: `47a039559d7155d8962e9df99808f07919db7892`
+- Verified tree: `b26aa20960471caf701cf57c326ff4a5f6450842`
+- CI: https://github.com/Maergoth/rro/actions/runs/30974850931
 
 ## Launch coverage
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
 | Furniture directional sets | 229 | 4 | 4 | 4 | 0 |
-| Equipment inventory icons | 45 | 16 | 16 | 16 | 16 |
+| Equipment inventory icons | 45 | 24 | 24 | 16 | 16 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
 | Utility overlays | 5 | 0 | 0 | 0 | 0 |
@@ -76,6 +76,14 @@ Directional furniture texture selection is yes; final projection alignment is no
 | furniture-core-directional-001 | 20 | passed | blocked-not-bound | `9daba41` | planning/art-qa/furniture-core-directional-001/contact-627-dark.png |
 | equipment-icons-owner-server-002 | 19 | passed | passed-full-and-gameplay-scale | `0eec73b` | planning/art-qa/equipment-icons-owner-server-002/contact-128-dark.png |
 | character-remediation-idle-classic-v1 | 109 | passed | blocked-static-idle-and-no-runtime-compositor | `7b2caaf` | planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png |
+
+## Accepted locally, remote checkpoint pending
+
+These batches have passed source/composite QA but deliberately do not count as remotely verified or production-complete until their immutable GitHub commit and hosted CI are recorded.
+
+| Batch | Files | Source QA | Runtime/composite QA | Evidence |
+|---|---:|---|---|---|
+| equipment-icons-server-dish-003 | 20 | passed | passed-full-gameplay-and-cross-batch-scale | planning/art-qa/equipment-icons-server-dish-003/contact-128-dark.png |
 
 ## Missing furniture directional sets
 
@@ -152,9 +160,9 @@ This JSON block is part of this same authoritative document and contains every c
   "durableBaseline": {
     "branch": "agent/complete-production-art",
     "pullRequest": "https://github.com/Maergoth/rro/pull/2",
-    "commit": "e53f8758628ff1f23c515d9d7b5c5c38278b3f4d",
-    "tree": "55728466efb98fa6e3bedd9bdaac0d86830f43ae",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30974095159"
+    "commit": "47a039559d7155d8962e9df99808f07919db7892",
+    "tree": "b26aa20960471caf701cf57c326ff4a5f6450842",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30974850931"
   },
   "completionPipeline": [
     "generated",
@@ -191,8 +199,8 @@ This JSON block is part of this same authoritative document and contains every c
     {
       "lane": "Equipment inventory icons",
       "required": 45,
-      "present": 16,
-      "sourceAccepted": 16,
+      "present": 24,
+      "sourceAccepted": 24,
       "remoteVerified": 16,
       "productionComplete": 16
     },
@@ -11250,20 +11258,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-server-waterproof-order-pad.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "b30e478815b774e489256d06d5ff2e04cba119b8d21cb9b3dcecfac0ae199338"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-server-dish-003",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-server-dish-003/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "server-waiters-corkscrew",
@@ -11275,20 +11283,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-server-double-hinge-corkscrew.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "0a55e0705d726c7193644684f870080aaba4544b91cc26e6c702e22bb4853ed5"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-server-dish-003",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-server-dish-003/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "server-cork-tray",
@@ -11300,20 +11308,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-server-high-grip-cork-tray.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "170a12efed157285234d2db2cbae04c11705a8562226cc8e1f36722410cd97a1"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-server-dish-003",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-server-dish-003/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "server-palate-mints",
@@ -11325,20 +11333,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-server-unscented-palate-mints.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "6323f47afcff7ac1dd54a36005283ae9d7800a45306c79e37f5eb2f7d2035797"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-server-dish-003",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-server-dish-003/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "server-stain-rescue-pen",
@@ -11350,20 +11358,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-server-tablecloth-rescue-pen.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "f6b75ea619c8f7cdd3844ff308b54a3dcfd5148c663021f3fa7c0b4ce79bcd0a"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-server-dish-003",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-server-dish-003/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "dish-high-pressure-nozzle",
@@ -11375,20 +11383,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-dish-focused-pre-rinse-nozzle.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "1975869aae276527b0496b56ede3ad12a66b56dcdeacbdd331772fedd5827cbe"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-server-dish-003",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-server-dish-003/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "dish-silicone-rack-hook",
@@ -11400,20 +11408,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-dish-silicone-rack-hook.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "7cc09e53b1e2988e8209bc9cbe67226f85157f0537f24c5b79ce6686b92f9fed"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-server-dish-003",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-server-dish-003/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "dish-digital-test-reader",
@@ -11425,20 +11433,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-dish-digital-sanitizer-test-reader.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "8fc81d4560511d34b25d94e7977eff232f5544b2f156a6c6afd0e8c8d9f4e8e9"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-server-dish-003",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-server-dish-003/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "dish-steam-gauntlets",
@@ -13861,7 +13869,31 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": true
     }
   ],
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "equipment-icons-server-dish-003",
+      "assets": [
+        "server-waterproof-order-pad",
+        "server-waiters-corkscrew",
+        "server-cork-tray",
+        "server-palate-mints",
+        "server-stain-rescue-pen",
+        "dish-high-pressure-nozzle",
+        "dish-silicone-rack-hook",
+        "dish-digital-test-reader"
+      ],
+      "files": 20,
+      "qa": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
+      "sourcePromptMode": "built-in image generation; eight bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
+      "qaEvidence": "planning/art-qa/equipment-icons-server-dish-003/contact-128-dark.png",
+      "qaManifest": "planning/art-qa/equipment-icons-server-dish-003/qa.json",
+      "notes": "Eight server and dish icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-24 cross-batch comparison gates. They remain pending until this exact 20-file package is remotely verified and hosted CI is green.",
+      "qaEvidencePresent": true,
+      "remoteVerified": false,
+      "preservationPending": true
+    }
+  ],
   "preservedReferences": [
     {
       "id": "alpha2-overhead-furniture",
