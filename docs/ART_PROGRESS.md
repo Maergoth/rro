@@ -21,7 +21,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
 | Furniture directional sets | 229 | 4 | 4 | 4 | 0 |
-| Equipment inventory icons | 45 | 8 | 8 | 8 | 8 |
+| Equipment inventory icons | 45 | 16 | 8 | 8 | 8 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
 | Utility overlays | 5 | 0 | 0 | 0 | 0 |
@@ -174,7 +174,7 @@ This JSON block is part of this same authoritative document and contains every c
     {
       "lane": "Equipment inventory icons",
       "required": 45,
-      "present": 8,
+      "present": 16,
       "sourceAccepted": 8,
       "remoteVerified": 8,
       "productionComplete": 8
@@ -10804,20 +10804,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-manager-incident-seal-kit.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "3a607cb861a42bb30f2bfbde0226d5be2c9b85a8ca7159c3a376b16375b17cf9"
         }
       ],
-      "present": false,
+      "present": true,
       "batchId": null,
       "review": "unreviewed",
       "runtimeQa": "not-reviewed",
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "runtime_bound_unreviewed"
     },
     {
       "id": "owner-leather-ledger",
@@ -10829,20 +10829,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-owner-house-leather-ledger.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "40d3b20a2a24d382236c552b187802771d1e06fe745f988c52804d9beaa792a3"
         }
       ],
-      "present": false,
+      "present": true,
       "batchId": null,
       "review": "unreviewed",
       "runtimeQa": "not-reviewed",
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "runtime_bound_unreviewed"
     },
     {
       "id": "owner-operations-tablet",
@@ -10854,20 +10854,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-owner-operations-tablet.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "2d23dd64eb1cd9bcf62cdc0f0d01887515990b32b5a11ea57eb11d286ff0263f"
         }
       ],
-      "present": false,
+      "present": true,
       "batchId": null,
       "review": "unreviewed",
       "runtimeQa": "not-reviewed",
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "runtime_bound_unreviewed"
     },
     {
       "id": "owner-lease-calculator",
@@ -10879,20 +10879,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-owner-lease-scenario-calculator.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "125d69f59ab9f60c8b89ca1149eac4bf1e581d23b0306c28a6065c198c0f8bec"
         }
       ],
-      "present": false,
+      "present": true,
       "batchId": null,
       "review": "unreviewed",
       "runtimeQa": "not-reviewed",
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "runtime_bound_unreviewed"
     },
     {
       "id": "owner-tasting-notebook",
@@ -10904,20 +10904,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-owner-concept-tasting-notebook.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "b8047276996dc00b4e3c0b7c480dd8cc2e3ff242f364caa1321a9eb4503dd5a4"
         }
       ],
-      "present": false,
+      "present": true,
       "batchId": null,
       "review": "unreviewed",
       "runtimeQa": "not-reviewed",
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "runtime_bound_unreviewed"
     },
     {
       "id": "owner-networking-cards",
@@ -10929,20 +10929,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-owner-letterpress-networking-cards.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "806bc291c8d74a404a59cacb5e645070b0196a04e2495691b2b282f1d9d5899f"
         }
       ],
-      "present": false,
+      "present": true,
       "batchId": null,
       "review": "unreviewed",
       "runtimeQa": "not-reviewed",
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "runtime_bound_unreviewed"
     },
     {
       "id": "owner-market-scout-pass",
@@ -10954,20 +10954,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-owner-local-market-scout-pass.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "6932f89e63dda4ea3df5efa4e3e093ec77faee229833c298cb40425c60b96902"
         }
       ],
-      "present": false,
+      "present": true,
       "batchId": null,
       "review": "unreviewed",
       "runtimeQa": "not-reviewed",
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "runtime_bound_unreviewed"
     },
     {
       "id": "server-click-pen",
@@ -10979,20 +10979,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-server-balanced-service-pen.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "25641232bc12ec8cef64fe794af3d58631aaaf34aca34c197affc91309b0a278"
         }
       ],
-      "present": false,
+      "present": true,
       "batchId": null,
       "review": "unreviewed",
       "runtimeQa": "not-reviewed",
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "runtime_bound_unreviewed"
     },
     {
       "id": "server-waterproof-order-pad",

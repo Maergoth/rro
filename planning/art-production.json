@@ -26,8 +26,8 @@
     },
     "roleItems": {
       "total": 45,
-      "generated": 8,
-      "remaining": 37
+      "generated": 16,
+      "remaining": 29
     }
   },
   "furniture": [
@@ -5957,7 +5957,7 @@
         "manager"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-manager-incident-seal-kit.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Incident Seal Kit for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -5971,7 +5971,7 @@
         "owner"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-owner-house-leather-ledger.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of House Leather Ledger for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -5985,7 +5985,7 @@
         "owner"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-owner-operations-tablet.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Operations Tablet for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -5999,7 +5999,7 @@
         "owner"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-owner-lease-scenario-calculator.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Lease Scenario Calculator for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6013,7 +6013,7 @@
         "owner"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-owner-concept-tasting-notebook.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Concept Tasting Notebook for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6027,7 +6027,7 @@
         "owner"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-owner-letterpress-networking-cards.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Letterpress Networking Cards for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6041,7 +6041,7 @@
         "owner"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-owner-local-market-scout-pass.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Local Market Scout Pass for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6055,7 +6055,7 @@
         "server"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-server-balanced-service-pen.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Balanced Service Pen for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
