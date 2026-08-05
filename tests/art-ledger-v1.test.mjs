@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import test from "node:test";
@@ -20,6 +21,13 @@ test("the art ledger parser accepts Windows CRLF checkouts", () => {
     .replace(/\r\n/g, "\n")
     .replace(/\n/g, "\r\n");
   assert.equal(parseLedger(document).authoritativeProgressDocument, "docs/ART_PROGRESS.md");
+});
+
+test("text-art evidence hashes are stable across Git line-ending conversion", () => {
+  const art = ledger();
+  const mark = art.ui.find((entry) => entry.id === "rro-mark");
+  const svg = readFileSync(resolve(ROOT, mark.path), "utf8").replace(/\r\n/g, "\n");
+  assert.equal(mark.sha256, createHash("sha256").update(svg, "utf8").digest("hex"));
 });
 
 test("the authoritative art ledger cannot hide missing, failed, local-only, or unbound art", () => {

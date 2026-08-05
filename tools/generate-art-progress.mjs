@@ -19,7 +19,11 @@ const runtimeInventory = readFileSync(resolve(ROOT, "apps/client-godot/scripts/i
 
 const relative = (path) => resolve(ROOT, path);
 const present = (path) => existsSync(relative(path));
-const hash = (path) => present(path) ? createHash("sha256").update(readFileSync(relative(path))).digest("hex") : null;
+const canonicalArtifactBytes = (path) => {
+  const data = readFileSync(relative(path));
+  return /\.(svg)$/i.test(path) ? Buffer.from(data.toString("utf8").replace(/\r\n/g, "\n"), "utf8") : data;
+};
+const hash = (path) => present(path) ? createHash("sha256").update(canonicalArtifactBytes(path)).digest("hex") : null;
 const files = (paths) => paths.map((path) => ({ path, present: present(path), sha256: hash(path) }));
 const allPresent = (entries) => entries.length > 0 && entries.every((entry) => entry.present);
 const percent = (part, whole) => whole ? `${(part / whole * 100).toFixed(1)}%` : "n/a";
