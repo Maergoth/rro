@@ -289,7 +289,7 @@ const ledger = {
   quarantinedWork: pass.quarantinedWork,
   contractGaps: [
     "Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.",
-    "Remotely preserve the accepted attempt-004 native gameplay review before crediting its twenty-two floor assets as production-complete; complete mounted-object builder placement, runtime anchors, picking, depth, and exact native re-review for local-art, plants, and pendants.",
+    "Exercise the published mount-aware builder in a new exact native four-rotation gameplay capture, then visually accept legal wall/ceiling placement, mount anchors, picking, and depth for local-art, plants, and pendants.",
     "Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.",
     "Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete.",
   ],

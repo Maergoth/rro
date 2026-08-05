@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "f5515e3c6c6fcde19c4ea8b5e247215932b42229",
-    "tree": "174ff6d7e73e1df4b501f5fde1d3f255795ca1d6",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/31010348995"
+    "commit": "34daaef7744926b79ff68962c78f93bee218da4d",
+    "tree": "4110008c5540c913cb14ac72222087d33d84f096",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31011336304"
   },
   "completionRule": "generated, processed, raster-validated, visually accepted, runtime-bound assets whose exact reviewed bytes are remotely verified on GitHub with green CI",
   "artDirection": {
@@ -173,6 +173,11 @@
         "table-two"
       ],
       "rejectedAssetIds": ["local-art", "pendants", "plants"],
+      "reviewPreservation": {
+        "commit": "34daaef7744926b79ff68962c78f93bee218da4d",
+        "tree": "4110008c5540c913cb14ac72222087d33d84f096",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31011336304"
+      },
       "productionComplete": false
     }
   ],
@@ -187,14 +192,14 @@
       ],
       "files": 28,
       "qa": "passed",
-      "runtimeQa": "passed-native-gameplay-composite-attempt-004-review-preservation-pending",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-004",
       "sourcePromptMode": "built-in image generation; one separately prompted 2x2 rigid elevated-isometric rotation atlas per identity, with one targeted host-stand correction, chroma removal, common-pivot normalization, and full/gameplay-scale contact review",
       "remoteCommit": "9749406830ce8fa0139ff479c98a67d5d38c6882",
       "remoteTree": "4c0becd361bc5c6fa722caa3252f7588e512f898",
       "ci": "https://github.com/Maergoth/rro/actions/runs/31009371429",
       "qaEvidence": "planning/art-qa/furniture-core-directional-008/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-008/qa.json",
-      "notes": "Reservation host stand, integrated server station, and commercial POS terminal are source-accepted, remotely preserved, and accepted in exact native four-rotation gameplay review attempt 004. The review evidence checkpoint itself remains pending remote preservation, so production completion is withheld."
+      "notes": "Reservation host stand, integrated server station, and commercial POS terminal are source-accepted, remotely preserved, and accepted in exact native four-rotation gameplay review attempt 004; that review evidence is also remotely preserved with green Windows and Ubuntu CI."
     },
     {
       "id": "furniture-pilot-001",
