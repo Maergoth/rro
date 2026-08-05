@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "961fc31230a900ccc7c028a3ae312809b2960b93",
-    "tree": "d2887339e7fc63c52d4549a1e6c6f8b8dfea41e6",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30976714776"
+    "commit": "ff6433db1ea177dfec773dc2c204988c984fd1e4",
+    "tree": "ec43a654936e475aea11a6a9c96bce1ec1bf2862",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30976964146"
   },
   "completionRule": "generated, processed, raster-validated, visually accepted, runtime-bound assets whose exact reviewed bytes are remotely verified on GitHub with green CI",
   "artDirection": {
@@ -46,7 +46,28 @@
       "required": ["body_skin", "face", "hair_headwear", "base_outfit", "role_layer", "footwear", "accessory", "carried_object", "effects", "skin_masks", "primary_color_masks", "secondary_color_masks"]
     }
   },
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "equipment-icons-chef-cook-host-005",
+      "assets": [
+        "chef-palate-rinse",
+        "cook-fish-turner",
+        "cook-four-channel-timer",
+        "cook-bottle-holster",
+        "cook-chainmail-cut-glove",
+        "cook-pan-seasoning-wipe",
+        "cook-burn-gel-sachet",
+        "host-reservation-book"
+      ],
+      "files": 20,
+      "qa": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
+      "sourcePromptMode": "built-in image generation; eight bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
+      "qaEvidence": "planning/art-qa/equipment-icons-chef-cook-host-005/contact-128-dark.png",
+      "qaManifest": "planning/art-qa/equipment-icons-chef-cook-host-005/qa.json",
+      "notes": "Eight chef, cook, and host icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-40 cross-batch comparison gates. They remain pending until this exact 20-file package is remotely verified and hosted CI is green."
+    }
+  ],
   "batches": [
     {
       "id": "furniture-pilot-001",

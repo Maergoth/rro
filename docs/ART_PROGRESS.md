@@ -12,16 +12,16 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 - Branch: `agent/complete-production-art`
 - Draft PR: https://github.com/Maergoth/rro/pull/2
-- Last verified remote head before this ledger check-in: `961fc31230a900ccc7c028a3ae312809b2960b93`
-- Verified tree: `d2887339e7fc63c52d4549a1e6c6f8b8dfea41e6`
-- CI: https://github.com/Maergoth/rro/actions/runs/30976714776
+- Last verified remote head before this ledger check-in: `ff6433db1ea177dfec773dc2c204988c984fd1e4`
+- Verified tree: `ec43a654936e475aea11a6a9c96bce1ec1bf2862`
+- CI: https://github.com/Maergoth/rro/actions/runs/30976964146
 
 ## Launch coverage
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
 | Furniture directional sets | 229 | 4 | 4 | 4 | 0 |
-| Equipment inventory icons | 45 | 32 | 32 | 32 | 32 |
+| Equipment inventory icons | 45 | 40 | 40 | 32 | 32 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
 | Utility overlays | 5 | 0 | 0 | 0 | 0 |
@@ -78,6 +78,14 @@ Directional furniture texture selection is yes; final projection alignment is no
 | character-remediation-idle-classic-v1 | 109 | passed | blocked-static-idle-and-no-runtime-compositor | `7b2caaf` | planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png |
 | equipment-icons-server-dish-003 | 20 | passed | passed-full-gameplay-and-cross-batch-scale | `f3408b8` | planning/art-qa/equipment-icons-server-dish-003/contact-128-dark.png |
 | equipment-icons-dish-chef-004 | 20 | passed | passed-full-gameplay-and-cross-batch-scale | `961fc31` | planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png |
+
+## Accepted locally, remote checkpoint pending
+
+These batches have passed source/composite QA but deliberately do not count as remotely verified or production-complete until their immutable GitHub commit and hosted CI are recorded.
+
+| Batch | Files | Source QA | Runtime/composite QA | Evidence |
+|---|---:|---|---|---|
+| equipment-icons-chef-cook-host-005 | 20 | passed | passed-full-gameplay-and-cross-batch-scale | planning/art-qa/equipment-icons-chef-cook-host-005/contact-128-dark.png |
 
 ## Missing furniture directional sets
 
@@ -154,9 +162,9 @@ This JSON block is part of this same authoritative document and contains every c
   "durableBaseline": {
     "branch": "agent/complete-production-art",
     "pullRequest": "https://github.com/Maergoth/rro/pull/2",
-    "commit": "961fc31230a900ccc7c028a3ae312809b2960b93",
-    "tree": "d2887339e7fc63c52d4549a1e6c6f8b8dfea41e6",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30976714776"
+    "commit": "ff6433db1ea177dfec773dc2c204988c984fd1e4",
+    "tree": "ec43a654936e475aea11a6a9c96bce1ec1bf2862",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30976964146"
   },
   "completionPipeline": [
     "generated",
@@ -193,8 +201,8 @@ This JSON block is part of this same authoritative document and contains every c
     {
       "lane": "Equipment inventory icons",
       "required": 45,
-      "present": 32,
-      "sourceAccepted": 32,
+      "present": 40,
+      "sourceAccepted": 40,
       "remoteVerified": 32,
       "productionComplete": 32
     },
@@ -11652,20 +11660,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-chef-neutral-palate-rinse.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "a4d2c9c77a6c5fba89c3afbc898602b8b65fa00726acef4d2a15eaf864c34249"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-chef-cook-host-005",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-chef-cook-host-005/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "cook-fish-turner",
@@ -11677,20 +11685,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-cook-flexible-fish-turner.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "51e24b8dbf782c0c5e41eeac67505f1b3cac5e226754fc38a7467bfbb34e286f"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-chef-cook-host-005",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-chef-cook-host-005/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "cook-four-channel-timer",
@@ -11702,20 +11710,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-cook-four-channel-station-timer.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "b40a79d11508d3fcc86fdc7ce1c1ef826bf936f8a5d10277cbbce1613ad49eb6"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-chef-cook-host-005",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-chef-cook-host-005/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "cook-bottle-holster",
@@ -11727,20 +11735,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-cook-color-coded-bottle-holster.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "0e3533394cccd33c8fce3bfd2cb9836d938364cb42ba5993e5a93f1d8d74c8e6"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-chef-cook-host-005",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-chef-cook-host-005/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "cook-chainmail-cut-glove",
@@ -11752,20 +11760,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-cook-fine-mesh-cut-glove.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "f6b32043e69aa42448c341e54a6a97f5c27d1def69bed276f268c08f8d267c43"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-chef-cook-host-005",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-chef-cook-host-005/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "cook-pan-seasoning-wipe",
@@ -11777,20 +11785,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-cook-pan-seasoning-wipe.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "8d6ecbb91fbc0eb2652e15d85c398a0a1e01c9bb9b6f19dbaae661b44c9da8ff"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-chef-cook-host-005",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-chef-cook-host-005/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "cook-burn-gel-sachet",
@@ -11802,20 +11810,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-cook-kitchen-burn-gel-sachet.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "4eaa169272b0691c47ec977e1f13aff1f9bb543ec3a04f94a7128ca0aa73d9eb"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-chef-cook-host-005",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-chef-cook-host-005/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "host-reservation-book",
@@ -11827,20 +11835,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-host-tabbed-reservation-book.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "0d772216b75c0959fea830a30211f4d0b2de1b68b4fd506316659a28e2a44dd2"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-chef-cook-host-005",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-chef-cook-host-005/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "host-seating-tablet",
@@ -13913,7 +13921,31 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": true
     }
   ],
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "equipment-icons-chef-cook-host-005",
+      "assets": [
+        "chef-palate-rinse",
+        "cook-fish-turner",
+        "cook-four-channel-timer",
+        "cook-bottle-holster",
+        "cook-chainmail-cut-glove",
+        "cook-pan-seasoning-wipe",
+        "cook-burn-gel-sachet",
+        "host-reservation-book"
+      ],
+      "files": 20,
+      "qa": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
+      "sourcePromptMode": "built-in image generation; eight bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
+      "qaEvidence": "planning/art-qa/equipment-icons-chef-cook-host-005/contact-128-dark.png",
+      "qaManifest": "planning/art-qa/equipment-icons-chef-cook-host-005/qa.json",
+      "notes": "Eight chef, cook, and host icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-40 cross-batch comparison gates. They remain pending until this exact 20-file package is remotely verified and hosted CI is green.",
+      "qaEvidencePresent": true,
+      "remoteVerified": false,
+      "preservationPending": true
+    }
+  ],
   "preservedReferences": [
     {
       "id": "alpha2-overhead-furniture",

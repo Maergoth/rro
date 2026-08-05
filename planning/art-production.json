@@ -26,8 +26,8 @@
     },
     "roleItems": {
       "total": 45,
-      "generated": 32,
-      "remaining": 13
+      "generated": 40,
+      "remaining": 5
     }
   },
   "furniture": [
@@ -6293,7 +6293,7 @@
         "chef"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-chef-neutral-palate-rinse.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Neutral Palate Rinse for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6307,7 +6307,7 @@
         "cook"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-cook-flexible-fish-turner.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Flexible Fish Turner for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6321,7 +6321,7 @@
         "cook"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-cook-four-channel-station-timer.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Four-Channel Station Timer for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6335,7 +6335,7 @@
         "cook"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-cook-color-coded-bottle-holster.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Color-Coded Bottle Holster for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6349,7 +6349,7 @@
         "cook"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-cook-fine-mesh-cut-glove.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Fine-Mesh Cut Glove for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6363,7 +6363,7 @@
         "cook"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-cook-pan-seasoning-wipe.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Pan Seasoning Wipe for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6377,7 +6377,7 @@
         "cook"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-cook-kitchen-burn-gel-sachet.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Kitchen Burn Gel Sachet for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6391,7 +6391,7 @@
         "host-busser"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-host-tabbed-reservation-book.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Tabbed Reservation Book for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
