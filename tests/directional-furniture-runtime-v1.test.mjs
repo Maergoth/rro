@@ -9,6 +9,7 @@ const runtime = read("apps/client-godot/scripts/restaurant_floor.gd");
 const binding = read("apps/client-godot/scripts/furniture_art_binding.gd");
 const exportPreset = read("apps/client-godot/export_presets.cfg");
 const artPass = JSON.parse(read("planning/art-pass-v2.json"));
+const furnitureBatch002Qa = JSON.parse(read("planning/art-qa/furniture-core-directional-002/qa.json"));
 
 const canonicalRotation = (rotation) => ((rotation % 360) + 360) % 360;
 const directionForRotation = (rotation) => contract.directionsByRotation[String(canonicalRotation(rotation))] ?? "";
@@ -21,7 +22,7 @@ const directionalPath = (assetId, rotation) => {
 test("accepted furniture resolves exact directional paths for canonical rotations", () => {
   assert.equal(contract.schemaVersion, 1);
   assert.deepEqual(contract.directionsByRotation, { "0": "north", "90": "east", "180": "south", "270": "west" });
-  assert.deepEqual(contract.acceptedDirectionalAssetIds, ["furniture-six-burner-range", "host-stand", "table-four", "table-two"]);
+  assert.deepEqual(contract.acceptedDirectionalAssetIds, ["banquette", "booth", "furniture-six-burner-range", "host-stand", "service-station", "table-four", "table-two"]);
 
   const expectedDirections = [[0, "north"], [90, "east"], [180, "south"], [270, "west"]];
   for (const assetId of contract.acceptedDirectionalAssetIds) {
@@ -49,10 +50,18 @@ test("accepted furniture resolves exact directional paths for canonical rotation
 
 test("the runtime contract covers every source-accepted directional set without inflating production completion", () => {
   const accepted = new Set();
-  for (const batch of artPass.batches) {
+  const sourceAcceptedBatches = [...artPass.batches, ...(artPass.pendingBatches ?? [])];
+  if (!sourceAcceptedBatches.some((batch) => batch.id === furnitureBatch002Qa.batchId)) {
+    sourceAcceptedBatches.push({
+      id: furnitureBatch002Qa.batchId,
+      assets: furnitureBatch002Qa.assets,
+      qa: furnitureBatch002Qa.artReviewStatus,
+    });
+  }
+  for (const batch of sourceAcceptedBatches) {
     for (const assetId of batch.assets ?? []) {
       const review = batch.assetReviews?.[assetId] ?? batch.qa;
-      if (review !== "passed") continue;
+      if (review !== "passed" && !String(review).startsWith("accepted")) continue;
       const completeSet = Object.values(contract.directionsByRotation).every((direction) =>
         existsSync(new URL(`apps/client-godot/assets/objects/directional/${assetId}/${direction}.png`, root)));
       if (completeSet) accepted.add(assetId);

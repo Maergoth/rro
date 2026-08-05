@@ -16,8 +16,11 @@
     "270": "west"
   },
   "acceptedDirectionalAssetIds": [
+    "banquette",
+    "booth",
     "furniture-six-burner-range",
     "host-stand",
+    "service-station",
     "table-four",
     "table-two"
   ],

@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "18a236455172584748711bc9ff5ba0a0948025cf",
-    "tree": "e8276467713cf9fe5f92b25fe4c2c2d1257bc4aa",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30979314000"
+    "commit": "4f184d33c61c506e73adee6ff9a1f49378d6989f",
+    "tree": "f2a7c656e7ed70550b7feae4412be9f8d37aaa2e",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30979662731"
   },
   "completionRule": "generated, processed, raster-validated, visually accepted, runtime-bound assets whose exact reviewed bytes are remotely verified on GitHub with green CI",
   "artDirection": {
@@ -46,7 +46,19 @@
       "required": ["body_skin", "face", "hair_headwear", "base_outfit", "role_layer", "footwear", "accessory", "carried_object", "effects", "skin_masks", "primary_color_masks", "secondary_color_masks"]
     }
   },
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "furniture-core-directional-002",
+      "assets": ["booth", "banquette", "service-station"],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "blocked-orthogonal-projection-and-gameplay-composite",
+      "sourcePromptMode": "built-in image generation; identity-locked elevated four-direction sets with chroma removal, common-pivot normalization, rigid-count review, and full/gameplay-scale contact sheets",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-002/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-002/qa.json",
+      "notes": "Booth, banquette, and service-station each pass exact catalog identity, coherent quarter-turns, 627x627 sRGBA, common y=590 floor-contact pivot, transparent-border, unique-content, full-scale, and 128px review. They remain pending until this exact 28-file art/evidence package and its runtime-contract integration are remotely verified with green hosted CI; final orthographic-to-isometric projection and real gameplay composite acceptance remain blocking."
+    }
+  ],
   "batches": [
     {
       "id": "furniture-pilot-001",

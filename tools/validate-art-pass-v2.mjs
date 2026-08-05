@@ -93,6 +93,7 @@ for (const batch of pass.pendingBatches ?? []) {
   if (JSON.stringify(manifestAssets) !== JSON.stringify([...batch.assets].sort())) invalid.push(`${batch.id}: pending QA assets do not exactly match the batch`);
   const visualEvidence = [...(manifest.contactSheets ?? []), ...(manifest.visualEvidence ?? [])];
   if (!visualEvidence.some((sheet) => sheet.path === batch.qaEvidence)) invalid.push(`${batch.id}: pending primary QA evidence is absent from its manifest`);
+  for (const asset of batch.assets) acceptedAssets.set(asset, batch.assetReviews?.[asset] ?? batch.qa);
 }
 
 const expectedFurniture = new Set(production.furniture.map((item) => item.assetId));
