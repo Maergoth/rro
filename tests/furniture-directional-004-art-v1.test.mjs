@@ -8,7 +8,7 @@ import { inflateSync } from "node:zlib";
 const ROOT = resolve(import.meta.dirname, "..");
 const QA_ROOT = "planning/art-qa/furniture-core-directional-004";
 const QA_PATH = `${QA_ROOT}/qa.json`;
-const EXPECTED_QA_SHA256 = "af5e8e295bc52572ca99f47822d14f5d03e320300af26e93d4f0de1923fb2be5";
+const EXPECTED_QA_SHA256 = "ae826c4760d6fab984f66204f9ff6a1f606c0fe8b3166bc800738265677d7ab5";
 const DIRECTIONS = ["north", "east", "south", "west"];
 const ASSETS = ["espresso", "dish-machine", "mop-sink"];
 const PNG_SIGNATURE = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
@@ -136,21 +136,17 @@ test("furniture directional batch 004 has exact durable provenance and no transi
   assert.deepEqual(qa.assets, ASSETS);
   assert.equal(qa.artReviewStatus, "accepted");
   assert.equal(qa.productionComplete, false);
-  assert.deepEqual(qa.repositoryPromotion, {
-    status: "promoted-local-pending-remote-verification",
-    runtimeFiles: 12,
-    alphaSourceFiles: 12,
-    contactSheets: 2,
-    provenanceDocuments: 2,
-    totalFiles: 28,
+  assert.equal(qa.repositoryPromotion, "remote-verified");
+  assert.deepEqual(qa.remotePreservation, {
+    commit: "708642ffce26407b44daa47d4029e434e6166368",
+    tree: "9ee2f7817c4e9f11aae59bcf2ae469a6e126d4d4",
+    ci: "https://github.com/Maergoth/rro/actions/runs/30985234904",
   });
-  assert.equal(qa.remotePreservation, null);
   assert.deepEqual(qa.promotionScope, {
     runtimeFiles: 12, alphaSourceFiles: 12, contactSheets: 2, provenanceDocuments: 2, totalFiles: 28,
   });
-  assert.equal(qa.productionCompletionBlockers.length, 2);
+  assert.equal(qa.productionCompletionBlockers.length, 1);
   assert.match(qa.productionCompletionBlockers[0], /orthogonal.*elevated-isometric.*gameplay-composite/i);
-  assert.match(qa.productionCompletionBlockers[1], /remote tree verification.*hosted CI.*pending/i);
   assert.doesNotMatch(JSON.stringify(qa), /\/tmp\//, "durable QA must not reference transient storage");
   assert.equal(fileSha256(qa.source.promptLog), qa.source.promptLogSha256);
   assert.deepEqual(qa.source.rawSha256, {

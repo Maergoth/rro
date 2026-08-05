@@ -4,8 +4,7 @@
   "artReviewStatus": "accepted",
   "productionComplete": false,
   "productionCompletionBlockers": [
-    "The current Godot floor projection remains orthogonal; final elevated-isometric footprint alignment and runtime gameplay-composite review have not passed.",
-    "Exact remote tree verification and hosted CI are pending for this promoted repository batch."
+    "The current Godot floor projection remains orthogonal; final elevated-isometric footprint alignment and runtime gameplay-composite review have not passed."
   ],
   "assets": [
     "espresso",
@@ -19,15 +18,12 @@
     "provenanceDocuments": 2,
     "totalFiles": 28
   },
-  "repositoryPromotion": {
-    "status": "promoted-local-pending-remote-verification",
-    "runtimeFiles": 12,
-    "alphaSourceFiles": 12,
-    "contactSheets": 2,
-    "provenanceDocuments": 2,
-    "totalFiles": 28
+  "repositoryPromotion": "remote-verified",
+  "remotePreservation": {
+    "commit": "708642ffce26407b44daa47d4029e434e6166368",
+    "tree": "9ee2f7817c4e9f11aae59bcf2ae469a6e126d4d4",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30985234904"
   },
-  "remotePreservation": null,
   "source": {
     "generator": "OpenAI built-in image generation",
     "mode": "one separately prompted 2x2 rigid rotation atlas per furniture identity",
