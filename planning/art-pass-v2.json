@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "f3408b8f5896f19a7f0a6ffb93843ea818af5ede",
-    "tree": "5a12a7d1bc622ca2e45c8c3e99b3b6449e5a8b75",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30975812146"
+    "commit": "d17097f2d3e3b851576812b863a199ab11e4c1b1",
+    "tree": "0ad7675f581cdef515bbc8a6fa4b4d995280fe57",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30976041990"
   },
   "completionRule": "generated, processed, raster-validated, visually accepted, runtime-bound assets whose exact reviewed bytes are remotely verified on GitHub with green CI",
   "artDirection": {
@@ -46,7 +46,28 @@
       "required": ["body_skin", "face", "hair_headwear", "base_outfit", "role_layer", "footwear", "accessory", "carried_object", "effects", "skin_masks", "primary_color_masks", "secondary_color_masks"]
     }
   },
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "equipment-icons-dish-chef-004",
+      "assets": [
+        "dish-steam-gauntlets",
+        "dish-enzymatic-detergent",
+        "dish-deliming-pouch",
+        "chef-forged-knife",
+        "chef-folding-thermometer",
+        "chef-plating-tweezers",
+        "chef-tasting-spoon-wallet",
+        "chef-diamond-sharpening-strip"
+      ],
+      "files": 20,
+      "qa": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
+      "sourcePromptMode": "built-in image generation; eight bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
+      "qaEvidence": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
+      "qaManifest": "planning/art-qa/equipment-icons-dish-chef-004/qa.json",
+      "notes": "Eight dish and chef icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-32 cross-batch comparison gates. They remain pending until this exact 20-file package is remotely verified and hosted CI is green."
+    }
+  ],
   "batches": [
     {
       "id": "furniture-pilot-001",

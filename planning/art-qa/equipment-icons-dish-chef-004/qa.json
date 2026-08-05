@@ -1,0 +1,247 @@
+{
+  "schemaVersion": 1,
+  "batchId": "equipment-icons-dish-chef-004",
+  "catalogSequences": [
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32
+  ],
+  "status": "accepted",
+  "repositoryPromotion": "pending-parent-commit-and-push",
+  "source": {
+    "generator": "OpenAI built-in image generation",
+    "useCase": "stylized-concept",
+    "styleReference": "planning/art-qa/equipment-icons-owner-server-002/contact-128-dark.png",
+    "sharedPromptContract": "One bespoke Rush & Revenue Online game inventory icon matching the painterly semi-realistic isolated-object rendering, elevated three-quarter view, tactile professional materials, restrained highlights, clean silhouette, and visual weight of the accepted style reference. Center the complete subject on a perfectly flat solid #FF00FF chroma-key background with generous padding and readability at 64px. No gradient, texture, floor plane, cast/contact shadow, reflection, magenta subject material, text, letters, numbers, pseudo-text, brands, logos, watermark, people, hands, border, frame, room, unrelated props, or procedural emblem.",
+    "matteProcess": "remove_chroma_key.py --auto-key border --soft-matte --transparent-threshold 12 --opaque-threshold 220 --despill",
+    "runtimeResize": "trim transparent bounds, scale proportionally to at most 116x116, center on a 128x128 transparent canvas",
+    "notes": "The preserved high-resolution files are post-chroma alpha sources. Seven are 1254x1254; the wide sharpening-strip source is 1536x1024. Runtime assets are the 128x128 PNGs under apps/client-godot/assets/items; dark, light, and all-32 comparison sheets are retained as visual QA evidence.",
+    "preservedHighResolutionSource": "planning/art-qa/equipment-icons-dish-chef-004/alpha-source"
+  },
+  "gates": {
+    "dimensions": "128x128",
+    "colorMode": "sRGBA",
+    "minimumTransparentMarginPixels": 6,
+    "actualMinimumTransparentMarginPixels": 6,
+    "allCornersTransparent": true,
+    "uniqueRuntimeContentHashes": true,
+    "previouslyAcceptedRepositoryRuntimeIconCount": 24,
+    "noLettersNumbersPseudoTextBrandsOrWatermarks": true,
+    "visualReviewAtFullScale": "pass",
+    "visualReviewAtGameplayScale66px": "pass",
+    "duplicateOrAmbiguousSilhouettes": "none",
+    "chromaFringeOnDarkAndLightBackgrounds": "none visible",
+    "noCollisionWithPreviouslyAcceptedItemHashes": true,
+    "visualComparisonAcrossAll32AcceptedIcons": "pass"
+  },
+  "contactSheets": [
+    {
+      "path": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
+      "purpose": "128px runtime icons on a dark background",
+      "sha256": "4229ccc69ce96240a5ddd3bf995e1a85fdaf1026bf2dcd13680b57b92fc47f26"
+    },
+    {
+      "path": "planning/art-qa/equipment-icons-dish-chef-004/contact-66-light.png",
+      "purpose": "66px gameplay-scale icons on a light background",
+      "sha256": "6a3fbb55f5006175110402a7cf1661378ad1fd571ba69ca7c07b9184a64ddaed"
+    },
+    {
+      "path": "planning/art-qa/equipment-icons-dish-chef-004/comparison-all-32-66-dark.png",
+      "purpose": "Gameplay-scale semantic and silhouette comparison of accepted sequences 1-32",
+      "sha256": "3ac5ef5f66741e47321a39a97ddd19dd3998954eeb012eb378df109ad3a7f083"
+    }
+  ],
+  "items": [
+    {
+      "sequence": 25,
+      "catalogId": "dish-steam-gauntlets",
+      "iconId": "role-equipment.dish.steam-shell-gauntlets",
+      "name": "Steam-Shell Gauntlets",
+      "kind": "equipment",
+      "subjectPrompt": "One matched pair of long industrial waterproof gauntlet gloves arranged in a compact crossed V with no hands inside, using deep navy heat-resistant outer shells, burnt-orange silicone palms and fingertips, reinforced knuckle panels, long dark-teal forearm cuffs, and ribbed splash seals.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-dish-steam-shell-gauntlets.png",
+      "runtimeSha256": "288ff1897ad3b052ee2b00257d4244e6715a36e4acedce21eae0c0faca005970",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-dish-chef-004/alpha-source/role-equipment-dish-steam-shell-gauntlets.png",
+      "alphaSourceSha256": "6aa216ffafe1dc9443959733c2d23072604a9625350c0e60da401b38db68d5cb",
+      "rawChromaSourceSha256": "d1982a279b0e867d906c7337536656ef4dab8526cdf5c9c9ec17f6a39fc16488",
+      "opaqueBounds": "114x116+7+6",
+      "transparentMargins": {
+        "left": 7,
+        "right": 7,
+        "top": 6,
+        "bottom": 6
+      },
+      "semanticVerdict": "pass: paired armored waterproof palms and long splash-sealed cuffs read as premium steam/chemical gauntlets rather than thin cleaning gloves",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 26,
+      "catalogId": "dish-enzymatic-detergent",
+      "iconId": "role-equipment.dish.enzymatic-detergent-dose",
+      "name": "Enzymatic Detergent Dose",
+      "kind": "consumable",
+      "subjectPrompt": "One compact sealed single-load concentrate cartridge with a squat rounded form, dark-teal ribbed lower shell, opaque glossy amber upper reservoir divided into molded enzyme-gel lobes, a white break-off dosing neck, burnt-orange tamper ring, and raised plate/protein/starch pictogram.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-dish-enzymatic-detergent-dose.png",
+      "runtimeSha256": "647e8adbc1b486e9da93d5f66e3088f98f5d5c16dd8b1756af4051df5b0ada2d",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-dish-chef-004/alpha-source/role-equipment-dish-enzymatic-detergent-dose.png",
+      "alphaSourceSha256": "d6ce24a348f5f0e9c5f5211481af3e4bcabe4d6b3639dc9145cb2c3b6a49bca1",
+      "rawChromaSourceSha256": "cce02eba85549d6fc58376bd8ede955d04ba450ee3e8b851e54e305b124c136c",
+      "opaqueBounds": "110x116+9+6",
+      "transparentMargins": {
+        "left": 9,
+        "right": 9,
+        "top": 6,
+        "bottom": 6
+      },
+      "semanticVerdict": "pass: rigid squat dosing cartridge, molded concentrate reservoir and break-off neck distinguish it from the flat deliming pouch and other consumables",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 27,
+      "catalogId": "dish-deliming-pouch",
+      "iconId": "role-equipment.dish.quick-deliming-pouch",
+      "name": "Quick Deliming Pouch",
+      "kind": "consumable",
+      "subjectPrompt": "One flat sealed pre-measured maintenance pouch with crinkled matte silver foil, broad dark-teal lower band, two burnt-orange tear notches, heat-sealed top edge, and a large raised pictogram showing a circular wash arm with pale mineral scale breaking away.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-dish-quick-deliming-pouch.png",
+      "runtimeSha256": "f6bf31fd1e80323f3790ce3ee91cd227ae2a0da5ac9ad2566e7f3c0810793ae3",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-dish-chef-004/alpha-source/role-equipment-dish-quick-deliming-pouch.png",
+      "alphaSourceSha256": "1a29c050f60433460e71e3ac5bae5df50b5e9463ffd39150a789efcf36ab1463",
+      "rawChromaSourceSha256": "86f496f615133db6a1e3bbc2b279cc79f262f532805aef0f45ff29617b430d66",
+      "opaqueBounds": "87x116+20+6",
+      "transparentMargins": {
+        "left": 20,
+        "right": 21,
+        "top": 6,
+        "bottom": 6
+      },
+      "semanticVerdict": "pass: flexible foil, tear notches and mineral-scale wash-arm pictogram read as a deliming maintenance pouch without writing",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 28,
+      "catalogId": "chef-forged-knife",
+      "iconId": "role-equipment.chef.forged-eight-inch-knife",
+      "name": "Forged Eight-Inch Chef Knife",
+      "kind": "equipment",
+      "subjectPrompt": "One balanced eight-inch professional chef knife with a broad gently curved forged stainless blade, distal taper, subtle hammered upper face, satin cutting bevel, thick heel and full bolster, plus a dark walnut full-tang handle with three flush brass rivets.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-chef-forged-eight-inch-knife.png",
+      "runtimeSha256": "0fbe164fac85773629382c06a2b4ee6dffa564e45cd5875e0c7584ed8f66a137",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-dish-chef-004/alpha-source/role-equipment-chef-forged-eight-inch-knife.png",
+      "alphaSourceSha256": "19f67685e73b910aaa17e19129758c3a32807c9729618568fa61f34adb3c23c1",
+      "rawChromaSourceSha256": "9b0bd662db3ed5683c21be7fc83a35a1540cc6bf5de30da06ceabececf8af75e",
+      "opaqueBounds": "116x98+6+15",
+      "transparentMargins": {
+        "left": 6,
+        "right": 6,
+        "top": 15,
+        "bottom": 15
+      },
+      "semanticVerdict": "pass: broad curved forged blade, hammered upper face and riveted full-tang walnut handle read immediately as a chef knife rather than a cleaver or utility blade",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 29,
+      "catalogId": "chef-folding-thermometer",
+      "iconId": "role-equipment.chef.fast-read-folding-thermometer",
+      "name": "Fast-Read Folding Thermometer",
+      "kind": "equipment",
+      "subjectPrompt": "One professional folding food thermometer opened to an obtuse angle, with a compact burnt-orange and dark-teal rubberized body, long stainless probe, visible metal pivot, protected screen showing only three doneness color zones and a circular lock indicator, and two blank tactile buttons.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-chef-fast-read-folding-thermometer.png",
+      "runtimeSha256": "2f0ce609519ffe2af9c51cedf3e48bfe094835b333f28b6990a2ed0cc3ff0bb3",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-dish-chef-004/alpha-source/role-equipment-chef-fast-read-folding-thermometer.png",
+      "alphaSourceSha256": "7d8b275875e44ec5ab8ad04db36383981e7123de3612a6636e50a2cb941d524d",
+      "rawChromaSourceSha256": "7244ee27d7ff55ca4e72dce12574692db06c76efeca0c62d7105b3768b0961d1",
+      "opaqueBounds": "116x96+6+16",
+      "transparentMargins": {
+        "left": 6,
+        "right": 6,
+        "top": 16,
+        "bottom": 16
+      },
+      "semanticVerdict": "pass: hinged probe, visible pivot and color-zone body are unmistakably a folding thermometer and remain distinct from the sanitizer strip reader",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 30,
+      "catalogId": "chef-plating-tweezers",
+      "iconId": "role-equipment.chef.offset-plating-tweezers",
+      "name": "Offset Plating Tweezers",
+      "kind": "equipment",
+      "subjectPrompt": "One long pair of professional offset plating tweezers with satin stainless spring arms, a clearly visible parallel offset bend near fine serrated tips, dark-teal grip panels, a burnt-orange tension collar, and slightly open jaws.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-chef-offset-plating-tweezers.png",
+      "runtimeSha256": "617ab3a4e356b1885f3044291eec59d71e0ffca71ac8de0cecd23e2d31ad3c4f",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-dish-chef-004/alpha-source/role-equipment-chef-offset-plating-tweezers.png",
+      "alphaSourceSha256": "3a7cbf5c02dc536e34448efcd3fade760f77edeb5d947d7dbdb1ac680f8aaa0c",
+      "rawChromaSourceSha256": "00e293cdd1534dd9ff6e3f9f7a8b0a8f82c5f82fa5f8b88c3541945252fe5c86",
+      "opaqueBounds": "116x86+6+21",
+      "transparentMargins": {
+        "left": 6,
+        "right": 6,
+        "top": 21,
+        "bottom": 21
+      },
+      "semanticVerdict": "pass: open twin arms and pronounced parallel offset tips read as precision plating tweezers rather than tongs, scissors, or a thermometer probe",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 31,
+      "catalogId": "chef-tasting-spoon-wallet",
+      "iconId": "role-equipment.chef.tasting-spoon-wallet",
+      "name": "Tasting Spoon Wallet",
+      "kind": "equipment",
+      "subjectPrompt": "One compact washable dark-teal canvas utensil roll opened partway, revealing six identical small stainless tasting spoons in individual cream stitched pockets, with orderly spoon bowls, nested handles, burnt-orange tie strap, reinforced wipe-clean edging, and folded flap.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-chef-tasting-spoon-wallet.png",
+      "runtimeSha256": "3df934e161f6ce480bc20e2850688e00a356e0a5e442c56a373954bce4583d35",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-dish-chef-004/alpha-source/role-equipment-chef-tasting-spoon-wallet.png",
+      "alphaSourceSha256": "36238b26478d263ff39f9d9060ed6ad74472c84a07596a00649559ead496f090",
+      "rawChromaSourceSha256": "672b1d8d2ce8b1e42f8ad6eb7ff49cfc0655bc4630b214b278683892d8773fde",
+      "opaqueBounds": "116x86+6+21",
+      "transparentMargins": {
+        "left": 6,
+        "right": 6,
+        "top": 21,
+        "bottom": 21
+      },
+      "semanticVerdict": "pass: repeated spoon bowls, individual stitched pockets and rolled canvas form clearly identify a sanitary tasting-spoon wallet rather than a generic pouch or folio",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 32,
+      "catalogId": "chef-diamond-sharpening-strip",
+      "iconId": "role-equipment.chef.diamond-sharpening-strip",
+      "name": "Diamond Sharpening Strip",
+      "kind": "consumable",
+      "subjectPrompt": "One wide flexible blade-care strip with a flat dark-gray diamond-abrasive face, coarse sparkling crosshatch grit, thin dark-teal polymer backing, burnt-orange perforated grip tab, and one corner of a pale protective liner partially peeled back.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-chef-diamond-sharpening-strip.png",
+      "runtimeSha256": "72d7a77ad63446098014da58dfa2ef3bf02f60ca53302b7efe04113b39d6a300",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-dish-chef-004/alpha-source/role-equipment-chef-diamond-sharpening-strip.png",
+      "alphaSourceSha256": "852eafdf2dc48a97bbe4d26ec9c6c1c185d4cf8ec28b2a6ffb95413b25d62e4f",
+      "rawChromaSourceSha256": "547a20d78a8a00377f4ace4c782946aaf436427ebdcbc62275dc8cecf3d1d793",
+      "opaqueBounds": "116x70+6+29",
+      "transparentMargins": {
+        "left": 6,
+        "right": 6,
+        "top": 29,
+        "bottom": 29
+      },
+      "semanticVerdict": "pass: broad flexible layered strip, abrasive crosshatch and peeled liner distinguish it from tweezers, knife, ruler, file, or chemical sachet",
+      "gameplayLegibility": "pass"
+    }
+  ],
+  "assets": [
+    "dish-steam-gauntlets",
+    "dish-enzymatic-detergent",
+    "dish-deliming-pouch",
+    "chef-forged-knife",
+    "chef-folding-thermometer",
+    "chef-plating-tweezers",
+    "chef-tasting-spoon-wallet",
+    "chef-diamond-sharpening-strip"
+  ]
+}

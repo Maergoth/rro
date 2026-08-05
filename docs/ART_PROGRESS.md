@@ -12,16 +12,16 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 - Branch: `agent/complete-production-art`
 - Draft PR: https://github.com/Maergoth/rro/pull/2
-- Last verified remote head before this ledger check-in: `f3408b8f5896f19a7f0a6ffb93843ea818af5ede`
-- Verified tree: `5a12a7d1bc622ca2e45c8c3e99b3b6449e5a8b75`
-- CI: https://github.com/Maergoth/rro/actions/runs/30975812146
+- Last verified remote head before this ledger check-in: `d17097f2d3e3b851576812b863a199ab11e4c1b1`
+- Verified tree: `0ad7675f581cdef515bbc8a6fa4b4d995280fe57`
+- CI: https://github.com/Maergoth/rro/actions/runs/30976041990
 
 ## Launch coverage
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
 | Furniture directional sets | 229 | 4 | 4 | 4 | 0 |
-| Equipment inventory icons | 45 | 24 | 24 | 24 | 24 |
+| Equipment inventory icons | 45 | 32 | 32 | 24 | 24 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
 | Utility overlays | 5 | 0 | 0 | 0 | 0 |
@@ -77,6 +77,14 @@ Directional furniture texture selection is yes; final projection alignment is no
 | equipment-icons-owner-server-002 | 19 | passed | passed-full-and-gameplay-scale | `0eec73b` | planning/art-qa/equipment-icons-owner-server-002/contact-128-dark.png |
 | character-remediation-idle-classic-v1 | 109 | passed | blocked-static-idle-and-no-runtime-compositor | `7b2caaf` | planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png |
 | equipment-icons-server-dish-003 | 20 | passed | passed-full-gameplay-and-cross-batch-scale | `f3408b8` | planning/art-qa/equipment-icons-server-dish-003/contact-128-dark.png |
+
+## Accepted locally, remote checkpoint pending
+
+These batches have passed source/composite QA but deliberately do not count as remotely verified or production-complete until their immutable GitHub commit and hosted CI are recorded.
+
+| Batch | Files | Source QA | Runtime/composite QA | Evidence |
+|---|---:|---|---|---|
+| equipment-icons-dish-chef-004 | 20 | passed | passed-full-gameplay-and-cross-batch-scale | planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png |
 
 ## Missing furniture directional sets
 
@@ -153,9 +161,9 @@ This JSON block is part of this same authoritative document and contains every c
   "durableBaseline": {
     "branch": "agent/complete-production-art",
     "pullRequest": "https://github.com/Maergoth/rro/pull/2",
-    "commit": "f3408b8f5896f19a7f0a6ffb93843ea818af5ede",
-    "tree": "5a12a7d1bc622ca2e45c8c3e99b3b6449e5a8b75",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30975812146"
+    "commit": "d17097f2d3e3b851576812b863a199ab11e4c1b1",
+    "tree": "0ad7675f581cdef515bbc8a6fa4b4d995280fe57",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30976041990"
   },
   "completionPipeline": [
     "generated",
@@ -192,8 +200,8 @@ This JSON block is part of this same authoritative document and contains every c
     {
       "lane": "Equipment inventory icons",
       "required": 45,
-      "present": 24,
-      "sourceAccepted": 24,
+      "present": 32,
+      "sourceAccepted": 32,
       "remoteVerified": 24,
       "productionComplete": 24
     },
@@ -11451,20 +11459,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-dish-steam-shell-gauntlets.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "288ff1897ad3b052ee2b00257d4244e6715a36e4acedce21eae0c0faca005970"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-dish-chef-004",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "dish-enzymatic-detergent",
@@ -11476,20 +11484,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-dish-enzymatic-detergent-dose.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "647e8adbc1b486e9da93d5f66e3088f98f5d5c16dd8b1756af4051df5b0ada2d"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-dish-chef-004",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "dish-deliming-pouch",
@@ -11501,20 +11509,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-dish-quick-deliming-pouch.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "f6bf31fd1e80323f3790ce3ee91cd227ae2a0da5ac9ad2566e7f3c0810793ae3"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-dish-chef-004",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "chef-forged-knife",
@@ -11526,20 +11534,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-chef-forged-eight-inch-knife.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "0fbe164fac85773629382c06a2b4ee6dffa564e45cd5875e0c7584ed8f66a137"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-dish-chef-004",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "chef-folding-thermometer",
@@ -11551,20 +11559,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-chef-fast-read-folding-thermometer.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "2f0ce609519ffe2af9c51cedf3e48bfe094835b333f28b6990a2ed0cc3ff0bb3"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-dish-chef-004",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "chef-plating-tweezers",
@@ -11576,20 +11584,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-chef-offset-plating-tweezers.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "617ab3a4e356b1885f3044291eec59d71e0ffca71ac8de0cecd23e2d31ad3c4f"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-dish-chef-004",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "chef-tasting-spoon-wallet",
@@ -11601,20 +11609,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-chef-tasting-spoon-wallet.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "3df934e161f6ce480bc20e2850688e00a356e0a5e442c56a373954bce4583d35"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-dish-chef-004",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "chef-diamond-sharpening-strip",
@@ -11626,20 +11634,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-chef-diamond-sharpening-strip.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "72d7a77ad63446098014da58dfa2ef3bf02f60ca53302b7efe04113b39d6a300"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-dish-chef-004",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "chef-palate-rinse",
@@ -13887,7 +13895,31 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": true
     }
   ],
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "equipment-icons-dish-chef-004",
+      "assets": [
+        "dish-steam-gauntlets",
+        "dish-enzymatic-detergent",
+        "dish-deliming-pouch",
+        "chef-forged-knife",
+        "chef-folding-thermometer",
+        "chef-plating-tweezers",
+        "chef-tasting-spoon-wallet",
+        "chef-diamond-sharpening-strip"
+      ],
+      "files": 20,
+      "qa": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
+      "sourcePromptMode": "built-in image generation; eight bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
+      "qaEvidence": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
+      "qaManifest": "planning/art-qa/equipment-icons-dish-chef-004/qa.json",
+      "notes": "Eight dish and chef icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-32 cross-batch comparison gates. They remain pending until this exact 20-file package is remotely verified and hosted CI is green.",
+      "qaEvidencePresent": true,
+      "remoteVerified": false,
+      "preservationPending": true
+    }
+  ],
   "preservedReferences": [
     {
       "id": "alpha2-overhead-furniture",

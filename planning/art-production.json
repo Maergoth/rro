@@ -26,8 +26,8 @@
     },
     "roleItems": {
       "total": 45,
-      "generated": 24,
-      "remaining": 21
+      "generated": 32,
+      "remaining": 13
     }
   },
   "furniture": [
@@ -6181,7 +6181,7 @@
         "dishwasher"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-dish-steam-shell-gauntlets.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Steam-Shell Gauntlets for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6195,7 +6195,7 @@
         "dishwasher"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-dish-enzymatic-detergent-dose.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Enzymatic Detergent Dose for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6209,7 +6209,7 @@
         "dishwasher"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-dish-quick-deliming-pouch.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Quick Deliming Pouch for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6223,7 +6223,7 @@
         "chef"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-chef-forged-eight-inch-knife.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Forged Eight-Inch Chef Knife for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6237,7 +6237,7 @@
         "chef"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-chef-fast-read-folding-thermometer.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Fast-Read Folding Thermometer for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6251,7 +6251,7 @@
         "chef"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-chef-offset-plating-tweezers.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Offset Plating Tweezers for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6265,7 +6265,7 @@
         "chef"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-chef-tasting-spoon-wallet.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Tasting Spoon Wallet for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6279,7 +6279,7 @@
         "chef"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-chef-diamond-sharpening-strip.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Diamond Sharpening Strip for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
