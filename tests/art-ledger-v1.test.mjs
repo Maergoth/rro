@@ -65,15 +65,13 @@ test("the authoritative art ledger cannot hide missing, failed, local-only, or u
   assert.ok(art.preservedReferences.some((entry) => entry.productionStatus === "preserved-reference-wrong-camera"));
   assert.ok(art.characters.prototypeOutfits.filter((entry) => entry.outfit === "classic").every((entry) => entry.status === "source_accepted_runtime_blocked"));
   assert.ok(art.characters.prototypeOutfits.filter((entry) => entry.outfit === "apron").every((entry) => entry.status === "qa_failed_needs_remediation"));
-  assert.equal(art.pendingBatches.length, 1);
-  assert.equal(art.pendingBatches[0].id, "equipment-icons-server-dish-003");
-  assert.equal(art.pendingBatches[0].remoteVerified, false);
+  assert.equal(art.pendingBatches.length, 0);
   const equipmentSummary = art.summaries.find((entry) => entry.lane === "Equipment inventory icons");
   const furnitureSummary = art.summaries.find((entry) => entry.lane === "Furniture directional sets");
   assert.equal(equipmentSummary.present, 24);
   assert.equal(equipmentSummary.sourceAccepted, 24);
-  assert.equal(equipmentSummary.remoteVerified, 16);
-  assert.equal(equipmentSummary.productionComplete, 16);
+  assert.equal(equipmentSummary.remoteVerified, 24);
+  assert.equal(equipmentSummary.productionComplete, 24);
   assert.equal(furnitureSummary.present, 4);
   assert.equal(furnitureSummary.sourceAccepted, 4);
   assert.equal(furnitureSummary.remoteVerified, 4);
@@ -85,7 +83,7 @@ test("the authoritative art ledger cannot hide missing, failed, local-only, or u
   assert.equal(art.summaries.find((entry) => entry.lane === "Body animation sets (body × animation)").productionComplete, 0);
   assert.equal(art.summaries.find((entry) => entry.lane === "Character body source foundations").remoteVerified, 2);
   assert.ok(art.reviewedBatches.every((entry) => entry.qaEvidencePresent && entry.remoteVerified));
-  assert.equal(art.equipmentIcons.filter((entry) => entry.productionComplete).length, 16);
+  assert.equal(art.equipmentIcons.filter((entry) => entry.productionComplete).length, 24);
   const incompleteEquipment = art.equipmentIcons.filter((entry) => !entry.productionComplete);
   const incompleteLine = document.match(/^- Equipment icons \((\d+)\): (.+)$/m);
   assert.ok(incompleteLine, "the human-readable tracker must enumerate incomplete equipment");

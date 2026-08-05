@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "47a039559d7155d8962e9df99808f07919db7892",
-    "tree": "b26aa20960471caf701cf57c326ff4a5f6450842",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30974850931"
+    "commit": "f3408b8f5896f19a7f0a6ffb93843ea818af5ede",
+    "tree": "5a12a7d1bc622ca2e45c8c3e99b3b6449e5a8b75",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30975812146"
   },
   "completionRule": "generated, processed, raster-validated, visually accepted, runtime-bound assets whose exact reviewed bytes are remotely verified on GitHub with green CI",
   "artDirection": {
@@ -31,7 +31,7 @@
   },
   "coverage": {
     "furniture": { "catalogTotal": 229, "acceptedSets": 4, "acceptedDirectionalFiles": 16 },
-    "equipmentIcons": { "catalogTotal": 45, "accepted": 16 },
+    "equipmentIcons": { "catalogTotal": 45, "accepted": 24 },
     "characterSystem": {
       "status": "in_progress",
       "sourceAcceptedBodyPresentations": 2,
@@ -46,28 +46,7 @@
       "required": ["body_skin", "face", "hair_headwear", "base_outfit", "role_layer", "footwear", "accessory", "carried_object", "effects", "skin_masks", "primary_color_masks", "secondary_color_masks"]
     }
   },
-  "pendingBatches": [
-    {
-      "id": "equipment-icons-server-dish-003",
-      "assets": [
-        "server-waterproof-order-pad",
-        "server-waiters-corkscrew",
-        "server-cork-tray",
-        "server-palate-mints",
-        "server-stain-rescue-pen",
-        "dish-high-pressure-nozzle",
-        "dish-silicone-rack-hook",
-        "dish-digital-test-reader"
-      ],
-      "files": 20,
-      "qa": "passed",
-      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
-      "sourcePromptMode": "built-in image generation; eight bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
-      "qaEvidence": "planning/art-qa/equipment-icons-server-dish-003/contact-128-dark.png",
-      "qaManifest": "planning/art-qa/equipment-icons-server-dish-003/qa.json",
-      "notes": "Eight server and dish icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-24 cross-batch comparison gates. They remain pending until this exact 20-file package is remotely verified and hosted CI is green."
-    }
-  ],
+  "pendingBatches": [],
   "batches": [
     {
       "id": "furniture-pilot-001",
@@ -218,6 +197,29 @@
       "qaEvidence": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png",
       "qaManifest": "planning/art-qa/character-remediation-idle-classic-v1/qa.json",
       "notes": "Two elevated body presentations, normalized skin foundations, and two classic idle outfit body-fits pass exact raster hashes, byte reproduction, a common (192,472) pivot, zero leakage/occlusion gates, and full/gameplay composite review. Static idle art, combined classic clothing, and absent Godot character compositing/animation keep production completion at zero."
+    },
+    {
+      "id": "equipment-icons-server-dish-003",
+      "assets": [
+        "server-waterproof-order-pad",
+        "server-waiters-corkscrew",
+        "server-cork-tray",
+        "server-palate-mints",
+        "server-stain-rescue-pen",
+        "dish-high-pressure-nozzle",
+        "dish-silicone-rack-hook",
+        "dish-digital-test-reader"
+      ],
+      "files": 20,
+      "qa": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
+      "sourcePromptMode": "built-in image generation; eight bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
+      "remoteCommit": "f3408b8f5896f19a7f0a6ffb93843ea818af5ede",
+      "remoteTree": "5a12a7d1bc622ca2e45c8c3e99b3b6449e5a8b75",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30975812146",
+      "qaEvidence": "planning/art-qa/equipment-icons-server-dish-003/contact-128-dark.png",
+      "qaManifest": "planning/art-qa/equipment-icons-server-dish-003/qa.json",
+      "notes": "Eight distinct server and dish icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-24 cross-batch comparison gates. Their exact 20-file package is remotely verified with green Windows and Ubuntu CI."
     }
   ],
   "preservedButNotProductionComplete": [
