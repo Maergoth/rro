@@ -26,8 +26,8 @@
     },
     "roleItems": {
       "total": 45,
-      "generated": 40,
-      "remaining": 5
+      "generated": 45,
+      "remaining": 0
     }
   },
   "furniture": [
@@ -6405,7 +6405,7 @@
         "host-busser"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-host-glare-free-seating-tablet.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Glare-Free Seating Tablet for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6419,7 +6419,7 @@
         "host-busser"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-host-brass-crumb-scraper.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Brass Crumb Scraper for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6433,7 +6433,7 @@
         "host-busser"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-host-balanced-bus-tub-harness.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Balanced Bus-Tub Harness for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6447,7 +6447,7 @@
         "host-busser"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-host-reset-caddy-refill.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Reset Caddy Refill for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     },
     {
@@ -6461,7 +6461,7 @@
         "host-busser"
       ],
       "output": "apps/client-godot/assets/items/role-equipment-host-little-guest-activity-pack.png",
-      "status": "procedural-fallback",
+      "status": "generated",
       "promptBrief": "Single isolated inventory icon of Little Guest Activity Pack for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction."
     }
   ]

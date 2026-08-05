@@ -12,16 +12,16 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 - Branch: `agent/complete-production-art`
 - Draft PR: https://github.com/Maergoth/rro/pull/2
-- Last verified remote head before this ledger check-in: `e15aa0031a8477be68b022f5fcfbd6d30309fe9e`
-- Verified tree: `27350dbb6138e1e75d1fa56219a2509e3bf72924`
-- CI: https://github.com/Maergoth/rro/actions/runs/30977634704
+- Last verified remote head before this ledger check-in: `d84f8892460d2e290db834b6a3dbf2245c87ecd8`
+- Verified tree: `9ff99b685515c63cc8cb0dd24130a654235cf47b`
+- CI: https://github.com/Maergoth/rro/actions/runs/30977874013
 
 ## Launch coverage
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
 | Furniture directional sets | 229 | 4 | 4 | 4 | 0 |
-| Equipment inventory icons | 45 | 40 | 40 | 40 | 40 |
+| Equipment inventory icons | 45 | 45 | 45 | 40 | 40 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
 | Utility overlays | 5 | 0 | 0 | 0 | 0 |
@@ -79,6 +79,14 @@ Directional furniture texture selection is yes; final projection alignment is no
 | equipment-icons-server-dish-003 | 20 | passed | passed-full-gameplay-and-cross-batch-scale | `f3408b8` | planning/art-qa/equipment-icons-server-dish-003/contact-128-dark.png |
 | equipment-icons-dish-chef-004 | 20 | passed | passed-full-gameplay-and-cross-batch-scale | `961fc31` | planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png |
 | equipment-icons-chef-cook-host-005 | 20 | passed | passed-full-gameplay-and-cross-batch-scale | `e15aa00` | planning/art-qa/equipment-icons-chef-cook-host-005/contact-128-dark.png |
+
+## Accepted locally, remote checkpoint pending
+
+These batches have passed source/composite QA but deliberately do not count as remotely verified or production-complete until their immutable GitHub commit and hosted CI are recorded.
+
+| Batch | Files | Source QA | Runtime/composite QA | Evidence |
+|---|---:|---|---|---|
+| equipment-icons-host-006 | 14 | passed | passed-full-gameplay-and-cross-batch-scale | planning/art-qa/equipment-icons-host-006/contact-128-dark.png |
 
 ## Missing furniture directional sets
 
@@ -155,9 +163,9 @@ This JSON block is part of this same authoritative document and contains every c
   "durableBaseline": {
     "branch": "agent/complete-production-art",
     "pullRequest": "https://github.com/Maergoth/rro/pull/2",
-    "commit": "e15aa0031a8477be68b022f5fcfbd6d30309fe9e",
-    "tree": "27350dbb6138e1e75d1fa56219a2509e3bf72924",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30977634704"
+    "commit": "d84f8892460d2e290db834b6a3dbf2245c87ecd8",
+    "tree": "9ff99b685515c63cc8cb0dd24130a654235cf47b",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30977874013"
   },
   "completionPipeline": [
     "generated",
@@ -194,8 +202,8 @@ This JSON block is part of this same authoritative document and contains every c
     {
       "lane": "Equipment inventory icons",
       "required": 45,
-      "present": 40,
-      "sourceAccepted": 40,
+      "present": 45,
+      "sourceAccepted": 45,
       "remoteVerified": 40,
       "productionComplete": 40
     },
@@ -11853,20 +11861,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-host-glare-free-seating-tablet.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "6163ae12181aae851526dc199854ad5ae56bc2e4b784e441b1d47b740a56da94"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-host-006",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-host-006/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "host-brass-crumb-scraper",
@@ -11878,20 +11886,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-host-brass-crumb-scraper.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "5340011fbe46d884a870d7701659ec0b83ab7c73f804783ee1cd48c1f8a54844"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-host-006",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-host-006/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "host-bus-tub-harness",
@@ -11903,20 +11911,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-host-balanced-bus-tub-harness.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "e244fa9f9478c8724ae91e8ebf5c84575ecda9c150f69a3fab24ae9c078251d7"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-host-006",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-host-006/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "host-sanitizer-caddy-refill",
@@ -11928,20 +11936,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-host-reset-caddy-refill.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "365fbba68161f0691b8055b61358da738d51086eb688109a6417219426a29237"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-host-006",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-host-006/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "host-guest-activity-pack",
@@ -11953,20 +11961,20 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/items/role-equipment-host-little-guest-activity-pack.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "af90f3a94ba26bbd319ca9761adc198bed011d94fd25ebfcd03d8e56060c2b7d"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "equipment-icons-host-006",
+      "review": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "runtimeBound": false,
+      "qaEvidence": "planning/art-qa/equipment-icons-host-006/contact-128-dark.png",
+      "qaEvidencePresent": true,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     }
   ],
   "construction": {
@@ -13939,7 +13947,28 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": true
     }
   ],
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "equipment-icons-host-006",
+      "assets": [
+        "host-seating-tablet",
+        "host-brass-crumb-scraper",
+        "host-bus-tub-harness",
+        "host-sanitizer-caddy-refill",
+        "host-guest-activity-pack"
+      ],
+      "files": 14,
+      "qa": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
+      "sourcePromptMode": "built-in image generation; five bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
+      "qaEvidence": "planning/art-qa/equipment-icons-host-006/contact-128-dark.png",
+      "qaManifest": "planning/art-qa/equipment-icons-host-006/qa.json",
+      "notes": "The final five host icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-45 cross-batch comparison gates. They remain pending until this exact 14-file package is remotely verified and hosted CI is green.",
+      "qaEvidencePresent": true,
+      "remoteVerified": false,
+      "preservationPending": true
+    }
+  ],
   "preservedReferences": [
     {
       "id": "alpha2-overhead-furniture",
