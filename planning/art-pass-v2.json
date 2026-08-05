@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "9ad6abbd988e3dca19a3bc50b49582563ffa8eec",
-    "tree": "470af473c30497066119c963ce8c9d456aaae6ef",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/31000765420"
+    "commit": "1eb321395d7c9562e79fcf7a39a5c334ce3e05f9",
+    "tree": "e2d69e0f8c39e4dd1f372e5abec2b66c4d4d0c1a",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31001558391"
   },
   "completionRule": "generated, processed, raster-validated, visually accepted, runtime-bound assets whose exact reviewed bytes are remotely verified on GitHub with green CI",
   "artDirection": {
@@ -90,7 +90,11 @@
         "table-two"
       ],
       "rejectedAssetIds": ["local-art", "pendants", "plants"],
-      "reviewPreservation": null,
+      "reviewPreservation": {
+        "commit": "1eb321395d7c9562e79fcf7a39a5c334ce3e05f9",
+        "tree": "e2d69e0f8c39e4dd1f372e5abec2b66c4d4d0c1a",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31001558391"
+      },
       "productionComplete": false
     }
   ],

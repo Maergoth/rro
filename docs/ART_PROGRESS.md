@@ -12,15 +12,15 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 - Branch: `agent/complete-production-art`
 - Draft PR: https://github.com/Maergoth/rro/pull/2
-- Last verified remote head before this ledger check-in: `9ad6abbd988e3dca19a3bc50b49582563ffa8eec`
-- Verified tree: `470af473c30497066119c963ce8c9d456aaae6ef`
-- CI: https://github.com/Maergoth/rro/actions/runs/31000765420
+- Last verified remote head before this ledger check-in: `1eb321395d7c9562e79fcf7a39a5c334ce3e05f9`
+- Verified tree: `e2d69e0f8c39e4dd1f372e5abec2b66c4d4d0c1a`
+- CI: https://github.com/Maergoth/rro/actions/runs/31001558391
 
 ## Launch coverage
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
-| Furniture directional sets | 229 | 19 | 19 | 19 | 0 |
+| Furniture directional sets | 229 | 19 | 19 | 19 | 16 |
 | Equipment inventory icons | 45 | 45 | 45 | 45 | 45 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
@@ -34,8 +34,8 @@ Only the final state is production-complete. Existing files, historical narrativ
 | Equipment attachment body-fits | 62 | 0 | 0 | 0 | 0 |
 | Activity → animation bindings | 89 | 0 | 0 | 0 | 0 |
 
-45 equipment icons and 0 furniture directional sets are production-complete because their exact reviewed bytes are visually accepted, runtime-bound, remotely verified, and CI-green. Character art and the other missing lanes remain explicit below.
-Directional furniture texture selection is yes and projection alignment is yes. Native attempt 002 accepted 16/19 present sets; its durable review checkpoint is remote-verified: no. `local-art`, `pendants`, `plants` remain blocked on legal wall/ceiling mounting.
+45 equipment icons and 16 furniture directional sets are production-complete because their exact reviewed bytes are visually accepted, runtime-bound, remotely verified, and CI-green. Character art and the other missing lanes remain explicit below.
+Directional furniture texture selection is yes and projection alignment is yes. Native attempt 002 accepted 16/19 present sets; its durable review checkpoint is remote-verified: yes. `local-art`, `pendants`, `plants` remain blocked on legal wall/ceiling mounting.
 
 ## Character truth
 
@@ -173,9 +173,9 @@ This JSON block is part of this same authoritative document and contains every c
   "durableBaseline": {
     "branch": "agent/complete-production-art",
     "pullRequest": "https://github.com/Maergoth/rro/pull/2",
-    "commit": "9ad6abbd988e3dca19a3bc50b49582563ffa8eec",
-    "tree": "470af473c30497066119c963ce8c9d456aaae6ef",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/31000765420"
+    "commit": "1eb321395d7c9562e79fcf7a39a5c334ce3e05f9",
+    "tree": "e2d69e0f8c39e4dd1f372e5abec2b66c4d4d0c1a",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31001558391"
   },
   "completionPipeline": [
     "generated",
@@ -243,7 +243,7 @@ This JSON block is part of this same authoritative document and contains every c
         "pendants",
         "plants"
       ],
-      "runtimeReviewRemoteVerified": false
+      "runtimeReviewRemoteVerified": true
     }
   },
   "summaries": [
@@ -253,7 +253,7 @@ This JSON block is part of this same authoritative document and contains every c
       "present": 19,
       "sourceAccepted": 19,
       "remoteVerified": 19,
-      "productionComplete": 0
+      "productionComplete": 16
     },
     {
       "lane": "Equipment inventory icons",
@@ -405,8 +405,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "table-four",
@@ -460,8 +460,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "booth",
@@ -515,8 +515,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "banquette",
@@ -570,8 +570,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "host-stand",
@@ -625,8 +625,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "service-station",
@@ -680,8 +680,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "espresso",
@@ -735,8 +735,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "range",
@@ -790,8 +790,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "prep",
@@ -845,8 +845,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "pass",
@@ -900,8 +900,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "dish-machine",
@@ -955,8 +955,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "mop-sink",
@@ -1010,8 +1010,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "recycling",
@@ -1065,8 +1065,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "pendants",
@@ -1291,8 +1291,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "walnut-four-top",
@@ -1346,8 +1346,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "banquette-section",
@@ -1758,8 +1758,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "plancha-commercial",
@@ -16261,10 +16261,14 @@ This JSON block is part of this same authoritative document and contains every c
         "pendants",
         "plants"
       ],
-      "reviewPreservation": null,
+      "reviewPreservation": {
+        "commit": "1eb321395d7c9562e79fcf7a39a5c334ce3e05f9",
+        "tree": "e2d69e0f8c39e4dd1f372e5abec2b66c4d4d0c1a",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31001558391"
+      },
       "productionComplete": false,
       "evidencePresent": true,
-      "reviewRemoteVerified": false
+      "reviewRemoteVerified": true
     }
   ],
   "preservedReferences": [
