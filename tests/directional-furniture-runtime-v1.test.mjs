@@ -81,9 +81,9 @@ test("the runtime contract covers every source-accepted directional set without 
   assert.equal(contract.capability.projectionAligned, true);
   assert.equal(contract.capability.runtimeCompositeAccepted, false);
   assert.equal(contract.capability.productionComplete, false);
-  assert.deepEqual(contract.runtimeCompositeAcceptedAssetIds, ["banquette", "booth", "dish-machine", "espresso", "furniture-banquette-section", "furniture-commercial-chair", "furniture-oak-two-top", "furniture-premium-chair", "furniture-six-burner-range", "furniture-walnut-four-top", "host-stand", "mop-sink", "pass", "prep", "range", "recycling", "service-station", "table-four", "table-two"]);
+  assert.deepEqual(contract.runtimeCompositeAcceptedAssetIds, ["banquette", "booth", "dish-machine", "espresso", "furniture-banquette-section", "furniture-commercial-chair", "furniture-host-stand-pro", "furniture-oak-two-top", "furniture-pos-terminal", "furniture-premium-chair", "furniture-server-station-pro", "furniture-six-burner-range", "furniture-walnut-four-top", "host-stand", "mop-sink", "pass", "prep", "range", "recycling", "service-station", "table-four", "table-two"]);
   assert.deepEqual(contract.runtimeCompositeBlockedAssetIds, ["local-art", "pendants", "plants"]);
-  assert.deepEqual(contract.runtimeCompositePendingAssetIds, ["furniture-host-stand-pro", "furniture-pos-terminal", "furniture-server-station-pro"]);
+  assert.deepEqual(contract.runtimeCompositePendingAssetIds, []);
   assert.deepEqual(
     [...contract.runtimeCompositeAcceptedAssetIds, ...contract.runtimeCompositeBlockedAssetIds, ...contract.runtimeCompositePendingAssetIds].sort(),
     [...contract.acceptedDirectionalAssetIds].sort(),
@@ -93,8 +93,7 @@ test("the runtime contract covers every source-accepted directional set without 
     ...contract.runtimeCompositeBlockedAssetIds,
     ...contract.runtimeCompositePendingAssetIds,
   ]).size, contract.acceptedDirectionalAssetIds.length, "runtime states must be pairwise disjoint");
-  assert.match(contract.capability.remainingVisualGate, /wall and ceiling mounting.*local-art.*plants.*pendants.*four-rotation native Godot gameplay capture/i);
-  assert.match(contract.capability.remainingVisualGate, /four-rotation native Godot gameplay capture.*furniture-host-stand-pro.*furniture-pos-terminal.*furniture-server-station-pro/i);
+  assert.match(contract.capability.remainingVisualGate, /wall and ceiling placement.*local-art.*plants.*pendants.*four-rotation native Godot gameplay capture/i);
 });
 
 test("common floor-contact anchoring uses uniform scale and never stretches directional textures", () => {

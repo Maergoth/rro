@@ -9,8 +9,7 @@
   "artReviewStatus": "accepted",
   "productionComplete": false,
   "productionCompletionBlockers": [
-    "The exact accepted runtime sprites have not yet passed four-rotation native Godot gameplay composite review for projection, placement, floor contact, depth, and gameplay-scale legibility.",
-    "This local accepted checkpoint has not yet been remotely preserved with an exact GitHub tree and green hosted CI."
+    "Native review attempt 004 passed all three identities for projection, placement, floor contact, depth, direction, and gameplay-scale legibility, but that exact human review package has not yet been remotely preserved with a verified GitHub tree and green hosted CI."
   ],
   "promotionScope": {
     "runtimeFiles": 12,
@@ -20,14 +19,18 @@
     "totalFiles": 28
   },
   "repositoryPromotion": {
-    "status": "local-verified-pending-remote",
+    "status": "remote-verified",
     "runtimeFiles": 12,
     "alphaSourceFiles": 12,
     "contactSheets": 2,
     "provenanceDocuments": 2,
     "totalFiles": 28
   },
-  "remotePreservation": null,
+  "remotePreservation": {
+    "commit": "9749406830ce8fa0139ff479c98a67d5d38c6882",
+    "tree": "4c0becd361bc5c6fa722caa3252f7588e512f898",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31009371429"
+  },
   "quarantineArchive": {
     "filename": "RRO-furniture-core-directional-008-quarantine.tar.gz",
     "sha256": "38a0a675208916f9544909ad12f429ce4675bc7b72de60451ae913e6a357c396",

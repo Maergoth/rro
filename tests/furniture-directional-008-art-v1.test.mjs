@@ -8,7 +8,7 @@ import { inflateSync } from "node:zlib";
 const ROOT = resolve(import.meta.dirname, "..");
 const QA_ROOT = "planning/art-qa/furniture-core-directional-008";
 const QA_PATH = `${QA_ROOT}/qa.json`;
-const EXPECTED_QA_SHA256 = "d16d7611d86829a58e761ad14eb037b0914b8f666f044fd58b521b07895a76ad";
+const EXPECTED_QA_SHA256 = "7b711481451849ae3b24e6bd775ea18d4534d5a3be818fb554bc7dea7713e13d";
 const DIRECTIONS = ["north", "east", "south", "west"];
 const ASSETS = ["furniture-host-stand-pro", "furniture-server-station-pro", "furniture-pos-terminal"];
 const PLACEMENT = { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" };
@@ -163,20 +163,23 @@ test("furniture directional batch 008 has exact durable local provenance", () =>
   assert.equal(qa.artReviewStatus, "accepted");
   assert.equal(qa.productionComplete, false);
   assert.deepEqual(qa.repositoryPromotion, {
-    status: "local-verified-pending-remote",
+    status: "remote-verified",
     runtimeFiles: 12,
     alphaSourceFiles: 12,
     contactSheets: 2,
     provenanceDocuments: 2,
     totalFiles: 28,
   });
-  assert.equal(qa.remotePreservation, null);
+  assert.deepEqual(qa.remotePreservation, {
+    commit: "9749406830ce8fa0139ff479c98a67d5d38c6882",
+    tree: "4c0becd361bc5c6fa722caa3252f7588e512f898",
+    ci: "https://github.com/Maergoth/rro/actions/runs/31009371429",
+  });
   assert.deepEqual(qa.promotionScope, {
     runtimeFiles: 12, alphaSourceFiles: 12, contactSheets: 2, provenanceDocuments: 2, totalFiles: 28,
   });
-  assert.equal(qa.productionCompletionBlockers.length, 2);
-  assert.match(qa.productionCompletionBlockers[0], /four-rotation native Godot gameplay composite review/i);
-  assert.match(qa.productionCompletionBlockers[1], /remotely preserved.*GitHub.*green hosted CI/i);
+  assert.equal(qa.productionCompletionBlockers.length, 1);
+  assert.match(qa.productionCompletionBlockers[0], /attempt 004 passed all three identities.*review package.*remotely preserved.*green hosted CI/i);
   assert.doesNotMatch(JSON.stringify(qa), /\/tmp\/|\/workspace\//, "durable QA must not reference transient storage");
   assert.equal(qa.quarantineArchive.sha256, "38a0a675208916f9544909ad12f429ce4675bc7b72de60451ae913e6a357c396");
   assert.match(qa.quarantineArchive.safetyReview, /^pass:/);

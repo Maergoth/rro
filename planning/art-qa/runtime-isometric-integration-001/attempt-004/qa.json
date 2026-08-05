@@ -1,0 +1,67 @@
+{
+	"acceptedAssetIds": [
+		"banquette",
+		"booth",
+		"dish-machine",
+		"espresso",
+		"furniture-banquette-section",
+		"furniture-commercial-chair",
+		"furniture-host-stand-pro",
+		"furniture-oak-two-top",
+		"furniture-pos-terminal",
+		"furniture-premium-chair",
+		"furniture-server-station-pro",
+		"furniture-six-burner-range",
+		"furniture-walnut-four-top",
+		"host-stand",
+		"local-art",
+		"mop-sink",
+		"pass",
+		"pendants",
+		"plants",
+		"prep",
+		"range",
+		"recycling",
+		"service-station",
+		"table-four",
+		"table-two"
+	],
+	"captures": [
+		{
+			"direction": "north",
+			"path": "restaurant-north.png",
+			"rotation": 0,
+			"sampledColors": 304,
+			"sha256": "623fd56fa698de0b698af50bb24946d4806a9c71673e84a59b7ba544680360a1"
+		},
+		{
+			"direction": "east",
+			"path": "restaurant-east.png",
+			"rotation": 90,
+			"sampledColors": 309,
+			"sha256": "81b6cbd123a011b50b263916008872efb49ae6a8f9a70145a97c743205430aff"
+		},
+		{
+			"direction": "south",
+			"path": "restaurant-south.png",
+			"rotation": 180,
+			"sampledColors": 318,
+			"sha256": "081d3107319a1170f8704a999036eefe02cd50d37a9e6500cd1ad03c3b717995"
+		},
+		{
+			"direction": "west",
+			"path": "restaurant-west.png",
+			"rotation": 270,
+			"sampledColors": 310,
+			"sha256": "748c1cf8cfe3023a659013faab00932799f4a1f896bfad89d23cdf0848aaddc5"
+		}
+	],
+	"fixture": "accepted directional furniture plus walls, openings, incidents, parties, and avatars",
+	"productionComplete": false,
+	"remainingGate": "Human visual acceptance of these exact native Godot captures and durable repository preservation.",
+	"schemaVersion": 1,
+	"viewport": [
+		1800,
+		1100
+	]
+}

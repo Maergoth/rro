@@ -9,8 +9,9 @@ const reviewPaths = [
   "planning/art-qa/runtime-isometric-integration-001/attempt-001/review.json",
   "planning/art-qa/runtime-isometric-integration-001/attempt-002/review.json",
   "planning/art-qa/runtime-isometric-integration-001/attempt-003/review.json",
+  "planning/art-qa/runtime-isometric-integration-001/attempt-004/review.json",
 ];
-const [attempt001, attempt002, attempt003] = reviewPaths.map((path) => JSON.parse(read(path).toString("utf8")));
+const [attempt001, attempt002, attempt003, attempt004] = reviewPaths.map((path) => JSON.parse(read(path).toString("utf8")));
 
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 
@@ -53,8 +54,23 @@ test("native isometric attempt 003 accepts exactly nineteen floor assets without
   assert.deepEqual(attempt003.visualReview.blockers.map((entry) => entry.id), ["mounted-object-anchor-contract"]);
 });
 
+test("native isometric attempt 004 accepts exactly twenty-two floor assets without hiding mounted blockers", () => {
+  assert.equal(attempt004.source.remoteCommit, "9749406830ce8fa0139ff479c98a67d5d38c6882");
+  assert.equal(attempt004.source.remoteTree, "4c0becd361bc5c6fa722caa3252f7588e512f898");
+  assert.equal(attempt004.source.artifactId, 8931752495);
+  assert.equal(attempt004.source.artifactSha256, "25f2b0e993ad9c283d5be84dd2e08a5763d5b1c1931ed704a8dc8daa27a25332");
+  assert.equal(attempt004.visualReview.status, "passed-partial-floor-assets");
+  assert.equal(attempt004.visualReview.productionComplete, false);
+  assert.equal(attempt004.visualReview.acceptedAssetIds.length, 22);
+  assert.ok(attempt004.visualReview.acceptedAssetIds.includes("furniture-host-stand-pro"));
+  assert.ok(attempt004.visualReview.acceptedAssetIds.includes("furniture-pos-terminal"));
+  assert.ok(attempt004.visualReview.acceptedAssetIds.includes("furniture-server-station-pro"));
+  assert.deepEqual(attempt004.visualReview.rejectedAssetIds, ["local-art", "pendants", "plants"]);
+  assert.deepEqual(attempt004.visualReview.blockers.map((entry) => entry.id), ["mounted-object-anchor-contract"]);
+});
+
 test("every durable native capture has exact bytes and the required gameplay viewport", () => {
-  for (const review of [attempt001, attempt002, attempt003]) {
+  for (const review of [attempt001, attempt002, attempt003, attempt004]) {
     assert.equal(review.captures.length, 5);
     for (const capture of review.captures) {
       const bytes = read(capture.path);

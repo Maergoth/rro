@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "id": "runtime-isometric-integration-001-attempt-004",
+  "reviewedAt": "2026-08-05T13:28:02Z",
+  "source": {
+    "remoteCommit": "9749406830ce8fa0139ff479c98a67d5d38c6882",
+    "remoteTree": "4c0becd361bc5c6fa722caa3252f7588e512f898",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31009371429",
+    "artifactId": 8931752495,
+    "artifactName": "elevated-isometric-runtime-qa",
+    "artifactSha256": "25f2b0e993ad9c283d5be84dd2e08a5763d5b1c1931ed704a8dc8daa27a25332"
+  },
+  "automatedGates": {
+    "windowsCi": "passed",
+    "ubuntuCi": "passed",
+    "nativeGodotCapture": "passed",
+    "captureCount": 4,
+    "viewport": [1800, 1100],
+    "minimumSampledColors": 304,
+    "exactArtifactDigestVerified": true,
+    "exactCaptureHashesVerified": true
+  },
+  "visualReview": {
+    "status": "passed-partial-floor-assets",
+    "productionComplete": false,
+    "reviewers": ["root gameplay-scale inspection", "independent gameplay-scale inspection"],
+    "passed": [
+      "The three newly reviewed floor-mounted identities preserve coherent north, east, south, and west facings, footprint contact, scale, clipping, and mixed world depth at gameplay scale.",
+      "The reservation host stand preserves its teal guest front, single physical-right cable port, rear shelf and pull, tablet, and plain opposite side across the four rotations.",
+      "The integrated server station preserves its two-door guest front, two-cubby service rear, plain side ends, 3x2 contact, and correct occlusion against the Owner avatar and label.",
+      "The commercial POS terminal preserves its screen, single reader, rear grille, plain opposite side, weighted 1x1 contact, and distinct silhouette at gameplay scale.",
+      "The nineteen previously accepted floor-mounted identities remain visually coherent in the expanded twenty-five-item fixture."
+    ],
+    "blockers": [
+      {
+        "id": "mounted-object-anchor-contract",
+        "assets": ["local-art", "pendants", "plants"],
+        "reason": "Local art and the herb wall still stand on free floor cells, while pendant canopies and stems remain on the floor plane. They require remotely preserved wall/ceiling builder placement, mount-specific source anchors, mounted depth behavior, and a new exact native review before runtime acceptance."
+      }
+    ],
+    "acceptedAssetIds": [
+      "banquette",
+      "booth",
+      "dish-machine",
+      "espresso",
+      "furniture-banquette-section",
+      "furniture-commercial-chair",
+      "furniture-host-stand-pro",
+      "furniture-oak-two-top",
+      "furniture-pos-terminal",
+      "furniture-premium-chair",
+      "furniture-server-station-pro",
+      "furniture-six-burner-range",
+      "furniture-walnut-four-top",
+      "host-stand",
+      "mop-sink",
+      "pass",
+      "prep",
+      "range",
+      "recycling",
+      "service-station",
+      "table-four",
+      "table-two"
+    ],
+    "rejectedAssetIds": ["local-art", "pendants", "plants"],
+    "nextCaptureRequirements": [
+      "Preserve the wall-edge and ceiling-plane builder placement checkpoint with green hosted CI.",
+      "Validate mount-specific source anchors, picking, depth, persistence, and multiplayer authority for local-art, plants, and pendants.",
+      "Repeat the exact four-rotation native capture and independently review the three corrected mounted assets."
+    ]
+  },
+  "captures": [
+    {"path": "planning/art-qa/runtime-isometric-integration-001/attempt-004/restaurant-north.png", "sha256": "623fd56fa698de0b698af50bb24946d4806a9c71673e84a59b7ba544680360a1"},
+    {"path": "planning/art-qa/runtime-isometric-integration-001/attempt-004/restaurant-east.png", "sha256": "81b6cbd123a011b50b263916008872efb49ae6a8f9a70145a97c743205430aff"},
+    {"path": "planning/art-qa/runtime-isometric-integration-001/attempt-004/restaurant-south.png", "sha256": "081d3107319a1170f8704a999036eefe02cd50d37a9e6500cd1ad03c3b717995"},
+    {"path": "planning/art-qa/runtime-isometric-integration-001/attempt-004/restaurant-west.png", "sha256": "748c1cf8cfe3023a659013faab00932799f4a1f896bfad89d23cdf0848aaddc5"},
+    {"path": "planning/art-qa/runtime-isometric-integration-001/attempt-004/qa.json", "sha256": "11651f362602806b431a1ed1e85beda92a5d355427c79f5c919919e5929f48bc"}
+  ]
+}

@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "e750f74c69de2808908dca7153577d781c565020",
-    "tree": "a08373acc7673332eece94786505e988ebd88572",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/31006966202"
+    "commit": "f5515e3c6c6fcde19c4ea8b5e247215932b42229",
+    "tree": "174ff6d7e73e1df4b501f5fde1d3f255795ca1d6",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31010348995"
   },
   "completionRule": "generated, processed, raster-validated, visually accepted, runtime-bound assets whose exact reviewed bytes are remotely verified on GitHub with green CI",
   "artDirection": {
@@ -30,7 +30,7 @@
     ]
   },
   "coverage": {
-    "furniture": { "catalogTotal": 229, "acceptedSets": 25, "acceptedDirectionalFiles": 100, "runtimeCompositeAcceptedSets": 19 },
+    "furniture": { "catalogTotal": 229, "acceptedSets": 25, "acceptedDirectionalFiles": 100, "runtimeCompositeAcceptedSets": 22 },
     "equipmentIcons": { "catalogTotal": 45, "accepted": 45 },
     "characterSystem": {
       "status": "in_progress",
@@ -136,9 +136,48 @@
         "ci": "https://github.com/Maergoth/rro/actions/runs/31006311867"
       },
       "productionComplete": false
+    },
+    {
+      "id": "runtime-isometric-integration-001-attempt-004",
+      "status": "passed-partial-floor-assets",
+      "remoteCommit": "9749406830ce8fa0139ff479c98a67d5d38c6882",
+      "remoteTree": "4c0becd361bc5c6fa722caa3252f7588e512f898",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31009371429",
+      "artifactId": 8931752495,
+      "artifactSha256": "25f2b0e993ad9c283d5be84dd2e08a5763d5b1c1931ed704a8dc8daa27a25332",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-004/review.json",
+      "passed": ["native-four-rotation-capture", "elevated-projection", "directional-selection", "floor-contact-pivots", "mixed-world-depth", "gameplay-legibility", "twenty-two-floor-assets"],
+      "blockers": ["mounted-object-anchor-contract"],
+      "acceptedAssetIds": [
+        "banquette",
+        "booth",
+        "dish-machine",
+        "espresso",
+        "furniture-banquette-section",
+        "furniture-commercial-chair",
+        "furniture-host-stand-pro",
+        "furniture-oak-two-top",
+        "furniture-pos-terminal",
+        "furniture-premium-chair",
+        "furniture-server-station-pro",
+        "furniture-six-burner-range",
+        "furniture-walnut-four-top",
+        "host-stand",
+        "mop-sink",
+        "pass",
+        "prep",
+        "range",
+        "recycling",
+        "service-station",
+        "table-four",
+        "table-two"
+      ],
+      "rejectedAssetIds": ["local-art", "pendants", "plants"],
+      "productionComplete": false
     }
   ],
-  "pendingBatches": [
+  "pendingBatches": [],
+  "batches": [
     {
       "id": "furniture-core-directional-008",
       "assets": [
@@ -148,14 +187,15 @@
       ],
       "files": 28,
       "qa": "passed",
-      "runtimeQa": "pending-native-gameplay-composite",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-004-review-preservation-pending",
       "sourcePromptMode": "built-in image generation; one separately prompted 2x2 rigid elevated-isometric rotation atlas per identity, with one targeted host-stand correction, chroma removal, common-pivot normalization, and full/gameplay-scale contact review",
+      "remoteCommit": "9749406830ce8fa0139ff479c98a67d5d38c6882",
+      "remoteTree": "4c0becd361bc5c6fa722caa3252f7588e512f898",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31009371429",
       "qaEvidence": "planning/art-qa/furniture-core-directional-008/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-008/qa.json",
-      "notes": "Reservation host stand, integrated server station, and commercial POS terminal are source-accepted floor furniture sets with exact catalog identity, raster hashes, unique alpha content, common floor-contact pivots, and full-resolution plus 128px visual review. Remote preservation and an exact native Godot four-rotation gameplay composite remain required before runtime or production completion."
-    }
-  ],
-  "batches": [
+      "notes": "Reservation host stand, integrated server station, and commercial POS terminal are source-accepted, remotely preserved, and accepted in exact native four-rotation gameplay review attempt 004. The review evidence checkpoint itself remains pending remote preservation, so production completion is withheld."
+    },
     {
       "id": "furniture-pilot-001",
       "assets": ["furniture-six-burner-range"],
