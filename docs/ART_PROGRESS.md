@@ -12,16 +12,16 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 - Branch: `agent/complete-production-art`
 - Draft PR: https://github.com/Maergoth/rro/pull/2
-- Last verified remote head before this ledger check-in: `9daba41c16eb4803f90a9792535129ddb4844b7c`
-- Verified tree: `9127f0d6644894f6e87714cc51c33f1b08281504`
-- CI: https://github.com/Maergoth/rro/actions/runs/30970633758
+- Last verified remote head before this ledger check-in: `0eec73ba38ba302728893459f39421580e82c78f`
+- Verified tree: `217a1407d5f573286531c36abd6ef03fedfbf769`
+- CI: https://github.com/Maergoth/rro/actions/runs/30971460656
 
 ## Launch coverage
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
 | Furniture directional sets | 229 | 4 | 4 | 4 | 0 |
-| Equipment inventory icons | 45 | 16 | 8 | 8 | 8 |
+| Equipment inventory icons | 45 | 16 | 16 | 16 | 16 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
 | Utility overlays | 5 | 0 | 0 | 0 | 0 |
@@ -34,7 +34,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 | Equipment attachment body-fits | 62 | 0 | 0 | 0 | 0 |
 | Activity → animation bindings | 89 | 0 | 0 | 0 | 0 |
 
-8 equipment icons are production-complete because they are visually accepted, remotely verified, and loaded by the inventory runtime. Furniture and character source art remains preserved but runtime-blocked; other missing lanes remain explicit below.
+16 equipment icons are production-complete because they are visually accepted, remotely verified, and loaded by the inventory runtime. Furniture and character source art remains preserved but runtime-blocked; other missing lanes remain explicit below.
 
 ## Character truth
 
@@ -72,6 +72,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 | character-modular-apron-001 | 48 | failed | failed-needs-remediation | `f01c1e1` | planning/art-qa/character-modular-apron-001.png |
 | equipment-icons-shared-manager-001 | 19 | passed | passed-full-and-gameplay-scale | `c2158fc` | planning/art-qa/equipment-icons-shared-manager-001/contact-128-dark.png |
 | furniture-core-directional-001 | 20 | passed | blocked-not-bound | `9daba41` | planning/art-qa/furniture-core-directional-001/contact-627-dark.png |
+| equipment-icons-owner-server-002 | 19 | passed | passed-full-and-gameplay-scale | `0eec73b` | planning/art-qa/equipment-icons-owner-server-002/contact-128-dark.png |
 
 ## Missing furniture directional sets
 
@@ -148,9 +149,9 @@ This JSON block is part of this same authoritative document and contains every c
   "durableBaseline": {
     "branch": "agent/complete-production-art",
     "pullRequest": "https://github.com/Maergoth/rro/pull/2",
-    "commit": "9daba41c16eb4803f90a9792535129ddb4844b7c",
-    "tree": "9127f0d6644894f6e87714cc51c33f1b08281504",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30970633758"
+    "commit": "0eec73ba38ba302728893459f39421580e82c78f",
+    "tree": "217a1407d5f573286531c36abd6ef03fedfbf769",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30971460656"
   },
   "completionPipeline": [
     "generated",
@@ -175,9 +176,9 @@ This JSON block is part of this same authoritative document and contains every c
       "lane": "Equipment inventory icons",
       "required": 45,
       "present": 16,
-      "sourceAccepted": 8,
-      "remoteVerified": 8,
-      "productionComplete": 8
+      "sourceAccepted": 16,
+      "remoteVerified": 16,
+      "productionComplete": 16
     },
     {
       "lane": "Construction material textures",
@@ -10809,15 +10810,15 @@ This JSON block is part of this same authoritative document and contains every c
         }
       ],
       "present": true,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
-      "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
+      "batchId": "equipment-icons-owner-server-002",
+      "review": "passed",
+      "runtimeQa": "passed-full-and-gameplay-scale",
+      "remoteVerified": true,
+      "qaEvidence": "planning/art-qa/equipment-icons-owner-server-002/contact-128-dark.png",
+      "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_bound_unreviewed"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "owner-leather-ledger",
@@ -10834,15 +10835,15 @@ This JSON block is part of this same authoritative document and contains every c
         }
       ],
       "present": true,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
-      "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
+      "batchId": "equipment-icons-owner-server-002",
+      "review": "passed",
+      "runtimeQa": "passed-full-and-gameplay-scale",
+      "remoteVerified": true,
+      "qaEvidence": "planning/art-qa/equipment-icons-owner-server-002/contact-128-dark.png",
+      "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_bound_unreviewed"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "owner-operations-tablet",
@@ -10859,15 +10860,15 @@ This JSON block is part of this same authoritative document and contains every c
         }
       ],
       "present": true,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
-      "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
+      "batchId": "equipment-icons-owner-server-002",
+      "review": "passed",
+      "runtimeQa": "passed-full-and-gameplay-scale",
+      "remoteVerified": true,
+      "qaEvidence": "planning/art-qa/equipment-icons-owner-server-002/contact-128-dark.png",
+      "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_bound_unreviewed"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "owner-lease-calculator",
@@ -10884,15 +10885,15 @@ This JSON block is part of this same authoritative document and contains every c
         }
       ],
       "present": true,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
-      "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
+      "batchId": "equipment-icons-owner-server-002",
+      "review": "passed",
+      "runtimeQa": "passed-full-and-gameplay-scale",
+      "remoteVerified": true,
+      "qaEvidence": "planning/art-qa/equipment-icons-owner-server-002/contact-128-dark.png",
+      "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_bound_unreviewed"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "owner-tasting-notebook",
@@ -10909,15 +10910,15 @@ This JSON block is part of this same authoritative document and contains every c
         }
       ],
       "present": true,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
-      "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
+      "batchId": "equipment-icons-owner-server-002",
+      "review": "passed",
+      "runtimeQa": "passed-full-and-gameplay-scale",
+      "remoteVerified": true,
+      "qaEvidence": "planning/art-qa/equipment-icons-owner-server-002/contact-128-dark.png",
+      "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_bound_unreviewed"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "owner-networking-cards",
@@ -10934,15 +10935,15 @@ This JSON block is part of this same authoritative document and contains every c
         }
       ],
       "present": true,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
-      "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
+      "batchId": "equipment-icons-owner-server-002",
+      "review": "passed",
+      "runtimeQa": "passed-full-and-gameplay-scale",
+      "remoteVerified": true,
+      "qaEvidence": "planning/art-qa/equipment-icons-owner-server-002/contact-128-dark.png",
+      "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_bound_unreviewed"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "owner-market-scout-pass",
@@ -10959,15 +10960,15 @@ This JSON block is part of this same authoritative document and contains every c
         }
       ],
       "present": true,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
-      "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
+      "batchId": "equipment-icons-owner-server-002",
+      "review": "passed",
+      "runtimeQa": "passed-full-and-gameplay-scale",
+      "remoteVerified": true,
+      "qaEvidence": "planning/art-qa/equipment-icons-owner-server-002/contact-128-dark.png",
+      "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_bound_unreviewed"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "server-click-pen",
@@ -10984,15 +10985,15 @@ This JSON block is part of this same authoritative document and contains every c
         }
       ],
       "present": true,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
-      "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
+      "batchId": "equipment-icons-owner-server-002",
+      "review": "passed",
+      "runtimeQa": "passed-full-and-gameplay-scale",
+      "remoteVerified": true,
+      "qaEvidence": "planning/art-qa/equipment-icons-owner-server-002/contact-128-dark.png",
+      "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_bound_unreviewed"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "server-waterproof-order-pad",
@@ -13564,6 +13565,30 @@ This JSON block is part of this same authoritative document and contains every c
       "qaEvidence": "planning/art-qa/furniture-core-directional-001/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-001/qa.json",
       "notes": "Three source-accepted sets share a 627x627 canvas, common y=590 floor-contact baseline, four coherent directions, unique hashes, transparent corners, and full/gameplay-scale review. Runtime directional binding remains required before production completion.",
+      "qaEvidencePresent": true,
+      "remoteVerified": true
+    },
+    {
+      "id": "equipment-icons-owner-server-002",
+      "assets": [
+        "manager-incident-seal-kit",
+        "owner-leather-ledger",
+        "owner-operations-tablet",
+        "owner-lease-calculator",
+        "owner-tasting-notebook",
+        "owner-networking-cards",
+        "owner-market-scout-pass",
+        "server-click-pen"
+      ],
+      "files": 19,
+      "qa": "passed",
+      "runtimeQa": "passed-full-and-gameplay-scale",
+      "sourcePromptMode": "built-in image generation; eight bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
+      "remoteCommit": "0eec73ba38ba302728893459f39421580e82c78f",
+      "remoteTree": "217a1407d5f573286531c36abd6ef03fedfbf769",
+      "qaEvidence": "planning/art-qa/equipment-icons-owner-server-002/contact-128-dark.png",
+      "qaManifest": "planning/art-qa/equipment-icons-owner-server-002/qa.json",
+      "notes": "Eight distinct manager, owner, and server icons passed full-size and 66px review, exact catalog mapping, unique-content and cross-batch hashing, sRGBA/alpha validation, and a minimum six-pixel transparent margin. High-resolution accepted sources are preserved in the same remote checkpoint.",
       "qaEvidencePresent": true,
       "remoteVerified": true
     }

@@ -3,7 +3,12 @@
   "batchId": "equipment-icons-owner-server-002",
   "catalogSequences": [9, 10, 11, 12, 13, 14, 15, 16],
   "status": "accepted",
-  "repositoryPromotion": "pending-parent-commit-and-push",
+  "repositoryPromotion": "remote-verified",
+  "remotePreservation": {
+    "commit": "0eec73ba38ba302728893459f39421580e82c78f",
+    "tree": "217a1407d5f573286531c36abd6ef03fedfbf769",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30971460656"
+  },
   "source": {
     "generator": "OpenAI built-in image generation",
     "useCase": "stylized-concept",

@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "9daba41c16eb4803f90a9792535129ddb4844b7c",
-    "tree": "9127f0d6644894f6e87714cc51c33f1b08281504",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30970633758"
+    "commit": "0eec73ba38ba302728893459f39421580e82c78f",
+    "tree": "217a1407d5f573286531c36abd6ef03fedfbf769",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30971460656"
   },
   "completionRule": "accepted runtime files committed and uploaded to GitHub",
   "artDirection": {
@@ -31,7 +31,7 @@
   },
   "coverage": {
     "furniture": { "catalogTotal": 229, "acceptedSets": 4, "acceptedDirectionalFiles": 16 },
-    "equipmentIcons": { "catalogTotal": 45, "accepted": 8 },
+    "equipmentIcons": { "catalogTotal": 45, "accepted": 16 },
     "characterSystem": {
       "status": "in_progress",
       "sourceAcceptedBodyPresentations": 2,
@@ -152,6 +152,28 @@
       "qaEvidence": "planning/art-qa/furniture-core-directional-001/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-001/qa.json",
       "notes": "Three source-accepted sets share a 627x627 canvas, common y=590 floor-contact baseline, four coherent directions, unique hashes, transparent corners, and full/gameplay-scale review. Runtime directional binding remains required before production completion."
+    },
+    {
+      "id": "equipment-icons-owner-server-002",
+      "assets": [
+        "manager-incident-seal-kit",
+        "owner-leather-ledger",
+        "owner-operations-tablet",
+        "owner-lease-calculator",
+        "owner-tasting-notebook",
+        "owner-networking-cards",
+        "owner-market-scout-pass",
+        "server-click-pen"
+      ],
+      "files": 19,
+      "qa": "passed",
+      "runtimeQa": "passed-full-and-gameplay-scale",
+      "sourcePromptMode": "built-in image generation; eight bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
+      "remoteCommit": "0eec73ba38ba302728893459f39421580e82c78f",
+      "remoteTree": "217a1407d5f573286531c36abd6ef03fedfbf769",
+      "qaEvidence": "planning/art-qa/equipment-icons-owner-server-002/contact-128-dark.png",
+      "qaManifest": "planning/art-qa/equipment-icons-owner-server-002/qa.json",
+      "notes": "Eight distinct manager, owner, and server icons passed full-size and 66px review, exact catalog mapping, unique-content and cross-batch hashing, sRGBA/alpha validation, and a minimum six-pixel transparent margin. High-resolution accepted sources are preserved in the same remote checkpoint."
     }
   ],
   "preservedButNotProductionComplete": [

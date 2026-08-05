@@ -115,22 +115,37 @@ const furnitureWithArtwork = [...furnitureById.values()].filter((item) => {
   const candidates = [...new Set([item.assetId, item.id].filter(Boolean))];
   return candidates.some((candidate) => existsSync(resolve(generatedFurnitureRoot, `${candidate}.png`)));
 });
-const furnitureArtwork = {
-  complete: furnitureWithArtwork.length,
-  total: furnitureById.size,
-  remaining: furnitureById.size - furnitureWithArtwork.length,
-  coveragePercent: Math.round((furnitureWithArtwork.length / furnitureById.size) * 1_000) / 10,
-};
-
 const roleEquipment = JSON.parse(readFileSync(resolve(dataRoot, "core/role-equipment.json"), "utf8"));
 const roleEquipmentWithArtwork = roleEquipment.items.filter((item) => {
   const fileName = String(item.iconId).replaceAll(".", "-").replaceAll("/", "-");
   return existsSync(resolve(CLIENT, "assets/items", `${fileName}.png`));
 });
+
+const progressDocument = readFileSync(resolve(ROOT, "docs/ART_PROGRESS.md"), "utf8");
+const progressMatch = progressDocument.match(/<!-- ART_LEDGER_JSON_BEGIN -->\r?\n```json\r?\n([\s\S]+?)\r?\n```\r?\n<!-- ART_LEDGER_JSON_END -->/);
+assert.ok(progressMatch, "ART_PROGRESS.md is missing its machine-readable ledger block.");
+const artLedger = JSON.parse(progressMatch[1]);
+const furnitureSummary = artLedger.summaries.find((entry) => entry.lane === "Furniture directional sets");
+const equipmentSummary = artLedger.summaries.find((entry) => entry.lane === "Equipment inventory icons");
+assert.ok(furnitureSummary && equipmentSummary, "ART_PROGRESS.md is missing required furniture/equipment summaries.");
+
+const furnitureArtwork = {
+  catalogTotal: furnitureById.size,
+  legacyReferenceSprites: furnitureWithArtwork.length,
+  directionalSetsPresent: furnitureSummary.present,
+  sourceAccepted: furnitureSummary.sourceAccepted,
+  remoteVerified: furnitureSummary.remoteVerified,
+  productionComplete: furnitureSummary.productionComplete,
+  remainingDirectionalSets: furnitureById.size - furnitureSummary.present,
+  remainingProductionComplete: furnitureById.size - furnitureSummary.productionComplete,
+};
 const roleEquipmentArtwork = {
-  complete: roleEquipmentWithArtwork.length,
-  total: roleEquipment.items.length,
-  remaining: roleEquipment.items.length - roleEquipmentWithArtwork.length,
+  catalogTotal: roleEquipment.items.length,
+  filesPresent: roleEquipmentWithArtwork.length,
+  sourceAccepted: equipmentSummary.sourceAccepted,
+  remoteVerified: equipmentSummary.remoteVerified,
+  productionComplete: equipmentSummary.productionComplete,
+  remainingProductionComplete: roleEquipment.items.length - equipmentSummary.productionComplete,
   proceduralFallbacks: roleEquipment.items.length - roleEquipmentWithArtwork.length,
 };
 
@@ -138,9 +153,9 @@ const artProduction = JSON.parse(readFileSync(resolve(ROOT, "planning/art-produc
 assert.equal(artProduction.schemaVersion, 1, "Art-production queue has an unsupported schema.");
 assert.equal(artProduction.furniture.length, furnitureById.size, "Art-production queue must cover every furniture ID.");
 assert.equal(artProduction.roleItems.length, roleEquipment.items.length, "Art-production queue must cover every role-item icon ID.");
-assert.equal(artProduction.counts.furniture.generated, furnitureArtwork.complete, "Art-production furniture status is stale; run npm run generate:art.");
-assert.equal(artProduction.counts.furniture.remaining, furnitureArtwork.remaining, "Art-production furniture queue is stale; run npm run generate:art.");
-assert.equal(artProduction.counts.roleItems.generated, roleEquipmentArtwork.complete, "Art-production role-item status is stale; run npm run generate:art.");
-assert.equal(artProduction.counts.roleItems.remaining, roleEquipmentArtwork.remaining, "Art-production role-item queue is stale; run npm run generate:art.");
+assert.equal(artProduction.counts.furniture.generated, furnitureArtwork.legacyReferenceSprites, "Art-production furniture reference status is stale; run npm run generate:art.");
+assert.equal(artProduction.counts.furniture.remaining, furnitureArtwork.catalogTotal - furnitureArtwork.legacyReferenceSprites, "Art-production furniture reference queue is stale; run npm run generate:art.");
+assert.equal(artProduction.counts.roleItems.generated, roleEquipmentArtwork.filesPresent, "Art-production role-item file status is stale; run npm run generate:art.");
+assert.equal(artProduction.counts.roleItems.remaining, roleEquipmentArtwork.catalogTotal - roleEquipmentArtwork.filesPresent, "Art-production role-item file queue is stale; run npm run generate:art.");
 
 console.log(JSON.stringify({ ok: true, engine: "Godot 4.4+", scripts: scripts.length, globalClasses: classNames.length, analyzerErrors: errors.length, analyzerWarnings: warnings.length, modularSvgAssets: svgs.length, modularRasterAssets: rasterAssets.length, coreFurnitureSprites: coreFurniture.length, furnitureArtwork, roleEquipmentArtwork, artProductionQueue: artProduction.furniture.length + artProduction.roleItems.length, minigameGrammars: 12, bakedBackgrounds: 0 }, null, 2));

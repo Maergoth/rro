@@ -45,14 +45,17 @@ test("the authoritative art ledger cannot hide missing, failed, local-only, or u
   assert.ok(art.characters.prototypeOutfits.every((entry) => entry.status === "qa_failed_needs_remediation"));
   const equipmentSummary = art.summaries.find((entry) => entry.lane === "Equipment inventory icons");
   const furnitureSummary = art.summaries.find((entry) => entry.lane === "Furniture directional sets");
-  assert.equal(equipmentSummary.productionComplete, 8);
+  assert.equal(equipmentSummary.present, 16);
+  assert.equal(equipmentSummary.sourceAccepted, 16);
+  assert.equal(equipmentSummary.remoteVerified, 16);
+  assert.equal(equipmentSummary.productionComplete, 16);
   assert.equal(furnitureSummary.present, 4);
   assert.equal(furnitureSummary.sourceAccepted, 4);
   assert.equal(furnitureSummary.remoteVerified, 4);
   assert.equal(furnitureSummary.productionComplete, 0);
   assert.equal(art.summaries.find((entry) => entry.lane === "Body animation sets (body × animation)").productionComplete, 0);
   assert.ok(art.reviewedBatches.every((entry) => entry.qaEvidencePresent && entry.remoteVerified));
-  assert.equal(art.equipmentIcons.filter((entry) => entry.productionComplete).length, 8);
+  assert.equal(art.equipmentIcons.filter((entry) => entry.productionComplete).length, 16);
   for (const item of [...art.furniture, ...art.equipmentIcons]) {
     if (!item.productionComplete) continue;
     assert.equal(item.present, true);

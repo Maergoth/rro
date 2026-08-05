@@ -52,7 +52,7 @@ for (const batch of pass.batches) {
       if (!(manifest.contactSheets ?? []).some((sheet) => sheet.path === batch.qaEvidence)) invalid.push(`${batch.id}: primary QA evidence is absent from its manifest`);
       for (const item of manifest.items ?? []) {
         const runtimeFiles = item.runtimePath
-          ? [{ path: item.runtimePath, sha256: item.sha256, label: item.catalogId }]
+          ? [{ path: item.runtimePath, sha256: item.sha256 ?? item.runtimeSha256, label: item.catalogId }]
           : (item.directions ?? []).map((direction) => ({
               path: direction.path,
               sha256: direction.sha256,
