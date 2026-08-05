@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "runtime-isometric-integration-001-attempt-002",
+  "reviewedAt": "2026-08-05T11:16:00Z",
+  "source": {
+    "remoteCommit": "24781e2f08acc97c0189d05af3b6a72285f2cfbd",
+    "remoteTree": "8e9eba95e0c54de9e4513bc6474ff5c5c9722778",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31000326415",
+    "artifactId": 8927966443,
+    "artifactName": "elevated-isometric-runtime-qa",
+    "artifactSha256": "fba441164880464b7a240bcc10ce1a02e70f688092c7e38e4d713214013ebca8"
+  },
+  "automatedGates": {
+    "windowsCi": "passed",
+    "ubuntuCi": "passed",
+    "nativeGodotCapture": "passed",
+    "captureCount": 4,
+    "viewport": [1800, 1100],
+    "minimumSampledColors": 253,
+    "exactArtifactDigestVerified": true,
+    "exactCaptureHashesVerified": true
+  },
+  "visualReview": {
+    "status": "passed-partial-floor-assets",
+    "productionComplete": false,
+    "passed": [
+      "Live-service furniture names and condition strings no longer cover furniture, walls, actors, or one another.",
+      "The sixteen reviewed floor-mounted identities preserve coherent north, east, south, and west facings, footprint contact, scale, clipping, and mixed world depth.",
+      "Small worn and broken badges remain outside affected silhouettes and readable in every capture.",
+      "The premium six-burner range's minor source-baseline variance does not produce visible floating at gameplay scale."
+    ],
+    "blockers": [
+      {
+        "id": "mounted-object-anchor-contract",
+        "assets": ["local-art", "pendants", "plants"],
+        "reason": "Local art and the herb wall still stand on free floor cells, while pendant canopies and stems remain on the floor plane. They require legal wall/ceiling placement, mount-specific source anchors, and mounted depth behavior before runtime acceptance."
+      }
+    ],
+    "acceptedAssetIds": [
+      "banquette",
+      "booth",
+      "dish-machine",
+      "espresso",
+      "furniture-oak-two-top",
+      "furniture-six-burner-range",
+      "furniture-walnut-four-top",
+      "host-stand",
+      "mop-sink",
+      "pass",
+      "prep",
+      "range",
+      "recycling",
+      "service-station",
+      "table-four",
+      "table-two"
+    ],
+    "rejectedAssetIds": ["local-art", "pendants", "plants"],
+    "nextCaptureRequirements": [
+      "Implement wall-edge and ceiling-plane placement plus per-direction mount anchors for local-art, plants, and pendants.",
+      "Validate legal mounted placement, nonblocking navigation, picking, depth, persistence, and multiplayer authority.",
+      "Repeat the exact four-rotation native capture and independently review the three corrected mounted assets."
+    ]
+  },
+  "captures": [
+    {"path": "planning/art-qa/runtime-isometric-integration-001/attempt-002/restaurant-north.png", "sha256": "b4479c8e4f25837f3cd077a375f316f5cb66ad6e6067818004cc47e818bf6010"},
+    {"path": "planning/art-qa/runtime-isometric-integration-001/attempt-002/restaurant-east.png", "sha256": "83d32a25bf7017c882c580680a22c01f0f7637854cec9f8b85b2dc1dc3402c1e"},
+    {"path": "planning/art-qa/runtime-isometric-integration-001/attempt-002/restaurant-south.png", "sha256": "5ed549023a52a60a4dcb8ed018b45187e711b692aea3cb3463494f05aa14e786"},
+    {"path": "planning/art-qa/runtime-isometric-integration-001/attempt-002/restaurant-west.png", "sha256": "6dd25affbe9a401625f3c0ef39d70d983ff22eaeb7f5f224a31720702502c6a4"},
+    {"path": "planning/art-qa/runtime-isometric-integration-001/attempt-002/qa.json", "sha256": "a91418531e0e1e6b289c662a2b21ac79070ff408decbdc22ff6645df44646b99"}
+  ]
+}

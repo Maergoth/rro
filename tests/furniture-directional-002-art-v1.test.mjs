@@ -199,7 +199,7 @@ test("furniture directional batch 002 matches the authoritative catalog and comm
     "table-two",
   ]);
   assert.equal(runtimeContract.capability.projectionIntegrated, true);
-  assert.equal(runtimeContract.capability.projectionAligned, false);
+  assert.equal(runtimeContract.capability.projectionAligned, true);
   assert.equal(runtimeContract.capability.runtimeCompositeAccepted, false);
   assert.equal(runtimeContract.capability.productionComplete, false);
   assert.deepEqual(qa.gates.requiredDirections, DIRECTIONS);

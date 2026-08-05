@@ -34,7 +34,9 @@ test("restaurant floor delegates every grid transform and pick to the elevated i
   assert.doesNotMatch(runtime, /\(point - camera_offset\) \/ cell_pixels/);
   assert.equal(contract.capability.runtimeProjection, "elevated-orthographic-isometric-grid");
   assert.equal(contract.capability.projectionIntegrated, true);
-  assert.equal(contract.capability.runtimeCompositeAccepted, false, "native gameplay QA is still required");
+  assert.equal(contract.capability.runtimeCompositeAccepted, false, "mounted assets still require native gameplay QA");
+  assert.equal(contract.runtimeCompositeAcceptedAssetIds.length, 16);
+  assert.deepEqual(contract.runtimeCompositeBlockedAssetIds, ["local-art", "pendants", "plants"]);
 });
 
 test("zoom keeps the exact fractional world point under the cursor", () => {

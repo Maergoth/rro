@@ -13,6 +13,22 @@ const construction = read("packages/game-data/core/construction.json");
 const roleEquipment = read("packages/game-data/core/role-equipment.json");
 const activities = read("packages/game-data/core/activities.json").activities;
 const furnitureRuntimeContract = read("apps/client-godot/furniture-art-runtime.json");
+const furnitureDefinitions = [
+  ...read("packages/game-data/core/furniture.json"),
+  ...read("packages/game-data/core/furniture-production.json"),
+];
+const furnitureDefinitionByAssetId = new Map(furnitureDefinitions.map((item) => [item.assetId ?? item.id, item]));
+const runtimeCompositeAcceptedAssetIds = new Set(furnitureRuntimeContract.runtimeCompositeAcceptedAssetIds ?? []);
+const runtimeCompositeBlockedAssetIds = new Set(furnitureRuntimeContract.runtimeCompositeBlockedAssetIds ?? []);
+const directionalSelectionBound = furnitureRuntimeContract.capability.directionalTextureSelection === true;
+const latestFurnitureRuntimeQa = [...(pass.runtimeQaAttempts ?? [])].reverse().find((attempt) => Array.isArray(attempt.acceptedAssetIds));
+const runtimeReviewRemoteVerified = Boolean(
+  latestFurnitureRuntimeQa?.evidence
+    && file(latestFurnitureRuntimeQa.evidence)
+    && /^[0-9a-f]{40}$/.test(latestFurnitureRuntimeQa.reviewPreservation?.commit ?? "")
+    && /^[0-9a-f]{40}$/.test(latestFurnitureRuntimeQa.reviewPreservation?.tree ?? "")
+    && /^https:\/\/github\.com\/Maergoth\/rro\/actions\/runs\/\d+$/.test(latestFurnitureRuntimeQa.reviewPreservation?.ci ?? ""),
+);
 const missingCoverage = [];
 const invalid = [];
 const hashes = new Map();
@@ -118,12 +134,47 @@ for (const id of actualFurniture) if (!expectedFurniture.has(id)) invalid.push(`
 
 let furnitureSetsPresent = 0;
 let furnitureSourceAccepted = 0;
+let furnitureRuntimeBoundSets = 0;
+let furnitureProductionCompleteSets = 0;
 for (const item of production.furniture) {
   const paths = pass.artDirection.furnitureDirections.map((direction) => `apps/client-godot/assets/objects/directional/${item.assetId}/${direction}.png`);
   const count = paths.filter((path, index) => png(path, `furniture:${item.assetId}:${pass.artDirection.furnitureDirections[index]}`, [627, 627])).length;
   if (count === paths.length) furnitureSetsPresent += 1;
   else missingCoverage.push({ lane: "furniture", id: item.assetId, missingFiles: paths.filter((path) => !file(path)) });
-  if (count === paths.length && acceptedAssets.get(item.assetId) === "passed") furnitureSourceAccepted += 1;
+  const sourceAccepted = count === paths.length && acceptedAssets.get(item.assetId) === "passed";
+  if (sourceAccepted && !furnitureDefinitionByAssetId.get(item.assetId)?.placement) {
+    invalid.push(`${item.assetId}: source-accepted furniture requires an explicit reviewed placement contract`);
+  }
+  if (sourceAccepted) furnitureSourceAccepted += 1;
+  const runtimeBound = count === paths.length
+    && directionalSelectionBound
+    && furnitureRuntimeContract.capability.projectionAligned === true
+    && runtimeCompositeAcceptedAssetIds.has(item.assetId);
+  if (runtimeBound) furnitureRuntimeBoundSets += 1;
+  if (sourceAccepted && furnitureDefinitionByAssetId.get(item.assetId)?.placement && runtimeBound && runtimeReviewRemoteVerified) furnitureProductionCompleteSets += 1;
+}
+
+for (const assetId of runtimeCompositeAcceptedAssetIds) {
+  if (!furnitureRuntimeContract.acceptedDirectionalAssetIds.includes(assetId)) invalid.push(`${assetId}: runtime composite acceptance is not a directional source-accepted asset`);
+  if (runtimeCompositeBlockedAssetIds.has(assetId)) invalid.push(`${assetId}: cannot be both runtime-composite accepted and blocked`);
+}
+for (const assetId of runtimeCompositeBlockedAssetIds) {
+  if (!furnitureRuntimeContract.acceptedDirectionalAssetIds.includes(assetId)) invalid.push(`${assetId}: runtime composite blocker is not a directional source-accepted asset`);
+}
+if (runtimeCompositeAcceptedAssetIds.size + runtimeCompositeBlockedAssetIds.size !== furnitureRuntimeContract.acceptedDirectionalAssetIds.length) {
+  invalid.push("directional furniture runtime-composite accepted and blocked sets must exactly partition acceptedDirectionalAssetIds");
+}
+if (!latestFurnitureRuntimeQa?.evidence || !file(latestFurnitureRuntimeQa.evidence)) {
+  invalid.push("directional furniture runtime-composite acceptance requires durable native-review evidence");
+} else {
+  const acceptedFromEvidence = [...(latestFurnitureRuntimeQa.acceptedAssetIds ?? [])].sort();
+  const blockedFromEvidence = [...(latestFurnitureRuntimeQa.rejectedAssetIds ?? [])].sort();
+  if (JSON.stringify(acceptedFromEvidence) !== JSON.stringify([...runtimeCompositeAcceptedAssetIds].sort())) {
+    invalid.push("runtimeCompositeAcceptedAssetIds do not match the latest durable native review");
+  }
+  if (JSON.stringify(blockedFromEvidence) !== JSON.stringify([...runtimeCompositeBlockedAssetIds].sort())) {
+    invalid.push("runtimeCompositeBlockedAssetIds do not match the latest durable native review");
+  }
 }
 
 let equipmentIconsPresent = 0;
@@ -208,7 +259,6 @@ for (const outfit of contract.prototypeOutfitFamilies) {
 }
 
 const runtimeFloor = readFileSync(resolve(ROOT, "apps/client-godot/scripts/restaurant_floor.gd"), "utf8");
-const directionalSelectionBound = furnitureRuntimeContract.capability.directionalTextureSelection === true;
 const directionalRuntimeBound = directionalSelectionBound
   && furnitureRuntimeContract.capability.projectionAligned === true
   && furnitureRuntimeContract.capability.runtimeCompositeAccepted === true;
@@ -221,7 +271,17 @@ const equippableCount = roleEquipment.items.filter((item) => item.kind === "equi
 const requiredBodyFinalFrameCells = contract.bodyPresentations.length * contract.directions.length * contract.animations.reduce((sum, animation) => sum + animation.frames, 0);
 
 const coverage = {
-  furniture: { requiredSets: production.furniture.length, presentSets: furnitureSetsPresent, sourceAcceptedSets: furnitureSourceAccepted, directionalSelectionBound, runtimeBound: directionalRuntimeBound },
+  furniture: {
+    requiredSets: production.furniture.length,
+    presentSets: furnitureSetsPresent,
+    sourceAcceptedSets: furnitureSourceAccepted,
+    directionalSelectionBound,
+    projectionAligned: furnitureRuntimeContract.capability.projectionAligned === true,
+    runtimeBoundSets: furnitureRuntimeBoundSets,
+    runtimeReviewRemoteVerified,
+    productionCompleteSets: furnitureProductionCompleteSets,
+    runtimeBound: directionalRuntimeBound,
+  },
   equipmentIcons: { required: production.roleItems.length, present: equipmentIconsPresent, runtimeLoaderReady: equipmentRuntimeBound },
   construction: { requiredMaterials: construction.surfaces.length + construction.wallStyles.length, presentMaterials: constructionMaterialsPresent, requiredOpeningSets: pass.launchScope.construction.openingTypes.length, presentOpeningSets: openingSetsPresent, requiredUtilityOverlays: pass.launchScope.construction.utilityOverlays.length, presentUtilityOverlays: utilityOverlaysPresent },
   world: { required: pass.launchScope.world.length, present: worldAssetsPresent },

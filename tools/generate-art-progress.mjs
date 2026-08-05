@@ -11,6 +11,11 @@ const production = readJson("planning/art-production.json");
 const characters = readJson("planning/character-art-catalog.json");
 const characterApplicability = readJson("planning/character-launch-applicability-v1.json");
 const construction = readJson("packages/game-data/core/construction.json");
+const furnitureDefinitions = [
+  ...readJson("packages/game-data/core/furniture.json"),
+  ...readJson("packages/game-data/core/furniture-production.json"),
+];
+const furnitureDefinitionByAssetId = new Map(furnitureDefinitions.map((item) => [item.assetId ?? item.id, item]));
 const roleEquipment = readJson("packages/game-data/core/role-equipment.json");
 const activities = readJson("packages/game-data/core/activities.json").activities;
 const furnitureDirections = pass.artDirection.furnitureDirections;
@@ -52,6 +57,13 @@ const pendingBatches = (pass.pendingBatches ?? []).map((batch) => ({
 const runtimeQaAttempts = (pass.runtimeQaAttempts ?? []).map((attempt) => ({
   ...attempt,
   evidencePresent: Boolean(attempt.evidence && present(attempt.evidence)),
+  reviewRemoteVerified: Boolean(
+    attempt.evidence
+      && present(attempt.evidence)
+      && /^[0-9a-f]{40}$/.test(attempt.reviewPreservation?.commit ?? "")
+      && /^[0-9a-f]{40}$/.test(attempt.reviewPreservation?.tree ?? "")
+      && /^https:\/\/github\.com\/Maergoth\/rro\/actions\/runs\/\d+$/.test(attempt.reviewPreservation?.ci ?? ""),
+  ),
 }));
 const reviewBatches = [...batches, ...pendingBatches];
 
@@ -74,21 +86,31 @@ function status({ isPresent, review, remoteVerified, runtimeBound, productionCom
 }
 
 const directionalSelectionBound = furnitureRuntimeContract.capability.directionalTextureSelection === true;
-const directionalRuntimeBound = directionalSelectionBound
-  && furnitureRuntimeContract.capability.projectionAligned === true
-  && furnitureRuntimeContract.capability.runtimeCompositeAccepted === true;
+const runtimeCompositeAcceptedAssetIds = new Set(furnitureRuntimeContract.runtimeCompositeAcceptedAssetIds ?? []);
+const runtimeCompositeBlockedAssetIds = new Set(furnitureRuntimeContract.runtimeCompositeBlockedAssetIds ?? []);
+const projectionAligned = furnitureRuntimeContract.capability.projectionAligned === true;
+const latestFurnitureRuntimeQa = [...runtimeQaAttempts].reverse().find((attempt) => Array.isArray(attempt.acceptedAssetIds));
+const runtimeReviewRemoteVerified = latestFurnitureRuntimeQa?.reviewRemoteVerified === true;
 const equipmentRuntimeLoader = runtimeInventory.includes("res://assets/items/%s.png");
 const characterRuntimeBound = runtimeFloor.includes("assets/characters") && !runtimeFloor.includes("draw_circle(draw_position, 10, primary)");
 
 const furniture = production.furniture.map((item) => {
   const runtimeFiles = files(furnitureDirections.map((direction) => `apps/client-godot/assets/objects/directional/${item.assetId}/${direction}.png`));
   const review = reviewFor(item.assetId);
+  const definition = furnitureDefinitionByAssetId.get(item.assetId);
+  const placementDeclared = Boolean(definition?.placement);
   const isPresent = allPresent(runtimeFiles);
-  const runtimeBound = isPresent && directionalRuntimeBound;
-  const productionComplete = isPresent && review.review === "passed" && review.qaEvidencePresent && review.remoteVerified && runtimeBound;
+  const sourceAccepted = isPresent && placementDeclared && review.review === "passed" && review.qaEvidencePresent;
+  const runtimeBound = isPresent && directionalSelectionBound && projectionAligned && runtimeCompositeAcceptedAssetIds.has(item.assetId);
+  const productionComplete = sourceAccepted && review.remoteVerified && runtimeBound && runtimeReviewRemoteVerified;
   return {
     id: item.id, assetId: item.assetId, name: item.name, category: item.category, sourcePack: item.sourcePack,
-    requiredDirections: furnitureDirections, files: runtimeFiles, present: isPresent, ...review, directionalSelectionBound: isPresent && directionalSelectionBound, runtimeBound, productionComplete,
+    requiredDirections: furnitureDirections, files: runtimeFiles, present: isPresent, ...review,
+    placement: definition?.placement ?? null, placementDeclared, sourceAccepted,
+    directionalSelectionBound: isPresent && directionalSelectionBound,
+    runtimeCompositeAccepted: runtimeCompositeAcceptedAssetIds.has(item.assetId),
+    runtimeCompositeBlocked: runtimeCompositeBlockedAssetIds.has(item.assetId),
+    runtimeBound, productionComplete,
     status: status({ isPresent, review: review.review, remoteVerified: review.remoteVerified, runtimeBound, productionComplete }),
   };
 });
@@ -186,7 +208,7 @@ const legacyObjectRoot = relative("apps/client-godot/assets/objects/generated");
 const legacyObjectPngs = existsSync(legacyObjectRoot) ? readdirSync(legacyObjectRoot).filter((name) => name.endsWith(".png") && statSync(resolve(legacyObjectRoot, name)).isFile()).sort() : [];
 
 const summaries = [
-  { lane: "Furniture directional sets", required: furniture.length, present: furniture.filter((item) => item.present).length, sourceAccepted: furniture.filter((item) => item.present && item.qaEvidencePresent && item.review === "passed").length, remoteVerified: furniture.filter((item) => item.present && item.qaEvidencePresent && item.remoteVerified).length, productionComplete: furniture.filter((item) => item.productionComplete).length },
+  { lane: "Furniture directional sets", required: furniture.length, present: furniture.filter((item) => item.present).length, sourceAccepted: furniture.filter((item) => item.sourceAccepted).length, remoteVerified: furniture.filter((item) => item.sourceAccepted && item.remoteVerified).length, productionComplete: furniture.filter((item) => item.productionComplete).length },
   { lane: "Equipment inventory icons", required: equipmentIcons.length, present: equipmentIcons.filter((item) => item.present).length, sourceAccepted: equipmentIcons.filter((item) => item.present && item.qaEvidencePresent && item.review === "passed").length, remoteVerified: equipmentIcons.filter((item) => item.present && item.qaEvidencePresent && item.remoteVerified).length, productionComplete: equipmentIcons.filter((item) => item.productionComplete).length },
   { lane: "Construction material textures", required: constructionMaterials.length, present: constructionMaterials.filter((item) => item.present).length, sourceAccepted: 0, remoteVerified: 0, productionComplete: 0 },
   { lane: "Opening geometry sets (4 directions each)", required: openingModules.length, present: openingModules.filter((item) => item.present).length, sourceAccepted: 0, remoteVerified: 0, productionComplete: 0 },
@@ -217,7 +239,15 @@ const ledger = {
   durableBaseline: { branch: pass.branch, pullRequest: pass.pullRequest, ...pass.lastVerifiedRemote },
   completionPipeline: ["generated", "processed", "raster_validated", "visual_accepted", "runtime_bound", "remote_verified", "ci_green"],
   completionRule: "An asset is production-complete only when every pipeline gate passes. Mere existence, metadata bindings, procedural fallbacks, and quarantined/local-only files never count.",
-  runtimeCapabilities: { directionalFurniture: furnitureRuntimeContract.capability },
+  runtimeCapabilities: {
+    directionalFurniture: {
+      ...furnitureRuntimeContract.capability,
+      acceptedDirectionalAssetIds: furnitureRuntimeContract.acceptedDirectionalAssetIds,
+      runtimeCompositeAcceptedAssetIds: furnitureRuntimeContract.runtimeCompositeAcceptedAssetIds,
+      runtimeCompositeBlockedAssetIds: furnitureRuntimeContract.runtimeCompositeBlockedAssetIds,
+      runtimeReviewRemoteVerified,
+    },
+  },
   summaries,
   furniture,
   equipmentIcons,
@@ -255,7 +285,7 @@ const ledger = {
   quarantinedWork: pass.quarantinedWork,
   contractGaps: [
     "Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.",
-    "Complete the mounted-object placement/anchor contract and pass a corrected native Godot composite; attempt 001 proved the elevated projection while rejecting floor-mounted wall/ceiling decor and always-on labels.",
+    "Complete mounted-object server placement, builder snapping, runtime anchors, and depth, then pass a third native Godot composite for local-art, plants, and pendants; attempt 002 accepted the other sixteen floor assets.",
     "Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.",
     "Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete.",
   ],
@@ -288,8 +318,8 @@ lines.push("| Lane | Required units | Files/sets present | Source accepted | Rem
 lines.push("|---|---:|---:|---:|---:|---:|");
 for (const row of summaries) lines.push(`| ${row.lane} | ${row.required} | ${row.present} | ${row.sourceAccepted} | ${row.remoteVerified} | ${row.productionComplete} |`);
 lines.push("");
-lines.push(`${equipmentIcons.filter((item) => item.productionComplete).length} equipment icons are production-complete because they are visually accepted, remotely verified, and loaded by the inventory runtime. Furniture and character source art remains preserved but runtime-blocked; other missing lanes remain explicit below.`);
-lines.push(`Directional furniture texture selection is ${yes(directionalSelectionBound)}; final projection alignment is ${yes(furnitureRuntimeContract.capability.projectionAligned === true)} and runtime composite acceptance is ${yes(furnitureRuntimeContract.capability.runtimeCompositeAccepted === true)}. This partial binding does not make any furniture set production-complete.`);
+lines.push(`${equipmentIcons.filter((item) => item.productionComplete).length} equipment icons and ${furniture.filter((item) => item.productionComplete).length} furniture directional sets are production-complete because their exact reviewed bytes are visually accepted, runtime-bound, remotely verified, and CI-green. Character art and the other missing lanes remain explicit below.`);
+lines.push(`Directional furniture texture selection is ${yes(directionalSelectionBound)} and projection alignment is ${yes(projectionAligned)}. Native attempt 002 accepted ${runtimeCompositeAcceptedAssetIds.size}/${furniture.filter((item) => item.present).length} present sets; its durable review checkpoint is remote-verified: ${yes(runtimeReviewRemoteVerified)}. ${[...runtimeCompositeBlockedAssetIds].map((id) => `\`${id}\``).join(", ")} remain blocked on legal wall/ceiling mounting.`);
 lines.push("");
 lines.push("## Character truth");
 lines.push("");

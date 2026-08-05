@@ -76,10 +76,16 @@ test("the runtime contract covers every source-accepted directional set without 
   assert.equal(contract.capability.directionalTextureSelection, true);
   assert.equal(contract.capability.runtimeProjection, "elevated-orthographic-isometric-grid");
   assert.equal(contract.capability.projectionIntegrated, true);
-  assert.equal(contract.capability.projectionAligned, false);
+  assert.equal(contract.capability.projectionAligned, true);
   assert.equal(contract.capability.runtimeCompositeAccepted, false);
   assert.equal(contract.capability.productionComplete, false);
-  assert.match(contract.capability.remainingVisualGate, /real Godot gameplay scene.*footprint alignment/i);
+  assert.deepEqual(contract.runtimeCompositeAcceptedAssetIds, ["banquette", "booth", "dish-machine", "espresso", "furniture-oak-two-top", "furniture-six-burner-range", "furniture-walnut-four-top", "host-stand", "mop-sink", "pass", "prep", "range", "recycling", "service-station", "table-four", "table-two"]);
+  assert.deepEqual(contract.runtimeCompositeBlockedAssetIds, ["local-art", "pendants", "plants"]);
+  assert.deepEqual(
+    [...contract.runtimeCompositeAcceptedAssetIds, ...contract.runtimeCompositeBlockedAssetIds].sort(),
+    [...contract.acceptedDirectionalAssetIds].sort(),
+  );
+  assert.match(contract.capability.remainingVisualGate, /wall and ceiling mounting.*local-art.*plants.*pendants/i);
 });
 
 test("common floor-contact anchoring uses uniform scale and never stretches directional textures", () => {

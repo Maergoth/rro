@@ -36,6 +36,29 @@
     "table-four",
     "table-two"
   ],
+  "runtimeCompositeAcceptedAssetIds": [
+    "banquette",
+    "booth",
+    "dish-machine",
+    "espresso",
+    "furniture-oak-two-top",
+    "furniture-six-burner-range",
+    "furniture-walnut-four-top",
+    "host-stand",
+    "mop-sink",
+    "pass",
+    "prep",
+    "range",
+    "recycling",
+    "service-station",
+    "table-four",
+    "table-two"
+  ],
+  "runtimeCompositeBlockedAssetIds": [
+    "local-art",
+    "pendants",
+    "plants"
+  ],
   "capability": {
     "directionalTextureSelection": true,
     "commonFloorContactPivot": true,
@@ -43,9 +66,9 @@
     "stableFurnitureDrawOrder": true,
     "runtimeProjection": "elevated-orthographic-isometric-grid",
     "projectionIntegrated": true,
-    "projectionAligned": false,
+    "projectionAligned": true,
     "runtimeCompositeAccepted": false,
     "productionComplete": false,
-    "remainingVisualGate": "Capture the integrated elevated-isometric restaurant in a real Godot gameplay scene and accept footprint alignment, wall edges, mixed world depth, occlusion, and gameplay-scale legibility."
+    "remainingVisualGate": "Implement legal wall and ceiling mounting plus mount-specific anchors and depth for local-art, plants, and pendants, then pass another exact four-rotation native Godot gameplay capture."
   }
 }

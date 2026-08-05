@@ -137,6 +137,7 @@ const furnitureArtwork = {
   directionalSelectionBound: artLedger.runtimeCapabilities.directionalFurniture.directionalTextureSelection,
   projectionAligned: artLedger.runtimeCapabilities.directionalFurniture.projectionAligned,
   runtimeCompositeAccepted: artLedger.runtimeCapabilities.directionalFurniture.runtimeCompositeAccepted,
+  runtimeCompositeAcceptedSets: artLedger.runtimeCapabilities.directionalFurniture.runtimeCompositeAcceptedAssetIds.length,
   sourceAccepted: furnitureSummary.sourceAccepted,
   remoteVerified: furnitureSummary.remoteVerified,
   productionComplete: furnitureSummary.productionComplete,
