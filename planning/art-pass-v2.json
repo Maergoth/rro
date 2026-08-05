@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "c2158fc261b1ebff9fb5cf2cbff932254593a914",
-    "tree": "e533bccc199ea14378258d58da49d31d43be18a9",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30969066004"
+    "commit": "9daba41c16eb4803f90a9792535129ddb4844b7c",
+    "tree": "9127f0d6644894f6e87714cc51c33f1b08281504",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30970633758"
   },
   "completionRule": "accepted runtime files committed and uploaded to GitHub",
   "artDirection": {
@@ -30,7 +30,7 @@
     ]
   },
   "coverage": {
-    "furniture": { "catalogTotal": 229, "acceptedSets": 1, "acceptedDirectionalFiles": 4 },
+    "furniture": { "catalogTotal": 229, "acceptedSets": 4, "acceptedDirectionalFiles": 16 },
     "equipmentIcons": { "catalogTotal": 45, "accepted": 8 },
     "characterSystem": {
       "status": "in_progress",
@@ -139,6 +139,19 @@
       "qaEvidence": "planning/art-qa/equipment-icons-shared-manager-001/contact-128-dark.png",
       "qaManifest": "planning/art-qa/equipment-icons-shared-manager-001/qa.json",
       "notes": "Eight distinct icons passed full-size and 66px review, exact catalog mapping, unique-content hashing, sRGBA/alpha validation, and a minimum six-pixel transparent margin. High-resolution accepted sources are preserved in the same remote checkpoint."
+    },
+    {
+      "id": "furniture-core-directional-001",
+      "assets": ["table-two", "table-four", "host-stand"],
+      "files": 20,
+      "qa": "passed",
+      "runtimeQa": "blocked-not-bound",
+      "sourcePromptMode": "built-in image generation; identity-referenced rigid four-direction elevated isometric sets with chroma removal and common-pivot normalization",
+      "remoteCommit": "9daba41c16eb4803f90a9792535129ddb4844b7c",
+      "remoteTree": "9127f0d6644894f6e87714cc51c33f1b08281504",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-001/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-001/qa.json",
+      "notes": "Three source-accepted sets share a 627x627 canvas, common y=590 floor-contact baseline, four coherent directions, unique hashes, transparent corners, and full/gameplay-scale review. Runtime directional binding remains required before production completion."
     }
   ],
   "preservedButNotProductionComplete": [

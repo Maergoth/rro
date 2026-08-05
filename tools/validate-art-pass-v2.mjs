@@ -44,15 +44,26 @@ for (const batch of pass.batches) {
     if (!file(batch.qaManifest)) invalid.push(`${batch.id}: missing QA manifest ${batch.qaManifest}`);
     else {
       const manifest = read(batch.qaManifest);
-      if (manifest.batchId !== batch.id || manifest.status !== "accepted") invalid.push(`${batch.id}: QA manifest identity/status mismatch`);
+      const manifestStatus = manifest.status ?? manifest.artReviewStatus;
+      if (manifest.batchId !== batch.id || manifestStatus !== "accepted") invalid.push(`${batch.id}: QA manifest identity/status mismatch`);
       const manifestAssets = (manifest.items ?? []).map((item) => item.catalogId).sort();
       const batchAssets = [...batch.assets].sort();
       if (JSON.stringify(manifestAssets) !== JSON.stringify(batchAssets)) invalid.push(`${batch.id}: QA manifest assets do not exactly match the batch`);
       if (!(manifest.contactSheets ?? []).some((sheet) => sheet.path === batch.qaEvidence)) invalid.push(`${batch.id}: primary QA evidence is absent from its manifest`);
       for (const item of manifest.items ?? []) {
-        if (!file(item.runtimePath)) { invalid.push(`${batch.id}: QA runtime file is missing: ${item.runtimePath}`); continue; }
-        const digest = createHash("sha256").update(readFileSync(resolve(ROOT, item.runtimePath))).digest("hex");
-        if (digest !== item.sha256) invalid.push(`${batch.id}: QA hash mismatch for ${item.catalogId}`);
+        const runtimeFiles = item.runtimePath
+          ? [{ path: item.runtimePath, sha256: item.sha256, label: item.catalogId }]
+          : (item.directions ?? []).map((direction) => ({
+              path: direction.path,
+              sha256: direction.sha256,
+              label: `${item.catalogId}:${direction.direction}`,
+            }));
+        if (runtimeFiles.length === 0) invalid.push(`${batch.id}: QA manifest has no runtime files for ${item.catalogId}`);
+        for (const runtime of runtimeFiles) {
+          if (!file(runtime.path)) { invalid.push(`${batch.id}: QA runtime file is missing: ${runtime.path}`); continue; }
+          const digest = createHash("sha256").update(readFileSync(resolve(ROOT, runtime.path))).digest("hex");
+          if (digest !== runtime.sha256) invalid.push(`${batch.id}: QA hash mismatch for ${runtime.label}`);
+        }
       }
     }
   }

@@ -12,15 +12,15 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 - Branch: `agent/complete-production-art`
 - Draft PR: https://github.com/Maergoth/rro/pull/2
-- Last verified remote head before this ledger check-in: `c2158fc261b1ebff9fb5cf2cbff932254593a914`
-- Verified tree: `e533bccc199ea14378258d58da49d31d43be18a9`
-- CI: https://github.com/Maergoth/rro/actions/runs/30969066004
+- Last verified remote head before this ledger check-in: `9daba41c16eb4803f90a9792535129ddb4844b7c`
+- Verified tree: `9127f0d6644894f6e87714cc51c33f1b08281504`
+- CI: https://github.com/Maergoth/rro/actions/runs/30970633758
 
 ## Launch coverage
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
-| Furniture directional sets | 229 | 4 | 1 | 1 | 0 |
+| Furniture directional sets | 229 | 4 | 4 | 4 | 0 |
 | Equipment inventory icons | 45 | 8 | 8 | 8 | 8 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
@@ -71,10 +71,11 @@ Only the final state is production-complete. Existing files, historical narrativ
 | character-modular-classic-001 | 80 | mixed | failed-needs-remediation | `d99c458` | planning/art-qa/character-modular-classic-001.png |
 | character-modular-apron-001 | 48 | failed | failed-needs-remediation | `f01c1e1` | planning/art-qa/character-modular-apron-001.png |
 | equipment-icons-shared-manager-001 | 19 | passed | passed-full-and-gameplay-scale | `c2158fc` | planning/art-qa/equipment-icons-shared-manager-001/contact-128-dark.png |
+| furniture-core-directional-001 | 20 | passed | blocked-not-bound | `9daba41` | planning/art-qa/furniture-core-directional-001/contact-627-dark.png |
 
 ## Missing furniture directional sets
 
-One of 229 elevated four-direction sets is present. The 20 attractive overhead singles are preserved as references but do not satisfy this camera contract.
+4 of 229 elevated four-direction sets are present. The 20 attractive overhead singles are preserved as references but do not satisfy this camera contract.
 
 ### Dining — 38 missing
 
@@ -147,9 +148,9 @@ This JSON block is part of this same authoritative document and contains every c
   "durableBaseline": {
     "branch": "agent/complete-production-art",
     "pullRequest": "https://github.com/Maergoth/rro/pull/2",
-    "commit": "c2158fc261b1ebff9fb5cf2cbff932254593a914",
-    "tree": "e533bccc199ea14378258d58da49d31d43be18a9",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30969066004"
+    "commit": "9daba41c16eb4803f90a9792535129ddb4844b7c",
+    "tree": "9127f0d6644894f6e87714cc51c33f1b08281504",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30970633758"
   },
   "completionPipeline": [
     "generated",
@@ -166,8 +167,8 @@ This JSON block is part of this same authoritative document and contains every c
       "lane": "Furniture directional sets",
       "required": 229,
       "present": 4,
-      "sourceAccepted": 1,
-      "remoteVerified": 1,
+      "sourceAccepted": 4,
+      "remoteVerified": 4,
       "productionComplete": 0
     },
     {
@@ -303,15 +304,15 @@ This JSON block is part of this same authoritative document and contains every c
         }
       ],
       "present": true,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
-      "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
+      "batchId": "furniture-core-directional-001",
+      "review": "passed",
+      "runtimeQa": "blocked-not-bound",
+      "remoteVerified": true,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-001/contact-627-dark.png",
+      "qaEvidencePresent": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "present_unreviewed"
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "table-four",
@@ -348,15 +349,15 @@ This JSON block is part of this same authoritative document and contains every c
         }
       ],
       "present": true,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
-      "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
+      "batchId": "furniture-core-directional-001",
+      "review": "passed",
+      "runtimeQa": "blocked-not-bound",
+      "remoteVerified": true,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-001/contact-627-dark.png",
+      "qaEvidencePresent": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "present_unreviewed"
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "booth",
@@ -483,15 +484,15 @@ This JSON block is part of this same authoritative document and contains every c
         }
       ],
       "present": true,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
-      "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
+      "batchId": "furniture-core-directional-001",
+      "review": "passed",
+      "runtimeQa": "blocked-not-bound",
+      "remoteVerified": true,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-001/contact-627-dark.png",
+      "qaEvidencePresent": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "present_unreviewed"
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "service-station",
@@ -13544,6 +13545,25 @@ This JSON block is part of this same authoritative document and contains every c
       "qaEvidence": "planning/art-qa/equipment-icons-shared-manager-001/contact-128-dark.png",
       "qaManifest": "planning/art-qa/equipment-icons-shared-manager-001/qa.json",
       "notes": "Eight distinct icons passed full-size and 66px review, exact catalog mapping, unique-content hashing, sRGBA/alpha validation, and a minimum six-pixel transparent margin. High-resolution accepted sources are preserved in the same remote checkpoint.",
+      "qaEvidencePresent": true,
+      "remoteVerified": true
+    },
+    {
+      "id": "furniture-core-directional-001",
+      "assets": [
+        "table-two",
+        "table-four",
+        "host-stand"
+      ],
+      "files": 20,
+      "qa": "passed",
+      "runtimeQa": "blocked-not-bound",
+      "sourcePromptMode": "built-in image generation; identity-referenced rigid four-direction elevated isometric sets with chroma removal and common-pivot normalization",
+      "remoteCommit": "9daba41c16eb4803f90a9792535129ddb4844b7c",
+      "remoteTree": "9127f0d6644894f6e87714cc51c33f1b08281504",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-001/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-001/qa.json",
+      "notes": "Three source-accepted sets share a 627x627 canvas, common y=590 floor-contact baseline, four coherent directions, unique hashes, transparent corners, and full/gameplay-scale review. Runtime directional binding remains required before production completion.",
       "qaEvidencePresent": true,
       "remoteVerified": true
     }

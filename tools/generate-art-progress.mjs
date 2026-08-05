@@ -284,7 +284,7 @@ for (const batch of batches) lines.push(`| ${batch.id} | ${batch.files} | ${batc
 lines.push("");
 lines.push("## Missing furniture directional sets");
 lines.push("");
-lines.push(`One of ${furniture.length} elevated four-direction sets is present. The ${legacyObjectPngs.length} attractive overhead singles are preserved as references but do not satisfy this camera contract.`);
+lines.push(`${furniture.filter((item) => item.present).length} of ${furniture.length} elevated four-direction sets are present. The ${legacyObjectPngs.length} attractive overhead singles are preserved as references but do not satisfy this camera contract.`);
 lines.push("");
 for (const [category, items] of Object.entries(missingFurnitureByCategory)) {
   lines.push(`### ${category} — ${items.length} missing`);
