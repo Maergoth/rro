@@ -2,7 +2,12 @@
   "schemaVersion": 1,
   "batchId": "equipment-icons-chef-cook-host-005",
   "status": "accepted",
-  "repositoryPromotion": "pending-parent-commit-and-push",
+  "repositoryPromotion": "remote-verified",
+  "remotePreservation": {
+    "commit": "e15aa0031a8477be68b022f5fcfbd6d30309fe9e",
+    "tree": "27350dbb6138e1e75d1fa56219a2509e3bf72924",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30977634704"
+  },
   "catalogSequences": [
     33,
     34,
