@@ -57,6 +57,10 @@ test("the authoritative art ledger cannot hide missing, failed, local-only, or u
   assert.equal(furnitureSummary.sourceAccepted, 4);
   assert.equal(furnitureSummary.remoteVerified, 4);
   assert.equal(furnitureSummary.productionComplete, 0);
+  assert.equal(art.runtimeCapabilities.directionalFurniture.directionalTextureSelection, true);
+  assert.equal(art.runtimeCapabilities.directionalFurniture.projectionAligned, false);
+  assert.equal(art.runtimeCapabilities.directionalFurniture.runtimeCompositeAccepted, false);
+  assert.ok(art.furniture.filter((entry) => entry.present).every((entry) => entry.directionalSelectionBound === true && entry.runtimeBound === false));
   assert.equal(art.summaries.find((entry) => entry.lane === "Body animation sets (body × animation)").productionComplete, 0);
   assert.ok(art.reviewedBatches.every((entry) => entry.qaEvidencePresent && entry.remoteVerified));
   assert.equal(art.equipmentIcons.filter((entry) => entry.productionComplete).length, 16);

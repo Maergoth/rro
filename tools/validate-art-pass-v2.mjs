@@ -12,6 +12,7 @@ const pass = read("planning/art-pass-v2.json");
 const construction = read("packages/game-data/core/construction.json");
 const roleEquipment = read("packages/game-data/core/role-equipment.json");
 const activities = read("packages/game-data/core/activities.json").activities;
+const furnitureRuntimeContract = read("apps/client-godot/furniture-art-runtime.json");
 const missingCoverage = [];
 const invalid = [];
 const hashes = new Map();
@@ -191,7 +192,10 @@ for (const outfit of contract.prototypeOutfitFamilies) {
 }
 
 const runtimeFloor = readFileSync(resolve(ROOT, "apps/client-godot/scripts/restaurant_floor.gd"), "utf8");
-const directionalRuntimeBound = runtimeFloor.includes("assets/objects/directional") && runtimeFloor.includes("direction");
+const directionalSelectionBound = furnitureRuntimeContract.capability.directionalTextureSelection === true;
+const directionalRuntimeBound = directionalSelectionBound
+  && furnitureRuntimeContract.capability.projectionAligned === true
+  && furnitureRuntimeContract.capability.runtimeCompositeAccepted === true;
 const characterRuntimeBound = runtimeFloor.includes("assets/characters") && !runtimeFloor.includes("draw_circle(draw_position, 10, primary)");
 const inventoryRuntime = readFileSync(resolve(ROOT, "apps/client-godot/scripts/inventory_panel.gd"), "utf8");
 const equipmentRuntimeBound = inventoryRuntime.includes("res://assets/items/%s.png");
@@ -201,7 +205,7 @@ const equippableCount = roleEquipment.items.filter((item) => item.kind === "equi
 const requiredBodyFinalFrameCells = contract.bodyPresentations.length * contract.directions.length * contract.animations.reduce((sum, animation) => sum + animation.frames, 0);
 
 const coverage = {
-  furniture: { requiredSets: production.furniture.length, presentSets: furnitureSetsPresent, sourceAcceptedSets: furnitureSourceAccepted, runtimeBound: directionalRuntimeBound },
+  furniture: { requiredSets: production.furniture.length, presentSets: furnitureSetsPresent, sourceAcceptedSets: furnitureSourceAccepted, directionalSelectionBound, runtimeBound: directionalRuntimeBound },
   equipmentIcons: { required: production.roleItems.length, present: equipmentIconsPresent, runtimeLoaderReady: equipmentRuntimeBound },
   construction: { requiredMaterials: construction.surfaces.length + construction.wallStyles.length, presentMaterials: constructionMaterialsPresent, requiredOpeningSets: pass.launchScope.construction.openingTypes.length, presentOpeningSets: openingSetsPresent, requiredUtilityOverlays: pass.launchScope.construction.utilityOverlays.length, presentUtilityOverlays: utilityOverlaysPresent },
   world: { required: pass.launchScope.world.length, present: worldAssetsPresent },

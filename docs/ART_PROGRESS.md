@@ -35,6 +35,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 | Activity → animation bindings | 89 | 0 | 0 | 0 | 0 |
 
 16 equipment icons are production-complete because they are visually accepted, remotely verified, and loaded by the inventory runtime. Furniture and character source art remains preserved but runtime-blocked; other missing lanes remain explicit below.
+Directional furniture texture selection is yes; final projection alignment is no and runtime composite acceptance is no. This partial binding does not make any furniture set production-complete.
 
 ## Character truth
 
@@ -172,6 +173,19 @@ This JSON block is part of this same authoritative document and contains every c
     "ci_green"
   ],
   "completionRule": "An asset is production-complete only when every pipeline gate passes. Mere existence, metadata bindings, procedural fallbacks, and quarantined/local-only files never count.",
+  "runtimeCapabilities": {
+    "directionalFurniture": {
+      "directionalTextureSelection": true,
+      "commonFloorContactPivot": true,
+      "uniformScaleWithoutStretching": true,
+      "stableFurnitureDrawOrder": true,
+      "runtimeProjection": "orthogonal-grid",
+      "projectionAligned": false,
+      "runtimeCompositeAccepted": false,
+      "productionComplete": false,
+      "remainingVisualGate": "Render the accepted directional sets in a real Godot gameplay scene after the floor is converted to the final elevated isometric projection; review footprint alignment, occlusion, and gameplay-scale legibility."
+    }
+  },
   "summaries": [
     {
       "lane": "Furniture directional sets",
@@ -320,6 +334,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-001/contact-627-dark.png",
       "qaEvidencePresent": true,
+      "directionalSelectionBound": true,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "source_accepted_runtime_blocked"
@@ -365,6 +380,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-001/contact-627-dark.png",
       "qaEvidencePresent": true,
+      "directionalSelectionBound": true,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "source_accepted_runtime_blocked"
@@ -410,6 +426,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -455,6 +472,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -500,6 +518,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-001/contact-627-dark.png",
       "qaEvidencePresent": true,
+      "directionalSelectionBound": true,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "source_accepted_runtime_blocked"
@@ -545,6 +564,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -590,6 +610,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -635,6 +656,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -680,6 +702,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -725,6 +748,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -770,6 +794,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -815,6 +840,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -860,6 +886,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -905,6 +932,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -950,6 +978,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -995,6 +1024,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1040,6 +1070,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1085,6 +1116,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1130,6 +1162,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1175,6 +1208,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1220,6 +1254,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1265,6 +1300,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1310,6 +1346,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1355,6 +1392,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1400,6 +1438,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1445,6 +1484,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-pilot-001.png",
       "qaEvidencePresent": true,
+      "directionalSelectionBound": true,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "source_accepted_runtime_blocked"
@@ -1490,6 +1530,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1535,6 +1576,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1580,6 +1622,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1625,6 +1668,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1670,6 +1714,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1715,6 +1760,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1760,6 +1806,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1805,6 +1852,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1850,6 +1898,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1895,6 +1944,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1940,6 +1990,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -1985,6 +2036,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2030,6 +2082,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2075,6 +2128,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2120,6 +2174,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2165,6 +2220,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2210,6 +2266,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2255,6 +2312,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2300,6 +2358,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2345,6 +2404,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2390,6 +2450,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2435,6 +2496,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2480,6 +2542,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2525,6 +2588,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2570,6 +2634,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2615,6 +2680,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2660,6 +2726,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2705,6 +2772,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2750,6 +2818,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2795,6 +2864,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2840,6 +2910,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2885,6 +2956,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2930,6 +3002,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2975,6 +3048,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3020,6 +3094,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3065,6 +3140,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3110,6 +3186,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3155,6 +3232,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3200,6 +3278,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3245,6 +3324,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3290,6 +3370,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3335,6 +3416,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3380,6 +3462,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3425,6 +3508,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3470,6 +3554,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3515,6 +3600,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3560,6 +3646,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3605,6 +3692,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3650,6 +3738,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3695,6 +3784,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3740,6 +3830,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3785,6 +3876,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3830,6 +3922,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3875,6 +3968,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3920,6 +4014,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3965,6 +4060,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4010,6 +4106,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4055,6 +4152,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4100,6 +4198,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4145,6 +4244,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4190,6 +4290,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4235,6 +4336,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4280,6 +4382,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4325,6 +4428,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4370,6 +4474,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4415,6 +4520,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4460,6 +4566,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4505,6 +4612,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4550,6 +4658,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4595,6 +4704,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4640,6 +4750,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4685,6 +4796,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4730,6 +4842,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4775,6 +4888,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4820,6 +4934,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4865,6 +4980,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4910,6 +5026,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4955,6 +5072,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5000,6 +5118,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5045,6 +5164,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5090,6 +5210,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5135,6 +5256,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5180,6 +5302,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5225,6 +5348,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5270,6 +5394,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5315,6 +5440,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5360,6 +5486,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5405,6 +5532,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5450,6 +5578,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5495,6 +5624,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5540,6 +5670,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5585,6 +5716,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5630,6 +5762,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5675,6 +5808,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5720,6 +5854,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5765,6 +5900,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5810,6 +5946,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5855,6 +5992,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5900,6 +6038,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5945,6 +6084,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5990,6 +6130,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6035,6 +6176,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6080,6 +6222,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6125,6 +6268,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6170,6 +6314,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6215,6 +6360,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6260,6 +6406,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6305,6 +6452,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6350,6 +6498,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6395,6 +6544,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6440,6 +6590,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6485,6 +6636,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6530,6 +6682,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6575,6 +6728,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6620,6 +6774,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6665,6 +6820,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6710,6 +6866,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6755,6 +6912,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6800,6 +6958,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6845,6 +7004,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6890,6 +7050,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6935,6 +7096,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6980,6 +7142,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7025,6 +7188,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7070,6 +7234,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7115,6 +7280,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7160,6 +7326,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7205,6 +7372,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7250,6 +7418,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7295,6 +7464,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7340,6 +7510,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7385,6 +7556,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7430,6 +7602,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7475,6 +7648,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7520,6 +7694,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7565,6 +7740,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7610,6 +7786,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7655,6 +7832,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7700,6 +7878,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7745,6 +7924,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7790,6 +7970,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7835,6 +8016,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7880,6 +8062,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7925,6 +8108,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7970,6 +8154,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8015,6 +8200,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8060,6 +8246,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8105,6 +8292,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8150,6 +8338,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8195,6 +8384,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8240,6 +8430,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8285,6 +8476,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8330,6 +8522,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8375,6 +8568,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8420,6 +8614,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8465,6 +8660,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8510,6 +8706,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8555,6 +8752,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8600,6 +8798,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8645,6 +8844,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8690,6 +8890,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8735,6 +8936,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8780,6 +8982,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8825,6 +9028,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8870,6 +9074,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8915,6 +9120,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8960,6 +9166,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9005,6 +9212,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9050,6 +9258,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9095,6 +9304,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9140,6 +9350,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9185,6 +9396,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9230,6 +9442,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9275,6 +9488,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9320,6 +9534,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9365,6 +9580,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9410,6 +9626,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9455,6 +9672,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9500,6 +9718,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9545,6 +9764,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9590,6 +9810,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9635,6 +9856,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9680,6 +9902,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9725,6 +9948,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9770,6 +9994,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9815,6 +10040,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9860,6 +10086,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9905,6 +10132,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9950,6 +10178,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9995,6 +10224,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10040,6 +10270,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10085,6 +10316,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10130,6 +10362,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10175,6 +10408,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10220,6 +10454,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10265,6 +10500,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10310,6 +10546,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10355,6 +10592,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10400,6 +10638,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10445,6 +10684,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10490,6 +10730,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10535,6 +10776,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10580,6 +10822,7 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": false,
       "qaEvidence": null,
       "qaEvidencePresent": false,
+      "directionalSelectionBound": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"

@@ -16,6 +16,9 @@ const furnitureDirections = pass.artDirection.furnitureDirections;
 const characterDirections = pass.artDirection.characterDirections;
 const runtimeFloor = readFileSync(resolve(ROOT, "apps/client-godot/scripts/restaurant_floor.gd"), "utf8");
 const runtimeInventory = readFileSync(resolve(ROOT, "apps/client-godot/scripts/inventory_panel.gd"), "utf8");
+const furnitureRuntimeContract = existsSync(resolve(ROOT, "apps/client-godot/furniture-art-runtime.json"))
+  ? readJson("apps/client-godot/furniture-art-runtime.json")
+  : { capability: {} };
 
 const relative = (path) => resolve(ROOT, path);
 const present = (path) => existsSync(relative(path));
@@ -60,7 +63,10 @@ function status({ isPresent, review, remoteVerified, runtimeBound, productionCom
   return "missing";
 }
 
-const directionalRuntimeBound = runtimeFloor.includes("assets/objects/directional") && runtimeFloor.includes("direction");
+const directionalSelectionBound = furnitureRuntimeContract.capability.directionalTextureSelection === true;
+const directionalRuntimeBound = directionalSelectionBound
+  && furnitureRuntimeContract.capability.projectionAligned === true
+  && furnitureRuntimeContract.capability.runtimeCompositeAccepted === true;
 const equipmentRuntimeLoader = runtimeInventory.includes("res://assets/items/%s.png");
 const characterRuntimeBound = runtimeFloor.includes("assets/characters") && !runtimeFloor.includes("draw_circle(draw_position, 10, primary)");
 
@@ -72,7 +78,7 @@ const furniture = production.furniture.map((item) => {
   const productionComplete = isPresent && review.review === "passed" && review.qaEvidencePresent && review.remoteVerified && runtimeBound;
   return {
     id: item.id, assetId: item.assetId, name: item.name, category: item.category, sourcePack: item.sourcePack,
-    requiredDirections: furnitureDirections, files: runtimeFiles, present: isPresent, ...review, runtimeBound, productionComplete,
+    requiredDirections: furnitureDirections, files: runtimeFiles, present: isPresent, ...review, directionalSelectionBound: isPresent && directionalSelectionBound, runtimeBound, productionComplete,
     status: status({ isPresent, review: review.review, remoteVerified: review.remoteVerified, runtimeBound, productionComplete }),
   };
 });
@@ -200,6 +206,7 @@ const ledger = {
   durableBaseline: { branch: pass.branch, pullRequest: pass.pullRequest, ...pass.lastVerifiedRemote },
   completionPipeline: ["generated", "processed", "raster_validated", "visual_accepted", "runtime_bound", "remote_verified", "ci_green"],
   completionRule: "An asset is production-complete only when every pipeline gate passes. Mere existence, metadata bindings, procedural fallbacks, and quarantined/local-only files never count.",
+  runtimeCapabilities: { directionalFurniture: furnitureRuntimeContract.capability },
   summaries,
   furniture,
   equipmentIcons,
@@ -268,6 +275,7 @@ lines.push("|---|---:|---:|---:|---:|---:|");
 for (const row of summaries) lines.push(`| ${row.lane} | ${row.required} | ${row.present} | ${row.sourceAccepted} | ${row.remoteVerified} | ${row.productionComplete} |`);
 lines.push("");
 lines.push(`${equipmentIcons.filter((item) => item.productionComplete).length} equipment icons are production-complete because they are visually accepted, remotely verified, and loaded by the inventory runtime. Furniture and character source art remains preserved but runtime-blocked; other missing lanes remain explicit below.`);
+lines.push(`Directional furniture texture selection is ${yes(directionalSelectionBound)}; final projection alignment is ${yes(furnitureRuntimeContract.capability.projectionAligned === true)} and runtime composite acceptance is ${yes(furnitureRuntimeContract.capability.runtimeCompositeAccepted === true)}. This partial binding does not make any furniture set production-complete.`);
 lines.push("");
 lines.push("## Character truth");
 lines.push("");

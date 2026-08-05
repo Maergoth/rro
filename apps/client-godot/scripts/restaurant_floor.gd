@@ -205,7 +205,9 @@ func _draw() -> void:
 			draw_rect(rect.grow(-2), Color("efbc54", 0.55), true)
 	for wall in layout.get("walls", []):
 		draw_wall(wall)
-	for object in layout.get("objects", []):
+	var objects: Array = layout.get("objects", []).duplicate(true)
+	objects.sort_custom(object_draws_before)
+	for object in objects:
 		if not dragging_object.is_empty() and str(object.get("id", "")) == str(dragging_object.get("id", "")): continue
 		draw_object(object)
 	if not dragging_object.is_empty():
@@ -232,6 +234,31 @@ func draw_wall(wall: Dictionary) -> void:
 	else:
 		draw_line(start, start.lerp(finish, .28), color, 3); draw_line(start.lerp(finish, .72), finish, color, 3)
 
+func object_draws_before(left: Dictionary, right: Dictionary) -> bool:
+	var left_definition := furniture_definition(str(left.get("definitionId", "")))
+	var right_definition := furniture_definition(str(right.get("definitionId", "")))
+	var left_width := int(left_definition.get("width", 1))
+	var left_height := int(left_definition.get("height", 1))
+	var right_width := int(right_definition.get("width", 1))
+	var right_height := int(right_definition.get("height", 1))
+	if int(left.get("rotation", 0)) % 180 != 0:
+		var left_swap := left_width
+		left_width = left_height
+		left_height = left_swap
+	if int(right.get("rotation", 0)) % 180 != 0:
+		var right_swap := right_width
+		right_width = right_height
+		right_height = right_swap
+	var left_bottom := int(left.get("y", 0)) + left_height
+	var right_bottom := int(right.get("y", 0)) + right_height
+	if left_bottom != right_bottom:
+		return left_bottom < right_bottom
+	var left_right_edge := int(left.get("x", 0)) + left_width
+	var right_right_edge := int(right.get("x", 0)) + right_width
+	if left_right_edge != right_right_edge:
+		return left_right_edge < right_right_edge
+	return str(left.get("id", "")) < str(right.get("id", ""))
+
 func draw_object(object: Dictionary, alpha := 1.0) -> void:
 	var definition := furniture_definition(str(object.get("definitionId", "")))
 	if definition.is_empty(): return
@@ -250,15 +277,20 @@ func draw_object(object: Dictionary, alpha := 1.0) -> void:
 	elif condition == "worn": color = color.darkened(.24)
 	color.a = alpha
 	draw_style_box(make_object_box(color), rect)
-	var texture := texture_for(definition)
+	var texture_binding := texture_binding_for(definition, item_rotation)
+	var texture: Texture2D = texture_binding.get("texture")
 	if texture != null:
-		var source_size := Vector2(source_width, source_height) * cell_pixels - Vector2.ONE * 8
 		var condition_tint := Color(1, 1, 1, alpha)
 		if condition == "broken": condition_tint = Color(.62, .43, .40, alpha)
 		elif condition == "worn": condition_tint = Color(.78, .72, .65, alpha)
-		draw_set_transform(rect.get_center(), deg_to_rad(float(item_rotation)), Vector2.ONE)
-		draw_texture_rect(texture, Rect2(-source_size * .5, source_size), false, condition_tint)
-		draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
+		if bool(texture_binding.get("directional", false)):
+			var directional_rect := FurnitureArtBinding.draw_rect_for_floor_contact(texture.get_size(), rect)
+			draw_texture_rect(texture, directional_rect, false, condition_tint)
+		else:
+			var source_size := Vector2(source_width, source_height) * cell_pixels - Vector2.ONE * 8
+			draw_set_transform(rect.get_center(), deg_to_rad(float(item_rotation)), Vector2.ONE)
+			draw_texture_rect(texture, Rect2(-source_size * .5, source_size), false, condition_tint)
+			draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 	var symbol := str(definition.get("symbol", str(definition.get("name", "?"))[0]))
 	if texture == null: draw_string(ThemeDB.fallback_font, rect.get_center() + Vector2(-5, 5), symbol, HORIZONTAL_ALIGNMENT_LEFT, -1, clampi(int(cell_pixels * .45), 11, 22), Color("f7f0db", alpha))
 	if cell_pixels > 30:
@@ -288,6 +320,14 @@ func texture_for(definition: Dictionary) -> Texture2D:
 	var texture := load(path) as Texture2D
 	texture_cache[file_name] = texture
 	return texture
+
+func texture_binding_for(definition: Dictionary, item_rotation: int) -> Dictionary:
+	var directional_path := FurnitureArtBinding.directional_texture_path(definition, item_rotation)
+	if not directional_path.is_empty() and ResourceLoader.exists(directional_path):
+		if not texture_cache.has(directional_path):
+			texture_cache[directional_path] = load(directional_path) as Texture2D
+		return {"texture": texture_cache.get(directional_path), "directional": true, "path": directional_path}
+	return {"texture": texture_for(definition), "directional": false, "path": "legacy-fallback"}
 
 func draw_avatar(avatar: Dictionary) -> void:
 	var draw_position := grid_to_screen(Vector2(float(avatar.get("x", 0)), float(avatar.get("y", 0))))

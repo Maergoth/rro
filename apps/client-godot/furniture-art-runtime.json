@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "directionalRoot": "res://assets/objects/directional",
+  "sourceCanvas": {
+    "width": 627,
+    "height": 627,
+    "floorContactPivot": {
+      "x": 313.5,
+      "y": 590.0
+    }
+  },
+  "directionsByRotation": {
+    "0": "north",
+    "90": "east",
+    "180": "south",
+    "270": "west"
+  },
+  "acceptedDirectionalAssetIds": [
+    "furniture-six-burner-range",
+    "host-stand",
+    "table-four",
+    "table-two"
+  ],
+  "capability": {
+    "directionalTextureSelection": true,
+    "commonFloorContactPivot": true,
+    "uniformScaleWithoutStretching": true,
+    "stableFurnitureDrawOrder": true,
+    "runtimeProjection": "orthogonal-grid",
+    "projectionAligned": false,
+    "runtimeCompositeAccepted": false,
+    "productionComplete": false,
+    "remainingVisualGate": "Render the accepted directional sets in a real Godot gameplay scene after the floor is converted to the final elevated isometric projection; review footprint alignment, occlusion, and gameplay-scale legibility."
+  }
+}
