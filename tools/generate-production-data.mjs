@@ -281,7 +281,10 @@ const acceptedFurniturePlacements = {
   "host-stand-pro": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
   "server-station-pro": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
   "pos-terminal": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "expo-pass-heated": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
   "six-burner-range": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "plancha-commercial": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "convection-oven": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
 };
 
 function operationalStrength(stats) {

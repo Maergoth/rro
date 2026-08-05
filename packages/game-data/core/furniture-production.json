@@ -375,6 +375,11 @@
       "kitchen",
       "asset:furniture-expo-pass-heated"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-expo-pass-heated",
     "upkeepCents": 1806,
@@ -463,6 +468,11 @@
       "kitchen",
       "asset:furniture-plancha-commercial"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-plancha-commercial",
     "upkeepCents": 1476,
@@ -504,6 +514,11 @@
       "kitchen",
       "asset:furniture-convection-oven"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-convection-oven",
     "upkeepCents": 2461,
