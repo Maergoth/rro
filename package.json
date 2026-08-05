@@ -10,6 +10,9 @@
   "scripts": {
     "generate:data": "node tools/generate-production-data.mjs",
     "generate:art": "node tools/generate-art-production.mjs",
+    "art:ledger": "node tools/generate-art-progress.mjs",
+    "art:ledger:check": "node tools/generate-art-progress.mjs --check",
+    "art:qa-sheets": "python tools/generate-art-qa-sheets.py",
     "generate:backlog": "node tools/generate-v2-backlog.mjs",
     "dev:server": "npm run build:server && node --no-warnings dist/server/index.js",
     "build:server": "tsc -p apps/server/tsconfig.json",
@@ -17,10 +20,11 @@
     "typecheck": "tsc -p apps/server/tsconfig.json --noEmit",
     "validate:data": "node tools/validate-data.mjs",
     "validate:godot": "node tools/validate-godot-project.mjs",
-    "validate:art-pass": "node tools/validate-art-pass-v2.mjs",
+    "validate:art-pass": "npm run art:ledger:check && node tools/validate-art-pass-v2.mjs",
+    "validate:art-complete": "npm run art:ledger:check && node tools/validate-art-pass-v2.mjs --require-complete",
     "smoke:server": "npm run build:server && node tools/smoke-local-server.mjs",
     "test": "npm run build && node --test tests/*.test.mjs",
-    "verify": "npm run validate:data && npm run validate:godot && npm run typecheck && npm test",
+    "verify": "npm run validate:data && npm run validate:godot && npm run typecheck && npm test && npm run validate:art-pass",
     "release": "npm run verify && npm run smoke:server && node tools/make-v1-release.mjs"
   },
   "dependencies": {

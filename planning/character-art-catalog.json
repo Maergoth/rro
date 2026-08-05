@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "camera": "elevated orthographic semi-isometric",
   "directions": ["north", "north_east", "east", "south_east", "south", "south_west", "west", "north_west"],
   "bodyPresentations": ["base-a", "base-b"],
@@ -43,7 +43,17 @@
     {"id": "put-down", "frames": 6, "sourcePoseFrames": 3, "loop": false},
     {"id": "react", "frames": 6, "sourcePoseFrames": 3, "loop": false}
   ],
-  "baseOutfits": ["classic", "apron", "chef-coat", "manager-jacket", "utility"],
+  "prototypeOutfitFamilies": ["classic", "apron"],
+  "slotCatalogs": {
+    "faces": ["warm", "angular", "round", "mature", "soft", "freckled"],
+    "shirts": ["classic-button-up", "service-polo", "chef-coat", "manager-jacket", "utility-shirt", "casual-tee"],
+    "pants": ["service-slacks", "chef-check-trousers", "utility-cargo", "dark-jeans", "tailored-skirt", "service-shorts"],
+    "aprons": ["waist-apron", "bib-apron", "cross-back-apron", "waterproof-apron"],
+    "shoes": ["economy-nonslip", "compression-service", "kitchen-clog", "utility-boot"],
+    "headwear": ["chef-toque", "cook-cap", "service-visor", "hairnet", "head-scarf"],
+    "eyewear": ["rectangular-glasses", "round-glasses", "sunglasses", "safety-glasses"],
+    "accessories": ["name-badge", "earpiece", "wristwatch", "neck-scarf", "bracelet"]
+  },
   "roleLayers": ["manager", "owner", "server", "dishwasher", "chef", "cook", "host-busser"],
   "hairStyles": ["bald", "buzz", "short", "side-part", "curly", "coily", "locs", "braids", "bob", "ponytail", "bun", "long"],
   "facialHair": ["none", "stubble", "mustache", "goatee", "short-beard", "full-beard"],
@@ -53,6 +63,7 @@
     "appearanceLayers": "body-presentation-fitted directional layers attached to stable head, torso, hand, waist, and foot anchors",
     "skin": "neutral diffuse plus shader-applied skin mask",
     "colors": "diffuse plus independent primary and secondary masks",
-    "equipment": "every equippable non-consumable receives an avatar attachment binding; every catalog item receives an inventory icon"
+    "equipment": "every equippable non-consumable receives an avatar attachment binding; every catalog item receives an inventory icon",
+    "completion": "metadata mappings and static direction poses do not count as animation; every required frame must be authored, composited at gameplay scale, runtime-bound, remotely verified, and CI-green"
   }
 }

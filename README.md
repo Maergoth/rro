@@ -6,9 +6,9 @@ This repository is the clean `rro.v1` line. It contains a Godot 4 client, a stri
 
 The version is `1.0.0-alpha.2`. The source baseline is functional and tested; it is not represented as a finished, operated AAA MMO. Godot 4.4.1 now imports the project and launches the main scene cleanly on Linux. The supplied release tool still emits a client **source** ZIP unless a real Godot Windows export exists; the tagged GitHub workflow installs pinned export templates and builds the native Windows client.
 
-Alpha 2 is the production-foundation pass: furniture is now a persistent restaurant inventory with non-linear tradeoffs, live performance effects, upkeep, wear, breakage, and repair; every role has a persistent personal-equipment shop/loadout; and local rivals can spend earned cash during a physical guest visit to apply a chosen, bounded minigame modifier with visible counterplay. The catalog has 229 furniture definitions and 45 role-equipment items. Artwork coverage is measured rather than implied: all 16 core furniture pieces and four production-catalog pieces have individual raster sprites, leaving 209 furniture sprites and 45 bespoke equipment icons in the production-art queue.
+Alpha 2 is the production-foundation pass: furniture is now a persistent restaurant inventory with non-linear tradeoffs, live performance effects, upkeep, wear, breakage, and repair; every role has a persistent personal-equipment shop/loadout; and local rivals can spend earned cash during a physical guest visit to apply a chosen, bounded minigame modifier with visible counterplay. The catalog has 229 furniture definitions and 45 role-equipment items. Art progress is reported only by the generated [production art ledger](docs/ART_PROGRESS.md), which separates preserved references, source acceptance, runtime binding, remote verification, and genuine production completion.
 
-> **Recovery status (2026-08-02):** this repository is the recoverable Alpha 2 source of truth. A previously reported Alpha 3/full-art checkpoint was never durably delivered and is not part of the product. Current coverage remains 20/229 furniture sprites and 0/45 bespoke equipment icons. See `docs/PRODUCTION_AUDIT_AND_ROADMAP.md` for the verified state and next steps.
+> **Recovery status (2026-08-04):** the lost full-art claim is not part of the product. Twenty attractive overhead furniture references remain preserved, while the replacement elevated-isometric pass has one durable four-direction source set, two durable body source foundations, and durable skin/outfit prototype files. None is production-complete until runtime binding and every ledger gate pass. The quarantined deterministic placeholder branch is recorded but never counted.
 
 ## What is implemented
 
@@ -24,7 +24,7 @@ Alpha 2 is the production-foundation pass: furniture is now a persistent restaur
 | Building | Persistent 24×16 floor, add-ons to 64×64, floor painting, room tags, snapped walls/doors/arches, drag/move, four-way art rotation, collision, resale, wear and repair |
 | Furniture economy | 229 persistent items with price, upkeep, repair cost, comfort, appearance, cleanability, reliability, role/service effects, duplicate tapering, wear and breakage |
 | Role inventory | 45 persistent purchasable tools/consumables, seven role catalogs, four-slot loadouts, shop/inventory screen, stable icon IDs and procedural icon fallback |
-| Art | 20 individual generated top-down raster sprites (16/16 core plus four production items), 10 modular SVG/UI assets; explicit coverage gate reports 209 furniture sprites remaining |
+| Art | One authoritative ledger tracks 229 directional furniture sets, 45 equipment icons, construction/world/UI, and the full modular eight-direction character matrix; preserved references and failed QA never inflate completion |
 | Extensibility | Versioned packs, stable IDs, content hash, role inheritance hooks, seasonal events/modifiers, generated typed server content |
 | Operations | Hidden Windows server start, health polling, graceful tokenized stop, exact-PID fallback, separate server/client/source artifacts |
 | Verification | Strict TypeScript, zero-error/zero-warning Godot analysis, native Godot 4.4.1 import/launch/export, data invariants, and 29 server/integration tests |
@@ -105,9 +105,14 @@ Useful commands:
 |---|---|
 | `npm run generate:data` | Rebuild 196 skills, 89 activities, construction, appearance, and 210 production furniture definitions |
 | `npm run generate:art` | Rebuild the 229-furniture/45-item artwork queue with stable output paths, prompt briefs and live coverage status |
+| `npm run art:ledger` | Regenerate the single authoritative art-progress document from catalogs, files, review evidence, and runtime bindings |
+| `npm run art:ledger:check` | Fail when the committed art ledger is stale |
+| `npm run art:qa-sheets` | Rebuild durable contact sheets for reviewed art batches |
 | `npm run generate:backlog` | Rebuild the 240-task JSON/Markdown V2 backlog |
 | `npm run validate:data` | Assert content references, timing, rotation, and exact 20% world seeding |
 | `npm run validate:godot` | Parse/type-analyze every GDScript; enforce modular assets, core sprites, honest art coverage, and no baked backgrounds |
+| `npm run validate:art-pass` | Validate partial-pass integrity, exact catalogs, QA evidence, hashes, and honest missing coverage |
+| `npm run validate:art-complete` | Fail until every production-art and runtime-binding gate is complete |
 | `npm run typecheck` | Strict-check the TypeScript server |
 | `npm test` | Build and run integration tests |
 | `npm run verify` | Run every release gate available without a Godot runtime |
@@ -155,6 +160,7 @@ For a subclass, define a role with `kind: "subclass"` and `parentRoleId`; contri
 - [240-task team backlog](docs/V2_TEAM_BACKLOG.md)
 - [Machine-readable backlog](planning/v2-backlog.json)
 - [Furniture and role-item art queue](planning/art-production.json)
+- [Authoritative production art progress](docs/ART_PROGRESS.md)
 - [Architecture](docs/ARCHITECTURE.md)
 - [Server operations](docs/SERVER_README.md)
 - [Native client guide](docs/GAME_README.md)

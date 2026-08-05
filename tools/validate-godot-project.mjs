@@ -86,11 +86,14 @@ const approvedRasterRoots = [
   resolve(CLIENT, "assets/objects/generated"),
   resolve(CLIENT, "assets/objects/directional"),
   resolve(CLIENT, "assets/characters"),
+  resolve(CLIENT, "assets/construction"),
+  resolve(CLIENT, "assets/environment"),
   resolve(CLIENT, "assets/items"),
   resolve(CLIENT, "assets/ui"),
+  resolve(CLIENT, "assets/world"),
 ];
 const unscopedRasters = rasterAssets.filter((path) => !approvedRasterRoots.some((root) => path.startsWith(`${root}/`) || path.startsWith(`${root}\\`)));
-assert.deepEqual(unscopedRasters, [], "Raster art must remain modular object, item, or UI art; baked restaurant/world backgrounds are forbidden.");
+assert.deepEqual(unscopedRasters, [], "Raster art must remain inside an explicit modular object, character, construction, environment, item, UI, or world-art root; baked restaurant backgrounds are forbidden.");
 const coreFurniture = JSON.parse(readFileSync(resolve(ROOT, "packages/game-data/core/furniture.json"), "utf8"));
 for (const item of coreFurniture) {
   assert.ok(existsSync(resolve(CLIENT, "assets/objects/generated", `${item.id}.png`)), `Core furniture ${item.id} is missing its individual production sprite.`);

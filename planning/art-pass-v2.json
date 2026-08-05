@@ -1,6 +1,12 @@
 {
   "schemaVersion": 2,
   "branch": "agent/complete-production-art",
+  "pullRequest": "https://github.com/Maergoth/rro/pull/2",
+  "lastVerifiedRemote": {
+    "commit": "512f082d7433b6dc47a70c05de12e9306785f817",
+    "tree": "9fe2eda203dd85666cd11ddd67f8182b97ba0bef",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30965616152"
+  },
   "completionRule": "accepted runtime files committed and uploaded to GitHub",
   "artDirection": {
     "camera": "orthographic semi-isometric",
@@ -8,51 +14,90 @@
     "characterDirections": ["north", "north_east", "east", "south_east", "south", "south_west", "west", "north_west"],
     "transparency": "flat chroma-key source with locally validated alpha runtime files"
   },
+  "launchScope": {
+    "construction": {
+      "openingTypes": ["solid", "door", "service-door", "window", "arch"],
+      "openingDirections": ["north", "east", "south", "west"],
+      "utilityOverlays": ["power", "gas", "water", "drain", "ventilation"],
+      "note": "Floor and wall material IDs come from packages/game-data/core/construction.json. Opening geometry is shared across materials; material tint/texture is applied separately."
+    },
+    "world": ["world-atlas"],
+    "environment": ["contact-shadow", "selection-ring", "steam-puff", "service-sparkles"],
+    "ui": [
+      "builder-pointer", "builder-floor", "builder-wall", "builder-furniture", "builder-rotate",
+      "builder-repair", "builder-sell", "builder-expand", "builder-power", "builder-gas",
+      "builder-water", "builder-drain", "builder-ventilation", "login-hero", "rro-mark"
+    ]
+  },
   "coverage": {
     "furniture": { "catalogTotal": 229, "acceptedSets": 1, "acceptedDirectionalFiles": 4 },
     "equipmentIcons": { "catalogTotal": 45, "accepted": 0 },
     "characterSystem": {
       "status": "in_progress",
-      "acceptedBodyPresentations": 2,
-      "acceptedIdleDirectionalFiles": 16,
-      "acceptedSkinRuntimeFiles": 32,
-      "acceptedOutfitDesigns": 2,
-      "acceptedOutfitBodyVariants": 4,
-      "acceptedOutfitRuntimeFiles": 96,
+      "sourceAcceptedBodyPresentations": 2,
+      "sourceAcceptedIdleDirectionalFiles": 16,
+      "sourceAcceptedSkinFoundationFiles": 32,
+      "preservedPrototypeOutfitDesigns": 2,
+      "preservedPrototypeOutfitBodyVariants": 4,
+      "preservedPrototypeOutfitFiles": 96,
+      "productionAcceptedOutfitDesigns": 0,
+      "runtimeReadyCharacterAssets": 0,
       "required": ["body_skin", "face", "hair_headwear", "base_outfit", "role_layer", "footwear", "accessory", "carried_object", "effects", "skin_masks", "primary_color_masks", "secondary_color_masks"]
     }
   },
-  "acceptedBatches": [
+  "batches": [
     {
       "id": "furniture-pilot-001",
       "assets": ["furniture-six-burner-range"],
       "files": 4,
       "qa": "passed",
-      "sourcePromptMode": "built-in image generation; one combined 2x2 sheet"
+      "runtimeQa": "blocked-not-bound",
+      "sourcePromptMode": "built-in image generation; one combined 2x2 sheet",
+      "remoteCommit": "1977c47e13190e639ec5f12b8bfec2cb5a44c540",
+      "remoteTree": "ead4914a85cb1bde218300f85c2a196acf51a47f",
+      "qaEvidence": "planning/art-qa/furniture-pilot-001.png"
     },
     {
       "id": "character-foundation-001",
       "assets": ["body-base-a-idle-isometric"],
       "files": 8,
       "qa": "passed",
+      "runtimeQa": "blocked-anchor-and-chroma-normalization",
       "sourcePromptMode": "built-in image generation; one combined 4x2 elevated eight-direction atlas",
-      "notes": "Accepted as body presentation A using the elevated orthographic isometric camera lock. Additional body presentations and skin/color masks remain required."
+      "remoteCommit": "8f450ae29adc0005a81359466c36c5b24465589a",
+      "remoteTree": "81a48b83d643db5abe8f3e4b8ef5a5e45b242e9c",
+      "qaEvidence": "planning/art-qa/character-foundation-001.png",
+      "notes": "Accepted as an elevated source foundation, not a complete animated runtime body. Feet/origin normalization and every required animation remain open."
     },
     {
       "id": "character-foundation-002",
       "assets": ["body-base-b-idle-isometric"],
       "files": 8,
       "qa": "passed",
+      "runtimeQa": "blocked-anchor-and-chroma-normalization",
       "sourcePromptMode": "built-in image generation; one combined 4x2 elevated eight-direction atlas",
-      "notes": "Accepted as body presentation B under the same elevated camera, scale, and directional framing."
+      "remoteCommit": "027c5c5a7b9e966e5a9de07f832d40a83cfae516",
+      "remoteTree": "d2a78376f22e3bcae200e1ec707884e3d5c2bf0e",
+      "qaEvidence": "planning/art-qa/character-foundation-002.png",
+      "notes": "Accepted as an elevated source foundation, not a complete animated runtime body. Feet/origin normalization and every required animation remain open."
     },
     {
       "id": "character-modular-classic-001",
       "assets": ["body-skin-masks-base-a", "body-skin-masks-base-b", "outfit-classic-base-a", "outfit-classic-base-b"],
       "files": 80,
-      "qa": "passed",
+      "qa": "mixed",
+      "runtimeQa": "failed-needs-remediation",
+      "assetReviews": {
+        "body-skin-masks-base-a": "passed-source-foundation",
+        "body-skin-masks-base-b": "passed-source-foundation",
+        "outfit-classic-base-a": "failed-silhouette-leakage",
+        "outfit-classic-base-b": "failed-silhouette-leakage"
+      },
       "sourcePromptMode": "built-in image generation; identity-preserving 4x2 edits with local chroma removal, direction correction, body-anchor fitting, and red/blue tint extraction",
-      "notes": "Corrected the original body-atlas direction bindings. Classic uniform is a true body-presentation-fitted modular layer with neutral diffuse, primary mask, and secondary mask for every elevated direction; ten skin palettes are shader-driven from the independent skin mask."
+      "remoteCommit": "d99c458cadf3534299bada040d235d07980ed477",
+      "remoteTree": "28a0d13faf87a59a2684ec4727dfe849809b07e8",
+      "qaEvidence": "planning/art-qa/character-modular-classic-001.png",
+      "notes": "Preserved as a pose-locked prototype outfit family. It does not satisfy the final independently swappable shirt/pants/apron slot matrix or animated-frame contract until composite QA and skin-protection gates pass."
     },
     {
       "id": "character-modular-apron-001",
@@ -61,9 +106,33 @@
         "outfit-apron-base-b"
       ],
       "files": 48,
-      "qa": "passed",
+      "qa": "failed",
+      "runtimeQa": "failed-needs-remediation",
+      "assetReviews": {
+        "outfit-apron-base-a": "failed-silhouette-and-foot-leakage",
+        "outfit-apron-base-b": "failed-silhouette-and-foot-leakage"
+      },
       "sourcePromptMode": "built-in image generation; identity-preserving 4x2 edits with local chroma removal, body-anchor fitting, and red/blue tint extraction",
-      "notes": "Apron uniform is independently fitted to both accepted elevated body presentations. Runtime composites and calibration masks pass all eight-direction gameplay-scale review; footwear remains a separate swappable layer."
+      "remoteCommit": "f01c1e1f9b73e9dfe30c18d38f0bfc3c7979e2a8",
+      "remoteTree": "ec7814a6bde1517746831dab8d43e6d61ed2b70c",
+      "qaEvidence": "planning/art-qa/character-modular-apron-001.png",
+      "notes": "Preserved as a pose-locked prototype outfit family. It does not satisfy the final independently swappable shirt/pants/apron slot matrix or animated-frame contract until composite QA and skin-protection gates pass."
+    }
+  ],
+  "preservedButNotProductionComplete": [
+    {
+      "id": "alpha2-overhead-furniture",
+      "files": 20,
+      "path": "apps/client-godot/assets/objects/generated",
+      "reason": "High-quality identity/material references, but single-view direct-overhead camera does not meet the elevated four-direction runtime contract."
+    }
+  ],
+  "quarantinedWork": [
+    {
+      "id": "alpha3-deterministic-placeholder-pass",
+      "localCommit": "5714bb8",
+      "status": "local-only-rejected",
+      "reason": "Catalog-complete deterministic Pillow stand-ins and metadata-only animation reuse; useful only as scope/provenance evidence and never counted as accepted production art."
     }
   ]
 }
