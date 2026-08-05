@@ -652,7 +652,9 @@ func build_response(ok: bool, data: Dictionary, _code: int) -> void:
 		show_status("Layout committed to the authoritative restaurant database.")
 
 func update_builder_history(layout_data: Dictionary) -> void:
-	if is_instance_valid(current_builder): current_builder.set_history_state(layout_data.get("history", {}))
+	if is_instance_valid(current_builder):
+		current_builder.set_history_state(layout_data.get("history", {}))
+		current_builder.set_layout_validation(layout_data.get("validation", {}))
 
 func apply_builder_history(direction: String) -> void:
 	if current_restaurant_id.is_empty(): return

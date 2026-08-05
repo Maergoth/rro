@@ -6,7 +6,7 @@ import test from "node:test";
 import { signup } from "../dist/server/auth.js";
 import { loadContent } from "../dist/server/content.js";
 import { createDatabase } from "../dist/server/database.js";
-import { expandRestaurant, foundRestaurant, getFurnitureEffects, getLayout, moveObject, paintFloor, placeObject, redoLayout, repairObject, sellObject, undoLayout, upsertWall } from "../dist/server/layout-service.js";
+import { expandRestaurant, foundRestaurant, getFurnitureEffects, getLayout, moveObject, paintFloor, placeObject, redoLayout, repairObject, sellObject, undoLayout, upsertWall, validateLayout } from "../dist/server/layout-service.js";
 
 function comparableLayout(db, registry, restaurantId) {
   const layout = getLayout(db, registry, restaurantId);
@@ -76,6 +76,50 @@ test("layout undo and redo survive restart, restore treasury atomically, and dis
   } finally {
     db.close();
     rmSync(directory, { recursive: true, force: true });
+  }
+});
+
+test("service-readiness validation detects open perimeters, blocked egress, and wall-isolated floor", () => {
+  const registry = loadContent();
+  const db = createDatabase(":memory:", registry);
+  const stamp = Date.now().toString(36).slice(-8);
+  const auth = signup(db, registry, { username: `egress_${stamp}`, email: `egress_${stamp}@test.invalid`, displayName: "Egress Owner", password: "Production!234" });
+  try {
+    const founded = foundRestaurant(db, registry, auth.account, { regionId: "us-mid-atlantic", name: "Egress Test House", concept: registry.content.concepts[0], style: registry.content.styles[0] });
+    const healthy = validateLayout(db, registry, founded.id);
+    assert.equal(healthy.validForService, true);
+    assert.equal(healthy.usableExits, 2);
+    assert.equal(healthy.reachableCells, healthy.walkableCells);
+
+    const removed = db.prepare("SELECT * FROM wall_edges WHERE restaurant_id = ? AND grid_x = 0 AND grid_y = 0 AND edge = 'west'").get(founded.id);
+    db.prepare("DELETE FROM wall_edges WHERE id = ?").run(removed.id);
+    const openPerimeter = validateLayout(db, registry, founded.id);
+    assert.equal(openPerimeter.validForService, false);
+    assert.ok(openPerimeter.errors.some((error) => error.code === "open-perimeter"));
+    db.prepare("INSERT INTO wall_edges (id, restaurant_id, grid_x, grid_y, edge, wall_style_id, opening_type, rotation, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
+      .run(removed.id, removed.restaurant_id, removed.grid_x, removed.grid_y, removed.edge, removed.wall_style_id, removed.opening_type, removed.rotation, removed.updated_at);
+
+    const northBlock = placeObject(db, registry, auth.account, founded.id, { definitionId: "essential-dining-chair", x: 2, y: 0, rotation: 0 });
+    placeObject(db, registry, auth.account, founded.id, { definitionId: "essential-dining-chair", x: 23, y: 2, rotation: 0 });
+    const blocked = validateLayout(db, registry, founded.id);
+    assert.equal(blocked.validForService, false);
+    assert.equal(blocked.usableExits, 0);
+    assert.ok(blocked.errors.some((error) => error.code === "blocked-egress"));
+    undoLayout(db, registry, auth.account, founded.id);
+    const oneExit = validateLayout(db, registry, founded.id);
+    assert.equal(oneExit.validForService, true);
+    assert.equal(oneExit.usableExits, 1);
+    assert.ok(oneExit.warnings.some((warning) => warning.code === "single-egress"));
+    assert.ok(oneExit.inaccessibleObjectIds.includes(northBlock.id) === false, "a blocked exit object remains serviceable from its interior edge");
+
+    for (const [edge, rotation] of [["north", 0], ["east", 90], ["south", 180], ["west", 270]]) {
+      upsertWall(db, registry, auth.account, founded.id, { x: 6, y: 6, edge, wallStyleId: "subway-tile", openingType: "solid", rotation });
+    }
+    const isolated = validateLayout(db, registry, founded.id);
+    assert.equal(isolated.validForService, false);
+    assert.ok(isolated.errors.some((error) => error.code === "unreachable-floor" && error.count >= 1));
+  } finally {
+    db.close();
   }
 });
 

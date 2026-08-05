@@ -14,6 +14,7 @@ var rotation_label: Label
 var selected_label: Label
 var undo_button: Button
 var redo_button: Button
+var validation_label: Label
 
 func _ready() -> void:
 	add_theme_constant_override("separation", 8)
@@ -49,6 +50,7 @@ func _ready() -> void:
 	undo_button = Button.new(); undo_button.text = "Undo"; undo_button.disabled = true; undo_button.pressed.connect(func() -> void: undo_requested.emit()); history_actions.add_child(undo_button)
 	redo_button = Button.new(); redo_button.text = "Redo"; redo_button.disabled = true; redo_button.pressed.connect(func() -> void: redo_requested.emit()); history_actions.add_child(redo_button)
 	add_child(history_actions)
+	validation_label = Label.new(); validation_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; validation_label.text = "Checking service readiness…"; add_child(validation_label)
 	if not content.is_empty(): rebuild()
 
 func set_content(value: Dictionary) -> void:
@@ -115,3 +117,17 @@ func set_history_state(history: Dictionary) -> void:
 	redo_button.disabled = not bool(history.get("canRedo", false))
 	undo_button.text = "Undo %s" % str(history.get("undoAction", "")).capitalize() if not undo_button.disabled else "Undo"
 	redo_button.text = "Redo %s" % str(history.get("redoAction", "")).capitalize() if not redo_button.disabled else "Redo"
+
+func set_layout_validation(validation: Dictionary) -> void:
+	if not is_instance_valid(validation_label): return
+	var errors: Array = validation.get("errors", [])
+	var warnings: Array = validation.get("warnings", [])
+	if bool(validation.get("validForService", false)):
+		validation_label.text = "✓ Service-ready · %d exits · %d/%d walkable cells reachable" % [int(validation.get("usableExits", 0)), int(validation.get("reachableCells", 0)), int(validation.get("walkableCells", 0))]
+		validation_label.add_theme_color_override("font_color", Color("7fd0b2"))
+	else:
+		var messages: Array[String] = []
+		for issue in errors: messages.append(str(issue.get("message", "Layout error")))
+		for issue in warnings: messages.append(str(issue.get("message", "Layout warning")))
+		validation_label.text = "⚠ Service readiness\n" + "\n".join(messages)
+		validation_label.add_theme_color_override("font_color", Color("ef8f83"))

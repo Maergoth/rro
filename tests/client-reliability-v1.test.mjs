@@ -16,12 +16,15 @@ test("client bindings preserve each rendered item and movement sends an explicit
   assert.match(builder, /signal redo_requested/);
   assert.match(builder, /history\.get\("canUndo", false\)/);
   assert.match(builder, /history\.get\("canRedo", false\)/);
+  assert.match(builder, /func set_layout_validation/);
+  assert.match(builder, /validation\.get\("validForService", false\)/);
   assert.match(main, /set_home_region\.bind\(rid\)/);
   assert.match(main, /open_region\.bind\(selected_region\)/);
   assert.match(main, /Visit live shift as a guest/);
   assert.match(main, /Found a Restaurant/);
   assert.match(main, /layout\/%s" % \[current_restaurant_id, direction\]/);
   assert.match(main, /current_builder\.set_history_state/);
+  assert.match(main, /current_builder\.set_layout_validation/);
   assert.match(floor, /movement_input\.emit\(Vector2\.ZERO\)/);
   assert.match(floor, /direction != last_sent_direction/);
 });

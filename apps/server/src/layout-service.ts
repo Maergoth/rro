@@ -88,6 +88,109 @@ function historyState(db: Database, restaurantId: string): Record<string, unknow
   };
 }
 
+const PASSABLE_OPENINGS = new Set(["door", "service-door", "arch"]);
+const CARDINAL_STEPS = [
+  { dx: 0, dy: -1, edge: "north", opposite: "south" },
+  { dx: 1, dy: 0, edge: "east", opposite: "west" },
+  { dx: 0, dy: 1, edge: "south", opposite: "north" },
+  { dx: -1, dy: 0, edge: "west", opposite: "east" },
+] as const;
+
+function validateLayoutState(db: Database, registry: ContentRegistry, restaurantId: string): Record<string, unknown> {
+  const restaurant = restaurantRow(db, restaurantId);
+  const walls = db.prepare("SELECT grid_x, grid_y, edge, opening_type FROM wall_edges WHERE restaurant_id = ?").all(restaurantId) as any[];
+  const objects = db.prepare("SELECT id, definition_id, grid_x, grid_y, rotation FROM object_instances WHERE restaurant_id = ?").all(restaurantId) as any[];
+  const wallMap = new Map(walls.map((wall) => [`${wall.grid_x}:${wall.grid_y}:${wall.edge}`, String(wall.opening_type)]));
+  const blocked = new Set<string>();
+  const objectFootprints = new Map<string, Set<string>>();
+  for (const object of objects) {
+    const definition = registry.furnitureById.get(object.definition_id);
+    if (!definition) continue;
+    const size = dimensions(definition, object.rotation);
+    const footprint = new Set<string>();
+    for (let y = object.grid_y; y < object.grid_y + size.height; y += 1) {
+      for (let x = object.grid_x; x < object.grid_x + size.width; x += 1) {
+        const key = `${x}:${y}`;
+        blocked.add(key);
+        footprint.add(key);
+      }
+    }
+    objectFootprints.set(object.id, footprint);
+  }
+
+  const missingPerimeter: string[] = [];
+  const exits: Array<{ x: number; y: number; edge: string; openingType: string; blocked: boolean }> = [];
+  const checkBoundary = (x: number, y: number, edge: string): void => {
+    const openingType = wallMap.get(`${x}:${y}:${edge}`);
+    if (!openingType) missingPerimeter.push(`${x}:${y}:${edge}`);
+    else if (PASSABLE_OPENINGS.has(openingType)) exits.push({ x, y, edge, openingType, blocked: blocked.has(`${x}:${y}`) });
+  };
+  for (let x = 0; x < restaurant.build_width; x += 1) {
+    checkBoundary(x, 0, "north");
+    checkBoundary(x, restaurant.build_height - 1, "south");
+  }
+  for (let y = 0; y < restaurant.build_height; y += 1) {
+    checkBoundary(0, y, "west");
+    checkBoundary(restaurant.build_width - 1, y, "east");
+  }
+
+  const usableExits = exits.filter((exit) => !exit.blocked);
+  const reachable = new Set<string>();
+  const queue: Array<{ x: number; y: number }> = usableExits.map(({ x, y }) => ({ x, y }));
+  const crossingBlocked = (x: number, y: number, nx: number, ny: number, edge: string, opposite: string): boolean => {
+    const current = wallMap.get(`${x}:${y}:${edge}`);
+    const neighbor = wallMap.get(`${nx}:${ny}:${opposite}`);
+    return [current, neighbor].some((opening) => opening !== undefined && !PASSABLE_OPENINGS.has(opening));
+  };
+  while (queue.length) {
+    const current = queue.shift()!;
+    const key = `${current.x}:${current.y}`;
+    if (reachable.has(key) || blocked.has(key)) continue;
+    if (current.x < 0 || current.y < 0 || current.x >= restaurant.build_width || current.y >= restaurant.build_height) continue;
+    reachable.add(key);
+    for (const step of CARDINAL_STEPS) {
+      const nx = current.x + step.dx;
+      const ny = current.y + step.dy;
+      if (nx < 0 || ny < 0 || nx >= restaurant.build_width || ny >= restaurant.build_height) continue;
+      if (!crossingBlocked(current.x, current.y, nx, ny, step.edge, step.opposite)) queue.push({ x: nx, y: ny });
+    }
+  }
+
+  const walkableCells = restaurant.build_width * restaurant.build_height - blocked.size;
+  const inaccessibleObjects = objects.filter((object) => {
+    const footprint = objectFootprints.get(object.id) ?? new Set<string>();
+    for (const key of footprint) {
+      const [x = 0, y = 0] = key.split(":").map(Number);
+      for (const step of CARDINAL_STEPS) if (reachable.has(`${x + step.dx}:${y + step.dy}`)) return false;
+    }
+    return true;
+  }).map((object) => object.id);
+  const errors: Array<{ code: string; message: string; count?: number }> = [];
+  const warnings: Array<{ code: string; message: string; count?: number }> = [];
+  if (missingPerimeter.length) errors.push({ code: "open-perimeter", message: "The restaurant perimeter has unbuilt wall edges.", count: missingPerimeter.length });
+  if (!exits.length) errors.push({ code: "no-egress", message: "Add at least one exterior door or arch." });
+  else if (!usableExits.length) errors.push({ code: "blocked-egress", message: "Every exterior exit is blocked by furniture." });
+  else if (usableExits.length < 2) warnings.push({ code: "single-egress", message: "Only one usable exterior exit remains." });
+  if (reachable.size < walkableCells) errors.push({ code: "unreachable-floor", message: "Some unoccupied floor cells cannot reach an exterior exit.", count: walkableCells - reachable.size });
+  if (inaccessibleObjects.length) errors.push({ code: "inaccessible-object", message: "Some placed objects have no reachable interaction edge.", count: inaccessibleObjects.length });
+  return {
+    validForService: errors.length === 0,
+    errors,
+    warnings,
+    usableExits: usableExits.length,
+    exteriorOpenings: exits.length,
+    reachableCells: reachable.size,
+    walkableCells,
+    missingPerimeterEdges: missingPerimeter.length,
+    inaccessibleObjectIds: inaccessibleObjects,
+  };
+}
+
+export function validateLayout(db: Database, registry: ContentRegistry, restaurantId: string): Record<string, unknown> {
+  ensureLayout(db, registry, restaurantId);
+  return validateLayoutState(db, registry, restaurantId);
+}
+
 function recordLayoutMutation<T>(db: Database, restaurantId: string, account: AuthenticatedAccount, action: string, work: () => T): T {
   return transaction(db, () => {
     const before = captureLayoutState(db, restaurantId);
@@ -177,6 +280,7 @@ export function getLayout(db: Database, registry: ContentRegistry, restaurantId:
     objects: db.prepare("SELECT id, definition_id AS definitionId, grid_x AS x, grid_y AS y, rotation, state, wear, primary_color AS primaryColor, secondary_color AS secondaryColor FROM object_instances WHERE restaurant_id = ? ORDER BY placed_at, id").all(restaurantId),
     furnitureEffects: getFurnitureEffects(db, registry, restaurantId),
     history: historyState(db, restaurantId),
+    validation: validateLayoutState(db, registry, restaurantId),
   };
 }
 
