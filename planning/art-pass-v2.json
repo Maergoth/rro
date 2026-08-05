@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "10a0f705af46ae9737b27830af59fc5b1fa3b5bf",
-    "tree": "6cb40312461f9afc5f2624b797dd6b2dc5915c0e",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/31006311867"
+    "commit": "e750f74c69de2808908dca7153577d781c565020",
+    "tree": "a08373acc7673332eece94786505e988ebd88572",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31006966202"
   },
   "completionRule": "generated, processed, raster-validated, visually accepted, runtime-bound assets whose exact reviewed bytes are remotely verified on GitHub with green CI",
   "artDirection": {
@@ -30,7 +30,7 @@
     ]
   },
   "coverage": {
-    "furniture": { "catalogTotal": 229, "acceptedSets": 22, "acceptedDirectionalFiles": 88, "runtimeCompositeAcceptedSets": 19 },
+    "furniture": { "catalogTotal": 229, "acceptedSets": 25, "acceptedDirectionalFiles": 100, "runtimeCompositeAcceptedSets": 19 },
     "equipmentIcons": { "catalogTotal": 45, "accepted": 45 },
     "characterSystem": {
       "status": "in_progress",
@@ -138,7 +138,23 @@
       "productionComplete": false
     }
   ],
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "furniture-core-directional-008",
+      "assets": [
+        "furniture-host-stand-pro",
+        "furniture-server-station-pro",
+        "furniture-pos-terminal"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "pending-native-gameplay-composite",
+      "sourcePromptMode": "built-in image generation; one separately prompted 2x2 rigid elevated-isometric rotation atlas per identity, with one targeted host-stand correction, chroma removal, common-pivot normalization, and full/gameplay-scale contact review",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-008/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-008/qa.json",
+      "notes": "Reservation host stand, integrated server station, and commercial POS terminal are source-accepted floor furniture sets with exact catalog identity, raster hashes, unique alpha content, common floor-contact pivots, and full-resolution plus 128px visual review. Remote preservation and an exact native Godot four-rotation gameplay composite remain required before runtime or production completion."
+    }
+  ],
   "batches": [
     {
       "id": "furniture-pilot-001",

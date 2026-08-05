@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "batchId": "furniture-core-directional-008",
+  "assets": [
+    "furniture-host-stand-pro",
+    "furniture-server-station-pro",
+    "furniture-pos-terminal"
+  ],
+  "artReviewStatus": "accepted",
+  "productionComplete": false,
+  "productionCompletionBlockers": [
+    "The exact accepted runtime sprites have not yet passed four-rotation native Godot gameplay composite review for projection, placement, floor contact, depth, and gameplay-scale legibility.",
+    "This local accepted checkpoint has not yet been remotely preserved with an exact GitHub tree and green hosted CI."
+  ],
+  "promotionScope": {
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "repositoryPromotion": {
+    "status": "local-verified-pending-remote",
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "remotePreservation": null,
+  "quarantineArchive": {
+    "filename": "RRO-furniture-core-directional-008-quarantine.tar.gz",
+    "sha256": "38a0a675208916f9544909ad12f429ce4675bc7b72de60451ae913e6a357c396",
+    "memberCount": 55,
+    "safetyReview": "pass: no absolute paths, parent traversal, links, devices, or special members; every archived file passed the embedded SHA256SUMS manifest"
+  },
+  "source": {
+    "generator": "OpenAI built-in image generation",
+    "mode": "one separately prompted 2x2 rigid rotation atlas per identity, with one targeted host-stand correction",
+    "promptLog": "planning/art-qa/furniture-core-directional-008/prompts.md",
+    "promptLogSha256": "862675a5086087bb73db941ab9d5536d40fb8a7ce32776c16d971603c20c219d",
+    "quarantinedValidatorSha256": "380227fee71ed3e2fde23d0752d2fe9671c8ea84043dcb777d61565620cadae6",
+    "quarantinedFringeSanitizerSha256": "88c393774fd2441f10e4f4a89af810608d142cbcf9eb4808389f8765e103d339",
+    "rawSha256": {
+      "furniture-host-stand-pro": "ff46f90b34bbb72a73c49c37c98d6921c6cb08ac4bf13f006ea54d010ec6ee8d",
+      "furniture-server-station-pro": "48eb960191acae6f1a2b567ff790d8a25136d9daef993db5ff9575a9836a58a7",
+      "furniture-pos-terminal": "39a5a85324a61e3a94eb7b8c63ed67c63989d04797867511540cd83b70af5b31"
+    },
+    "alphaAtlasSha256": {
+      "furniture-host-stand-pro": "18f8cc408c667ae8225888e195bba7fef6039f402675fddfbe47d7f713b7a8e8",
+      "furniture-server-station-pro": "cbbd8f4439bdbbbb35775cbc269932e877485a9bf23c84c498b068ed0b8ad714",
+      "furniture-pos-terminal": "67eeca517a1dc42d011238153101042889f27d0e63e8716a6eade1a30147be46"
+    },
+    "matteProcess": "Official imagegen remove_chroma_key.py helper with border auto-keying, soft matte, thresholds 12/220, and despill; host stand and POS terminal use the documented one-pixel edge contraction. After normalization, a quarantined sanitizer cleared 215 effectively invisible magenta-key resampling remnants at alpha <=12 without changing opaque or meaningful antialiased pixels.",
+    "normalization": "Split accepted 1254x1254 alpha atlases into exact 627x627 cells, apply one shared scale per identity, center each silhouette horizontally, and place the bottommost visible row at y=589 for the exclusive floor-contact baseline y=590."
+  },
+  "gates": {
+    "requiredDirections": ["north", "east", "south", "west"],
+    "runtimeDimensions": "627x627",
+    "colorMode": "sRGBA",
+    "commonCanvasPivot": [313.5, 590],
+    "commonFloorContactBaselineY": 590,
+    "transparentBottomMarginPixels": 37,
+    "allOuterBordersTransparent": true,
+    "zeroVisibleMagentaFringePixelsAboveAlpha2": true,
+    "uniqueRuntimeFileHashes": true,
+    "uniqueRuntimePixelHashes": true,
+    "repositoryDirectionalPngsCompared": 88,
+    "uniqueAgainstRepositoryDirectionalPngs": true,
+    "samePhysicalObjectAcrossDirections": "pass",
+    "fixedElevatedOrthographicIsometricCamera": "pass",
+    "noClippingTextLogosWatermarksOrExtraObjects": "pass",
+    "visualReviewAtFullScale": "pass: contact-627-dark.png inspected at original resolution; all twelve accepted runtime candidates retain coherent rigid identity, fixed elevated semi-isometric projection, transparent edges, generous padding, and exact floor contact.",
+    "visualReviewAtGameplayScale128px": "pass: contact-128-light.png inspected at original resolution; host front/rear/port cues, server-station door/cubby state, and POS screen/reader/grille cues remain distinct across all four facings.",
+    "proceduralOrDeterministicStandIn": false
+  },
+  "contactSheets": [
+    {
+      "path": "planning/art-qa/furniture-core-directional-008/contact-627-dark.png",
+      "purpose": "Exact 627px runtime candidates on a dark checkerboard",
+      "sha256": "9bed47f479e35a458114121c024d6ed5b682b4defaa672b70a7e79eafa2a88ad"
+    },
+    {
+      "path": "planning/art-qa/furniture-core-directional-008/contact-128-light.png",
+      "purpose": "Same runtime candidates reduced to 128px on a light checkerboard",
+      "sha256": "09f1e84d5348b6c60c3bef50cdd726de1c51a55d64fc23b3675328044ca37f9e"
+    }
+  ],
+  "items": [
+    {
+      "catalogId": "host-stand-pro",
+      "assetId": "furniture-host-stand-pro",
+      "name": "Reservation Host Stand",
+      "footprint": [2, 2],
+      "placement": {"mount": "floor", "occupancy": "blocking", "serviceAccess": "adjacent"},
+      "identityContract": "One premium host podium with a rounded dark-walnut carcass, charcoal stone top, aged-brass toe kick and guest rail, deep-teal guest-front inset, one blank angled reservation tablet, one staff-rear shelf and centered pull, exactly one east-side circular cable port, and a plain west side.",
+      "semanticVerdict": "pass: guest front, staff rear, east cable port, plain west side, tablet, proportions, and materials rotate coherently without duplication.",
+      "gameplayLegibility": "pass: teal guest panel, rear shelf/pull, tablet, and one-sided port remain readable at 128px.",
+      "directions": [
+        {"direction": "north", "path": "apps/client-godot/assets/objects/directional/furniture-host-stand-pro/north.png", "sha256": "92f8936bf796d1d1e55deec4f2cddefda9202f008bfcb5421c2365f3de137100", "pixelSha256": "b30595c36af4de0792dfa2211ff70f96927e8b2d690488db9eff6ea6d75f46a5", "sourceAlphaPath": "planning/art-qa/furniture-core-directional-008/alpha-source/furniture-host-stand-pro-north.png", "sourceAlphaSha256": "1a3529b56fb8b8a011eba7df5d66d88111d2dcba87ba8770b44b6918f192f3cd", "uniformScale": 1.08024691358, "opaqueBounds": "400x525+113+65", "sourceOpaqueBounds": "370x486+150+73"},
+        {"direction": "east", "path": "apps/client-godot/assets/objects/directional/furniture-host-stand-pro/east.png", "sha256": "e68292749515678c17d336b8ba66e484941981e108451148904eb0728408fe26", "pixelSha256": "315c7c918abbcba68750f9185ff36e4857a077d43620a179d131209d834535cb", "sourceAlphaPath": "planning/art-qa/furniture-core-directional-008/alpha-source/furniture-host-stand-pro-east.png", "sourceAlphaSha256": "0aa1aaff90057045c1a4129e979002b6b3e41803f26e705291140a817073d698", "uniformScale": 1.08024691358, "opaqueBounds": "375x524+126+66", "sourceOpaqueBounds": "347x485+127+76"},
+        {"direction": "south", "path": "apps/client-godot/assets/objects/directional/furniture-host-stand-pro/south.png", "sha256": "680f52e985eb1a48e365e9be7184be4805eb00361ef62b7a43c1b5861188596c", "pixelSha256": "92456662b634a3f95f5310c2533ace3019b2bb25cd228cdc4471819bd96c3528", "sourceAlphaPath": "planning/art-qa/furniture-core-directional-008/alpha-source/furniture-host-stand-pro-south.png", "sourceAlphaSha256": "8023854b581996af2568070c924340815bb0b4a79915af5af4d6947f1651bc78", "uniformScale": 1.08024691358, "opaqueBounds": "405x514+111+76", "sourceOpaqueBounds": "375x476+133+58"},
+        {"direction": "west", "path": "apps/client-godot/assets/objects/directional/furniture-host-stand-pro/west.png", "sha256": "b95a8f0df9db5b28833de9f03e0185b2cd7b64310b64ce33f9b05008f167a4d6", "pixelSha256": "fd7bf029ab013e07e90a467dd865e69cca9636e15ab3ca21d7157215741ebd92", "sourceAlphaPath": "planning/art-qa/furniture-core-directional-008/alpha-source/furniture-host-stand-pro-west.png", "sourceAlphaSha256": "b4e08c7036f5ffd8248192d8ae6c44a2e5016c09374d34e70e45e129f7c43623", "uniformScale": 1.08024691358, "opaqueBounds": "378x516+124+74", "sourceOpaqueBounds": "350x478+119+69"}
+      ]
+    },
+    {
+      "catalogId": "server-station-pro",
+      "assetId": "furniture-server-station-pro",
+      "name": "Integrated Server Station",
+      "footprint": [3, 2],
+      "placement": {"mount": "floor", "occupancy": "blocking", "serviceAccess": "adjacent"},
+      "identityContract": "One premium service console with a rounded dark-walnut carcass, continuous brushed-stainless worktop, continuous brass toe kick, exactly two deep-teal guest-front doors, exactly two open staff-rear cubbies and one recessed black tray, and two plain uninterrupted end panels.",
+      "semanticVerdict": "pass: guest door front and staff cubby rear reverse coherently; both plain end panels, top, toe kick, proportions, and materials remain fixed through quarter turns.",
+      "gameplayLegibility": "pass: teal two-door front, open two-cubby rear, inset tray, stainless top, and plain sides remain readable at 128px.",
+      "directions": [
+        {"direction": "north", "path": "apps/client-godot/assets/objects/directional/furniture-server-station-pro/north.png", "sha256": "4fbc1eecae3cbe91ce2ecf53c7b4ccdeb72bbb4b41a0f288b7e886dd7e10af25", "pixelSha256": "96f18b79e398f777b1d2cac87d8e05fa756593dfee7bd66057196314b5f66f96", "sourceAlphaPath": "planning/art-qa/furniture-core-directional-008/alpha-source/furniture-server-station-pro-north.png", "sourceAlphaSha256": "46099e9eba87dd314d0e47a360b53993254fb557962bddf9ab67a8e05f3de1d5", "uniformScale": 1.10062893082, "opaqueBounds": "533x507+47+83", "sourceOpaqueBounds": "484x461+93+88"},
+        {"direction": "east", "path": "apps/client-godot/assets/objects/directional/furniture-server-station-pro/east.png", "sha256": "7b1657cf4502784216409ccc10901ef4182a54dac24fa5587d7860624d2b2115", "pixelSha256": "c9f32d89c959d1002a3ae9e02959068b601883051f53879c9ea34c68ad214b76", "sourceAlphaPath": "planning/art-qa/furniture-core-directional-008/alpha-source/furniture-server-station-pro-east.png", "sourceAlphaSha256": "0b09cb2a929bcd296f65a507c0546695d96eef02c1ddc13ec81546d60b559cdf", "uniformScale": 1.10062893082, "opaqueBounds": "371x521+128+69", "sourceOpaqueBounds": "337x473+138+86"},
+        {"direction": "south", "path": "apps/client-godot/assets/objects/directional/furniture-server-station-pro/south.png", "sha256": "5f581537686642934a455cedbdfdf0af861e9d47507e81c364ca6a6185fbed6d", "pixelSha256": "da0106101865ed400675392a4f873e38da9ef25a7fbb21bbba4f7e2a621aec31", "sourceAlphaPath": "planning/art-qa/furniture-core-directional-008/alpha-source/furniture-server-station-pro-south.png", "sourceAlphaSha256": "eccd0ada5ce86db89444d4795d8e58f0df2fa2d80f3f01217dcacfd7bcc3f4bb", "uniformScale": 1.10062893082, "opaqueBounds": "535x511+46+79", "sourceOpaqueBounds": "486x464+92+74"},
+        {"direction": "west", "path": "apps/client-godot/assets/objects/directional/furniture-server-station-pro/west.png", "sha256": "0196a97f0f00f9776d775683c8a16fa818868e4400a4bd96651da2989ad6b5bc", "pixelSha256": "d019adf88f3d9fb5e39e05bded91947a9d45f8e59ea3f14feb2b4639f5b29c02", "sourceAlphaPath": "planning/art-qa/furniture-core-directional-008/alpha-source/furniture-server-station-pro-west.png", "sourceAlphaSha256": "4b6609b9b4ecd5409d37b24aa8c899c633a3d48e4d08d036be595804dfbcbbb8", "uniformScale": 1.10062893082, "opaqueBounds": "370x525+128+65", "sourceOpaqueBounds": "336x477+140+62"}
+      ]
+    },
+    {
+      "catalogId": "pos-terminal",
+      "assetId": "furniture-pos-terminal",
+      "name": "Commercial POS Terminal",
+      "footprint": [1, 1],
+      "placement": {"mount": "floor", "occupancy": "blocking", "serviceAccess": "adjacent"},
+      "identityContract": "One self-standing compact POS kiosk with one low square charcoal-metal weighted pedestal and brass toe cap, one short brass neck, one blank touchscreen in a deep-teal bezel, exactly one physical-right card reader, exactly one front receipt slot, exactly one rear ventilation grille, and a plain physical-left side.",
+      "semanticVerdict": "pass: screen, reader, receipt slot, rear grille, plain opposite side, weighted base, neck, proportions, and materials rotate coherently without mirrored hardware.",
+      "gameplayLegibility": "pass: blank teal-bezel screen, side reader, rear grille, receipt slot, and weighted floor base remain distinct at 128px.",
+      "directions": [
+        {"direction": "north", "path": "apps/client-godot/assets/objects/directional/furniture-pos-terminal/north.png", "sha256": "9f89cf0e131992489204d26d449d28d1bd9b78e58bc0f7b63b88eb3ae048f6a2", "pixelSha256": "ebda8ba827a6fee697a9ef79bc1f8e5bb2cd1adb4d0834c12f46b884fded7474", "sourceAlphaPath": "planning/art-qa/furniture-core-directional-008/alpha-source/furniture-pos-terminal-north.png", "sourceAlphaSha256": "d909ab3e1c78b0228c2d49dc95a8bb42fbbb6ece602091ce9caa71286c7833bd", "uniformScale": 0.9375, "opaqueBounds": "344x525+141+65", "sourceOpaqueBounds": "367x560+155+35"},
+        {"direction": "east", "path": "apps/client-godot/assets/objects/directional/furniture-pos-terminal/east.png", "sha256": "a74388aaa4822ff0bc3fcb8c09ce29d78830324d3a36e2e878bd49e696bfba04", "pixelSha256": "800749024cae20b2257a20159ababcf82dddefc0345bc3073c15ec97c5832c75", "sourceAlphaPath": "planning/art-qa/furniture-core-directional-008/alpha-source/furniture-pos-terminal-east.png", "sourceAlphaSha256": "22de721372708838907226c09821388f13bd22abf81a6ac3be1009def6620784", "uniformScale": 0.9375, "opaqueBounds": "291x523+168+67", "sourceOpaqueBounds": "310x558+123+43"},
+        {"direction": "south", "path": "apps/client-godot/assets/objects/directional/furniture-pos-terminal/south.png", "sha256": "1ae82455331cb0a48f538455b3d351b7fbbc13fec57a80498e95ca2cbd4f4849", "pixelSha256": "32adc9dd9e2cc9d72abf6a3bad47381d883a1d1ee62356217239de5df34121d6", "sourceAlphaPath": "planning/art-qa/furniture-core-directional-008/alpha-source/furniture-pos-terminal-south.png", "sourceAlphaSha256": "67dcddc4ba7c8f4423ba9b222f9f5d2ac1c1b8b5f8667598fba304ceb7904f4f", "uniformScale": 0.9375, "opaqueBounds": "329x503+149+87", "sourceOpaqueBounds": "351x537+142+32"},
+        {"direction": "west", "path": "apps/client-godot/assets/objects/directional/furniture-pos-terminal/west.png", "sha256": "1434d8ae74f649b087e3b2c6476f159cdcf8f60a99ca14b7a99f34bf957e3771", "pixelSha256": "32c4c209bc513b4b693f6ef38bbd57094949e6de4442cfa51fc75c1697b8e9c6", "sourceAlphaPath": "planning/art-qa/furniture-core-directional-008/alpha-source/furniture-pos-terminal-west.png", "sourceAlphaSha256": "b21d2a8bb91666cb8d7d397613fc5502a54be06a94b2373cfe2aabece057b29b", "uniformScale": 0.9375, "opaqueBounds": "230x510+198+80", "sourceOpaqueBounds": "245x544+143+24"}
+      ]
+    }
+  ],
+  "rejectedAttempts": [
+    {"generatorOutputSha256": "921c94820db1ad4efa432c5e9e8df89c439f26e9c7d8424402bba6c3b5604fde", "reason": "Cable port appeared in both host-stand side views, violating rigid one-side identity."},
+    {"generatorOutputSha256": "f2f09f778cb456ca3eff31276462093ad4db3ea42d5e5fe0bd6f105096660f19", "reason": "Guest front repeated in three server-station cells and the waste opening mirrored across incompatible sides."},
+    {"generatorOutputSha256": "e0b5dc363914e7ab86095b04986b7cbc699936df0d686d25e96b9c4ece4bfa1a", "reason": "The server-station waste opening replicated into three cells despite an exact one-opening contract."},
+    {"generatorOutputSha256": "dbb40840cb35c2c2ad7aadf83eb9513310396c2152fb72651baa243f0c6bf2bd", "reason": "The pre-edge-contract host-stand matte retained low-alpha chroma contamination after normalization."},
+    {"generatorOutputSha256": "c3d9629e1bdd9a811171ace14ddcc359606adb0f937e64a0d35935afc6f8e1ef", "reason": "The pre-edge-contract POS matte retained low-alpha chroma contamination after normalization."}
+  ],
+  "excludedQuarantinePayload": {
+    "rawAtlases": 3,
+    "alphaAtlases": 3,
+    "rejectedBinaries": 5,
+    "processScripts": 2,
+    "policy": "Raw, rejected, and process binaries remain outside the repository; exact source, intermediate, and rejection hashes plus reasons are retained above."
+  }
+}

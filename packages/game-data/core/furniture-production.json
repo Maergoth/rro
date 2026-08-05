@@ -238,6 +238,11 @@
       "service",
       "asset:furniture-host-stand-pro"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-host-stand-pro",
     "upkeepCents": 808,
@@ -278,6 +283,11 @@
       "service",
       "asset:furniture-server-station-pro"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-server-station-pro",
     "upkeepCents": 1010,
@@ -317,6 +327,11 @@
       "service",
       "asset:furniture-pos-terminal"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-pos-terminal",
     "upkeepCents": 408,

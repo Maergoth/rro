@@ -22,8 +22,11 @@
     "espresso",
     "furniture-banquette-section",
     "furniture-commercial-chair",
+    "furniture-host-stand-pro",
     "furniture-oak-two-top",
+    "furniture-pos-terminal",
     "furniture-premium-chair",
+    "furniture-server-station-pro",
     "furniture-six-burner-range",
     "furniture-walnut-four-top",
     "host-stand",
@@ -65,7 +68,11 @@
     "pendants",
     "plants"
   ],
-  "runtimeCompositePendingAssetIds": [],
+  "runtimeCompositePendingAssetIds": [
+    "furniture-host-stand-pro",
+    "furniture-pos-terminal",
+    "furniture-server-station-pro"
+  ],
   "capability": {
     "directionalTextureSelection": true,
     "commonFloorContactPivot": true,
@@ -76,6 +83,6 @@
     "projectionAligned": true,
     "runtimeCompositeAccepted": false,
     "productionComplete": false,
-    "remainingVisualGate": "Implement legal wall and ceiling mounting plus mount-specific anchors and depth for local-art, plants, and pendants, then pass an exact four-rotation native Godot gameplay capture for those mounted assets."
+    "remainingVisualGate": "Pass an exact four-rotation native Godot gameplay capture for furniture-host-stand-pro, furniture-pos-terminal, and furniture-server-station-pro; implement legal wall and ceiling mounting plus mount-specific anchors and depth for local-art, plants, and pendants, then pass a second exact four-rotation native Godot gameplay capture for those mounted assets."
   }
 }
