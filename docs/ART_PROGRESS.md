@@ -20,7 +20,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
-| Furniture directional sets | 229 | 16 | 16 | 16 | 0 |
+| Furniture directional sets | 229 | 19 | 19 | 16 | 0 |
 | Equipment inventory icons | 45 | 45 | 45 | 45 | 45 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
@@ -87,17 +87,21 @@ Directional furniture texture selection is yes; final projection alignment is no
 | furniture-core-directional-004 | 28 | passed | blocked-native-gameplay-composite-acceptance | `708642f` | planning/art-qa/furniture-core-directional-004/contact-627-dark.png |
 | furniture-core-directional-005 | 28 | passed | blocked-native-gameplay-composite-acceptance | `565869f` | planning/art-qa/furniture-core-directional-005/contact-627-dark.png |
 
+## Accepted locally, remote checkpoint pending
+
+These batches have passed source/composite QA but deliberately do not count as remotely verified or production-complete until their immutable GitHub commit and hosted CI are recorded.
+
+| Batch | Files | Source QA | Runtime/composite QA | Evidence |
+|---|---:|---|---|---|
+| furniture-core-directional-006 | 28 | passed | blocked-native-gameplay-composite-acceptance | planning/art-qa/furniture-core-directional-006/contact-627-dark.png |
+
 ## Missing furniture directional sets
 
-16 of 229 elevated four-direction sets are present. The 20 attractive overhead singles are preserved as references but do not satisfy this camera contract.
+19 of 229 elevated four-direction sets are present. The 20 attractive overhead singles are preserved as references but do not satisfy this camera contract.
 
-### Decor — 25 missing
+### Dining — 34 missing
 
-`local-art`, `furniture-oak-partition`, `furniture-large-planter`, `furniture-wall-art-local`, `furniture-acoustic-panel`, `furniture-pendant-light`, `furniture-essential-room-divider`, `furniture-craftsman-room-divider`, `furniture-endurance-room-divider`, `furniture-hospitality-room-divider`, `furniture-precision-room-divider`, `furniture-reclaimed-room-divider`, `furniture-essential-planter-feature`, `furniture-craftsman-planter-feature`, `furniture-endurance-planter-feature`, `furniture-hospitality-planter-feature`, `furniture-precision-planter-feature`, `furniture-reclaimed-planter-feature`, `furniture-essential-acoustic-light`, `furniture-craftsman-acoustic-light`, `furniture-endurance-acoustic-light`, `furniture-hospitality-acoustic-light`, `furniture-precision-acoustic-light`, `furniture-reclaimed-acoustic-light`, `summer-canopy`
-
-### Dining — 36 missing
-
-`furniture-oak-two-top`, `furniture-walnut-four-top`, `furniture-banquette-section`, `furniture-commercial-chair`, `furniture-premium-chair`, `furniture-essential-cafe-two-top`, `furniture-craftsman-cafe-two-top`, `furniture-endurance-cafe-two-top`, `furniture-hospitality-cafe-two-top`, `furniture-precision-cafe-two-top`, `furniture-reclaimed-cafe-two-top`, `furniture-essential-family-four-top`, `furniture-craftsman-family-four-top`, `furniture-endurance-family-four-top`, `furniture-hospitality-family-four-top`, `furniture-precision-family-four-top`, `furniture-reclaimed-family-four-top`, `furniture-essential-communal-table`, `furniture-craftsman-communal-table`, `furniture-endurance-communal-table`, `furniture-hospitality-communal-table`, `furniture-precision-communal-table`, `furniture-reclaimed-communal-table`, `furniture-essential-dining-chair`, `furniture-craftsman-dining-chair`, `furniture-endurance-dining-chair`, `furniture-hospitality-dining-chair`, `furniture-precision-dining-chair`, `furniture-reclaimed-dining-chair`, `furniture-essential-dining-booth`, `furniture-craftsman-dining-booth`, `furniture-endurance-dining-booth`, `furniture-hospitality-dining-booth`, `furniture-precision-dining-booth`, `furniture-reclaimed-dining-booth`, `summer-patio-two`
+`furniture-banquette-section`, `furniture-commercial-chair`, `furniture-premium-chair`, `furniture-essential-cafe-two-top`, `furniture-craftsman-cafe-two-top`, `furniture-endurance-cafe-two-top`, `furniture-hospitality-cafe-two-top`, `furniture-precision-cafe-two-top`, `furniture-reclaimed-cafe-two-top`, `furniture-essential-family-four-top`, `furniture-craftsman-family-four-top`, `furniture-endurance-family-four-top`, `furniture-hospitality-family-four-top`, `furniture-precision-family-four-top`, `furniture-reclaimed-family-four-top`, `furniture-essential-communal-table`, `furniture-craftsman-communal-table`, `furniture-endurance-communal-table`, `furniture-hospitality-communal-table`, `furniture-precision-communal-table`, `furniture-reclaimed-communal-table`, `furniture-essential-dining-chair`, `furniture-craftsman-dining-chair`, `furniture-endurance-dining-chair`, `furniture-hospitality-dining-chair`, `furniture-precision-dining-chair`, `furniture-reclaimed-dining-chair`, `furniture-essential-dining-booth`, `furniture-craftsman-dining-booth`, `furniture-endurance-dining-booth`, `furniture-hospitality-dining-booth`, `furniture-precision-dining-booth`, `furniture-reclaimed-dining-booth`, `summer-patio-two`
 
 ### Service — 36 missing
 
@@ -114,6 +118,10 @@ Directional furniture texture selection is yes; final projection alignment is no
 ### Utility — 36 missing
 
 `furniture-chemical-cabinet`, `furniture-dish-machine-high-temp`, `furniture-three-comp-sink`, `furniture-glass-rack-system`, `furniture-floor-drain`, `furniture-wet-floor-station`, `furniture-essential-dish-machine`, `furniture-craftsman-dish-machine`, `furniture-endurance-dish-machine`, `furniture-hospitality-dish-machine`, `furniture-precision-dish-machine`, `furniture-reclaimed-dish-machine`, `furniture-essential-pot-wash-sink`, `furniture-craftsman-pot-wash-sink`, `furniture-endurance-pot-wash-sink`, `furniture-hospitality-pot-wash-sink`, `furniture-precision-pot-wash-sink`, `furniture-reclaimed-pot-wash-sink`, `furniture-essential-mop-basin`, `furniture-craftsman-mop-basin`, `furniture-endurance-mop-basin`, `furniture-hospitality-mop-basin`, `furniture-precision-mop-basin`, `furniture-reclaimed-mop-basin`, `furniture-essential-waste-sorter`, `furniture-craftsman-waste-sorter`, `furniture-endurance-waste-sorter`, `furniture-hospitality-waste-sorter`, `furniture-precision-waste-sorter`, `furniture-reclaimed-waste-sorter`, `furniture-essential-spill-cart`, `furniture-craftsman-spill-cart`, `furniture-endurance-spill-cart`, `furniture-hospitality-spill-cart`, `furniture-precision-spill-cart`, `furniture-reclaimed-spill-cart`
+
+### Decor — 24 missing
+
+`furniture-oak-partition`, `furniture-large-planter`, `furniture-wall-art-local`, `furniture-acoustic-panel`, `furniture-pendant-light`, `furniture-essential-room-divider`, `furniture-craftsman-room-divider`, `furniture-endurance-room-divider`, `furniture-hospitality-room-divider`, `furniture-precision-room-divider`, `furniture-reclaimed-room-divider`, `furniture-essential-planter-feature`, `furniture-craftsman-planter-feature`, `furniture-endurance-planter-feature`, `furniture-hospitality-planter-feature`, `furniture-precision-planter-feature`, `furniture-reclaimed-planter-feature`, `furniture-essential-acoustic-light`, `furniture-craftsman-acoustic-light`, `furniture-endurance-acoustic-light`, `furniture-hospitality-acoustic-light`, `furniture-precision-acoustic-light`, `furniture-reclaimed-acoustic-light`, `summer-canopy`
 
 ### Office — 14 missing
 
@@ -195,8 +203,8 @@ This JSON block is part of this same authoritative document and contains every c
     {
       "lane": "Furniture directional sets",
       "required": 229,
-      "present": 16,
-      "sourceAccepted": 16,
+      "present": 19,
+      "sourceAccepted": 19,
       "remoteVerified": 16,
       "productionComplete": 0
     },
@@ -1003,36 +1011,36 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/local-art/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "15517f5f05092075c2f753fb5e1f23cf4d6025aade0f0d8bf92ee0fbb06f906c"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/local-art/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "08f153340927cee22f31c0358135b2a5b4947fff8d677bbad2f0cd5cc3b020e8"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/local-art/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "9218d12571ef3779288f09ed39d964fc11a353a4ef293c1017fc29d1312f0545"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/local-art/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "9653242d5e91293d42e0b55ddd96ddabc91141b52e207e2c3dbecbbefa655847"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "furniture-core-directional-006",
+      "review": "passed",
+      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "directionalSelectionBound": false,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-006/contact-627-dark.png",
+      "qaEvidencePresent": true,
+      "directionalSelectionBound": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "oak-two-top",
@@ -1049,36 +1057,36 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-oak-two-top/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "d6a5abc9e7306b0d8cf4f9ed5ebf2e8bf63e78a98c75d6455f948ff4589eca76"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-oak-two-top/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "59354c68b6f1eb9d57aaefe6718d5d5334e7aaa87e903b01c16401dbda6dbb24"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-oak-two-top/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "fb19a998f3a331f8224cb8debeaadd1efbace08f5835543ce1bf9cf2911711be"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-oak-two-top/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "748b1d5cddebcd450ae757db353eafd5c187a0525d3a9aad24a42a4e4a9408fd"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "furniture-core-directional-006",
+      "review": "passed",
+      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "directionalSelectionBound": false,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-006/contact-627-dark.png",
+      "qaEvidencePresent": true,
+      "directionalSelectionBound": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "walnut-four-top",
@@ -1095,36 +1103,36 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-walnut-four-top/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "34ffe15db9881dc44c3e8268ce291574b677d8c211274b5e5c4eb0c423f46ca5"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-walnut-four-top/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "1b4c0ea9182885f63f34d98c877203fbe16f5eb07a5962b2029e95ae6df31774"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-walnut-four-top/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "bd11b2dbce979698820a2e33251efccc22ea91c49d1ac285ce2f7b1d971a6dcf"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-walnut-four-top/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "ca6949890089823f1987e68c2ed8407a8f6f29b186a8ef7ba84e136819b5674c"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "furniture-core-directional-006",
+      "review": "passed",
+      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "directionalSelectionBound": false,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-006/contact-627-dark.png",
+      "qaEvidencePresent": true,
+      "directionalSelectionBound": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "banquette-section",
@@ -14889,7 +14897,26 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": true
     }
   ],
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "furniture-core-directional-006",
+      "assets": [
+        "local-art",
+        "furniture-oak-two-top",
+        "furniture-walnut-four-top"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
+      "sourcePromptMode": "built-in image generation; three identity-locked elevated four-direction atlases with targeted camera/count corrections, chroma removal, common-pivot normalization, exact identity review, and full/gameplay-scale contact sheets",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-006/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-006/qa.json",
+      "notes": "Local print set, oak two-top, and walnut four-top each pass exact catalog identity, coherent quarter-turns, 627x627 sRGBA, common y=590 floor-contact pivot, transparent-border, unique-content, full-scale, and 128px review. Six rejected camera/count attempts remain hash-recorded but excluded. The accepted package is locally promoted and runtime-registered; exact remote tree verification, hosted CI, and native Godot gameplay-composite acceptance remain blocking.",
+      "qaEvidencePresent": true,
+      "remoteVerified": false,
+      "preservationPending": true
+    }
+  ],
   "preservedReferences": [
     {
       "id": "alpha2-overhead-furniture",

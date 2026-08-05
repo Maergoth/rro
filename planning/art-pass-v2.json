@@ -30,7 +30,7 @@
     ]
   },
   "coverage": {
-    "furniture": { "catalogTotal": 229, "acceptedSets": 16, "acceptedDirectionalFiles": 64 },
+    "furniture": { "catalogTotal": 229, "acceptedSets": 19, "acceptedDirectionalFiles": 76 },
     "equipmentIcons": { "catalogTotal": 45, "accepted": 45 },
     "characterSystem": {
       "status": "in_progress",
@@ -46,7 +46,19 @@
       "required": ["body_skin", "face", "hair_headwear", "base_outfit", "role_layer", "footwear", "accessory", "carried_object", "effects", "skin_masks", "primary_color_masks", "secondary_color_masks"]
     }
   },
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "furniture-core-directional-006",
+      "assets": ["local-art", "furniture-oak-two-top", "furniture-walnut-four-top"],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
+      "sourcePromptMode": "built-in image generation; three identity-locked elevated four-direction atlases with targeted camera/count corrections, chroma removal, common-pivot normalization, exact identity review, and full/gameplay-scale contact sheets",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-006/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-006/qa.json",
+      "notes": "Local print set, oak two-top, and walnut four-top each pass exact catalog identity, coherent quarter-turns, 627x627 sRGBA, common y=590 floor-contact pivot, transparent-border, unique-content, full-scale, and 128px review. Six rejected camera/count attempts remain hash-recorded but excluded. The accepted package is locally promoted and runtime-registered; exact remote tree verification, hosted CI, and native Godot gameplay-composite acceptance remain blocking."
+    }
+  ],
   "batches": [
     {
       "id": "furniture-pilot-001",

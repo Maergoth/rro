@@ -182,8 +182,11 @@ test("furniture directional batch 002 matches the authoritative catalog and comm
     "booth",
     "dish-machine",
     "espresso",
+    "furniture-oak-two-top",
     "furniture-six-burner-range",
+    "furniture-walnut-four-top",
     "host-stand",
+    "local-art",
     "mop-sink",
     "pass",
     "pendants",
@@ -195,6 +198,7 @@ test("furniture directional batch 002 matches the authoritative catalog and comm
     "table-four",
     "table-two",
   ]);
+  assert.equal(runtimeContract.capability.projectionIntegrated, true);
   assert.equal(runtimeContract.capability.projectionAligned, false);
   assert.equal(runtimeContract.capability.runtimeCompositeAccepted, false);
   assert.equal(runtimeContract.capability.productionComplete, false);
