@@ -45,6 +45,16 @@ static func draw_rect_for_floor_contact(texture_size: Vector2, footprint_rect: R
 	return draw_rect_for_floor_contact_target(texture_size, Vector2(footprint_rect.get_center().x, footprint_rect.end.y), footprint_rect.size)
 
 static func draw_rect_for_floor_contact_target(texture_size: Vector2, floor_contact: Vector2, visual_extent: Vector2) -> Rect2:
+	return draw_rect_for_source_anchor(texture_size, floor_contact, visual_extent)
+
+## Mounted sheets retain the accepted common source pivot, but bind it to a
+## raised wall-plane or ceiling target supplied by the runtime. Keeping this as
+## a separate entry point prevents mounted objects from silently falling back
+## to a projected floor-contact target.
+static func draw_rect_for_mount_anchor(texture_size: Vector2, mount_anchor: Vector2, visual_extent: Vector2) -> Rect2:
+	return draw_rect_for_source_anchor(texture_size, mount_anchor, visual_extent)
+
+static func draw_rect_for_source_anchor(texture_size: Vector2, screen_anchor: Vector2, visual_extent: Vector2) -> Rect2:
 	var canvas: Dictionary = contract().get("sourceCanvas", {})
 	var canvas_width := float(canvas.get("width", 0.0))
 	var canvas_height := float(canvas.get("height", 0.0))
@@ -53,4 +63,4 @@ static func draw_rect_for_floor_contact_target(texture_size: Vector2, floor_cont
 		return Rect2()
 	var uniform_scale := maxf(visual_extent.x, visual_extent.y) / maxf(canvas_width, canvas_height)
 	var source_pivot := Vector2(float(pivot_data.get("x", canvas_width * 0.5)), float(pivot_data.get("y", canvas_height)))
-	return Rect2(floor_contact - source_pivot * uniform_scale, texture_size * uniform_scale)
+	return Rect2(screen_anchor - source_pivot * uniform_scale, texture_size * uniform_scale)

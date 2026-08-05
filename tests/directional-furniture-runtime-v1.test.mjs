@@ -116,7 +116,8 @@ test("common floor-contact anchoring uses uniform scale and never stretches dire
 
   assert.match(binding, /footprint_rect\.get_center\(\)\.x, footprint_rect\.end\.y/);
   assert.match(binding, /draw_rect_for_floor_contact_target\(texture_size, Vector2\(footprint_rect\.get_center\(\)\.x, footprint_rect\.end\.y\), footprint_rect\.size\)/);
-  assert.match(binding, /floor_contact - source_pivot \* uniform_scale/);
+  assert.match(binding, /draw_rect_for_mount_anchor\(texture_size: Vector2, mount_anchor: Vector2, visual_extent: Vector2\)/);
+  assert.match(binding, /screen_anchor - source_pivot \* uniform_scale/);
   assert.match(binding, /texture_size \* uniform_scale/);
   assert.doesNotMatch(binding, /Vector2\([^\n]*\/ canvas_width[^\n]*\/ canvas_height/);
 });
@@ -126,6 +127,7 @@ test("directional textures are not rotated and legacy generated/SVG fallback rem
   assert.ok(directionalBranch, "directional and legacy draw branches are missing");
   assert.doesNotMatch(directionalBranch[1], /draw_set_transform|deg_to_rad/, "directional texture must not be rotated again");
   assert.match(directionalBranch[1], /FurnitureArtBinding\.draw_rect_for_floor_contact_target/);
+  assert.match(directionalBranch[1], /FurnitureArtBinding\.draw_rect_for_mount_anchor/);
   assert.match(directionalBranch[1], /IsometricGridProjection\.floor_contact_target/);
   assert.match(directionalBranch[2], /draw_set_transform\(bounds\.get_center\(\), deg_to_rad\(float\(item_rotation\)\)/);
   assert.match(runtime, /res:\/\/assets\/objects\/generated\/%s\.png/);

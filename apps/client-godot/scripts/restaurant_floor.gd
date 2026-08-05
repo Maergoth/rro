@@ -39,6 +39,12 @@ const CATEGORY_COLORS := {
 	"Utility": Color("52758f"), "Decor": Color("6e9364"), "Storage": Color("80705d"), "Office": Color("776487")
 }
 
+# Visual elevation is deliberately client-only. Persisted x/y/rotation keep
+# the exact server contract while art is raised from its wall edge or ceiling
+# cell anchor in the elevated orthographic-isometric view.
+const WALL_ART_ELEVATION_CELLS := 0.85
+const CEILING_ART_ELEVATION_CELLS := 1.70
+
 func _ready() -> void:
 	clip_contents = true
 	mouse_filter = Control.MOUSE_FILTER_STOP
@@ -465,13 +471,23 @@ func object_draws_before(left: Dictionary, right: Dictionary) -> bool:
 	var right_key := IsometricGridProjection.depth_key(object_footprint(right, right_definition), str(right.get("id", "")))
 	return IsometricGridProjection.depth_key_draws_before(left_key, right_key)
 
-func object_art_contact_screen(object: Dictionary, definition: Dictionary, footprint: Rect2) -> Vector2:
+func object_art_mount_anchor_screen(object: Dictionary, definition: Dictionary) -> Vector2:
 	var mount := FurnitureMountPlacement.mount_for(definition)
+	var grid_anchor := FurnitureMountPlacement.mount_anchor_grid(object, definition)
 	if mount == "wall":
-		return grid_to_screen(FurnitureMountPlacement.mount_anchor_grid(object, definition)) - Vector2(0.0, cell_pixels * 0.35)
+		return grid_to_screen(grid_anchor) - Vector2(0.0, cell_pixels * WALL_ART_ELEVATION_CELLS)
 	if mount == "ceiling":
-		return grid_to_screen(FurnitureMountPlacement.mount_anchor_grid(object, definition)) - Vector2(0.0, cell_pixels * 1.25)
-	return IsometricGridProjection.floor_contact_target(footprint, camera_offset, cell_pixels)
+		return grid_to_screen(grid_anchor) - Vector2(0.0, cell_pixels * CEILING_ART_ELEVATION_CELLS)
+	return grid_to_screen(grid_anchor)
+
+func object_art_mount_visual_extent(object: Dictionary, definition: Dictionary, footprint: Rect2) -> Vector2:
+	if FurnitureMountPlacement.mount_for(definition) == "wall":
+		var segment := wall_edge_screen_segment(object, definition)
+		if segment.size() == 2:
+			# The projected support span is rotation-invariant and keeps wall art
+			# scaled to the wall plane instead of the containing floor diamond.
+			return Vector2(segment[0].distance_to(segment[1]), cell_pixels * WALL_ART_ELEVATION_CELLS)
+	return polygon_bounds(footprint_polygon(footprint)).size
 
 func draw_object(object: Dictionary, alpha := 1.0) -> void:
 	var definition := furniture_definition(str(object.get("definitionId", "")))
@@ -510,10 +526,14 @@ func draw_object(object: Dictionary, alpha := 1.0) -> void:
 		elif condition == "worn": condition_tint = Color(.78, .72, .65, alpha)
 		if not preview_valid: condition_tint = Color(1.0, .42, .38, alpha)
 		if bool(texture_binding.get("directional", false)):
-			var floor_contact := IsometricGridProjection.floor_contact_target(footprint, camera_offset, cell_pixels)
-			if mount != "floor":
-				floor_contact = object_art_contact_screen(object, definition, footprint)
-			var directional_rect := FurnitureArtBinding.draw_rect_for_floor_contact_target(texture.get_size(), floor_contact, bounds.size)
+			var directional_rect := Rect2()
+			if mount == "floor":
+				var floor_contact := IsometricGridProjection.floor_contact_target(footprint, camera_offset, cell_pixels)
+				directional_rect = FurnitureArtBinding.draw_rect_for_floor_contact_target(texture.get_size(), floor_contact, bounds.size)
+			else:
+				var mount_anchor := object_art_mount_anchor_screen(object, definition)
+				var mount_extent := object_art_mount_visual_extent(object, definition, footprint)
+				directional_rect = FurnitureArtBinding.draw_rect_for_mount_anchor(texture.get_size(), mount_anchor, mount_extent)
 			draw_texture_rect(texture, directional_rect, false, condition_tint)
 		else:
 			var source_size := bounds.size - Vector2.ONE * 8

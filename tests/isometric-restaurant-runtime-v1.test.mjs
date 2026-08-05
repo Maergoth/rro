@@ -69,11 +69,14 @@ test("builder floor paint and wall picking use diamonds and projected edge segme
   assert.doesNotMatch(runtime, /var local: Vector2 = \(event\.position - cell_origin\) \/ cell_pixels/);
 });
 
-test("directional sprites anchor their common source pivot to the projected footprint contact without stretching", () => {
+test("directional sprites use distinct projected floor and raised mount anchors without stretching", () => {
   assert.match(runtime, /IsometricGridProjection\.floor_contact_target\(footprint, camera_offset, cell_pixels\)/);
   assert.match(runtime, /FurnitureArtBinding\.draw_rect_for_floor_contact_target\(texture\.get_size\(\), floor_contact, bounds\.size\)/);
+  assert.match(runtime, /FurnitureArtBinding\.draw_rect_for_mount_anchor\(texture\.get_size\(\), mount_anchor, mount_extent\)/);
+  assert.match(runtime, /object_art_mount_anchor_screen\(object, definition\)/);
+  assert.match(runtime, /object_art_mount_visual_extent\(object, definition, footprint\)/);
   assert.match(binding, /var uniform_scale := maxf\(visual_extent\.x, visual_extent\.y\) \/ maxf\(canvas_width, canvas_height\)/);
-  assert.match(binding, /return Rect2\(floor_contact - source_pivot \* uniform_scale, texture_size \* uniform_scale\)/);
+  assert.match(binding, /return Rect2\(screen_anchor - source_pivot \* uniform_scale, texture_size \* uniform_scale\)/);
   assert.doesNotMatch(binding, /Vector2\([^\n]*\/ canvas_width[^\n]*\/ canvas_height/);
 });
 

@@ -137,5 +137,5 @@ test("floor geometry and rendering retain the legacy rectangular rotation path",
   assert.match(helper, /return str\(placement\.get\("mount", "floor"\)\)/);
   assert.match(runtime, /if mount == "floor":\s*draw_colored_polygon\(polygon, color\)\s*draw_polyline\(closed_polygon\(polygon\), Color\(color\)\.lightened\(\.25\), 2\.0, true\)/s);
   assert.match(runtime, /var floor_contact := IsometricGridProjection\.floor_contact_target\(footprint, camera_offset, cell_pixels\)/);
-  assert.match(runtime, /if mount != "floor":\s*floor_contact = object_art_contact_screen/s);
+  assert.match(runtime, /if mount == "floor":[\s\S]*draw_rect_for_floor_contact_target[\s\S]*else:[\s\S]*draw_rect_for_mount_anchor/);
 });
