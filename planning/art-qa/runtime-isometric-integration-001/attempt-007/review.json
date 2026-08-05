@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "id": "runtime-isometric-integration-001-attempt-007",
+  "reviewedAt": "2026-08-05T15:15:27Z",
+  "source": {
+    "remoteCommit": "f2cc4afc3dca51ae468d9c95e2b036dedd8c3ee5",
+    "remoteTree": "3307f0ba9abf9505af1e3410895da28a890d7cdf",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31018806421",
+    "artifactId": 8935706427,
+    "artifactName": "elevated-isometric-runtime-qa",
+    "artifactSha256": "640bc60b9e699dbe3ce84c05ce5258f2a60336f6d97d1d0b95849636fd1d2376"
+  },
+  "automatedGates": {
+    "windowsCi": "passed",
+    "ubuntuCi": "passed",
+    "nativeGodotCapture": "passed",
+    "captureCount": 4,
+    "viewport": [
+      1800,
+      1100
+    ],
+    "minimumSampledColors": 350,
+    "exactArtifactDigestVerified": true,
+    "exactCaptureHashesVerified": true,
+    "legalMountedPlacementRecordsPresent": true
+  },
+  "visualReview": {
+    "status": "passed-all-present-assets",
+    "productionComplete": false,
+    "reviewers": [
+      "root original-scale and gameplay-scale inspection",
+      "independent original-scale and gameplay-scale inspection"
+    ],
+    "passed": [
+      "The relocated convection oven preserves its complete silhouette, floor contact, directional construction, scale, and gameplay legibility without foreground-wall occlusion in all four captures.",
+      "Local art and plants retain coherent room-facing wall support, while pendants retain credible ceiling suspension above the walnut four-top in all four directions.",
+      "The other twenty-seven previously accepted directional identities retain their reviewed placement, projection, depth, scale, and gameplay legibility without regression.",
+      "Pixel comparison with attempt 006 is identical outside the union of the prior and relocated convection-oven bounding boxes.",
+      "The exact native artifact, four capture hashes, mounted placement records, remote commit, tree, and green Windows and Ubuntu CI are verified."
+    ],
+    "blockers": [],
+    "acceptedAssetIds": [
+      "banquette",
+      "booth",
+      "dish-machine",
+      "espresso",
+      "furniture-banquette-section",
+      "furniture-commercial-chair",
+      "furniture-convection-oven",
+      "furniture-expo-pass-heated",
+      "furniture-host-stand-pro",
+      "furniture-oak-two-top",
+      "furniture-plancha-commercial",
+      "furniture-pos-terminal",
+      "furniture-premium-chair",
+      "furniture-server-station-pro",
+      "furniture-six-burner-range",
+      "furniture-walnut-four-top",
+      "host-stand",
+      "local-art",
+      "mop-sink",
+      "pass",
+      "pendants",
+      "plants",
+      "prep",
+      "range",
+      "recycling",
+      "service-station",
+      "table-four",
+      "table-two"
+    ],
+    "rejectedAssetIds": [],
+    "nextCaptureRequirements": [
+      "No remaining directional-furniture runtime visual blocker exists for the twenty-eight present source-accepted identities.",
+      "Later catalog identities still require their own source acceptance, exact remote preservation, native gameplay-scale review, durable evidence checkpoint, and green hosted CI before receiving production credit."
+    ]
+  },
+  "captures": [
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-007/restaurant-north.png",
+      "sha256": "31f53d2845340202f8d4917a81cf1a5a3611ced88fcc2c1af2f9832d146d747f"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-007/restaurant-east.png",
+      "sha256": "af0024dcb0b4fee0f109232802b3d011618a65838b20a5b8164e05232f9c1068"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-007/restaurant-south.png",
+      "sha256": "f673020d3b33f3c74e7a00f4281dae9f22a1410a91f6fb343722a500e2e48379"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-007/restaurant-west.png",
+      "sha256": "a2cce74ff63b761c4a0012c408ed4f667749a84d02b77f15a218d19818ea53bd"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-007/qa.json",
+      "sha256": "68b232b6204eae36a7df7a9de3b073ebb428f913bfbafc77f2d3c613dda488b0"
+    }
+  ]
+}
