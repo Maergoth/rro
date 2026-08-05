@@ -32,3 +32,18 @@ jobs:
           use-dotnet: false
           include-templates: false
       - run: godot --headless --path apps/client-godot --editor --quit
+      - name: Capture elevated-isometric runtime QA
+        if: matrix.os == 'ubuntu-latest'
+        shell: bash
+        run: |
+          mkdir -p artifacts/isometric-runtime
+          godot --headless --path apps/client-godot --script res://tests/isometric_runtime_capture.gd -- --output-dir="$GITHUB_WORKSPACE/artifacts/isometric-runtime"
+          test "$(find artifacts/isometric-runtime -maxdepth 1 -name 'restaurant-*.png' | wc -l)" -eq 4
+          test -s artifacts/isometric-runtime/qa.json
+      - name: Upload elevated-isometric runtime QA
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: elevated-isometric-runtime-qa
+          path: artifacts/isometric-runtime
+          if-no-files-found: error

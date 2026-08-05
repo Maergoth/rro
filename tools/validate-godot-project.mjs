@@ -19,7 +19,8 @@ assert.match(project, /run\/main_scene="res:\/\/main\.tscn"/);
 assert.match(project, /config\/features=PackedStringArray\("4\.4"/);
 assert.doesNotMatch(project, /WebView|JavaScript|browser/i);
 
-const scripts = walk(resolve(CLIENT, "scripts")).filter((path) => extname(path) === ".gd");
+const scriptRoots = [resolve(CLIENT, "scripts"), resolve(CLIENT, "tests")].filter(existsSync);
+const scripts = scriptRoots.flatMap(walk).filter((path) => extname(path) === ".gd");
 const required = ["main.gd", "api_client.gd", "realtime_client.gd", "world_globe.gd", "restaurant_floor.gd", "task_panel.gd", "minigame_stage.gd", "builder_palette.gd", "inventory_panel.gd"];
 for (const name of required) assert.ok(scripts.some((p) => p.endsWith(`/${name}`) || p.endsWith(`\\${name}`)), `Missing ${name}.`);
 
