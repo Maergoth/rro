@@ -43,8 +43,12 @@ test("the authoritative art ledger cannot hide missing, failed, local-only, or u
   assert.ok(art.quarantinedWork.some((entry) => entry.localCommit === "5714bb8" && entry.status === "local-only-rejected"));
   assert.ok(art.preservedReferences.some((entry) => entry.productionStatus === "preserved-reference-wrong-camera"));
   assert.ok(art.characters.prototypeOutfits.every((entry) => entry.status === "qa_failed_needs_remediation"));
-  assert.ok(art.summaries.every((entry) => entry.productionComplete === 0));
+  const equipmentSummary = art.summaries.find((entry) => entry.lane === "Equipment inventory icons");
+  assert.equal(equipmentSummary.productionComplete, 8);
+  assert.equal(art.summaries.find((entry) => entry.lane === "Furniture directional sets").productionComplete, 0);
+  assert.equal(art.summaries.find((entry) => entry.lane === "Body animation sets (body × animation)").productionComplete, 0);
   assert.ok(art.reviewedBatches.every((entry) => entry.qaEvidencePresent && entry.remoteVerified));
+  assert.equal(art.equipmentIcons.filter((entry) => entry.productionComplete).length, 8);
   for (const item of [...art.furniture, ...art.equipmentIcons]) {
     if (!item.productionComplete) continue;
     assert.equal(item.present, true);

@@ -40,6 +40,22 @@ for (const batch of pass.batches) {
   if (!/^[0-9a-f]{40}$/.test(batch.remoteCommit ?? "")) invalid.push(`${batch.id}: missing exact remote commit`);
   if (!/^[0-9a-f]{40}$/.test(batch.remoteTree ?? "")) invalid.push(`${batch.id}: missing exact remote tree`);
   if (!batch.qaEvidence || !png(batch.qaEvidence, `qa:${batch.id}`)) invalid.push(`${batch.id}: missing durable QA contact sheet`);
+  if (batch.qaManifest) {
+    if (!file(batch.qaManifest)) invalid.push(`${batch.id}: missing QA manifest ${batch.qaManifest}`);
+    else {
+      const manifest = read(batch.qaManifest);
+      if (manifest.batchId !== batch.id || manifest.status !== "accepted") invalid.push(`${batch.id}: QA manifest identity/status mismatch`);
+      const manifestAssets = (manifest.items ?? []).map((item) => item.catalogId).sort();
+      const batchAssets = [...batch.assets].sort();
+      if (JSON.stringify(manifestAssets) !== JSON.stringify(batchAssets)) invalid.push(`${batch.id}: QA manifest assets do not exactly match the batch`);
+      if (!(manifest.contactSheets ?? []).some((sheet) => sheet.path === batch.qaEvidence)) invalid.push(`${batch.id}: primary QA evidence is absent from its manifest`);
+      for (const item of manifest.items ?? []) {
+        if (!file(item.runtimePath)) { invalid.push(`${batch.id}: QA runtime file is missing: ${item.runtimePath}`); continue; }
+        const digest = createHash("sha256").update(readFileSync(resolve(ROOT, item.runtimePath))).digest("hex");
+        if (digest !== item.sha256) invalid.push(`${batch.id}: QA hash mismatch for ${item.catalogId}`);
+      }
+    }
+  }
   for (const asset of batch.assets) acceptedAssets.set(asset, batch.assetReviews?.[asset] ?? batch.qa);
 }
 

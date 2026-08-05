@@ -12,16 +12,16 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 - Branch: `agent/complete-production-art`
 - Draft PR: https://github.com/Maergoth/rro/pull/2
-- Last verified remote head before this ledger check-in: `512f082d7433b6dc47a70c05de12e9306785f817`
-- Verified tree: `9fe2eda203dd85666cd11ddd67f8182b97ba0bef`
-- CI: https://github.com/Maergoth/rro/actions/runs/30965616152
+- Last verified remote head before this ledger check-in: `c2158fc261b1ebff9fb5cf2cbff932254593a914`
+- Verified tree: `e533bccc199ea14378258d58da49d31d43be18a9`
+- CI: https://github.com/Maergoth/rro/actions/runs/30969066004
 
 ## Launch coverage
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
 | Furniture directional sets | 229 | 1 | 1 | 1 | 0 |
-| Equipment inventory icons | 45 | 8 | 0 | 0 | 0 |
+| Equipment inventory icons | 45 | 8 | 8 | 8 | 8 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
 | Utility overlays | 5 | 0 | 0 | 0 | 0 |
@@ -34,7 +34,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 | Equipment attachment body-fits | 62 | 0 | 0 | 0 | 0 |
 | Activity → animation bindings | 89 | 0 | 0 | 0 | 0 |
 
-Production-complete is currently zero because the accepted new art is not yet bound by the Godot runtime. That does not erase the preserved work; it identifies the next integration gate precisely.
+8 equipment icons are production-complete because they are visually accepted, remotely verified, and loaded by the inventory runtime. Furniture and character source art remains preserved but runtime-blocked; other missing lanes remain explicit below.
 
 ## Character truth
 
@@ -70,6 +70,7 @@ Production-complete is currently zero because the accepted new art is not yet bo
 | character-foundation-002 | 8 | passed | blocked-anchor-and-chroma-normalization | `027c5c5` | planning/art-qa/character-foundation-002.png |
 | character-modular-classic-001 | 80 | mixed | failed-needs-remediation | `d99c458` | planning/art-qa/character-modular-classic-001.png |
 | character-modular-apron-001 | 48 | failed | failed-needs-remediation | `f01c1e1` | planning/art-qa/character-modular-apron-001.png |
+| equipment-icons-shared-manager-001 | 19 | passed | passed-full-and-gameplay-scale | `c2158fc` | planning/art-qa/equipment-icons-shared-manager-001/contact-128-dark.png |
 
 ## Missing furniture directional sets
 
@@ -146,9 +147,9 @@ This JSON block is part of this same authoritative document and contains every c
   "durableBaseline": {
     "branch": "agent/complete-production-art",
     "pullRequest": "https://github.com/Maergoth/rro/pull/2",
-    "commit": "512f082d7433b6dc47a70c05de12e9306785f817",
-    "tree": "9fe2eda203dd85666cd11ddd67f8182b97ba0bef",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30965616152"
+    "commit": "c2158fc261b1ebff9fb5cf2cbff932254593a914",
+    "tree": "e533bccc199ea14378258d58da49d31d43be18a9",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30969066004"
   },
   "completionPipeline": [
     "generated",
@@ -173,9 +174,9 @@ This JSON block is part of this same authoritative document and contains every c
       "lane": "Equipment inventory icons",
       "required": 45,
       "present": 8,
-      "sourceAccepted": 0,
-      "remoteVerified": 0,
-      "productionComplete": 0
+      "sourceAccepted": 8,
+      "remoteVerified": 8,
+      "productionComplete": 8
     },
     {
       "lane": "Construction material textures",
@@ -10595,15 +10596,15 @@ This JSON block is part of this same authoritative document and contains every c
         }
       ],
       "present": true,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
-      "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
+      "batchId": "equipment-icons-shared-manager-001",
+      "review": "passed",
+      "runtimeQa": "passed-full-and-gameplay-scale",
+      "remoteVerified": true,
+      "qaEvidence": "planning/art-qa/equipment-icons-shared-manager-001/contact-128-dark.png",
+      "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_bound_unreviewed"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "compression-service-shoes",
@@ -10626,15 +10627,15 @@ This JSON block is part of this same authoritative document and contains every c
         }
       ],
       "present": true,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
-      "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
+      "batchId": "equipment-icons-shared-manager-001",
+      "review": "passed",
+      "runtimeQa": "passed-full-and-gameplay-scale",
+      "remoteVerified": true,
+      "qaEvidence": "planning/art-qa/equipment-icons-shared-manager-001/contact-128-dark.png",
+      "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_bound_unreviewed"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "magnetic-pocket-flashlight",
@@ -10657,15 +10658,15 @@ This JSON block is part of this same authoritative document and contains every c
         }
       ],
       "present": true,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
-      "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
+      "batchId": "equipment-icons-shared-manager-001",
+      "review": "passed",
+      "runtimeQa": "passed-full-and-gameplay-scale",
+      "remoteVerified": true,
+      "qaEvidence": "planning/art-qa/equipment-icons-shared-manager-001/contact-128-dark.png",
+      "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_bound_unreviewed"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "manager-service-clipboard",
@@ -10682,15 +10683,15 @@ This JSON block is part of this same authoritative document and contains every c
         }
       ],
       "present": true,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
-      "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
+      "batchId": "equipment-icons-shared-manager-001",
+      "review": "passed",
+      "runtimeQa": "passed-full-and-gameplay-scale",
+      "remoteVerified": true,
+      "qaEvidence": "planning/art-qa/equipment-icons-shared-manager-001/contact-128-dark.png",
+      "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_bound_unreviewed"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "manager-radio-headset",
@@ -10707,15 +10708,15 @@ This JSON block is part of this same authoritative document and contains every c
         }
       ],
       "present": true,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
-      "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
+      "batchId": "equipment-icons-shared-manager-001",
+      "review": "passed",
+      "runtimeQa": "passed-full-and-gameplay-scale",
+      "remoteVerified": true,
+      "qaEvidence": "planning/art-qa/equipment-icons-shared-manager-001/contact-128-dark.png",
+      "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_bound_unreviewed"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "manager-floor-plan-folio",
@@ -10732,15 +10733,15 @@ This JSON block is part of this same authoritative document and contains every c
         }
       ],
       "present": true,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
-      "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
+      "batchId": "equipment-icons-shared-manager-001",
+      "review": "passed",
+      "runtimeQa": "passed-full-and-gameplay-scale",
+      "remoteVerified": true,
+      "qaEvidence": "planning/art-qa/equipment-icons-shared-manager-001/contact-128-dark.png",
+      "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_bound_unreviewed"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "manager-recovery-cards",
@@ -10757,15 +10758,15 @@ This JSON block is part of this same authoritative document and contains every c
         }
       ],
       "present": true,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
-      "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
+      "batchId": "equipment-icons-shared-manager-001",
+      "review": "passed",
+      "runtimeQa": "passed-full-and-gameplay-scale",
+      "remoteVerified": true,
+      "qaEvidence": "planning/art-qa/equipment-icons-shared-manager-001/contact-128-dark.png",
+      "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_bound_unreviewed"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "manager-morale-candy-tin",
@@ -10782,15 +10783,15 @@ This JSON block is part of this same authoritative document and contains every c
         }
       ],
       "present": true,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
-      "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
+      "batchId": "equipment-icons-shared-manager-001",
+      "review": "passed",
+      "runtimeQa": "passed-full-and-gameplay-scale",
+      "remoteVerified": true,
+      "qaEvidence": "planning/art-qa/equipment-icons-shared-manager-001/contact-128-dark.png",
+      "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_bound_unreviewed"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "manager-incident-seal-kit",
@@ -13519,6 +13520,30 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteTree": "ec7814a6bde1517746831dab8d43e6d61ed2b70c",
       "qaEvidence": "planning/art-qa/character-modular-apron-001.png",
       "notes": "Preserved as a pose-locked prototype outfit family. It does not satisfy the final independently swappable shirt/pants/apron slot matrix or animated-frame contract until composite QA and skin-protection gates pass.",
+      "qaEvidencePresent": true,
+      "remoteVerified": true
+    },
+    {
+      "id": "equipment-icons-shared-manager-001",
+      "assets": [
+        "economy-nonslip-shoes",
+        "compression-service-shoes",
+        "magnetic-pocket-flashlight",
+        "manager-service-clipboard",
+        "manager-radio-headset",
+        "manager-floor-plan-folio",
+        "manager-recovery-cards",
+        "manager-morale-candy-tin"
+      ],
+      "files": 19,
+      "qa": "passed",
+      "runtimeQa": "passed-full-and-gameplay-scale",
+      "sourcePromptMode": "built-in image generation; eight bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
+      "remoteCommit": "c2158fc261b1ebff9fb5cf2cbff932254593a914",
+      "remoteTree": "e533bccc199ea14378258d58da49d31d43be18a9",
+      "qaEvidence": "planning/art-qa/equipment-icons-shared-manager-001/contact-128-dark.png",
+      "qaManifest": "planning/art-qa/equipment-icons-shared-manager-001/qa.json",
+      "notes": "Eight distinct icons passed full-size and 66px review, exact catalog mapping, unique-content hashing, sRGBA/alpha validation, and a minimum six-pixel transparent margin. High-resolution accepted sources are preserved in the same remote checkpoint.",
       "qaEvidencePresent": true,
       "remoteVerified": true
     }

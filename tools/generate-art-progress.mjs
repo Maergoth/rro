@@ -164,7 +164,7 @@ const legacyObjectPngs = existsSync(legacyObjectRoot) ? readdirSync(legacyObject
 
 const summaries = [
   { lane: "Furniture directional sets", required: furniture.length, present: furniture.filter((item) => item.present).length, sourceAccepted: furniture.filter((item) => item.review === "passed").length, remoteVerified: furniture.filter((item) => item.remoteVerified).length, productionComplete: furniture.filter((item) => item.productionComplete).length },
-  { lane: "Equipment inventory icons", required: equipmentIcons.length, present: equipmentIcons.filter((item) => item.present).length, sourceAccepted: 0, remoteVerified: 0, productionComplete: equipmentIcons.filter((item) => item.productionComplete).length },
+  { lane: "Equipment inventory icons", required: equipmentIcons.length, present: equipmentIcons.filter((item) => item.present).length, sourceAccepted: equipmentIcons.filter((item) => item.review === "passed").length, remoteVerified: equipmentIcons.filter((item) => item.remoteVerified).length, productionComplete: equipmentIcons.filter((item) => item.productionComplete).length },
   { lane: "Construction material textures", required: constructionMaterials.length, present: constructionMaterials.filter((item) => item.present).length, sourceAccepted: 0, remoteVerified: 0, productionComplete: 0 },
   { lane: "Opening geometry sets (4 directions each)", required: openingModules.length, present: openingModules.filter((item) => item.present).length, sourceAccepted: 0, remoteVerified: 0, productionComplete: 0 },
   { lane: "Utility overlays", required: utilityOverlays.length, present: utilityOverlays.filter((item) => item.present).length, sourceAccepted: 0, remoteVerified: 0, productionComplete: 0 },
@@ -259,7 +259,7 @@ lines.push("| Lane | Required units | Files/sets present | Source accepted | Rem
 lines.push("|---|---:|---:|---:|---:|---:|");
 for (const row of summaries) lines.push(`| ${row.lane} | ${row.required} | ${row.present} | ${row.sourceAccepted} | ${row.remoteVerified} | ${row.productionComplete} |`);
 lines.push("");
-lines.push("Production-complete is currently zero because the accepted new art is not yet bound by the Godot runtime. That does not erase the preserved work; it identifies the next integration gate precisely.");
+lines.push(`${equipmentIcons.filter((item) => item.productionComplete).length} equipment icons are production-complete because they are visually accepted, remotely verified, and loaded by the inventory runtime. Furniture and character source art remains preserved but runtime-blocked; other missing lanes remain explicit below.`);
 lines.push("");
 lines.push("## Character truth");
 lines.push("");

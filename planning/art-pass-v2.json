@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "512f082d7433b6dc47a70c05de12e9306785f817",
-    "tree": "9fe2eda203dd85666cd11ddd67f8182b97ba0bef",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30965616152"
+    "commit": "c2158fc261b1ebff9fb5cf2cbff932254593a914",
+    "tree": "e533bccc199ea14378258d58da49d31d43be18a9",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30969066004"
   },
   "completionRule": "accepted runtime files committed and uploaded to GitHub",
   "artDirection": {
@@ -31,7 +31,7 @@
   },
   "coverage": {
     "furniture": { "catalogTotal": 229, "acceptedSets": 1, "acceptedDirectionalFiles": 4 },
-    "equipmentIcons": { "catalogTotal": 45, "accepted": 0 },
+    "equipmentIcons": { "catalogTotal": 45, "accepted": 8 },
     "characterSystem": {
       "status": "in_progress",
       "sourceAcceptedBodyPresentations": 2,
@@ -117,6 +117,28 @@
       "remoteTree": "ec7814a6bde1517746831dab8d43e6d61ed2b70c",
       "qaEvidence": "planning/art-qa/character-modular-apron-001.png",
       "notes": "Preserved as a pose-locked prototype outfit family. It does not satisfy the final independently swappable shirt/pants/apron slot matrix or animated-frame contract until composite QA and skin-protection gates pass."
+    },
+    {
+      "id": "equipment-icons-shared-manager-001",
+      "assets": [
+        "economy-nonslip-shoes",
+        "compression-service-shoes",
+        "magnetic-pocket-flashlight",
+        "manager-service-clipboard",
+        "manager-radio-headset",
+        "manager-floor-plan-folio",
+        "manager-recovery-cards",
+        "manager-morale-candy-tin"
+      ],
+      "files": 19,
+      "qa": "passed",
+      "runtimeQa": "passed-full-and-gameplay-scale",
+      "sourcePromptMode": "built-in image generation; eight bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
+      "remoteCommit": "c2158fc261b1ebff9fb5cf2cbff932254593a914",
+      "remoteTree": "e533bccc199ea14378258d58da49d31d43be18a9",
+      "qaEvidence": "planning/art-qa/equipment-icons-shared-manager-001/contact-128-dark.png",
+      "qaManifest": "planning/art-qa/equipment-icons-shared-manager-001/qa.json",
+      "notes": "Eight distinct icons passed full-size and 66px review, exact catalog mapping, unique-content hashing, sRGBA/alpha validation, and a minimum six-pixel transparent margin. High-resolution accepted sources are preserved in the same remote checkpoint."
     }
   ],
   "preservedButNotProductionComplete": [
