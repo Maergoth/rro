@@ -12,7 +12,12 @@
     32
   ],
   "status": "accepted",
-  "repositoryPromotion": "pending-parent-commit-and-push",
+  "repositoryPromotion": "remote-verified",
+  "remotePreservation": {
+    "commit": "961fc31230a900ccc7c028a3ae312809b2960b93",
+    "tree": "d2887339e7fc63c52d4549a1e6c6f8b8dfea41e6",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30976714776"
+  },
   "source": {
     "generator": "OpenAI built-in image generation",
     "useCase": "stylized-concept",

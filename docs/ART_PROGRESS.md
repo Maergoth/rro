@@ -12,16 +12,16 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 - Branch: `agent/complete-production-art`
 - Draft PR: https://github.com/Maergoth/rro/pull/2
-- Last verified remote head before this ledger check-in: `d17097f2d3e3b851576812b863a199ab11e4c1b1`
-- Verified tree: `0ad7675f581cdef515bbc8a6fa4b4d995280fe57`
-- CI: https://github.com/Maergoth/rro/actions/runs/30976041990
+- Last verified remote head before this ledger check-in: `961fc31230a900ccc7c028a3ae312809b2960b93`
+- Verified tree: `d2887339e7fc63c52d4549a1e6c6f8b8dfea41e6`
+- CI: https://github.com/Maergoth/rro/actions/runs/30976714776
 
 ## Launch coverage
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
 | Furniture directional sets | 229 | 4 | 4 | 4 | 0 |
-| Equipment inventory icons | 45 | 32 | 32 | 24 | 24 |
+| Equipment inventory icons | 45 | 32 | 32 | 32 | 32 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
 | Utility overlays | 5 | 0 | 0 | 0 | 0 |
@@ -34,7 +34,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 | Equipment attachment body-fits | 62 | 0 | 0 | 0 | 0 |
 | Activity → animation bindings | 89 | 0 | 0 | 0 | 0 |
 
-24 equipment icons are production-complete because they are visually accepted, remotely verified, and loaded by the inventory runtime. Furniture and character source art remains preserved but runtime-blocked; other missing lanes remain explicit below.
+32 equipment icons are production-complete because they are visually accepted, remotely verified, and loaded by the inventory runtime. Furniture and character source art remains preserved but runtime-blocked; other missing lanes remain explicit below.
 Directional furniture texture selection is yes; final projection alignment is no and runtime composite acceptance is no. This partial binding does not make any furniture set production-complete.
 
 ## Character truth
@@ -77,14 +77,7 @@ Directional furniture texture selection is yes; final projection alignment is no
 | equipment-icons-owner-server-002 | 19 | passed | passed-full-and-gameplay-scale | `0eec73b` | planning/art-qa/equipment-icons-owner-server-002/contact-128-dark.png |
 | character-remediation-idle-classic-v1 | 109 | passed | blocked-static-idle-and-no-runtime-compositor | `7b2caaf` | planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png |
 | equipment-icons-server-dish-003 | 20 | passed | passed-full-gameplay-and-cross-batch-scale | `f3408b8` | planning/art-qa/equipment-icons-server-dish-003/contact-128-dark.png |
-
-## Accepted locally, remote checkpoint pending
-
-These batches have passed source/composite QA but deliberately do not count as remotely verified or production-complete until their immutable GitHub commit and hosted CI are recorded.
-
-| Batch | Files | Source QA | Runtime/composite QA | Evidence |
-|---|---:|---|---|---|
-| equipment-icons-dish-chef-004 | 20 | passed | passed-full-gameplay-and-cross-batch-scale | planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png |
+| equipment-icons-dish-chef-004 | 20 | passed | passed-full-gameplay-and-cross-batch-scale | `961fc31` | planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png |
 
 ## Missing furniture directional sets
 
@@ -120,7 +113,7 @@ These batches have passed source/composite QA but deliberately do not count as r
 
 ## Other exact incomplete catalogs
 
-- Equipment icons (21): `dish-steam-gauntlets`, `dish-enzymatic-detergent`, `dish-deliming-pouch`, `chef-forged-knife`, `chef-folding-thermometer`, `chef-plating-tweezers`, `chef-tasting-spoon-wallet`, `chef-diamond-sharpening-strip`, `chef-palate-rinse`, `cook-fish-turner`, `cook-four-channel-timer`, `cook-bottle-holster`, `cook-chainmail-cut-glove`, `cook-pan-seasoning-wipe`, `cook-burn-gel-sachet`, `host-reservation-book`, `host-seating-tablet`, `host-brass-crumb-scraper`, `host-bus-tub-harness`, `host-sanitizer-caddy-refill`, `host-guest-activity-pack`
+- Equipment icons (13): `chef-palate-rinse`, `cook-fish-turner`, `cook-four-channel-timer`, `cook-bottle-holster`, `cook-chainmail-cut-glove`, `cook-pan-seasoning-wipe`, `cook-burn-gel-sachet`, `host-reservation-book`, `host-seating-tablet`, `host-brass-crumb-scraper`, `host-bus-tub-harness`, `host-sanitizer-caddy-refill`, `host-guest-activity-pack`
 - Construction materials (18): `floor-sealed-concrete`, `floor-quarry-tile`, `floor-white-hex`, `floor-slate-tile`, `floor-oak-plank`, `floor-walnut-plank`, `floor-terrazzo`, `floor-pattern-cement`, `floor-commercial-vinyl`, `floor-rubber-kitchen`, `floor-entry-mat`, `floor-outdoor-paver`, `wall-painted-plaster`, `wall-subway-tile`, `wall-exposed-brick`, `wall-oak-panel`, `wall-glass-partition`, `wall-stainless-kitchen`
 - Opening geometry (5 × 4 directions): `solid`, `door`, `service-door`, `window`, `arch`
 - Utility overlays (5): `power`, `gas`, `water`, `drain`, `ventilation`
@@ -161,9 +154,9 @@ This JSON block is part of this same authoritative document and contains every c
   "durableBaseline": {
     "branch": "agent/complete-production-art",
     "pullRequest": "https://github.com/Maergoth/rro/pull/2",
-    "commit": "d17097f2d3e3b851576812b863a199ab11e4c1b1",
-    "tree": "0ad7675f581cdef515bbc8a6fa4b4d995280fe57",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30976041990"
+    "commit": "961fc31230a900ccc7c028a3ae312809b2960b93",
+    "tree": "d2887339e7fc63c52d4549a1e6c6f8b8dfea41e6",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30976714776"
   },
   "completionPipeline": [
     "generated",
@@ -202,8 +195,8 @@ This JSON block is part of this same authoritative document and contains every c
       "required": 45,
       "present": 32,
       "sourceAccepted": 32,
-      "remoteVerified": 24,
-      "productionComplete": 24
+      "remoteVerified": 32,
+      "productionComplete": 32
     },
     {
       "lane": "Construction material textures",
@@ -11467,12 +11460,12 @@ This JSON block is part of this same authoritative document and contains every c
       "batchId": "equipment-icons-dish-chef-004",
       "review": "passed",
       "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
-      "remoteVerified": false,
+      "remoteVerified": true,
       "qaEvidence": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
       "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_local_only"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "dish-enzymatic-detergent",
@@ -11492,12 +11485,12 @@ This JSON block is part of this same authoritative document and contains every c
       "batchId": "equipment-icons-dish-chef-004",
       "review": "passed",
       "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
-      "remoteVerified": false,
+      "remoteVerified": true,
       "qaEvidence": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
       "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_local_only"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "dish-deliming-pouch",
@@ -11517,12 +11510,12 @@ This JSON block is part of this same authoritative document and contains every c
       "batchId": "equipment-icons-dish-chef-004",
       "review": "passed",
       "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
-      "remoteVerified": false,
+      "remoteVerified": true,
       "qaEvidence": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
       "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_local_only"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "chef-forged-knife",
@@ -11542,12 +11535,12 @@ This JSON block is part of this same authoritative document and contains every c
       "batchId": "equipment-icons-dish-chef-004",
       "review": "passed",
       "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
-      "remoteVerified": false,
+      "remoteVerified": true,
       "qaEvidence": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
       "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_local_only"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "chef-folding-thermometer",
@@ -11567,12 +11560,12 @@ This JSON block is part of this same authoritative document and contains every c
       "batchId": "equipment-icons-dish-chef-004",
       "review": "passed",
       "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
-      "remoteVerified": false,
+      "remoteVerified": true,
       "qaEvidence": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
       "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_local_only"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "chef-plating-tweezers",
@@ -11592,12 +11585,12 @@ This JSON block is part of this same authoritative document and contains every c
       "batchId": "equipment-icons-dish-chef-004",
       "review": "passed",
       "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
-      "remoteVerified": false,
+      "remoteVerified": true,
       "qaEvidence": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
       "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_local_only"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "chef-tasting-spoon-wallet",
@@ -11617,12 +11610,12 @@ This JSON block is part of this same authoritative document and contains every c
       "batchId": "equipment-icons-dish-chef-004",
       "review": "passed",
       "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
-      "remoteVerified": false,
+      "remoteVerified": true,
       "qaEvidence": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
       "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_local_only"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "chef-diamond-sharpening-strip",
@@ -11642,12 +11635,12 @@ This JSON block is part of this same authoritative document and contains every c
       "batchId": "equipment-icons-dish-chef-004",
       "review": "passed",
       "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
-      "remoteVerified": false,
+      "remoteVerified": true,
       "qaEvidence": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
       "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_local_only"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "chef-palate-rinse",
@@ -13893,9 +13886,7 @@ This JSON block is part of this same authoritative document and contains every c
       "notes": "Eight distinct server and dish icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-24 cross-batch comparison gates. Their exact 20-file package is remotely verified with green Windows and Ubuntu CI.",
       "qaEvidencePresent": true,
       "remoteVerified": true
-    }
-  ],
-  "pendingBatches": [
+    },
     {
       "id": "equipment-icons-dish-chef-004",
       "assets": [
@@ -13912,14 +13903,17 @@ This JSON block is part of this same authoritative document and contains every c
       "qa": "passed",
       "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "sourcePromptMode": "built-in image generation; eight bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
+      "remoteCommit": "961fc31230a900ccc7c028a3ae312809b2960b93",
+      "remoteTree": "d2887339e7fc63c52d4549a1e6c6f8b8dfea41e6",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30976714776",
       "qaEvidence": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
       "qaManifest": "planning/art-qa/equipment-icons-dish-chef-004/qa.json",
-      "notes": "Eight dish and chef icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-32 cross-batch comparison gates. They remain pending until this exact 20-file package is remotely verified and hosted CI is green.",
+      "notes": "Eight distinct dish and chef icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-32 cross-batch comparison gates. Their exact 20-file package is remotely verified with green Windows and Ubuntu CI.",
       "qaEvidencePresent": true,
-      "remoteVerified": false,
-      "preservationPending": true
+      "remoteVerified": true
     }
   ],
+  "pendingBatches": [],
   "preservedReferences": [
     {
       "id": "alpha2-overhead-furniture",

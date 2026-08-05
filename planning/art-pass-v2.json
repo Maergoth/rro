@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "d17097f2d3e3b851576812b863a199ab11e4c1b1",
-    "tree": "0ad7675f581cdef515bbc8a6fa4b4d995280fe57",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30976041990"
+    "commit": "961fc31230a900ccc7c028a3ae312809b2960b93",
+    "tree": "d2887339e7fc63c52d4549a1e6c6f8b8dfea41e6",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30976714776"
   },
   "completionRule": "generated, processed, raster-validated, visually accepted, runtime-bound assets whose exact reviewed bytes are remotely verified on GitHub with green CI",
   "artDirection": {
@@ -31,7 +31,7 @@
   },
   "coverage": {
     "furniture": { "catalogTotal": 229, "acceptedSets": 4, "acceptedDirectionalFiles": 16 },
-    "equipmentIcons": { "catalogTotal": 45, "accepted": 24 },
+    "equipmentIcons": { "catalogTotal": 45, "accepted": 32 },
     "characterSystem": {
       "status": "in_progress",
       "sourceAcceptedBodyPresentations": 2,
@@ -46,28 +46,7 @@
       "required": ["body_skin", "face", "hair_headwear", "base_outfit", "role_layer", "footwear", "accessory", "carried_object", "effects", "skin_masks", "primary_color_masks", "secondary_color_masks"]
     }
   },
-  "pendingBatches": [
-    {
-      "id": "equipment-icons-dish-chef-004",
-      "assets": [
-        "dish-steam-gauntlets",
-        "dish-enzymatic-detergent",
-        "dish-deliming-pouch",
-        "chef-forged-knife",
-        "chef-folding-thermometer",
-        "chef-plating-tweezers",
-        "chef-tasting-spoon-wallet",
-        "chef-diamond-sharpening-strip"
-      ],
-      "files": 20,
-      "qa": "passed",
-      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
-      "sourcePromptMode": "built-in image generation; eight bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
-      "qaEvidence": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
-      "qaManifest": "planning/art-qa/equipment-icons-dish-chef-004/qa.json",
-      "notes": "Eight dish and chef icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-32 cross-batch comparison gates. They remain pending until this exact 20-file package is remotely verified and hosted CI is green."
-    }
-  ],
+  "pendingBatches": [],
   "batches": [
     {
       "id": "furniture-pilot-001",
@@ -241,6 +220,29 @@
       "qaEvidence": "planning/art-qa/equipment-icons-server-dish-003/contact-128-dark.png",
       "qaManifest": "planning/art-qa/equipment-icons-server-dish-003/qa.json",
       "notes": "Eight distinct server and dish icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-24 cross-batch comparison gates. Their exact 20-file package is remotely verified with green Windows and Ubuntu CI."
+    },
+    {
+      "id": "equipment-icons-dish-chef-004",
+      "assets": [
+        "dish-steam-gauntlets",
+        "dish-enzymatic-detergent",
+        "dish-deliming-pouch",
+        "chef-forged-knife",
+        "chef-folding-thermometer",
+        "chef-plating-tweezers",
+        "chef-tasting-spoon-wallet",
+        "chef-diamond-sharpening-strip"
+      ],
+      "files": 20,
+      "qa": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
+      "sourcePromptMode": "built-in image generation; eight bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
+      "remoteCommit": "961fc31230a900ccc7c028a3ae312809b2960b93",
+      "remoteTree": "d2887339e7fc63c52d4549a1e6c6f8b8dfea41e6",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30976714776",
+      "qaEvidence": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
+      "qaManifest": "planning/art-qa/equipment-icons-dish-chef-004/qa.json",
+      "notes": "Eight distinct dish and chef icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-32 cross-batch comparison gates. Their exact 20-file package is remotely verified with green Windows and Ubuntu CI."
     }
   ],
   "preservedButNotProductionComplete": [
