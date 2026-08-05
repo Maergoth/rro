@@ -24,7 +24,7 @@ func _ready() -> void:
 	title.add_theme_color_override("font_color", Color("efbc54"))
 	add_child(title)
 	var instructions := Label.new()
-	instructions.text = "Left-drag flooring and objects. Right-click or R rotates. Middle-drag pans. Every purchase is server-priced and collision-checked."
+	instructions.text = "Left-drag flooring and objects. Wall decor snaps to the pointed cell edge; ceiling fixtures use their grid footprint. Right-click or R rotates floor/ceiling objects. Every purchase remains server-priced and validated."
 	instructions.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	instructions.add_theme_color_override("font_color", Color("95a6a6"))
 	instructions.custom_minimum_size = Vector2(310, 66)
@@ -83,9 +83,13 @@ func rebuild() -> void:
 		for item in by_category[category]:
 			var item_id := str(item.get("id", ""))
 			var item_name := str(item.get("name", "Object"))
+			var placement: Dictionary = item.get("placement", {})
+			var mount := str(placement.get("mount", "floor"))
 			var modifier_text := ""
 			for key in item.get("stats", {}).keys(): modifier_text += "%s %+d  " % [key, int(item.stats[key])]
-			add_catalog_button(catalog, "%s\n$%.2f  ·  %s  ·  %s" % [item_name, float(item.get("costCents", 0))/100.0, str(item.get("tier", item.get("style", "standard"))).capitalize(), modifier_text], select_catalog.bind("object", item_id, "%s · right-click to rotate" % item_name))
+			var mount_hint := "snaps to the pointed wall edge" if mount == "wall" else ("ceiling footprint · right-click to rotate" if mount == "ceiling" else "right-click to rotate")
+			var catalog_detail := "%s mount" % mount if mount != "floor" else str(item.get("tier", item.get("style", "standard"))).capitalize()
+			add_catalog_button(catalog, "%s\n$%.2f  ·  %s  ·  %s" % [item_name, float(item.get("costCents", 0))/100.0, catalog_detail, modifier_text], select_catalog.bind("object", item_id, "%s · %s" % [item_name, mount_hint]))
 
 func select_catalog(tool: String, catalog_id: String, label: String) -> void:
 	selected_label.text = label
@@ -109,7 +113,15 @@ func add_catalog_button(parent: VBoxContainer, text: String, callback: Callable)
 	parent.add_child(button)
 
 func set_selected_object(object: Dictionary) -> void:
-	selected_label.text = "Selected: %s · %s · %.1f%% wear\nDrag to move · right-click to rotate" % [object.get("definitionId", "object"), str(object.get("state", "operational")).capitalize(), float(object.get("wear", 0))]
+	var definition_id := str(object.get("definitionId", "object"))
+	var mount := "floor"
+	for definition in content.get("furniture", []):
+		if str(definition.get("id", "")) == definition_id:
+			var placement: Dictionary = definition.get("placement", {})
+			mount = str(placement.get("mount", "floor"))
+			break
+	var move_hint := "Drag across a cell edge to re-snap" if mount == "wall" else "Drag to move · right-click to rotate"
+	selected_label.text = "Selected: %s · %s · %.1f%% wear\n%s" % [definition_id, str(object.get("state", "operational")).capitalize(), float(object.get("wear", 0)), move_hint]
 
 func set_history_state(history: Dictionary) -> void:
 	if not is_instance_valid(undo_button) or not is_instance_valid(redo_button): return

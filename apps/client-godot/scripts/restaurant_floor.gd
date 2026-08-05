@@ -20,7 +20,9 @@ var camera_origin := Vector2.ZERO
 var painting := false
 var paint_cells: Dictionary = {}
 var dragging_object: Dictionary = {}
-var drag_preview_cell := Vector2i.ZERO
+var drag_preview_placement: Dictionary = {}
+var hover_cell := Vector2i(-1, -1)
+var hover_screen_position := Vector2.ZERO
 var movement_send_cooldown := 0.0
 var last_sent_direction := Vector2.ZERO
 var texture_cache: Dictionary = {}
@@ -66,6 +68,7 @@ func select_tool(tool: String, catalog_id := "") -> void:
 	build_tool = tool
 	selected_catalog_id = catalog_id
 	dragging_object = {}
+	drag_preview_placement = {}
 	paint_cells.clear()
 	queue_redraw()
 
@@ -82,13 +85,7 @@ func grid_footprint(x: float, y: float, width: float, height: float) -> Rect2:
 	return Rect2(Vector2(x, y), Vector2(width, height))
 
 func object_footprint(object: Dictionary, definition: Dictionary) -> Rect2:
-	var width := int(definition.get("width", 1))
-	var height := int(definition.get("height", 1))
-	if int(object.get("rotation", 0)) % 180 != 0:
-		var swap := width
-		width = height
-		height = swap
-	return grid_footprint(float(object.get("x", 0)), float(object.get("y", 0)), float(width), float(height))
+	return FurnitureMountPlacement.footprint(object, definition)
 
 func footprint_polygon(footprint: Rect2) -> PackedVector2Array:
 	return IsometricGridProjection.footprint_corners(footprint, camera_offset, cell_pixels)
@@ -133,25 +130,105 @@ func nearest_cell_edge(cell: Vector2i, screen_point: Vector2) -> String:
 func inside_grid(cell: Vector2i) -> bool:
 	return cell.x >= 0 and cell.y >= 0 and cell.x < int(layout.get("width", 0)) and cell.y < int(layout.get("height", 0))
 
+func layout_grid_size() -> Vector2i:
+	return Vector2i(int(layout.get("width", 0)), int(layout.get("height", 0)))
+
 func furniture_definition(id: String) -> Dictionary:
 	for definition in content.get("furniture", []):
 		if str(definition.get("id", "")) == id:
 			return definition
 	return {}
 
-func object_at(cell: Vector2i) -> Dictionary:
+func active_object_definition() -> Dictionary:
+	if not dragging_object.is_empty():
+		return furniture_definition(str(dragging_object.get("definitionId", "")))
+	if build_tool == "object" and not selected_catalog_id.is_empty():
+		return furniture_definition(selected_catalog_id)
+	return {}
+
+func object_placement_for_pointer(definition: Dictionary, cell: Vector2i, screen_point: Vector2, rotation: int) -> Dictionary:
+	if FurnitureMountPlacement.mount_for(definition) == "wall":
+		var edge := nearest_cell_edge(cell, screen_point)
+		return FurnitureMountPlacement.wall_placement_for_cell(cell, edge, definition, layout_grid_size())
+	return {
+		"x": cell.x,
+		"y": cell.y,
+		"rotation": FurnitureMountPlacement.canonical_rotation(rotation),
+	}
+
+func wall_edge_screen_segment(object: Dictionary, definition: Dictionary) -> PackedVector2Array:
+	var grid_segment := FurnitureMountPlacement.wall_edge_segment(object, definition)
+	if grid_segment.size() != 2:
+		return PackedVector2Array()
+	return PackedVector2Array([grid_to_screen(grid_segment[0]), grid_to_screen(grid_segment[1])])
+
+func object_at(cell: Vector2i, screen_point: Vector2) -> Dictionary:
 	var objects: Array = layout.get("objects", [])
+	var fallback: Dictionary = {}
 	for index in range(objects.size() - 1, -1, -1):
 		var object: Dictionary = objects[index]
 		var definition := furniture_definition(str(object.get("definitionId", "")))
 		if definition.is_empty(): continue
-		var width := int(definition.get("width", 1))
-		var height := int(definition.get("height", 1))
-		if int(object.get("rotation", 0)) in [90, 270]:
-			var swap := width; width = height; height = swap
-		if cell.x >= int(object.get("x", 0)) and cell.x < int(object.get("x", 0)) + width and cell.y >= int(object.get("y", 0)) and cell.y < int(object.get("y", 0)) + height:
-			return object
-	return {}
+		if not object_footprint(object, definition).has_point(Vector2(cell) + Vector2(0.5, 0.5)):
+			continue
+		if fallback.is_empty():
+			fallback = object
+		if FurnitureMountPlacement.mount_for(definition) == "wall":
+			var segment := wall_edge_screen_segment(object, definition)
+			if segment.size() == 2 and distance_to_segment(screen_point, segment[0], segment[1]) <= maxf(8.0, cell_pixels * 0.18):
+				return object
+	return fallback
+
+func object_depth_grid_position(object: Dictionary, definition: Dictionary) -> Vector2:
+	return FurnitureMountPlacement.mount_anchor_grid(object, definition)
+
+func wall_opening_at(x: int, y: int, edge: String) -> String:
+	for wall in layout.get("walls", []):
+		if int(wall.get("x", -1)) == x and int(wall.get("y", -1)) == y and str(wall.get("edge", "")) == edge:
+			return str(wall.get("openingType", ""))
+	var mirrored_x := x
+	var mirrored_y := y
+	var mirrored_edge := ""
+	match edge:
+		"north":
+			mirrored_y -= 1; mirrored_edge = "south"
+		"east":
+			mirrored_x += 1; mirrored_edge = "west"
+		"south":
+			mirrored_y += 1; mirrored_edge = "north"
+		"west":
+			mirrored_x -= 1; mirrored_edge = "east"
+	for wall in layout.get("walls", []):
+		if int(wall.get("x", -1)) == mirrored_x and int(wall.get("y", -1)) == mirrored_y and str(wall.get("edge", "")) == mirrored_edge:
+			return str(wall.get("openingType", ""))
+	return ""
+
+## This is advisory preview state only. The server still prices, validates,
+## persists, and either accepts or rejects every unchanged placement payload.
+func placement_preview_is_valid(object: Dictionary, definition: Dictionary, except_id := "") -> bool:
+	var footprint_cells := FurnitureMountPlacement.footprint_cells(object, definition)
+	for cell in footprint_cells:
+		if not inside_grid(cell):
+			return false
+	var mount := FurnitureMountPlacement.mount_for(definition)
+	if mount == "wall":
+		var placement: Dictionary = definition.get("placement", {})
+		var allowed_openings: Array = placement.get("allowedWallOpenings", [])
+		var edge := FurnitureMountPlacement.wall_edge_for_rotation(int(object.get("rotation", 0)))
+		for cell in footprint_cells:
+			if not allowed_openings.has(wall_opening_at(cell.x, cell.y, edge)):
+				return false
+	for placed in layout.get("objects", []):
+		if str(placed.get("id", "")) == except_id:
+			continue
+		var placed_definition := furniture_definition(str(placed.get("definitionId", "")))
+		if placed_definition.is_empty() or FurnitureMountPlacement.mount_for(placed_definition) != mount:
+			continue
+		var placed_cells := FurnitureMountPlacement.footprint_cells(placed, placed_definition)
+		for cell in footprint_cells:
+			if placed_cells.has(cell):
+				return false
+	return true
 
 func _process(delta: float) -> void:
 	if build_mode:
@@ -192,17 +269,32 @@ func _gui_input(event: InputEvent) -> void:
 	if not build_mode:
 		return
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+		var active_definition := active_object_definition()
+		if not active_definition.is_empty() and FurnitureMountPlacement.mount_for(active_definition) == "wall":
+			queue_redraw(); accept_event(); return
 		build_rotation = (build_rotation + 90) % 360
 		if not dragging_object.is_empty():
-			build_action_requested.emit("move", {"id": dragging_object.get("id", ""), "x": drag_preview_cell.x, "y": drag_preview_cell.y, "rotation": build_rotation})
+			drag_preview_placement["rotation"] = build_rotation
+			build_action_requested.emit("move", {
+				"id": dragging_object.get("id", ""),
+				"x": int(drag_preview_placement.get("x", dragging_object.get("x", 0))),
+				"y": int(drag_preview_placement.get("y", dragging_object.get("y", 0))),
+				"rotation": build_rotation,
+			})
 			dragging_object = {}
+			drag_preview_placement = {}
 		queue_redraw(); accept_event(); return
 	if event is InputEventKey and event.pressed and event.physical_keycode == KEY_R:
+		var active_definition := active_object_definition()
+		if not active_definition.is_empty() and FurnitureMountPlacement.mount_for(active_definition) == "wall":
+			queue_redraw(); accept_event(); return
 		build_rotation = (build_rotation + 90) % 360
 		queue_redraw(); accept_event(); return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		var cell := screen_to_grid(event.position)
 		if not inside_grid(cell): return
+		hover_cell = cell
+		hover_screen_position = event.position
 		if event.pressed:
 			if build_tool == "floor":
 				painting = true; paint_cells.clear(); paint_cells["%d:%d" % [cell.x, cell.y]] = {"x": cell.x, "y": cell.y}; queue_redraw()
@@ -211,12 +303,28 @@ func _gui_input(event: InputEvent) -> void:
 				var opening := "solid" if build_tool == "wall" else ("service-door" if build_tool == "door" else "arch")
 				build_action_requested.emit("wall", {"x": cell.x, "y": cell.y, "edge": edge, "wallStyleId": selected_catalog_id, "openingType": opening, "rotation": build_rotation})
 			elif build_tool == "object" and not selected_catalog_id.is_empty():
-				build_action_requested.emit("place", {"definitionId": selected_catalog_id, "x": cell.x, "y": cell.y, "rotation": build_rotation})
+				var definition := furniture_definition(selected_catalog_id)
+				if not definition.is_empty():
+					var placement := object_placement_for_pointer(definition, cell, event.position, build_rotation)
+					if FurnitureMountPlacement.mount_for(definition) == "wall":
+						build_rotation = int(placement.get("rotation", 0))
+					build_action_requested.emit("place", {
+						"definitionId": selected_catalog_id,
+						"x": int(placement.get("x", cell.x)),
+						"y": int(placement.get("y", cell.y)),
+						"rotation": int(placement.get("rotation", build_rotation)),
+					})
 			else:
-				var object := object_at(cell)
+				var object := object_at(cell, event.position)
 				if not object.is_empty():
 					dragging_object = object.duplicate(true)
-					drag_preview_cell = cell
+					var definition := furniture_definition(str(object.get("definitionId", "")))
+					var preserve_clicked_anchor := FurnitureMountPlacement.mount_for(definition) == "floor"
+					drag_preview_placement = {
+						"x": cell.x if preserve_clicked_anchor else int(object.get("x", 0)),
+						"y": cell.y if preserve_clicked_anchor else int(object.get("y", 0)),
+						"rotation": int(object.get("rotation", 0)),
+					}
 					build_rotation = int(object.get("rotation", 0))
 					object_selected.emit(object)
 		else:
@@ -225,17 +333,32 @@ func _gui_input(event: InputEvent) -> void:
 				build_action_requested.emit("floor", {"surfaceId": selected_catalog_id, "cells": paint_cells.values()})
 				paint_cells.clear()
 			elif not dragging_object.is_empty():
-				build_action_requested.emit("move", {"id": dragging_object.get("id", ""), "x": cell.x, "y": cell.y, "rotation": build_rotation})
+				var definition := furniture_definition(str(dragging_object.get("definitionId", "")))
+				var placement := object_placement_for_pointer(definition, cell, event.position, build_rotation)
+				build_action_requested.emit("move", {
+					"id": dragging_object.get("id", ""),
+					"x": int(placement.get("x", cell.x)),
+					"y": int(placement.get("y", cell.y)),
+					"rotation": int(placement.get("rotation", build_rotation)),
+				})
 				dragging_object = {}
+				drag_preview_placement = {}
 		queue_redraw(); accept_event(); return
 	if event is InputEventMouseMotion:
 		var cell := screen_to_grid(event.position)
+		hover_cell = cell if inside_grid(cell) else Vector2i(-1, -1)
+		hover_screen_position = event.position
 		if painting and inside_grid(cell):
 			paint_cells["%d:%d" % [cell.x, cell.y]] = {"x": cell.x, "y": cell.y}
 			queue_redraw(); accept_event()
 		elif not dragging_object.is_empty() and inside_grid(cell):
-			drag_preview_cell = cell
+			var definition := furniture_definition(str(dragging_object.get("definitionId", "")))
+			drag_preview_placement = object_placement_for_pointer(definition, cell, event.position, build_rotation)
+			if FurnitureMountPlacement.mount_for(definition) == "wall":
+				build_rotation = int(drag_preview_placement.get("rotation", 0))
 			queue_redraw(); accept_event()
+		else:
+			queue_redraw()
 
 func _draw() -> void:
 	draw_rect(Rect2(Vector2.ZERO, size), Color("091114"), true)
@@ -260,13 +383,29 @@ func _draw() -> void:
 		if not dragging_object.is_empty() and str(object.get("id", "")) == str(dragging_object.get("id", "")): continue
 		var definition := furniture_definition(str(object.get("definitionId", "")))
 		if not definition.is_empty():
-			world_items.append(world_item("object", object, object_footprint(object, definition).end))
+			world_items.append(world_item("object", object, object_depth_grid_position(object, definition)))
 	if not dragging_object.is_empty():
 		var preview := dragging_object.duplicate()
-		preview.x = drag_preview_cell.x; preview.y = drag_preview_cell.y; preview.rotation = build_rotation
+		preview.x = int(drag_preview_placement.get("x", dragging_object.get("x", 0)))
+		preview.y = int(drag_preview_placement.get("y", dragging_object.get("y", 0)))
+		preview.rotation = int(drag_preview_placement.get("rotation", build_rotation))
 		var preview_definition := furniture_definition(str(preview.get("definitionId", "")))
 		if not preview_definition.is_empty():
-			world_items.append(world_item("object-preview", preview, object_footprint(preview, preview_definition).end))
+			preview["_previewValid"] = placement_preview_is_valid(preview, preview_definition, str(preview.get("id", "")))
+			world_items.append(world_item("object-preview", preview, object_depth_grid_position(preview, preview_definition)))
+	elif build_tool == "object" and not selected_catalog_id.is_empty() and inside_grid(hover_cell):
+		var preview_definition := furniture_definition(selected_catalog_id)
+		if not preview_definition.is_empty():
+			var preview_placement := object_placement_for_pointer(preview_definition, hover_cell, hover_screen_position, build_rotation)
+			var preview := {
+				"definitionId": selected_catalog_id,
+				"x": int(preview_placement.get("x", hover_cell.x)),
+				"y": int(preview_placement.get("y", hover_cell.y)),
+				"rotation": int(preview_placement.get("rotation", build_rotation)),
+				"_previewValid": false,
+			}
+			preview["_previewValid"] = placement_preview_is_valid(preview, preview_definition)
+			world_items.append(world_item("object-preview", preview, object_depth_grid_position(preview, preview_definition)))
 	for incident in snapshot.get("incidents", []):
 		world_items.append(world_item("incident", incident, Vector2(float(incident.get("x", 0)), float(incident.get("y", 0)))))
 	for party in snapshot.get("parties", []):
@@ -326,35 +465,54 @@ func object_draws_before(left: Dictionary, right: Dictionary) -> bool:
 	var right_key := IsometricGridProjection.depth_key(object_footprint(right, right_definition), str(right.get("id", "")))
 	return IsometricGridProjection.depth_key_draws_before(left_key, right_key)
 
+func object_art_contact_screen(object: Dictionary, definition: Dictionary, footprint: Rect2) -> Vector2:
+	var mount := FurnitureMountPlacement.mount_for(definition)
+	if mount == "wall":
+		return grid_to_screen(FurnitureMountPlacement.mount_anchor_grid(object, definition)) - Vector2(0.0, cell_pixels * 0.35)
+	if mount == "ceiling":
+		return grid_to_screen(FurnitureMountPlacement.mount_anchor_grid(object, definition)) - Vector2(0.0, cell_pixels * 1.25)
+	return IsometricGridProjection.floor_contact_target(footprint, camera_offset, cell_pixels)
+
 func draw_object(object: Dictionary, alpha := 1.0) -> void:
 	var definition := furniture_definition(str(object.get("definitionId", "")))
 	if definition.is_empty(): return
-	var source_width := int(definition.get("width", 1)); var source_height := int(definition.get("height", 1))
-	var width := source_width; var height := source_height
-	var item_rotation := int(object.get("rotation", 0)) % 360
-	if item_rotation in [90, 270]:
-		var swap := width
-		width = height
-		height = swap
-	var footprint := grid_footprint(float(object.get("x", 0)), float(object.get("y", 0)), float(width), float(height))
+	var item_rotation := FurnitureMountPlacement.canonical_rotation(int(object.get("rotation", 0)))
+	var mount := FurnitureMountPlacement.mount_for(definition)
+	var footprint := object_footprint(object, definition)
 	var polygon := footprint_polygon(footprint)
 	var bounds := polygon_bounds(polygon)
 	var color: Color = CATEGORY_COLORS.get(str(definition.get("category", "Decor")), Color("6e9364"))
 	var condition := str(object.get("state", "operational"))
 	var wear := float(object.get("wear", 0))
+	var is_preview := object.has("_previewValid")
+	var preview_valid := bool(object.get("_previewValid", true))
 	if condition == "broken": color = Color("7b3e3e")
 	elif condition == "worn": color = color.darkened(.24)
+	if not preview_valid: color = Color("b7433f")
 	color.a = alpha
-	draw_colored_polygon(polygon, color)
-	draw_polyline(closed_polygon(polygon), Color(color).lightened(.25), 2.0, true)
+	if mount == "floor":
+		draw_colored_polygon(polygon, color)
+		draw_polyline(closed_polygon(polygon), Color(color).lightened(.25), 2.0, true)
+	elif mount == "wall" and (build_mode or is_preview):
+		var segment := wall_edge_screen_segment(object, definition)
+		if segment.size() == 2:
+			draw_line(segment[0], segment[1], Color("101719", alpha), 8.0)
+			draw_line(segment[0], segment[1], Color(color).lightened(.25), 4.0)
+	elif mount == "ceiling" and (build_mode or is_preview):
+		var ceiling_color := Color(color, alpha * 0.24)
+		draw_colored_polygon(polygon, ceiling_color)
+		draw_polyline(closed_polygon(polygon), Color(color).lightened(.25), 2.0, true)
 	var texture_binding := texture_binding_for(definition, item_rotation)
 	var texture: Texture2D = texture_binding.get("texture")
 	if texture != null:
 		var condition_tint := Color(1, 1, 1, alpha)
 		if condition == "broken": condition_tint = Color(.62, .43, .40, alpha)
 		elif condition == "worn": condition_tint = Color(.78, .72, .65, alpha)
+		if not preview_valid: condition_tint = Color(1.0, .42, .38, alpha)
 		if bool(texture_binding.get("directional", false)):
 			var floor_contact := IsometricGridProjection.floor_contact_target(footprint, camera_offset, cell_pixels)
+			if mount != "floor":
+				floor_contact = object_art_contact_screen(object, definition, footprint)
 			var directional_rect := FurnitureArtBinding.draw_rect_for_floor_contact_target(texture.get_size(), floor_contact, bounds.size)
 			draw_texture_rect(texture, directional_rect, false, condition_tint)
 		else:
@@ -435,5 +593,8 @@ func draw_hud() -> void:
 	var mode := "BUILD MODE" if build_mode else "LIVE SERVICE"
 	draw_rect(Rect2(16, 16, 226, 54), Color("0c1518", .9), true)
 	draw_string(ThemeDB.fallback_font, Vector2(30, 40), mode, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color("7fd0b2") if not build_mode else Color("efbc54"))
-	var hint := "WASD move • wheel zoom • middle-drag pan" if not build_mode else "Left drag/place • drag objects • right-click/R rotate"
+	var active_definition := active_object_definition()
+	var wall_mount_active := not active_definition.is_empty() and FurnitureMountPlacement.mount_for(active_definition) == "wall"
+	var build_hint := "Wall mount • point at an edge to snap • drag to move" if wall_mount_active else "Left drag/place • drag objects • right-click/R rotate"
+	var hint := "WASD move • wheel zoom • middle-drag pan" if not build_mode else build_hint
 	draw_string(ThemeDB.fallback_font, Vector2(30, 59), hint, HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color("9aabaa"))
