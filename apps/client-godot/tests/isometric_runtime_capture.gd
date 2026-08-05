@@ -265,7 +265,7 @@ func capture_runtime() -> void:
 	var manifest_path := output.path_join("qa.json")
 	var manifest := {
 		"schemaVersion": 1,
-		"fixture": "25 source-accepted floor identities (22 previously native-accepted and 3 pending this capture) plus legal wall/ceiling directional review placements, walls, openings, incidents, parties, and avatars",
+		"fixture": "%d source-accepted directional identities (%d floor and %d mounted) plus walls, openings, incidents, parties, and avatars" % [DEFINITIONS.size(), FLOOR_POSITIONS.size(), MOUNTED_ASSET_IDS.size()],
 		"viewport": [VIEWPORT_SIZE.x, VIEWPORT_SIZE.y],
 		"acceptedAssetIds": FurnitureArtBinding.contract().acceptedDirectionalAssetIds,
 		"runtimeCompositeAcceptedAssetIds": FurnitureArtBinding.contract().runtimeCompositeAcceptedAssetIds,

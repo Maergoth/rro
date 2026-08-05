@@ -289,7 +289,12 @@ const ledger = {
   quarantinedWork: pass.quarantinedWork,
   contractGaps: [
     "Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.",
-    "Exercise the published mount-aware builder in a new exact native four-rotation gameplay capture, then visually accept legal wall/ceiling placement, mount anchors, picking, and depth for local-art, plants, and pendants.",
+    ...((runtimeCompositeBlockedAssetIds.size + runtimeCompositePendingAssetIds.size) > 0 ? [
+      `Resolve the latest native directional-furniture review for ${[
+        ...runtimeCompositeBlockedAssetIds,
+        ...runtimeCompositePendingAssetIds,
+      ].toSorted().join(", ")} before those source-accepted sets receive production credit.`,
+    ] : []),
     "Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.",
     "Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete.",
   ],
@@ -328,7 +333,11 @@ const localOnlyPendingRuntimeEntries = pendingRuntimeEntries.filter((item) => !i
 const pendingRuntimeSummary = pendingRuntimeEntries.length > 0
   ? `${pendingRuntimeEntries.map((item) => `\`${item.assetId}\``).join(", ")} are source-accepted but pending their first native four-rotation gameplay composite; ${localOnlyPendingRuntimeEntries.length}/${pendingRuntimeEntries.length} are also local-only pending an immutable remote checkpoint and green hosted CI.`
   : "No source-accepted directional sets are pending their first native four-rotation gameplay composite.";
-lines.push(`Directional furniture texture selection is ${yes(directionalSelectionBound)} and projection alignment is ${yes(projectionAligned)}. Latest native review \`${latestFurnitureRuntimeQa?.id ?? "unavailable"}\` accepted ${runtimeCompositeAcceptedAssetIds.size}/${furniture.filter((item) => item.present).length} present sets; its durable review checkpoint is remote-verified: ${yes(runtimeReviewRemoteVerified)}. ${[...runtimeCompositeBlockedAssetIds].map((id) => `\`${id}\``).join(", ")} remain blocked on legal wall/ceiling mounting. ${pendingRuntimeSummary}`);
+const blockedRuntimeEntries = furniture.filter((item) => item.runtimeCompositeBlocked);
+const blockedRuntimeSummary = blockedRuntimeEntries.length > 0
+  ? `${blockedRuntimeEntries.map((item) => `\`${item.assetId}\``).join(", ")} remain blocked by the latest native gameplay review.`
+  : "No source-accepted directional sets remain blocked by the latest native gameplay review.";
+lines.push(`Directional furniture texture selection is ${yes(directionalSelectionBound)} and projection alignment is ${yes(projectionAligned)}. Latest native review \`${latestFurnitureRuntimeQa?.id ?? "unavailable"}\` accepted ${runtimeCompositeAcceptedAssetIds.size}/${furniture.filter((item) => item.present).length} present sets; its durable review checkpoint is remote-verified: ${yes(runtimeReviewRemoteVerified)}. ${blockedRuntimeSummary} ${pendingRuntimeSummary}`);
 lines.push("");
 lines.push("## Character truth");
 lines.push("");
@@ -361,7 +370,9 @@ lines.push("| Attempt | Result | Remote commit | CI/artifact | Passed gates | Bl
 lines.push("|---|---|---|---|---|---|---|");
 for (const attempt of runtimeQaAttempts) {
   const artifact = attempt.artifactId ? `${attempt.ci}/artifacts/${attempt.artifactId}` : attempt.ci;
-  lines.push(`| ${attempt.id} | ${attempt.status} | \`${attempt.remoteCommit.slice(0, 7)}\` | ${artifact} | ${(attempt.passed ?? []).join(", ")} | ${(attempt.blockers ?? []).join(", ")} | ${attempt.evidencePresent ? attempt.evidence : "missing"} |`);
+  const passedGates = (attempt.passed ?? []).join(", ") || "none";
+  const blockers = (attempt.blockers ?? []).join(", ") || "none";
+  lines.push(`| ${attempt.id} | ${attempt.status} | \`${attempt.remoteCommit.slice(0, 7)}\` | ${artifact} | ${passedGates} | ${blockers} | ${attempt.evidencePresent ? attempt.evidence : "missing"} |`);
 }
 lines.push("");
 lines.push("## Reviewed batches and durable evidence");

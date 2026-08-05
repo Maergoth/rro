@@ -52,16 +52,22 @@
     "espresso",
     "furniture-banquette-section",
     "furniture-commercial-chair",
+    "furniture-convection-oven",
+    "furniture-expo-pass-heated",
     "furniture-host-stand-pro",
     "furniture-oak-two-top",
+    "furniture-plancha-commercial",
     "furniture-pos-terminal",
     "furniture-premium-chair",
     "furniture-server-station-pro",
     "furniture-six-burner-range",
     "furniture-walnut-four-top",
     "host-stand",
+    "local-art",
     "mop-sink",
     "pass",
+    "pendants",
+    "plants",
     "prep",
     "range",
     "recycling",
@@ -69,16 +75,8 @@
     "table-four",
     "table-two"
   ],
-  "runtimeCompositeBlockedAssetIds": [
-    "local-art",
-    "pendants",
-    "plants"
-  ],
-  "runtimeCompositePendingAssetIds": [
-    "furniture-convection-oven",
-    "furniture-expo-pass-heated",
-    "furniture-plancha-commercial"
-  ],
+  "runtimeCompositeBlockedAssetIds": [],
+  "runtimeCompositePendingAssetIds": [],
   "capability": {
     "directionalTextureSelection": true,
     "commonFloorContactPivot": true,
@@ -87,8 +85,8 @@
     "runtimeProjection": "elevated-orthographic-isometric-grid",
     "projectionIntegrated": true,
     "projectionAligned": true,
-    "runtimeCompositeAccepted": false,
+    "runtimeCompositeAccepted": true,
     "productionComplete": false,
-    "remainingVisualGate": "Run and visually accept an exact four-rotation native Godot gameplay capture for furniture-convection-oven, furniture-expo-pass-heated, and furniture-plancha-commercial; also preserve and visually validate legal wall and ceiling placement, mount-specific anchors, picking, and depth for local-art, plants, and pendants."
+    "remainingVisualGate": "No runtime visual blocker remains for the twenty-eight present source-accepted directional furniture sets. The other 201 catalog identities still require source acceptance, exact remote preservation, native gameplay-scale review, and green hosted CI."
   }
 }

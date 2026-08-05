@@ -8,7 +8,7 @@ import { inflateSync } from "node:zlib";
 const ROOT = resolve(import.meta.dirname, "..");
 const QA_ROOT = "planning/art-qa/furniture-core-directional-009";
 const QA_PATH = `${QA_ROOT}/qa.json`;
-const EXPECTED_QA_SHA256 = "0ff41f99e8c8b5f10516ba38f2d56dea1dca282da62cdcd63c5ab40a1b0c4344";
+const EXPECTED_QA_SHA256 = "42f4cca63d7e15abbdd208d70f89e3da413e698611b0e9fdeacb079c32d007c2";
 const DIRECTIONS = ["north", "east", "south", "west"];
 const ASSETS = ["furniture-expo-pass-heated", "furniture-plancha-commercial", "furniture-convection-oven"];
 const PLACEMENT = { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" };
@@ -155,28 +155,50 @@ function visibleMagentaFringePixels(image) {
   return count;
 }
 
-test("furniture directional batch 009 has exact durable local provenance", () => {
+test("furniture directional batch 009 has exact durable remote and runtime provenance", () => {
   const qa = json(QA_PATH);
+  const artPass = json("planning/art-pass-v2.json");
+  const batch = artPass.batches.find((entry) => entry.id === "furniture-core-directional-009");
   assert.equal(fileSha256(QA_PATH), EXPECTED_QA_SHA256);
   assert.equal(qa.batchId, "furniture-core-directional-009");
   assert.deepEqual(qa.assets, ASSETS);
   assert.equal(qa.artReviewStatus, "accepted");
-  assert.equal(qa.productionComplete, false);
+  assert.equal(qa.productionComplete, true);
   assert.deepEqual(qa.repositoryPromotion, {
-    status: "local-verified-pending-remote",
+    status: "remote-verified",
     runtimeFiles: 12,
     alphaSourceFiles: 12,
     contactSheets: 2,
     provenanceDocuments: 2,
     totalFiles: 28,
   });
-  assert.equal(qa.remotePreservation, null);
+  assert.deepEqual(qa.remotePreservation, {
+    commit: "447a203e8f6d2dc1f014a49c3dc1f0b57b442e11",
+    tree: "262ecc0c84e6a79dc1194d38de6cd8aa0dcd3a3f",
+    ci: "https://github.com/Maergoth/rro/actions/runs/31015657101",
+    artifactId: 8934364142,
+    artifactSha256: "529ae6a0791f38c0fb9d9ba1522eb4c1a3044e19c81dcdf2d453ab202da8d7ce",
+  });
+  assert.deepEqual(batch, {
+    id: "furniture-core-directional-009",
+    assets: ASSETS,
+    files: 28,
+    qa: "passed",
+    runtimeQa: "passed-native-gameplay-composite-attempt-007",
+    sourcePromptMode: "built-in image generation; three separately prompted rigid elevated-isometric four-direction kitchen equipment atlases with rejected attempts quarantined, chroma removal, common-pivot normalization, and full/gameplay-scale contact review",
+    remoteCommit: "447a203e8f6d2dc1f014a49c3dc1f0b57b442e11",
+    remoteTree: "262ecc0c84e6a79dc1194d38de6cd8aa0dcd3a3f",
+    ci: "https://github.com/Maergoth/rro/actions/runs/31015657101",
+    artifactId: 8934364142,
+    artifactSha256: "529ae6a0791f38c0fb9d9ba1522eb4c1a3044e19c81dcdf2d453ab202da8d7ce",
+    qaEvidence: "planning/art-qa/furniture-core-directional-009/contact-627-dark.png",
+    qaManifest: QA_PATH,
+    notes: "Heated expo pass, commercial plancha, and convection oven are source-accepted, remotely preserved, and accepted with every other present directional identity in exact native four-rotation gameplay review attempt 007; that review evidence is also remotely preserved with green Windows and Ubuntu CI.",
+  });
   assert.deepEqual(qa.promotionScope, {
     runtimeFiles: 12, alphaSourceFiles: 12, contactSheets: 2, provenanceDocuments: 2, totalFiles: 28,
   });
-  assert.equal(qa.productionCompletionBlockers.length, 2);
-  assert.match(qa.productionCompletionBlockers[0], /four-rotation native Godot gameplay composite review/i);
-  assert.match(qa.productionCompletionBlockers[1], /remotely preserved.*exact GitHub tree.*green hosted CI/i);
+  assert.deepEqual(qa.productionCompletionBlockers, []);
   assert.doesNotMatch(JSON.stringify(qa), /\/tmp\/|\/workspace\//, "durable QA must not reference transient storage");
   assert.equal(qa.quarantineArchive.sha256, "489aba694c71206f91f10251d0b937a958bcb333b4907adad0f4c76122ced72e");
   assert.equal(qa.quarantineArchive.memberCount, 121);

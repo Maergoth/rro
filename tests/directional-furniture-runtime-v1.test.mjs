@@ -7,6 +7,7 @@ const read = (path) => readFileSync(new URL(path, root), "utf8");
 const contract = JSON.parse(read("apps/client-godot/furniture-art-runtime.json"));
 const runtime = read("apps/client-godot/scripts/restaurant_floor.gd");
 const binding = read("apps/client-godot/scripts/furniture_art_binding.gd");
+const validator = read("tools/validate-art-pass-v2.mjs");
 const exportPreset = read("apps/client-godot/export_presets.cfg");
 const artPass = JSON.parse(read("planning/art-pass-v2.json"));
 const furnitureBatch002Qa = JSON.parse(read("planning/art-qa/furniture-core-directional-002/qa.json"));
@@ -80,11 +81,11 @@ test("the runtime contract covers every source-accepted directional set without 
   assert.equal(contract.capability.runtimeProjection, "elevated-orthographic-isometric-grid");
   assert.equal(contract.capability.projectionIntegrated, true);
   assert.equal(contract.capability.projectionAligned, true);
-  assert.equal(contract.capability.runtimeCompositeAccepted, false);
+  assert.equal(contract.capability.runtimeCompositeAccepted, true);
   assert.equal(contract.capability.productionComplete, false);
-  assert.deepEqual(contract.runtimeCompositeAcceptedAssetIds, ["banquette", "booth", "dish-machine", "espresso", "furniture-banquette-section", "furniture-commercial-chair", "furniture-host-stand-pro", "furniture-oak-two-top", "furniture-pos-terminal", "furniture-premium-chair", "furniture-server-station-pro", "furniture-six-burner-range", "furniture-walnut-four-top", "host-stand", "mop-sink", "pass", "prep", "range", "recycling", "service-station", "table-four", "table-two"]);
-  assert.deepEqual(contract.runtimeCompositeBlockedAssetIds, ["local-art", "pendants", "plants"]);
-  assert.deepEqual(contract.runtimeCompositePendingAssetIds, ["furniture-convection-oven", "furniture-expo-pass-heated", "furniture-plancha-commercial"]);
+  assert.deepEqual(contract.runtimeCompositeAcceptedAssetIds, contract.acceptedDirectionalAssetIds);
+  assert.deepEqual(contract.runtimeCompositeBlockedAssetIds, []);
+  assert.deepEqual(contract.runtimeCompositePendingAssetIds, []);
   assert.deepEqual(
     [...contract.runtimeCompositeAcceptedAssetIds, ...contract.runtimeCompositeBlockedAssetIds, ...contract.runtimeCompositePendingAssetIds].sort(),
     [...contract.acceptedDirectionalAssetIds].sort(),
@@ -94,7 +95,8 @@ test("the runtime contract covers every source-accepted directional set without 
     ...contract.runtimeCompositeBlockedAssetIds,
     ...contract.runtimeCompositePendingAssetIds,
   ]).size, contract.acceptedDirectionalAssetIds.length, "runtime states must be pairwise disjoint");
-  assert.match(contract.capability.remainingVisualGate, /four-rotation native Godot gameplay capture.*furniture-convection-oven.*furniture-expo-pass-heated.*furniture-plancha-commercial.*wall and ceiling placement.*local-art.*plants.*pendants/i);
+  assert.match(contract.capability.remainingVisualGate, /no runtime visual blocker.*twenty-eight present source-accepted.*other 201 catalog identities/i);
+  assert.match(validator, /runtimeCompositeAccepted must be true iff runtime acceptance exactly covers every source-accepted directional set with no blocked or pending identities/);
 });
 
 test("common floor-contact anchoring uses uniform scale and never stretches directional textures", () => {

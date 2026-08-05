@@ -7,11 +7,8 @@
     "furniture-convection-oven"
   ],
   "artReviewStatus": "accepted",
-  "productionComplete": false,
-  "productionCompletionBlockers": [
-    "The exact accepted runtime sprites have not yet passed four-rotation native Godot gameplay composite review for projection, placement, floor contact, depth, and gameplay-scale legibility.",
-    "This local accepted checkpoint has not yet been remotely preserved with an exact GitHub tree and green hosted CI."
-  ],
+  "productionComplete": true,
+  "productionCompletionBlockers": [],
   "promotionScope": {
     "runtimeFiles": 12,
     "alphaSourceFiles": 12,
@@ -20,14 +17,20 @@
     "totalFiles": 28
   },
   "repositoryPromotion": {
-    "status": "local-verified-pending-remote",
+    "status": "remote-verified",
     "runtimeFiles": 12,
     "alphaSourceFiles": 12,
     "contactSheets": 2,
     "provenanceDocuments": 2,
     "totalFiles": 28
   },
-  "remotePreservation": null,
+  "remotePreservation": {
+    "commit": "447a203e8f6d2dc1f014a49c3dc1f0b57b442e11",
+    "tree": "262ecc0c84e6a79dc1194d38de6cd8aa0dcd3a3f",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31015657101",
+    "artifactId": 8934364142,
+    "artifactSha256": "529ae6a0791f38c0fb9d9ba1522eb4c1a3044e19c81dcdf2d453ab202da8d7ce"
+  },
   "quarantineArchive": {
     "filename": "RRO-furniture-core-directional-009-quarantine.tar.gz",
     "sha256": "489aba694c71206f91f10251d0b937a958bcb333b4907adad0f4c76122ced72e",

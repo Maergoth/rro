@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "34daaef7744926b79ff68962c78f93bee218da4d",
-    "tree": "4110008c5540c913cb14ac72222087d33d84f096",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/31011336304"
+    "commit": "19128970c6e8b1de849987784911d5a4201aca19",
+    "tree": "5d8939aaebf95d0524bcb61892916a56984dd5c3",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31019720470"
   },
   "completionRule": "generated, processed, raster-validated, visually accepted, runtime-bound assets whose exact reviewed bytes are remotely verified on GitHub with green CI",
   "artDirection": {
@@ -30,7 +30,7 @@
     ]
   },
   "coverage": {
-    "furniture": { "catalogTotal": 229, "acceptedSets": 28, "acceptedDirectionalFiles": 112, "runtimeCompositeAcceptedSets": 22 },
+    "furniture": { "catalogTotal": 229, "acceptedSets": 28, "acceptedDirectionalFiles": 112, "runtimeCompositeAcceptedSets": 28 },
     "equipmentIcons": { "catalogTotal": 45, "accepted": 45 },
     "characterSystem": {
       "status": "in_progress",
@@ -179,9 +179,150 @@
         "ci": "https://github.com/Maergoth/rro/actions/runs/31011336304"
       },
       "productionComplete": false
+    },
+    {
+      "id": "runtime-isometric-integration-001-attempt-005",
+      "status": "failed-mounted-visual-context",
+      "remoteCommit": "f6014d2e647ba8b6333279075cfbace0d7857bec",
+      "remoteTree": "f9284c2bc7202a410b3d00399791b635ffdefe6e",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31013459664",
+      "artifactId": 8933468440,
+      "artifactSha256": "953e1ec3f134cfef827e7f97afd0750c942521244dfcf3ec84004f9b1b8aa74e",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-005/review.json",
+      "passed": ["native-four-rotation-capture", "elevated-projection", "directional-selection", "floor-contact-pivots", "mixed-world-depth", "legal-mounted-placement-records", "twenty-two-floor-assets"],
+      "blockers": ["visible-wall-plane-and-room-facing-depth", "ceiling-context-and-elevation"],
+      "acceptedAssetIds": [
+        "banquette",
+        "booth",
+        "dish-machine",
+        "espresso",
+        "furniture-banquette-section",
+        "furniture-commercial-chair",
+        "furniture-host-stand-pro",
+        "furniture-oak-two-top",
+        "furniture-pos-terminal",
+        "furniture-premium-chair",
+        "furniture-server-station-pro",
+        "furniture-six-burner-range",
+        "furniture-walnut-four-top",
+        "host-stand",
+        "mop-sink",
+        "pass",
+        "prep",
+        "range",
+        "recycling",
+        "service-station",
+        "table-four",
+        "table-two"
+      ],
+      "rejectedAssetIds": ["local-art", "pendants", "plants"],
+      "reviewPreservation": {
+        "commit": "cb1cd7f5c29d953abe94cb27a70891ede9d842c8",
+        "tree": "f73c8171ba200f58eac682e4fc7cfb43f6825200",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31016663766"
+      },
+      "productionComplete": false
+    },
+    {
+      "id": "runtime-isometric-integration-001-attempt-006",
+      "status": "passed-partial-present-assets",
+      "remoteCommit": "cb1cd7f5c29d953abe94cb27a70891ede9d842c8",
+      "remoteTree": "f73c8171ba200f58eac682e4fc7cfb43f6825200",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31016663766",
+      "artifactId": 8934792593,
+      "artifactSha256": "663b165ee0b1622924d2c9ae5df3c76e451432690b38f6e41f4205b38bb404cb",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-006/review.json",
+      "passed": ["native-four-rotation-capture", "elevated-projection", "directional-selection", "floor-contact-pivots", "mixed-world-depth", "gameplay-legibility", "legal-mounted-placement-records", "wall-and-ceiling-context", "twenty-seven-present-assets"],
+      "blockers": ["convection-oven-foreground-wall-occlusion"],
+      "acceptedAssetIds": [
+        "banquette",
+        "booth",
+        "dish-machine",
+        "espresso",
+        "furniture-banquette-section",
+        "furniture-commercial-chair",
+        "furniture-expo-pass-heated",
+        "furniture-host-stand-pro",
+        "furniture-oak-two-top",
+        "furniture-plancha-commercial",
+        "furniture-pos-terminal",
+        "furniture-premium-chair",
+        "furniture-server-station-pro",
+        "furniture-six-burner-range",
+        "furniture-walnut-four-top",
+        "host-stand",
+        "local-art",
+        "mop-sink",
+        "pass",
+        "pendants",
+        "plants",
+        "prep",
+        "range",
+        "recycling",
+        "service-station",
+        "table-four",
+        "table-two"
+      ],
+      "rejectedAssetIds": ["furniture-convection-oven"],
+      "reviewPreservation": {
+        "commit": "f2cc4afc3dca51ae468d9c95e2b036dedd8c3ee5",
+        "tree": "3307f0ba9abf9505af1e3410895da28a890d7cdf",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31018806421"
+      },
+      "productionComplete": false
+    },
+    {
+      "id": "runtime-isometric-integration-001-attempt-007",
+      "status": "passed-all-present-assets",
+      "remoteCommit": "f2cc4afc3dca51ae468d9c95e2b036dedd8c3ee5",
+      "remoteTree": "3307f0ba9abf9505af1e3410895da28a890d7cdf",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31018806421",
+      "artifactId": 8935706427,
+      "artifactSha256": "640bc60b9e699dbe3ce84c05ce5258f2a60336f6d97d1d0b95849636fd1d2376",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-007/review.json",
+      "passed": ["native-four-rotation-capture", "elevated-projection", "directional-selection", "floor-contact-pivots", "mixed-world-depth", "gameplay-legibility", "legal-mounted-placement-records", "wall-and-ceiling-context", "twenty-eight-present-assets"],
+      "blockers": [],
+      "acceptedAssetIds": [
+        "banquette",
+        "booth",
+        "dish-machine",
+        "espresso",
+        "furniture-banquette-section",
+        "furniture-commercial-chair",
+        "furniture-convection-oven",
+        "furniture-expo-pass-heated",
+        "furniture-host-stand-pro",
+        "furniture-oak-two-top",
+        "furniture-plancha-commercial",
+        "furniture-pos-terminal",
+        "furniture-premium-chair",
+        "furniture-server-station-pro",
+        "furniture-six-burner-range",
+        "furniture-walnut-four-top",
+        "host-stand",
+        "local-art",
+        "mop-sink",
+        "pass",
+        "pendants",
+        "plants",
+        "prep",
+        "range",
+        "recycling",
+        "service-station",
+        "table-four",
+        "table-two"
+      ],
+      "rejectedAssetIds": [],
+      "reviewPreservation": {
+        "commit": "19128970c6e8b1de849987784911d5a4201aca19",
+        "tree": "5d8939aaebf95d0524bcb61892916a56984dd5c3",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31019720470"
+      },
+      "productionComplete": false
     }
   ],
-  "pendingBatches": [
+  "pendingBatches": [],
+  "batches": [
     {
       "id": "furniture-core-directional-009",
       "assets": [
@@ -191,14 +332,17 @@
       ],
       "files": 28,
       "qa": "passed",
-      "runtimeQa": "pending-native-four-rotation-gameplay-composite",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-007",
       "sourcePromptMode": "built-in image generation; three separately prompted rigid elevated-isometric four-direction kitchen equipment atlases with rejected attempts quarantined, chroma removal, common-pivot normalization, and full/gameplay-scale contact review",
+      "remoteCommit": "447a203e8f6d2dc1f014a49c3dc1f0b57b442e11",
+      "remoteTree": "262ecc0c84e6a79dc1194d38de6cd8aa0dcd3a3f",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31015657101",
+      "artifactId": 8934364142,
+      "artifactSha256": "529ae6a0791f38c0fb9d9ba1522eb4c1a3044e19c81dcdf2d453ab202da8d7ce",
       "qaEvidence": "planning/art-qa/furniture-core-directional-009/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-009/qa.json",
-      "notes": "Heated expo pass, commercial plancha, and convection oven are source-accepted in durable local QA only. They remain outside remote and production-complete counts until this exact package is remotely preserved with green hosted CI and accepted in an exact native four-rotation gameplay composite."
-    }
-  ],
-  "batches": [
+      "notes": "Heated expo pass, commercial plancha, and convection oven are source-accepted, remotely preserved, and accepted with every other present directional identity in exact native four-rotation gameplay review attempt 007; that review evidence is also remotely preserved with green Windows and Ubuntu CI."
+    },
     {
       "id": "furniture-core-directional-008",
       "assets": [
@@ -322,7 +466,7 @@
       "remoteTree": "9127f0d6644894f6e87714cc51c33f1b08281504",
       "qaEvidence": "planning/art-qa/furniture-core-directional-001/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-001/qa.json",
-      "notes": "Three source-accepted sets share a 627x627 canvas, common y=590 floor-contact baseline, four coherent directions, unique hashes, transparent corners, and full/gameplay-scale review. Runtime directional binding remains required before production completion."
+      "notes": "The source package is remotely preserved with green CI. Native attempt 002 first accepted table-two, table-four, and host-stand in four-rotation gameplay composites; durable attempt 007 retained all three without regression."
     },
     {
       "id": "equipment-icons-owner-server-002",
@@ -469,7 +613,7 @@
       "ci": "https://github.com/Maergoth/rro/actions/runs/30980689257",
       "qaEvidence": "planning/art-qa/furniture-core-directional-002/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-002/qa.json",
-      "notes": "Booth, banquette, and service-station each pass exact catalog identity, coherent quarter-turns, 627x627 sRGBA, common y=590 floor-contact pivot, transparent-border, unique-content, full-scale, and 128px review. Their exact 28-file art/evidence package and runtime-contract integration are remotely verified with green Windows and Ubuntu CI. The elevated-isometric runtime is integrated; native gameplay capture and composite acceptance remain blocking."
+      "notes": "The source package is remotely preserved with green Windows and Ubuntu CI. Native attempt 002 first accepted booth, banquette, and service-station in four-rotation gameplay composites; durable attempt 007 retained all three without regression."
     },
     {
       "id": "furniture-core-directional-003",
@@ -483,7 +627,7 @@
       "ci": "https://github.com/Maergoth/rro/actions/runs/30982693857",
       "qaEvidence": "planning/art-qa/furniture-core-directional-003/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-003/qa.json",
-      "notes": "Range, prep, and pass each pass exact catalog identity, coherent quarter-turns, 627x627 sRGBA, common y=590 floor-contact pivot, transparent-border, unique-content, full-scale, and 128px review. One rejected prep attempt remains hash-recorded but excluded. Their exact 28-file art/evidence package and runtime-contract integration are remotely verified with green Windows and Ubuntu CI. The elevated-isometric runtime is integrated; native gameplay capture and composite acceptance remain blocking."
+      "notes": "The source package is remotely preserved with green Windows and Ubuntu CI. Native attempt 002 first accepted range, prep, and pass in four-rotation gameplay composites; durable attempt 007 retained all three without regression."
     },
     {
       "id": "furniture-core-directional-004",
@@ -497,35 +641,35 @@
       "ci": "https://github.com/Maergoth/rro/actions/runs/30985234904",
       "qaEvidence": "planning/art-qa/furniture-core-directional-004/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-004/qa.json",
-      "notes": "Espresso machine, dish machine, and mop sink each pass exact catalog identity, coherent quarter-turns, 627x627 sRGBA, common y=590 floor-contact pivot, transparent-border, unique-content, full-scale, and 128px review. Their exact 28-file art/evidence package and runtime-contract integration are remotely verified with green Windows and Ubuntu CI. The elevated-isometric runtime is integrated; native gameplay capture and composite acceptance remain blocking."
+      "notes": "The source package is remotely preserved with green Windows and Ubuntu CI. Native attempt 002 first accepted espresso, dish-machine, and mop-sink in four-rotation gameplay composites; durable attempt 007 retained all three without regression."
     },
     {
       "id": "furniture-core-directional-005",
       "assets": ["recycling", "pendants", "plants"],
       "files": 28,
       "qa": "passed",
-      "runtimeQa": "mixed-native-gameplay-composite-attempt-002-mount-blocked",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-007",
       "sourcePromptMode": "built-in image generation; identity-locked elevated four-direction atlases with targeted retries, chroma removal, common-pivot normalization, exact feature-count review, and full/gameplay-scale contact sheets",
       "remoteCommit": "565869f5c09529d5da7dc30c0a31c042669c5291",
       "remoteTree": "5bdfdc178b6ebf5ce9f7719f63a417391f4b9ef6",
       "ci": "https://github.com/Maergoth/rro/actions/runs/30996475549",
       "qaEvidence": "planning/art-qa/furniture-core-directional-005/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-005/qa.json",
-      "notes": "Recycling station, pendant-light set, and herb wall each pass exact catalog identity, coherent quarter-turns, 627x627 sRGBA, common y=590 floor-contact pivot, transparent-border, unique-content, full-scale, and 128px review. Three rejected generator attempts remain hash-recorded but excluded. Their exact art, evidence, runtime-contract, and ledger bytes are remotely verified with green Windows and Ubuntu CI. The elevated-isometric runtime is integrated; native gameplay capture and composite acceptance remain blocking."
+      "notes": "The source package is remotely preserved with green Windows and Ubuntu CI. Native attempt 002 first accepted recycling in four-rotation gameplay composites; durable attempt 007 passed pendants and plants on legal mounts with visible room context and retained recycling without regression."
     },
     {
       "id": "furniture-core-directional-006",
       "assets": ["local-art", "furniture-oak-two-top", "furniture-walnut-four-top"],
       "files": 28,
       "qa": "passed",
-      "runtimeQa": "mixed-native-gameplay-composite-attempt-002-mount-blocked",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-007",
       "sourcePromptMode": "built-in image generation; three identity-locked elevated four-direction atlases with targeted camera/count corrections, chroma removal, common-pivot normalization, exact identity review, and full/gameplay-scale contact sheets",
       "remoteCommit": "185ca509f0d52aa3421686880ed94187ae77b35e",
       "remoteTree": "ef75c179d6c16b0159baa7d675fa870699721bd0",
       "ci": "https://github.com/Maergoth/rro/actions/runs/30998050059",
       "qaEvidence": "planning/art-qa/furniture-core-directional-006/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-006/qa.json",
-      "notes": "Local print set, oak two-top, and walnut four-top each pass exact source identity, coherent quarter-turns, raster gates, and full/gameplay-scale contact review. Their 28-file source package is remotely verified with green Windows and Ubuntu CI. Native attempt 001 confirmed the floor furniture projection but rejected production completion because local-art lacks a wall-mount contract and always-on world labels collided with art."
+      "notes": "The source package is remotely preserved with green Windows and Ubuntu CI. Native attempt 002 first accepted furniture-oak-two-top and furniture-walnut-four-top in four-rotation gameplay composites; durable attempt 007 passed local-art on a legal wall mount with visible room context and retained both floor assets without regression."
     },
     {
       "id": "furniture-core-directional-007",

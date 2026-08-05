@@ -163,6 +163,7 @@ let furnitureSetsPresent = 0;
 let furnitureSourceAccepted = 0;
 let furnitureRuntimeBoundSets = 0;
 let furnitureProductionCompleteSets = 0;
+const sourceAcceptedDirectionalAssetIds = [];
 for (const item of production.furniture) {
   const paths = pass.artDirection.furnitureDirections.map((direction) => `apps/client-godot/assets/objects/directional/${item.assetId}/${direction}.png`);
   const count = paths.filter((path, index) => png(path, `furniture:${item.assetId}:${pass.artDirection.furnitureDirections[index]}`, [627, 627])).length;
@@ -172,7 +173,10 @@ for (const item of production.furniture) {
   if (sourceAccepted && !furnitureDefinitionByAssetId.get(item.assetId)?.placement) {
     invalid.push(`${item.assetId}: source-accepted furniture requires an explicit reviewed placement contract`);
   }
-  if (sourceAccepted) furnitureSourceAccepted += 1;
+  if (sourceAccepted) {
+    furnitureSourceAccepted += 1;
+    sourceAcceptedDirectionalAssetIds.push(item.assetId);
+  }
   const runtimeBound = count === paths.length
     && directionalSelectionBound
     && furnitureRuntimeContract.capability.projectionAligned === true
@@ -201,6 +205,14 @@ const runtimeStateAssetIds = new Set([
 if (runtimeStateAssetIds.size !== furnitureRuntimeContract.acceptedDirectionalAssetIds.length
     || [...runtimeStateAssetIds].some((assetId) => !furnitureRuntimeContract.acceptedDirectionalAssetIds.includes(assetId))) {
   invalid.push("directional furniture runtime-composite accepted, blocked, and pending sets must exactly partition acceptedDirectionalAssetIds");
+}
+const runtimeAcceptedIds = furnitureRuntimeContract.runtimeCompositeAcceptedAssetIds ?? [];
+const runtimeCompositeCoversEverySourceAcceptedSet = runtimeAcceptedIds.length === sourceAcceptedDirectionalAssetIds.length
+  && JSON.stringify([...runtimeAcceptedIds].sort()) === JSON.stringify([...sourceAcceptedDirectionalAssetIds].sort())
+  && runtimeCompositeBlockedAssetIds.size === 0
+  && runtimeCompositePendingAssetIds.size === 0;
+if ((furnitureRuntimeContract.capability.runtimeCompositeAccepted === true) !== runtimeCompositeCoversEverySourceAcceptedSet) {
+  invalid.push("directional furniture capability.runtimeCompositeAccepted must be true iff runtime acceptance exactly covers every source-accepted directional set with no blocked or pending identities");
 }
 if (!latestFurnitureRuntimeQa?.evidence || !file(latestFurnitureRuntimeQa.evidence)) {
   invalid.push("directional furniture runtime-composite acceptance requires durable native-review evidence");

@@ -10,8 +10,11 @@ const reviewPaths = [
   "planning/art-qa/runtime-isometric-integration-001/attempt-002/review.json",
   "planning/art-qa/runtime-isometric-integration-001/attempt-003/review.json",
   "planning/art-qa/runtime-isometric-integration-001/attempt-004/review.json",
+  "planning/art-qa/runtime-isometric-integration-001/attempt-005/review.json",
+  "planning/art-qa/runtime-isometric-integration-001/attempt-006/review.json",
+  "planning/art-qa/runtime-isometric-integration-001/attempt-007/review.json",
 ];
-const [attempt001, attempt002, attempt003, attempt004] = reviewPaths.map((path) => JSON.parse(read(path).toString("utf8")));
+const [attempt001, attempt002, attempt003, attempt004, attempt005, attempt006, attempt007] = reviewPaths.map((path) => JSON.parse(read(path).toString("utf8")));
 
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 
@@ -69,8 +72,44 @@ test("native isometric attempt 004 accepts exactly twenty-two floor assets witho
   assert.deepEqual(attempt004.visualReview.blockers.map((entry) => entry.id), ["mounted-object-anchor-contract"]);
 });
 
+test("native isometric attempt 005 preserves the failed mounted-context verdict", () => {
+  assert.equal(attempt005.source.remoteCommit, "f6014d2e647ba8b6333279075cfbace0d7857bec");
+  assert.equal(attempt005.source.remoteTree, "f9284c2bc7202a410b3d00399791b635ffdefe6e");
+  assert.equal(attempt005.source.artifactId, 8933468440);
+  assert.equal(attempt005.source.artifactSha256, "953e1ec3f134cfef827e7f97afd0750c942521244dfcf3ec84004f9b1b8aa74e");
+  assert.equal(attempt005.visualReview.status, "failed-mounted-visual-context");
+  assert.equal(attempt005.visualReview.productionComplete, false);
+  assert.equal(attempt005.visualReview.acceptedAssetIds.length, 22);
+  assert.deepEqual(attempt005.visualReview.rejectedAssetIds, ["local-art", "pendants", "plants"]);
+  assert.deepEqual(attempt005.visualReview.blockers.map((entry) => entry.id), ["visible-wall-plane-and-room-facing-depth", "ceiling-context-and-elevation"]);
+});
+
+test("native isometric attempt 006 accepts twenty-seven present assets and isolates the oven occlusion", () => {
+  assert.equal(attempt006.source.remoteCommit, "cb1cd7f5c29d953abe94cb27a70891ede9d842c8");
+  assert.equal(attempt006.source.remoteTree, "f73c8171ba200f58eac682e4fc7cfb43f6825200");
+  assert.equal(attempt006.source.artifactId, 8934792593);
+  assert.equal(attempt006.source.artifactSha256, "663b165ee0b1622924d2c9ae5df3c76e451432690b38f6e41f4205b38bb404cb");
+  assert.equal(attempt006.visualReview.status, "passed-partial-present-assets");
+  assert.equal(attempt006.visualReview.productionComplete, false);
+  assert.equal(attempt006.visualReview.acceptedAssetIds.length, 27);
+  assert.deepEqual(attempt006.visualReview.rejectedAssetIds, ["furniture-convection-oven"]);
+  assert.deepEqual(attempt006.visualReview.blockers.map((entry) => entry.id), ["convection-oven-foreground-wall-occlusion"]);
+});
+
+test("native isometric attempt 007 accepts all twenty-eight present assets without blockers", () => {
+  assert.equal(attempt007.source.remoteCommit, "f2cc4afc3dca51ae468d9c95e2b036dedd8c3ee5");
+  assert.equal(attempt007.source.remoteTree, "3307f0ba9abf9505af1e3410895da28a890d7cdf");
+  assert.equal(attempt007.source.artifactId, 8935706427);
+  assert.equal(attempt007.source.artifactSha256, "640bc60b9e699dbe3ce84c05ce5258f2a60336f6d97d1d0b95849636fd1d2376");
+  assert.equal(attempt007.visualReview.status, "passed-all-present-assets");
+  assert.equal(attempt007.visualReview.productionComplete, false, "the whole-game art catalog remains incomplete");
+  assert.equal(attempt007.visualReview.acceptedAssetIds.length, 28);
+  assert.deepEqual(attempt007.visualReview.rejectedAssetIds, []);
+  assert.deepEqual(attempt007.visualReview.blockers, []);
+});
+
 test("every durable native capture has exact bytes and the required gameplay viewport", () => {
-  for (const review of [attempt001, attempt002, attempt003, attempt004]) {
+  for (const review of [attempt001, attempt002, attempt003, attempt004, attempt005, attempt006, attempt007]) {
     assert.equal(review.captures.length, 5);
     for (const capture of review.captures) {
       const bytes = read(capture.path);
