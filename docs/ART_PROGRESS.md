@@ -20,7 +20,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
-| Furniture directional sets | 229 | 1 | 1 | 1 | 0 |
+| Furniture directional sets | 229 | 4 | 1 | 1 | 0 |
 | Equipment inventory icons | 45 | 8 | 8 | 8 | 8 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
@@ -76,13 +76,13 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 One of 229 elevated four-direction sets is present. The 20 attractive overhead singles are preserved as references but do not satisfy this camera contract.
 
-### Dining — 40 missing
+### Dining — 38 missing
 
-`table-two`, `table-four`, `booth`, `banquette`, `furniture-oak-two-top`, `furniture-walnut-four-top`, `furniture-banquette-section`, `furniture-commercial-chair`, `furniture-premium-chair`, `furniture-essential-cafe-two-top`, `furniture-craftsman-cafe-two-top`, `furniture-endurance-cafe-two-top`, `furniture-hospitality-cafe-two-top`, `furniture-precision-cafe-two-top`, `furniture-reclaimed-cafe-two-top`, `furniture-essential-family-four-top`, `furniture-craftsman-family-four-top`, `furniture-endurance-family-four-top`, `furniture-hospitality-family-four-top`, `furniture-precision-family-four-top`, `furniture-reclaimed-family-four-top`, `furniture-essential-communal-table`, `furniture-craftsman-communal-table`, `furniture-endurance-communal-table`, `furniture-hospitality-communal-table`, `furniture-precision-communal-table`, `furniture-reclaimed-communal-table`, `furniture-essential-dining-chair`, `furniture-craftsman-dining-chair`, `furniture-endurance-dining-chair`, `furniture-hospitality-dining-chair`, `furniture-precision-dining-chair`, `furniture-reclaimed-dining-chair`, `furniture-essential-dining-booth`, `furniture-craftsman-dining-booth`, `furniture-endurance-dining-booth`, `furniture-hospitality-dining-booth`, `furniture-precision-dining-booth`, `furniture-reclaimed-dining-booth`, `summer-patio-two`
+`booth`, `banquette`, `furniture-oak-two-top`, `furniture-walnut-four-top`, `furniture-banquette-section`, `furniture-commercial-chair`, `furniture-premium-chair`, `furniture-essential-cafe-two-top`, `furniture-craftsman-cafe-two-top`, `furniture-endurance-cafe-two-top`, `furniture-hospitality-cafe-two-top`, `furniture-precision-cafe-two-top`, `furniture-reclaimed-cafe-two-top`, `furniture-essential-family-four-top`, `furniture-craftsman-family-four-top`, `furniture-endurance-family-four-top`, `furniture-hospitality-family-four-top`, `furniture-precision-family-four-top`, `furniture-reclaimed-family-four-top`, `furniture-essential-communal-table`, `furniture-craftsman-communal-table`, `furniture-endurance-communal-table`, `furniture-hospitality-communal-table`, `furniture-precision-communal-table`, `furniture-reclaimed-communal-table`, `furniture-essential-dining-chair`, `furniture-craftsman-dining-chair`, `furniture-endurance-dining-chair`, `furniture-hospitality-dining-chair`, `furniture-precision-dining-chair`, `furniture-reclaimed-dining-chair`, `furniture-essential-dining-booth`, `furniture-craftsman-dining-booth`, `furniture-endurance-dining-booth`, `furniture-hospitality-dining-booth`, `furniture-precision-dining-booth`, `furniture-reclaimed-dining-booth`, `summer-patio-two`
 
-### Service — 39 missing
+### Service — 38 missing
 
-`host-stand`, `service-station`, `espresso`, `furniture-host-stand-pro`, `furniture-server-station-pro`, `furniture-pos-terminal`, `furniture-linen-storage`, `furniture-water-station`, `furniture-essential-host-podium`, `furniture-craftsman-host-podium`, `furniture-endurance-host-podium`, `furniture-hospitality-host-podium`, `furniture-precision-host-podium`, `furniture-reclaimed-host-podium`, `furniture-essential-server-console`, `furniture-craftsman-server-console`, `furniture-endurance-server-console`, `furniture-hospitality-server-console`, `furniture-precision-server-console`, `furniture-reclaimed-server-console`, `furniture-essential-beverage-station`, `furniture-craftsman-beverage-station`, `furniture-endurance-beverage-station`, `furniture-hospitality-beverage-station`, `furniture-precision-beverage-station`, `furniture-reclaimed-beverage-station`, `furniture-essential-pos-workstation`, `furniture-craftsman-pos-workstation`, `furniture-endurance-pos-workstation`, `furniture-hospitality-pos-workstation`, `furniture-precision-pos-workstation`, `furniture-reclaimed-pos-workstation`, `furniture-essential-bussing-station`, `furniture-craftsman-bussing-station`, `furniture-endurance-bussing-station`, `furniture-hospitality-bussing-station`, `furniture-precision-bussing-station`, `furniture-reclaimed-bussing-station`, `summer-lemonade`
+`service-station`, `espresso`, `furniture-host-stand-pro`, `furniture-server-station-pro`, `furniture-pos-terminal`, `furniture-linen-storage`, `furniture-water-station`, `furniture-essential-host-podium`, `furniture-craftsman-host-podium`, `furniture-endurance-host-podium`, `furniture-hospitality-host-podium`, `furniture-precision-host-podium`, `furniture-reclaimed-host-podium`, `furniture-essential-server-console`, `furniture-craftsman-server-console`, `furniture-endurance-server-console`, `furniture-hospitality-server-console`, `furniture-precision-server-console`, `furniture-reclaimed-server-console`, `furniture-essential-beverage-station`, `furniture-craftsman-beverage-station`, `furniture-endurance-beverage-station`, `furniture-hospitality-beverage-station`, `furniture-precision-beverage-station`, `furniture-reclaimed-beverage-station`, `furniture-essential-pos-workstation`, `furniture-craftsman-pos-workstation`, `furniture-endurance-pos-workstation`, `furniture-hospitality-pos-workstation`, `furniture-precision-pos-workstation`, `furniture-reclaimed-pos-workstation`, `furniture-essential-bussing-station`, `furniture-craftsman-bussing-station`, `furniture-endurance-bussing-station`, `furniture-hospitality-bussing-station`, `furniture-precision-bussing-station`, `furniture-reclaimed-bussing-station`, `summer-lemonade`
 
 ### Kitchen — 49 missing
 
@@ -165,7 +165,7 @@ This JSON block is part of this same authoritative document and contains every c
     {
       "lane": "Furniture directional sets",
       "required": 229,
-      "present": 1,
+      "present": 4,
       "sourceAccepted": 1,
       "remoteVerified": 1,
       "productionComplete": 0
@@ -283,26 +283,26 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/table-two/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "5a2eda2886a111e11e618383827e7a2e44bde330db5e0140c5fd60f655e6b362"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/table-two/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "d4e676f5ff109355d0c3caabae9868f1c449347ed693c2f47beb9987cfc79d33"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/table-two/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "436b3a7eb27e1ae72cdefa2217e8be8cc49e0e823fae036eddec5183515ca55f"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/table-two/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "e6543e3a20b778040d8d9e82455693a8ab9c88c0501bb2f2118b4f3ad059cb7f"
         }
       ],
-      "present": false,
+      "present": true,
       "batchId": null,
       "review": "unreviewed",
       "runtimeQa": "not-reviewed",
@@ -311,7 +311,7 @@ This JSON block is part of this same authoritative document and contains every c
       "qaEvidencePresent": false,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "present_unreviewed"
     },
     {
       "id": "table-four",
@@ -328,26 +328,26 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/table-four/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "04633f182087398908585dcf67deac7214a7fdebb6309b2dc4f2b776eb0455cd"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/table-four/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "a92a0956061de546977e54006aacfec6a2bbac5af6449a0dc009c63b54a4a71f"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/table-four/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "3cb53f39cbaa4c11b6b194dd268de2b774ad936fbd8835af0d1e1829426d2ef8"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/table-four/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "c41006be11bfc852e44ae2ba585dce5b6e1465d1d7b964b88d92d2458a709b22"
         }
       ],
-      "present": false,
+      "present": true,
       "batchId": null,
       "review": "unreviewed",
       "runtimeQa": "not-reviewed",
@@ -356,7 +356,7 @@ This JSON block is part of this same authoritative document and contains every c
       "qaEvidencePresent": false,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "present_unreviewed"
     },
     {
       "id": "booth",
@@ -463,26 +463,26 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/host-stand/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "9170859b113b10161089d274ba7cae9f251ea440afdf72554d72155ee25b717a"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/host-stand/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "0fd01a4beb5dd1db9f79d9f022618c74d9d7ad74c0ffab2bb8dfea856791f209"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/host-stand/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "25a2277f0b9736c0cef7a6aa6af6ffc0e98b4a1ea1db1ca585302bc00ca9fa71"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/host-stand/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "03df9612c109fdd356b7935ef8b4c4bdf63399d42e0aae2a99743f62af2962e7"
         }
       ],
-      "present": false,
+      "present": true,
       "batchId": null,
       "review": "unreviewed",
       "runtimeQa": "not-reviewed",
@@ -491,7 +491,7 @@ This JSON block is part of this same authoritative document and contains every c
       "qaEvidencePresent": false,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "present_unreviewed"
     },
     {
       "id": "service-station",
