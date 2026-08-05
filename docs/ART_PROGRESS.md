@@ -28,7 +28,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 | World atlas | 1 | 0 | 0 | 0 | 0 |
 | Environment helpers | 4 | 0 | 0 | 0 | 0 |
 | Launch UI assets | 15 | 1 | 0 | 0 | 0 |
-| Character body source foundations | 2 | 2 | 2 | 2 | 0 |
+| Character body source foundations | 2 | 2 | 2 | 0 | 0 |
 | Body animation sets (body × animation) | 52 | 0 | 0 | 0 | 0 |
 | Split modular layer body-fits | 126 | 0 | 0 | 0 | 0 |
 | Equipment attachment body-fits | 62 | 0 | 0 | 0 | 0 |
@@ -41,11 +41,12 @@ Only the final state is production-complete. Existing files, historical narrativ
 - Durable character files: 144 PNGs.
 - Body source poses: 16/1344 (1.2%).
 - Final body animation frame cells: 0/2720; even idle requires four frames and currently has one still per direction.
-- Source foundations: 2/2 accepted but pending common feet/pivot normalization and chroma cleanup.
+- Source foundations: 2/2 accepted with a normalized `(192,472)` ground pivot and clean skin channels; 0/2 reflect the currently reviewed bytes on a verified remote checkpoint.
 - Split swappable layer body-fits: 0/126; required catalogs are frozen below.
 - Equipment attachment body-fits: 0/62 from 31 equippable items.
 - Activity-animation bindings: 0/89.
-- Classic and apron prototype files remain durable, but renewed full-resolution composite QA found rear-leg silhouette leakage; accepted production outfit coverage is 0 until remediation.
+- Classic idle outfit body-fits: 2/2 source-accepted after full-resolution/gameplay composite remediation; they remain production-incomplete until remote verification, split-layer catalog coverage, animation frames, and runtime compositing pass.
+- Apron prototypes remain durable but QA-failed for silhouette/foot leakage and are not counted.
 
 | Modular slot | Required visible choices | IDs |
 |---|---:|---|
@@ -73,6 +74,14 @@ Only the final state is production-complete. Existing files, historical narrativ
 | equipment-icons-shared-manager-001 | 19 | passed | passed-full-and-gameplay-scale | `c2158fc` | planning/art-qa/equipment-icons-shared-manager-001/contact-128-dark.png |
 | furniture-core-directional-001 | 20 | passed | blocked-not-bound | `9daba41` | planning/art-qa/furniture-core-directional-001/contact-627-dark.png |
 | equipment-icons-owner-server-002 | 19 | passed | passed-full-and-gameplay-scale | `0eec73b` | planning/art-qa/equipment-icons-owner-server-002/contact-128-dark.png |
+
+## Accepted locally, remote checkpoint pending
+
+These batches have passed source/composite QA but deliberately do not count as remotely verified or production-complete until their immutable GitHub commit and hosted CI are recorded.
+
+| Batch | Files | Source QA | Runtime/composite QA | Evidence |
+|---|---:|---|---|---|
+| character-remediation-idle-classic-v1 | 109 | passed | blocked-static-idle-and-no-runtime-compositor | planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png |
 
 ## Missing furniture directional sets
 
@@ -233,7 +242,7 @@ This JSON block is part of this same authoritative document and contains every c
       "required": 2,
       "present": 2,
       "sourceAccepted": 2,
-      "remoteVerified": 2,
+      "remoteVerified": 0,
       "productionComplete": 0
     },
     {
@@ -12462,54 +12471,54 @@ This JSON block is part of this same authoritative document and contains every c
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/north.png",
             "present": true,
-            "sha256": "d3691a101b5d042c85828d214961a7a9c3121159214bd12e27518dfd39203943"
+            "sha256": "cd5b4408bef68aea28c59fc4e532d1c25426b51e5f7333cd020b71f7bc341357"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/north_east.png",
             "present": true,
-            "sha256": "382a60b92e140cc015ad4d6da3755e24e3414e9a89265d51759d57092681a4e0"
+            "sha256": "e0344851c62e316bbcdcdef6d043b46652296dd7c319e3f0f28bf84f720ff4b5"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/east.png",
             "present": true,
-            "sha256": "fa98730813e2facba98e15478da260b9232aea7ce8be0f830895db450689ff2b"
+            "sha256": "9b5f09e15d2e26ade4558ec47caa9400313e606ecdde300e89aadb6176ba0e35"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/south_east.png",
             "present": true,
-            "sha256": "07fcad8c86bfa62eefe347ccfbce1c72adb000e6268f3bdc4608e818bbdf88e7"
+            "sha256": "d14c717abb21d7f38fa251d1f969e3d42d50f4b3be171d54e9ca764525c31b46"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/south.png",
             "present": true,
-            "sha256": "14d8873a2556229d0151554bf1d923b899fba6398ea08ec08ed23c675305c7c1"
+            "sha256": "164752e457b0a9a190c19220c6a0d19c90f14791c0ef64d0d4b7ed254a442759"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/south_west.png",
             "present": true,
-            "sha256": "8f629eceffb91a073db567b21bc838fdd8452bd783b3ae569c2260aea32fa488"
+            "sha256": "ebdf1d813d186e8f228bb92d69fa8d86001bb2cd069552b72991c25e1357c7ce"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/west.png",
             "present": true,
-            "sha256": "bbba114213f84e136f55edee94c6fdd49e850f8719cfcd3c723468fb7d639318"
+            "sha256": "8db85cbe50f0863a316ef446aac219917b0ffb90566339b0e3a4edf7403175f8"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/north_west.png",
             "present": true,
-            "sha256": "17a0d0edc078ded6d9a2dddbf71a52cfb14b647ccd99385df2be8164a735b97c"
+            "sha256": "08f9e5e90a40b61d5fe0877f3ad036daf847ccda8d3f294230db315aecfa359a"
           }
         ],
         "present": true,
-        "batchId": "character-foundation-001",
+        "batchId": "character-remediation-idle-classic-v1",
         "review": "passed",
-        "runtimeQa": "blocked-anchor-and-chroma-normalization",
-        "remoteVerified": true,
-        "qaEvidence": "planning/art-qa/character-foundation-001.png",
+        "runtimeQa": "blocked-static-idle-and-no-runtime-compositor",
+        "remoteVerified": false,
+        "qaEvidence": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png",
         "qaEvidencePresent": true,
         "runtimeBound": false,
         "productionComplete": false,
-        "status": "source_accepted_runtime_blocked"
+        "status": "source_accepted_local_only"
       },
       {
         "body": "base-b",
@@ -12517,54 +12526,54 @@ This JSON block is part of this same authoritative document and contains every c
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/north.png",
             "present": true,
-            "sha256": "bda63f0e4d58300a1101a2592e5924629e742c998fe9761b4b53e077d62d441a"
+            "sha256": "e4cc3b8b9bdb474ef14d169318b4f6ba530389b5c98162f4bdee75acc8767007"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/north_east.png",
             "present": true,
-            "sha256": "a15e3e169b314e6c3d00fc266406dea3c5bba99560fcdfcf197dccfd8cb2ddef"
+            "sha256": "f5ffb5cf79e1b7a834e6217c4abd99196dff7837ed70a8223ea2a0ade52cfb07"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/east.png",
             "present": true,
-            "sha256": "54c9cd7fb1f078eb2072f8fae5998807bb7b06046d49a6167a97e5393471f866"
+            "sha256": "032790d1c65156412d5ecbaf6569ecd0bd564857401f05fae89646d37aae579f"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/south_east.png",
             "present": true,
-            "sha256": "47ba65dbdd6aa51e7be8075a973d00c1e23217404bfdd4da2152773555a3a0ce"
+            "sha256": "08b80520d332fa6e7e428aa02fb29c3d1872f74e0d52e1c2ade710da96120e66"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/south.png",
             "present": true,
-            "sha256": "b39a95c7404c7b292db4871f9fec93a0008e9291ee34813e3bfff16c198722d0"
+            "sha256": "d139afee6de151b2755fc3e0101cfcedb36ee982d442b6a4786a316dafeb0f94"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/south_west.png",
             "present": true,
-            "sha256": "449083dc4f1e391b12aec7e34e0e2e35c6b0bd91026f1368aee55625461b33c7"
+            "sha256": "5193017bb29dd57e784826cfbcf46be03cd54df097e3a272056dbcede54678c1"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/west.png",
             "present": true,
-            "sha256": "55c6b6cae4ef61140d10f59074e1d882148e3ed571345f9fe725124a1fd2afe4"
+            "sha256": "08502cdd3e0b99ae2cbf02c18d543271b6350ea983e5f272c13e2e8d37ed5e8b"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/north_west.png",
             "present": true,
-            "sha256": "dc60212868e1f11f295c09268d3adc7590a310b287c0881d6371e6fcbf9d7a82"
+            "sha256": "a6cc7f48496c04d36e1fffe2258716fa6604742a92de56bd42938d6283409ef7"
           }
         ],
         "present": true,
-        "batchId": "character-foundation-002",
+        "batchId": "character-remediation-idle-classic-v1",
         "review": "passed",
-        "runtimeQa": "blocked-anchor-and-chroma-normalization",
-        "remoteVerified": true,
-        "qaEvidence": "planning/art-qa/character-foundation-002.png",
+        "runtimeQa": "blocked-static-idle-and-no-runtime-compositor",
+        "remoteVerified": false,
+        "qaEvidence": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png",
         "qaEvidencePresent": true,
         "runtimeBound": false,
         "productionComplete": false,
-        "status": "source_accepted_runtime_blocked"
+        "status": "source_accepted_local_only"
       }
     ],
     "skinFoundations": [
@@ -12574,94 +12583,94 @@ This JSON block is part of this same authoritative document and contains every c
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/north.png",
             "present": true,
-            "sha256": "64a263899ff4c941b30ecc650deb017ddf2df7ce0904ec7ba7eaace1eb0bfead"
+            "sha256": "7f87b161f649b6bda5d2a9717fe469b51befa1608c9369b9fec93436c9d59ba9"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/north.png",
             "present": true,
-            "sha256": "5d8ca370690b14b8bbab69ac07d4acfdf14f879ec033928e0871696c44b4720c"
+            "sha256": "f86aaafbbdf74b1764cbdd89fcd74863b058ccb7d48bd651536969b43871c034"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/north_east.png",
             "present": true,
-            "sha256": "4c317f23407c8369a6efd2bc277c29ea0c427af5db676a1cb6451e5b0f5b75e9"
+            "sha256": "c45ca8a41604d4ec0e65d7cc673009e9ae357e67f97a9dcd44514fd0ff135e5e"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/north_east.png",
             "present": true,
-            "sha256": "ef26127919b5a4c5745cb4e6930b17e156094fb22c76409ef0dfbabce058a608"
+            "sha256": "bb090830d878f48984ecf7f0b52b45b891c731d17da69bf5aa59670f10152ea9"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/east.png",
             "present": true,
-            "sha256": "e648f765e66ab5f8f0473642951a087c73fb4bbc814cd0cadb98c01bc4abd133"
+            "sha256": "ce860ed2daae2ee480881e49a8745d77293139ea1f877361c7fc5bbb582c5961"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/east.png",
             "present": true,
-            "sha256": "4a96f96f79ef305702629d2e9bfa12b5acc1fbf3adb2fb03f733d59cea67bb16"
+            "sha256": "f78fde572591ce4391b9cabb3e9c896128915eaf2cb9bb1b2ad9973a4862b1b7"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/south_east.png",
             "present": true,
-            "sha256": "ceb1f6f465e574d39a8ccee0699ff96b617864381ae7ca3c1e0000c896683a00"
+            "sha256": "5bf57ea22ad9855a5c01311c026bf7658089a7cda365b2bd9b03631fa39ec840"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/south_east.png",
             "present": true,
-            "sha256": "d9f27d74da211f31f8d61d7d28ec4139cc9ec867fd98381f5da428f6137a24d6"
+            "sha256": "f90b84cc0073194a8e2a4f59e4a9fa83f3ed0ea42d339563ccdfd86ca298c632"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/south.png",
             "present": true,
-            "sha256": "14cd69513b442f5d7c431bbd837055fa09397f6c31fe00c2d7adab2574a68f46"
+            "sha256": "e0d0b7d8a167c34b79feda63252447a5d7d3a253afae30dbdcdf12c65daf6826"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/south.png",
             "present": true,
-            "sha256": "05fa25ee7b974de9a9ae3f48d0454a2f7ccb26cc17e3c5911aea8c66a7c4f608"
+            "sha256": "c664cae847030a011e503b4ff6359857dd937bac396b0c74e47109bf47e5bc4d"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/south_west.png",
             "present": true,
-            "sha256": "d29f035ddd2474ffd40121efb0bde806af98111064c04e890bbf56019235b72e"
+            "sha256": "ea105574ca2317eddee550c366f8fbbf7a095103f5e844e2db0ca1b39273d86b"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/south_west.png",
             "present": true,
-            "sha256": "62e754867c3935823b28223dcff3508915d95739e705ac9782ec0767a59cf572"
+            "sha256": "d4f4add6cf640504da710661a84aadc6fbbe328df337a8ea2afca2bd9b49a026"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/west.png",
             "present": true,
-            "sha256": "85938123fb32cc40e2c1fcacb2c06424fbc71f0c913176e7ceea8210a06e9e1b"
+            "sha256": "c159996359ecc1f4098f3cbd4cc4fee15ee765becc7c905e5932cd33faaee160"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/west.png",
             "present": true,
-            "sha256": "0f4489706623fad88da442e0e77930c8154a2035bea48248a77f1beaa4dc911d"
+            "sha256": "61d88d0c960372052a2c574fc529e22f4908ad1d22b5ab42b03535841683ef46"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/north_west.png",
             "present": true,
-            "sha256": "d02f197a101a8bc71eef6a1bc186ae97d0c86058d33cf32c788a59dbab71765e"
+            "sha256": "fe34f729882e5a4c22d345b33ce6a710622a126d2e1b57e12ed5dc3ad60513f4"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/north_west.png",
             "present": true,
-            "sha256": "c5855ab406a62bd423bc70fdedf2bcd4c62edd3ede84d79ba195305519206762"
+            "sha256": "c60a44cf799faf5ce0d70bf370c0d0101031e5d4e72e71f0230ac96dd83b4b93"
           }
         ],
         "present": true,
-        "batchId": "character-modular-classic-001",
-        "review": "passed-source-foundation",
-        "runtimeQa": "failed-needs-remediation",
-        "remoteVerified": true,
-        "qaEvidence": "planning/art-qa/character-modular-classic-001.png",
+        "batchId": "character-remediation-idle-classic-v1",
+        "review": "passed",
+        "runtimeQa": "blocked-static-idle-and-no-runtime-compositor",
+        "remoteVerified": false,
+        "qaEvidence": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png",
         "qaEvidencePresent": true,
         "runtimeBound": false,
         "productionComplete": false,
-        "status": "source_accepted_runtime_blocked"
+        "status": "source_accepted_local_only"
       },
       {
         "body": "base-b",
@@ -12669,94 +12678,94 @@ This JSON block is part of this same authoritative document and contains every c
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/north.png",
             "present": true,
-            "sha256": "c876a3778bc9d507bb19c5d6353caf603ba9a150cc504e8adef7072634ef2728"
+            "sha256": "f82c5492eb955d78b8a1700ba2f49e892d5e788059a603b5ad7e465d7aa80c03"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/north.png",
             "present": true,
-            "sha256": "c013939414e8c21c2ad2fcc7d4c9f18fb8287809b7a64f8a92fb9e49aa9105d6"
+            "sha256": "8068c9b86f3ad8d21a8a45391d312d98e2c5d7aad0cfa30ca2f072478e5403d6"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/north_east.png",
             "present": true,
-            "sha256": "e1ea126d367971c44e0fb1af104ff7714435fa15caadd2a44e232e34fef2a6a9"
+            "sha256": "f685951a7e1ae67367ae18193f0ac191c6b4fe36a679c8bc50b613659ef44a43"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/north_east.png",
             "present": true,
-            "sha256": "877a50a0f5fadd8de86e250c01bf562fc6351abb7d385bdf4c1a22fd90e940db"
+            "sha256": "1d9f88b3b1b2ed28ca9e4ae4429c1d977f22f6204adcf6458ed2a2ce4034cfb7"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/east.png",
             "present": true,
-            "sha256": "f828f2b5692fe756a4f996f2bd135b7239743e67296167bf755f3d8eacf063be"
+            "sha256": "6bfb5babb36486a91fec8439d8c7d05e0a3c3ad4922ec0a80cb721988769da4f"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/east.png",
             "present": true,
-            "sha256": "4cbde5f2dcf779d9afa90fd7109b25c8db9437709ee8370568180cc21ed310c1"
+            "sha256": "cafc3c4d9bbb75c37ab833783b1c220b5aabcc8fd7d9aed711084b233725d257"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/south_east.png",
             "present": true,
-            "sha256": "dd64dd31ef9d4495ae7ce3e7a620d50c5eade411d4e408967a0b1c61913d2390"
+            "sha256": "36b10221d31b1ae2b775c13b1fa006d57875f34f9108c8f43bf8e025efcedd2a"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/south_east.png",
             "present": true,
-            "sha256": "79a6ba3c7e53bb58c4f7e8f074ce8514ab3b714367c8831d181492e9116a9d8f"
+            "sha256": "82d0114c36b2070ab174dddd9defc2a769b0596fd65e95b8b7235e237ac8c2a9"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/south.png",
             "present": true,
-            "sha256": "c7d5b1639155e2b4bee0ee64e6e4d61a6aa26b98b1bdb468b8f30430327185bf"
+            "sha256": "a19448e5e595ba3f748660a9dddac74b8e4d1871c1f33bbbb19da73dee15b4cf"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/south.png",
             "present": true,
-            "sha256": "59933f176158a6ef0624ab111bff1fb091fcd4330ea279a63cac7bc82d683b34"
+            "sha256": "05837f0d502bfbabffc4ee905762c35003cbcb27b1677216738f13db8d33094a"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/south_west.png",
             "present": true,
-            "sha256": "157c657cbc320bb4466ed2fe15786535a44fa3145ad53baa1122e48ffbadd401"
+            "sha256": "a3ca3723e3e403501f55f53be576937c4b785af9a79ddaa42a24e5697acd2b02"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/south_west.png",
             "present": true,
-            "sha256": "a978f74e0edf6873e51f23d94eb0b288ebfa248eeea6d71b012730e7c51e3da6"
+            "sha256": "35fa6b7b8b34b2ee839605312a9d2b6143eb6ccb758c6d1f610c91ef0598d5d5"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/west.png",
             "present": true,
-            "sha256": "5f22e93b093cf7967093dcc7820163eabcfa37255dbd38cd910d462788bf3e76"
+            "sha256": "e39fe11acf1d39c645513a7a8fbc3aeed109bddb607fc84f6c3b5eff755b6374"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/west.png",
             "present": true,
-            "sha256": "b4906d863a11f60386e63a4e0911647b5695b080bf2821659d7065d627b134a9"
+            "sha256": "522b5cea0ea655c1d9cce63a0fad4bcc87fc9f7850cd666099ab04e02fca0531"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/north_west.png",
             "present": true,
-            "sha256": "e06895b94d5d293eac2b71c7a2f534e7e69842cff6627691400e561072847774"
+            "sha256": "a0c922029d289aa04c9ee0a8e714377f1604ef9ee550858fb8e5e169b74e0e8f"
           },
           {
             "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/north_west.png",
             "present": true,
-            "sha256": "efc985279adc93a1daacdd358d2835dd7170b73a61f2cd1740d5b6aae785f8cd"
+            "sha256": "118e78422673627cfb577355e2e0927a00c27344918b6de6bac5fafc7ae95b4e"
           }
         ],
         "present": true,
-        "batchId": "character-modular-classic-001",
-        "review": "passed-source-foundation",
-        "runtimeQa": "failed-needs-remediation",
-        "remoteVerified": true,
-        "qaEvidence": "planning/art-qa/character-modular-classic-001.png",
+        "batchId": "character-remediation-idle-classic-v1",
+        "review": "passed",
+        "runtimeQa": "blocked-static-idle-and-no-runtime-compositor",
+        "remoteVerified": false,
+        "qaEvidence": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png",
         "qaEvidencePresent": true,
         "runtimeBound": false,
         "productionComplete": false,
-        "status": "source_accepted_runtime_blocked"
+        "status": "source_accepted_local_only"
       }
     ],
     "prototypeOutfits": [
@@ -12767,134 +12776,134 @@ This JSON block is part of this same authoritative document and contains every c
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/diffuse/north.png",
             "present": true,
-            "sha256": "260f4e412fc4bddca20bd9b93fd64b4eb5099b21ca898e47bfa046541f6a4ed5"
+            "sha256": "baaaae166b8cb0e304217bee47dd636425d99e3a06ab8146d5926fd2bf1c7832"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/primary-mask/north.png",
             "present": true,
-            "sha256": "4992391b6c8b7bbc31e1dbc34ce1a449c00a20c8cdec26839efa601dec54630a"
+            "sha256": "f543e23670a4b7ca684ad0a46abda7d34d2539d45fa2aaf5fd78192e228e7563"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/secondary-mask/north.png",
             "present": true,
-            "sha256": "3033c814c9bae7d15e8e5b4d36424f5b552c366b578ae1f592d8e1159797aaf0"
+            "sha256": "1e3ca0f14acac124031508c6593b48bb44f9dc4b90a750b38b5163be558358f1"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/diffuse/north_east.png",
             "present": true,
-            "sha256": "f93e205a802b4ca001fa51cd00f1e70b7b56d9c755e87fa683508caad822ce40"
+            "sha256": "cec6dc6bc6c91e30a28bf08b5f7ab9686c2f688918a53b4a5f573f5beb7c8f0d"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/primary-mask/north_east.png",
             "present": true,
-            "sha256": "13bd2c2e382bfc02fc53a5b4e1c6cfe52786809e0e05502ae29562111e687520"
+            "sha256": "cf726a3210ae57e8e4d83edf85063cd44686adcf6c0eae23ba4193193e325990"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/secondary-mask/north_east.png",
             "present": true,
-            "sha256": "54bc49a5cc7ffcbd1aaf0ea641f1753cbbfe483a289cdf203f4dc654c7162e44"
+            "sha256": "d2f6cb21a8dce26ed87c839bfc20b6dfa2202f80651a041061ca26a2f37643d0"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/diffuse/east.png",
             "present": true,
-            "sha256": "194111206f78a793cdf46f3cd8a261e7ffc333c09c504f8099a1bc06ba81c272"
+            "sha256": "8c6b2b92e57f3081e73ca31225c826070ca46ac92bb528fce9390f7157a45dba"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/primary-mask/east.png",
             "present": true,
-            "sha256": "14fd5c8f92a4fcbe2fafb1f71a29139f95533f28a9949734361a4b4ed0751292"
+            "sha256": "a7e29cfab3b8ab19d2168b6919e024039fa7a66d4eacd1b541d749eca2635401"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/secondary-mask/east.png",
             "present": true,
-            "sha256": "3ad8aa6783514d3ae1710e5edd8b2f764a10dcdae9b3f33ef9309f1b2db40b46"
+            "sha256": "8ef829608730b7221690a2d3ad77b80dc99717e4cf9411b8c252e9885bd1ba83"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/diffuse/south_east.png",
             "present": true,
-            "sha256": "49c13d9e4b40f5a825a62eef046f6eb20b31b5f8f5888326390a4a70050c21ad"
+            "sha256": "c3c30d0e780db143c427e74e92a707435a2d977f78dd9dcb123cf9cec9a930cb"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/primary-mask/south_east.png",
             "present": true,
-            "sha256": "edc4f75d58c1d67723cc9d03709b6d1516dfe8ba23b49c3c26ce0b3563a826ec"
+            "sha256": "9a8ec14eed6843980a535227546cb41d298027b04a026440c60bde233d1710eb"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/secondary-mask/south_east.png",
             "present": true,
-            "sha256": "00310d2af2bb898edd9acc2d15d4685743dc148084b714d1d36ab3ac058ad8b2"
+            "sha256": "28e5fde1b0453115ec64c10f82ff58731c2271a01fcb342e1c535e04f50d099c"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/diffuse/south.png",
             "present": true,
-            "sha256": "29dee28c1db525e680ab93a1a2a12fe1d07fdbe0b91e7d332682445cc822f49d"
+            "sha256": "60a55bee510bb7369d1f988298e7e851641b2531d418f5ff38b10f61e413053f"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/primary-mask/south.png",
             "present": true,
-            "sha256": "724bb0c0e81ea978e9026e38a7fdda1b284661aef15a87086f704761dcfbad84"
+            "sha256": "f96e65b3b4292434d6f9918afa63b5665139faf166a9d7be62c77ae827e1678a"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/secondary-mask/south.png",
             "present": true,
-            "sha256": "8e87d91fa3d66383ea8a3d5a4ddf754b6e8976806b399f4af8f51bf4f4fb8b78"
+            "sha256": "00275595253722c9477338e22d8881d00ce6e748e4dc4b09dfebea88d4775715"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/diffuse/south_west.png",
             "present": true,
-            "sha256": "c511768f9bddd4abc50bd7b40aeb1acd28a7e82000c949ee72b5c69ff7898de6"
+            "sha256": "3fdcd997850cb800f6307f604e9840db476b3a9f356d74ce2c9fa487a067d018"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/primary-mask/south_west.png",
             "present": true,
-            "sha256": "ff682a170e6efef122d9381f145c8f3401db61e0a4f1c7f5c549f8cfaaae3b12"
+            "sha256": "5c9fc2d72570300b56848cfa4e5c0ca8ac1638e7da569bfd19abe9c68e420727"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/secondary-mask/south_west.png",
             "present": true,
-            "sha256": "1f87bc109ac4e82183290fc9076a862b40fabd1df5e22272ced471fd5ac1d419"
+            "sha256": "d5f5126a2626762834ce83c20b410f67d4387970f6974c2b43701bb0789469c6"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/diffuse/west.png",
             "present": true,
-            "sha256": "39c400f5827dade8bcfbac24c17902aa0b520fce93c14c128b300ee5cd13a673"
+            "sha256": "74d22503ad46787d463a2ffd03ef192d158c505daf0a6756515381363775152b"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/primary-mask/west.png",
             "present": true,
-            "sha256": "ff08e6436d51996f115bb88ee89d6f2d713973a8b8d4504f66ac6801ff93eeea"
+            "sha256": "c348f5568818962999caa2e12e6db5511f83e885dd3f267ba4e357dd1aaa0ab6"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/secondary-mask/west.png",
             "present": true,
-            "sha256": "4a1bc34d949d3ee345a29e0adc916a4a21e43441852f1eabf75a172656de57f6"
+            "sha256": "a7574a1101ec7c09fcc19f7548499573d5a3b550391cf13b3454743eb60d05e2"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/diffuse/north_west.png",
             "present": true,
-            "sha256": "02d1d330873654b6383f45721853eae1d54d660bf89583cc58b2b4e7308a8574"
+            "sha256": "5b97e00d1f0c41acd2a296e3356612aaa32364b8f36a9e95408ef0f0fad5944e"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/primary-mask/north_west.png",
             "present": true,
-            "sha256": "33fd541454ba10c5c0dfb65a9a900b7ea975389ce60b0dd0d79058debf1819fe"
+            "sha256": "b10314ea392bc0f2202bca9326d2a9c66a794d427e782dca093f5f46f81db3b3"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/secondary-mask/north_west.png",
             "present": true,
-            "sha256": "cc9170c5a76c47d9d99288c5e578877f062cb1fe6dbc6d24942fd899e6ff02c0"
+            "sha256": "a4ad2781207aa19fadd336721bb5b536af68e0168d9843b0734f14a86bf4aa25"
           }
         ],
         "present": true,
-        "batchId": "character-modular-classic-001",
-        "review": "failed-silhouette-leakage",
-        "runtimeQa": "failed-needs-remediation",
-        "remoteVerified": true,
-        "qaEvidence": "planning/art-qa/character-modular-classic-001.png",
+        "batchId": "character-remediation-idle-classic-v1",
+        "review": "passed",
+        "runtimeQa": "blocked-static-idle-and-no-runtime-compositor",
+        "remoteVerified": false,
+        "qaEvidence": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png",
         "qaEvidencePresent": true,
         "runtimeBound": false,
         "productionComplete": false,
-        "status": "qa_failed_needs_remediation"
+        "status": "source_accepted_local_only"
       },
       {
         "outfit": "classic",
@@ -12903,134 +12912,134 @@ This JSON block is part of this same authoritative document and contains every c
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/diffuse/north.png",
             "present": true,
-            "sha256": "7067c5984e6cfd8d5a6afd9ab5e21aeb3e49c4bf4b13ff2fad440a59a7a6cc62"
+            "sha256": "2ba7210a3d7290978937f2e66f2e238829473ad39bed13fafa7d533e067bae76"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/primary-mask/north.png",
             "present": true,
-            "sha256": "d220b7ca1e1e3dfb6f4929847823b410041c526b500674a7db55b8bbefdd9941"
+            "sha256": "f2a001597dc6d070b0dd574264107add0a1731484b26f10645d8a3e77dd3ecf9"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/secondary-mask/north.png",
             "present": true,
-            "sha256": "aaa38e58632b95a1d423148dc329d325c10494a2c428f4d37309ada589148ef7"
+            "sha256": "9d34b7500fabd097d1d5bb3f06f84e37fb535fd836ab437d7661950ca102805c"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/diffuse/north_east.png",
             "present": true,
-            "sha256": "fe3ca2ec509e26ed7f73fb3cf34dc31ac4ca13434427cdfd41112356e76e8bd4"
+            "sha256": "0c58f7a8970cacc24649fa6883ccf54e8028cb18619509ad824d886ee2925e35"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/primary-mask/north_east.png",
             "present": true,
-            "sha256": "083b840c94a705a91353e666b17ae225ca62eebb89ff5b704f3e67b1e5b84416"
+            "sha256": "a6353780818992ec5f7a9fccb64a61f6a2d3e37eebae6fb63278002db68b0169"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/secondary-mask/north_east.png",
             "present": true,
-            "sha256": "6a9cc0217957ce972e3fda15f4c774187ff332e1a4aed5963db48943b4124c4f"
+            "sha256": "f5dcef97d5338b5da41f2eadffd1019483718089a425238ca204944870c5250f"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/diffuse/east.png",
             "present": true,
-            "sha256": "5815841cea38f6e16e8676fa73c43a2ea304159f4a1b202b159693f069fcf9f6"
+            "sha256": "5d55dba8d106609399a009d87b5089ddd98cebd41ebe662fbf21015c016f9443"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/primary-mask/east.png",
             "present": true,
-            "sha256": "0067fa23db1c74e2e1eeac64f36d4c2a2410962c50802a2f52f7f9f51a7d1a7c"
+            "sha256": "e6203518b05e20c8ab4a3e43d819b503f2094d01cfd6ea64598e10929ba7a1f0"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/secondary-mask/east.png",
             "present": true,
-            "sha256": "18c8af52bca185d1972272df48b5f3ab3287634690125cbf02ac4497c68d88dd"
+            "sha256": "44f7c97cb5f34f3061e7c57b5f426607a213e978be2f48bc48b2708f69e7404d"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/diffuse/south_east.png",
             "present": true,
-            "sha256": "cc6c4df70e3f14b1199ea53a911e5b3be39363eb16d9ec9f31c9b252f481a805"
+            "sha256": "088288eaf7ec0a46df2c6d3e0e94d28d15e1e3443a290464a5b5663109e02ab6"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/primary-mask/south_east.png",
             "present": true,
-            "sha256": "b5113647aba38351835e4fa5774588841e366f264e42c3c4920a1c12581743db"
+            "sha256": "40b80a6ff6c5d3b0e2cbda12dccd8f9f05651e660aadc6a10355b9e7057cc4f6"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/secondary-mask/south_east.png",
             "present": true,
-            "sha256": "6f5447c90aab891f8fca0a5834c506a2bb49c1af5280aa5f05c3cdd84dab7ee3"
+            "sha256": "cb71b480f1a8fd318588c68905b455d9f950a86bca3c976eca6160c087c1347e"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/diffuse/south.png",
             "present": true,
-            "sha256": "1f1c981bd0e10f7376c1088a8eb179d8581a4b35b05679057b42ac04f96dcb81"
+            "sha256": "3fa0848efc0022ffbb1090bdfee6b5efb34dd2d2f12ee60973e1574bf43c1d62"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/primary-mask/south.png",
             "present": true,
-            "sha256": "6f6f4c8dc8c37b847da7e1b0996c1e6ac3872f8710fbca9899224e77dfb92350"
+            "sha256": "970d70cb6ec2501ce974aa5c0d797db31648505e32ef09fd1f8636380667d324"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/secondary-mask/south.png",
             "present": true,
-            "sha256": "e3d5a049a79310e89e0b2261f0ad2f38eb8846066d6e6d7bc12eb92651518038"
+            "sha256": "840738d1db5192a310ef38c0b2c96e2f7a90dfc5602d47f7c32a071a841f1664"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/diffuse/south_west.png",
             "present": true,
-            "sha256": "7973783a9fa8dae1a88deb44dc1c2e8f263bd3b2e2527528442a59222c12409b"
+            "sha256": "d27cfaaa85215e4625a1689cd44685427f97bb4198af71718faa029027df6a8e"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/primary-mask/south_west.png",
             "present": true,
-            "sha256": "1653493f5ea6d1c557fe3cc3d0fd435195a9b5b381ee30207b25c21d0da3ad33"
+            "sha256": "3a84e2928109cda6b3175eb71fffb4f96ffcf83c66b0829d13f0bad898d800c3"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/secondary-mask/south_west.png",
             "present": true,
-            "sha256": "3307b9a93050ea10d6ae53f8daf83b2443951e56575accb6da0fa60019a57fe4"
+            "sha256": "2d11664b23fe8857ca29aec5d7a4e75686300b770ddfaee5fcba179e33c1dfc9"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/diffuse/west.png",
             "present": true,
-            "sha256": "a63dd1dfcdc57060363f8244fda1456816794ff83de23ffe42b9f0532805307f"
+            "sha256": "7deefe73207ad29b7850474f568d2ea073c7dfaf67f3fb5951a46c164f6c6bb0"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/primary-mask/west.png",
             "present": true,
-            "sha256": "9e0eb27f3f8e9c067ea2cb6a8958b4b48702b4861438c50c31d27ef874fff8bf"
+            "sha256": "cb24d4af9fe905b5bf36304b471860ff2e35472ee1f7a31e2a51dbcb729ca721"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/secondary-mask/west.png",
             "present": true,
-            "sha256": "002daa6d6182a66f233fe544b4e8fd0b4d8545311f220c52d12a4bb40b8afea6"
+            "sha256": "8a0b7ef85ef3adfeeb13f97f3c1337c812fe13042c7ce185c161d8725f8d98f2"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/diffuse/north_west.png",
             "present": true,
-            "sha256": "ef78881cb13ac8deec4d58f18759da5e080efc401ed926b9bd1027313a804860"
+            "sha256": "1eda852352e07f6fc40ab7ef52af3ddd4537a1d81e71a25732ecc582fcb05ef7"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/primary-mask/north_west.png",
             "present": true,
-            "sha256": "5e8f4ed3ed651db5504e396cc890ed65dc62e68c6cc1d1d1720bf40750ce690a"
+            "sha256": "e157283e86cd7c7cf2174b4b5f9038bcb37426ede55f9b52c4e0acbca76d38c1"
           },
           {
             "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/secondary-mask/north_west.png",
             "present": true,
-            "sha256": "27b1bde9aedd84f570c02c076aaebbf0a8265438f014e7c3ba050b7c838fdb83"
+            "sha256": "d9327acbf8f1deaad670a29067fe1d6623f59325ea903eabec0ce8a46eabad5d"
           }
         ],
         "present": true,
-        "batchId": "character-modular-classic-001",
-        "review": "failed-silhouette-leakage",
-        "runtimeQa": "failed-needs-remediation",
-        "remoteVerified": true,
-        "qaEvidence": "planning/art-qa/character-modular-classic-001.png",
+        "batchId": "character-remediation-idle-classic-v1",
+        "review": "passed",
+        "runtimeQa": "blocked-static-idle-and-no-runtime-compositor",
+        "remoteVerified": false,
+        "qaEvidence": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png",
         "qaEvidencePresent": true,
         "runtimeBound": false,
         "productionComplete": false,
-        "status": "qa_failed_needs_remediation"
+        "status": "source_accepted_local_only"
       },
       {
         "outfit": "apron",
@@ -13591,6 +13600,29 @@ This JSON block is part of this same authoritative document and contains every c
       "notes": "Eight distinct manager, owner, and server icons passed full-size and 66px review, exact catalog mapping, unique-content and cross-batch hashing, sRGBA/alpha validation, and a minimum six-pixel transparent margin. High-resolution accepted sources are preserved in the same remote checkpoint.",
       "qaEvidencePresent": true,
       "remoteVerified": true
+    }
+  ],
+  "pendingBatches": [
+    {
+      "id": "character-remediation-idle-classic-v1",
+      "assets": [
+        "body-base-a-idle-isometric",
+        "body-base-b-idle-isometric",
+        "body-skin-masks-base-a",
+        "body-skin-masks-base-b",
+        "outfit-classic-base-a",
+        "outfit-classic-base-b"
+      ],
+      "files": 109,
+      "qa": "passed",
+      "runtimeQa": "blocked-static-idle-and-no-runtime-compositor",
+      "sourcePromptMode": "pose-locked built-in image edits plus deterministic alpha extraction, pivot normalization, tint-mask reconstruction, and byte-reproducible processing",
+      "qaEvidence": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png",
+      "qaManifest": "planning/art-qa/character-remediation-idle-classic-v1/qa.json",
+      "notes": "Two elevated body presentations, skin layers, and classic outfit fits pass full-resolution/gameplay composite QA and exact raster gates. This pending record deliberately withholds remote verification until the immutable preservation commit and hosted CI are green. Static idle art, combined classic clothing, and absent Godot character compositing/animation keep production completion at zero.",
+      "qaEvidencePresent": true,
+      "remoteVerified": false,
+      "preservationPending": true
     }
   ],
   "preservedReferences": [

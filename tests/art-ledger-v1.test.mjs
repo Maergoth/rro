@@ -42,7 +42,11 @@ test("the authoritative art ledger cannot hide missing, failed, local-only, or u
   assert.equal(art.characters.presentActivityBindings, 0);
   assert.ok(art.quarantinedWork.some((entry) => entry.localCommit === "5714bb8" && entry.status === "local-only-rejected"));
   assert.ok(art.preservedReferences.some((entry) => entry.productionStatus === "preserved-reference-wrong-camera"));
-  assert.ok(art.characters.prototypeOutfits.every((entry) => entry.status === "qa_failed_needs_remediation"));
+  assert.ok(art.characters.prototypeOutfits.filter((entry) => entry.outfit === "classic").every((entry) => entry.status === "source_accepted_local_only"));
+  assert.ok(art.characters.prototypeOutfits.filter((entry) => entry.outfit === "apron").every((entry) => entry.status === "qa_failed_needs_remediation"));
+  assert.equal(art.pendingBatches.length, 1);
+  assert.equal(art.pendingBatches[0].id, "character-remediation-idle-classic-v1");
+  assert.equal(art.pendingBatches[0].remoteVerified, false);
   const equipmentSummary = art.summaries.find((entry) => entry.lane === "Equipment inventory icons");
   const furnitureSummary = art.summaries.find((entry) => entry.lane === "Furniture directional sets");
   assert.equal(equipmentSummary.present, 16);

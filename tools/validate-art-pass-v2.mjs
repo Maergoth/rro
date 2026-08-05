@@ -44,12 +44,13 @@ for (const batch of pass.batches) {
     if (!file(batch.qaManifest)) invalid.push(`${batch.id}: missing QA manifest ${batch.qaManifest}`);
     else {
       const manifest = read(batch.qaManifest);
-      const manifestStatus = manifest.status ?? manifest.artReviewStatus;
-      if (manifest.batchId !== batch.id || manifestStatus !== "accepted") invalid.push(`${batch.id}: QA manifest identity/status mismatch`);
-      const manifestAssets = (manifest.items ?? []).map((item) => item.catalogId).sort();
+      const manifestStatus = String(manifest.status ?? manifest.artReviewStatus ?? "");
+      if ((manifest.batchId ?? manifest.batch) !== batch.id || !manifestStatus.startsWith("accepted")) invalid.push(`${batch.id}: QA manifest identity/status mismatch`);
+      const manifestAssets = (manifest.assets ?? (manifest.items ?? []).map((item) => item.catalogId)).toSorted();
       const batchAssets = [...batch.assets].sort();
       if (JSON.stringify(manifestAssets) !== JSON.stringify(batchAssets)) invalid.push(`${batch.id}: QA manifest assets do not exactly match the batch`);
-      if (!(manifest.contactSheets ?? []).some((sheet) => sheet.path === batch.qaEvidence)) invalid.push(`${batch.id}: primary QA evidence is absent from its manifest`);
+      const visualEvidence = [...(manifest.contactSheets ?? []), ...(manifest.visualEvidence ?? [])];
+      if (!visualEvidence.some((sheet) => sheet.path === batch.qaEvidence)) invalid.push(`${batch.id}: primary QA evidence is absent from its manifest`);
       for (const item of manifest.items ?? []) {
         const runtimeFiles = item.runtimePath
           ? [{ path: item.runtimePath, sha256: item.sha256 ?? item.runtimeSha256, label: item.catalogId }]
@@ -65,9 +66,32 @@ for (const batch of pass.batches) {
           if (digest !== runtime.sha256) invalid.push(`${batch.id}: QA hash mismatch for ${runtime.label}`);
         }
       }
+      const checksumIndex = manifest.runtimeFiles?.checksumIndex;
+      if (checksumIndex) {
+        if (!file(checksumIndex)) invalid.push(`${batch.id}: missing checksum index ${checksumIndex}`);
+        else for (const line of readFileSync(resolve(ROOT, checksumIndex), "utf8").trim().split(/\r?\n/)) {
+          const match = line.match(/^([0-9a-f]{64})  (.+)$/);
+          if (!match || !file(match[2])) { invalid.push(`${batch.id}: invalid checksum entry ${line}`); continue; }
+          const digest = createHash("sha256").update(readFileSync(resolve(ROOT, match[2]))).digest("hex");
+          if (digest !== match[1]) invalid.push(`${batch.id}: checksum mismatch for ${match[2]}`);
+        }
+      }
     }
   }
   for (const asset of batch.assets) acceptedAssets.set(asset, batch.assetReviews?.[asset] ?? batch.qa);
+}
+
+for (const batch of pass.pendingBatches ?? []) {
+  if (batch.remoteCommit || batch.remoteTree) invalid.push(`${batch.id}: pending batch must not claim remote verification`);
+  if (!batch.qaEvidence || !png(batch.qaEvidence, `pending-qa:${batch.id}`)) invalid.push(`${batch.id}: pending batch is missing durable QA evidence`);
+  if (!batch.qaManifest || !file(batch.qaManifest)) { invalid.push(`${batch.id}: pending batch is missing its QA manifest`); continue; }
+  const manifest = read(batch.qaManifest);
+  const manifestStatus = String(manifest.status ?? manifest.artReviewStatus ?? "");
+  if ((manifest.batchId ?? manifest.batch) !== batch.id || !manifestStatus.startsWith("accepted")) invalid.push(`${batch.id}: pending QA identity/status mismatch`);
+  const manifestAssets = [...(manifest.assets ?? [])].sort();
+  if (JSON.stringify(manifestAssets) !== JSON.stringify([...batch.assets].sort())) invalid.push(`${batch.id}: pending QA assets do not exactly match the batch`);
+  const visualEvidence = [...(manifest.contactSheets ?? []), ...(manifest.visualEvidence ?? [])];
+  if (!visualEvidence.some((sheet) => sheet.path === batch.qaEvidence)) invalid.push(`${batch.id}: pending primary QA evidence is absent from its manifest`);
 }
 
 const expectedFurniture = new Set(production.furniture.map((item) => item.assetId));

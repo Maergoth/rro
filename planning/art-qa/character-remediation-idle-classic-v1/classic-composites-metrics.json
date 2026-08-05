@@ -1,0 +1,985 @@
+{
+  "schemaVersion": 1,
+  "batch": "character-remediation-idle-classic-v1",
+  "component": "classic-outfit",
+  "sourceCommit": "20e83ef4dbac4f616686023007f4eb9ee7801445",
+  "canvas": [
+    384,
+    512
+  ],
+  "groundContactPivot": [
+    192,
+    472
+  ],
+  "layerOrderUnderTest": [
+    "body",
+    "classic-outfit"
+  ],
+  "sourcePreservation": {
+    "method": "Generated edit sources are committed separately; pre-replacement body/skin input hashes are recorded here and original runtime art remains in sourceCommit.",
+    "generatedSources": [
+      {
+        "path": "planning/art-sources/character-remediation-idle-classic-v1/base-a-atlas.png",
+        "sha256": "597795e9e01a553462d1a94179176a26bd5d86cff0b2a2ca84203350cbd2ff2e"
+      },
+      {
+        "path": "planning/art-sources/character-remediation-idle-classic-v1/base-b-atlas.png",
+        "sha256": "880bd0d5d8e0c7931fbc647c7698e87eb71b39f41dc148ee590549fdc1beeebc"
+      },
+      {
+        "path": "planning/art-sources/character-remediation-idle-classic-v1/base-a-south-west-sleeve-edit.png",
+        "sha256": "cf2d44033756138a4f82ebb452422644b660e35c6596a02d6e09e3ce245a95b2"
+      }
+    ],
+    "bodyInputs": [
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/east.png",
+        "sha256": "9b5f09e15d2e26ade4558ec47caa9400313e606ecdde300e89aadb6176ba0e35"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/north.png",
+        "sha256": "cd5b4408bef68aea28c59fc4e532d1c25426b51e5f7333cd020b71f7bc341357"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/north_east.png",
+        "sha256": "e0344851c62e316bbcdcdef6d043b46652296dd7c319e3f0f28bf84f720ff4b5"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/north_west.png",
+        "sha256": "08f9e5e90a40b61d5fe0877f3ad036daf847ccda8d3f294230db315aecfa359a"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/east.png",
+        "sha256": "f78fde572591ce4391b9cabb3e9c896128915eaf2cb9bb1b2ad9973a4862b1b7"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/north.png",
+        "sha256": "f86aaafbbdf74b1764cbdd89fcd74863b058ccb7d48bd651536969b43871c034"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/north_east.png",
+        "sha256": "bb090830d878f48984ecf7f0b52b45b891c731d17da69bf5aa59670f10152ea9"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/north_west.png",
+        "sha256": "c60a44cf799faf5ce0d70bf370c0d0101031e5d4e72e71f0230ac96dd83b4b93"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/south.png",
+        "sha256": "c664cae847030a011e503b4ff6359857dd937bac396b0c74e47109bf47e5bc4d"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/south_east.png",
+        "sha256": "f90b84cc0073194a8e2a4f59e4a9fa83f3ed0ea42d339563ccdfd86ca298c632"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/south_west.png",
+        "sha256": "d4f4add6cf640504da710661a84aadc6fbbe328df337a8ea2afca2bd9b49a026"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/west.png",
+        "sha256": "61d88d0c960372052a2c574fc529e22f4908ad1d22b5ab42b03535841683ef46"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/south.png",
+        "sha256": "164752e457b0a9a190c19220c6a0d19c90f14791c0ef64d0d4b7ed254a442759"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/south_east.png",
+        "sha256": "d14c717abb21d7f38fa251d1f969e3d42d50f4b3be171d54e9ca764525c31b46"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/south_west.png",
+        "sha256": "ebdf1d813d186e8f228bb92d69fa8d86001bb2cd069552b72991c25e1357c7ce"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/west.png",
+        "sha256": "8db85cbe50f0863a316ef446aac219917b0ffb90566339b0e3a4edf7403175f8"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/east.png",
+        "sha256": "032790d1c65156412d5ecbaf6569ecd0bd564857401f05fae89646d37aae579f"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/north.png",
+        "sha256": "e4cc3b8b9bdb474ef14d169318b4f6ba530389b5c98162f4bdee75acc8767007"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/north_east.png",
+        "sha256": "f5ffb5cf79e1b7a834e6217c4abd99196dff7837ed70a8223ea2a0ade52cfb07"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/north_west.png",
+        "sha256": "a6cc7f48496c04d36e1fffe2258716fa6604742a92de56bd42938d6283409ef7"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/east.png",
+        "sha256": "cafc3c4d9bbb75c37ab833783b1c220b5aabcc8fd7d9aed711084b233725d257"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/north.png",
+        "sha256": "8068c9b86f3ad8d21a8a45391d312d98e2c5d7aad0cfa30ca2f072478e5403d6"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/north_east.png",
+        "sha256": "1d9f88b3b1b2ed28ca9e4ae4429c1d977f22f6204adcf6458ed2a2ce4034cfb7"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/north_west.png",
+        "sha256": "118e78422673627cfb577355e2e0927a00c27344918b6de6bac5fafc7ae95b4e"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/south.png",
+        "sha256": "05837f0d502bfbabffc4ee905762c35003cbcb27b1677216738f13db8d33094a"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/south_east.png",
+        "sha256": "82d0114c36b2070ab174dddd9defc2a769b0596fd65e95b8b7235e237ac8c2a9"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/south_west.png",
+        "sha256": "35fa6b7b8b34b2ee839605312a9d2b6143eb6ccb758c6d1f610c91ef0598d5d5"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/west.png",
+        "sha256": "522b5cea0ea655c1d9cce63a0fad4bcc87fc9f7850cd666099ab04e02fca0531"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/south.png",
+        "sha256": "d139afee6de151b2755fc3e0101cfcedb36ee982d442b6a4786a316dafeb0f94"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/south_east.png",
+        "sha256": "08b80520d332fa6e7e428aa02fb29c3d1872f74e0d52e1c2ade710da96120e66"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/south_west.png",
+        "sha256": "5193017bb29dd57e784826cfbcf46be03cd54df097e3a272056dbcede54678c1"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/west.png",
+        "sha256": "08502cdd3e0b99ae2cbf02c18d543271b6350ea983e5f272c13e2e8d37ed5e8b"
+      }
+    ]
+  },
+  "directions": [
+    {
+      "body": "base-a",
+      "direction": "north",
+      "translation": [
+        1,
+        -1
+      ],
+      "generatedSubjectBounds": [
+        109,
+        66,
+        276,
+        473
+      ],
+      "bodyBounds": [
+        109,
+        69,
+        277,
+        472
+      ],
+      "primaryPixels": 16869,
+      "secondaryPixels": 15726,
+      "fittedSleevePixels": 0,
+      "maskOverlapPixels": 0,
+      "diffuseMaskUnionMismatchPixels": 0,
+      "uncoveredRearLegPixels": 0,
+      "protectedFacePixels": 2249,
+      "protectedHandPixels": 315,
+      "protectedFootPixels": 961,
+      "garmentPixelsOnProtectedFace": 0,
+      "garmentPixelsOnProtectedHands": 0,
+      "garmentPixelsOnProtectedFeetFromEdit": 0,
+      "garmentPixelsOnProtectedScalp": 0,
+      "garmentPixelsOnProtectedFeet": 0,
+      "garmentOutsideBodyProximityPixels": 0,
+      "visibleScalpPixels": 1698,
+      "visibleFeetPixels": 1856
+    },
+    {
+      "body": "base-a",
+      "direction": "north_east",
+      "translation": [
+        0,
+        0
+      ],
+      "generatedSubjectBounds": [
+        104,
+        62,
+        242,
+        472
+      ],
+      "bodyBounds": [
+        106,
+        62,
+        241,
+        472
+      ],
+      "primaryPixels": 13122,
+      "secondaryPixels": 14779,
+      "fittedSleevePixels": 0,
+      "maskOverlapPixels": 0,
+      "diffuseMaskUnionMismatchPixels": 0,
+      "uncoveredRearLegPixels": 0,
+      "protectedFacePixels": 2513,
+      "protectedHandPixels": 491,
+      "protectedFootPixels": 1527,
+      "garmentPixelsOnProtectedFace": 0,
+      "garmentPixelsOnProtectedHands": 0,
+      "garmentPixelsOnProtectedFeetFromEdit": 0,
+      "garmentPixelsOnProtectedScalp": 0,
+      "garmentPixelsOnProtectedFeet": 0,
+      "garmentOutsideBodyProximityPixels": 0,
+      "visibleScalpPixels": 2065,
+      "visibleFeetPixels": 1780
+    },
+    {
+      "body": "base-a",
+      "direction": "east",
+      "translation": [
+        1,
+        -1
+      ],
+      "generatedSubjectBounds": [
+        144,
+        61,
+        226,
+        473
+      ],
+      "bodyBounds": [
+        145,
+        61,
+        228,
+        472
+      ],
+      "primaryPixels": 9410,
+      "secondaryPixels": 8681,
+      "fittedSleevePixels": 0,
+      "maskOverlapPixels": 0,
+      "diffuseMaskUnionMismatchPixels": 0,
+      "uncoveredRearLegPixels": 0,
+      "protectedFacePixels": 2899,
+      "protectedHandPixels": 344,
+      "protectedFootPixels": 1476,
+      "garmentPixelsOnProtectedFace": 0,
+      "garmentPixelsOnProtectedHands": 0,
+      "garmentPixelsOnProtectedFeetFromEdit": 0,
+      "garmentPixelsOnProtectedScalp": 0,
+      "garmentPixelsOnProtectedFeet": 0,
+      "garmentOutsideBodyProximityPixels": 0,
+      "visibleScalpPixels": 2178,
+      "visibleFeetPixels": 1801
+    },
+    {
+      "body": "base-a",
+      "direction": "south_east",
+      "translation": [
+        -1,
+        -1
+      ],
+      "generatedSubjectBounds": [
+        106,
+        59,
+        252,
+        473
+      ],
+      "bodyBounds": [
+        104,
+        59,
+        246,
+        472
+      ],
+      "primaryPixels": 13974,
+      "secondaryPixels": 14126,
+      "fittedSleevePixels": 0,
+      "maskOverlapPixels": 0,
+      "diffuseMaskUnionMismatchPixels": 0,
+      "uncoveredRearLegPixels": 0,
+      "protectedFacePixels": 2769,
+      "protectedHandPixels": 646,
+      "protectedFootPixels": 1874,
+      "garmentPixelsOnProtectedFace": 0,
+      "garmentPixelsOnProtectedHands": 0,
+      "garmentPixelsOnProtectedFeetFromEdit": 0,
+      "garmentPixelsOnProtectedScalp": 0,
+      "garmentPixelsOnProtectedFeet": 0,
+      "garmentOutsideBodyProximityPixels": 0,
+      "visibleScalpPixels": 1863,
+      "visibleFeetPixels": 1396
+    },
+    {
+      "body": "base-a",
+      "direction": "south",
+      "translation": [
+        0,
+        5
+      ],
+      "generatedSubjectBounds": [
+        111,
+        57,
+        277,
+        467
+      ],
+      "bodyBounds": [
+        109,
+        61,
+        279,
+        472
+      ],
+      "primaryPixels": 15948,
+      "secondaryPixels": 14467,
+      "fittedSleevePixels": 0,
+      "maskOverlapPixels": 0,
+      "diffuseMaskUnionMismatchPixels": 0,
+      "uncoveredRearLegPixels": 0,
+      "protectedFacePixels": 2799,
+      "protectedHandPixels": 551,
+      "protectedFootPixels": 1843,
+      "garmentPixelsOnProtectedFace": 0,
+      "garmentPixelsOnProtectedHands": 0,
+      "garmentPixelsOnProtectedFeetFromEdit": 0,
+      "garmentPixelsOnProtectedScalp": 0,
+      "garmentPixelsOnProtectedFeet": 0,
+      "garmentOutsideBodyProximityPixels": 0,
+      "visibleScalpPixels": 1728,
+      "visibleFeetPixels": 1860
+    },
+    {
+      "body": "base-a",
+      "direction": "south_west",
+      "translation": [
+        6,
+        0
+      ],
+      "generatedSubjectBounds": [
+        132,
+        60,
+        274,
+        472
+      ],
+      "bodyBounds": [
+        142,
+        60,
+        289,
+        472
+      ],
+      "primaryPixels": 14633,
+      "secondaryPixels": 13636,
+      "fittedSleevePixels": 1113,
+      "maskOverlapPixels": 0,
+      "diffuseMaskUnionMismatchPixels": 0,
+      "uncoveredRearLegPixels": 0,
+      "protectedFacePixels": 2865,
+      "protectedHandPixels": 678,
+      "protectedFootPixels": 1893,
+      "garmentPixelsOnProtectedFace": 0,
+      "garmentPixelsOnProtectedHands": 0,
+      "garmentPixelsOnProtectedFeetFromEdit": 0,
+      "garmentPixelsOnProtectedScalp": 0,
+      "garmentPixelsOnProtectedFeet": 0,
+      "garmentOutsideBodyProximityPixels": 0,
+      "visibleScalpPixels": 1864,
+      "visibleFeetPixels": 1393
+    },
+    {
+      "body": "base-a",
+      "direction": "west",
+      "translation": [
+        3,
+        1
+      ],
+      "generatedSubjectBounds": [
+        159,
+        61,
+        239,
+        471
+      ],
+      "bodyBounds": [
+        160,
+        62,
+        242,
+        472
+      ],
+      "primaryPixels": 8965,
+      "secondaryPixels": 8919,
+      "fittedSleevePixels": 0,
+      "maskOverlapPixels": 0,
+      "diffuseMaskUnionMismatchPixels": 0,
+      "uncoveredRearLegPixels": 0,
+      "protectedFacePixels": 2835,
+      "protectedHandPixels": 358,
+      "protectedFootPixels": 1442,
+      "garmentPixelsOnProtectedFace": 0,
+      "garmentPixelsOnProtectedHands": 0,
+      "garmentPixelsOnProtectedFeetFromEdit": 0,
+      "garmentPixelsOnProtectedScalp": 0,
+      "garmentPixelsOnProtectedFeet": 0,
+      "garmentOutsideBodyProximityPixels": 0,
+      "visibleScalpPixels": 2126,
+      "visibleFeetPixels": 1779
+    },
+    {
+      "body": "base-a",
+      "direction": "north_west",
+      "translation": [
+        3,
+        3
+      ],
+      "generatedSubjectBounds": [
+        144,
+        65,
+        283,
+        469
+      ],
+      "bodyBounds": [
+        145,
+        65,
+        283,
+        472
+      ],
+      "primaryPixels": 12586,
+      "secondaryPixels": 14490,
+      "fittedSleevePixels": 0,
+      "maskOverlapPixels": 0,
+      "diffuseMaskUnionMismatchPixels": 0,
+      "uncoveredRearLegPixels": 0,
+      "protectedFacePixels": 2351,
+      "protectedHandPixels": 547,
+      "protectedFootPixels": 1612,
+      "garmentPixelsOnProtectedFace": 0,
+      "garmentPixelsOnProtectedHands": 0,
+      "garmentPixelsOnProtectedFeetFromEdit": 0,
+      "garmentPixelsOnProtectedScalp": 0,
+      "garmentPixelsOnProtectedFeet": 0,
+      "garmentOutsideBodyProximityPixels": 0,
+      "visibleScalpPixels": 2019,
+      "visibleFeetPixels": 1745
+    },
+    {
+      "body": "base-b",
+      "direction": "north",
+      "translation": [
+        1,
+        -1
+      ],
+      "generatedSubjectBounds": [
+        111,
+        66,
+        272,
+        473
+      ],
+      "bodyBounds": [
+        112,
+        69,
+        273,
+        472
+      ],
+      "primaryPixels": 15140,
+      "secondaryPixels": 16082,
+      "fittedSleevePixels": 0,
+      "maskOverlapPixels": 0,
+      "diffuseMaskUnionMismatchPixels": 0,
+      "uncoveredRearLegPixels": 0,
+      "protectedFacePixels": 2231,
+      "protectedHandPixels": 218,
+      "protectedFootPixels": 1033,
+      "garmentPixelsOnProtectedFace": 0,
+      "garmentPixelsOnProtectedHands": 0,
+      "garmentPixelsOnProtectedFeetFromEdit": 0,
+      "garmentPixelsOnProtectedScalp": 0,
+      "garmentPixelsOnProtectedFeet": 0,
+      "garmentOutsideBodyProximityPixels": 0,
+      "visibleScalpPixels": 1627,
+      "visibleFeetPixels": 1803
+    },
+    {
+      "body": "base-b",
+      "direction": "north_east",
+      "translation": [
+        -4,
+        -1
+      ],
+      "generatedSubjectBounds": [
+        106,
+        61,
+        240,
+        473
+      ],
+      "bodyBounds": [
+        107,
+        63,
+        238,
+        472
+      ],
+      "primaryPixels": 12127,
+      "secondaryPixels": 14328,
+      "fittedSleevePixels": 0,
+      "maskOverlapPixels": 0,
+      "diffuseMaskUnionMismatchPixels": 0,
+      "uncoveredRearLegPixels": 0,
+      "protectedFacePixels": 2595,
+      "protectedHandPixels": 368,
+      "protectedFootPixels": 1483,
+      "garmentPixelsOnProtectedFace": 0,
+      "garmentPixelsOnProtectedHands": 0,
+      "garmentPixelsOnProtectedFeetFromEdit": 0,
+      "garmentPixelsOnProtectedScalp": 0,
+      "garmentPixelsOnProtectedFeet": 0,
+      "garmentOutsideBodyProximityPixels": 1,
+      "visibleScalpPixels": 2046,
+      "visibleFeetPixels": 1684
+    },
+    {
+      "body": "base-b",
+      "direction": "east",
+      "translation": [
+        5,
+        0
+      ],
+      "generatedSubjectBounds": [
+        138,
+        50,
+        235,
+        472
+      ],
+      "bodyBounds": [
+        148,
+        54,
+        238,
+        472
+      ],
+      "primaryPixels": 10419,
+      "secondaryPixels": 10832,
+      "fittedSleevePixels": 0,
+      "maskOverlapPixels": 0,
+      "diffuseMaskUnionMismatchPixels": 0,
+      "uncoveredRearLegPixels": 0,
+      "protectedFacePixels": 2821,
+      "protectedHandPixels": 380,
+      "protectedFootPixels": 1916,
+      "garmentPixelsOnProtectedFace": 0,
+      "garmentPixelsOnProtectedHands": 0,
+      "garmentPixelsOnProtectedFeetFromEdit": 0,
+      "garmentPixelsOnProtectedScalp": 0,
+      "garmentPixelsOnProtectedFeet": 0,
+      "garmentOutsideBodyProximityPixels": 36,
+      "visibleScalpPixels": 2103,
+      "visibleFeetPixels": 1578
+    },
+    {
+      "body": "base-b",
+      "direction": "south_east",
+      "translation": [
+        6,
+        -2
+      ],
+      "generatedSubjectBounds": [
+        137,
+        47,
+        283,
+        474
+      ],
+      "bodyBounds": [
+        147,
+        49,
+        288,
+        472
+      ],
+      "primaryPixels": 13819,
+      "secondaryPixels": 14804,
+      "fittedSleevePixels": 0,
+      "maskOverlapPixels": 0,
+      "diffuseMaskUnionMismatchPixels": 0,
+      "uncoveredRearLegPixels": 0,
+      "protectedFacePixels": 2830,
+      "protectedHandPixels": 625,
+      "protectedFootPixels": 1844,
+      "garmentPixelsOnProtectedFace": 0,
+      "garmentPixelsOnProtectedHands": 0,
+      "garmentPixelsOnProtectedFeetFromEdit": 0,
+      "garmentPixelsOnProtectedScalp": 0,
+      "garmentPixelsOnProtectedFeet": 0,
+      "garmentOutsideBodyProximityPixels": 0,
+      "visibleScalpPixels": 1890,
+      "visibleFeetPixels": 1392
+    },
+    {
+      "body": "base-b",
+      "direction": "south",
+      "translation": [
+        2,
+        5
+      ],
+      "generatedSubjectBounds": [
+        110,
+        48,
+        270,
+        467
+      ],
+      "bodyBounds": [
+        111,
+        56,
+        274,
+        472
+      ],
+      "primaryPixels": 15738,
+      "secondaryPixels": 15149,
+      "fittedSleevePixels": 0,
+      "maskOverlapPixels": 0,
+      "diffuseMaskUnionMismatchPixels": 0,
+      "uncoveredRearLegPixels": 0,
+      "protectedFacePixels": 2664,
+      "protectedHandPixels": 446,
+      "protectedFootPixels": 1770,
+      "garmentPixelsOnProtectedFace": 0,
+      "garmentPixelsOnProtectedHands": 0,
+      "garmentPixelsOnProtectedFeetFromEdit": 0,
+      "garmentPixelsOnProtectedScalp": 0,
+      "garmentPixelsOnProtectedFeet": 0,
+      "garmentOutsideBodyProximityPixels": 0,
+      "visibleScalpPixels": 1753,
+      "visibleFeetPixels": 1812
+    },
+    {
+      "body": "base-b",
+      "direction": "south_west",
+      "translation": [
+        -4,
+        2
+      ],
+      "generatedSubjectBounds": [
+        109,
+        53,
+        244,
+        470
+      ],
+      "bodyBounds": [
+        104,
+        58,
+        238,
+        472
+      ],
+      "primaryPixels": 12566,
+      "secondaryPixels": 14116,
+      "fittedSleevePixels": 0,
+      "maskOverlapPixels": 0,
+      "diffuseMaskUnionMismatchPixels": 0,
+      "uncoveredRearLegPixels": 0,
+      "protectedFacePixels": 2641,
+      "protectedHandPixels": 600,
+      "protectedFootPixels": 1833,
+      "garmentPixelsOnProtectedFace": 0,
+      "garmentPixelsOnProtectedHands": 0,
+      "garmentPixelsOnProtectedFeetFromEdit": 0,
+      "garmentPixelsOnProtectedScalp": 0,
+      "garmentPixelsOnProtectedFeet": 0,
+      "garmentOutsideBodyProximityPixels": 0,
+      "visibleScalpPixels": 1867,
+      "visibleFeetPixels": 1249
+    },
+    {
+      "body": "base-b",
+      "direction": "west",
+      "translation": [
+        5,
+        3
+      ],
+      "generatedSubjectBounds": [
+        156,
+        57,
+        235,
+        469
+      ],
+      "bodyBounds": [
+        162,
+        63,
+        238,
+        472
+      ],
+      "primaryPixels": 9243,
+      "secondaryPixels": 8671,
+      "fittedSleevePixels": 0,
+      "maskOverlapPixels": 0,
+      "diffuseMaskUnionMismatchPixels": 0,
+      "uncoveredRearLegPixels": 0,
+      "protectedFacePixels": 2630,
+      "protectedHandPixels": 377,
+      "protectedFootPixels": 1595,
+      "garmentPixelsOnProtectedFace": 0,
+      "garmentPixelsOnProtectedHands": 0,
+      "garmentPixelsOnProtectedFeetFromEdit": 0,
+      "garmentPixelsOnProtectedScalp": 0,
+      "garmentPixelsOnProtectedFeet": 0,
+      "garmentOutsideBodyProximityPixels": 0,
+      "visibleScalpPixels": 2013,
+      "visibleFeetPixels": 1672
+    },
+    {
+      "body": "base-b",
+      "direction": "north_west",
+      "translation": [
+        11,
+        6
+      ],
+      "generatedSubjectBounds": [
+        145,
+        59,
+        278,
+        466
+      ],
+      "bodyBounds": [
+        153,
+        66,
+        283,
+        472
+      ],
+      "primaryPixels": 11788,
+      "secondaryPixels": 14667,
+      "fittedSleevePixels": 0,
+      "maskOverlapPixels": 0,
+      "diffuseMaskUnionMismatchPixels": 0,
+      "uncoveredRearLegPixels": 0,
+      "protectedFacePixels": 2323,
+      "protectedHandPixels": 308,
+      "protectedFootPixels": 1539,
+      "garmentPixelsOnProtectedFace": 0,
+      "garmentPixelsOnProtectedHands": 0,
+      "garmentPixelsOnProtectedFeetFromEdit": 0,
+      "garmentPixelsOnProtectedScalp": 0,
+      "garmentPixelsOnProtectedFeet": 0,
+      "garmentOutsideBodyProximityPixels": 2,
+      "visibleScalpPixels": 1987,
+      "visibleFeetPixels": 1642
+    }
+  ],
+  "totals": {
+    "variants": 16,
+    "runtimeFiles": 48,
+    "maskOverlapPixels": 0,
+    "diffuseMaskUnionMismatchPixels": 0,
+    "uncoveredRearLegPixels": 0,
+    "garmentPixelsOnProtectedFace": 0,
+    "garmentPixelsOnProtectedHands": 0,
+    "garmentPixelsOnProtectedFeetFromEdit": 0,
+    "garmentPixelsOnProtectedScalp": 0,
+    "garmentPixelsOnProtectedFeet": 0,
+    "garmentOutsideBodyProximityPixels": 39,
+    "maximumAbsoluteTranslationPixels": 11,
+    "minimumProtectedFacePixels": 2231,
+    "minimumProtectedHandPixels": 218,
+    "minimumProtectedFootPixels": 961,
+    "minimumVisibleScalpPixels": 1627,
+    "minimumVisibleFeetPixels": 1249,
+    "fittedSleevePixels": 1113
+  },
+  "visualQa": {
+    "fullResolution": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png",
+    "gameplayScale": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-gameplay.png"
+  },
+  "outputs": [
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/diffuse/east.png",
+      "sha256": "8c6b2b92e57f3081e73ca31225c826070ca46ac92bb528fce9390f7157a45dba"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/diffuse/north.png",
+      "sha256": "baaaae166b8cb0e304217bee47dd636425d99e3a06ab8146d5926fd2bf1c7832"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/diffuse/north_east.png",
+      "sha256": "cec6dc6bc6c91e30a28bf08b5f7ab9686c2f688918a53b4a5f573f5beb7c8f0d"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/diffuse/north_west.png",
+      "sha256": "5b97e00d1f0c41acd2a296e3356612aaa32364b8f36a9e95408ef0f0fad5944e"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/diffuse/south.png",
+      "sha256": "60a55bee510bb7369d1f988298e7e851641b2531d418f5ff38b10f61e413053f"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/diffuse/south_east.png",
+      "sha256": "c3c30d0e780db143c427e74e92a707435a2d977f78dd9dcb123cf9cec9a930cb"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/diffuse/south_west.png",
+      "sha256": "3fdcd997850cb800f6307f604e9840db476b3a9f356d74ce2c9fa487a067d018"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/diffuse/west.png",
+      "sha256": "74d22503ad46787d463a2ffd03ef192d158c505daf0a6756515381363775152b"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/primary-mask/east.png",
+      "sha256": "a7e29cfab3b8ab19d2168b6919e024039fa7a66d4eacd1b541d749eca2635401"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/primary-mask/north.png",
+      "sha256": "f543e23670a4b7ca684ad0a46abda7d34d2539d45fa2aaf5fd78192e228e7563"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/primary-mask/north_east.png",
+      "sha256": "cf726a3210ae57e8e4d83edf85063cd44686adcf6c0eae23ba4193193e325990"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/primary-mask/north_west.png",
+      "sha256": "b10314ea392bc0f2202bca9326d2a9c66a794d427e782dca093f5f46f81db3b3"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/primary-mask/south.png",
+      "sha256": "f96e65b3b4292434d6f9918afa63b5665139faf166a9d7be62c77ae827e1678a"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/primary-mask/south_east.png",
+      "sha256": "9a8ec14eed6843980a535227546cb41d298027b04a026440c60bde233d1710eb"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/primary-mask/south_west.png",
+      "sha256": "5c9fc2d72570300b56848cfa4e5c0ca8ac1638e7da569bfd19abe9c68e420727"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/primary-mask/west.png",
+      "sha256": "c348f5568818962999caa2e12e6db5511f83e885dd3f267ba4e357dd1aaa0ab6"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/secondary-mask/east.png",
+      "sha256": "8ef829608730b7221690a2d3ad77b80dc99717e4cf9411b8c252e9885bd1ba83"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/secondary-mask/north.png",
+      "sha256": "1e3ca0f14acac124031508c6593b48bb44f9dc4b90a750b38b5163be558358f1"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/secondary-mask/north_east.png",
+      "sha256": "d2f6cb21a8dce26ed87c839bfc20b6dfa2202f80651a041061ca26a2f37643d0"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/secondary-mask/north_west.png",
+      "sha256": "a4ad2781207aa19fadd336721bb5b536af68e0168d9843b0734f14a86bf4aa25"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/secondary-mask/south.png",
+      "sha256": "00275595253722c9477338e22d8881d00ce6e748e4dc4b09dfebea88d4775715"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/secondary-mask/south_east.png",
+      "sha256": "28e5fde1b0453115ec64c10f82ff58731c2271a01fcb342e1c535e04f50d099c"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/secondary-mask/south_west.png",
+      "sha256": "d5f5126a2626762834ce83c20b410f67d4387970f6974c2b43701bb0789469c6"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-a/idle/secondary-mask/west.png",
+      "sha256": "a7574a1101ec7c09fcc19f7548499573d5a3b550391cf13b3454743eb60d05e2"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/diffuse/east.png",
+      "sha256": "5d55dba8d106609399a009d87b5089ddd98cebd41ebe662fbf21015c016f9443"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/diffuse/north.png",
+      "sha256": "2ba7210a3d7290978937f2e66f2e238829473ad39bed13fafa7d533e067bae76"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/diffuse/north_east.png",
+      "sha256": "0c58f7a8970cacc24649fa6883ccf54e8028cb18619509ad824d886ee2925e35"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/diffuse/north_west.png",
+      "sha256": "1eda852352e07f6fc40ab7ef52af3ddd4537a1d81e71a25732ecc582fcb05ef7"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/diffuse/south.png",
+      "sha256": "3fa0848efc0022ffbb1090bdfee6b5efb34dd2d2f12ee60973e1574bf43c1d62"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/diffuse/south_east.png",
+      "sha256": "088288eaf7ec0a46df2c6d3e0e94d28d15e1e3443a290464a5b5663109e02ab6"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/diffuse/south_west.png",
+      "sha256": "d27cfaaa85215e4625a1689cd44685427f97bb4198af71718faa029027df6a8e"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/diffuse/west.png",
+      "sha256": "7deefe73207ad29b7850474f568d2ea073c7dfaf67f3fb5951a46c164f6c6bb0"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/primary-mask/east.png",
+      "sha256": "e6203518b05e20c8ab4a3e43d819b503f2094d01cfd6ea64598e10929ba7a1f0"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/primary-mask/north.png",
+      "sha256": "f2a001597dc6d070b0dd574264107add0a1731484b26f10645d8a3e77dd3ecf9"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/primary-mask/north_east.png",
+      "sha256": "a6353780818992ec5f7a9fccb64a61f6a2d3e37eebae6fb63278002db68b0169"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/primary-mask/north_west.png",
+      "sha256": "e157283e86cd7c7cf2174b4b5f9038bcb37426ede55f9b52c4e0acbca76d38c1"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/primary-mask/south.png",
+      "sha256": "970d70cb6ec2501ce974aa5c0d797db31648505e32ef09fd1f8636380667d324"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/primary-mask/south_east.png",
+      "sha256": "40b80a6ff6c5d3b0e2cbda12dccd8f9f05651e660aadc6a10355b9e7057cc4f6"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/primary-mask/south_west.png",
+      "sha256": "3a84e2928109cda6b3175eb71fffb4f96ffcf83c66b0829d13f0bad898d800c3"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/primary-mask/west.png",
+      "sha256": "cb24d4af9fe905b5bf36304b471860ff2e35472ee1f7a31e2a51dbcb729ca721"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/secondary-mask/east.png",
+      "sha256": "44f7c97cb5f34f3061e7c57b5f426607a213e978be2f48bc48b2708f69e7404d"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/secondary-mask/north.png",
+      "sha256": "9d34b7500fabd097d1d5bb3f06f84e37fb535fd836ab437d7661950ca102805c"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/secondary-mask/north_east.png",
+      "sha256": "f5dcef97d5338b5da41f2eadffd1019483718089a425238ca204944870c5250f"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/secondary-mask/north_west.png",
+      "sha256": "d9327acbf8f1deaad670a29067fe1d6623f59325ea903eabec0ce8a46eabad5d"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/secondary-mask/south.png",
+      "sha256": "840738d1db5192a310ef38c0b2c96e2f7a90dfc5602d47f7c32a071a841f1664"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/secondary-mask/south_east.png",
+      "sha256": "cb71b480f1a8fd318588c68905b455d9f950a86bca3c976eca6160c087c1347e"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/secondary-mask/south_west.png",
+      "sha256": "2d11664b23fe8857ca29aec5d7a4e75686300b770ddfaee5fcba179e33c1dfc9"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/outfits/classic/base-b/idle/secondary-mask/west.png",
+      "sha256": "8a0b7ef85ef3adfeeb13f97f3c1337c812fe13042c7ce185c161d8725f8d98f2"
+    },
+    {
+      "path": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png",
+      "sha256": "2e8c581eeade06ec57681cd27300154ea3db6ed7cf52d9dfd9018f942b246cdc"
+    },
+    {
+      "path": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-gameplay.png",
+      "sha256": "594f1079bf7ea3472126111e9f8ce0cbb470a4220e1c431e6ef4f46654666d2b"
+    }
+  ]
+}

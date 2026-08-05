@@ -45,6 +45,26 @@
       "required": ["body_skin", "face", "hair_headwear", "base_outfit", "role_layer", "footwear", "accessory", "carried_object", "effects", "skin_masks", "primary_color_masks", "secondary_color_masks"]
     }
   },
+  "pendingBatches": [
+    {
+      "id": "character-remediation-idle-classic-v1",
+      "assets": [
+        "body-base-a-idle-isometric",
+        "body-base-b-idle-isometric",
+        "body-skin-masks-base-a",
+        "body-skin-masks-base-b",
+        "outfit-classic-base-a",
+        "outfit-classic-base-b"
+      ],
+      "files": 109,
+      "qa": "passed",
+      "runtimeQa": "blocked-static-idle-and-no-runtime-compositor",
+      "sourcePromptMode": "pose-locked built-in image edits plus deterministic alpha extraction, pivot normalization, tint-mask reconstruction, and byte-reproducible processing",
+      "qaEvidence": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png",
+      "qaManifest": "planning/art-qa/character-remediation-idle-classic-v1/qa.json",
+      "notes": "Two elevated body presentations, skin layers, and classic outfit fits pass full-resolution/gameplay composite QA and exact raster gates. This pending record deliberately withholds remote verification until the immutable preservation commit and hosted CI are green. Static idle art, combined classic clothing, and absent Godot character compositing/animation keep production completion at zero."
+    }
+  ],
   "batches": [
     {
       "id": "furniture-pilot-001",

@@ -34,9 +34,16 @@ const batches = pass.batches.map((batch) => ({
   qaEvidencePresent: Boolean(batch.qaEvidence && present(batch.qaEvidence)),
   remoteVerified: /^[0-9a-f]{40}$/.test(batch.remoteCommit ?? "") && /^[0-9a-f]{40}$/.test(batch.remoteTree ?? ""),
 }));
+const pendingBatches = (pass.pendingBatches ?? []).map((batch) => ({
+  ...batch,
+  qaEvidencePresent: Boolean(batch.qaEvidence && present(batch.qaEvidence)),
+  remoteVerified: false,
+  preservationPending: true,
+}));
+const reviewBatches = [...batches, ...pendingBatches];
 
 function reviewFor(assetId) {
-  for (const batch of batches) {
+  for (const batch of [...reviewBatches].reverse()) {
     if (!batch.assets.includes(assetId)) continue;
     const review = batch.assetReviews?.[assetId] ?? batch.qa;
     return { batchId: batch.id, review, runtimeQa: batch.runtimeQa, remoteVerified: batch.remoteVerified, qaEvidence: batch.qaEvidence, qaEvidencePresent: batch.qaEvidencePresent };
@@ -223,6 +230,7 @@ const ledger = {
     runtimeBound: characterRuntimeBound,
   },
   reviewedBatches: batches,
+  pendingBatches,
   preservedReferences: [{ id: "alpha2-overhead-furniture", files: legacyObjectPngs.map((name) => `apps/client-godot/assets/objects/generated/${name}`), count: legacyObjectPngs.length, productionStatus: "preserved-reference-wrong-camera" }],
   quarantinedWork: pass.quarantinedWork,
   contractGaps: [
@@ -266,11 +274,12 @@ lines.push("");
 lines.push(`- Durable character files: ${bodyFoundations.reduce((sum, item) => sum + item.files.filter((file) => file.present).length, 0) + skinFoundations.reduce((sum, item) => sum + item.files.filter((file) => file.present).length, 0) + prototypeOutfits.reduce((sum, item) => sum + item.files.filter((file) => file.present).length, 0)} PNGs.`);
 lines.push(`- Body source poses: ${ledger.characters.presentStaticBodyPoses}/${ledger.characters.requiredBodySourcePoses} (${percent(ledger.characters.presentStaticBodyPoses, ledger.characters.requiredBodySourcePoses)}).`);
 lines.push(`- Final body animation frame cells: 0/${ledger.characters.requiredBodyFinalFrameCells}; even idle requires four frames and currently has one still per direction.`);
-lines.push(`- Source foundations: ${bodyFoundations.filter((item) => item.review === "passed").length}/2 accepted but pending common feet/pivot normalization and chroma cleanup.`);
+lines.push(`- Source foundations: ${bodyFoundations.filter((item) => item.review === "passed").length}/2 accepted with a normalized \`(192,472)\` ground pivot and clean skin channels; ${bodyFoundations.filter((item) => item.remoteVerified).length}/2 reflect the currently reviewed bytes on a verified remote checkpoint.`);
 lines.push(`- Split swappable layer body-fits: 0/${ledger.characters.requiredSplitLayerBodyFits}; required catalogs are frozen below.`);
 lines.push(`- Equipment attachment body-fits: 0/${ledger.characters.requiredEquipmentAttachmentBodyFits} from ${equippableItems.length} equippable items.`);
 lines.push(`- Activity-animation bindings: 0/${activities.length}.`);
-lines.push("- Classic and apron prototype files remain durable, but renewed full-resolution composite QA found rear-leg silhouette leakage; accepted production outfit coverage is 0 until remediation.");
+lines.push(`- Classic idle outfit body-fits: ${prototypeOutfits.filter((item) => item.outfit === "classic" && item.review === "passed").length}/2 source-accepted after full-resolution/gameplay composite remediation; they remain production-incomplete until remote verification, split-layer catalog coverage, animation frames, and runtime compositing pass.`);
+lines.push("- Apron prototypes remain durable but QA-failed for silhouette/foot leakage and are not counted.");
 lines.push("");
 lines.push("| Modular slot | Required visible choices | IDs |");
 lines.push("|---|---:|---|");
@@ -282,6 +291,16 @@ lines.push("| Batch | Files | Source QA | Runtime/composite QA | Remote commit |
 lines.push("|---|---:|---|---|---|---|");
 for (const batch of batches) lines.push(`| ${batch.id} | ${batch.files} | ${batch.qa} | ${batch.runtimeQa} | \`${batch.remoteCommit.slice(0, 7)}\` | ${batch.qaEvidencePresent ? batch.qaEvidence : "missing"} |`);
 lines.push("");
+if (pendingBatches.length > 0) {
+  lines.push("## Accepted locally, remote checkpoint pending");
+  lines.push("");
+  lines.push("These batches have passed source/composite QA but deliberately do not count as remotely verified or production-complete until their immutable GitHub commit and hosted CI are recorded.");
+  lines.push("");
+  lines.push("| Batch | Files | Source QA | Runtime/composite QA | Evidence |");
+  lines.push("|---|---:|---|---|---|");
+  for (const batch of pendingBatches) lines.push(`| ${batch.id} | ${batch.files} | ${batch.qa} | ${batch.runtimeQa} | ${batch.qaEvidencePresent ? batch.qaEvidence : "missing"} |`);
+  lines.push("");
+}
 lines.push("## Missing furniture directional sets");
 lines.push("");
 lines.push(`${furniture.filter((item) => item.present).length} of ${furniture.length} elevated four-direction sets are present. The ${legacyObjectPngs.length} attractive overhead singles are preserved as references but do not satisfy this camera contract.`);
