@@ -183,8 +183,27 @@ if (runtimeStateAssetIds.size !== furnitureRuntimeContract.acceptedDirectionalAs
 if (!latestFurnitureRuntimeQa?.evidence || !file(latestFurnitureRuntimeQa.evidence)) {
   invalid.push("directional furniture runtime-composite acceptance requires durable native-review evidence");
 } else {
-  const acceptedFromEvidence = [...(latestFurnitureRuntimeQa.acceptedAssetIds ?? [])].sort();
-  const blockedFromEvidence = [...(latestFurnitureRuntimeQa.rejectedAssetIds ?? [])].sort();
+  const nativeReview = read(latestFurnitureRuntimeQa.evidence);
+  if (nativeReview.id !== latestFurnitureRuntimeQa.id) invalid.push("latest durable native-review evidence identity does not match art-pass-v2");
+  if (nativeReview.source?.remoteCommit !== latestFurnitureRuntimeQa.remoteCommit
+      || nativeReview.source?.remoteTree !== latestFurnitureRuntimeQa.remoteTree
+      || nativeReview.source?.ci !== latestFurnitureRuntimeQa.ci
+      || nativeReview.source?.artifactId !== latestFurnitureRuntimeQa.artifactId
+      || nativeReview.source?.artifactSha256 !== latestFurnitureRuntimeQa.artifactSha256) {
+    invalid.push("latest durable native-review source does not match art-pass-v2");
+  }
+  const acceptedFromEvidence = [...(nativeReview.visualReview?.acceptedAssetIds ?? [])].sort();
+  const blockedFromEvidence = [...(nativeReview.visualReview?.rejectedAssetIds ?? [])].sort();
+  if (JSON.stringify(acceptedFromEvidence) !== JSON.stringify([...(latestFurnitureRuntimeQa.acceptedAssetIds ?? [])].sort())
+      || JSON.stringify(blockedFromEvidence) !== JSON.stringify([...(latestFurnitureRuntimeQa.rejectedAssetIds ?? [])].sort())) {
+    invalid.push("latest durable native-review verdict does not match art-pass-v2");
+  }
+  if ((nativeReview.captures ?? []).length !== 5) invalid.push("latest durable native review must preserve four captures plus qa.json");
+  for (const capture of nativeReview.captures ?? []) {
+    if (!capture.path || !file(capture.path)) { invalid.push(`latest durable native-review capture is missing: ${capture.path ?? "<unnamed>"}`); continue; }
+    const digest = createHash("sha256").update(readFileSync(resolve(ROOT, capture.path))).digest("hex");
+    if (digest !== capture.sha256) invalid.push(`latest durable native-review capture hash mismatch: ${capture.path}`);
+  }
   if (JSON.stringify(acceptedFromEvidence) !== JSON.stringify([...runtimeCompositeAcceptedAssetIds].sort())) {
     invalid.push("runtimeCompositeAcceptedAssetIds do not match the latest durable native review");
   }

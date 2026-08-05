@@ -12,15 +12,15 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 - Branch: `agent/complete-production-art`
 - Draft PR: https://github.com/Maergoth/rro/pull/2
-- Last verified remote head before this ledger check-in: `1eb321395d7c9562e79fcf7a39a5c334ce3e05f9`
-- Verified tree: `e2d69e0f8c39e4dd1f372e5abec2b66c4d4d0c1a`
-- CI: https://github.com/Maergoth/rro/actions/runs/31001558391
+- Last verified remote head before this ledger check-in: `9d37a9ab17fbae466143d47399b534719e527f87`
+- Verified tree: `6218cacc3368be4c25696039a0b226473ac222c9`
+- CI: https://github.com/Maergoth/rro/actions/runs/31005145768
 
 ## Launch coverage
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
-| Furniture directional sets | 229 | 22 | 22 | 19 | 16 |
+| Furniture directional sets | 229 | 22 | 22 | 22 | 0 |
 | Equipment inventory icons | 45 | 45 | 45 | 45 | 45 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
@@ -34,8 +34,8 @@ Only the final state is production-complete. Existing files, historical narrativ
 | Equipment attachment body-fits | 62 | 0 | 0 | 0 | 0 |
 | Activity → animation bindings | 89 | 0 | 0 | 0 | 0 |
 
-45 equipment icons and 16 furniture directional sets are production-complete because their exact reviewed bytes are visually accepted, runtime-bound, remotely verified, and CI-green. Character art and the other missing lanes remain explicit below.
-Directional furniture texture selection is yes and projection alignment is yes. Native attempt 002 accepted 16/22 present sets; its durable review checkpoint is remote-verified: yes. `local-art`, `pendants`, `plants` remain blocked on legal wall/ceiling mounting. `furniture-banquette-section`, `furniture-commercial-chair`, `furniture-premium-chair` are source-accepted but pending their first native four-rotation gameplay composite.
+45 equipment icons and 0 furniture directional sets are production-complete because their exact reviewed bytes are visually accepted, runtime-bound, remotely verified, and CI-green. Character art and the other missing lanes remain explicit below.
+Directional furniture texture selection is yes and projection alignment is yes. Latest native review `runtime-isometric-integration-001-attempt-003` accepted 19/22 present sets; its durable review checkpoint is remote-verified: no. `local-art`, `pendants`, `plants` remain blocked on legal wall/ceiling mounting. No source-accepted directional sets are pending their first native four-rotation gameplay composite.
 
 ## Character truth
 
@@ -73,6 +73,7 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 |---|---|---|---|---|---|---|
 | runtime-isometric-integration-001-attempt-001 | failed-needs-remediation | `00f9a36` | https://github.com/Maergoth/rro/actions/runs/30999133497/artifacts/8927474963 | native-four-rotation-capture, elevated-projection, directional-selection, floor-contact-pivots, mixed-world-depth | mounted-object-anchor-contract, world-label-collision | planning/art-qa/runtime-isometric-integration-001/attempt-001/review.json |
 | runtime-isometric-integration-001-attempt-002 | passed-partial-floor-assets | `24781e2` | https://github.com/Maergoth/rro/actions/runs/31000326415/artifacts/8927966443 | native-four-rotation-capture, elevated-projection, directional-selection, floor-contact-pivots, mixed-world-depth, gameplay-legibility, sixteen-floor-assets | mounted-object-anchor-contract | planning/art-qa/runtime-isometric-integration-001/attempt-002/review.json |
+| runtime-isometric-integration-001-attempt-003 | passed-partial-floor-assets | `98e479e` | https://github.com/Maergoth/rro/actions/runs/31004267533/artifacts/8929624396 | native-four-rotation-capture, elevated-projection, directional-selection, floor-contact-pivots, mixed-world-depth, gameplay-legibility, nineteen-floor-assets | mounted-object-anchor-contract | planning/art-qa/runtime-isometric-integration-001/attempt-003/review.json |
 
 ## Reviewed batches and durable evidence
 
@@ -96,14 +97,7 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 | furniture-core-directional-004 | 28 | passed | passed-native-gameplay-composite-attempt-002 | `708642f` | planning/art-qa/furniture-core-directional-004/contact-627-dark.png |
 | furniture-core-directional-005 | 28 | passed | mixed-native-gameplay-composite-attempt-002-mount-blocked | `565869f` | planning/art-qa/furniture-core-directional-005/contact-627-dark.png |
 | furniture-core-directional-006 | 28 | passed | mixed-native-gameplay-composite-attempt-002-mount-blocked | `185ca50` | planning/art-qa/furniture-core-directional-006/contact-627-dark.png |
-
-## Accepted locally, remote checkpoint pending
-
-These batches have passed source/composite QA but deliberately do not count as remotely verified or production-complete until their immutable GitHub commit and hosted CI are recorded.
-
-| Batch | Files | Source QA | Runtime/composite QA | Evidence |
-|---|---:|---|---|---|
-| furniture-core-directional-007 | 28 | passed | pending-native-gameplay-composite | planning/art-qa/furniture-core-directional-007/contact-627-dark.png |
+| furniture-core-directional-007 | 28 | passed | passed-native-gameplay-composite-attempt-003-review-preservation-pending | `98e479e` | planning/art-qa/furniture-core-directional-007/contact-627-dark.png |
 
 ## Missing furniture directional sets
 
@@ -155,7 +149,7 @@ These batches have passed source/composite QA but deliberately do not count as r
 ## Contract gaps blocking a truthful 100% denominator
 
 - Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.
-- Run exact four-rotation native Godot composite review for furniture-banquette-section, furniture-commercial-chair, and furniture-premium-chair; complete mounted-object server placement, builder snapping, runtime anchors, and depth before re-reviewing local-art, plants, and pendants.
+- Remotely preserve the exact attempt-003 review package and green hosted CI; complete mounted-object server placement, builder snapping, runtime anchors, and depth before re-reviewing local-art, plants, and pendants.
 - Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.
 - Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete.
 
@@ -181,9 +175,9 @@ This JSON block is part of this same authoritative document and contains every c
   "durableBaseline": {
     "branch": "agent/complete-production-art",
     "pullRequest": "https://github.com/Maergoth/rro/pull/2",
-    "commit": "1eb321395d7c9562e79fcf7a39a5c334ce3e05f9",
-    "tree": "e2d69e0f8c39e4dd1f372e5abec2b66c4d4d0c1a",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/31001558391"
+    "commit": "9d37a9ab17fbae466143d47399b534719e527f87",
+    "tree": "6218cacc3368be4c25696039a0b226473ac222c9",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31005145768"
   },
   "completionPipeline": [
     "generated",
@@ -206,7 +200,7 @@ This JSON block is part of this same authoritative document and contains every c
       "projectionAligned": true,
       "runtimeCompositeAccepted": false,
       "productionComplete": false,
-      "remainingVisualGate": "Pass an exact four-rotation native Godot gameplay capture for furniture-banquette-section, furniture-commercial-chair, and furniture-premium-chair; separately implement legal wall and ceiling mounting plus mount-specific anchors and depth for local-art, plants, and pendants.",
+      "remainingVisualGate": "Implement legal wall and ceiling mounting plus mount-specific anchors and depth for local-art, plants, and pendants, then pass an exact four-rotation native Godot gameplay capture for those mounted assets.",
       "acceptedDirectionalAssetIds": [
         "banquette",
         "booth",
@@ -236,7 +230,10 @@ This JSON block is part of this same authoritative document and contains every c
         "booth",
         "dish-machine",
         "espresso",
+        "furniture-banquette-section",
+        "furniture-commercial-chair",
         "furniture-oak-two-top",
+        "furniture-premium-chair",
         "furniture-six-burner-range",
         "furniture-walnut-four-top",
         "host-stand",
@@ -254,12 +251,8 @@ This JSON block is part of this same authoritative document and contains every c
         "pendants",
         "plants"
       ],
-      "runtimeCompositePendingAssetIds": [
-        "furniture-banquette-section",
-        "furniture-commercial-chair",
-        "furniture-premium-chair"
-      ],
-      "runtimeReviewRemoteVerified": true
+      "runtimeCompositePendingAssetIds": [],
+      "runtimeReviewRemoteVerified": false
     }
   },
   "summaries": [
@@ -268,8 +261,8 @@ This JSON block is part of this same authoritative document and contains every c
       "required": 229,
       "present": 22,
       "sourceAccepted": 22,
-      "remoteVerified": 19,
-      "productionComplete": 16
+      "remoteVerified": 22,
+      "productionComplete": 0
     },
     {
       "lane": "Equipment inventory icons",
@@ -422,8 +415,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "productionComplete": false,
+      "status": "runtime_accepted_review_preservation_pending"
     },
     {
       "id": "table-four",
@@ -478,8 +471,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "productionComplete": false,
+      "status": "runtime_accepted_review_preservation_pending"
     },
     {
       "id": "booth",
@@ -534,8 +527,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "productionComplete": false,
+      "status": "runtime_accepted_review_preservation_pending"
     },
     {
       "id": "banquette",
@@ -590,8 +583,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "productionComplete": false,
+      "status": "runtime_accepted_review_preservation_pending"
     },
     {
       "id": "host-stand",
@@ -646,8 +639,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "productionComplete": false,
+      "status": "runtime_accepted_review_preservation_pending"
     },
     {
       "id": "service-station",
@@ -702,8 +695,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "productionComplete": false,
+      "status": "runtime_accepted_review_preservation_pending"
     },
     {
       "id": "espresso",
@@ -758,8 +751,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "productionComplete": false,
+      "status": "runtime_accepted_review_preservation_pending"
     },
     {
       "id": "range",
@@ -814,8 +807,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "productionComplete": false,
+      "status": "runtime_accepted_review_preservation_pending"
     },
     {
       "id": "prep",
@@ -870,8 +863,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "productionComplete": false,
+      "status": "runtime_accepted_review_preservation_pending"
     },
     {
       "id": "pass",
@@ -926,8 +919,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "productionComplete": false,
+      "status": "runtime_accepted_review_preservation_pending"
     },
     {
       "id": "dish-machine",
@@ -982,8 +975,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "productionComplete": false,
+      "status": "runtime_accepted_review_preservation_pending"
     },
     {
       "id": "mop-sink",
@@ -1038,8 +1031,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "productionComplete": false,
+      "status": "runtime_accepted_review_preservation_pending"
     },
     {
       "id": "recycling",
@@ -1094,8 +1087,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "productionComplete": false,
+      "status": "runtime_accepted_review_preservation_pending"
     },
     {
       "id": "pendants",
@@ -1324,8 +1317,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "productionComplete": false,
+      "status": "runtime_accepted_review_preservation_pending"
     },
     {
       "id": "walnut-four-top",
@@ -1380,8 +1373,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "productionComplete": false,
+      "status": "runtime_accepted_review_preservation_pending"
     },
     {
       "id": "banquette-section",
@@ -1420,8 +1413,8 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-007",
       "review": "passed",
-      "runtimeQa": "pending-native-gameplay-composite",
-      "remoteVerified": false,
+      "runtimeQa": "passed-native-gameplay-composite-attempt-003-review-preservation-pending",
+      "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-007/contact-627-dark.png",
       "qaEvidencePresent": true,
       "placement": {
@@ -1432,12 +1425,12 @@ This JSON block is part of this same authoritative document and contains every c
       "placementDeclared": true,
       "sourceAccepted": true,
       "directionalSelectionBound": true,
-      "runtimeCompositeAccepted": false,
+      "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": true,
-      "runtimeBound": false,
+      "runtimeCompositePending": false,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "source_accepted_local_only"
+      "status": "runtime_accepted_review_preservation_pending"
     },
     {
       "id": "commercial-chair",
@@ -1476,8 +1469,8 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-007",
       "review": "passed",
-      "runtimeQa": "pending-native-gameplay-composite",
-      "remoteVerified": false,
+      "runtimeQa": "passed-native-gameplay-composite-attempt-003-review-preservation-pending",
+      "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-007/contact-627-dark.png",
       "qaEvidencePresent": true,
       "placement": {
@@ -1488,12 +1481,12 @@ This JSON block is part of this same authoritative document and contains every c
       "placementDeclared": true,
       "sourceAccepted": true,
       "directionalSelectionBound": true,
-      "runtimeCompositeAccepted": false,
+      "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": true,
-      "runtimeBound": false,
+      "runtimeCompositePending": false,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "source_accepted_local_only"
+      "status": "runtime_accepted_review_preservation_pending"
     },
     {
       "id": "premium-chair",
@@ -1532,8 +1525,8 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-007",
       "review": "passed",
-      "runtimeQa": "pending-native-gameplay-composite",
-      "remoteVerified": false,
+      "runtimeQa": "passed-native-gameplay-composite-attempt-003-review-preservation-pending",
+      "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-007/contact-627-dark.png",
       "qaEvidencePresent": true,
       "placement": {
@@ -1544,12 +1537,12 @@ This JSON block is part of this same authoritative document and contains every c
       "placementDeclared": true,
       "sourceAccepted": true,
       "directionalSelectionBound": true,
-      "runtimeCompositeAccepted": false,
+      "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": true,
-      "runtimeBound": false,
+      "runtimeCompositePending": false,
+      "runtimeBound": true,
       "productionComplete": false,
-      "status": "source_accepted_local_only"
+      "status": "runtime_accepted_review_preservation_pending"
     },
     {
       "id": "host-stand-pro",
@@ -1812,8 +1805,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "productionComplete": false,
+      "status": "runtime_accepted_review_preservation_pending"
     },
     {
       "id": "plancha-commercial",
@@ -16446,9 +16439,7 @@ This JSON block is part of this same authoritative document and contains every c
       "notes": "Local print set, oak two-top, and walnut four-top each pass exact source identity, coherent quarter-turns, raster gates, and full/gameplay-scale contact review. Their 28-file source package is remotely verified with green Windows and Ubuntu CI. Native attempt 001 confirmed the floor furniture projection but rejected production completion because local-art lacks a wall-mount contract and always-on world labels collided with art.",
       "qaEvidencePresent": true,
       "remoteVerified": true
-    }
-  ],
-  "pendingBatches": [
+    },
     {
       "id": "furniture-core-directional-007",
       "assets": [
@@ -16458,16 +16449,19 @@ This JSON block is part of this same authoritative document and contains every c
       ],
       "files": 28,
       "qa": "passed",
-      "runtimeQa": "pending-native-gameplay-composite",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-003-review-preservation-pending",
       "sourcePromptMode": "built-in image generation; identity-referenced rigid four-direction elevated isometric sets with chroma removal and common-pivot normalization",
+      "remoteCommit": "98e479eaa5afed6c95e0abe1026dfcf8e09e062a",
+      "remoteTree": "bcfcb076d26c1d3b8a973dbe601c6a921563348b",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31004267533",
       "qaEvidence": "planning/art-qa/furniture-core-directional-007/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-007/qa.json",
-      "notes": "Three source-accepted floor furniture sets pass exact raster hashes, catalog identity, unique-content, alpha, common-pivot, full-resolution, and 128px review. Remote preservation and an exact native Godot four-rotation gameplay composite remain required before runtime or production completion.",
+      "notes": "Banquette section, commercial chair, and premium chair pass exact raster hashes, catalog identity, unique-content, alpha, common-pivot, full-resolution, 128px, and native four-rotation gameplay-composite review. Their exact 28-file source package is remotely verified with green Windows and Ubuntu CI. The attempt-003 review package is durable locally but deliberately does not confer production completion until its own exact remote commit, tree, and green hosted CI are recorded.",
       "qaEvidencePresent": true,
-      "remoteVerified": false,
-      "preservationPending": true
+      "remoteVerified": true
     }
   ],
+  "pendingBatches": [],
   "runtimeQaAttempts": [
     {
       "id": "runtime-isometric-integration-001-attempt-001",
@@ -16545,6 +16539,57 @@ This JSON block is part of this same authoritative document and contains every c
       "productionComplete": false,
       "evidencePresent": true,
       "reviewRemoteVerified": true
+    },
+    {
+      "id": "runtime-isometric-integration-001-attempt-003",
+      "status": "passed-partial-floor-assets",
+      "remoteCommit": "98e479eaa5afed6c95e0abe1026dfcf8e09e062a",
+      "remoteTree": "bcfcb076d26c1d3b8a973dbe601c6a921563348b",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31004267533",
+      "artifactId": 8929624396,
+      "artifactSha256": "ee92f4309c99bd6b580550e1c5f31c91f45f2107c8e053e49ffc980788a80cd8",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-003/review.json",
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility",
+        "nineteen-floor-assets"
+      ],
+      "blockers": [
+        "mounted-object-anchor-contract"
+      ],
+      "acceptedAssetIds": [
+        "banquette",
+        "booth",
+        "dish-machine",
+        "espresso",
+        "furniture-banquette-section",
+        "furniture-commercial-chair",
+        "furniture-oak-two-top",
+        "furniture-premium-chair",
+        "furniture-six-burner-range",
+        "furniture-walnut-four-top",
+        "host-stand",
+        "mop-sink",
+        "pass",
+        "prep",
+        "range",
+        "recycling",
+        "service-station",
+        "table-four",
+        "table-two"
+      ],
+      "rejectedAssetIds": [
+        "local-art",
+        "pendants",
+        "plants"
+      ],
+      "productionComplete": false,
+      "evidencePresent": true,
+      "reviewRemoteVerified": false
     }
   ],
   "preservedReferences": [
@@ -16586,7 +16631,7 @@ This JSON block is part of this same authoritative document and contains every c
   ],
   "contractGaps": [
     "Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.",
-    "Run exact four-rotation native Godot composite review for furniture-banquette-section, furniture-commercial-chair, and furniture-premium-chair; complete mounted-object server placement, builder snapping, runtime anchors, and depth before re-reviewing local-art, plants, and pendants.",
+    "Remotely preserve the exact attempt-003 review package and green hosted CI; complete mounted-object server placement, builder snapping, runtime anchors, and depth before re-reviewing local-art, plants, and pendants.",
     "Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.",
     "Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete."
   ]

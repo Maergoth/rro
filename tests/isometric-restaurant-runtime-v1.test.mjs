@@ -35,7 +35,7 @@ test("restaurant floor delegates every grid transform and pick to the elevated i
   assert.equal(contract.capability.runtimeProjection, "elevated-orthographic-isometric-grid");
   assert.equal(contract.capability.projectionIntegrated, true);
   assert.equal(contract.capability.runtimeCompositeAccepted, false, "mounted assets still require native gameplay QA");
-  assert.equal(contract.runtimeCompositeAcceptedAssetIds.length, 16);
+  assert.equal(contract.runtimeCompositeAcceptedAssetIds.length, 19);
   assert.deepEqual(contract.runtimeCompositeBlockedAssetIds, ["local-art", "pendants", "plants"]);
 });
 

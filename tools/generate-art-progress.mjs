@@ -79,6 +79,7 @@ function reviewFor(assetId) {
 function status({ isPresent, review, remoteVerified, runtimeBound, productionComplete = false }) {
   if (productionComplete) return "production_complete";
   if (String(review).startsWith("failed") || review === "mixed") return "qa_failed_needs_remediation";
+  if (runtimeBound && remoteVerified) return "runtime_accepted_review_preservation_pending";
   if (review === "passed" || String(review).startsWith("passed-source")) return remoteVerified ? "source_accepted_runtime_blocked" : "source_accepted_local_only";
   if (isPresent && runtimeBound) return "runtime_bound_unreviewed";
   if (isPresent) return "present_unreviewed";
@@ -288,7 +289,7 @@ const ledger = {
   quarantinedWork: pass.quarantinedWork,
   contractGaps: [
     "Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.",
-    "Run exact four-rotation native Godot composite review for furniture-banquette-section, furniture-commercial-chair, and furniture-premium-chair; complete mounted-object server placement, builder snapping, runtime anchors, and depth before re-reviewing local-art, plants, and pendants.",
+    "Remotely preserve the exact attempt-003 review package and green hosted CI; complete mounted-object server placement, builder snapping, runtime anchors, and depth before re-reviewing local-art, plants, and pendants.",
     "Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.",
     "Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete.",
   ],
@@ -322,7 +323,10 @@ lines.push("|---|---:|---:|---:|---:|---:|");
 for (const row of summaries) lines.push(`| ${row.lane} | ${row.required} | ${row.present} | ${row.sourceAccepted} | ${row.remoteVerified} | ${row.productionComplete} |`);
 lines.push("");
 lines.push(`${equipmentIcons.filter((item) => item.productionComplete).length} equipment icons and ${furniture.filter((item) => item.productionComplete).length} furniture directional sets are production-complete because their exact reviewed bytes are visually accepted, runtime-bound, remotely verified, and CI-green. Character art and the other missing lanes remain explicit below.`);
-lines.push(`Directional furniture texture selection is ${yes(directionalSelectionBound)} and projection alignment is ${yes(projectionAligned)}. Native attempt 002 accepted ${runtimeCompositeAcceptedAssetIds.size}/${furniture.filter((item) => item.present).length} present sets; its durable review checkpoint is remote-verified: ${yes(runtimeReviewRemoteVerified)}. ${[...runtimeCompositeBlockedAssetIds].map((id) => `\`${id}\``).join(", ")} remain blocked on legal wall/ceiling mounting. ${[...runtimeCompositePendingAssetIds].map((id) => `\`${id}\``).join(", ")} are source-accepted but pending their first native four-rotation gameplay composite.`);
+const pendingRuntimeSummary = runtimeCompositePendingAssetIds.size > 0
+  ? `${[...runtimeCompositePendingAssetIds].map((id) => `\`${id}\``).join(", ")} are source-accepted but pending their first native four-rotation gameplay composite.`
+  : "No source-accepted directional sets are pending their first native four-rotation gameplay composite.";
+lines.push(`Directional furniture texture selection is ${yes(directionalSelectionBound)} and projection alignment is ${yes(projectionAligned)}. Latest native review \`${latestFurnitureRuntimeQa?.id ?? "unavailable"}\` accepted ${runtimeCompositeAcceptedAssetIds.size}/${furniture.filter((item) => item.present).length} present sets; its durable review checkpoint is remote-verified: ${yes(runtimeReviewRemoteVerified)}. ${[...runtimeCompositeBlockedAssetIds].map((id) => `\`${id}\``).join(", ")} remain blocked on legal wall/ceiling mounting. ${pendingRuntimeSummary}`);
 lines.push("");
 lines.push("## Character truth");
 lines.push("");
