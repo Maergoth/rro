@@ -320,7 +320,8 @@ lines.push("");
 const output = `${lines.join("\n").trimEnd()}\n`;
 
 if (CHECK) {
-  if (!existsSync(OUTPUT) || readFileSync(OUTPUT, "utf8") !== output) {
+  const existing = existsSync(OUTPUT) ? readFileSync(OUTPUT, "utf8").replace(/\r\n/g, "\n") : "";
+  if (existing !== output) {
     console.error("docs/ART_PROGRESS.md is stale. Run npm run art:ledger and commit the result.");
     process.exitCode = 1;
   } else {

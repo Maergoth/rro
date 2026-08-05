@@ -5,12 +5,20 @@ import test from "node:test";
 
 const ROOT = resolve(import.meta.dirname, "..");
 
-function ledger() {
-  const document = readFileSync(resolve(ROOT, "docs/ART_PROGRESS.md"), "utf8");
-  const match = document.match(/<!-- ART_LEDGER_JSON_BEGIN -->\n```json\n([\s\S]+?)\n```\n<!-- ART_LEDGER_JSON_END -->/);
+function parseLedger(document) {
+  const match = document.match(/<!-- ART_LEDGER_JSON_BEGIN -->\r?\n```json\r?\n([\s\S]+?)\r?\n```\r?\n<!-- ART_LEDGER_JSON_END -->/);
   assert.ok(match, "ART_PROGRESS.md must contain its machine-readable ledger block");
   return JSON.parse(match[1]);
 }
+
+function ledger() {
+  return parseLedger(readFileSync(resolve(ROOT, "docs/ART_PROGRESS.md"), "utf8"));
+}
+
+test("the art ledger parser accepts Windows CRLF checkouts", () => {
+  const document = readFileSync(resolve(ROOT, "docs/ART_PROGRESS.md"), "utf8").replace(/\n/g, "\r\n");
+  assert.equal(parseLedger(document).authoritativeProgressDocument, "docs/ART_PROGRESS.md");
+});
 
 test("the authoritative art ledger cannot hide missing, failed, local-only, or unbound art", () => {
   const art = ledger();
