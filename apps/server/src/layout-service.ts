@@ -1,16 +1,27 @@
 import { FURNITURE_WALL_EDGE_BY_ROTATION, type ContentRegistry } from "./content.js";
 import { newId, transaction } from "./database.js";
 import { aggregateFurnitureEffects, type FurnitureEffectsSummary } from "./furniture-effects.js";
+import { canonicalWallSegment, canonicalWallSegmentKey, isCardinalEdge, type CardinalEdge } from "./layout-geometry.js";
 import { ApiError, type AuthenticatedAccount, type Database, type FurnitureDefinition } from "./types.js";
 
 type CellInput = { x: number; y: number };
-type CardinalEdge = "north" | "east" | "south" | "west";
 type PlacedObjectRow = {
   id: string;
   definition_id: string;
   grid_x: number;
   grid_y: number;
   rotation: number;
+};
+type WallRow = {
+  id: string;
+  restaurant_id: string;
+  grid_x: number;
+  grid_y: number;
+  edge: CardinalEdge;
+  wall_style_id: string;
+  opening_type: string;
+  rotation: number;
+  updated_at: number;
 };
 type LayoutState = {
   width: number;
@@ -62,22 +73,37 @@ function footprintCells(definition: FurnitureDefinition, x: number, y: number, r
   return cells;
 }
 
-function wallKey(x: number, y: number, edge: CardinalEdge): string {
-  return `${x}:${y}:${edge}`;
-}
-
-function mirroredWallKey(x: number, y: number, edge: CardinalEdge): string {
-  switch (edge) {
-    case "north": return wallKey(x, y - 1, "south");
-    case "east": return wallKey(x + 1, y, "west");
-    case "south": return wallKey(x, y + 1, "north");
-    case "west": return wallKey(x - 1, y, "east");
-  }
-}
-
 function wallMapForRestaurant(db: Database, restaurantId: string): Map<string, string> {
   const walls = db.prepare("SELECT grid_x, grid_y, edge, opening_type FROM wall_edges WHERE restaurant_id = ?").all(restaurantId) as any[];
-  return new Map(walls.map((wall) => [wallKey(Number(wall.grid_x), Number(wall.grid_y), String(wall.edge) as CardinalEdge), String(wall.opening_type)]));
+  return new Map(walls.map((wall) => [canonicalWallSegmentKey(Number(wall.grid_x), Number(wall.grid_y), String(wall.edge) as CardinalEdge), String(wall.opening_type)]));
+}
+
+function wallRowForSegment(db: Database, restaurantId: string, x: number, y: number, edge: CardinalEdge): WallRow | undefined {
+  const key = canonicalWallSegmentKey(x, y, edge);
+  return (db.prepare("SELECT * FROM wall_edges WHERE restaurant_id = ?").all(restaurantId) as WallRow[])
+    .find((wall) => canonicalWallSegmentKey(wall.grid_x, wall.grid_y, wall.edge) === key);
+}
+
+function writeWallSegment(
+  db: Database,
+  restaurantId: string,
+  location: { x: number; y: number; edge: CardinalEdge },
+  wall: { wallStyleId: string; openingType: string; rotation: number; updatedAt: number },
+): { id: string; created: boolean } {
+  const existing = wallRowForSegment(db, restaurantId, location.x, location.y, location.edge);
+  if (existing) {
+    db.prepare(`UPDATE wall_edges
+      SET grid_x = ?, grid_y = ?, edge = ?, wall_style_id = ?, opening_type = ?, rotation = ?, updated_at = ?
+      WHERE id = ?`)
+      .run(location.x, location.y, location.edge, wall.wallStyleId, wall.openingType, wall.rotation, wall.updatedAt, existing.id);
+    return { id: existing.id, created: false };
+  }
+  const id = newId("wall");
+  db.prepare(`INSERT INTO wall_edges
+    (id, restaurant_id, grid_x, grid_y, edge, wall_style_id, opening_type, rotation, updated_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`)
+    .run(id, restaurantId, location.x, location.y, location.edge, wall.wallStyleId, wall.openingType, wall.rotation, wall.updatedAt);
+  return { id, created: true };
 }
 
 function wallSupportFailure(
@@ -91,8 +117,7 @@ function wallSupportFailure(
   const edge = wallMountEdge(rotation);
   const allowed = new Set<string>(definition.placement.allowedWallOpenings ?? []);
   for (const cell of footprintCells(definition, x, y, rotation)) {
-    const exact = wallMap.get(wallKey(cell.x, cell.y, edge));
-    const opening = exact ?? wallMap.get(mirroredWallKey(cell.x, cell.y, edge));
+    const opening = wallMap.get(canonicalWallSegmentKey(cell.x, cell.y, edge));
     if (opening === undefined) return { kind: "missing", x: cell.x, y: cell.y, edge };
     if (!allowed.has(opening)) return { kind: "opening", x: cell.x, y: cell.y, edge, opening };
   }
@@ -118,10 +143,8 @@ function assertLegalMountSupport(
 function wallSupportKeys(definition: FurnitureDefinition, x: number, y: number, rotation: number): Set<string> {
   if (definition.placement.mount !== "wall") return new Set();
   const edge = wallMountEdge(rotation);
-  return new Set(footprintCells(definition, x, y, rotation).flatMap((cell) => [
-    wallKey(cell.x, cell.y, edge),
-    mirroredWallKey(cell.x, cell.y, edge),
-  ]));
+  return new Set(footprintCells(definition, x, y, rotation)
+    .map((cell) => canonicalWallSegmentKey(cell.x, cell.y, edge)));
 }
 
 function assertWallChangePreservesMountedObjects(
@@ -133,7 +156,7 @@ function assertWallChangePreservesMountedObjects(
   edge: CardinalEdge,
   opening: string,
 ): void {
-  const changedKey = wallKey(x, y, edge);
+  const changedKey = canonicalWallSegmentKey(x, y, edge);
   const wallMap = wallMapForRestaurant(db, restaurantId);
   wallMap.set(changedKey, opening);
   const objects = db.prepare("SELECT id, definition_id, grid_x, grid_y, rotation FROM object_instances WHERE restaurant_id = ?").all(restaurantId) as PlacedObjectRow[];
@@ -164,6 +187,24 @@ function assertLayoutEditable(db: Database, restaurantId: string): void {
   if (live) throw new ApiError(409, "Restaurant layout is locked while a live shift is active.");
 }
 
+function uniqueWallRows(rows: WallRow[]): WallRow[] {
+  const bySegment = new Map<string, WallRow>();
+  for (const row of rows) {
+    const key = canonicalWallSegmentKey(Number(row.grid_x), Number(row.grid_y), row.edge);
+    const current = bySegment.get(key);
+    if (!current
+      || Number(row.updated_at) > Number(current.updated_at)
+      || (Number(row.updated_at) === Number(current.updated_at) && row.id.localeCompare(current.id) > 0)) {
+      bySegment.set(key, row);
+    }
+  }
+  return [...bySegment.values()].sort((left, right) => (
+    Number(left.grid_y) - Number(right.grid_y)
+    || Number(left.grid_x) - Number(right.grid_x)
+    || String(left.edge).localeCompare(String(right.edge))
+  ));
+}
+
 function captureLayoutState(db: Database, restaurantId: string): LayoutState {
   const restaurant = restaurantRow(db, restaurantId);
   return {
@@ -171,7 +212,7 @@ function captureLayoutState(db: Database, restaurantId: string): LayoutState {
     height: restaurant.build_height,
     treasuryCents: restaurant.treasury_cents,
     cells: db.prepare("SELECT * FROM floor_cells WHERE restaurant_id = ? ORDER BY grid_y, grid_x").all(restaurantId) as any[],
-    walls: db.prepare("SELECT * FROM wall_edges WHERE restaurant_id = ? ORDER BY grid_y, grid_x, edge").all(restaurantId) as any[],
+    walls: uniqueWallRows(db.prepare("SELECT * FROM wall_edges WHERE restaurant_id = ? ORDER BY grid_y, grid_x, edge").all(restaurantId) as WallRow[]),
     objects: db.prepare("SELECT * FROM object_instances WHERE restaurant_id = ? ORDER BY placed_at, id").all(restaurantId) as any[],
   };
 }
@@ -185,7 +226,7 @@ function restoreLayoutState(db: Database, restaurantId: string, state: LayoutSta
   const insertCell = db.prepare("INSERT INTO floor_cells (restaurant_id, grid_x, grid_y, surface_id, room_tag, walkable, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)");
   for (const row of state.cells) insertCell.run(restaurantId, row.grid_x, row.grid_y, row.surface_id, row.room_tag, row.walkable, row.updated_at);
   const insertWall = db.prepare("INSERT INTO wall_edges (id, restaurant_id, grid_x, grid_y, edge, wall_style_id, opening_type, rotation, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-  for (const row of state.walls) insertWall.run(row.id, restaurantId, row.grid_x, row.grid_y, row.edge, row.wall_style_id, row.opening_type, row.rotation, row.updated_at);
+  for (const row of uniqueWallRows(state.walls as WallRow[])) insertWall.run(row.id, restaurantId, row.grid_x, row.grid_y, row.edge, row.wall_style_id, row.opening_type, row.rotation, row.updated_at);
   const insertObject = db.prepare(`INSERT INTO object_instances
     (id, restaurant_id, definition_id, grid_x, grid_y, rotation, state, wear, primary_color, secondary_color, placed_at, updated_at)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
@@ -206,17 +247,17 @@ function historyState(db: Database, restaurantId: string): Record<string, unknow
 
 const PASSABLE_OPENINGS = new Set(["door", "service-door", "arch"]);
 const CARDINAL_STEPS = [
-  { dx: 0, dy: -1, edge: "north", opposite: "south" },
-  { dx: 1, dy: 0, edge: "east", opposite: "west" },
-  { dx: 0, dy: 1, edge: "south", opposite: "north" },
-  { dx: -1, dy: 0, edge: "west", opposite: "east" },
+  { dx: 0, dy: -1, edge: "north" },
+  { dx: 1, dy: 0, edge: "east" },
+  { dx: 0, dy: 1, edge: "south" },
+  { dx: -1, dy: 0, edge: "west" },
 ] as const;
 
 function validateLayoutState(db: Database, registry: ContentRegistry, restaurantId: string): Record<string, unknown> {
   const restaurant = restaurantRow(db, restaurantId);
   const walls = db.prepare("SELECT grid_x, grid_y, edge, opening_type FROM wall_edges WHERE restaurant_id = ?").all(restaurantId) as any[];
   const objects = db.prepare("SELECT id, definition_id, grid_x, grid_y, rotation FROM object_instances WHERE restaurant_id = ?").all(restaurantId) as PlacedObjectRow[];
-  const wallMap = new Map(walls.map((wall) => [wallKey(Number(wall.grid_x), Number(wall.grid_y), String(wall.edge) as CardinalEdge), String(wall.opening_type)]));
+  const wallMap = new Map(walls.map((wall) => [canonicalWallSegmentKey(Number(wall.grid_x), Number(wall.grid_y), String(wall.edge) as CardinalEdge), String(wall.opening_type)]));
   const blocked = new Set<string>();
   const objectFootprints = new Map<string, Set<string>>();
   const invalidMountObjectIds: string[] = [];
@@ -246,8 +287,8 @@ function validateLayoutState(db: Database, registry: ContentRegistry, restaurant
 
   const missingPerimeter: string[] = [];
   const exits: Array<{ x: number; y: number; edge: string; openingType: string; blocked: boolean }> = [];
-  const checkBoundary = (x: number, y: number, edge: string): void => {
-    const openingType = wallMap.get(`${x}:${y}:${edge}`);
+  const checkBoundary = (x: number, y: number, edge: CardinalEdge): void => {
+    const openingType = wallMap.get(canonicalWallSegmentKey(x, y, edge));
     if (!openingType) missingPerimeter.push(`${x}:${y}:${edge}`);
     else if (PASSABLE_OPENINGS.has(openingType)) exits.push({ x, y, edge, openingType, blocked: blocked.has(`${x}:${y}`) });
   };
@@ -263,10 +304,9 @@ function validateLayoutState(db: Database, registry: ContentRegistry, restaurant
   const usableExits = exits.filter((exit) => !exit.blocked);
   const reachable = new Set<string>();
   const queue: Array<{ x: number; y: number }> = usableExits.map(({ x, y }) => ({ x, y }));
-  const crossingBlocked = (x: number, y: number, nx: number, ny: number, edge: string, opposite: string): boolean => {
-    const current = wallMap.get(`${x}:${y}:${edge}`);
-    const neighbor = wallMap.get(`${nx}:${ny}:${opposite}`);
-    return [current, neighbor].some((opening) => opening !== undefined && !PASSABLE_OPENINGS.has(opening));
+  const crossingBlocked = (x: number, y: number, edge: CardinalEdge): boolean => {
+    const opening = wallMap.get(canonicalWallSegmentKey(x, y, edge));
+    return opening !== undefined && !PASSABLE_OPENINGS.has(opening);
   };
   while (queue.length) {
     const current = queue.shift()!;
@@ -278,7 +318,7 @@ function validateLayoutState(db: Database, registry: ContentRegistry, restaurant
       const nx = current.x + step.dx;
       const ny = current.y + step.dy;
       if (nx < 0 || ny < 0 || nx >= restaurant.build_width || ny >= restaurant.build_height) continue;
-      if (!crossingBlocked(current.x, current.y, nx, ny, step.edge, step.opposite)) queue.push({ x: nx, y: ny });
+      if (!crossingBlocked(current.x, current.y, step.edge)) queue.push({ x: nx, y: ny });
     }
   }
 
@@ -403,7 +443,7 @@ export function getLayout(db: Database, registry: ContentRegistry, restaurantId:
     height: restaurant.build_height,
     cellMeters: registry.content.construction.grid.cellMeters,
     cells: db.prepare("SELECT grid_x AS x, grid_y AS y, surface_id AS surfaceId, room_tag AS roomTag, walkable FROM floor_cells WHERE restaurant_id = ? ORDER BY grid_y, grid_x").all(restaurantId),
-    walls: db.prepare("SELECT id, grid_x AS x, grid_y AS y, edge, wall_style_id AS wallStyleId, opening_type AS openingType, rotation FROM wall_edges WHERE restaurant_id = ? ORDER BY grid_y, grid_x").all(restaurantId),
+    walls: db.prepare("SELECT id, grid_x AS x, grid_y AS y, edge, wall_style_id AS wallStyleId, opening_type AS openingType, rotation FROM wall_edges WHERE restaurant_id = ? ORDER BY grid_y, grid_x, edge, id").all(restaurantId),
     objects: db.prepare("SELECT id, definition_id AS definitionId, grid_x AS x, grid_y AS y, rotation, state, wear, primary_color AS primaryColor, secondary_color AS secondaryColor FROM object_instances WHERE restaurant_id = ? ORDER BY placed_at, id").all(restaurantId),
     furnitureEffects: getFurnitureEffects(db, registry, restaurantId),
     history: historyState(db, restaurantId),
@@ -477,22 +517,25 @@ export function upsertWall(db: Database, registry: ContentRegistry, account: Aut
   const x = integer(body.x, "x");
   const y = integer(body.y, "y");
   ensureInside(restaurant, x, y);
-  const edge = String(body.edge ?? "");
-  if (!["north", "east", "south", "west"].includes(edge)) throw new ApiError(400, "Unknown wall edge.");
+  const edgeValue = String(body.edge ?? "");
+  if (!isCardinalEdge(edgeValue)) throw new ApiError(400, "Unknown wall edge.");
+  const edge = edgeValue;
   const styleId = String(body.wallStyleId ?? "");
   const style = registry.content.construction.wallStyles.find((item) => item.id === styleId);
   if (!style) throw new ApiError(400, "Unknown wall style.");
   const opening = String(body.openingType ?? "solid");
   if (!["solid", "door", "service-door", "window", "arch"].includes(opening)) throw new ApiError(400, "Unknown wall opening.");
   const rotation = normalizeRotation(body.rotation);
-  assertWallChangePreservesMountedObjects(db, registry, restaurantId, x, y, edge as CardinalEdge, opening);
+  assertWallChangePreservesMountedObjects(db, registry, restaurantId, x, y, edge, opening);
   if (restaurant.treasury_cents < style.costCents) throw new ApiError(409, "Restaurant treasury cannot cover this wall purchase.");
   const now = Date.now();
   recordLayoutMutation(db, restaurantId, account, opening === "solid" ? "build wall" : `build ${opening}`, () => {
-    db.prepare(`INSERT INTO wall_edges (id, restaurant_id, grid_x, grid_y, edge, wall_style_id, opening_type, rotation, updated_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-      ON CONFLICT(restaurant_id, grid_x, grid_y, edge) DO UPDATE SET wall_style_id = excluded.wall_style_id, opening_type = excluded.opening_type, rotation = excluded.rotation, updated_at = excluded.updated_at`)
-      .run(newId("wall"), restaurantId, x, y, edge, styleId, opening, rotation, now);
+    writeWallSegment(db, restaurantId, { x, y, edge }, {
+      wallStyleId: styleId,
+      openingType: opening,
+      rotation,
+      updatedAt: now,
+    });
     db.prepare("UPDATE restaurants SET treasury_cents = treasury_cents - ? WHERE id = ?").run(style.costCents, restaurantId);
   });
   return { costCents: style.costCents, layout: getLayout(db, registry, restaurantId) };
@@ -594,7 +637,73 @@ export function expandRestaurant(db: Database, registry: ContentRegistry, accoun
   const cost = newCells * 25_000;
   if (restaurant.treasury_cents < cost) throw new ApiError(409, "Restaurant treasury cannot cover this add-on.");
   const now = Date.now();
+  let relocatedWalls = 0;
+  let addedPerimeterWalls = 0;
+  let relocatedMounts = 0;
   recordLayoutMutation(db, restaurantId, account, "expand restaurant", () => {
+    const oldWidth = Number(restaurant.build_width);
+    const oldHeight = Number(restaurant.build_height);
+    const walls = db.prepare("SELECT * FROM wall_edges WHERE restaurant_id = ?").all(restaurantId) as WallRow[];
+    const segments = walls.map((wall) => ({ wall, segment: canonicalWallSegment(wall.grid_x, wall.grid_y, wall.edge) }));
+
+    if (addWidth > 0) {
+      for (const { wall, segment } of segments) {
+        if (segment.axis !== "vertical" || segment.x !== oldWidth || segment.y < 0 || segment.y >= oldHeight) continue;
+        db.prepare("UPDATE wall_edges SET grid_x = ?, grid_y = ?, edge = 'east', rotation = 90, updated_at = ? WHERE id = ?")
+          .run(width - 1, segment.y, now, wall.id);
+        relocatedWalls += 1;
+      }
+    }
+    if (addHeight > 0) {
+      for (const { wall, segment } of segments) {
+        if (segment.axis !== "horizontal" || segment.y !== oldHeight || segment.x < 0 || segment.x >= oldWidth) continue;
+        db.prepare("UPDATE wall_edges SET grid_x = ?, grid_y = ?, edge = 'south', rotation = 180, updated_at = ? WHERE id = ?")
+          .run(segment.x, height - 1, now, wall.id);
+        relocatedWalls += 1;
+      }
+    }
+
+    const perimeterStyle = (x: number, y: number, edge: CardinalEdge): string => (
+      wallRowForSegment(db, restaurantId, x, y, edge)?.wall_style_id ?? "painted-plaster"
+    );
+    const addSolidPerimeter = (x: number, y: number, edge: CardinalEdge, styleSource: { x: number; y: number; edge: CardinalEdge }): void => {
+      const result = writeWallSegment(db, restaurantId, { x, y, edge }, {
+        wallStyleId: perimeterStyle(styleSource.x, styleSource.y, styleSource.edge),
+        openingType: "solid",
+        rotation: edge === "north" ? 0 : edge === "east" ? 90 : edge === "south" ? 180 : 270,
+        updatedAt: now,
+      });
+      if (result.created) addedPerimeterWalls += 1;
+    };
+    if (addWidth > 0) {
+      for (let x = oldWidth; x < width; x += 1) {
+        addSolidPerimeter(x, 0, "north", { x: oldWidth - 1, y: 0, edge: "north" });
+        addSolidPerimeter(x, height - 1, "south", { x: oldWidth - 1, y: height - 1, edge: "south" });
+      }
+    }
+    if (addHeight > 0) {
+      for (let y = oldHeight; y < height; y += 1) {
+        addSolidPerimeter(0, y, "west", { x: 0, y: oldHeight - 1, edge: "west" });
+        addSolidPerimeter(width - 1, y, "east", { x: width - 1, y: oldHeight - 1, edge: "east" });
+      }
+    }
+
+    const objects = db.prepare("SELECT id, definition_id, grid_x, grid_y, rotation FROM object_instances WHERE restaurant_id = ?").all(restaurantId) as PlacedObjectRow[];
+    for (const object of objects) {
+      const definition = registry.furnitureById.get(object.definition_id);
+      if (!definition || definition.placement.mount !== "wall") continue;
+      const edge = wallMountEdge(object.rotation);
+      const footprint = footprintCells(definition, object.grid_x, object.grid_y, object.rotation);
+      const moveEast = addWidth > 0 && edge === "east" && footprint.every((cell) => cell.x === oldWidth - 1);
+      const moveSouth = addHeight > 0 && edge === "south" && footprint.every((cell) => cell.y === oldHeight - 1);
+      if (!moveEast && !moveSouth) continue;
+      const nextX = object.grid_x + (moveEast ? addWidth : 0);
+      const nextY = object.grid_y + (moveSouth ? addHeight : 0);
+      db.prepare("UPDATE object_instances SET grid_x = ?, grid_y = ?, updated_at = ? WHERE id = ?")
+        .run(nextX, nextY, now, object.id);
+      relocatedMounts += 1;
+    }
+
     db.prepare("UPDATE restaurants SET build_width = ?, build_height = ?, treasury_cents = treasury_cents - ? WHERE id = ?").run(width, height, cost, restaurantId);
     const insert = db.prepare("INSERT INTO floor_cells (restaurant_id, grid_x, grid_y, surface_id, room_tag, walkable, updated_at) VALUES (?, ?, ?, 'sealed-concrete', 'unassigned', 1, ?)");
     for (let y = 0; y < height; y += 1) {
@@ -602,8 +711,17 @@ export function expandRestaurant(db: Database, registry: ContentRegistry, accoun
         if (x >= restaurant.build_width || y >= restaurant.build_height) insert.run(restaurantId, x, y, now);
       }
     }
+    const updatedWallMap = wallMapForRestaurant(db, restaurantId);
+    const mountedObjects = db.prepare("SELECT id, definition_id, grid_x, grid_y, rotation FROM object_instances WHERE restaurant_id = ?").all(restaurantId) as PlacedObjectRow[];
+    for (const object of mountedObjects) {
+      const definition = registry.furnitureById.get(object.definition_id);
+      if (!definition || definition.placement.mount !== "wall") continue;
+      if (wallSupportFailure(definition, object.grid_x, object.grid_y, object.rotation, updatedWallMap)) {
+        throw new ApiError(409, "Expansion could not preserve legal support for every wall-mounted object.");
+      }
+    }
   });
-  return { width, height, costCents: cost, layout: getLayout(db, registry, restaurantId) };
+  return { width, height, costCents: cost, relocatedWalls, addedPerimeterWalls, relocatedMounts, layout: getLayout(db, registry, restaurantId) };
 }
 
 function applyHistoryState(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string, direction: "undo" | "redo"): Record<string, unknown> {

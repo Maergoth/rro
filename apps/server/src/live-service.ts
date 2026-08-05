@@ -2,6 +2,7 @@ import { EventEmitter } from "node:events";
 import type { ContentRegistry } from "./content.js";
 import { newId, transaction } from "./database.js";
 import type { FurnitureEffectsSummary } from "./furniture-effects.js";
+import { mirroredWallLocation, type CardinalEdge } from "./layout-geometry.js";
 import { ensureLayout, getFurnitureEffects, getLayout } from "./layout-service.js";
 import {
   RIVALRY_LIMITS,
@@ -1122,20 +1123,22 @@ export class LiveService extends EventEmitter {
     const walkable = this.db.prepare("SELECT walkable FROM floor_cells WHERE restaurant_id = ? AND grid_x = ? AND grid_y = ?")
       .get(restaurantId, toCell.x, toCell.y) as any;
     if (!walkable || Number(walkable.walkable) !== 1) return false;
-    if (toCell.x > fromCell.x && this.blockingWallBetween(restaurantId, fromCell.x, fromCell.y, "east", toCell.x, toCell.y, "west")) return false;
-    if (toCell.x < fromCell.x && this.blockingWallBetween(restaurantId, fromCell.x, fromCell.y, "west", toCell.x, toCell.y, "east")) return false;
-    if (toCell.y > fromCell.y && this.blockingWallBetween(restaurantId, fromCell.x, fromCell.y, "south", toCell.x, toCell.y, "north")) return false;
-    if (toCell.y < fromCell.y && this.blockingWallBetween(restaurantId, fromCell.x, fromCell.y, "north", toCell.x, toCell.y, "south")) return false;
+    if (toCell.x > fromCell.x && this.blockingWallBetween(restaurantId, fromCell.x, fromCell.y, "east")) return false;
+    if (toCell.x < fromCell.x && this.blockingWallBetween(restaurantId, fromCell.x, fromCell.y, "west")) return false;
+    if (toCell.y > fromCell.y && this.blockingWallBetween(restaurantId, fromCell.x, fromCell.y, "south")) return false;
+    if (toCell.y < fromCell.y && this.blockingWallBetween(restaurantId, fromCell.x, fromCell.y, "north")) return false;
     return true;
   }
 
-  private blockingWallBetween(restaurantId: string, ax: number, ay: number, edgeA: string, bx: number, by: number, edgeB: string): boolean {
-    const blocks = (x: number, y: number, edge: string): boolean => {
-      const wall = this.db.prepare("SELECT opening_type FROM wall_edges WHERE restaurant_id = ? AND grid_x = ? AND grid_y = ? AND edge = ?")
-        .get(restaurantId, x, y, edge) as any;
-      return Boolean(wall && !["door", "service-door", "arch"].includes(String(wall.opening_type)));
-    };
-    return blocks(ax, ay, edgeA) || blocks(bx, by, edgeB);
+  private blockingWallBetween(restaurantId: string, x: number, y: number, edge: CardinalEdge): boolean {
+    const mirror = mirroredWallLocation(x, y, edge);
+    const wall = this.db.prepare(`SELECT opening_type FROM wall_edges
+      WHERE restaurant_id = ? AND (
+        (grid_x = ? AND grid_y = ? AND edge = ?)
+        OR (grid_x = ? AND grid_y = ? AND edge = ?)
+      ) LIMIT 1`)
+      .get(restaurantId, x, y, edge, mirror.x, mirror.y, mirror.edge) as any;
+    return Boolean(wall && !["door", "service-door", "arch"].includes(String(wall.opening_type)));
   }
 
   private findSafeSpawn(restaurantId: string, characterId: string): { x: number; y: number } {

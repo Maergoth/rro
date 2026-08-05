@@ -379,10 +379,48 @@ CREATE INDEX IF NOT EXISTS evidence_party_idx ON review_evidence(party_id, dimen
 CREATE INDEX IF NOT EXISTS layout_history_stack_idx ON layout_history(restaurant_id, undone_at, id DESC);
 `;
 
+function ensureCanonicalWallTopology(db: Database): void {
+  // Older clean-V1 databases allowed both cell-side descriptions of one
+  // physical wall segment. Keep the most recently edited row, then enforce
+  // one authority with an expression index that maps north/south and
+  // east/west mirrors onto the same grid-line segment.
+  transaction(db, () => {
+    db.exec(`
+      DELETE FROM wall_edges
+      WHERE rowid IN (
+        SELECT rowid FROM (
+          SELECT
+            rowid,
+            ROW_NUMBER() OVER (
+              PARTITION BY
+                restaurant_id,
+                CASE WHEN edge IN ('north', 'south') THEN 'horizontal' ELSE 'vertical' END,
+                grid_x + CASE WHEN edge = 'east' THEN 1 ELSE 0 END,
+                grid_y + CASE WHEN edge = 'south' THEN 1 ELSE 0 END
+              ORDER BY updated_at DESC, rowid DESC
+            ) AS duplicate_rank
+          FROM wall_edges
+        )
+        WHERE duplicate_rank > 1
+      );
+
+      CREATE UNIQUE INDEX IF NOT EXISTS wall_edges_physical_segment_idx
+      ON wall_edges (
+        restaurant_id,
+        CASE WHEN edge IN ('north', 'south') THEN 'horizontal' ELSE 'vertical' END,
+        grid_x + CASE WHEN edge = 'east' THEN 1 ELSE 0 END,
+        grid_y + CASE WHEN edge = 'south' THEN 1 ELSE 0 END
+      );
+    `);
+    db.prepare("INSERT OR REPLACE INTO application_meta (key, value) VALUES ('wall_topology_version', '1')").run();
+  });
+}
+
 export function createDatabase(path: string, registry: ContentRegistry): Database {
   if (path !== ":memory:") mkdirSync(dirname(path), { recursive: true });
   const db = new DatabaseSync(path);
   db.exec(SCHEMA);
+  ensureCanonicalWallTopology(db);
   try {
     db.exec("PRAGMA journal_mode = WAL;");
     db.exec("PRAGMA synchronous = NORMAL;");

@@ -610,7 +610,7 @@ The V1 alpha begins players with $35,000 personal cash. Opening costs $10,000 an
 
 ### 13.2 Build grid
 
-The launch build surface is a 24×16 collision-checked grid with add-on expansion to 64×64. Floor cells, room tags, wall edges, doors/arches, and object instances are persisted separately. The alpha-2 registry contains 229 stable furniture definitions: 16 core, 210 generated production-catalog, and three seasonal. Items declare width, height, four-way rotation, cost, tier, upkeep, repair cost, durability, wear per shift, breakage horizon, utilities, style, pack, tags, stat effects, role effects, and a one-to-one asset ID.
+The launch build surface is a 24×16 collision-checked grid with add-on expansion to 64×64. Floor cells, room tags, physical wall segments, doors/arches, and object instances are persisted separately. Opposite cell-side descriptions of a shared wall resolve to one canonical segment authority. Width and height expansion relocate the existing east/south perimeter, its openings, and supported wall-mounted objects before adding closed new perimeter runs; the atomic change survives restart and audited undo/redo without leaving an internal shell. The alpha-2 registry contains 229 stable furniture definitions: 16 core, 210 generated production-catalog, and three seasonal. Items declare width, height, four-way rotation, cost, tier, upkeep, repair cost, durability, wear per shift, breakage horizon, utilities, style, pack, tags, stat effects, role effects, and a one-to-one asset ID.
 
 Launch item stats include:
 

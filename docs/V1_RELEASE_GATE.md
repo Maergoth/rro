@@ -25,7 +25,7 @@ This gate prevents “source exists” from being confused with “production ga
 | Skill trees | Pass (data/runtime) | 28 nodes per base role, prerequisites, cost, unlock endpoint | Skill-effect integration, loadouts, respec economy and subclasses |
 | Role equipment | Pass (slice) | 45 purchasable tools/consumables, role/level eligibility, four-slot loadouts, persistent quantities, shop/inventory UI and audited personal-cash actions | Bind all effects into minigames, equipment wear/repair, balance, and 45 bespoke icons |
 | Furniture economy | Pass (slice) | 229 inventory definitions with non-linear price/stat tradeoffs; live rating, happiness, workload, role/task, revenue/upkeep, wear, broken-state and owner repair effects | Balance/telemetry, utilities, placement storage, maintenance staffing and full art coverage |
-| Modular layout | Pass (slice) | 24×16 cells, surfaces, room tags, walls/openings, objects, drag, 4 rotations with rotating artwork, collision, sale, add-on and repair | Utilities, code/clearance, undo, collaboration, nav/flow heatmap |
+| Modular layout | Pass (slice) | 24×16 cells; surfaces and room tags; one canonical authority per physical wall segment; walls/openings; floor, wall and ceiling objects; mount-aware drag/rotation; collision; path/egress validation; sale/repair; expansion that relocates perimeter openings and wall mounts; persistent audited undo/redo | Routed utilities/ventilation, code/clearance, native room-tag tool, optimistic revisions, commit/cancel staging, collaboration and nav/flow heatmap |
 | Modular art | Partial (authoritative ledger) | Elevated orthographic-isometric directional runtime is integrated; legacy direct-overhead furniture files are reference-only; the generated [production art ledger](ART_PROGRESS.md) records per-asset visual QA, runtime binding, remote preservation, and CI evidence | Complete every unresolved ledger lane, including directional furniture, construction/world/UI art, modular character layers and animation; audio/VFX remain separate production work |
 | Godot parse/type quality | Pass | Godot 4 engine-model GDScript analyzer reports 0 errors and 0 warnings | Keep as CI gate; CI also imports with a real editor |
 | Godot native execution | Pass (Linux headless) | Godot 4.4.1 imported all assets, registered the inventory UI and launched the main scene with exit code 0 | Complete graphical/two-client acceptance on target Windows hardware |
@@ -33,7 +33,7 @@ This gate prevents “source exists” from being confused with “production ga
 | Windows server controller | Source pass / runtime required | Hidden start, health, graceful loopback-token stop, exact-PID fallback | Execute start/stop/delete/restart tests on supported Windows versions |
 | Standalone server artifact | Pass after release | Pinned Node 24.14.0 PE runtime with SHA-512 verification, app/data/config/control, separate ZIP | Windows runtime smoke and malware/signature pipeline |
 | Separate distribution | Pass | Server, GitHub source, planning and client runtime/source artifacts have distinct names/manifests | Preserve separation in CI publishing |
-| Automated server tests | Pass | 28 content, furniture, inventory, layout, live simulation, rivalry, persistence and HTTP/WebSocket tests | Add chaos, persistence upgrade, security, load, property and replay tests |
+| Automated server tests | Pass | Full content, furniture, inventory, canonical-wall/expansion, mount, layout-history, live simulation, rivalry, persistence and HTTP/WebSocket regression suite | Add chaos, persistence-upgrade, security, load, broader property and replay tests |
 | Accessibility | Production required | Non-color cues and data-driven input concept only | Requirements, remapping, screen reader, timing alternatives, disabled-player tests |
 | Localization | Production required | Strings are not yet fully externalized | Localization architecture, fonts, RTL, terminology and functional QA |
 | Security/trust | Production required | Local authority and rate/body limits exist | Threat model, MFA, signing, moderation, anti-cheat, pen test, privacy/compliance |
@@ -55,7 +55,7 @@ npm run verify
 2. full GDScript parse/type diagnostics with zero errors/warnings plus explicit furniture/item artwork coverage;
 3. strict TypeScript type checking;
 4. deterministic content generation and server compilation;
-5. 28 Node tests for content, furniture effects/wear/repair, persistent role equipment, building, role work, targeted rivalry, HTTP auth, and WebSockets.
+5. the full Node suite for content, furniture effects/wear/repair, persistent role equipment, canonical wall topology and expansion, building history, role work, targeted rivalry, HTTP auth, and WebSockets.
 
 The release build additionally requires:
 
