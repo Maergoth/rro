@@ -49,6 +49,10 @@ const pendingBatches = (pass.pendingBatches ?? []).map((batch) => ({
   remoteVerified: false,
   preservationPending: true,
 }));
+const runtimeQaAttempts = (pass.runtimeQaAttempts ?? []).map((attempt) => ({
+  ...attempt,
+  evidencePresent: Boolean(attempt.evidence && present(attempt.evidence)),
+}));
 const reviewBatches = [...batches, ...pendingBatches];
 
 function reviewFor(assetId) {
@@ -246,11 +250,12 @@ const ledger = {
   },
   reviewedBatches: batches,
   pendingBatches,
+  runtimeQaAttempts,
   preservedReferences: [{ id: "alpha2-overhead-furniture", files: legacyObjectPngs.map((name) => `apps/client-godot/assets/objects/generated/${name}`), count: legacyObjectPngs.length, productionStatus: "preserved-reference-wrong-camera" }],
   quarantinedWork: pass.quarantinedWork,
   contractGaps: [
     "Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.",
-    "Choose and implement the final isometric floor projection; the current orthogonal renderer cannot align accepted elevated sprites.",
+    "Complete the mounted-object placement/anchor contract and pass a corrected native Godot composite; attempt 001 proved the elevated projection while rejecting floor-mounted wall/ceiling decor and always-on labels.",
     "Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.",
     "Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete.",
   ],
@@ -308,6 +313,17 @@ lines.push("");
 lines.push("| Modular slot | Required visible choices | IDs |");
 lines.push("|---|---:|---|");
 for (const [slot, ids] of Object.entries(slotCatalogs)) lines.push(`| ${slot} | ${ids.length} | ${ids.map((id) => `\`${id}\``).join(", ")} |`);
+lines.push("");
+lines.push("## Native runtime art QA attempts");
+lines.push("");
+lines.push("A native capture is evidence, not automatic acceptance. Failed attempts remain durable here so projection, placement, and legibility defects cannot be forgotten or silently relabeled as complete.");
+lines.push("");
+lines.push("| Attempt | Result | Remote commit | CI/artifact | Passed gates | Blocking defects | Durable review |");
+lines.push("|---|---|---|---|---|---|---|");
+for (const attempt of runtimeQaAttempts) {
+  const artifact = attempt.artifactId ? `${attempt.ci}/artifacts/${attempt.artifactId}` : attempt.ci;
+  lines.push(`| ${attempt.id} | ${attempt.status} | \`${attempt.remoteCommit.slice(0, 7)}\` | ${artifact} | ${(attempt.passed ?? []).join(", ")} | ${(attempt.blockers ?? []).join(", ")} | ${attempt.evidencePresent ? attempt.evidence : "missing"} |`);
+}
 lines.push("");
 lines.push("## Reviewed batches and durable evidence");
 lines.push("");

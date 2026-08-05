@@ -12,15 +12,15 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 - Branch: `agent/complete-production-art`
 - Draft PR: https://github.com/Maergoth/rro/pull/2
-- Last verified remote head before this ledger check-in: `565869f5c09529d5da7dc30c0a31c042669c5291`
-- Verified tree: `5bdfdc178b6ebf5ce9f7719f63a417391f4b9ef6`
-- CI: https://github.com/Maergoth/rro/actions/runs/30996475549
+- Last verified remote head before this ledger check-in: `00f9a36dccf35ca2c82dbf2689d982749ab27f5c`
+- Verified tree: `7c95a33e679232e99cfc9cb472abfbb478fa3ae9`
+- CI: https://github.com/Maergoth/rro/actions/runs/30999133497
 
 ## Launch coverage
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
-| Furniture directional sets | 229 | 19 | 19 | 16 | 0 |
+| Furniture directional sets | 229 | 19 | 19 | 19 | 0 |
 | Equipment inventory icons | 45 | 45 | 45 | 45 | 45 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
@@ -65,6 +65,14 @@ Directional furniture texture selection is yes; final projection alignment is no
 | accessories | 5 | `name-badge`, `earpiece`, `wristwatch`, `neck-scarf`, `bracelet` |
 | roleLayers | 7 | `manager`, `owner`, `server`, `dishwasher`, `chef`, `cook`, `host-busser` |
 
+## Native runtime art QA attempts
+
+A native capture is evidence, not automatic acceptance. Failed attempts remain durable here so projection, placement, and legibility defects cannot be forgotten or silently relabeled as complete.
+
+| Attempt | Result | Remote commit | CI/artifact | Passed gates | Blocking defects | Durable review |
+|---|---|---|---|---|---|---|
+| runtime-isometric-integration-001-attempt-001 | failed-needs-remediation | `00f9a36` | https://github.com/Maergoth/rro/actions/runs/30999133497/artifacts/8927474963 | native-four-rotation-capture, elevated-projection, directional-selection, floor-contact-pivots, mixed-world-depth | mounted-object-anchor-contract, world-label-collision | planning/art-qa/runtime-isometric-integration-001/attempt-001/review.json |
+
 ## Reviewed batches and durable evidence
 
 | Batch | Files | Source QA | Runtime/composite QA | Remote commit | Contact sheet |
@@ -86,14 +94,7 @@ Directional furniture texture selection is yes; final projection alignment is no
 | furniture-core-directional-003 | 28 | passed | blocked-native-gameplay-composite-acceptance | `998a2e5` | planning/art-qa/furniture-core-directional-003/contact-627-dark.png |
 | furniture-core-directional-004 | 28 | passed | blocked-native-gameplay-composite-acceptance | `708642f` | planning/art-qa/furniture-core-directional-004/contact-627-dark.png |
 | furniture-core-directional-005 | 28 | passed | blocked-native-gameplay-composite-acceptance | `565869f` | planning/art-qa/furniture-core-directional-005/contact-627-dark.png |
-
-## Accepted locally, remote checkpoint pending
-
-These batches have passed source/composite QA but deliberately do not count as remotely verified or production-complete until their immutable GitHub commit and hosted CI are recorded.
-
-| Batch | Files | Source QA | Runtime/composite QA | Evidence |
-|---|---:|---|---|---|
-| furniture-core-directional-006 | 28 | passed | blocked-native-gameplay-composite-acceptance | planning/art-qa/furniture-core-directional-006/contact-627-dark.png |
+| furniture-core-directional-006 | 28 | passed | failed-native-gameplay-composite-attempt-001 | `185ca50` | planning/art-qa/furniture-core-directional-006/contact-627-dark.png |
 
 ## Missing furniture directional sets
 
@@ -145,7 +146,7 @@ These batches have passed source/composite QA but deliberately do not count as r
 ## Contract gaps blocking a truthful 100% denominator
 
 - Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.
-- Choose and implement the final isometric floor projection; the current orthogonal renderer cannot align accepted elevated sprites.
+- Complete the mounted-object placement/anchor contract and pass a corrected native Godot composite; attempt 001 proved the elevated projection while rejecting floor-mounted wall/ceiling decor and always-on labels.
 - Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.
 - Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete.
 
@@ -171,9 +172,9 @@ This JSON block is part of this same authoritative document and contains every c
   "durableBaseline": {
     "branch": "agent/complete-production-art",
     "pullRequest": "https://github.com/Maergoth/rro/pull/2",
-    "commit": "565869f5c09529d5da7dc30c0a31c042669c5291",
-    "tree": "5bdfdc178b6ebf5ce9f7719f63a417391f4b9ef6",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30996475549"
+    "commit": "00f9a36dccf35ca2c82dbf2689d982749ab27f5c",
+    "tree": "7c95a33e679232e99cfc9cb472abfbb478fa3ae9",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30999133497"
   },
   "completionPipeline": [
     "generated",
@@ -205,7 +206,7 @@ This JSON block is part of this same authoritative document and contains every c
       "required": 229,
       "present": 19,
       "sourceAccepted": 19,
-      "remoteVerified": 16,
+      "remoteVerified": 19,
       "productionComplete": 0
     },
     {
@@ -1033,14 +1034,14 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-006",
       "review": "passed",
-      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
-      "remoteVerified": false,
+      "runtimeQa": "failed-native-gameplay-composite-attempt-001",
+      "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-006/contact-627-dark.png",
       "qaEvidencePresent": true,
       "directionalSelectionBound": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "source_accepted_local_only"
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "oak-two-top",
@@ -1079,14 +1080,14 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-006",
       "review": "passed",
-      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
-      "remoteVerified": false,
+      "runtimeQa": "failed-native-gameplay-composite-attempt-001",
+      "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-006/contact-627-dark.png",
       "qaEvidencePresent": true,
       "directionalSelectionBound": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "source_accepted_local_only"
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "walnut-four-top",
@@ -1125,14 +1126,14 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-006",
       "review": "passed",
-      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
-      "remoteVerified": false,
+      "runtimeQa": "failed-native-gameplay-composite-attempt-001",
+      "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-006/contact-627-dark.png",
       "qaEvidencePresent": true,
       "directionalSelectionBound": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "source_accepted_local_only"
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "banquette-section",
@@ -14895,9 +14896,7 @@ This JSON block is part of this same authoritative document and contains every c
       "notes": "Recycling station, pendant-light set, and herb wall each pass exact catalog identity, coherent quarter-turns, 627x627 sRGBA, common y=590 floor-contact pivot, transparent-border, unique-content, full-scale, and 128px review. Three rejected generator attempts remain hash-recorded but excluded. Their exact art, evidence, runtime-contract, and ledger bytes are remotely verified with green Windows and Ubuntu CI. The elevated-isometric runtime is integrated; native gameplay capture and composite acceptance remain blocking.",
       "qaEvidencePresent": true,
       "remoteVerified": true
-    }
-  ],
-  "pendingBatches": [
+    },
     {
       "id": "furniture-core-directional-006",
       "assets": [
@@ -14907,14 +14906,42 @@ This JSON block is part of this same authoritative document and contains every c
       ],
       "files": 28,
       "qa": "passed",
-      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
+      "runtimeQa": "failed-native-gameplay-composite-attempt-001",
       "sourcePromptMode": "built-in image generation; three identity-locked elevated four-direction atlases with targeted camera/count corrections, chroma removal, common-pivot normalization, exact identity review, and full/gameplay-scale contact sheets",
+      "remoteCommit": "185ca509f0d52aa3421686880ed94187ae77b35e",
+      "remoteTree": "ef75c179d6c16b0159baa7d675fa870699721bd0",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30998050059",
       "qaEvidence": "planning/art-qa/furniture-core-directional-006/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-006/qa.json",
-      "notes": "Local print set, oak two-top, and walnut four-top each pass exact catalog identity, coherent quarter-turns, 627x627 sRGBA, common y=590 floor-contact pivot, transparent-border, unique-content, full-scale, and 128px review. Six rejected camera/count attempts remain hash-recorded but excluded. The accepted package is locally promoted and runtime-registered; exact remote tree verification, hosted CI, and native Godot gameplay-composite acceptance remain blocking.",
+      "notes": "Local print set, oak two-top, and walnut four-top each pass exact source identity, coherent quarter-turns, raster gates, and full/gameplay-scale contact review. Their 28-file source package is remotely verified with green Windows and Ubuntu CI. Native attempt 001 confirmed the floor furniture projection but rejected production completion because local-art lacks a wall-mount contract and always-on world labels collided with art.",
       "qaEvidencePresent": true,
-      "remoteVerified": false,
-      "preservationPending": true
+      "remoteVerified": true
+    }
+  ],
+  "pendingBatches": [],
+  "runtimeQaAttempts": [
+    {
+      "id": "runtime-isometric-integration-001-attempt-001",
+      "status": "failed-needs-remediation",
+      "remoteCommit": "00f9a36dccf35ca2c82dbf2689d982749ab27f5c",
+      "remoteTree": "7c95a33e679232e99cfc9cb472abfbb478fa3ae9",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30999133497",
+      "artifactId": 8927474963,
+      "artifactSha256": "933842483b6a38a31eb9da837b665bd1799a320e343adb59b126564f815edbfd",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-001/review.json",
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth"
+      ],
+      "blockers": [
+        "mounted-object-anchor-contract",
+        "world-label-collision"
+      ],
+      "productionComplete": false,
+      "evidencePresent": true
     }
   ],
   "preservedReferences": [
@@ -14956,7 +14983,7 @@ This JSON block is part of this same authoritative document and contains every c
   ],
   "contractGaps": [
     "Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.",
-    "Choose and implement the final isometric floor projection; the current orthogonal renderer cannot align accepted elevated sprites.",
+    "Complete the mounted-object placement/anchor contract and pass a corrected native Godot composite; attempt 001 proved the elevated projection while rejecting floor-mounted wall/ceiling decor and always-on labels.",
     "Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.",
     "Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete."
   ]

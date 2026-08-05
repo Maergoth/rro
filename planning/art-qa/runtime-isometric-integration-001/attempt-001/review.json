@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "id": "runtime-isometric-integration-001-attempt-001",
+  "reviewedAt": "2026-08-05T10:55:46Z",
+  "source": {
+    "remoteCommit": "00f9a36dccf35ca2c82dbf2689d982749ab27f5c",
+    "remoteTree": "7c95a33e679232e99cfc9cb472abfbb478fa3ae9",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30999133497",
+    "artifactId": 8927474963,
+    "artifactName": "elevated-isometric-runtime-qa",
+    "artifactSha256": "933842483b6a38a31eb9da837b665bd1799a320e343adb59b126564f815edbfd"
+  },
+  "automatedGates": {
+    "windowsCi": "passed",
+    "ubuntuCi": "passed",
+    "nativeGodotCapture": "passed",
+    "captureCount": 4,
+    "viewport": [1800, 1100],
+    "minimumSampledColors": 260,
+    "exactArtifactDigestVerified": true,
+    "exactCaptureHashesVerified": true
+  },
+  "visualReview": {
+    "status": "failed-needs-remediation",
+    "productionComplete": false,
+    "passed": [
+      "The restaurant floor uses the intended elevated 2:1 orthographic-isometric projection in all four captures.",
+      "All 19 accepted directional identities render in the native Godot scene for north, east, south, and west rotations.",
+      "Four-direction texture selection, common floor-contact pivoting, uniform scaling, and mixed world depth are broadly coherent for floor-mounted furniture.",
+      "Walls, openings, incidents, parties, avatars, worn state, and broken state are present in the same native composite."
+    ],
+    "blockers": [
+      {
+        "id": "mounted-object-anchor-contract",
+        "assets": ["local-art", "pendants", "plants"],
+        "reason": "The catalog and runtime have only floor-footprint placement. Wall art and the window herb wall stand on the floor, while pendant lights lie at floor level instead of mounting to a wall or ceiling plane."
+      },
+      {
+        "id": "world-label-collision",
+        "assets": ["all-captured-assets"],
+        "reason": "Always-on furniture names and condition text overlap sprites, walls, actors, and one another; several labels are clipped to footprint width. This fails gameplay-scale legibility even though the underlying art is readable."
+      }
+    ],
+    "provisionalFloorAssetPasses": [
+      "banquette",
+      "booth",
+      "dish-machine",
+      "espresso",
+      "furniture-oak-two-top",
+      "furniture-six-burner-range",
+      "furniture-walnut-four-top",
+      "host-stand",
+      "mop-sink",
+      "pass",
+      "prep",
+      "range",
+      "recycling",
+      "service-station",
+      "table-four",
+      "table-two"
+    ],
+    "acceptedAssetIds": [],
+    "nextCaptureRequirements": [
+      "Hide or relocate always-on world labels so art and play-state markers remain readable at gameplay scale.",
+      "Represent mount type explicitly and prevent wall/ceiling assets from receiving floor-mounted runtime acceptance.",
+      "Repeat the exact four-rotation native capture and independently review the new artifact before updating production-complete counts."
+    ]
+  },
+  "captures": [
+    {"path": "planning/art-qa/runtime-isometric-integration-001/attempt-001/restaurant-north.png", "sha256": "4b686a57deb01f049cae3b8c5a5c21783b13d2b7f0a17d528cfd444a49f1cdb6"},
+    {"path": "planning/art-qa/runtime-isometric-integration-001/attempt-001/restaurant-east.png", "sha256": "05a8fa4026b50533b0b03d2ca757922a83ec7c26b55c9a0cb6260d39120dd1df"},
+    {"path": "planning/art-qa/runtime-isometric-integration-001/attempt-001/restaurant-south.png", "sha256": "0d89768ec47120d56b0f06a3706a74b1bd4ae8d402f3fd7bc440618aed5d6031"},
+    {"path": "planning/art-qa/runtime-isometric-integration-001/attempt-001/restaurant-west.png", "sha256": "10eb1f29d237ec9628b8332ef807576626383da3326a2af59dadcf30cacf207e"},
+    {"path": "planning/art-qa/runtime-isometric-integration-001/attempt-001/qa.json", "sha256": "e7f9ab61ba68d128419d7b1cb71ef3f5b4ed1514e49162bf21df967bf0a694cd"}
+  ]
+}

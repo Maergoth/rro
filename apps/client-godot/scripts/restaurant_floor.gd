@@ -364,10 +364,16 @@ func draw_object(object: Dictionary, alpha := 1.0) -> void:
 			draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 	var symbol := str(definition.get("symbol", str(definition.get("name", "?"))[0]))
 	if texture == null: draw_string(ThemeDB.fallback_font, bounds.get_center() + Vector2(-5, 5), symbol, HORIZONTAL_ALIGNMENT_LEFT, -1, clampi(int(cell_pixels * .35), 11, 22), Color("f7f0db", alpha))
-	if cell_pixels > 30:
+	if build_mode and cell_pixels > 30:
 		draw_string(ThemeDB.fallback_font, bounds.position + Vector2(5, 14), str(definition.get("name", "")), HORIZONTAL_ALIGNMENT_LEFT, int(bounds.size.x - 10), 10, Color("f7f0db", alpha * .92))
 		if condition in ["worn", "broken"]:
 			draw_string(ThemeDB.fallback_font, bounds.position + Vector2(5, bounds.size.y - 5), "%s · %.0f%%" % [condition.to_upper(), wear], HORIZONTAL_ALIGNMENT_LEFT, int(bounds.size.x - 10), 10, Color("ffc6a5", alpha))
+	elif condition in ["worn", "broken"]:
+		var marker_position := bounds.position + Vector2(9, 9)
+		var marker_color := Color("d9a44b") if condition == "worn" else Color("c6544f")
+		draw_circle(marker_position, 8, Color("101719", alpha))
+		draw_circle(marker_position, 6, Color(marker_color, alpha))
+		draw_string(ThemeDB.fallback_font, marker_position + Vector2(-2.5, 3.5), "!", HORIZONTAL_ALIGNMENT_LEFT, -1, 10, Color("fff4d8", alpha))
 
 func make_object_box(color: Color) -> StyleBoxFlat:
 	var box := StyleBoxFlat.new(); box.bg_color = color; box.border_color = Color(color).lightened(.25); box.set_border_width_all(2); box.set_corner_radius_all(5); return box

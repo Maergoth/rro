@@ -84,3 +84,9 @@ test("avatar headings are projected through the same isometric basis and all wor
   assert.match(runtime, /"party": draw_party\(item\.data\)/);
   assert.match(runtime, /"avatar": draw_avatar\(item\.data\)/);
 });
+
+test("live service keeps furniture art legible while build mode retains exact object labels", () => {
+  assert.match(runtime, /if build_mode and cell_pixels > 30:/);
+  assert.match(runtime, /elif condition in \["worn", "broken"\]:/);
+  assert.match(runtime, /var marker_color := Color\("d9a44b"\) if condition == "worn" else Color\("c6544f"\)/);
+});

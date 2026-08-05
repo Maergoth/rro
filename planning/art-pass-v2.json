@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "565869f5c09529d5da7dc30c0a31c042669c5291",
-    "tree": "5bdfdc178b6ebf5ce9f7719f63a417391f4b9ef6",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30996475549"
+    "commit": "00f9a36dccf35ca2c82dbf2689d982749ab27f5c",
+    "tree": "7c95a33e679232e99cfc9cb472abfbb478fa3ae9",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30999133497"
   },
   "completionRule": "generated, processed, raster-validated, visually accepted, runtime-bound assets whose exact reviewed bytes are remotely verified on GitHub with green CI",
   "artDirection": {
@@ -46,19 +46,22 @@
       "required": ["body_skin", "face", "hair_headwear", "base_outfit", "role_layer", "footwear", "accessory", "carried_object", "effects", "skin_masks", "primary_color_masks", "secondary_color_masks"]
     }
   },
-  "pendingBatches": [
+  "runtimeQaAttempts": [
     {
-      "id": "furniture-core-directional-006",
-      "assets": ["local-art", "furniture-oak-two-top", "furniture-walnut-four-top"],
-      "files": 28,
-      "qa": "passed",
-      "runtimeQa": "blocked-native-gameplay-composite-acceptance",
-      "sourcePromptMode": "built-in image generation; three identity-locked elevated four-direction atlases with targeted camera/count corrections, chroma removal, common-pivot normalization, exact identity review, and full/gameplay-scale contact sheets",
-      "qaEvidence": "planning/art-qa/furniture-core-directional-006/contact-627-dark.png",
-      "qaManifest": "planning/art-qa/furniture-core-directional-006/qa.json",
-      "notes": "Local print set, oak two-top, and walnut four-top each pass exact catalog identity, coherent quarter-turns, 627x627 sRGBA, common y=590 floor-contact pivot, transparent-border, unique-content, full-scale, and 128px review. Six rejected camera/count attempts remain hash-recorded but excluded. The accepted package is locally promoted and runtime-registered; exact remote tree verification, hosted CI, and native Godot gameplay-composite acceptance remain blocking."
+      "id": "runtime-isometric-integration-001-attempt-001",
+      "status": "failed-needs-remediation",
+      "remoteCommit": "00f9a36dccf35ca2c82dbf2689d982749ab27f5c",
+      "remoteTree": "7c95a33e679232e99cfc9cb472abfbb478fa3ae9",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30999133497",
+      "artifactId": 8927474963,
+      "artifactSha256": "933842483b6a38a31eb9da837b665bd1799a320e343adb59b126564f815edbfd",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-001/review.json",
+      "passed": ["native-four-rotation-capture", "elevated-projection", "directional-selection", "floor-contact-pivots", "mixed-world-depth"],
+      "blockers": ["mounted-object-anchor-contract", "world-label-collision"],
+      "productionComplete": false
     }
   ],
+  "pendingBatches": [],
   "batches": [
     {
       "id": "furniture-pilot-001",
@@ -355,6 +358,20 @@
       "qaEvidence": "planning/art-qa/furniture-core-directional-005/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-005/qa.json",
       "notes": "Recycling station, pendant-light set, and herb wall each pass exact catalog identity, coherent quarter-turns, 627x627 sRGBA, common y=590 floor-contact pivot, transparent-border, unique-content, full-scale, and 128px review. Three rejected generator attempts remain hash-recorded but excluded. Their exact art, evidence, runtime-contract, and ledger bytes are remotely verified with green Windows and Ubuntu CI. The elevated-isometric runtime is integrated; native gameplay capture and composite acceptance remain blocking."
+    },
+    {
+      "id": "furniture-core-directional-006",
+      "assets": ["local-art", "furniture-oak-two-top", "furniture-walnut-four-top"],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "failed-native-gameplay-composite-attempt-001",
+      "sourcePromptMode": "built-in image generation; three identity-locked elevated four-direction atlases with targeted camera/count corrections, chroma removal, common-pivot normalization, exact identity review, and full/gameplay-scale contact sheets",
+      "remoteCommit": "185ca509f0d52aa3421686880ed94187ae77b35e",
+      "remoteTree": "ef75c179d6c16b0159baa7d675fa870699721bd0",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30998050059",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-006/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-006/qa.json",
+      "notes": "Local print set, oak two-top, and walnut four-top each pass exact source identity, coherent quarter-turns, raster gates, and full/gameplay-scale contact review. Their 28-file source package is remotely verified with green Windows and Ubuntu CI. Native attempt 001 confirmed the floor furniture projection but rejected production completion because local-art lacks a wall-mount contract and always-on world labels collided with art."
     }
   ],
   "preservedButNotProductionComplete": [
