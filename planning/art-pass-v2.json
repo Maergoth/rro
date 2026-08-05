@@ -7,7 +7,7 @@
     "tree": "55728466efb98fa6e3bedd9bdaac0d86830f43ae",
     "ci": "https://github.com/Maergoth/rro/actions/runs/30974095159"
   },
-  "completionRule": "accepted runtime files committed and uploaded to GitHub",
+  "completionRule": "generated, processed, raster-validated, visually accepted, runtime-bound assets whose exact reviewed bytes are remotely verified on GitHub with green CI",
   "artDirection": {
     "camera": "orthographic semi-isometric",
     "furnitureDirections": ["north", "east", "south", "west"],

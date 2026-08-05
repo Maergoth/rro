@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import { resolve } from "node:path";
 import test from "node:test";
 
@@ -30,7 +31,27 @@ test("text-art evidence hashes are stable across Git line-ending conversion", ()
   assert.equal(mark.sha256, createHash("sha256").update(svg, "utf8").digest("hex"));
 });
 
+test("Git checks out checksum-bearing art evidence with canonical LF endings", () => {
+  const paths = [
+    "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-metrics.json",
+    "planning/art-qa/character-remediation-idle-classic-v1/normalized-bodies-metrics.json",
+    "planning/art-qa/character-remediation-idle-classic-v1/qa.json",
+    "tools/normalize-character-idle-v1.py",
+    "tools/process-character-classic-edited-v1.py",
+    "tools/validate-character-remediation-idle-classic-v1.py",
+  ];
+  const attributes = execFileSync("git", ["check-attr", "eol", "--", ...paths], {
+    cwd: ROOT,
+    encoding: "utf8",
+  }).trim().split(/\r?\n/);
+  assert.equal(attributes.length, paths.length);
+  for (const [index, line] of attributes.entries()) {
+    assert.equal(line, `${paths[index]}: eol: lf`);
+  }
+});
+
 test("the authoritative art ledger cannot hide missing, failed, local-only, or unbound art", () => {
+  const document = readFileSync(resolve(ROOT, "docs/ART_PROGRESS.md"), "utf8");
   const art = ledger();
   assert.equal(art.authoritativeProgressDocument, "docs/ART_PROGRESS.md");
   assert.equal(art.furniture.length, 229);
@@ -63,6 +84,14 @@ test("the authoritative art ledger cannot hide missing, failed, local-only, or u
   assert.equal(art.summaries.find((entry) => entry.lane === "Character body source foundations").remoteVerified, 2);
   assert.ok(art.reviewedBatches.every((entry) => entry.qaEvidencePresent && entry.remoteVerified));
   assert.equal(art.equipmentIcons.filter((entry) => entry.productionComplete).length, 16);
+  const incompleteEquipment = art.equipmentIcons.filter((entry) => !entry.productionComplete);
+  const incompleteLine = document.match(/^- Equipment icons \((\d+)\): (.+)$/m);
+  assert.ok(incompleteLine, "the human-readable tracker must enumerate incomplete equipment");
+  assert.equal(Number(incompleteLine[1]), incompleteEquipment.length);
+  assert.deepEqual(
+    [...incompleteLine[2].matchAll(/`([^`]+)`/g)].map((match) => match[1]),
+    incompleteEquipment.map((entry) => entry.id),
+  );
   for (const item of [...art.furniture, ...art.equipmentIcons]) {
     if (!item.productionComplete) continue;
     assert.equal(item.present, true);

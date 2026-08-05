@@ -249,6 +249,7 @@ const ledger = {
 };
 
 const missingFurnitureByCategory = Object.groupBy(furniture.filter((item) => !item.present), (item) => item.category);
+const incompleteEquipmentIcons = equipmentIcons.filter((item) => !item.productionComplete);
 const lines = [];
 lines.push("# RRO production art progress");
 lines.push("");
@@ -319,15 +320,15 @@ for (const [category, items] of Object.entries(missingFurnitureByCategory)) {
   lines.push(items.map((item) => `\`${item.assetId}\``).join(", "));
   lines.push("");
 }
-lines.push("## Other exact missing catalogs");
+lines.push("## Other exact incomplete catalogs");
 lines.push("");
-lines.push(`- Equipment icons (${equipmentIcons.length}): ${equipmentIcons.map((item) => `\`${item.id}\``).join(", ")}`);
+lines.push(`- Equipment icons (${incompleteEquipmentIcons.length}): ${incompleteEquipmentIcons.map((item) => `\`${item.id}\``).join(", ")}`);
 lines.push(`- Construction materials (${constructionMaterials.length}): ${constructionMaterials.map((item) => `\`${item.id}\``).join(", ")}`);
 lines.push(`- Opening geometry (${openingModules.length} × 4 directions): ${openingModules.map((item) => `\`${item.id}\``).join(", ")}`);
 lines.push(`- Utility overlays (${utilityOverlays.length}): ${utilityOverlays.map((item) => `\`${item.id}\``).join(", ")}`);
 lines.push(`- World (${world.length}): ${world.map((item) => `\`${item.id}\``).join(", ")}`);
 lines.push(`- Environment (${environment.length}): ${environment.map((item) => `\`${item.id}\``).join(", ")}`);
-lines.push(`- UI (${ui.length}; one present but unreviewed): ${ui.map((item) => `\`${item.id}\``).join(", ")}`);
+lines.push(`- UI (${ui.length} incomplete: ${ui.filter((item) => !item.present).length} absent, ${ui.filter((item) => item.present && item.status !== "production_complete").length} present but unreviewed): ${ui.map((item) => `\`${item.id}\``).join(", ")}`);
 lines.push("");
 lines.push("## Preserved and quarantined work");
 lines.push("");
