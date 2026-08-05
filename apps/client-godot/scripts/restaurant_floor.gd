@@ -41,9 +41,20 @@ const CATEGORY_COLORS := {
 
 # Visual elevation is deliberately client-only. Persisted x/y/rotation keep
 # the exact server contract while art is raised from its wall edge or ceiling
-# cell anchor in the elevated orthographic-isometric view.
+# cell anchor in the elevated orthographic-isometric view. These solid-color
+# structural planes do not claim the pending construction texture art.
+const WALL_PLANE_HEIGHT_CELLS := 1.75
 const WALL_ART_ELEVATION_CELLS := 0.85
-const CEILING_ART_ELEVATION_CELLS := 1.70
+const WALL_ART_ROOM_INSET_CELLS := 0.14
+const CEILING_ART_ELEVATION_CELLS := 2.15
+const CEILING_WORLD_DRAW_LAYER := 1
+
+const WALL_PLANE_COLORS := {
+	"north": Color("d6cfbd"),
+	"east": Color("bbb39f"),
+	"south": Color("aca38f"),
+	"west": Color("c7bfac"),
+}
 
 func _ready() -> void:
 	clip_contents = true
@@ -186,7 +197,10 @@ func object_at(cell: Vector2i, screen_point: Vector2) -> Dictionary:
 	return fallback
 
 func object_depth_grid_position(object: Dictionary, definition: Dictionary) -> Vector2:
-	return FurnitureMountPlacement.mount_anchor_grid(object, definition)
+	return FurnitureMountPlacement.mount_depth_anchor_grid(object, definition)
+
+func object_draw_layer(definition: Dictionary) -> int:
+	return CEILING_WORLD_DRAW_LAYER if FurnitureMountPlacement.mount_for(definition) == "ceiling" else 0
 
 func wall_opening_at(x: int, y: int, edge: String) -> String:
 	for wall in layout.get("walls", []):
@@ -389,7 +403,7 @@ func _draw() -> void:
 		if not dragging_object.is_empty() and str(object.get("id", "")) == str(dragging_object.get("id", "")): continue
 		var definition := furniture_definition(str(object.get("definitionId", "")))
 		if not definition.is_empty():
-			world_items.append(world_item("object", object, object_depth_grid_position(object, definition)))
+			world_items.append(world_item("object", object, object_depth_grid_position(object, definition), object_draw_layer(definition)))
 	if not dragging_object.is_empty():
 		var preview := dragging_object.duplicate()
 		preview.x = int(drag_preview_placement.get("x", dragging_object.get("x", 0)))
@@ -398,7 +412,7 @@ func _draw() -> void:
 		var preview_definition := furniture_definition(str(preview.get("definitionId", "")))
 		if not preview_definition.is_empty():
 			preview["_previewValid"] = placement_preview_is_valid(preview, preview_definition, str(preview.get("id", "")))
-			world_items.append(world_item("object-preview", preview, object_depth_grid_position(preview, preview_definition)))
+			world_items.append(world_item("object-preview", preview, object_depth_grid_position(preview, preview_definition), object_draw_layer(preview_definition)))
 	elif build_tool == "object" and not selected_catalog_id.is_empty() and inside_grid(hover_cell):
 		var preview_definition := furniture_definition(selected_catalog_id)
 		if not preview_definition.is_empty():
@@ -411,7 +425,7 @@ func _draw() -> void:
 				"_previewValid": false,
 			}
 			preview["_previewValid"] = placement_preview_is_valid(preview, preview_definition)
-			world_items.append(world_item("object-preview", preview, object_depth_grid_position(preview, preview_definition)))
+			world_items.append(world_item("object-preview", preview, object_depth_grid_position(preview, preview_definition), object_draw_layer(preview_definition)))
 	for incident in snapshot.get("incidents", []):
 		world_items.append(world_item("incident", incident, Vector2(float(incident.get("x", 0)), float(incident.get("y", 0)))))
 	for party in snapshot.get("parties", []):
@@ -429,14 +443,19 @@ func _draw() -> void:
 			"avatar": draw_avatar(item.data)
 	draw_hud()
 
-func world_item(kind: String, data: Dictionary, grid_position: Vector2) -> Dictionary:
+func world_item(kind: String, data: Dictionary, grid_position: Vector2, draw_layer := 0) -> Dictionary:
 	return {
 		"kind": kind,
 		"data": data,
+		"drawLayer": draw_layer,
 		"depth": IsometricGridProjection.depth_key(Rect2(grid_position, Vector2.ZERO), "%s:%s" % [kind, str(data.get("id", data.get("characterId", "")))]),
 	}
 
 func world_item_draws_before(left: Dictionary, right: Dictionary) -> bool:
+	var left_layer := int(left.get("drawLayer", 0))
+	var right_layer := int(right.get("drawLayer", 0))
+	if left_layer != right_layer:
+		return left_layer < right_layer
 	return IsometricGridProjection.depth_key_draws_before(left.get("depth", {}), right.get("depth", {}))
 
 func wall_grid_position(wall: Dictionary) -> Vector2:
@@ -448,6 +467,19 @@ func wall_grid_position(wall: Dictionary) -> Vector2:
 		"west": return Vector2(x, y + 0.5)
 	return Vector2(x, y)
 
+func wall_plane_point(start: Vector2, finish: Vector2, along: float, height: float) -> Vector2:
+	return start.lerp(finish, clampf(along, 0.0, 1.0)) - Vector2(0.0, cell_pixels * WALL_PLANE_HEIGHT_CELLS * clampf(height, 0.0, 1.0))
+
+func draw_wall_plane_section(start: Vector2, finish: Vector2, along_start: float, along_end: float, height_start: float, height_end: float, color: Color) -> void:
+	var panel := PackedVector2Array([
+		wall_plane_point(start, finish, along_start, height_start),
+		wall_plane_point(start, finish, along_end, height_start),
+		wall_plane_point(start, finish, along_end, height_end),
+		wall_plane_point(start, finish, along_start, height_end),
+	])
+	draw_colored_polygon(panel, color)
+	draw_polyline(closed_polygon(panel), Color("273034"), 1.25, true)
+
 func draw_wall(wall: Dictionary) -> void:
 	var x := float(wall.get("x", 0)); var y := float(wall.get("y", 0)); var edge := str(wall.get("edge", "north"))
 	var polygon := footprint_polygon(grid_footprint(x, y, 1.0, 1.0))
@@ -458,11 +490,30 @@ func draw_wall(wall: Dictionary) -> void:
 		"south": start = polygon[2]; finish = polygon[3]
 		"west": start = polygon[3]; finish = polygon[0]
 	var opening := str(wall.get("openingType", "solid"))
-	var color := Color("d1cab5") if opening == "solid" else Color("82ccb1")
-	draw_line(start, finish, Color("172024"), 7)
-	if opening == "solid": draw_line(start, finish, color, 3)
+	var plane_color: Color = WALL_PLANE_COLORS.get(edge, Color("c8c0ad"))
+	var opening_color := Color("82ccb1")
+	if opening == "solid":
+		draw_wall_plane_section(start, finish, 0.0, 1.0, 0.0, 1.0, plane_color)
 	else:
-		draw_line(start, start.lerp(finish, .28), color, 3); draw_line(start.lerp(finish, .72), finish, color, 3)
+		# Preserve a traversable/readable center opening while retaining wall
+		# mass at both jambs. Windows also keep a sill; doors and arches remain
+		# open to the floor with a shallow structural header.
+		draw_wall_plane_section(start, finish, 0.0, 0.28, 0.0, 1.0, plane_color)
+		draw_wall_plane_section(start, finish, 0.72, 1.0, 0.0, 1.0, plane_color)
+		if opening == "window":
+			draw_wall_plane_section(start, finish, 0.28, 0.72, 0.0, 0.30, plane_color)
+			draw_wall_plane_section(start, finish, 0.28, 0.72, 0.72, 1.0, plane_color)
+			draw_line(wall_plane_point(start, finish, 0.28, 0.30), wall_plane_point(start, finish, 0.72, 0.30), opening_color, 2.0)
+			draw_line(wall_plane_point(start, finish, 0.28, 0.72), wall_plane_point(start, finish, 0.72, 0.72), opening_color, 2.0)
+		else:
+			var header_bottom := 0.62 if opening == "arch" else 0.72
+			draw_wall_plane_section(start, finish, 0.28, 0.72, header_bottom, 1.0, plane_color)
+			draw_line(wall_plane_point(start, finish, 0.28, 0.0), wall_plane_point(start, finish, 0.28, header_bottom), opening_color, 2.0)
+			draw_line(wall_plane_point(start, finish, 0.72, 0.0), wall_plane_point(start, finish, 0.72, header_bottom), opening_color, 2.0)
+	draw_line(start, finish, Color("172024"), 7)
+	if opening == "solid": draw_line(start, finish, plane_color.lightened(0.12), 3)
+	else:
+		draw_line(start, start.lerp(finish, .28), opening_color, 3); draw_line(start.lerp(finish, .72), finish, opening_color, 3)
 
 func object_draws_before(left: Dictionary, right: Dictionary) -> bool:
 	var left_definition := furniture_definition(str(left.get("definitionId", "")))
@@ -475,6 +526,7 @@ func object_art_mount_anchor_screen(object: Dictionary, definition: Dictionary) 
 	var mount := FurnitureMountPlacement.mount_for(definition)
 	var grid_anchor := FurnitureMountPlacement.mount_anchor_grid(object, definition)
 	if mount == "wall":
+		grid_anchor = FurnitureMountPlacement.wall_room_anchor_grid(object, definition, WALL_ART_ROOM_INSET_CELLS)
 		return grid_to_screen(grid_anchor) - Vector2(0.0, cell_pixels * WALL_ART_ELEVATION_CELLS)
 	if mount == "ceiling":
 		return grid_to_screen(grid_anchor) - Vector2(0.0, cell_pixels * CEILING_ART_ELEVATION_CELLS)

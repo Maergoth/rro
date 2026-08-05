@@ -72,13 +72,14 @@ const FLOOR_POSITIONS := {
 }
 
 # Wall anchors move to a complete solid perimeter span for the edge selected
-# by the persisted rotation. The ceiling anchor remains an in-bounds minimum
-# cell and lets its 2x1 footprint rotate through the same four directions.
+# by the persisted rotation. The ceiling anchor shares the walnut four-top's
+# cells on purpose, proving floor/ceiling namespaces while giving the pendants
+# an honest dining-table context in every reviewed direction.
 const MOUNTED_POSITIONS_BY_ROTATION := {
-	0: {"local-art": Vector2i(5, 0), "pendants": Vector2i(15, 20), "plants": Vector2i(20, 0)},
-	90: {"local-art": Vector2i(29, 3), "pendants": Vector2i(15, 20), "plants": Vector2i(29, 12)},
-	180: {"local-art": Vector2i(5, 22), "pendants": Vector2i(15, 20), "plants": Vector2i(20, 22)},
-	270: {"local-art": Vector2i(0, 3), "pendants": Vector2i(15, 20), "plants": Vector2i(0, 12)},
+	0: {"local-art": Vector2i(5, 0), "pendants": Vector2i(5, 16), "plants": Vector2i(20, 0)},
+	90: {"local-art": Vector2i(29, 3), "pendants": Vector2i(5, 16), "plants": Vector2i(29, 12)},
+	180: {"local-art": Vector2i(5, 22), "pendants": Vector2i(5, 16), "plants": Vector2i(20, 22)},
+	270: {"local-art": Vector2i(0, 3), "pendants": Vector2i(5, 16), "plants": Vector2i(0, 12)},
 }
 
 func _initialize() -> void:

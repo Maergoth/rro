@@ -117,3 +117,33 @@ static func mount_anchor_grid(object: Dictionary, definition: Dictionary) -> Vec
 	if mount == "ceiling":
 		return footprint_value.get_center()
 	return footprint_value.end
+
+## Points from a supporting wall edge into the persisted object's room-side
+## cell. This is visual geometry only; server-authoritative x/y/rotation and
+## support validation remain unchanged.
+static func wall_room_normal_grid(rotation_degrees: int) -> Vector2:
+	match wall_edge_for_rotation(rotation_degrees):
+		"north":
+			return Vector2(0.0, 1.0)
+		"east":
+			return Vector2(-1.0, 0.0)
+		"south":
+			return Vector2(0.0, -1.0)
+		"west":
+			return Vector2(1.0, 0.0)
+	return Vector2.ZERO
+
+static func wall_room_anchor_grid(object: Dictionary, definition: Dictionary, inset_cells: float) -> Vector2:
+	return mount_anchor_grid(object, definition) + wall_room_normal_grid(int(object.get("rotation", 0))) * maxf(0.0, inset_cells)
+
+## A wall sprite sorts at the frontmost endpoint of its complete support span,
+## after every individual wall panel in that span. Other mounts keep the
+## established footprint-derived depth anchor.
+static func mount_depth_anchor_grid(object: Dictionary, definition: Dictionary) -> Vector2:
+	if mount_for(definition) == "wall":
+		var segment := wall_edge_segment(object, definition)
+		if segment.size() == 2:
+			var first_depth := segment[0].x + segment[0].y
+			var second_depth := segment[1].x + segment[1].y
+			return segment[1] if second_depth >= first_depth else segment[0]
+	return mount_anchor_grid(object, definition)
