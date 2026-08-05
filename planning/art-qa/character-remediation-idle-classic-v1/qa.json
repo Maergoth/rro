@@ -24,6 +24,11 @@
     "groundContactPivot": [192, 472]
   },
   "sourceCommit": "20e83ef4dbac4f616686023007f4eb9ee7801445",
+  "remotePreservation": {
+    "commit": "7b2caaf6843e2d1b895870a80103eff57227d15e",
+    "tree": "3892dcc335490ff767d8e17d39a4b5b8b9236a6a",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30973906887"
+  },
   "acceptedEditSources": [
     {
       "path": "planning/art-sources/character-remediation-idle-classic-v1/base-a-atlas.png",
@@ -93,8 +98,7 @@
   "blockers": [
     "Accepted character art is static idle only; animated body frames are not included.",
     "The Godot character runtime compositor is not implemented or bound to these layers.",
-    "Animation/activity bindings are not implemented.",
-    "The accepted batch is local and remote publication is pending."
+    "Animation/activity bindings are not implemented."
   ],
   "explicitExclusions": {
     "apron": "failed and unmodified",

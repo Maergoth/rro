@@ -12,9 +12,9 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 - Branch: `agent/complete-production-art`
 - Draft PR: https://github.com/Maergoth/rro/pull/2
-- Last verified remote head before this ledger check-in: `0eec73ba38ba302728893459f39421580e82c78f`
-- Verified tree: `217a1407d5f573286531c36abd6ef03fedfbf769`
-- CI: https://github.com/Maergoth/rro/actions/runs/30971460656
+- Last verified remote head before this ledger check-in: `e53f8758628ff1f23c515d9d7b5c5c38278b3f4d`
+- Verified tree: `55728466efb98fa6e3bedd9bdaac0d86830f43ae`
+- CI: https://github.com/Maergoth/rro/actions/runs/30974095159
 
 ## Launch coverage
 
@@ -28,7 +28,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 | World atlas | 1 | 0 | 0 | 0 | 0 |
 | Environment helpers | 4 | 0 | 0 | 0 | 0 |
 | Launch UI assets | 15 | 1 | 0 | 0 | 0 |
-| Character body source foundations | 2 | 2 | 2 | 0 | 0 |
+| Character body source foundations | 2 | 2 | 2 | 2 | 0 |
 | Body animation sets (body × animation) | 52 | 0 | 0 | 0 | 0 |
 | Split modular layer body-fits | 126 | 0 | 0 | 0 | 0 |
 | Equipment attachment body-fits | 62 | 0 | 0 | 0 | 0 |
@@ -42,11 +42,11 @@ Directional furniture texture selection is yes; final projection alignment is no
 - Durable character files: 144 PNGs.
 - Body source poses: 16/1344 (1.2%).
 - Final body animation frame cells: 0/2720; even idle requires four frames and currently has one still per direction.
-- Source foundations: 2/2 accepted with a normalized `(192,472)` ground pivot and clean skin channels; 0/2 reflect the currently reviewed bytes on a verified remote checkpoint.
+- Source foundations: 2/2 accepted with a normalized `(192,472)` ground pivot and clean skin channels; 2/2 reflect the currently reviewed bytes on a verified remote checkpoint.
 - Split swappable layer body-fits: 0/126; required catalogs are frozen below.
 - Equipment attachment body-fits: 0/62 from 31 equippable items.
 - Activity-animation bindings: 0/89.
-- Classic idle outfit body-fits: 2/2 source-accepted after full-resolution/gameplay composite remediation; they remain production-incomplete until remote verification, split-layer catalog coverage, animation frames, and runtime compositing pass.
+- Classic idle outfit body-fits: 2/2 source-accepted and 2/2 remote-verified after full-resolution/gameplay composite remediation; they remain production-incomplete until split-layer catalog coverage, animation frames, and runtime compositing pass.
 - Apron prototypes remain durable but QA-failed for silhouette/foot leakage and are not counted.
 
 | Modular slot | Required visible choices | IDs |
@@ -75,14 +75,7 @@ Directional furniture texture selection is yes; final projection alignment is no
 | equipment-icons-shared-manager-001 | 19 | passed | passed-full-and-gameplay-scale | `c2158fc` | planning/art-qa/equipment-icons-shared-manager-001/contact-128-dark.png |
 | furniture-core-directional-001 | 20 | passed | blocked-not-bound | `9daba41` | planning/art-qa/furniture-core-directional-001/contact-627-dark.png |
 | equipment-icons-owner-server-002 | 19 | passed | passed-full-and-gameplay-scale | `0eec73b` | planning/art-qa/equipment-icons-owner-server-002/contact-128-dark.png |
-
-## Accepted locally, remote checkpoint pending
-
-These batches have passed source/composite QA but deliberately do not count as remotely verified or production-complete until their immutable GitHub commit and hosted CI are recorded.
-
-| Batch | Files | Source QA | Runtime/composite QA | Evidence |
-|---|---:|---|---|---|
-| character-remediation-idle-classic-v1 | 109 | passed | blocked-static-idle-and-no-runtime-compositor | planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png |
+| character-remediation-idle-classic-v1 | 109 | passed | blocked-static-idle-and-no-runtime-compositor | `7b2caaf` | planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png |
 
 ## Missing furniture directional sets
 
@@ -159,9 +152,9 @@ This JSON block is part of this same authoritative document and contains every c
   "durableBaseline": {
     "branch": "agent/complete-production-art",
     "pullRequest": "https://github.com/Maergoth/rro/pull/2",
-    "commit": "0eec73ba38ba302728893459f39421580e82c78f",
-    "tree": "217a1407d5f573286531c36abd6ef03fedfbf769",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30971460656"
+    "commit": "e53f8758628ff1f23c515d9d7b5c5c38278b3f4d",
+    "tree": "55728466efb98fa6e3bedd9bdaac0d86830f43ae",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30974095159"
   },
   "completionPipeline": [
     "generated",
@@ -256,7 +249,7 @@ This JSON block is part of this same authoritative document and contains every c
       "required": 2,
       "present": 2,
       "sourceAccepted": 2,
-      "remoteVerified": 0,
+      "remoteVerified": 2,
       "productionComplete": 0
     },
     {
@@ -12756,12 +12749,12 @@ This JSON block is part of this same authoritative document and contains every c
         "batchId": "character-remediation-idle-classic-v1",
         "review": "passed",
         "runtimeQa": "blocked-static-idle-and-no-runtime-compositor",
-        "remoteVerified": false,
+        "remoteVerified": true,
         "qaEvidence": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png",
         "qaEvidencePresent": true,
         "runtimeBound": false,
         "productionComplete": false,
-        "status": "source_accepted_local_only"
+        "status": "source_accepted_runtime_blocked"
       },
       {
         "body": "base-b",
@@ -12811,12 +12804,12 @@ This JSON block is part of this same authoritative document and contains every c
         "batchId": "character-remediation-idle-classic-v1",
         "review": "passed",
         "runtimeQa": "blocked-static-idle-and-no-runtime-compositor",
-        "remoteVerified": false,
+        "remoteVerified": true,
         "qaEvidence": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png",
         "qaEvidencePresent": true,
         "runtimeBound": false,
         "productionComplete": false,
-        "status": "source_accepted_local_only"
+        "status": "source_accepted_runtime_blocked"
       }
     ],
     "skinFoundations": [
@@ -12908,12 +12901,12 @@ This JSON block is part of this same authoritative document and contains every c
         "batchId": "character-remediation-idle-classic-v1",
         "review": "passed",
         "runtimeQa": "blocked-static-idle-and-no-runtime-compositor",
-        "remoteVerified": false,
+        "remoteVerified": true,
         "qaEvidence": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png",
         "qaEvidencePresent": true,
         "runtimeBound": false,
         "productionComplete": false,
-        "status": "source_accepted_local_only"
+        "status": "source_accepted_runtime_blocked"
       },
       {
         "body": "base-b",
@@ -13003,12 +12996,12 @@ This JSON block is part of this same authoritative document and contains every c
         "batchId": "character-remediation-idle-classic-v1",
         "review": "passed",
         "runtimeQa": "blocked-static-idle-and-no-runtime-compositor",
-        "remoteVerified": false,
+        "remoteVerified": true,
         "qaEvidence": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png",
         "qaEvidencePresent": true,
         "runtimeBound": false,
         "productionComplete": false,
-        "status": "source_accepted_local_only"
+        "status": "source_accepted_runtime_blocked"
       }
     ],
     "prototypeOutfits": [
@@ -13141,12 +13134,12 @@ This JSON block is part of this same authoritative document and contains every c
         "batchId": "character-remediation-idle-classic-v1",
         "review": "passed",
         "runtimeQa": "blocked-static-idle-and-no-runtime-compositor",
-        "remoteVerified": false,
+        "remoteVerified": true,
         "qaEvidence": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png",
         "qaEvidencePresent": true,
         "runtimeBound": false,
         "productionComplete": false,
-        "status": "source_accepted_local_only"
+        "status": "source_accepted_runtime_blocked"
       },
       {
         "outfit": "classic",
@@ -13277,12 +13270,12 @@ This JSON block is part of this same authoritative document and contains every c
         "batchId": "character-remediation-idle-classic-v1",
         "review": "passed",
         "runtimeQa": "blocked-static-idle-and-no-runtime-compositor",
-        "remoteVerified": false,
+        "remoteVerified": true,
         "qaEvidence": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png",
         "qaEvidencePresent": true,
         "runtimeBound": false,
         "productionComplete": false,
-        "status": "source_accepted_local_only"
+        "status": "source_accepted_runtime_blocked"
       },
       {
         "outfit": "apron",
@@ -13843,9 +13836,7 @@ This JSON block is part of this same authoritative document and contains every c
       "notes": "Eight distinct manager, owner, and server icons passed full-size and 66px review, exact catalog mapping, unique-content and cross-batch hashing, sRGBA/alpha validation, and a minimum six-pixel transparent margin. High-resolution accepted sources are preserved in the same remote checkpoint.",
       "qaEvidencePresent": true,
       "remoteVerified": true
-    }
-  ],
-  "pendingBatches": [
+    },
     {
       "id": "character-remediation-idle-classic-v1",
       "assets": [
@@ -13860,14 +13851,17 @@ This JSON block is part of this same authoritative document and contains every c
       "qa": "passed",
       "runtimeQa": "blocked-static-idle-and-no-runtime-compositor",
       "sourcePromptMode": "pose-locked built-in image edits plus deterministic alpha extraction, pivot normalization, tint-mask reconstruction, and byte-reproducible processing",
+      "remoteCommit": "7b2caaf6843e2d1b895870a80103eff57227d15e",
+      "remoteTree": "3892dcc335490ff767d8e17d39a4b5b8b9236a6a",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30973906887",
       "qaEvidence": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png",
       "qaManifest": "planning/art-qa/character-remediation-idle-classic-v1/qa.json",
-      "notes": "Two elevated body presentations, skin layers, and classic outfit fits pass full-resolution/gameplay composite QA and exact raster gates. This pending record deliberately withholds remote verification until the immutable preservation commit and hosted CI are green. Static idle art, combined classic clothing, and absent Godot character compositing/animation keep production completion at zero.",
+      "notes": "Two elevated body presentations, normalized skin foundations, and two classic idle outfit body-fits pass exact raster hashes, byte reproduction, a common (192,472) pivot, zero leakage/occlusion gates, and full/gameplay composite review. Static idle art, combined classic clothing, and absent Godot character compositing/animation keep production completion at zero.",
       "qaEvidencePresent": true,
-      "remoteVerified": false,
-      "preservationPending": true
+      "remoteVerified": true
     }
   ],
+  "pendingBatches": [],
   "preservedReferences": [
     {
       "id": "alpha2-overhead-furniture",

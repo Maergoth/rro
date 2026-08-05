@@ -99,7 +99,7 @@ cb71b480f1a8fd318588c68905b455d9f950a86bca3c976eca6160c087c1347e  apps/client-go
 f5dc82f71b722cadd1ae6a60995ed1dea8a401d4104b4caf20cf50554d72b4c8  planning/art-qa/character-remediation-idle-classic-v1/classic-composites-metrics.json
 5bbccb23e37830c55aed3cf1728cd7724089a3d0e4b76a7d960f2a3066c5f70e  planning/art-qa/character-remediation-idle-classic-v1/normalized-bodies-full.png
 40eaba3b2d3a0058684331d0dbb73e72d6099d20ea479404e0f761239b371992  planning/art-qa/character-remediation-idle-classic-v1/normalized-bodies-metrics.json
-1f569b18213174e281a34354d552bd11f2863d1d6977dcfd46b85a88f66415fa  planning/art-qa/character-remediation-idle-classic-v1/qa.json
+cce9d3d2a184113e33f7fc1eddb014119d345fcbbecf30896ba9bb82ce4b128a  planning/art-qa/character-remediation-idle-classic-v1/qa.json
 597795e9e01a553462d1a94179176a26bd5d86cff0b2a2ca84203350cbd2ff2e  planning/art-sources/character-remediation-idle-classic-v1/base-a-atlas.png
 cf2d44033756138a4f82ebb452422644b660e35c6596a02d6e09e3ce245a95b2  planning/art-sources/character-remediation-idle-classic-v1/base-a-south-west-sleeve-edit.png
 880bd0d5d8e0c7931fbc647c7698e87eb71b39f41dc148ee590549fdc1beeebc  planning/art-sources/character-remediation-idle-classic-v1/base-b-atlas.png

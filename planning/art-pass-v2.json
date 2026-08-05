@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "0eec73ba38ba302728893459f39421580e82c78f",
-    "tree": "217a1407d5f573286531c36abd6ef03fedfbf769",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30971460656"
+    "commit": "e53f8758628ff1f23c515d9d7b5c5c38278b3f4d",
+    "tree": "55728466efb98fa6e3bedd9bdaac0d86830f43ae",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30974095159"
   },
   "completionRule": "accepted runtime files committed and uploaded to GitHub",
   "artDirection": {
@@ -37,6 +37,7 @@
       "sourceAcceptedBodyPresentations": 2,
       "sourceAcceptedIdleDirectionalFiles": 16,
       "sourceAcceptedSkinFoundationFiles": 32,
+      "sourceAcceptedClassicOutfitBodyVariants": 2,
       "preservedPrototypeOutfitDesigns": 2,
       "preservedPrototypeOutfitBodyVariants": 4,
       "preservedPrototypeOutfitFiles": 96,
@@ -45,26 +46,7 @@
       "required": ["body_skin", "face", "hair_headwear", "base_outfit", "role_layer", "footwear", "accessory", "carried_object", "effects", "skin_masks", "primary_color_masks", "secondary_color_masks"]
     }
   },
-  "pendingBatches": [
-    {
-      "id": "character-remediation-idle-classic-v1",
-      "assets": [
-        "body-base-a-idle-isometric",
-        "body-base-b-idle-isometric",
-        "body-skin-masks-base-a",
-        "body-skin-masks-base-b",
-        "outfit-classic-base-a",
-        "outfit-classic-base-b"
-      ],
-      "files": 109,
-      "qa": "passed",
-      "runtimeQa": "blocked-static-idle-and-no-runtime-compositor",
-      "sourcePromptMode": "pose-locked built-in image edits plus deterministic alpha extraction, pivot normalization, tint-mask reconstruction, and byte-reproducible processing",
-      "qaEvidence": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png",
-      "qaManifest": "planning/art-qa/character-remediation-idle-classic-v1/qa.json",
-      "notes": "Two elevated body presentations, skin layers, and classic outfit fits pass full-resolution/gameplay composite QA and exact raster gates. This pending record deliberately withholds remote verification until the immutable preservation commit and hosted CI are green. Static idle art, combined classic clothing, and absent Godot character compositing/animation keep production completion at zero."
-    }
-  ],
+  "pendingBatches": [],
   "batches": [
     {
       "id": "furniture-pilot-001",
@@ -194,6 +176,27 @@
       "qaEvidence": "planning/art-qa/equipment-icons-owner-server-002/contact-128-dark.png",
       "qaManifest": "planning/art-qa/equipment-icons-owner-server-002/qa.json",
       "notes": "Eight distinct manager, owner, and server icons passed full-size and 66px review, exact catalog mapping, unique-content and cross-batch hashing, sRGBA/alpha validation, and a minimum six-pixel transparent margin. High-resolution accepted sources are preserved in the same remote checkpoint."
+    },
+    {
+      "id": "character-remediation-idle-classic-v1",
+      "assets": [
+        "body-base-a-idle-isometric",
+        "body-base-b-idle-isometric",
+        "body-skin-masks-base-a",
+        "body-skin-masks-base-b",
+        "outfit-classic-base-a",
+        "outfit-classic-base-b"
+      ],
+      "files": 109,
+      "qa": "passed",
+      "runtimeQa": "blocked-static-idle-and-no-runtime-compositor",
+      "sourcePromptMode": "pose-locked built-in image edits plus deterministic alpha extraction, pivot normalization, tint-mask reconstruction, and byte-reproducible processing",
+      "remoteCommit": "7b2caaf6843e2d1b895870a80103eff57227d15e",
+      "remoteTree": "3892dcc335490ff767d8e17d39a4b5b8b9236a6a",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30973906887",
+      "qaEvidence": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png",
+      "qaManifest": "planning/art-qa/character-remediation-idle-classic-v1/qa.json",
+      "notes": "Two elevated body presentations, normalized skin foundations, and two classic idle outfit body-fits pass exact raster hashes, byte reproduction, a common (192,472) pivot, zero leakage/occlusion gates, and full/gameplay composite review. Static idle art, combined classic clothing, and absent Godot character compositing/animation keep production completion at zero."
     }
   ],
   "preservedButNotProductionComplete": [

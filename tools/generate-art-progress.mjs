@@ -286,7 +286,7 @@ lines.push(`- Source foundations: ${bodyFoundations.filter((item) => item.review
 lines.push(`- Split swappable layer body-fits: 0/${ledger.characters.requiredSplitLayerBodyFits}; required catalogs are frozen below.`);
 lines.push(`- Equipment attachment body-fits: 0/${ledger.characters.requiredEquipmentAttachmentBodyFits} from ${equippableItems.length} equippable items.`);
 lines.push(`- Activity-animation bindings: 0/${activities.length}.`);
-lines.push(`- Classic idle outfit body-fits: ${prototypeOutfits.filter((item) => item.outfit === "classic" && item.review === "passed").length}/2 source-accepted after full-resolution/gameplay composite remediation; they remain production-incomplete until remote verification, split-layer catalog coverage, animation frames, and runtime compositing pass.`);
+lines.push(`- Classic idle outfit body-fits: ${prototypeOutfits.filter((item) => item.outfit === "classic" && item.review === "passed").length}/2 source-accepted and ${prototypeOutfits.filter((item) => item.outfit === "classic" && item.remoteVerified).length}/2 remote-verified after full-resolution/gameplay composite remediation; they remain production-incomplete until split-layer catalog coverage, animation frames, and runtime compositing pass.`);
 lines.push("- Apron prototypes remain durable but QA-failed for silhouette/foot leakage and are not counted.");
 lines.push("");
 lines.push("| Modular slot | Required visible choices | IDs |");
