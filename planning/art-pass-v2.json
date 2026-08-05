@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "daef2aa572f0f855ac95d92402b9af19cc76bc9f",
-    "tree": "36fbf6d8740e2f07f29527ff6e506cf541684b51",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30980689257"
+    "commit": "a5baba4c7e1e8d8a5bf5d873e6b1b809a1740505",
+    "tree": "9221129ebe145eda45feee2c31ef8be25689fde0",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30981276677"
   },
   "completionRule": "generated, processed, raster-validated, visually accepted, runtime-bound assets whose exact reviewed bytes are remotely verified on GitHub with green CI",
   "artDirection": {
@@ -46,7 +46,19 @@
       "required": ["body_skin", "face", "hair_headwear", "base_outfit", "role_layer", "footwear", "accessory", "carried_object", "effects", "skin_masks", "primary_color_masks", "secondary_color_masks"]
     }
   },
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "furniture-core-directional-003",
+      "assets": ["range", "prep", "pass"],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "blocked-orthogonal-projection-and-gameplay-composite",
+      "sourcePromptMode": "built-in image generation; three separately prompted rigid 2x2 elevated-direction atlases with chroma removal, common-pivot normalization, exact feature-count review, and full/gameplay-scale contact sheets",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-003/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-003/qa.json",
+      "notes": "Range, prep, and pass each pass exact catalog identity, coherent quarter-turns, 627x627 sRGBA, common y=590 floor-contact pivot, transparent-border, unique-content, full-scale, and 128px review. One rejected prep attempt remains hash-recorded but excluded. The accepted package remains pending until its exact art/evidence/runtime-contract tree is remotely verified with green hosted CI; final orthographic-to-isometric projection and real gameplay composite acceptance remain blocking."
+    }
+  ],
   "batches": [
     {
       "id": "furniture-pilot-001",

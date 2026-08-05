@@ -10,6 +10,7 @@ const binding = read("apps/client-godot/scripts/furniture_art_binding.gd");
 const exportPreset = read("apps/client-godot/export_presets.cfg");
 const artPass = JSON.parse(read("planning/art-pass-v2.json"));
 const furnitureBatch002Qa = JSON.parse(read("planning/art-qa/furniture-core-directional-002/qa.json"));
+const furnitureBatch003Qa = JSON.parse(read("planning/art-qa/furniture-core-directional-003/qa.json"));
 
 const canonicalRotation = (rotation) => ((rotation % 360) + 360) % 360;
 const directionForRotation = (rotation) => contract.directionsByRotation[String(canonicalRotation(rotation))] ?? "";
@@ -22,7 +23,7 @@ const directionalPath = (assetId, rotation) => {
 test("accepted furniture resolves exact directional paths for canonical rotations", () => {
   assert.equal(contract.schemaVersion, 1);
   assert.deepEqual(contract.directionsByRotation, { "0": "north", "90": "east", "180": "south", "270": "west" });
-  assert.deepEqual(contract.acceptedDirectionalAssetIds, ["banquette", "booth", "furniture-six-burner-range", "host-stand", "service-station", "table-four", "table-two"]);
+  assert.deepEqual(contract.acceptedDirectionalAssetIds, ["banquette", "booth", "furniture-six-burner-range", "host-stand", "pass", "prep", "range", "service-station", "table-four", "table-two"]);
 
   const expectedDirections = [[0, "north"], [90, "east"], [180, "south"], [270, "west"]];
   for (const assetId of contract.acceptedDirectionalAssetIds) {
@@ -51,11 +52,12 @@ test("accepted furniture resolves exact directional paths for canonical rotation
 test("the runtime contract covers every source-accepted directional set without inflating production completion", () => {
   const accepted = new Set();
   const sourceAcceptedBatches = [...artPass.batches, ...(artPass.pendingBatches ?? [])];
-  if (!sourceAcceptedBatches.some((batch) => batch.id === furnitureBatch002Qa.batchId)) {
+  for (const qa of [furnitureBatch002Qa, furnitureBatch003Qa]) {
+    if (sourceAcceptedBatches.some((batch) => batch.id === qa.batchId)) continue;
     sourceAcceptedBatches.push({
-      id: furnitureBatch002Qa.batchId,
-      assets: furnitureBatch002Qa.assets,
-      qa: furnitureBatch002Qa.artReviewStatus,
+      id: qa.batchId,
+      assets: qa.assets,
+      qa: qa.artReviewStatus,
     });
   }
   for (const batch of sourceAcceptedBatches) {
