@@ -5,11 +5,15 @@ signal tool_selected(tool: String, catalog_id: String)
 signal expand_requested(add_width: int, add_height: int)
 signal sell_selected_requested
 signal repair_selected_requested
+signal undo_requested
+signal redo_requested
 
 var content: Dictionary = {}
 var category_tabs: TabContainer
 var rotation_label: Label
 var selected_label: Label
+var undo_button: Button
+var redo_button: Button
 
 func _ready() -> void:
 	add_theme_constant_override("separation", 8)
@@ -41,6 +45,10 @@ func _ready() -> void:
 	var sell := Button.new(); sell.text = "Sell selected (40%)"; sell.pressed.connect(func() -> void: sell_selected_requested.emit()); actions.add_child(sell)
 	var expand := Button.new(); expand.text = "Add 4×4 area"; expand.pressed.connect(func() -> void: expand_requested.emit(4, 4)); actions.add_child(expand)
 	add_child(actions)
+	var history_actions := HBoxContainer.new()
+	undo_button = Button.new(); undo_button.text = "Undo"; undo_button.disabled = true; undo_button.pressed.connect(func() -> void: undo_requested.emit()); history_actions.add_child(undo_button)
+	redo_button = Button.new(); redo_button.text = "Redo"; redo_button.disabled = true; redo_button.pressed.connect(func() -> void: redo_requested.emit()); history_actions.add_child(redo_button)
+	add_child(history_actions)
 	if not content.is_empty(): rebuild()
 
 func set_content(value: Dictionary) -> void:
@@ -100,3 +108,10 @@ func add_catalog_button(parent: VBoxContainer, text: String, callback: Callable)
 
 func set_selected_object(object: Dictionary) -> void:
 	selected_label.text = "Selected: %s · %s · %.1f%% wear\nDrag to move · right-click to rotate" % [object.get("definitionId", "object"), str(object.get("state", "operational")).capitalize(), float(object.get("wear", 0))]
+
+func set_history_state(history: Dictionary) -> void:
+	if not is_instance_valid(undo_button) or not is_instance_valid(redo_button): return
+	undo_button.disabled = not bool(history.get("canUndo", false))
+	redo_button.disabled = not bool(history.get("canRedo", false))
+	undo_button.text = "Undo %s" % str(history.get("undoAction", "")).capitalize() if not undo_button.disabled else "Undo"
+	redo_button.text = "Redo %s" % str(history.get("redoAction", "")).capitalize() if not redo_button.disabled else "Redo"

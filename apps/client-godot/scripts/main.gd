@@ -601,9 +601,9 @@ func show_my_restaurant() -> void:
 		if is_instance_valid(current_builder): current_builder.set_selected_object(object)
 	)
 	split.add_child(current_floor)
-	var panel := PanelContainer.new(); panel.custom_minimum_size.x = 390; split.add_child(panel); current_builder = BuilderPalette.new(); current_builder.set_content(bootstrap.get("content", {})); current_builder.tool_selected.connect(func(tool: String, id: String) -> void: current_floor.select_tool(tool, id)); current_builder.repair_selected_requested.connect(repair_selected_builder_object); current_builder.sell_selected_requested.connect(sell_selected_builder_object); current_builder.expand_requested.connect(expand_builder); panel.add_child(current_builder)
+	var panel := PanelContainer.new(); panel.custom_minimum_size.x = 390; split.add_child(panel); current_builder = BuilderPalette.new(); current_builder.set_content(bootstrap.get("content", {})); current_builder.tool_selected.connect(func(tool: String, id: String) -> void: current_floor.select_tool(tool, id)); current_builder.repair_selected_requested.connect(repair_selected_builder_object); current_builder.sell_selected_requested.connect(sell_selected_builder_object); current_builder.expand_requested.connect(expand_builder); current_builder.undo_requested.connect(func() -> void: apply_builder_history("undo")); current_builder.redo_requested.connect(func() -> void: apply_builder_history("redo")); panel.add_child(current_builder)
 	api.get_json("/v1/restaurants/%s/layout" % current_restaurant_id, func(ok: bool, data: Dictionary, _code: int) -> void:
-		if ok and is_instance_valid(current_floor): current_floor.set_layout(data)
+		if ok and is_instance_valid(current_floor): current_floor.set_layout(data); update_builder_history(data)
 	)
 
 func show_found_restaurant() -> void:
@@ -645,12 +645,30 @@ func handle_build_action(action: String, payload: Dictionary) -> void:
 			var id := str(payload.get("id", "")); payload.erase("id"); api.patch_json("/v1/restaurants/%s/layout/objects/%s" % [current_restaurant_id, id], payload, build_response)
 
 func build_response(ok: bool, data: Dictionary, _code: int) -> void:
-	if ok and is_instance_valid(current_floor): current_floor.set_layout(data.get("layout", data)); show_status("Layout committed to the authoritative restaurant database.")
+	if ok and is_instance_valid(current_floor):
+		var committed: Dictionary = data.get("layout", data)
+		current_floor.set_layout(committed)
+		update_builder_history(committed)
+		show_status("Layout committed to the authoritative restaurant database.")
+
+func update_builder_history(layout_data: Dictionary) -> void:
+	if is_instance_valid(current_builder): current_builder.set_history_state(layout_data.get("history", {}))
+
+func apply_builder_history(direction: String) -> void:
+	if current_restaurant_id.is_empty(): return
+	api.post_json("/v1/restaurants/%s/layout/%s" % [current_restaurant_id, direction], {}, func(ok: bool, data: Dictionary, _code: int) -> void:
+		if not ok: return
+		selected_builder_object = {}
+		var restored: Dictionary = data.get("layout", {})
+		if is_instance_valid(current_floor): current_floor.set_layout(restored)
+		update_builder_history(restored)
+		show_status("%s: %s" % [direction.capitalize(), str(data.get("action", "layout action"))])
+	)
 
 func sell_selected_builder_object() -> void:
 	if selected_builder_object.is_empty(): show_status("Select a placed object first."); return
 	api.delete_json("/v1/restaurants/%s/layout/objects/%s" % [current_restaurant_id, selected_builder_object.get("id", "")], func(ok: bool, data: Dictionary, _code: int) -> void:
-		if ok: selected_builder_object = {}; current_floor.set_layout(data.get("layout", {})); show_status("Object sold back at its wear-adjusted recovery value.")
+		if ok: selected_builder_object = {}; current_floor.set_layout(data.get("layout", {})); update_builder_history(data.get("layout", {})); show_status("Object sold back at its wear-adjusted recovery value.")
 	)
 
 func repair_selected_builder_object() -> void:
@@ -659,6 +677,7 @@ func repair_selected_builder_object() -> void:
 		if ok:
 			selected_builder_object = {}
 			current_floor.set_layout(data.get("layout", {}))
+			update_builder_history(data.get("layout", {}))
 			show_status("Furniture restored for $%.2f from restaurant treasury." % (float(data.get("costCents", 0)) / 100.0))
 	)
 

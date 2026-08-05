@@ -4,6 +4,14 @@ import { aggregateFurnitureEffects, type FurnitureEffectsSummary } from "./furni
 import { ApiError, type AuthenticatedAccount, type Database, type FurnitureDefinition } from "./types.js";
 
 type CellInput = { x: number; y: number };
+type LayoutState = {
+  width: number;
+  height: number;
+  treasuryCents: number;
+  cells: any[];
+  walls: any[];
+  objects: any[];
+};
 
 function integer(value: unknown, label: string): number {
   const result = Number(value);
@@ -33,6 +41,63 @@ function assertOwner(db: Database, restaurantId: string, account: AuthenticatedA
   const row = restaurantRow(db, restaurantId);
   if (row.owner_character_id !== account.characterId) throw new ApiError(403, "Only this restaurant's owner can change its layout.");
   return row;
+}
+
+function assertLayoutEditable(db: Database, restaurantId: string): void {
+  const live = db.prepare("SELECT 1 FROM service_shifts WHERE restaurant_id = ? AND state IN ('crew-call', 'open', 'closing') LIMIT 1").get(restaurantId);
+  if (live) throw new ApiError(409, "Restaurant layout is locked while a live shift is active.");
+}
+
+function captureLayoutState(db: Database, restaurantId: string): LayoutState {
+  const restaurant = restaurantRow(db, restaurantId);
+  return {
+    width: restaurant.build_width,
+    height: restaurant.build_height,
+    treasuryCents: restaurant.treasury_cents,
+    cells: db.prepare("SELECT * FROM floor_cells WHERE restaurant_id = ? ORDER BY grid_y, grid_x").all(restaurantId) as any[],
+    walls: db.prepare("SELECT * FROM wall_edges WHERE restaurant_id = ? ORDER BY grid_y, grid_x, edge").all(restaurantId) as any[],
+    objects: db.prepare("SELECT * FROM object_instances WHERE restaurant_id = ? ORDER BY placed_at, id").all(restaurantId) as any[],
+  };
+}
+
+function restoreLayoutState(db: Database, restaurantId: string, state: LayoutState): void {
+  db.prepare("DELETE FROM object_instances WHERE restaurant_id = ?").run(restaurantId);
+  db.prepare("DELETE FROM wall_edges WHERE restaurant_id = ?").run(restaurantId);
+  db.prepare("DELETE FROM floor_cells WHERE restaurant_id = ?").run(restaurantId);
+  db.prepare("UPDATE restaurants SET build_width = ?, build_height = ?, treasury_cents = ? WHERE id = ?")
+    .run(state.width, state.height, state.treasuryCents, restaurantId);
+  const insertCell = db.prepare("INSERT INTO floor_cells (restaurant_id, grid_x, grid_y, surface_id, room_tag, walkable, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)");
+  for (const row of state.cells) insertCell.run(restaurantId, row.grid_x, row.grid_y, row.surface_id, row.room_tag, row.walkable, row.updated_at);
+  const insertWall = db.prepare("INSERT INTO wall_edges (id, restaurant_id, grid_x, grid_y, edge, wall_style_id, opening_type, rotation, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+  for (const row of state.walls) insertWall.run(row.id, restaurantId, row.grid_x, row.grid_y, row.edge, row.wall_style_id, row.opening_type, row.rotation, row.updated_at);
+  const insertObject = db.prepare(`INSERT INTO object_instances
+    (id, restaurant_id, definition_id, grid_x, grid_y, rotation, state, wear, primary_color, secondary_color, placed_at, updated_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
+  for (const row of state.objects) insertObject.run(row.id, restaurantId, row.definition_id, row.grid_x, row.grid_y, row.rotation, row.state, row.wear, row.primary_color, row.secondary_color, row.placed_at, row.updated_at);
+}
+
+function historyState(db: Database, restaurantId: string): Record<string, unknown> {
+  const undo = db.prepare("SELECT id, action FROM layout_history WHERE restaurant_id = ? AND undone_at IS NULL ORDER BY id DESC LIMIT 1").get(restaurantId) as any;
+  const redo = db.prepare("SELECT id, action FROM layout_history WHERE restaurant_id = ? AND undone_at IS NOT NULL ORDER BY id ASC LIMIT 1").get(restaurantId) as any;
+  return {
+    canUndo: Boolean(undo),
+    canRedo: Boolean(redo),
+    undoAction: undo?.action ?? null,
+    redoAction: redo?.action ?? null,
+    revision: Number(undo?.id ?? 0),
+  };
+}
+
+function recordLayoutMutation<T>(db: Database, restaurantId: string, account: AuthenticatedAccount, action: string, work: () => T): T {
+  return transaction(db, () => {
+    const before = captureLayoutState(db, restaurantId);
+    db.prepare("DELETE FROM layout_history WHERE restaurant_id = ? AND undone_at IS NOT NULL").run(restaurantId);
+    const result = work();
+    const after = captureLayoutState(db, restaurantId);
+    db.prepare("INSERT INTO layout_history (restaurant_id, character_id, action, before_json, after_json, created_at) VALUES (?, ?, ?, ?, ?, ?)")
+      .run(restaurantId, account.characterId, action, JSON.stringify(before), JSON.stringify(after), Date.now());
+    return result;
+  });
 }
 
 function ensureInside(row: any, x: number, y: number, width = 1, height = 1): void {
@@ -109,14 +174,15 @@ export function getLayout(db: Database, registry: ContentRegistry, restaurantId:
     cellMeters: registry.content.construction.grid.cellMeters,
     cells: db.prepare("SELECT grid_x AS x, grid_y AS y, surface_id AS surfaceId, room_tag AS roomTag, walkable FROM floor_cells WHERE restaurant_id = ? ORDER BY grid_y, grid_x").all(restaurantId),
     walls: db.prepare("SELECT id, grid_x AS x, grid_y AS y, edge, wall_style_id AS wallStyleId, opening_type AS openingType, rotation FROM wall_edges WHERE restaurant_id = ? ORDER BY grid_y, grid_x").all(restaurantId),
-    objects: db.prepare("SELECT id, definition_id AS definitionId, grid_x AS x, grid_y AS y, rotation, state, wear, primary_color AS primaryColor, secondary_color AS secondaryColor FROM object_instances WHERE restaurant_id = ? ORDER BY placed_at").all(restaurantId),
+    objects: db.prepare("SELECT id, definition_id AS definitionId, grid_x AS x, grid_y AS y, rotation, state, wear, primary_color AS primaryColor, secondary_color AS secondaryColor FROM object_instances WHERE restaurant_id = ? ORDER BY placed_at, id").all(restaurantId),
     furnitureEffects: getFurnitureEffects(db, registry, restaurantId),
+    history: historyState(db, restaurantId),
   };
 }
 
 export function getFurnitureEffects(db: Database, registry: ContentRegistry, restaurantId: string): FurnitureEffectsSummary {
   restaurantRow(db, restaurantId);
-  const instances = db.prepare("SELECT definition_id AS definitionId, wear, state FROM object_instances WHERE restaurant_id = ? ORDER BY placed_at").all(restaurantId) as Array<{ definitionId: string; wear: number; state: string }>;
+  const instances = db.prepare("SELECT definition_id AS definitionId, wear, state FROM object_instances WHERE restaurant_id = ? ORDER BY placed_at, id").all(restaurantId) as Array<{ definitionId: string; wear: number; state: string }>;
   return aggregateFurnitureEffects(registry.content.furniture, instances);
 }
 
@@ -149,6 +215,7 @@ export function foundRestaurant(db: Database, registry: ContentRegistry, account
 
 export function paintFloor(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string, body: Record<string, unknown>): Record<string, unknown> {
   const restaurant = assertOwner(db, restaurantId, account);
+  assertLayoutEditable(db, restaurantId);
   const surfaceId = String(body.surfaceId ?? "");
   const surface = registry.content.construction.surfaces.find((item) => item.id === surfaceId);
   if (!surface) throw new ApiError(400, "Unknown floor surface.");
@@ -163,7 +230,7 @@ export function paintFloor(db: Database, registry: ContentRegistry, account: Aut
   const cost = surface.costCents * unique.size;
   if (restaurant.treasury_cents < cost) throw new ApiError(409, "Restaurant treasury cannot cover this floor purchase.");
   const now = Date.now();
-  transaction(db, () => {
+  recordLayoutMutation(db, restaurantId, account, "paint floor", () => {
     const update = db.prepare("UPDATE floor_cells SET surface_id = ?, room_tag = COALESCE(?, room_tag), updated_at = ? WHERE restaurant_id = ? AND grid_x = ? AND grid_y = ?");
     for (const cell of unique.values()) update.run(surfaceId, body.roomTag ? String(body.roomTag).slice(0, 20) : null, now, restaurantId, cell.x, cell.y);
     db.prepare("UPDATE restaurants SET treasury_cents = treasury_cents - ? WHERE id = ?").run(cost, restaurantId);
@@ -175,6 +242,7 @@ export function paintFloor(db: Database, registry: ContentRegistry, account: Aut
 
 export function upsertWall(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string, body: Record<string, unknown>): Record<string, unknown> {
   const restaurant = assertOwner(db, restaurantId, account);
+  assertLayoutEditable(db, restaurantId);
   const x = integer(body.x, "x");
   const y = integer(body.y, "y");
   ensureInside(restaurant, x, y);
@@ -187,7 +255,7 @@ export function upsertWall(db: Database, registry: ContentRegistry, account: Aut
   if (!["solid", "door", "service-door", "window", "arch"].includes(opening)) throw new ApiError(400, "Unknown wall opening.");
   if (restaurant.treasury_cents < style.costCents) throw new ApiError(409, "Restaurant treasury cannot cover this wall purchase.");
   const now = Date.now();
-  transaction(db, () => {
+  recordLayoutMutation(db, restaurantId, account, opening === "solid" ? "build wall" : `build ${opening}`, () => {
     db.prepare(`INSERT INTO wall_edges (id, restaurant_id, grid_x, grid_y, edge, wall_style_id, opening_type, rotation, updated_at)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
       ON CONFLICT(restaurant_id, grid_x, grid_y, edge) DO UPDATE SET wall_style_id = excluded.wall_style_id, opening_type = excluded.opening_type, rotation = excluded.rotation, updated_at = excluded.updated_at`)
@@ -199,6 +267,7 @@ export function upsertWall(db: Database, registry: ContentRegistry, account: Aut
 
 export function placeObject(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string, body: Record<string, unknown>): Record<string, unknown> {
   const restaurant = assertOwner(db, restaurantId, account);
+  assertLayoutEditable(db, restaurantId);
   const definition = registry.furnitureById.get(String(body.definitionId ?? ""));
   if (!definition) throw new ApiError(400, "Unknown furniture definition.");
   const x = integer(body.x, "x");
@@ -210,7 +279,7 @@ export function placeObject(db: Database, registry: ContentRegistry, account: Au
   if (restaurant.treasury_cents < definition.costCents) throw new ApiError(409, "Restaurant treasury cannot cover this purchase.");
   const id = newId("object");
   const now = Date.now();
-  transaction(db, () => {
+  recordLayoutMutation(db, restaurantId, account, "place object", () => {
     db.prepare(`INSERT INTO object_instances
       (id, restaurant_id, definition_id, grid_x, grid_y, rotation, primary_color, secondary_color, placed_at, updated_at)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
@@ -224,6 +293,7 @@ export function placeObject(db: Database, registry: ContentRegistry, account: Au
 
 export function moveObject(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string, objectId: string, body: Record<string, unknown>): Record<string, unknown> {
   const restaurant = assertOwner(db, restaurantId, account);
+  assertLayoutEditable(db, restaurantId);
   const object = db.prepare("SELECT * FROM object_instances WHERE id = ? AND restaurant_id = ?").get(objectId, restaurantId) as any;
   if (!object) throw new ApiError(404, "Placed object not found.");
   const definition = registry.furnitureById.get(object.definition_id);
@@ -234,12 +304,15 @@ export function moveObject(db: Database, registry: ContentRegistry, account: Aut
   const size = dimensions(definition, rotation);
   ensureInside(restaurant, x, y, size.width, size.height);
   assertClear(db, registry, restaurantId, x, y, size.width, size.height, objectId);
-  db.prepare("UPDATE object_instances SET grid_x = ?, grid_y = ?, rotation = ?, updated_at = ? WHERE id = ?").run(x, y, rotation, Date.now(), objectId);
+  recordLayoutMutation(db, restaurantId, account, "move object", () => {
+    db.prepare("UPDATE object_instances SET grid_x = ?, grid_y = ?, rotation = ?, updated_at = ? WHERE id = ?").run(x, y, rotation, Date.now(), objectId);
+  });
   return { id: objectId, layout: getLayout(db, registry, restaurantId) };
 }
 
 export function repairObject(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string, objectId: string): Record<string, unknown> {
   const restaurant = assertOwner(db, restaurantId, account);
+  assertLayoutEditable(db, restaurantId);
   const object = db.prepare("SELECT * FROM object_instances WHERE id = ? AND restaurant_id = ?").get(objectId, restaurantId) as any;
   if (!object) throw new ApiError(404, "Placed object not found.");
   const definition = registry.furnitureById.get(object.definition_id);
@@ -252,7 +325,7 @@ export function repairObject(db: Database, registry: ContentRegistry, account: A
   const cost = Math.max(1, Math.round(fullRepairCost * repairFraction));
   if (restaurant.treasury_cents < cost) throw new ApiError(409, "Restaurant treasury cannot cover this repair.");
   const now = Date.now();
-  transaction(db, () => {
+  recordLayoutMutation(db, restaurantId, account, "repair object", () => {
     db.prepare("UPDATE restaurants SET treasury_cents = treasury_cents - ? WHERE id = ?").run(cost, restaurantId);
     db.prepare("UPDATE object_instances SET state = 'operational', wear = 0, updated_at = ? WHERE id = ? AND restaurant_id = ?").run(now, objectId, restaurantId);
     db.prepare("INSERT INTO ledger_entries (id, restaurant_id, character_id, category, amount_cents, reference_type, reference_id, created_at) VALUES (?, ?, ?, 'furniture-repair', ?, 'object', ?, ?)")
@@ -263,11 +336,12 @@ export function repairObject(db: Database, registry: ContentRegistry, account: A
 
 export function sellObject(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string, objectId: string): Record<string, unknown> {
   assertOwner(db, restaurantId, account);
+  assertLayoutEditable(db, restaurantId);
   const object = db.prepare("SELECT * FROM object_instances WHERE id = ? AND restaurant_id = ?").get(objectId, restaurantId) as any;
   if (!object) throw new ApiError(404, "Placed object not found.");
   const definition = registry.furnitureById.get(object.definition_id);
   const refund = Math.max(0, Math.round((definition?.costCents ?? 0) * 0.4 * (1 - object.wear / 150)));
-  transaction(db, () => {
+  recordLayoutMutation(db, restaurantId, account, "sell object", () => {
     db.prepare("DELETE FROM object_instances WHERE id = ?").run(objectId);
     db.prepare("UPDATE restaurants SET treasury_cents = treasury_cents + ? WHERE id = ?").run(refund, restaurantId);
   });
@@ -276,6 +350,7 @@ export function sellObject(db: Database, registry: ContentRegistry, account: Aut
 
 export function expandRestaurant(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string, body: Record<string, unknown>): Record<string, unknown> {
   const restaurant = assertOwner(db, restaurantId, account);
+  assertLayoutEditable(db, restaurantId);
   const addWidth = integer(body.addWidth ?? 0, "addWidth");
   const addHeight = integer(body.addHeight ?? 0, "addHeight");
   if (addWidth < 0 || addHeight < 0 || addWidth + addHeight < 1 || addWidth > 12 || addHeight > 12) throw new ApiError(400, "An add-on may extend width and/or height by 1–12 cells.");
@@ -286,7 +361,7 @@ export function expandRestaurant(db: Database, registry: ContentRegistry, accoun
   const cost = newCells * 25_000;
   if (restaurant.treasury_cents < cost) throw new ApiError(409, "Restaurant treasury cannot cover this add-on.");
   const now = Date.now();
-  transaction(db, () => {
+  recordLayoutMutation(db, restaurantId, account, "expand restaurant", () => {
     db.prepare("UPDATE restaurants SET build_width = ?, build_height = ?, treasury_cents = treasury_cents - ? WHERE id = ?").run(width, height, cost, restaurantId);
     const insert = db.prepare("INSERT INTO floor_cells (restaurant_id, grid_x, grid_y, surface_id, room_tag, walkable, updated_at) VALUES (?, ?, ?, 'sealed-concrete', 'unassigned', 1, ?)");
     for (let y = 0; y < height; y += 1) {
@@ -296,4 +371,38 @@ export function expandRestaurant(db: Database, registry: ContentRegistry, accoun
     }
   });
   return { width, height, costCents: cost, layout: getLayout(db, registry, restaurantId) };
+}
+
+function applyHistoryState(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string, direction: "undo" | "redo"): Record<string, unknown> {
+  assertOwner(db, restaurantId, account);
+  assertLayoutEditable(db, restaurantId);
+  const order = direction === "undo" ? "DESC" : "ASC";
+  const condition = direction === "undo" ? "undone_at IS NULL" : "undone_at IS NOT NULL";
+  return transaction(db, () => {
+    const entry = db.prepare(`SELECT * FROM layout_history WHERE restaurant_id = ? AND ${condition} ORDER BY id ${order} LIMIT 1`).get(restaurantId) as any;
+    if (!entry) throw new ApiError(409, direction === "undo" ? "There is no layout action to undo." : "There is no layout action to redo.");
+    const before = captureLayoutState(db, restaurantId);
+    const target = JSON.parse(direction === "undo" ? entry.before_json : entry.after_json) as LayoutState;
+    restoreLayoutState(db, restaurantId, target);
+    const now = Date.now();
+    if (direction === "undo") db.prepare("UPDATE layout_history SET undone_at = ? WHERE id = ?").run(now, entry.id);
+    else db.prepare("UPDATE layout_history SET undone_at = NULL WHERE id = ?").run(entry.id);
+    const treasuryDelta = target.treasuryCents - before.treasuryCents;
+    db.prepare("INSERT INTO ledger_entries (id, restaurant_id, character_id, category, amount_cents, reference_type, reference_id, created_at) VALUES (?, ?, ?, ?, ?, 'layout-history', ?, ?)")
+      .run(newId("ledger"), restaurantId, account.characterId, `construction-${direction}`, treasuryDelta, String(entry.id), now);
+    return {
+      action: entry.action,
+      direction,
+      treasuryDeltaCents: treasuryDelta,
+      layout: getLayout(db, registry, restaurantId),
+    };
+  });
+}
+
+export function undoLayout(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string): Record<string, unknown> {
+  return applyHistoryState(db, registry, account, restaurantId, "undo");
+}
+
+export function redoLayout(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string): Record<string, unknown> {
+  return applyHistoryState(db, registry, account, restaurantId, "redo");
 }

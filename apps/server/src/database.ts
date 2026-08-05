@@ -353,6 +353,17 @@ CREATE TABLE IF NOT EXISTS command_log (
   UNIQUE(character_id, command_id)
 );
 
+CREATE TABLE IF NOT EXISTS layout_history (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  restaurant_id TEXT NOT NULL REFERENCES restaurants(id) ON DELETE CASCADE,
+  character_id TEXT NOT NULL REFERENCES characters(id) ON DELETE CASCADE,
+  action TEXT NOT NULL,
+  before_json TEXT NOT NULL,
+  after_json TEXT NOT NULL,
+  created_at INTEGER NOT NULL,
+  undone_at INTEGER
+);
+
 CREATE INDEX IF NOT EXISTS sessions_token_idx ON sessions(token_hash);
 CREATE INDEX IF NOT EXISTS character_inventory_item_idx ON character_inventory(item_id, character_id);
 CREATE INDEX IF NOT EXISTS character_loadouts_role_idx ON character_role_loadouts(character_id, role_id);
@@ -365,6 +376,7 @@ CREATE INDEX IF NOT EXISTS duty_slots_shift_idx ON duty_slots(service_shift_id, 
 CREATE INDEX IF NOT EXISTS presences_shift_idx ON shift_presences(service_shift_id, left_at);
 CREATE INDEX IF NOT EXISTS tasks_shift_idx ON service_tasks(service_shift_id, state, owner_role_id, priority);
 CREATE INDEX IF NOT EXISTS evidence_party_idx ON review_evidence(party_id, dimension);
+CREATE INDEX IF NOT EXISTS layout_history_stack_idx ON layout_history(restaurant_id, undone_at, id DESC);
 `;
 
 export function createDatabase(path: string, registry: ContentRegistry): Database {
@@ -426,6 +438,19 @@ function seedWorld(db: Database, registry: ContentRegistry): void {
 }
 
 export function transaction<T>(db: Database, work: () => T): T {
+  if (db.isTransaction) {
+    const savepoint = `nested_${randomUUID().replaceAll("-", "")}`;
+    db.exec(`SAVEPOINT ${savepoint}`);
+    try {
+      const result = work();
+      db.exec(`RELEASE SAVEPOINT ${savepoint}`);
+      return result;
+    } catch (error) {
+      db.exec(`ROLLBACK TO SAVEPOINT ${savepoint}`);
+      db.exec(`RELEASE SAVEPOINT ${savepoint}`);
+      throw error;
+    }
+  }
   db.exec("BEGIN IMMEDIATE");
   try {
     const result = work();
