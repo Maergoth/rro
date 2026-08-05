@@ -2,8 +2,11 @@ extends SceneTree
 
 const OUTPUT_ARGUMENT := "--output-dir="
 const VIEWPORT_SIZE := Vector2i(1800, 1100)
+const WATCHDOG_SECONDS := 45.0
 const ROTATIONS := [0, 90, 180, 270]
 const DIRECTION_NAMES := {0: "north", 90: "east", 180: "south", 270: "west"}
+
+var capture_finished := false
 
 const DEFINITIONS := [
 	{"id": "banquette", "assetId": "banquette", "name": "Deep Teal Banquette", "category": "Dining", "width": 5, "height": 2},
@@ -28,7 +31,19 @@ const DEFINITIONS := [
 ]
 
 func _initialize() -> void:
+	var watchdog := create_timer(WATCHDOG_SECONDS, true, false, true)
+	watchdog.timeout.connect(capture_timed_out)
 	call_deferred("capture_runtime")
+
+func capture_timed_out() -> void:
+	if capture_finished:
+		return
+	push_error("Native runtime QA capture exceeded the %.0f-second watchdog." % WATCHDOG_SECONDS)
+	finish_capture(6)
+
+func finish_capture(exit_code: int) -> void:
+	capture_finished = true
+	quit(exit_code)
 
 func output_directory() -> String:
 	for argument in OS.get_cmdline_user_args():
@@ -91,9 +106,10 @@ func capture_runtime() -> void:
 	var output := output_directory()
 	if DirAccess.make_dir_recursive_absolute(output) != OK:
 		push_error("Could not create runtime QA directory: %s" % output)
-		quit(2)
+		finish_capture(2)
 		return
 	get_root().size = VIEWPORT_SIZE
+	get_root().content_scale_size = VIEWPORT_SIZE
 	var restaurant_view := RestaurantFloor.new()
 	restaurant_view.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	restaurant_view.size = Vector2(VIEWPORT_SIZE)
@@ -124,22 +140,24 @@ func capture_runtime() -> void:
 			object.rotation = rotation
 		layout.objects = objects
 		restaurant_view.set_layout(layout)
-		await process_frame
-		await process_frame
-		RenderingServer.force_draw(false)
-		await process_frame
+		restaurant_view.queue_redraw()
+		print("RRO_RUNTIME_CAPTURE_WAIT rotation=%d" % rotation)
+		# Readback is only safe after the renderer has completed the queued frame.
+		# force_draw() can block indefinitely with a headless display driver.
+		await RenderingServer.frame_post_draw
 		var image := get_root().get_texture().get_image()
 		var colors := sampled_color_count(image)
 		if image.is_empty() or image.get_size() != VIEWPORT_SIZE or colors < 16:
 			push_error("Runtime QA capture failed for rotation %d: size=%s sampledColors=%d" % [rotation, image.get_size(), colors])
-			quit(3)
+			finish_capture(3)
 			return
 		var direction: String = DIRECTION_NAMES[rotation]
 		var path := output.path_join("restaurant-%s.png" % direction)
 		if image.save_png(path) != OK:
 			push_error("Could not save runtime QA capture: %s" % path)
-			quit(4)
+			finish_capture(4)
 			return
+		print("RRO_RUNTIME_CAPTURE_SAVED rotation=%d path=%s" % [rotation, path])
 		captures.append({"direction": direction, "rotation": rotation, "path": path.get_file(), "sha256": FileAccess.get_sha256(path), "sampledColors": colors})
 	var manifest_path := output.path_join("qa.json")
 	var manifest := {
@@ -154,9 +172,9 @@ func capture_runtime() -> void:
 	var file := FileAccess.open(manifest_path, FileAccess.WRITE)
 	if file == null:
 		push_error("Could not write runtime QA manifest: %s" % manifest_path)
-		quit(5)
+		finish_capture(5)
 		return
 	file.store_string(JSON.stringify(manifest, "\t") + "\n")
 	file.close()
 	print("RRO_ISOMETRIC_RUNTIME_QA ", JSON.stringify(manifest))
-	quit(0)
+	finish_capture(0)
