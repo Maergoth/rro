@@ -97,7 +97,7 @@ const unscopedRasters = rasterAssets.filter((path) => !approvedRasterRoots.some(
 assert.deepEqual(unscopedRasters, [], "Raster art must remain inside an explicit modular object, character, construction, environment, item, UI, or world-art root; baked restaurant backgrounds are forbidden.");
 const coreFurniture = JSON.parse(readFileSync(resolve(ROOT, "packages/game-data/core/furniture.json"), "utf8"));
 for (const item of coreFurniture) {
-  assert.ok(existsSync(resolve(CLIENT, "assets/objects/generated", `${item.id}.png`)), `Core furniture ${item.id} is missing its individual production sprite.`);
+  assert.ok(existsSync(resolve(CLIENT, "assets/objects/generated", `${item.id}.png`)), `Core furniture ${item.id} is missing its preserved legacy reference sprite.`);
 }
 
 const dataRoot = resolve(ROOT, "packages/game-data");
@@ -155,12 +155,17 @@ const roleEquipmentArtwork = {
 };
 
 const artProduction = JSON.parse(readFileSync(resolve(ROOT, "planning/art-production.json"), "utf8"));
-assert.equal(artProduction.schemaVersion, 1, "Art-production queue has an unsupported schema.");
-assert.equal(artProduction.furniture.length, furnitureById.size, "Art-production queue must cover every furniture ID.");
-assert.equal(artProduction.roleItems.length, roleEquipment.items.length, "Art-production queue must cover every role-item icon ID.");
-assert.equal(artProduction.counts.furniture.generated, furnitureArtwork.legacyReferenceSprites, "Art-production furniture reference status is stale; run npm run generate:art.");
-assert.equal(artProduction.counts.furniture.remaining, furnitureArtwork.catalogTotal - furnitureArtwork.legacyReferenceSprites, "Art-production furniture reference queue is stale; run npm run generate:art.");
-assert.equal(artProduction.counts.roleItems.generated, roleEquipmentArtwork.filesPresent, "Art-production role-item file status is stale; run npm run generate:art.");
-assert.equal(artProduction.counts.roleItems.remaining, roleEquipmentArtwork.catalogTotal - roleEquipmentArtwork.filesPresent, "Art-production role-item file queue is stale; run npm run generate:art.");
+assert.equal(artProduction.schemaVersion, 2, "Art-production index has an unsupported schema.");
+assert.equal(artProduction.authoritativeProgress.document, "docs/ART_PROGRESS.md", "Art-production index must defer live status to the authoritative ledger.");
+assert.equal(artProduction.productionContract.furnitureCamera, "elevated orthographic-isometric", "Art-production index has the wrong furniture camera contract.");
+assert.equal(artProduction.legacyReferencePolicy.status, "reference-only", "Legacy overhead sprites must be reference-only.");
+assert.equal(artProduction.furniture.length, furnitureById.size, "Art-production index must cover every furniture ID.");
+assert.equal(artProduction.roleItems.length, roleEquipment.items.length, "Art-production index must cover every role-item icon ID.");
+assert.ok(!Object.hasOwn(artProduction, "counts"), "Art-production index must not duplicate the authoritative ledger's live counters.");
+for (const item of artProduction.furniture) {
+  const legacyPresent = existsSync(resolve(ROOT, item.legacyReference.path));
+  assert.equal(item.legacyReference.status, legacyPresent ? "legacy-reference-only" : "not-preserved", `Legacy-reference status is stale for ${item.assetId}; run npm run generate:art.`);
+  assert.equal(item.legacyReference.excludedFromProductionCompletion, true, `${item.assetId} legacy overhead art must be excluded from production completion.`);
+}
 
-console.log(JSON.stringify({ ok: true, engine: "Godot 4.4+", scripts: scripts.length, globalClasses: classNames.length, analyzerErrors: errors.length, analyzerWarnings: warnings.length, modularSvgAssets: svgs.length, modularRasterAssets: rasterAssets.length, coreFurnitureSprites: coreFurniture.length, furnitureArtwork, roleEquipmentArtwork, artProductionQueue: artProduction.furniture.length + artProduction.roleItems.length, minigameGrammars: 12, bakedBackgrounds: 0 }, null, 2));
+console.log(JSON.stringify({ ok: true, engine: "Godot 4.4+", scripts: scripts.length, globalClasses: classNames.length, analyzerErrors: errors.length, analyzerWarnings: warnings.length, modularSvgAssets: svgs.length, modularRasterAssets: rasterAssets.length, coreLegacyFurnitureReferences: coreFurniture.length, furnitureArtwork, roleEquipmentArtwork, artProductionIndex: artProduction.furniture.length + artProduction.roleItems.length, minigameGrammars: 12, bakedBackgrounds: 0 }, null, 2));

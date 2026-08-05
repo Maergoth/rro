@@ -2,13 +2,13 @@
 
 Rush & Revenue Online is a native top-down restaurant MMORPG foundation: players choose a country and region, join persistent public restaurant shifts as one of seven hospitality classes, visit as a paying guest, or found and physically design a restaurant.
 
-This repository is the clean `rro.v1` line. It contains a Godot 4 client, a strict TypeScript authoritative server, the launch gameplay/content definitions, local authentication and SQLite persistence, Windows server controls, tests, release tooling, the comprehensive design document, a measured art-production queue, and a 240-item V2 AAA backlog.
+This repository is the clean `rro.v1` line. It contains a Godot 4 client, a strict TypeScript authoritative server, the launch gameplay/content definitions, local authentication and SQLite persistence, Windows server controls, tests, release tooling, the comprehensive design document, one authoritative generated art ledger, and a 240-item V2 AAA backlog.
 
 The version is `1.0.0-alpha.2`. The source baseline is functional and tested; it is not represented as a finished, operated AAA MMO. Godot 4.4.1 now imports the project and launches the main scene cleanly on Linux. The supplied release tool still emits a client **source** ZIP unless a real Godot Windows export exists; the tagged GitHub workflow installs pinned export templates and builds the native Windows client.
 
 Alpha 2 is the production-foundation pass: furniture is now a persistent restaurant inventory with non-linear tradeoffs, live performance effects, upkeep, wear, breakage, and repair; every role has a persistent personal-equipment shop/loadout; and local rivals can spend earned cash during a physical guest visit to apply a chosen, bounded minigame modifier with visible counterplay. The catalog has 229 furniture definitions and 45 role-equipment items. Art progress is reported only by the generated [production art ledger](docs/ART_PROGRESS.md), which separates preserved references, source acceptance, runtime binding, remote verification, and genuine production completion.
 
-> **Recovery status (2026-08-04):** the lost full-art claim is not part of the product. Twenty attractive overhead furniture references remain preserved, while the replacement elevated-isometric pass has one durable four-direction source set, two durable body source foundations, and durable skin/outfit prototype files. None is production-complete until runtime binding and every ledger gate pass. The quarantined deterministic placeholder branch is recorded but never counted.
+> **Art-source boundary:** the lost full-art claim is not part of the product. Preserved direct-overhead furniture files are identity/material references only; they are not runtime production art. The current contract is elevated orthographic-isometric with true authored directions, and only the generated [production art ledger](docs/ART_PROGRESS.md) may report live completion.
 
 ## What is implemented
 
@@ -104,7 +104,7 @@ Useful commands:
 | Command | Purpose |
 |---|---|
 | `npm run generate:data` | Rebuild 196 skills, 89 activities, construction, appearance, and 210 production furniture definitions |
-| `npm run generate:art` | Rebuild the 229-furniture/45-item artwork queue with stable output paths, prompt briefs and live coverage status |
+| `npm run generate:art` | Rebuild the non-authoritative catalog/legacy-reference index; this command neither generates images nor reports live completion |
 | `npm run art:ledger` | Regenerate the single authoritative art-progress document from catalogs, files, review evidence, and runtime bindings |
 | `npm run art:ledger:check` | Fail when the committed art ledger is stale |
 | `npm run art:qa-sheets` | Rebuild durable contact sheets for reviewed art batches |
@@ -132,7 +132,7 @@ config/               V1 server configuration
 launchers/windows-v1/ Hidden start/stop, server controller, client launcher
 tests/                 Content, builder, live-service, HTTP/WebSocket tests
 tools/                 Data, backlog, validation, and release generators
-planning/              Issue-tracker-ready V2 backlog and deterministic art queue
+planning/              Issue-tracker-ready V2 backlog, art contracts and legacy-reference index
 docs/                  GDD, architecture, runbooks, gates, roadmap, backlog
 legacy/                Audit-only V0 recovery; excluded from every V1 artifact
 ```
@@ -159,7 +159,7 @@ For a subclass, define a role with `kind: "subclass"` and `parentRoleId`; contri
 - [V2 AAA MoSCoW roadmap](docs/V2_AAA_ROADMAP.md)
 - [240-task team backlog](docs/V2_TEAM_BACKLOG.md)
 - [Machine-readable backlog](planning/v2-backlog.json)
-- [Furniture and role-item art queue](planning/art-production.json)
+- [Art catalog and legacy-reference index](planning/art-production.json)
 - [Authoritative production art progress](docs/ART_PROGRESS.md)
 - [Architecture](docs/ARCHITECTURE.md)
 - [Server operations](docs/SERVER_README.md)
