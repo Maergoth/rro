@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "d84f8892460d2e290db834b6a3dbf2245c87ecd8",
-    "tree": "9ff99b685515c63cc8cb0dd24130a654235cf47b",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30977874013"
+    "commit": "dd8c05995b39649132ff5ce8fad29a432f15cebc",
+    "tree": "7231193527236af6538c1d9fcd6e1d11184bdb7b",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30979027528"
   },
   "completionRule": "generated, processed, raster-validated, visually accepted, runtime-bound assets whose exact reviewed bytes are remotely verified on GitHub with green CI",
   "artDirection": {
@@ -31,7 +31,7 @@
   },
   "coverage": {
     "furniture": { "catalogTotal": 229, "acceptedSets": 4, "acceptedDirectionalFiles": 16 },
-    "equipmentIcons": { "catalogTotal": 45, "accepted": 40 },
+    "equipmentIcons": { "catalogTotal": 45, "accepted": 45 },
     "characterSystem": {
       "status": "in_progress",
       "sourceAcceptedBodyPresentations": 2,
@@ -46,25 +46,7 @@
       "required": ["body_skin", "face", "hair_headwear", "base_outfit", "role_layer", "footwear", "accessory", "carried_object", "effects", "skin_masks", "primary_color_masks", "secondary_color_masks"]
     }
   },
-  "pendingBatches": [
-    {
-      "id": "equipment-icons-host-006",
-      "assets": [
-        "host-seating-tablet",
-        "host-brass-crumb-scraper",
-        "host-bus-tub-harness",
-        "host-sanitizer-caddy-refill",
-        "host-guest-activity-pack"
-      ],
-      "files": 14,
-      "qa": "passed",
-      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
-      "sourcePromptMode": "built-in image generation; five bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
-      "qaEvidence": "planning/art-qa/equipment-icons-host-006/contact-128-dark.png",
-      "qaManifest": "planning/art-qa/equipment-icons-host-006/qa.json",
-      "notes": "The final five host icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-45 cross-batch comparison gates. They remain pending until this exact 14-file package is remotely verified and hosted CI is green."
-    }
-  ],
+  "pendingBatches": [],
   "batches": [
     {
       "id": "furniture-pilot-001",
@@ -284,6 +266,26 @@
       "qaEvidence": "planning/art-qa/equipment-icons-chef-cook-host-005/contact-128-dark.png",
       "qaManifest": "planning/art-qa/equipment-icons-chef-cook-host-005/qa.json",
       "notes": "Eight distinct chef, cook, and host icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-40 cross-batch comparison gates. Their exact 20-file package is remotely verified with green Windows and Ubuntu CI."
+    },
+    {
+      "id": "equipment-icons-host-006",
+      "assets": [
+        "host-seating-tablet",
+        "host-brass-crumb-scraper",
+        "host-bus-tub-harness",
+        "host-sanitizer-caddy-refill",
+        "host-guest-activity-pack"
+      ],
+      "files": 14,
+      "qa": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
+      "sourcePromptMode": "built-in image generation; five bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
+      "remoteCommit": "dd8c05995b39649132ff5ce8fad29a432f15cebc",
+      "remoteTree": "7231193527236af6538c1d9fcd6e1d11184bdb7b",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30979027528",
+      "qaEvidence": "planning/art-qa/equipment-icons-host-006/contact-128-dark.png",
+      "qaManifest": "planning/art-qa/equipment-icons-host-006/qa.json",
+      "notes": "The final five host icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-45 cross-batch comparison gates. Their exact 14-file package is remotely verified with green Windows and Ubuntu CI."
     }
   ],
   "preservedButNotProductionComplete": [

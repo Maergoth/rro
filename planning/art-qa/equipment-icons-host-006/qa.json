@@ -2,7 +2,12 @@
   "schemaVersion": 1,
   "batchId": "equipment-icons-host-006",
   "status": "accepted",
-  "repositoryPromotion": "pending-parent-commit-and-push",
+  "repositoryPromotion": "remote-verified",
+  "remotePreservation": {
+    "commit": "dd8c05995b39649132ff5ce8fad29a432f15cebc",
+    "tree": "7231193527236af6538c1d9fcd6e1d11184bdb7b",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30979027528"
+  },
   "catalogSequences": [
     41,
     42,

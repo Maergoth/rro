@@ -322,7 +322,7 @@ for (const [category, items] of Object.entries(missingFurnitureByCategory)) {
 }
 lines.push("## Other exact incomplete catalogs");
 lines.push("");
-lines.push(`- Equipment icons (${incompleteEquipmentIcons.length}): ${incompleteEquipmentIcons.map((item) => `\`${item.id}\``).join(", ")}`);
+lines.push(`- Equipment icons (${incompleteEquipmentIcons.length}): ${incompleteEquipmentIcons.length > 0 ? incompleteEquipmentIcons.map((item) => `\`${item.id}\``).join(", ") : "none"}`);
 lines.push(`- Construction materials (${constructionMaterials.length}): ${constructionMaterials.map((item) => `\`${item.id}\``).join(", ")}`);
 lines.push(`- Opening geometry (${openingModules.length} × 4 directions): ${openingModules.map((item) => `\`${item.id}\``).join(", ")}`);
 lines.push(`- Utility overlays (${utilityOverlays.length}): ${utilityOverlays.map((item) => `\`${item.id}\``).join(", ")}`);

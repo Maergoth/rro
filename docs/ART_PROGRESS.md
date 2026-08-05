@@ -12,16 +12,16 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 - Branch: `agent/complete-production-art`
 - Draft PR: https://github.com/Maergoth/rro/pull/2
-- Last verified remote head before this ledger check-in: `d84f8892460d2e290db834b6a3dbf2245c87ecd8`
-- Verified tree: `9ff99b685515c63cc8cb0dd24130a654235cf47b`
-- CI: https://github.com/Maergoth/rro/actions/runs/30977874013
+- Last verified remote head before this ledger check-in: `dd8c05995b39649132ff5ce8fad29a432f15cebc`
+- Verified tree: `7231193527236af6538c1d9fcd6e1d11184bdb7b`
+- CI: https://github.com/Maergoth/rro/actions/runs/30979027528
 
 ## Launch coverage
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
 | Furniture directional sets | 229 | 4 | 4 | 4 | 0 |
-| Equipment inventory icons | 45 | 45 | 45 | 40 | 40 |
+| Equipment inventory icons | 45 | 45 | 45 | 45 | 45 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
 | Utility overlays | 5 | 0 | 0 | 0 | 0 |
@@ -34,7 +34,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 | Equipment attachment body-fits | 62 | 0 | 0 | 0 | 0 |
 | Activity → animation bindings | 89 | 0 | 0 | 0 | 0 |
 
-40 equipment icons are production-complete because they are visually accepted, remotely verified, and loaded by the inventory runtime. Furniture and character source art remains preserved but runtime-blocked; other missing lanes remain explicit below.
+45 equipment icons are production-complete because they are visually accepted, remotely verified, and loaded by the inventory runtime. Furniture and character source art remains preserved but runtime-blocked; other missing lanes remain explicit below.
 Directional furniture texture selection is yes; final projection alignment is no and runtime composite acceptance is no. This partial binding does not make any furniture set production-complete.
 
 ## Character truth
@@ -79,14 +79,7 @@ Directional furniture texture selection is yes; final projection alignment is no
 | equipment-icons-server-dish-003 | 20 | passed | passed-full-gameplay-and-cross-batch-scale | `f3408b8` | planning/art-qa/equipment-icons-server-dish-003/contact-128-dark.png |
 | equipment-icons-dish-chef-004 | 20 | passed | passed-full-gameplay-and-cross-batch-scale | `961fc31` | planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png |
 | equipment-icons-chef-cook-host-005 | 20 | passed | passed-full-gameplay-and-cross-batch-scale | `e15aa00` | planning/art-qa/equipment-icons-chef-cook-host-005/contact-128-dark.png |
-
-## Accepted locally, remote checkpoint pending
-
-These batches have passed source/composite QA but deliberately do not count as remotely verified or production-complete until their immutable GitHub commit and hosted CI are recorded.
-
-| Batch | Files | Source QA | Runtime/composite QA | Evidence |
-|---|---:|---|---|---|
-| equipment-icons-host-006 | 14 | passed | passed-full-gameplay-and-cross-batch-scale | planning/art-qa/equipment-icons-host-006/contact-128-dark.png |
+| equipment-icons-host-006 | 14 | passed | passed-full-gameplay-and-cross-batch-scale | `dd8c059` | planning/art-qa/equipment-icons-host-006/contact-128-dark.png |
 
 ## Missing furniture directional sets
 
@@ -122,7 +115,7 @@ These batches have passed source/composite QA but deliberately do not count as r
 
 ## Other exact incomplete catalogs
 
-- Equipment icons (5): `host-seating-tablet`, `host-brass-crumb-scraper`, `host-bus-tub-harness`, `host-sanitizer-caddy-refill`, `host-guest-activity-pack`
+- Equipment icons (0): none
 - Construction materials (18): `floor-sealed-concrete`, `floor-quarry-tile`, `floor-white-hex`, `floor-slate-tile`, `floor-oak-plank`, `floor-walnut-plank`, `floor-terrazzo`, `floor-pattern-cement`, `floor-commercial-vinyl`, `floor-rubber-kitchen`, `floor-entry-mat`, `floor-outdoor-paver`, `wall-painted-plaster`, `wall-subway-tile`, `wall-exposed-brick`, `wall-oak-panel`, `wall-glass-partition`, `wall-stainless-kitchen`
 - Opening geometry (5 × 4 directions): `solid`, `door`, `service-door`, `window`, `arch`
 - Utility overlays (5): `power`, `gas`, `water`, `drain`, `ventilation`
@@ -163,9 +156,9 @@ This JSON block is part of this same authoritative document and contains every c
   "durableBaseline": {
     "branch": "agent/complete-production-art",
     "pullRequest": "https://github.com/Maergoth/rro/pull/2",
-    "commit": "d84f8892460d2e290db834b6a3dbf2245c87ecd8",
-    "tree": "9ff99b685515c63cc8cb0dd24130a654235cf47b",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30977874013"
+    "commit": "dd8c05995b39649132ff5ce8fad29a432f15cebc",
+    "tree": "7231193527236af6538c1d9fcd6e1d11184bdb7b",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30979027528"
   },
   "completionPipeline": [
     "generated",
@@ -204,8 +197,8 @@ This JSON block is part of this same authoritative document and contains every c
       "required": 45,
       "present": 45,
       "sourceAccepted": 45,
-      "remoteVerified": 40,
-      "productionComplete": 40
+      "remoteVerified": 45,
+      "productionComplete": 45
     },
     {
       "lane": "Construction material textures",
@@ -11869,12 +11862,12 @@ This JSON block is part of this same authoritative document and contains every c
       "batchId": "equipment-icons-host-006",
       "review": "passed",
       "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
-      "remoteVerified": false,
+      "remoteVerified": true,
       "qaEvidence": "planning/art-qa/equipment-icons-host-006/contact-128-dark.png",
       "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_local_only"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "host-brass-crumb-scraper",
@@ -11894,12 +11887,12 @@ This JSON block is part of this same authoritative document and contains every c
       "batchId": "equipment-icons-host-006",
       "review": "passed",
       "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
-      "remoteVerified": false,
+      "remoteVerified": true,
       "qaEvidence": "planning/art-qa/equipment-icons-host-006/contact-128-dark.png",
       "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_local_only"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "host-bus-tub-harness",
@@ -11919,12 +11912,12 @@ This JSON block is part of this same authoritative document and contains every c
       "batchId": "equipment-icons-host-006",
       "review": "passed",
       "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
-      "remoteVerified": false,
+      "remoteVerified": true,
       "qaEvidence": "planning/art-qa/equipment-icons-host-006/contact-128-dark.png",
       "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_local_only"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "host-sanitizer-caddy-refill",
@@ -11944,12 +11937,12 @@ This JSON block is part of this same authoritative document and contains every c
       "batchId": "equipment-icons-host-006",
       "review": "passed",
       "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
-      "remoteVerified": false,
+      "remoteVerified": true,
       "qaEvidence": "planning/art-qa/equipment-icons-host-006/contact-128-dark.png",
       "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_local_only"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "host-guest-activity-pack",
@@ -11969,12 +11962,12 @@ This JSON block is part of this same authoritative document and contains every c
       "batchId": "equipment-icons-host-006",
       "review": "passed",
       "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
-      "remoteVerified": false,
+      "remoteVerified": true,
       "qaEvidence": "planning/art-qa/equipment-icons-host-006/contact-128-dark.png",
       "qaEvidencePresent": true,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "source_accepted_local_only"
+      "productionComplete": true,
+      "status": "production_complete"
     }
   ],
   "construction": {
@@ -13945,9 +13938,7 @@ This JSON block is part of this same authoritative document and contains every c
       "notes": "Eight distinct chef, cook, and host icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-40 cross-batch comparison gates. Their exact 20-file package is remotely verified with green Windows and Ubuntu CI.",
       "qaEvidencePresent": true,
       "remoteVerified": true
-    }
-  ],
-  "pendingBatches": [
+    },
     {
       "id": "equipment-icons-host-006",
       "assets": [
@@ -13961,14 +13952,17 @@ This JSON block is part of this same authoritative document and contains every c
       "qa": "passed",
       "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
       "sourcePromptMode": "built-in image generation; five bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
+      "remoteCommit": "dd8c05995b39649132ff5ce8fad29a432f15cebc",
+      "remoteTree": "7231193527236af6538c1d9fcd6e1d11184bdb7b",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30979027528",
       "qaEvidence": "planning/art-qa/equipment-icons-host-006/contact-128-dark.png",
       "qaManifest": "planning/art-qa/equipment-icons-host-006/qa.json",
-      "notes": "The final five host icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-45 cross-batch comparison gates. They remain pending until this exact 14-file package is remotely verified and hosted CI is green.",
+      "notes": "The final five host icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-45 cross-batch comparison gates. Their exact 14-file package is remotely verified with green Windows and Ubuntu CI.",
       "qaEvidencePresent": true,
-      "remoteVerified": false,
-      "preservationPending": true
+      "remoteVerified": true
     }
   ],
+  "pendingBatches": [],
   "preservedReferences": [
     {
       "id": "alpha2-overhead-furniture",
