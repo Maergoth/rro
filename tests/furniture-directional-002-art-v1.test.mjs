@@ -8,7 +8,7 @@ import { inflateSync } from "node:zlib";
 const ROOT = resolve(import.meta.dirname, "..");
 const QA_PATH = "planning/art-qa/furniture-core-directional-002/qa.json";
 const QA_ROOT = "planning/art-qa/furniture-core-directional-002";
-const EXPECTED_QA_SHA256 = "9e6e204c91cfdc0d6dcdaa025125e9d355cefdfa5fb5f2cc8ed0717cc831378d";
+const EXPECTED_QA_SHA256 = "c56c619e037c228c735c7e0f95113eb1aaa9e4e4572179a7f887a93a8c4ea63a";
 const DIRECTIONS = ["north", "east", "south", "west"];
 const ASSETS = ["banquette", "booth", "service-station"];
 const PNG_SIGNATURE = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
@@ -144,14 +144,19 @@ test("furniture directional batch 002 has durable exact provenance", () => {
   assert.deepEqual([...qa.assets].sort(), ASSETS);
   assert.equal(qa.artReviewStatus, "accepted");
   assert.equal(qa.productionComplete, false);
-  assert.equal(qa.repositoryPromotion.status, "promoted-local-pending-remote-verification");
+  assert.equal(qa.repositoryPromotion, "remote-verified");
+  assert.deepEqual(qa.remotePreservation, {
+    commit: "daef2aa572f0f855ac95d92402b9af19cc76bc9f",
+    tree: "36fbf6d8740e2f07f29527ff6e506cf541684b51",
+    ci: "https://github.com/Maergoth/rro/actions/runs/30980689257",
+  });
   assert.deepEqual(
     {
-      runtimeFiles: qa.repositoryPromotion.runtimeFiles,
-      alphaSourceFiles: qa.repositoryPromotion.alphaSourceFiles,
-      contactSheets: qa.repositoryPromotion.contactSheets,
-      provenanceDocuments: qa.repositoryPromotion.provenanceDocuments,
-      totalFiles: qa.repositoryPromotion.totalFiles,
+      runtimeFiles: qa.promotionScope.runtimeFiles,
+      alphaSourceFiles: qa.promotionScope.alphaSourceFiles,
+      contactSheets: qa.promotionScope.contactSheets,
+      provenanceDocuments: qa.promotionScope.provenanceDocuments,
+      totalFiles: qa.promotionScope.totalFiles,
     },
     { runtimeFiles: 12, alphaSourceFiles: 12, contactSheets: 2, provenanceDocuments: 2, totalFiles: 28 },
   );

@@ -52,6 +52,21 @@ for (const batch of pass.batches) {
       if (JSON.stringify(manifestAssets) !== JSON.stringify(batchAssets)) invalid.push(`${batch.id}: QA manifest assets do not exactly match the batch`);
       const visualEvidence = [...(manifest.contactSheets ?? []), ...(manifest.visualEvidence ?? [])];
       if (!visualEvidence.some((sheet) => sheet.path === batch.qaEvidence)) invalid.push(`${batch.id}: primary QA evidence is absent from its manifest`);
+      for (const sheet of visualEvidence) {
+        if (!sheet.path || !file(sheet.path)) { invalid.push(`${batch.id}: missing visual evidence ${sheet.path ?? "<unnamed>"}`); continue; }
+        if (sheet.sha256) {
+          const digest = createHash("sha256").update(readFileSync(resolve(ROOT, sheet.path))).digest("hex");
+          if (digest !== sheet.sha256) invalid.push(`${batch.id}: visual evidence hash mismatch for ${sheet.path}`);
+        }
+      }
+      if (manifest.promotionScope?.totalFiles !== undefined && manifest.promotionScope.totalFiles !== batch.files) {
+        invalid.push(`${batch.id}: QA promotion file count does not match batch.files`);
+      }
+      if (manifest.remotePreservation) {
+        if (manifest.remotePreservation.commit !== batch.remoteCommit || manifest.remotePreservation.tree !== batch.remoteTree || manifest.remotePreservation.ci !== batch.ci) {
+          invalid.push(`${batch.id}: QA remote preservation does not match the reviewed batch checkpoint`);
+        }
+      }
       for (const item of manifest.items ?? []) {
         const runtimeFiles = item.runtimePath
           ? [{ path: item.runtimePath, sha256: item.sha256 ?? item.runtimeSha256, label: item.catalogId }]

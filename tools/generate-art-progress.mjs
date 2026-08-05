@@ -33,11 +33,16 @@ const allPresent = (entries) => entries.length > 0 && entries.every((entry) => e
 const percent = (part, whole) => whole ? `${(part / whole * 100).toFixed(1)}%` : "n/a";
 const yes = (value) => value ? "yes" : "no";
 
-const batches = pass.batches.map((batch) => ({
-  ...batch,
-  qaEvidencePresent: Boolean(batch.qaEvidence && present(batch.qaEvidence)),
-  remoteVerified: /^[0-9a-f]{40}$/.test(batch.remoteCommit ?? "") && /^[0-9a-f]{40}$/.test(batch.remoteTree ?? ""),
-}));
+const batches = pass.batches.map((batch) => {
+  const qaEvidencePresent = Boolean(batch.qaEvidence && present(batch.qaEvidence));
+  return {
+    ...batch,
+    qaEvidencePresent,
+    remoteVerified: qaEvidencePresent
+      && /^[0-9a-f]{40}$/.test(batch.remoteCommit ?? "")
+      && /^[0-9a-f]{40}$/.test(batch.remoteTree ?? ""),
+  };
+});
 const pendingBatches = (pass.pendingBatches ?? []).map((batch) => ({
   ...batch,
   qaEvidencePresent: Boolean(batch.qaEvidence && present(batch.qaEvidence)),
@@ -177,15 +182,15 @@ const legacyObjectRoot = relative("apps/client-godot/assets/objects/generated");
 const legacyObjectPngs = existsSync(legacyObjectRoot) ? readdirSync(legacyObjectRoot).filter((name) => name.endsWith(".png") && statSync(resolve(legacyObjectRoot, name)).isFile()).sort() : [];
 
 const summaries = [
-  { lane: "Furniture directional sets", required: furniture.length, present: furniture.filter((item) => item.present).length, sourceAccepted: furniture.filter((item) => item.review === "passed").length, remoteVerified: furniture.filter((item) => item.remoteVerified).length, productionComplete: furniture.filter((item) => item.productionComplete).length },
-  { lane: "Equipment inventory icons", required: equipmentIcons.length, present: equipmentIcons.filter((item) => item.present).length, sourceAccepted: equipmentIcons.filter((item) => item.review === "passed").length, remoteVerified: equipmentIcons.filter((item) => item.remoteVerified).length, productionComplete: equipmentIcons.filter((item) => item.productionComplete).length },
+  { lane: "Furniture directional sets", required: furniture.length, present: furniture.filter((item) => item.present).length, sourceAccepted: furniture.filter((item) => item.present && item.qaEvidencePresent && item.review === "passed").length, remoteVerified: furniture.filter((item) => item.present && item.qaEvidencePresent && item.remoteVerified).length, productionComplete: furniture.filter((item) => item.productionComplete).length },
+  { lane: "Equipment inventory icons", required: equipmentIcons.length, present: equipmentIcons.filter((item) => item.present).length, sourceAccepted: equipmentIcons.filter((item) => item.present && item.qaEvidencePresent && item.review === "passed").length, remoteVerified: equipmentIcons.filter((item) => item.present && item.qaEvidencePresent && item.remoteVerified).length, productionComplete: equipmentIcons.filter((item) => item.productionComplete).length },
   { lane: "Construction material textures", required: constructionMaterials.length, present: constructionMaterials.filter((item) => item.present).length, sourceAccepted: 0, remoteVerified: 0, productionComplete: 0 },
   { lane: "Opening geometry sets (4 directions each)", required: openingModules.length, present: openingModules.filter((item) => item.present).length, sourceAccepted: 0, remoteVerified: 0, productionComplete: 0 },
   { lane: "Utility overlays", required: utilityOverlays.length, present: utilityOverlays.filter((item) => item.present).length, sourceAccepted: 0, remoteVerified: 0, productionComplete: 0 },
   { lane: "World atlas", required: world.length, present: world.filter((item) => item.present).length, sourceAccepted: 0, remoteVerified: 0, productionComplete: 0 },
   { lane: "Environment helpers", required: environment.length, present: environment.filter((item) => item.present).length, sourceAccepted: 0, remoteVerified: 0, productionComplete: 0 },
   { lane: "Launch UI assets", required: ui.length, present: ui.filter((item) => item.present).length, sourceAccepted: 0, remoteVerified: 0, productionComplete: 0 },
-  { lane: "Character body source foundations", required: bodyFoundations.length, present: bodyFoundations.filter((item) => item.present).length, sourceAccepted: bodyFoundations.filter((item) => item.review === "passed").length, remoteVerified: bodyFoundations.filter((item) => item.remoteVerified).length, productionComplete: 0 },
+  { lane: "Character body source foundations", required: bodyFoundations.length, present: bodyFoundations.filter((item) => item.present).length, sourceAccepted: bodyFoundations.filter((item) => item.present && item.qaEvidencePresent && item.review === "passed").length, remoteVerified: bodyFoundations.filter((item) => item.present && item.qaEvidencePresent && item.remoteVerified).length, productionComplete: 0 },
   { lane: "Body animation sets (body × animation)", required: characters.bodyPresentations.length * characters.animations.length, present: 0, sourceAccepted: 0, remoteVerified: 0, productionComplete: 0 },
   { lane: "Split modular layer body-fits", required: slotChoiceCount * characters.bodyPresentations.length, present: 0, sourceAccepted: 0, remoteVerified: 0, productionComplete: 0 },
   { lane: "Equipment attachment body-fits", required: equippableItems.length * characters.bodyPresentations.length, present: 0, sourceAccepted: 0, remoteVerified: 0, productionComplete: 0 },
