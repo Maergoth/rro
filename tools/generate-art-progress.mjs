@@ -9,6 +9,7 @@ const readJson = (path) => JSON.parse(readFileSync(resolve(ROOT, path), "utf8"))
 const pass = readJson("planning/art-pass-v2.json");
 const production = readJson("planning/art-production.json");
 const characters = readJson("planning/character-art-catalog.json");
+const characterApplicability = readJson("planning/character-launch-applicability-v1.json");
 const construction = readJson("packages/game-data/core/construction.json");
 const roleEquipment = readJson("packages/game-data/core/role-equipment.json");
 const activities = readJson("packages/game-data/core/activities.json").activities;
@@ -200,6 +201,7 @@ const ledger = {
     "planning/art-pass-v2.json",
     "planning/art-production.json",
     "planning/character-art-catalog.json",
+    "planning/character-launch-applicability-v1.json",
     "apps/client-godot/assets/**",
     "current Godot runtime bindings",
   ],
@@ -235,6 +237,7 @@ const ledger = {
     requiredActivityBindings: activities.length,
     presentActivityBindings: 0,
     runtimeBound: characterRuntimeBound,
+    launchApplicability: characterApplicability,
   },
   reviewedBatches: batches,
   pendingBatches,
@@ -243,7 +246,7 @@ const ledger = {
   contractGaps: [
     "Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.",
     "Choose and implement the final isometric floor projection; the current orthogonal renderer cannot align accepted elevated sprites.",
-    "Freeze character animation storage/rigging for every split layer; static direction art and metadata-only clip aliases do not satisfy the 26-animation contract.",
+    "Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.",
     "Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete.",
   ],
 };
@@ -283,10 +286,17 @@ lines.push("");
 lines.push(`- Durable character files: ${bodyFoundations.reduce((sum, item) => sum + item.files.filter((file) => file.present).length, 0) + skinFoundations.reduce((sum, item) => sum + item.files.filter((file) => file.present).length, 0) + prototypeOutfits.reduce((sum, item) => sum + item.files.filter((file) => file.present).length, 0)} PNGs.`);
 lines.push(`- Body source poses: ${ledger.characters.presentStaticBodyPoses}/${ledger.characters.requiredBodySourcePoses} (${percent(ledger.characters.presentStaticBodyPoses, ledger.characters.requiredBodySourcePoses)}).`);
 lines.push(`- Final body animation frame cells: 0/${ledger.characters.requiredBodyFinalFrameCells}; even idle requires four frames and currently has one still per direction.`);
+lines.push(`- Final runtime raster-channel cells: 0/${characterApplicability.totals.totalFinalRuntimeRasterCells.toLocaleString("en-US")} across body, modular-layer, mask, and equipment channels; the corresponding authored-source denominator is ${characterApplicability.totals.totalSourceRuntimeRasterCells.toLocaleString("en-US")}.`);
 lines.push(`- Source foundations: ${bodyFoundations.filter((item) => item.review === "passed").length}/2 accepted with a normalized \`(192,472)\` ground pivot and clean skin channels; ${bodyFoundations.filter((item) => item.remoteVerified).length}/2 reflect the currently reviewed bytes on a verified remote checkpoint.`);
 lines.push(`- Split swappable layer body-fits: 0/${ledger.characters.requiredSplitLayerBodyFits}; required catalogs are frozen below.`);
 lines.push(`- Equipment attachment body-fits: 0/${ledger.characters.requiredEquipmentAttachmentBodyFits} from ${equippableItems.length} equippable items.`);
 lines.push(`- Activity-animation bindings: 0/${activities.length}.`);
+lines.push("- Applicability is frozen in `planning/character-launch-applicability-v1.json`: "
+  + `${characterApplicability.totals.visibleModularChoiceCount} visible modular choices, `
+  + `${characterApplicability.totals.equipmentAliasItemCount} footwear aliases, `
+  + `${characterApplicability.totals.equipmentDeformingItemCount} deforming worn items, `
+  + `${characterApplicability.totals.equipmentRigidItemCount} rigid anchored items, and `
+  + `${characterApplicability.totals.consumableNoPersistentAttachmentCount} nonpersistent consumables.`);
 lines.push(`- Classic idle outfit body-fits: ${prototypeOutfits.filter((item) => item.outfit === "classic" && item.review === "passed").length}/2 source-accepted and ${prototypeOutfits.filter((item) => item.outfit === "classic" && item.remoteVerified).length}/2 remote-verified after full-resolution/gameplay composite remediation; they remain production-incomplete until split-layer catalog coverage, animation frames, and runtime compositing pass.`);
 lines.push("- Apron prototypes remain durable but QA-failed for silhouette/foot leakage and are not counted.");
 lines.push("");

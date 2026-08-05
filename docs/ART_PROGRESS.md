@@ -12,9 +12,9 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 - Branch: `agent/complete-production-art`
 - Draft PR: https://github.com/Maergoth/rro/pull/2
-- Last verified remote head before this ledger check-in: `dd8c05995b39649132ff5ce8fad29a432f15cebc`
-- Verified tree: `7231193527236af6538c1d9fcd6e1d11184bdb7b`
-- CI: https://github.com/Maergoth/rro/actions/runs/30979027528
+- Last verified remote head before this ledger check-in: `18a236455172584748711bc9ff5ba0a0948025cf`
+- Verified tree: `e8276467713cf9fe5f92b25fe4c2c2d1257bc4aa`
+- CI: https://github.com/Maergoth/rro/actions/runs/30979314000
 
 ## Launch coverage
 
@@ -42,10 +42,12 @@ Directional furniture texture selection is yes; final projection alignment is no
 - Durable character files: 144 PNGs.
 - Body source poses: 16/1344 (1.2%).
 - Final body animation frame cells: 0/2720; even idle requires four frames and currently has one still per direction.
+- Final runtime raster-channel cells: 0/443,776 across body, modular-layer, mask, and equipment channels; the corresponding authored-source denominator is 219,488.
 - Source foundations: 2/2 accepted with a normalized `(192,472)` ground pivot and clean skin channels; 2/2 reflect the currently reviewed bytes on a verified remote checkpoint.
 - Split swappable layer body-fits: 0/126; required catalogs are frozen below.
 - Equipment attachment body-fits: 0/62 from 31 equippable items.
 - Activity-animation bindings: 0/89.
+- Applicability is frozen in `planning/character-launch-applicability-v1.json`: 63 visible modular choices, 2 footwear aliases, 3 deforming worn items, 26 rigid anchored items, and 14 nonpersistent consumables.
 - Classic idle outfit body-fits: 2/2 source-accepted and 2/2 remote-verified after full-resolution/gameplay composite remediation; they remain production-incomplete until split-layer catalog coverage, animation frames, and runtime compositing pass.
 - Apron prototypes remain durable but QA-failed for silhouette/foot leakage and are not counted.
 
@@ -132,7 +134,7 @@ Directional furniture texture selection is yes; final projection alignment is no
 
 - Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.
 - Choose and implement the final isometric floor projection; the current orthogonal renderer cannot align accepted elevated sprites.
-- Freeze character animation storage/rigging for every split layer; static direction art and metadata-only clip aliases do not satisfy the 26-animation contract.
+- Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.
 - Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete.
 
 ## Machine-readable ledger
@@ -150,15 +152,16 @@ This JSON block is part of this same authoritative document and contains every c
     "planning/art-pass-v2.json",
     "planning/art-production.json",
     "planning/character-art-catalog.json",
+    "planning/character-launch-applicability-v1.json",
     "apps/client-godot/assets/**",
     "current Godot runtime bindings"
   ],
   "durableBaseline": {
     "branch": "agent/complete-production-art",
     "pullRequest": "https://github.com/Maergoth/rro/pull/2",
-    "commit": "dd8c05995b39649132ff5ce8fad29a432f15cebc",
-    "tree": "7231193527236af6538c1d9fcd6e1d11184bdb7b",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/30979027528"
+    "commit": "18a236455172584748711bc9ff5ba0a0948025cf",
+    "tree": "e8276467713cf9fe5f92b25fe4c2c2d1257bc4aa",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30979314000"
   },
   "completionPipeline": [
     "generated",
@@ -13678,7 +13681,845 @@ This JSON block is part of this same authoritative document and contains every c
     "requiredEquipmentAttachmentBodyFits": 62,
     "requiredActivityBindings": 89,
     "presentActivityBindings": 0,
-    "runtimeBound": false
+    "runtimeBound": false,
+    "launchApplicability": {
+      "schemaVersion": 1,
+      "id": "character-launch-applicability-v1",
+      "status": "binding-launch-denominator",
+      "purpose": "Freeze every launch character-art applicability axis so body animation cells, modular design fits, runtime raster channels, equipment attachments, and activity bindings can be tracked without an inferred or moving denominator.",
+      "catalogLocks": [
+        {
+          "path": "planning/character-art-catalog.json",
+          "sha256": "7ac538bf8889e7c1c8cf7e8873e37dbcefdc4871c1450d7eb935bb3b0028067f"
+        },
+        {
+          "path": "packages/game-data/core/activities.json",
+          "sha256": "bf1d441c53576f7d15f3ca777f2db1d40c7a4fab2c9bd4ba33b1ffec389b3b47"
+        },
+        {
+          "path": "packages/game-data/core/role-equipment.json",
+          "sha256": "3a683fe70e1ba0e04c2212d44b85492c6777d70c0acff5e8b0cb678dd22337a1"
+        },
+        {
+          "path": "packages/game-data/core/appearance.json",
+          "sha256": "4f24bb7d0a73bfdb371f113625eb3a9d66ad7ceb17c7a82d781447ab23f046c0"
+        },
+        {
+          "path": "packages/game-data/core/roles.json",
+          "sha256": "9b29b0e265b150c53ab461087b71a9e908bc49bd387f862bc88b685eb8544fd4"
+        }
+      ],
+      "countingSemantics": {
+        "animationSet": "One body-presentation plus animation-clip design unit. This is not a raster count.",
+        "poseCell": "One visible design at one body presentation, animation clip, final frame, and direction before diffuse or mask channels are split.",
+        "runtimeRasterCell": "One pose cell in one required runtime channel. Diffuse and each mask are separate raster cells.",
+        "bodyFitUnit": "One visible modular design or equippable item fitted to one body presentation. It is a design and QA unit, not a raster count.",
+        "sourcePoseCell": "One authored key/source pose before the required in-between final frames are authored. Source poses never satisfy final-frame completion.",
+        "requiredOccludedCell": "A direction/frame remains required even when the layer is fully self-occluded; the reviewed cell may be transparent, but it may not be omitted or counted as completed merely because a file exists.",
+        "nonApplicable": "A combination deliberately outside raster production. Each such exclusion is listed explicitly below and must not enter a completion denominator."
+      },
+      "axes": {
+        "bodyPresentations": [
+          "base-a",
+          "base-b"
+        ],
+        "directions": [
+          "north",
+          "north_east",
+          "east",
+          "south_east",
+          "south",
+          "south_west",
+          "west",
+          "north_west"
+        ],
+        "animations": [
+          {
+            "id": "idle",
+            "frames": 4,
+            "sourcePoseFrames": 1,
+            "loop": true
+          },
+          {
+            "id": "walk",
+            "frames": 8,
+            "sourcePoseFrames": 4,
+            "loop": true
+          },
+          {
+            "id": "carry",
+            "frames": 4,
+            "sourcePoseFrames": 2,
+            "loop": true
+          },
+          {
+            "id": "greet",
+            "frames": 6,
+            "sourcePoseFrames": 3,
+            "loop": false
+          },
+          {
+            "id": "order-pos",
+            "frames": 6,
+            "sourcePoseFrames": 3,
+            "loop": false
+          },
+          {
+            "id": "pour",
+            "frames": 6,
+            "sourcePoseFrames": 3,
+            "loop": false
+          },
+          {
+            "id": "deliver",
+            "frames": 6,
+            "sourcePoseFrames": 3,
+            "loop": false
+          },
+          {
+            "id": "clear",
+            "frames": 6,
+            "sourcePoseFrames": 3,
+            "loop": false
+          },
+          {
+            "id": "wipe",
+            "frames": 8,
+            "sourcePoseFrames": 4,
+            "loop": true
+          },
+          {
+            "id": "sweep",
+            "frames": 8,
+            "sourcePoseFrames": 4,
+            "loop": true
+          },
+          {
+            "id": "mop",
+            "frames": 8,
+            "sourcePoseFrames": 4,
+            "loop": true
+          },
+          {
+            "id": "scrub",
+            "frames": 8,
+            "sourcePoseFrames": 4,
+            "loop": true
+          },
+          {
+            "id": "scrape",
+            "frames": 6,
+            "sourcePoseFrames": 3,
+            "loop": true
+          },
+          {
+            "id": "rack",
+            "frames": 6,
+            "sourcePoseFrames": 3,
+            "loop": true
+          },
+          {
+            "id": "load",
+            "frames": 6,
+            "sourcePoseFrames": 3,
+            "loop": false
+          },
+          {
+            "id": "unload",
+            "frames": 6,
+            "sourcePoseFrames": 3,
+            "loop": false
+          },
+          {
+            "id": "polish",
+            "frames": 8,
+            "sourcePoseFrames": 4,
+            "loop": true
+          },
+          {
+            "id": "chop",
+            "frames": 8,
+            "sourcePoseFrames": 4,
+            "loop": true
+          },
+          {
+            "id": "stir",
+            "frames": 8,
+            "sourcePoseFrames": 4,
+            "loop": true
+          },
+          {
+            "id": "flip",
+            "frames": 6,
+            "sourcePoseFrames": 3,
+            "loop": false
+          },
+          {
+            "id": "plate",
+            "frames": 8,
+            "sourcePoseFrames": 4,
+            "loop": true
+          },
+          {
+            "id": "inspect",
+            "frames": 6,
+            "sourcePoseFrames": 3,
+            "loop": false
+          },
+          {
+            "id": "open",
+            "frames": 6,
+            "sourcePoseFrames": 3,
+            "loop": false
+          },
+          {
+            "id": "pick-up",
+            "frames": 6,
+            "sourcePoseFrames": 3,
+            "loop": false
+          },
+          {
+            "id": "put-down",
+            "frames": 6,
+            "sourcePoseFrames": 3,
+            "loop": false
+          },
+          {
+            "id": "react",
+            "frames": 6,
+            "sourcePoseFrames": 3,
+            "loop": false
+          }
+        ],
+        "bodyRuntimeChannels": [
+          "skin-diffuse",
+          "skin-mask"
+        ],
+        "anchorNames": [
+          "floor-origin",
+          "head",
+          "torso",
+          "dominant-hand",
+          "off-hand",
+          "waist",
+          "left-foot",
+          "right-foot"
+        ]
+      },
+      "globalStateBindings": {
+        "stationary": "idle",
+        "navigation": "walk",
+        "rule": "Idle and walk are global movement-state bindings. Every activity has one separate primary task clip below."
+      },
+      "modularVisibleLayers": [
+        {
+          "id": "faces",
+          "source": "slotCatalogs.faces",
+          "choices": [
+            "warm",
+            "angular",
+            "round",
+            "mature",
+            "soft",
+            "freckled"
+          ],
+          "noRasterChoices": [],
+          "runtimeChannels": [
+            "diffuse",
+            "skin-mask"
+          ],
+          "anchorRegion": "head",
+          "requiresEveryAnimationFrame": true,
+          "requiresEveryDirection": true,
+          "bodyFitUnits": 12,
+          "finalPoseCells": 16320,
+          "runtimeRasterCells": 32640
+        },
+        {
+          "id": "shirts",
+          "source": "slotCatalogs.shirts",
+          "choices": [
+            "classic-button-up",
+            "service-polo",
+            "chef-coat",
+            "manager-jacket",
+            "utility-shirt",
+            "casual-tee"
+          ],
+          "noRasterChoices": [],
+          "runtimeChannels": [
+            "diffuse",
+            "primary-mask",
+            "secondary-mask"
+          ],
+          "anchorRegion": "torso-and-arms",
+          "requiresEveryAnimationFrame": true,
+          "requiresEveryDirection": true,
+          "bodyFitUnits": 12,
+          "finalPoseCells": 16320,
+          "runtimeRasterCells": 48960
+        },
+        {
+          "id": "pants",
+          "source": "slotCatalogs.pants",
+          "choices": [
+            "service-slacks",
+            "chef-check-trousers",
+            "utility-cargo",
+            "dark-jeans",
+            "tailored-skirt",
+            "service-shorts"
+          ],
+          "noRasterChoices": [],
+          "runtimeChannels": [
+            "diffuse",
+            "primary-mask",
+            "secondary-mask"
+          ],
+          "anchorRegion": "waist-and-legs",
+          "requiresEveryAnimationFrame": true,
+          "requiresEveryDirection": true,
+          "bodyFitUnits": 12,
+          "finalPoseCells": 16320,
+          "runtimeRasterCells": 48960
+        },
+        {
+          "id": "aprons",
+          "source": "slotCatalogs.aprons",
+          "choices": [
+            "waist-apron",
+            "bib-apron",
+            "cross-back-apron",
+            "waterproof-apron"
+          ],
+          "noRasterChoices": [],
+          "runtimeChannels": [
+            "diffuse",
+            "primary-mask",
+            "secondary-mask"
+          ],
+          "anchorRegion": "torso-waist-and-legs",
+          "requiresEveryAnimationFrame": true,
+          "requiresEveryDirection": true,
+          "bodyFitUnits": 8,
+          "finalPoseCells": 10880,
+          "runtimeRasterCells": 32640
+        },
+        {
+          "id": "shoes",
+          "source": "slotCatalogs.shoes",
+          "choices": [
+            "economy-nonslip",
+            "compression-service",
+            "kitchen-clog",
+            "utility-boot"
+          ],
+          "noRasterChoices": [],
+          "runtimeChannels": [
+            "diffuse",
+            "primary-mask",
+            "secondary-mask"
+          ],
+          "anchorRegion": "feet",
+          "requiresEveryAnimationFrame": true,
+          "requiresEveryDirection": true,
+          "bodyFitUnits": 8,
+          "finalPoseCells": 10880,
+          "runtimeRasterCells": 32640
+        },
+        {
+          "id": "headwear",
+          "source": "slotCatalogs.headwear",
+          "choices": [
+            "chef-toque",
+            "cook-cap",
+            "service-visor",
+            "hairnet",
+            "head-scarf"
+          ],
+          "noRasterChoices": [],
+          "runtimeChannels": [
+            "diffuse",
+            "primary-mask",
+            "secondary-mask"
+          ],
+          "anchorRegion": "head",
+          "requiresEveryAnimationFrame": true,
+          "requiresEveryDirection": true,
+          "bodyFitUnits": 10,
+          "finalPoseCells": 13600,
+          "runtimeRasterCells": 40800
+        },
+        {
+          "id": "eyewear",
+          "source": "slotCatalogs.eyewear",
+          "choices": [
+            "rectangular-glasses",
+            "round-glasses",
+            "sunglasses",
+            "safety-glasses"
+          ],
+          "noRasterChoices": [],
+          "runtimeChannels": [
+            "diffuse",
+            "primary-mask"
+          ],
+          "anchorRegion": "head",
+          "requiresEveryAnimationFrame": true,
+          "requiresEveryDirection": true,
+          "bodyFitUnits": 8,
+          "finalPoseCells": 10880,
+          "runtimeRasterCells": 21760
+        },
+        {
+          "id": "accessories",
+          "source": "slotCatalogs.accessories",
+          "choices": [
+            "name-badge",
+            "earpiece",
+            "wristwatch",
+            "neck-scarf",
+            "bracelet"
+          ],
+          "noRasterChoices": [],
+          "runtimeChannels": [
+            "diffuse",
+            "primary-mask"
+          ],
+          "anchorRegion": "choice-specific",
+          "requiresEveryAnimationFrame": true,
+          "requiresEveryDirection": true,
+          "bodyFitUnits": 10,
+          "finalPoseCells": 13600,
+          "runtimeRasterCells": 27200
+        },
+        {
+          "id": "roleLayers",
+          "source": "roleLayers",
+          "choices": [
+            "manager",
+            "owner",
+            "server",
+            "dishwasher",
+            "chef",
+            "cook",
+            "host-busser"
+          ],
+          "noRasterChoices": [],
+          "runtimeChannels": [
+            "diffuse",
+            "primary-mask",
+            "secondary-mask"
+          ],
+          "anchorRegion": "torso-waist-and-limbs",
+          "requiresEveryAnimationFrame": true,
+          "requiresEveryDirection": true,
+          "bodyFitUnits": 14,
+          "finalPoseCells": 19040,
+          "runtimeRasterCells": 57120
+        },
+        {
+          "id": "hairStyles",
+          "source": "hairStyles",
+          "choices": [
+            "buzz",
+            "short",
+            "side-part",
+            "curly",
+            "coily",
+            "locs",
+            "braids",
+            "bob",
+            "ponytail",
+            "bun",
+            "long"
+          ],
+          "noRasterChoices": [
+            "bald"
+          ],
+          "runtimeChannels": [
+            "diffuse",
+            "primary-mask"
+          ],
+          "anchorRegion": "head-and-shoulders",
+          "requiresEveryAnimationFrame": true,
+          "requiresEveryDirection": true,
+          "bodyFitUnits": 22,
+          "finalPoseCells": 29920,
+          "runtimeRasterCells": 59840
+        },
+        {
+          "id": "facialHair",
+          "source": "facialHair",
+          "choices": [
+            "stubble",
+            "mustache",
+            "goatee",
+            "short-beard",
+            "full-beard"
+          ],
+          "noRasterChoices": [
+            "none"
+          ],
+          "runtimeChannels": [
+            "diffuse",
+            "primary-mask"
+          ],
+          "anchorRegion": "head",
+          "requiresEveryAnimationFrame": true,
+          "requiresEveryDirection": true,
+          "bodyFitUnits": 10,
+          "finalPoseCells": 13600,
+          "runtimeRasterCells": 27200
+        }
+      ],
+      "equipmentAttachments": {
+        "policy": "Every kind=equipment catalog item requires a binding for both body presentations. Deforming worn items require every animation frame; rigid items reuse one reviewed directional raster through per-frame anchors; footwear aliases reuse the independently swappable shoe layer. Consumables have no persistent avatar attachment.",
+        "groups": [
+          {
+            "id": "footwear-layer-alias",
+            "rasterRule": "alias-existing-layer",
+            "anchors": [
+              "left-foot",
+              "right-foot"
+            ],
+            "runtimeChannels": [],
+            "itemIds": [
+              "economy-nonslip-shoes",
+              "compression-service-shoes"
+            ],
+            "aliases": {
+              "economy-nonslip-shoes": "economy-nonslip",
+              "compression-service-shoes": "compression-service"
+            }
+          },
+          {
+            "id": "deforming-worn-hands",
+            "rasterRule": "full-frame-deforming",
+            "anchors": [
+              "dominant-hand",
+              "off-hand"
+            ],
+            "runtimeChannels": [
+              "diffuse"
+            ],
+            "itemIds": [
+              "dish-steam-gauntlets",
+              "cook-chainmail-cut-glove"
+            ]
+          },
+          {
+            "id": "deforming-worn-harness",
+            "rasterRule": "full-frame-deforming",
+            "anchors": [
+              "torso",
+              "dominant-hand",
+              "off-hand"
+            ],
+            "runtimeChannels": [
+              "diffuse"
+            ],
+            "itemIds": [
+              "host-bus-tub-harness"
+            ]
+          },
+          {
+            "id": "rigid-head",
+            "rasterRule": "directional-rigid-anchor-reuse",
+            "anchors": [
+              "head"
+            ],
+            "runtimeChannels": [
+              "diffuse"
+            ],
+            "itemIds": [
+              "manager-radio-headset"
+            ]
+          },
+          {
+            "id": "rigid-torso-waist",
+            "rasterRule": "directional-rigid-anchor-reuse",
+            "anchors": [
+              "torso",
+              "waist"
+            ],
+            "runtimeChannels": [
+              "diffuse"
+            ],
+            "itemIds": [
+              "magnetic-pocket-flashlight",
+              "chef-tasting-spoon-wallet",
+              "cook-four-channel-timer",
+              "cook-bottle-holster"
+            ]
+          },
+          {
+            "id": "rigid-handheld",
+            "rasterRule": "directional-rigid-anchor-reuse",
+            "anchors": [
+              "dominant-hand",
+              "off-hand"
+            ],
+            "runtimeChannels": [
+              "diffuse"
+            ],
+            "itemIds": [
+              "manager-service-clipboard",
+              "manager-floor-plan-folio",
+              "manager-recovery-cards",
+              "owner-leather-ledger",
+              "owner-operations-tablet",
+              "owner-lease-calculator",
+              "owner-tasting-notebook",
+              "server-click-pen",
+              "server-waterproof-order-pad",
+              "server-waiters-corkscrew",
+              "server-cork-tray",
+              "dish-high-pressure-nozzle",
+              "dish-silicone-rack-hook",
+              "dish-digital-test-reader",
+              "chef-forged-knife",
+              "chef-folding-thermometer",
+              "chef-plating-tweezers",
+              "cook-fish-turner",
+              "host-reservation-book",
+              "host-seating-tablet",
+              "host-brass-crumb-scraper"
+            ]
+          }
+        ],
+        "nonPersistentCatalogItemIds": [
+          "manager-morale-candy-tin",
+          "manager-incident-seal-kit",
+          "owner-networking-cards",
+          "owner-market-scout-pass",
+          "server-palate-mints",
+          "server-stain-rescue-pen",
+          "dish-enzymatic-detergent",
+          "dish-deliming-pouch",
+          "chef-diamond-sharpening-strip",
+          "chef-palate-rinse",
+          "cook-pan-seasoning-wipe",
+          "cook-burn-gel-sachet",
+          "host-sanitizer-caddy-refill",
+          "host-guest-activity-pack"
+        ]
+      },
+      "activityPrimaryClips": {
+        "manager-lineup-deployment": "order-pos",
+        "manager-operations-board": "inspect",
+        "manager-seating-throttle": "order-pos",
+        "manager-labor-breaks": "order-pos",
+        "manager-guest-recovery": "greet",
+        "manager-comp-void-control": "order-pos",
+        "manager-sanitation-walk": "inspect",
+        "manager-incident-command": "react",
+        "manager-incident-reconstruction": "inspect",
+        "manager-coaching-intervention": "greet",
+        "manager-close-control": "inspect",
+        "owner-cash-runway": "order-pos",
+        "owner-capital-portfolio": "order-pos",
+        "owner-vendor-negotiation": "greet",
+        "owner-purchase-authorization": "order-pos",
+        "owner-menu-engineering": "inspect",
+        "owner-brand-watch": "inspect",
+        "owner-policy-desk": "order-pos",
+        "owner-maintenance-portfolio": "inspect",
+        "owner-community-hosting": "greet",
+        "owner-insurance-lease": "order-pos",
+        "owner-site-expansion": "inspect",
+        "server-party-pre-read": "inspect",
+        "server-contextual-greeting": "greet",
+        "server-beverage-discovery": "greet",
+        "server-pour-setup": "pour",
+        "server-menu-interview": "greet",
+        "server-seat-order": "order-pos",
+        "server-allergy-confirmation": "order-pos",
+        "server-course-conductor": "react",
+        "server-tray-route": "carry",
+        "server-delivery-seat-match": "deliver",
+        "server-two-bite-check": "greet",
+        "server-attention-circuit": "walk",
+        "server-recovery-conversation": "greet",
+        "server-dessert-check-read": "greet",
+        "server-split-payment": "order-pos",
+        "server-checkout-handoff": "order-pos",
+        "dishwasher-intake-triage": "inspect",
+        "dishwasher-scrape-waste": "scrape",
+        "dishwasher-soil-treatment": "scrub",
+        "dishwasher-rack-geometry": "rack",
+        "dishwasher-machine-setup": "load",
+        "dishwasher-cycle-cadence": "rack",
+        "dishwasher-clean-inspection": "inspect",
+        "dishwasher-pit-priority": "order-pos",
+        "dishwasher-clean-distribution": "carry",
+        "dishwasher-specialty-ware": "polish",
+        "dishwasher-breakage-containment": "react",
+        "dishwasher-preventative-maintenance": "open",
+        "dishwasher-pit-close": "unload",
+        "chef-line-check": "inspect",
+        "chef-ticket-rail": "order-pos",
+        "chef-call-acknowledgment": "react",
+        "chef-pickup-orchestration": "deliver",
+        "chef-plate-inspection": "inspect",
+        "chef-taste-calibration": "inspect",
+        "chef-refire-recovery": "react",
+        "chef-availability-control": "order-pos",
+        "chef-haccp-decision": "inspect",
+        "chef-yield-order-guide": "order-pos",
+        "chef-waste-review": "inspect",
+        "chef-kitchen-coaching": "greet",
+        "cook-product-rotation": "inspect",
+        "cook-mise-plan": "order-pos",
+        "cook-knife-prep": "chop",
+        "cook-batch-scaling": "stir",
+        "cook-station-setup": "put-down",
+        "cook-heat-control": "flip",
+        "cook-doneness-read": "inspect",
+        "cook-allergy-lane": "order-pos",
+        "cook-pickup-sync": "react",
+        "cook-plating-assembly": "plate",
+        "cook-clean-as-you-go": "wipe",
+        "cook-equipment-anomaly": "open",
+        "cook-station-handoff": "greet",
+        "host-busser-reservation-graph": "order-pos",
+        "host-busser-wait-forecast": "inspect",
+        "host-busser-arrival-dialogue": "greet",
+        "host-busser-seating-graph": "order-pos",
+        "host-busser-escort-handoff": "walk",
+        "host-busser-table-combine": "pick-up",
+        "host-busser-room-scan": "inspect",
+        "host-busser-prebus-circuit": "clear",
+        "host-busser-stack-balance": "carry",
+        "host-busser-reset-sequence": "put-down",
+        "host-busser-spill-containment": "mop",
+        "host-busser-restroom-entry-standard": "inspect",
+        "host-busser-closing-room": "sweep"
+      },
+      "nonApplicableCombinations": [
+        {
+          "id": "skin-tone-raster-duplicates",
+          "classification": "shader-only",
+          "choiceCount": 10,
+          "excludedDuplicatePoseCells": 27200,
+          "reason": "Ten catalog skin tones are shader palettes applied through the required skin mask; they do not create ten copies of each body raster."
+        },
+        {
+          "id": "appearance-palette-raster-duplicates",
+          "classification": "shader-only",
+          "choiceCount": 6,
+          "reason": "Six appearance palettes drive primary and secondary masks; they are not separate garment raster designs."
+        },
+        {
+          "id": "absence-layer-cells",
+          "classification": "intentional-empty-selection",
+          "choices": [
+            "hairStyles:bald",
+            "facialHair:none"
+          ],
+          "excludedPoseCells": 5440,
+          "reason": "Bald and no-facial-hair are valid selections represented by the absence of a visible layer."
+        },
+        {
+          "id": "prototype-outfit-composite-duplicates",
+          "classification": "composite-recipe-only",
+          "choices": [
+            "classic",
+            "apron"
+          ],
+          "excludedBodyFitUnits": 4,
+          "reason": "Prototype combined outfit silhouettes are preservation evidence, not additional independently swappable launch layers."
+        },
+        {
+          "id": "appearance-outfit-silhouette-duplicates",
+          "classification": "composite-recipe-only",
+          "choices": [
+            "classic",
+            "apron",
+            "chef-coat",
+            "manager-jacket",
+            "utility"
+          ],
+          "reason": "Appearance silhouettes are recipes assembled from split layers and do not add raster choices to the split-layer denominator."
+        },
+        {
+          "id": "consumable-persistent-attachments",
+          "classification": "non-persistent-item",
+          "choiceCount": 14,
+          "excludedBodyFitUnits": 28,
+          "reason": "Kind=consumable items can trigger generic effects but are not persistently equipped on the avatar."
+        },
+        {
+          "id": "footwear-equipment-duplicate-raster",
+          "classification": "existing-layer-alias",
+          "choiceCount": 2,
+          "excludedDirectionalRasterCells": 32,
+          "reason": "The two equipment footwear items bind to their matching shoe-layer designs rather than duplicating equipment attachment rasters."
+        },
+        {
+          "id": "rigid-equipment-frame-raster-duplicates",
+          "classification": "anchor-reused",
+          "choiceCount": 26,
+          "excludedPerFrameRasterCells": 70720,
+          "reason": "Rigid equipment has one body-fitted raster per direction. The base body supplies reviewed per-frame anchors, so duplicating the rigid bitmap for every animation frame is non-applicable."
+        },
+        {
+          "id": "role-specific-body-or-layer-raster-duplicates",
+          "classification": "runtime-selection-only",
+          "reason": "Body presentations and shared modular choices do not duplicate by role. Role permissions select combinations at runtime; the seven role-layer designs are already counted once per body fit."
+        },
+        {
+          "id": "generic-effects-body-frame-duplicates",
+          "classification": "separate-environment-lane",
+          "choices": [
+            "contact-shadow",
+            "selection-ring",
+            "steam-puff",
+            "service-sparkles"
+          ],
+          "reason": "Generic effects are tracked as reusable environment assets and runtime bindings, not duplicated across character bodies, directions, or frames."
+        }
+      ],
+      "contractBoundary": {
+        "activityBindingGranularity": "Exactly one primary task clip per current activity, plus global idle/navigation bindings. The current activity schema has no phase-level animation-tag field, so phase choreography is not part of this launch denominator.",
+        "runtimePackaging": "Atlas versus per-frame file packaging does not change any cell total. Every cell and channel must still be authored, visually reviewed in a runtime composite at gameplay scale, runtime-bound, remotely verified, and CI-green.",
+        "effects": "The four generic effect rasters remain in the environment-art lane; character runtime tests must bind them without duplicating them by appearance combination.",
+        "occlusion": "No direction is silently removed for face, hair, clothing, or accessories. Fully self-occluded cells remain required and are accepted only after composite review."
+      },
+      "totals": {
+        "bodyPresentationCount": 2,
+        "directionCount": 8,
+        "animationClipCount": 26,
+        "animationSetDesignUnits": 52,
+        "finalFramesPerBodyDirection": 170,
+        "sourcePoseFramesPerBodyDirection": 84,
+        "baseBodySourcePoseCells": 1344,
+        "baseBodyFinalPoseCells": 2720,
+        "baseBodyRuntimeRasterCells": 5440,
+        "anchorNamesPerBodyPoseCell": 8,
+        "requiredAnchorRecords": 21760,
+        "visibleModularChoiceCount": 63,
+        "intentionalEmptyModularChoiceCount": 2,
+        "modularBodyFitDesignUnits": 126,
+        "modularSourcePoseCells": 84672,
+        "modularFinalPoseCells": 171360,
+        "modularRuntimeRasterCells": 429760,
+        "equippableItemCount": 31,
+        "consumableNoPersistentAttachmentCount": 14,
+        "equipmentAttachmentBodyFitUnits": 62,
+        "equipmentFrameBindingCombinations": 84320,
+        "equipmentAliasItemCount": 2,
+        "equipmentDeformingItemCount": 3,
+        "equipmentRigidItemCount": 26,
+        "equipmentDeformingRuntimeRasterCells": 8160,
+        "equipmentRigidRuntimeRasterCells": 416,
+        "equipmentRuntimeRasterCells": 8576,
+        "activityCount": 89,
+        "activityPrimaryBindingCount": 89,
+        "totalSourceRuntimeRasterCells": 219488,
+        "totalFinalRuntimeRasterCells": 443776
+      }
+    }
   },
   "reviewedBatches": [
     {
@@ -14003,7 +14844,7 @@ This JSON block is part of this same authoritative document and contains every c
   "contractGaps": [
     "Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.",
     "Choose and implement the final isometric floor projection; the current orthogonal renderer cannot align accepted elevated sprites.",
-    "Freeze character animation storage/rigging for every split layer; static direction art and metadata-only clip aliases do not satisfy the 26-animation contract.",
+    "Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.",
     "Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete."
   ]
 }

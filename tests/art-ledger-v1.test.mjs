@@ -60,6 +60,9 @@ test("the authoritative art ledger cannot hide missing, failed, local-only, or u
   assert.equal(art.characters.animationCount, 26);
   assert.equal(art.characters.requiredBodySourcePoses, 1344);
   assert.equal(art.characters.requiredBodyFinalFrameCells, 2720);
+  assert.equal(art.characters.launchApplicability.id, "character-launch-applicability-v1");
+  assert.equal(art.characters.launchApplicability.totals.totalFinalRuntimeRasterCells, 443776);
+  assert.equal(art.characters.launchApplicability.totals.activityPrimaryBindingCount, 89);
   assert.equal(art.characters.presentActivityBindings, 0);
   assert.ok(art.quarantinedWork.some((entry) => entry.localCommit === "5714bb8" && entry.status === "local-only-rejected"));
   assert.ok(art.preservedReferences.some((entry) => entry.productionStatus === "preserved-reference-wrong-camera"));
