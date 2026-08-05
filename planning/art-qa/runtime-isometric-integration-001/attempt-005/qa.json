@@ -1,0 +1,299 @@
+{
+	"acceptedAssetIds": [
+		"banquette",
+		"booth",
+		"dish-machine",
+		"espresso",
+		"furniture-banquette-section",
+		"furniture-commercial-chair",
+		"furniture-host-stand-pro",
+		"furniture-oak-two-top",
+		"furniture-pos-terminal",
+		"furniture-premium-chair",
+		"furniture-server-station-pro",
+		"furniture-six-burner-range",
+		"furniture-walnut-four-top",
+		"host-stand",
+		"local-art",
+		"mop-sink",
+		"pass",
+		"pendants",
+		"plants",
+		"prep",
+		"range",
+		"recycling",
+		"service-station",
+		"table-four",
+		"table-two"
+	],
+	"captures": [
+		{
+			"direction": "north",
+			"mountedPlacements": [
+				{
+					"anchor": [
+						6.0,
+						0.0
+					],
+					"assetId": "local-art",
+					"footprint": [
+						5.0,
+						0.0,
+						2.0,
+						1.0
+					],
+					"mount": "wall",
+					"occupancy": "nonblocking",
+					"rotation": 0,
+					"supportEdge": "north",
+					"x": 5,
+					"y": 0
+				},
+				{
+					"anchor": [
+						16.0,
+						20.5
+					],
+					"assetId": "pendants",
+					"footprint": [
+						15.0,
+						20.0,
+						2.0,
+						1.0
+					],
+					"mount": "ceiling",
+					"occupancy": "nonblocking",
+					"rotation": 0,
+					"x": 15,
+					"y": 20
+				},
+				{
+					"anchor": [
+						21.5,
+						0.0
+					],
+					"assetId": "plants",
+					"footprint": [
+						20.0,
+						0.0,
+						3.0,
+						1.0
+					],
+					"mount": "wall",
+					"occupancy": "nonblocking",
+					"rotation": 0,
+					"supportEdge": "north",
+					"x": 20,
+					"y": 0
+				}
+			],
+			"path": "restaurant-north.png",
+			"rotation": 0,
+			"sampledColors": 294,
+			"sha256": "1beac8ad849ebd9144e0a81b4fbf3839a5e82ccc731f0e3b3ffca4d439b4be40"
+		},
+		{
+			"direction": "east",
+			"mountedPlacements": [
+				{
+					"anchor": [
+						30.0,
+						4.0
+					],
+					"assetId": "local-art",
+					"footprint": [
+						29.0,
+						3.0,
+						1.0,
+						2.0
+					],
+					"mount": "wall",
+					"occupancy": "nonblocking",
+					"rotation": 90,
+					"supportEdge": "east",
+					"x": 29,
+					"y": 3
+				},
+				{
+					"anchor": [
+						15.5,
+						21.0
+					],
+					"assetId": "pendants",
+					"footprint": [
+						15.0,
+						20.0,
+						1.0,
+						2.0
+					],
+					"mount": "ceiling",
+					"occupancy": "nonblocking",
+					"rotation": 90,
+					"x": 15,
+					"y": 20
+				},
+				{
+					"anchor": [
+						30.0,
+						13.5
+					],
+					"assetId": "plants",
+					"footprint": [
+						29.0,
+						12.0,
+						1.0,
+						3.0
+					],
+					"mount": "wall",
+					"occupancy": "nonblocking",
+					"rotation": 90,
+					"supportEdge": "east",
+					"x": 29,
+					"y": 12
+				}
+			],
+			"path": "restaurant-east.png",
+			"rotation": 90,
+			"sampledColors": 298,
+			"sha256": "f7dc41902ee4ef411d8c166acfe74d00ea00b1f89e0827e9c9610a42a14bb626"
+		},
+		{
+			"direction": "south",
+			"mountedPlacements": [
+				{
+					"anchor": [
+						6.0,
+						23.0
+					],
+					"assetId": "local-art",
+					"footprint": [
+						5.0,
+						22.0,
+						2.0,
+						1.0
+					],
+					"mount": "wall",
+					"occupancy": "nonblocking",
+					"rotation": 180,
+					"supportEdge": "south",
+					"x": 5,
+					"y": 22
+				},
+				{
+					"anchor": [
+						16.0,
+						20.5
+					],
+					"assetId": "pendants",
+					"footprint": [
+						15.0,
+						20.0,
+						2.0,
+						1.0
+					],
+					"mount": "ceiling",
+					"occupancy": "nonblocking",
+					"rotation": 180,
+					"x": 15,
+					"y": 20
+				},
+				{
+					"anchor": [
+						21.5,
+						23.0
+					],
+					"assetId": "plants",
+					"footprint": [
+						20.0,
+						22.0,
+						3.0,
+						1.0
+					],
+					"mount": "wall",
+					"occupancy": "nonblocking",
+					"rotation": 180,
+					"supportEdge": "south",
+					"x": 20,
+					"y": 22
+				}
+			],
+			"path": "restaurant-south.png",
+			"rotation": 180,
+			"sampledColors": 309,
+			"sha256": "a3c87bf9efdf641f98ff1653b992c55689bceb2e66c5ab14b4d9f7ed1e2518ac"
+		},
+		{
+			"direction": "west",
+			"mountedPlacements": [
+				{
+					"anchor": [
+						0.0,
+						4.0
+					],
+					"assetId": "local-art",
+					"footprint": [
+						0.0,
+						3.0,
+						1.0,
+						2.0
+					],
+					"mount": "wall",
+					"occupancy": "nonblocking",
+					"rotation": 270,
+					"supportEdge": "west",
+					"x": 0,
+					"y": 3
+				},
+				{
+					"anchor": [
+						15.5,
+						21.0
+					],
+					"assetId": "pendants",
+					"footprint": [
+						15.0,
+						20.0,
+						1.0,
+						2.0
+					],
+					"mount": "ceiling",
+					"occupancy": "nonblocking",
+					"rotation": 270,
+					"x": 15,
+					"y": 20
+				},
+				{
+					"anchor": [
+						0.0,
+						13.5
+					],
+					"assetId": "plants",
+					"footprint": [
+						0.0,
+						12.0,
+						1.0,
+						3.0
+					],
+					"mount": "wall",
+					"occupancy": "nonblocking",
+					"rotation": 270,
+					"supportEdge": "west",
+					"x": 0,
+					"y": 12
+				}
+			],
+			"path": "restaurant-west.png",
+			"rotation": 270,
+			"sampledColors": 300,
+			"sha256": "bf0f4879c29f22dca43784fef882900e18a367ce3983b01b21e8314d10431d9c"
+		}
+	],
+	"fixture": "22 accepted floor identities plus legal wall/ceiling directional review placements, walls, openings, incidents, parties, and avatars",
+	"productionComplete": false,
+	"remainingGate": "Human visual acceptance of these exact native Godot captures and durable repository preservation.",
+	"schemaVersion": 1,
+	"viewport": [
+		1800,
+		1100
+	]
+}
