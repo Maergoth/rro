@@ -50,7 +50,7 @@ const FLOOR_POSITIONS := {
 	"espresso": Vector2i(21, 2),
 	"furniture-banquette-section": Vector2i(4, 6),
 	"furniture-commercial-chair": Vector2i(10, 6),
-	"furniture-convection-oven": Vector2i(26, 19),
+	"furniture-convection-oven": Vector2i(14, 16),
 	"furniture-expo-pass-heated": Vector2i(3, 14),
 	"furniture-host-stand-pro": Vector2i(16, 6),
 	"furniture-oak-two-top": Vector2i(22, 6),

@@ -8,6 +8,8 @@ const capture = read("apps/client-godot/tests/isometric_runtime_capture.gd");
 const workflow = read(".github/workflows/ci.yml");
 const contract = JSON.parse(read("apps/client-godot/furniture-art-runtime.json"));
 const validator = read("tools/validate-godot-project.mjs");
+const restaurantFloor = read("apps/client-godot/scripts/restaurant_floor.gd");
+const projection = read("apps/client-godot/scripts/isometric_grid_projection.gd");
 const furnitureCatalog = [
   ...JSON.parse(read("packages/game-data/core/furniture.json")),
   ...JSON.parse(read("packages/game-data/core/furniture-production.json")),
@@ -33,7 +35,7 @@ test("native Godot QA fixture renders every accepted directional furniture ident
     espresso: { x: 21, y: 2 },
     "furniture-banquette-section": { x: 4, y: 6 },
     "furniture-commercial-chair": { x: 10, y: 6 },
-    "furniture-convection-oven": { x: 26, y: 19 },
+    "furniture-convection-oven": { x: 14, y: 16 },
     "furniture-expo-pass-heated": { x: 3, y: 14 },
     "furniture-host-stand-pro": { x: 16, y: 6 },
     "furniture-oak-two-top": { x: 22, y: 6 },
@@ -109,6 +111,35 @@ test("native Godot QA fixture renders every accepted directional furniture ident
         assert.equal(overlaps, false, `${a.assetId} overlaps ${b.assetId} in the native fixture at rotation ${rotation}`);
       }
     }
+  }
+  const gridSizeMatch = capture.match(/"width": (\d+),\s*\n\s*"height": (\d+)/);
+  const wallHeightMatch = restaurantFloor.match(/const WALL_PLANE_HEIGHT_CELLS := ([\d.]+)/);
+  const halfHeightRatioMatch = projection.match(/const HALF_HEIGHT_RATIO := ([\d.]+)/);
+  assert.ok(gridSizeMatch, "the native fixture must declare its review-grid dimensions");
+  assert.ok(wallHeightMatch, "the renderer must declare its wall-plane height");
+  assert.ok(halfHeightRatioMatch, "the isometric projection must declare its vertical basis ratio");
+  const gridSize = { width: Number(gridSizeMatch[1]), height: Number(gridSizeMatch[2]) };
+  const wallHeightCells = Number(wallHeightMatch[1]);
+  const halfHeightRatio = Number(halfHeightRatioMatch[1]);
+  // At a fixed screen x, one cell toward either foreground edge advances both
+  // grid axes, so its projected ground depth is twice the vertical basis ratio.
+  const minimumForegroundClearanceCells = Math.floor(wallHeightCells / (2 * halfHeightRatio)) + 1;
+  const ovenDefinition = floorDefinitions.find((definition) => definition.assetId === "furniture-convection-oven");
+  const ovenPosition = floorPositions.get("furniture-convection-oven");
+  assert.ok(ovenDefinition && ovenPosition, "the convection oven must remain in the native review fixture");
+  assert.equal(minimumForegroundClearanceCells, 4, "the current wall height and isometric basis require four cells of foreground clearance");
+  for (const rotation of [0, 90, 180, 270]) {
+    const quarterTurn = rotation === 90 || rotation === 270;
+    const ovenWidth = quarterTurn ? ovenDefinition.height : ovenDefinition.width;
+    const ovenHeight = quarterTurn ? ovenDefinition.width : ovenDefinition.height;
+    assert.ok(
+      gridSize.width - (ovenPosition.x + ovenWidth) >= minimumForegroundClearanceCells,
+      `the convection oven must remain clear of the camera-facing east wall plane at rotation ${rotation}`,
+    );
+    assert.ok(
+      gridSize.height - (ovenPosition.y + ovenHeight) >= minimumForegroundClearanceCells,
+      `the convection oven must remain clear of the camera-facing south wall plane at rotation ${rotation}`,
+    );
   }
   assert.match(capture, /const ROTATIONS := \[0, 90, 180, 270\]/);
   assert.match(capture, /restaurant-%s\.png/);
