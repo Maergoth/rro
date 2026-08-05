@@ -1,0 +1,474 @@
+{
+  "schemaVersion": 1,
+  "batchId": "furniture-core-directional-004",
+  "artReviewStatus": "accepted",
+  "productionComplete": false,
+  "productionCompletionBlockers": [
+    "The current Godot floor projection remains orthogonal; final elevated-isometric footprint alignment and runtime gameplay-composite review have not passed.",
+    "Exact remote tree verification and hosted CI are pending for this promoted repository batch."
+  ],
+  "assets": [
+    "espresso",
+    "dish-machine",
+    "mop-sink"
+  ],
+  "promotionScope": {
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "repositoryPromotion": {
+    "status": "promoted-local-pending-remote-verification",
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "remotePreservation": null,
+  "source": {
+    "generator": "OpenAI built-in image generation",
+    "mode": "one separately prompted 2x2 rigid rotation atlas per furniture identity",
+    "promptLog": "planning/art-qa/furniture-core-directional-004/prompts.md",
+    "promptLogSha256": "111099aa1635f67f7f7a3d8f9b1cf4f521ad0bca65217001d311c9a4b228a862",
+    "identityReferences": [
+      "apps/client-godot/assets/objects/generated/espresso.png",
+      "apps/client-godot/assets/objects/generated/dish-machine.png",
+      "apps/client-godot/assets/objects/generated/mop-sink.png"
+    ],
+    "cameraReference": "accepted furniture-core-directional-002/003 and furniture-pilot-001",
+    "matteProcess": "Official imagegen remove_chroma_key.py helper with border auto-keying, soft matte, magenta despill, transparent threshold 12, and opaque threshold 220.",
+    "normalization": "Split each 1254x1254 alpha atlas into four exact 627x627 cells, alpha-trim, uniformly scale, center horizontally, and place the bottommost opaque row at baseline y=590 on a transparent 627x627 canvas.",
+    "rawSha256": {
+      "espresso": "f5e9db7b0587b44cdb94abc29253946dead7d6723a647f8472188aa0284454d5",
+      "dish-machine": "45b54f3400ba11ba6890112061d1c36cc63170fb72f8a8822d014f9394c63748",
+      "mop-sink": "b41711603108610967ae01147bd69ae957e5a92cbe9af29d57b285ecc42a3586"
+    },
+    "alphaAtlasSha256": {
+      "espresso": "f27f5a60cd64220294788400bd5f8be96745ffb3da8c9a06add10f2d67a5abbb",
+      "dish-machine": "b715f595373dc3505987abf4a9a50255e06374b117a6ad45c58075768c1bf80f",
+      "mop-sink": "c43c6b8757326f91541a181733196e321cf1480e0eef79bc25a14daf78b3caf5"
+    }
+  },
+  "gates": {
+    "requiredDirections": [
+      "north",
+      "east",
+      "south",
+      "west"
+    ],
+    "runtimeDimensions": "627x627",
+    "colorMode": "sRGBA",
+    "commonCanvasPivot": [
+      313.5,
+      590
+    ],
+    "commonFloorContactBaselineY": 590,
+    "minimumTransparentBottomMarginPixels": 37,
+    "allOuterBordersTransparent": true,
+    "uniqueRuntimeFileHashes": true,
+    "uniqueRuntimePixelHashes": true,
+    "uniqueAgainstRepositoryDirectionalPngs": true,
+    "samePhysicalObjectAcrossDirections": "pass",
+    "fixedElevatedOrthographicIsometricCamera": "pass",
+    "noClippingTextLogosWatermarksOrExtraObjects": "pass",
+    "visualReviewAtFullScale": "pass: contact-627-dark.png inspected at original resolution; identity, rigid feature counts, service-front/rear states, camera, silhouettes, alpha edges, and padding accepted.",
+    "visualReviewAtGameplayScale128px": "pass: contact-128-light.png inspected at original resolution; all three identities and each front/rear state remain readable.",
+    "proceduralOrDeterministicStandIn": false
+  },
+  "contactSheets": [
+    {
+      "path": "planning/art-qa/furniture-core-directional-004/contact-627-dark.png",
+      "purpose": "Exact 627px runtime candidates on a dark checkerboard",
+      "sha256": "6a68d29f59a639345b85c3c2afea679ce5792544e6d4d97c5d255c063066f843"
+    },
+    {
+      "path": "planning/art-qa/furniture-core-directional-004/contact-128-light.png",
+      "purpose": "Same runtime candidates reduced to 128px on a light checkerboard",
+      "sha256": "c487774571750845c844d85dd38e3fb00f29974e3aeaa382946e1036fa87522e"
+    }
+  ],
+  "items": [
+    {
+      "catalogId": "espresso",
+      "assetId": "espresso",
+      "name": "Espresso Machine",
+      "footprint": [
+        2,
+        1
+      ],
+      "identityContract": "One compact stainless-and-copper two-group body; exactly two group heads and two black-handled portafilters; one steam wand on machine-left; one hot-water spout on machine-right; four front knobs; one slotted drip tray; two short ivory cup stacks; one centered rear vent.",
+      "semanticVerdict": "pass: North/east expose the operational front from opposite isometric axes; south/west expose the centered rear vent. The fixed left steam wand and right hot-water spout keep coherent side ordering under each rigid quarter-turn.",
+      "gameplayLegibility": "pass: The twin group heads and handles, warm copper trim, wide drip tray, and front-versus-rear state remain identifiable at 128px.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/espresso/north.png",
+          "sha256": "356eef483e0f37755bd632557ef09d32d746d38baeec2a7c562839f82a97baa4",
+          "pixelSha256": "816bac2e8b2731113b695b68ba69dfca6cb3417df332d239fd6c5838e16449aa",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-004/alpha-source/espresso-north.png",
+          "sourceAlphaSha256": "7a3a6b0ffa153c22d9f517bd76ee21bdc09dffa503a4d72d5d841dafe271976a",
+          "sourceOpaqueBounds": "538x516+47+77",
+          "uniformScale": 0.96899225,
+          "opaqueBounds": "521x500+53+90",
+          "transparentMargins": {
+            "left": 53,
+            "right": 53,
+            "top": 90,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/espresso/east.png",
+          "sha256": "f138a521f1ef46e2587b7b0e270779e5c091ff3e135cc41462236b2574229d7e",
+          "pixelSha256": "259cede0709b2e08094d96990674e1f998c48d1e34bd828d1039d357884e98ee",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-004/alpha-source/espresso-east.png",
+          "sourceAlphaSha256": "a70b1868a3ae95bed744fe946200d5f960f5a63a23fe570adb3dbb5ae1aea2af",
+          "sourceOpaqueBounds": "535x514+20+86",
+          "uniformScale": 0.97276265,
+          "opaqueBounds": "520x500+53+90",
+          "transparentMargins": {
+            "left": 53,
+            "right": 54,
+            "top": 90,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/espresso/south.png",
+          "sha256": "003657cc1b84db2902d0873c0713d86afe98ec857ecd8c67636032f58edc8f20",
+          "pixelSha256": "cc794f8dced6a11cce325937255ded78f128a276c799d7a34c97cc8294fa337b",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-004/alpha-source/espresso-south.png",
+          "sourceAlphaSha256": "8ca68f8f8edb0b19ee84a7d846ab893af5ce13f9f809a49769c44950854c44bb",
+          "sourceOpaqueBounds": "527x472+57+71",
+          "uniformScale": 0.99620493,
+          "opaqueBounds": "525x470+51+120",
+          "transparentMargins": {
+            "left": 51,
+            "right": 51,
+            "top": 120,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/espresso/west.png",
+          "sha256": "80da2f442c7ec271aca2c1f42c65c0d04bc0efb06596e33d6e0f82b68cda9ed9",
+          "pixelSha256": "b4a93a6fc67c401309ce8e2b94d7892332856a6665aa8bb963eaaa1d7bfae036",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-004/alpha-source/espresso-west.png",
+          "sourceAlphaSha256": "b0eeb6ddb4a6c3008aa1109df92103515ec290e176d06317996f20e31278ff2c",
+          "sourceOpaqueBounds": "536x482+29+61",
+          "uniformScale": 0.97947761,
+          "opaqueBounds": "525x472+51+118",
+          "transparentMargins": {
+            "left": 51,
+            "right": 51,
+            "top": 118,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        }
+      ]
+    },
+    {
+      "catalogId": "dish-machine",
+      "assetId": "dish-machine",
+      "name": "High-Temp Dish Machine",
+      "footprint": [
+        3,
+        2
+      ],
+      "identityContract": "One tall central stainless pass-through hood; one matching plate-rack/drainboard wing on each side; two beige racks of white plates; one three-button control pod at upper front-right; one vertical front-left handle; four short feet; one plain rear service panel.",
+      "semanticVerdict": "pass: North/east expose the control pod and handle from opposite axes; south/west replace them with the plain service-panel rear. Both plate-rack wings remain rigidly attached to the same hood.",
+      "gameplayLegibility": "pass: The tall pass-through hood, paired rack wings, plates, front control/handle state, and rear access-panel state remain distinct at 128px.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/dish-machine/north.png",
+          "sha256": "4be474558ba5fbba9135d9a6e1b5f7cfc97e4be4cb455601265876301d329a70",
+          "pixelSha256": "f94e7ed639e90893fb3339b4fd55476f0fe7f0b031150a0ff9c2053a8d0ef2fa",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-004/alpha-source/dish-machine-north.png",
+          "sourceAlphaSha256": "37700fd9e9af754bd4ad6a16d80bfba56d7d9a0c06c53f5f9235e879294a29ab",
+          "sourceOpaqueBounds": "584x534+31+60",
+          "uniformScale": 0.9760274,
+          "opaqueBounds": "570x521+28+69",
+          "transparentMargins": {
+            "left": 28,
+            "right": 29,
+            "top": 69,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/dish-machine/east.png",
+          "sha256": "2306dbabc3d331d8d73ada747112ed25296440d55d6774bc6d011cd69f3f7850",
+          "pixelSha256": "5bfc8e19874a7447648a65169e8c85050c65199d50411894d5d4e2eecf729e59",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-004/alpha-source/dish-machine-east.png",
+          "sourceAlphaSha256": "482254b58ba2b4074ff9a4ceffa9f44620cf1762979e337b9b321e277e8711d3",
+          "sourceOpaqueBounds": "583x534+12+64",
+          "uniformScale": 0.97770154,
+          "opaqueBounds": "570x522+28+68",
+          "transparentMargins": {
+            "left": 28,
+            "right": 29,
+            "top": 68,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/dish-machine/south.png",
+          "sha256": "3271bdf4fbd70e9cbabf90807eb1459d37e1002579b30c83a2cb8f5f9bd4c059",
+          "pixelSha256": "31c29884ddc4117b02f50de77b4eaf264b7134813d068a22ba9f3d1b07634007",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-004/alpha-source/dish-machine-south.png",
+          "sourceAlphaSha256": "76349c4746badc60c7714ca4d206859f7ffa7e7247082484d694ec647f9bcf26",
+          "sourceOpaqueBounds": "584x540+27+40",
+          "uniformScale": 0.9760274,
+          "opaqueBounds": "570x527+28+63",
+          "transparentMargins": {
+            "left": 28,
+            "right": 29,
+            "top": 63,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/dish-machine/west.png",
+          "sha256": "8f220010ff0cf66422e2a74c43fb730f6caa851aece30d368f638efa83397967",
+          "pixelSha256": "60f29ad151b5b7557666f5275304f50b52ceb4216031b13cf1995d52a91bfa9f",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-004/alpha-source/dish-machine-west.png",
+          "sourceAlphaSha256": "99fd0f2763f4a0e44b828153fdbcac703214f3951324b179107c54d547c827af",
+          "sourceOpaqueBounds": "585x541+11+38",
+          "uniformScale": 0.97435897,
+          "opaqueBounds": "570x527+28+63",
+          "transparentMargins": {
+            "left": 28,
+            "right": 29,
+            "top": 63,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        }
+      ]
+    },
+    {
+      "catalogId": "mop-sink",
+      "assetId": "mop-sink",
+      "name": "Utility Sink",
+      "footprint": [
+        2,
+        2
+      ],
+      "identityContract": "One deep stainless basin on four legs; one ribbed drainboard fixed on machine-right; one centered gooseneck faucet with exactly two handles; one black pre-rinse hose at rear-left; one amber dispenser at rear-right; one central basin drain; one rear access panel.",
+      "semanticVerdict": "pass: North/east show the deep open basin and right-side drainboard; south/west expose the solid rear and centered access panel. Hose, dispenser, faucet, and drainboard rotate with fixed physical side assignments.",
+      "gameplayLegibility": "pass: The deep-basin silhouette, ribbed drainboard, tall faucet, black hose, amber dispenser, and open-front versus service-rear state remain readable at 128px.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/mop-sink/north.png",
+          "sha256": "3bcee68c724833225b3a5d9d3ca6281045bb21d82aa2c939b83bf73aee664fcc",
+          "pixelSha256": "126cf6c7c34440491e87dbbe7cf8796530b16603d6f2628a52d8dbc56b3996d1",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-004/alpha-source/mop-sink-north.png",
+          "sourceAlphaSha256": "8e92850106255b161fd211af42ec8563df323c68e3937ab8e7026a98bdd15207",
+          "sourceOpaqueBounds": "520x574+98+36",
+          "uniformScale": 0.90592334,
+          "opaqueBounds": "471x520+78+70",
+          "transparentMargins": {
+            "left": 78,
+            "right": 78,
+            "top": 70,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/mop-sink/east.png",
+          "sha256": "a85c4b492c9a1b56392170baf32231b8aa8fba053e8d3c4820b7c11de2b89de4",
+          "pixelSha256": "d6db739818260141fc3775e290c0847de1eca3ee218f629dd44726d99bdb842a",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-004/alpha-source/mop-sink-east.png",
+          "sourceAlphaSha256": "7e18da5cef6ad653c9082614e42f96284a4067a336d0b9c7bafc660a06576f23",
+          "sourceOpaqueBounds": "519x588+9+36",
+          "uniformScale": 0.88435374,
+          "opaqueBounds": "459x520+84+70",
+          "transparentMargins": {
+            "left": 84,
+            "right": 84,
+            "top": 70,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/mop-sink/south.png",
+          "sha256": "98221fc9813031c9018e6df7073c90cff01b18f2f9cb4d6113170818eec90365",
+          "pixelSha256": "a7f0a24a3ab6dcf452f725f16c44b31a1266b85f6e16640b13b3050f9b8f3f71",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-004/alpha-source/mop-sink-south.png",
+          "sourceAlphaSha256": "0f676b87dc9700b0b7072a5a68c37ced1b69e5c63c9ec4aafda86f6525533418",
+          "sourceOpaqueBounds": "496x546+79+15",
+          "uniformScale": 0.95238095,
+          "opaqueBounds": "472x520+77+70",
+          "transparentMargins": {
+            "left": 77,
+            "right": 78,
+            "top": 70,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/mop-sink/west.png",
+          "sha256": "f9169db3054301dec5854e72924651a82c62b9b7ed492f3bfb67f6f66584486c",
+          "pixelSha256": "aa91267f0917c60fb76050f51c19d037a4251cdf25c2ff092748a238c5c1704b",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-004/alpha-source/mop-sink-west.png",
+          "sourceAlphaSha256": "19de70fc532c6bdaf6324ff9b6e7021b17135dd24c0e86851361ab8ad136e6fb",
+          "sourceOpaqueBounds": "495x536+49+27",
+          "uniformScale": 0.97014925,
+          "opaqueBounds": "480x520+73+70",
+          "transparentMargins": {
+            "left": 73,
+            "right": 74,
+            "top": 70,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        }
+      ]
+    }
+  ],
+  "rejectedAttempts": []
+}

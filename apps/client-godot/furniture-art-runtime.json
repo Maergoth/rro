@@ -18,8 +18,11 @@
   "acceptedDirectionalAssetIds": [
     "banquette",
     "booth",
+    "dish-machine",
+    "espresso",
     "furniture-six-burner-range",
     "host-stand",
+    "mop-sink",
     "pass",
     "prep",
     "range",
