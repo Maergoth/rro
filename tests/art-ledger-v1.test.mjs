@@ -16,7 +16,9 @@ function ledger() {
 }
 
 test("the art ledger parser accepts Windows CRLF checkouts", () => {
-  const document = readFileSync(resolve(ROOT, "docs/ART_PROGRESS.md"), "utf8").replace(/\n/g, "\r\n");
+  const document = readFileSync(resolve(ROOT, "docs/ART_PROGRESS.md"), "utf8")
+    .replace(/\r\n/g, "\n")
+    .replace(/\n/g, "\r\n");
   assert.equal(parseLedger(document).authoritativeProgressDocument, "docs/ART_PROGRESS.md");
 });
 
