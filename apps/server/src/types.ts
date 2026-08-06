@@ -220,7 +220,12 @@ export interface Snapshot {
 }
 
 export class ApiError extends Error {
-  constructor(public readonly status: number, message: string) {
+  constructor(
+    public readonly status: number,
+    message: string,
+    public readonly code?: string,
+    public readonly details?: Record<string, unknown>,
+  ) {
     super(message);
   }
 }

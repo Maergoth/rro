@@ -143,6 +143,7 @@ CREATE TABLE IF NOT EXISTS restaurants (
   treasury_cents INTEGER NOT NULL DEFAULT 1200000,
   build_width INTEGER NOT NULL DEFAULT 24,
   build_height INTEGER NOT NULL DEFAULT 16,
+  layout_revision INTEGER NOT NULL DEFAULT 0,
   generation INTEGER NOT NULL DEFAULT 1,
   is_npc INTEGER NOT NULL DEFAULT 1,
   opened_at INTEGER NOT NULL,
@@ -416,10 +417,19 @@ function ensureCanonicalWallTopology(db: Database): void {
   });
 }
 
+function ensureLayoutRevision(db: Database): void {
+  const columns = db.prepare("PRAGMA table_info(restaurants)").all() as Array<{ name: string }>;
+  if (!columns.some((column) => column.name === "layout_revision")) {
+    db.exec("ALTER TABLE restaurants ADD COLUMN layout_revision INTEGER NOT NULL DEFAULT 0");
+  }
+  db.prepare("INSERT OR REPLACE INTO application_meta (key, value) VALUES ('layout_revision_version', '1')").run();
+}
+
 export function createDatabase(path: string, registry: ContentRegistry): Database {
   if (path !== ":memory:") mkdirSync(dirname(path), { recursive: true });
   const db = new DatabaseSync(path);
   db.exec(SCHEMA);
+  ensureLayoutRevision(db);
   ensureCanonicalWallTopology(db);
   try {
     db.exec("PRAGMA journal_mode = WAL;");

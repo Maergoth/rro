@@ -17,6 +17,7 @@ var current_builder: BuilderPalette
 var current_inventory_panel: InventoryPanel
 var pending_inventory_catalog: Dictionary = {}
 var selected_builder_object: Dictionary = {}
+var current_layout_revision := 0
 var status_label: Label
 var screen_root: Control
 var shift_tasks_completed := 0
@@ -637,6 +638,7 @@ func show_found_restaurant() -> void:
 
 func handle_build_action(action: String, payload: Dictionary) -> void:
 	if current_restaurant_id.is_empty(): return
+	payload = builder_revision_payload(payload)
 	match action:
 		"floor": api.patch_json("/v1/restaurants/%s/layout/floor" % current_restaurant_id, payload, build_response)
 		"wall": api.put_json("/v1/restaurants/%s/layout/walls" % current_restaurant_id, payload, build_response)
@@ -644,7 +646,10 @@ func handle_build_action(action: String, payload: Dictionary) -> void:
 		"move":
 			var id := str(payload.get("id", "")); payload.erase("id"); api.patch_json("/v1/restaurants/%s/layout/objects/%s" % [current_restaurant_id, id], payload, build_response)
 
-func build_response(ok: bool, data: Dictionary, _code: int) -> void:
+func build_response(ok: bool, data: Dictionary, code: int) -> void:
+	if not ok:
+		handle_builder_revision_conflict(data, code)
+		return
 	if ok and is_instance_valid(current_floor):
 		var committed: Dictionary = data.get("layout", data)
 		current_floor.set_layout(committed)
@@ -652,14 +657,17 @@ func build_response(ok: bool, data: Dictionary, _code: int) -> void:
 		show_status("Layout committed to the authoritative restaurant database.")
 
 func update_builder_history(layout_data: Dictionary) -> void:
+	current_layout_revision = int(layout_data.get("revision", layout_data.get("history", {}).get("revision", current_layout_revision)))
 	if is_instance_valid(current_builder):
 		current_builder.set_history_state(layout_data.get("history", {}))
 		current_builder.set_layout_validation(layout_data.get("validation", {}))
 
 func apply_builder_history(direction: String) -> void:
 	if current_restaurant_id.is_empty(): return
-	api.post_json("/v1/restaurants/%s/layout/%s" % [current_restaurant_id, direction], {}, func(ok: bool, data: Dictionary, _code: int) -> void:
-		if not ok: return
+	api.post_json("/v1/restaurants/%s/layout/%s" % [current_restaurant_id, direction], builder_revision_payload(), func(ok: bool, data: Dictionary, code: int) -> void:
+		if not ok:
+			handle_builder_revision_conflict(data, code)
+			return
 		selected_builder_object = {}
 		var restored: Dictionary = data.get("layout", {})
 		if is_instance_valid(current_floor): current_floor.set_layout(restored)
@@ -669,22 +677,40 @@ func apply_builder_history(direction: String) -> void:
 
 func sell_selected_builder_object() -> void:
 	if selected_builder_object.is_empty(): show_status("Select a placed object first."); return
-	api.delete_json("/v1/restaurants/%s/layout/objects/%s" % [current_restaurant_id, selected_builder_object.get("id", "")], func(ok: bool, data: Dictionary, _code: int) -> void:
+	api.delete_json("/v1/restaurants/%s/layout/objects/%s" % [current_restaurant_id, selected_builder_object.get("id", "")], builder_revision_payload(), func(ok: bool, data: Dictionary, code: int) -> void:
 		if ok: selected_builder_object = {}; current_floor.set_layout(data.get("layout", {})); update_builder_history(data.get("layout", {})); show_status("Object sold back at its wear-adjusted recovery value.")
+		else: handle_builder_revision_conflict(data, code)
 	)
 
 func repair_selected_builder_object() -> void:
 	if selected_builder_object.is_empty(): show_status("Select a worn or broken object first."); return
-	api.post_json("/v1/restaurants/%s/layout/objects/%s/repair" % [current_restaurant_id, selected_builder_object.get("id", "")], {}, func(ok: bool, data: Dictionary, _code: int) -> void:
+	api.post_json("/v1/restaurants/%s/layout/objects/%s/repair" % [current_restaurant_id, selected_builder_object.get("id", "")], builder_revision_payload(), func(ok: bool, data: Dictionary, code: int) -> void:
 		if ok:
 			selected_builder_object = {}
 			current_floor.set_layout(data.get("layout", {}))
 			update_builder_history(data.get("layout", {}))
 			show_status("Furniture restored for $%.2f from restaurant treasury." % (float(data.get("costCents", 0)) / 100.0))
+		else: handle_builder_revision_conflict(data, code)
 	)
 
 func expand_builder(add_width: int, add_height: int) -> void:
-	api.post_json("/v1/restaurants/%s/layout/expand" % current_restaurant_id, {"addWidth": add_width, "addHeight": add_height}, build_response)
+	api.post_json("/v1/restaurants/%s/layout/expand" % current_restaurant_id, builder_revision_payload({"addWidth": add_width, "addHeight": add_height}), build_response)
+
+func builder_revision_payload(payload: Dictionary = {}) -> Dictionary:
+	var versioned := payload.duplicate(true)
+	versioned["expectedRevision"] = current_layout_revision
+	return versioned
+
+func handle_builder_revision_conflict(data: Dictionary, code: int) -> void:
+	var error: Dictionary = data.get("error", {})
+	if code != 409 or str(error.get("code", "")) != "layout-revision-conflict": return
+	api.get_json("/v1/restaurants/%s/layout" % current_restaurant_id, func(ok: bool, latest: Dictionary, _refresh_code: int) -> void:
+		if not ok: return
+		selected_builder_object = {}
+		if is_instance_valid(current_floor): current_floor.set_layout(latest)
+		update_builder_history(latest)
+		show_status("The layout changed in another editor. Refreshed to revision %d; review and retry your action." % current_layout_revision)
+	)
 
 func show_inventory() -> void:
 	var root := make_shell("Role Inventory")
