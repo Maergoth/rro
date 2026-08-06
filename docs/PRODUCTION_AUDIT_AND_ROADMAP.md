@@ -23,7 +23,7 @@ This audit prioritizes a polished, dependable vertical slice before broad conten
 | Roles and work | 7 roles, 89 activities, task claim/action, XP and cash rewards | Twelve animated presentations sit over binary safe/risky buttons; no spatial station or authentic minigame input |
 | Progression | 196 skill nodes, 45 purchasable role items, persistent loadouts | Skills/equipment/consumables are not resolved into authoritative task outcomes; skill points do not replenish |
 | Restaurant simulation | Parties, tasks, incidents, reviews, duty slots, NPC completion, settlement | Physical tickets, recipes, ingredients, table paths, station dependencies, and per-slot NPC behavior are absent |
-| Builder | Persistent floor/wall/object editing, canonical shared edges, mount-aware placement, legal expansion, path/egress validation, monotonic optimistic revisions, durable undo/redo, repair, wear and sale | No routed utilities/ventilation, code-clearance solver, native room-tag workflow, commit/cancel staging, or collaborative editing beyond stale-editor rejection |
+| Builder | Persistent floor/wall/object editing, canonical shared edges, mount-aware placement, atomic commit/cancel staging, legal expansion, path/egress validation, monotonic optimistic revisions, durable undo/redo, repair, wear and sale | No routed utilities/ventilation, code-clearance solver, native room-tag workflow, or collaborative editing beyond stale-editor rejection |
 | Multiplayer | Authenticated WebSocket snapshots/commands and shared shifts | No reconnect/resume; current patch cleans up immediately on disconnect; snapshots are full-state and unscaled |
 | Art | Elevated orthographic-isometric directional runtime, modular asset roots, and durable review evidence | The generated [production art ledger](ART_PROGRESS.md) is authoritative for incomplete furniture, construction/world/UI, character-layer and animation work; legacy overhead files never count |
 | Delivery | Strict TypeScript, zero-warning static GDScript analysis, the full Node integration/regression suite, and release tooling | No graphical Godot E2E, two-client Windows acceptance, signing, installer/updater, or production operations |
@@ -46,6 +46,7 @@ This audit prioritizes a polished, dependable vertical slice before broad conten
 - Shared north/south and east/west descriptions resolve to one physical wall authority, with startup repair plus a database uniqueness guard for legacy mirrored rows.
 - Width/height add-ons relocate existing east/south perimeter walls, openings, and supported wall mounts; new runs receive a closed perimeter and the whole change remains one restart-safe undo/redo mutation.
 - Every builder mutation carries the last observed monotonic layout revision; stale editors receive a machine-readable conflict, refresh authoritative state, and cannot spend treasury or append audit history.
+- Floor, wall, placement, and movement edits preview locally until explicit Commit; the server validates and spends the full staged batch in one transaction, advances one revision, writes one undo entry, and rolls everything back if any edit is invalid or stale. Cancel and Escape restore the authoritative layout without a request.
 
 These fixes make the proof of concept more dependable. They do not make it feature-complete.
 
@@ -106,7 +107,7 @@ These fixes make the proof of concept more dependable. They do not make it featu
 - Ratify immediate hiring versus pending applications; implement one coherent owner/worker flow.
 - Add staffing, scheduling, menu/pricing, purchasing, sanitation, utilities, maintenance, and daily operating decisions.
 - **Implemented:** canonical shared wall authority plus expansion-safe perimeter, opening, and wall-mount relocation with restart-safe undo/redo coverage.
-- **Implemented foundation:** mount-aware placement previews, path/egress validation, audited construction history, and optimistic revision conflict rejection. Add commit/cancel staging and richer collaboration semantics.
+- **Implemented:** mount-aware placement previews, atomic commit/cancel staging, path/egress validation, audited construction history, and optimistic revision conflict rejection. Add the native room-tag workflow and richer collaboration semantics.
 - Add restaurant open/close readiness checks and actionable failure messages.
 
 **Exit gate:** a new owner can found, build a legal layout, staff it, run an accelerated day, settle, repair/reinvest, restart, and continue.

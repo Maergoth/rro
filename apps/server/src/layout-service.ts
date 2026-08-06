@@ -31,6 +31,15 @@ type LayoutState = {
   walls: any[];
   objects: any[];
 };
+type AppliedLayoutOperation = {
+  type: "floor" | "wall" | "place" | "move";
+  costCents: number;
+  changed?: number;
+  id?: string;
+  clientId?: string;
+};
+
+const MAX_STAGED_LAYOUT_OPERATIONS = 128;
 
 function integer(value: unknown, label: string): number {
   const result = Number(value);
@@ -517,9 +526,14 @@ export function foundRestaurant(db: Database, registry: ContentRegistry, account
 }
 
 export function paintFloor(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string, body: Record<string, unknown>): Record<string, unknown> {
-  const restaurant = assertOwner(db, restaurantId, account);
+  assertOwner(db, restaurantId, account);
   const expectedRevision = optionalExpectedRevision(body);
-  assertLayoutRevision(db, restaurantId, expectedRevision);
+  const result = recordLayoutMutation(db, restaurantId, account, "paint floor", expectedRevision, () => applyFloorOperation(db, registry, account, restaurantId, body));
+  return { ...result, layout: getLayout(db, registry, restaurantId) };
+}
+
+function applyFloorOperation(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string, body: Record<string, unknown>): AppliedLayoutOperation {
+  const restaurant = assertOwner(db, restaurantId, account);
   assertLayoutEditable(db, restaurantId);
   const surfaceId = String(body.surfaceId ?? "");
   const surface = registry.content.construction.surfaces.find((item) => item.id === surfaceId);
@@ -535,20 +549,24 @@ export function paintFloor(db: Database, registry: ContentRegistry, account: Aut
   const cost = surface.costCents * unique.size;
   if (restaurant.treasury_cents < cost) throw new ApiError(409, "Restaurant treasury cannot cover this floor purchase.");
   const now = Date.now();
-  recordLayoutMutation(db, restaurantId, account, "paint floor", expectedRevision, () => {
-    const update = db.prepare("UPDATE floor_cells SET surface_id = ?, room_tag = COALESCE(?, room_tag), updated_at = ? WHERE restaurant_id = ? AND grid_x = ? AND grid_y = ?");
-    for (const cell of unique.values()) update.run(surfaceId, body.roomTag ? String(body.roomTag).slice(0, 20) : null, now, restaurantId, cell.x, cell.y);
-    db.prepare("UPDATE restaurants SET treasury_cents = treasury_cents - ? WHERE id = ?").run(cost, restaurantId);
-    db.prepare("INSERT INTO ledger_entries (id, restaurant_id, character_id, category, amount_cents, reference_type, reference_id, created_at) VALUES (?, ?, ?, 'construction', ?, 'surface', ?, ?)")
-      .run(newId("ledger"), restaurantId, account.characterId, -cost, surfaceId, now);
-  });
-  return { costCents: cost, changed: unique.size, layout: getLayout(db, registry, restaurantId) };
+  const update = db.prepare("UPDATE floor_cells SET surface_id = ?, room_tag = COALESCE(?, room_tag), updated_at = ? WHERE restaurant_id = ? AND grid_x = ? AND grid_y = ?");
+  for (const cell of unique.values()) update.run(surfaceId, body.roomTag ? String(body.roomTag).slice(0, 20) : null, now, restaurantId, cell.x, cell.y);
+  db.prepare("UPDATE restaurants SET treasury_cents = treasury_cents - ? WHERE id = ?").run(cost, restaurantId);
+  db.prepare("INSERT INTO ledger_entries (id, restaurant_id, character_id, category, amount_cents, reference_type, reference_id, created_at) VALUES (?, ?, ?, 'construction', ?, 'surface', ?, ?)")
+    .run(newId("ledger"), restaurantId, account.characterId, -cost, surfaceId, now);
+  return { type: "floor", costCents: cost, changed: unique.size };
 }
 
 export function upsertWall(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string, body: Record<string, unknown>): Record<string, unknown> {
-  const restaurant = assertOwner(db, restaurantId, account);
+  assertOwner(db, restaurantId, account);
   const expectedRevision = optionalExpectedRevision(body);
-  assertLayoutRevision(db, restaurantId, expectedRevision);
+  const opening = String(body.openingType ?? "solid");
+  const result = recordLayoutMutation(db, restaurantId, account, opening === "solid" ? "build wall" : `build ${opening}`, expectedRevision, () => applyWallOperation(db, registry, account, restaurantId, body));
+  return { ...result, layout: getLayout(db, registry, restaurantId) };
+}
+
+function applyWallOperation(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string, body: Record<string, unknown>): AppliedLayoutOperation {
+  const restaurant = assertOwner(db, restaurantId, account);
   assertLayoutEditable(db, restaurantId);
   const x = integer(body.x, "x");
   const y = integer(body.y, "y");
@@ -565,22 +583,25 @@ export function upsertWall(db: Database, registry: ContentRegistry, account: Aut
   assertWallChangePreservesMountedObjects(db, registry, restaurantId, x, y, edge, opening);
   if (restaurant.treasury_cents < style.costCents) throw new ApiError(409, "Restaurant treasury cannot cover this wall purchase.");
   const now = Date.now();
-  recordLayoutMutation(db, restaurantId, account, opening === "solid" ? "build wall" : `build ${opening}`, expectedRevision, () => {
-    writeWallSegment(db, restaurantId, { x, y, edge }, {
-      wallStyleId: styleId,
-      openingType: opening,
-      rotation,
-      updatedAt: now,
-    });
-    db.prepare("UPDATE restaurants SET treasury_cents = treasury_cents - ? WHERE id = ?").run(style.costCents, restaurantId);
+  writeWallSegment(db, restaurantId, { x, y, edge }, {
+    wallStyleId: styleId,
+    openingType: opening,
+    rotation,
+    updatedAt: now,
   });
-  return { costCents: style.costCents, layout: getLayout(db, registry, restaurantId) };
+  db.prepare("UPDATE restaurants SET treasury_cents = treasury_cents - ? WHERE id = ?").run(style.costCents, restaurantId);
+  return { type: "wall", costCents: style.costCents };
 }
 
 export function placeObject(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string, body: Record<string, unknown>): Record<string, unknown> {
-  const restaurant = assertOwner(db, restaurantId, account);
+  assertOwner(db, restaurantId, account);
   const expectedRevision = optionalExpectedRevision(body);
-  assertLayoutRevision(db, restaurantId, expectedRevision);
+  const result = recordLayoutMutation(db, restaurantId, account, "place object", expectedRevision, () => applyPlaceOperation(db, registry, account, restaurantId, body));
+  return { ...result, layout: getLayout(db, registry, restaurantId) };
+}
+
+function applyPlaceOperation(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string, body: Record<string, unknown>): AppliedLayoutOperation {
+  const restaurant = assertOwner(db, restaurantId, account);
   assertLayoutEditable(db, restaurantId);
   const definition = registry.furnitureById.get(String(body.definitionId ?? ""));
   if (!definition) throw new ApiError(400, "Unknown furniture definition.");
@@ -593,22 +614,28 @@ export function placeObject(db: Database, registry: ContentRegistry, account: Au
   if (restaurant.treasury_cents < definition.costCents) throw new ApiError(409, "Restaurant treasury cannot cover this purchase.");
   const id = newId("object");
   const now = Date.now();
-  recordLayoutMutation(db, restaurantId, account, "place object", expectedRevision, () => {
-    db.prepare(`INSERT INTO object_instances
-      (id, restaurant_id, definition_id, grid_x, grid_y, rotation, primary_color, secondary_color, placed_at, updated_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
-      .run(id, restaurantId, definition.id, x, y, rotation, body.primaryColor ? String(body.primaryColor) : null, body.secondaryColor ? String(body.secondaryColor) : null, now, now);
-    db.prepare("UPDATE restaurants SET treasury_cents = treasury_cents - ? WHERE id = ?").run(definition.costCents, restaurantId);
-    db.prepare("INSERT INTO ledger_entries (id, restaurant_id, character_id, category, amount_cents, reference_type, reference_id, created_at) VALUES (?, ?, ?, 'furniture', ?, 'object', ?, ?)")
-      .run(newId("ledger"), restaurantId, account.characterId, -definition.costCents, id, now);
-  });
-  return { id, costCents: definition.costCents, layout: getLayout(db, registry, restaurantId) };
+  db.prepare(`INSERT INTO object_instances
+    (id, restaurant_id, definition_id, grid_x, grid_y, rotation, primary_color, secondary_color, placed_at, updated_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
+    .run(id, restaurantId, definition.id, x, y, rotation, body.primaryColor ? String(body.primaryColor) : null, body.secondaryColor ? String(body.secondaryColor) : null, now, now);
+  db.prepare("UPDATE restaurants SET treasury_cents = treasury_cents - ? WHERE id = ?").run(definition.costCents, restaurantId);
+  db.prepare("INSERT INTO ledger_entries (id, restaurant_id, character_id, category, amount_cents, reference_type, reference_id, created_at) VALUES (?, ?, ?, 'furniture', ?, 'object', ?, ?)")
+    .run(newId("ledger"), restaurantId, account.characterId, -definition.costCents, id, now);
+  const clientId = body.clientId ? String(body.clientId).slice(0, 64) : undefined;
+  return clientId
+    ? { type: "place", id, clientId, costCents: definition.costCents }
+    : { type: "place", id, costCents: definition.costCents };
 }
 
 export function moveObject(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string, objectId: string, body: Record<string, unknown>): Record<string, unknown> {
-  const restaurant = assertOwner(db, restaurantId, account);
+  assertOwner(db, restaurantId, account);
   const expectedRevision = optionalExpectedRevision(body);
-  assertLayoutRevision(db, restaurantId, expectedRevision);
+  const result = recordLayoutMutation(db, restaurantId, account, "move object", expectedRevision, () => applyMoveOperation(db, registry, account, restaurantId, objectId, body));
+  return { ...result, layout: getLayout(db, registry, restaurantId) };
+}
+
+function applyMoveOperation(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string, objectId: string, body: Record<string, unknown>): AppliedLayoutOperation {
+  const restaurant = assertOwner(db, restaurantId, account);
   assertLayoutEditable(db, restaurantId);
   const object = db.prepare("SELECT * FROM object_instances WHERE id = ? AND restaurant_id = ?").get(objectId, restaurantId) as any;
   if (!object) throw new ApiError(404, "Placed object not found.");
@@ -620,10 +647,38 @@ export function moveObject(db: Database, registry: ContentRegistry, account: Aut
   for (const cell of footprintCells(definition, x, y, rotation)) ensureInside(restaurant, cell.x, cell.y);
   assertClear(db, registry, restaurantId, definition, x, y, rotation, objectId);
   assertLegalMountSupport(db, restaurantId, definition, x, y, rotation);
-  recordLayoutMutation(db, restaurantId, account, "move object", expectedRevision, () => {
-    db.prepare("UPDATE object_instances SET grid_x = ?, grid_y = ?, rotation = ?, updated_at = ? WHERE id = ?").run(x, y, rotation, Date.now(), objectId);
+  db.prepare("UPDATE object_instances SET grid_x = ?, grid_y = ?, rotation = ?, updated_at = ? WHERE id = ?").run(x, y, rotation, Date.now(), objectId);
+  return { type: "move", id: objectId, costCents: 0 };
+}
+
+export function commitStagedLayout(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string, body: Record<string, unknown>): Record<string, unknown> {
+  assertOwner(db, restaurantId, account);
+  const expectedRevision = optionalExpectedRevision(body);
+  const rawOperations = body.operations;
+  if (!Array.isArray(rawOperations) || rawOperations.length < 1) throw new ApiError(400, "Stage at least one layout edit before committing.");
+  if (rawOperations.length > MAX_STAGED_LAYOUT_OPERATIONS) throw new ApiError(400, `A staged commit is limited to ${MAX_STAGED_LAYOUT_OPERATIONS} edits.`);
+  const operations = rawOperations.map((operation, index) => {
+    if (!operation || typeof operation !== "object" || Array.isArray(operation)) throw new ApiError(400, `Staged edit ${index + 1} must be an object.`);
+    return operation as Record<string, unknown>;
   });
-  return { id: objectId, layout: getLayout(db, registry, restaurantId) };
+  const results = recordLayoutMutation(db, restaurantId, account, `commit ${operations.length} staged edits`, expectedRevision, () => operations.map((operation, index) => {
+    const type = String(operation.type ?? "");
+    if (type === "floor") return applyFloorOperation(db, registry, account, restaurantId, operation);
+    if (type === "wall") return applyWallOperation(db, registry, account, restaurantId, operation);
+    if (type === "place") return applyPlaceOperation(db, registry, account, restaurantId, operation);
+    if (type === "move") {
+      const objectId = String(operation.id ?? "");
+      if (!objectId) throw new ApiError(400, `Staged move ${index + 1} requires an object id.`);
+      return applyMoveOperation(db, registry, account, restaurantId, objectId, operation);
+    }
+    throw new ApiError(400, `Unknown staged layout edit type at position ${index + 1}.`);
+  }));
+  return {
+    operationCount: results.length,
+    costCents: results.reduce((total, result) => total + result.costCents, 0),
+    results,
+    layout: getLayout(db, registry, restaurantId),
+  };
 }
 
 export function repairObject(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string, objectId: string, body: Record<string, unknown> = {}): Record<string, unknown> {

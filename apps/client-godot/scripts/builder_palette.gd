@@ -7,6 +7,8 @@ signal sell_selected_requested
 signal repair_selected_requested
 signal undo_requested
 signal redo_requested
+signal commit_staged_requested
+signal cancel_staged_requested
 
 var content: Dictionary = {}
 var category_tabs: TabContainer
@@ -15,6 +17,12 @@ var selected_label: Label
 var undo_button: Button
 var redo_button: Button
 var validation_label: Label
+var staged_label: Label
+var commit_button: Button
+var cancel_button: Button
+var latest_history: Dictionary = {}
+var staged_count := 0
+var staged_commit_in_flight := false
 
 func _ready() -> void:
 	add_theme_constant_override("separation", 8)
@@ -24,7 +32,7 @@ func _ready() -> void:
 	title.add_theme_color_override("font_color", Color("efbc54"))
 	add_child(title)
 	var instructions := Label.new()
-	instructions.text = "Left-drag flooring and objects. Wall decor snaps to the pointed cell edge; ceiling fixtures use their grid footprint. Right-click or R rotates floor/ceiling objects. Every purchase remains server-priced and validated."
+	instructions.text = "Left-drag flooring and objects. Wall decor snaps to the pointed cell edge; ceiling fixtures use their grid footprint. Changes stay staged until Commit; Cancel or Escape restores the authoritative layout without spending."
 	instructions.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	instructions.add_theme_color_override("font_color", Color("95a6a6"))
 	instructions.custom_minimum_size = Vector2(310, 66)
@@ -46,6 +54,11 @@ func _ready() -> void:
 	var sell := Button.new(); sell.text = "Sell selected (40%)"; sell.pressed.connect(func() -> void: sell_selected_requested.emit()); actions.add_child(sell)
 	var expand := Button.new(); expand.text = "Add 4×4 area"; expand.pressed.connect(func() -> void: expand_requested.emit(4, 4)); actions.add_child(expand)
 	add_child(actions)
+	var staged_actions := HBoxContainer.new()
+	staged_label = Label.new(); staged_label.text = "No staged edits"; staged_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL; staged_actions.add_child(staged_label)
+	commit_button = Button.new(); commit_button.text = "Commit"; commit_button.disabled = true; commit_button.pressed.connect(func() -> void: commit_staged_requested.emit()); staged_actions.add_child(commit_button)
+	cancel_button = Button.new(); cancel_button.text = "Cancel"; cancel_button.disabled = true; cancel_button.pressed.connect(func() -> void: cancel_staged_requested.emit()); staged_actions.add_child(cancel_button)
+	add_child(staged_actions)
 	var history_actions := HBoxContainer.new()
 	undo_button = Button.new(); undo_button.text = "Undo"; undo_button.disabled = true; undo_button.pressed.connect(func() -> void: undo_requested.emit()); history_actions.add_child(undo_button)
 	redo_button = Button.new(); redo_button.text = "Redo"; redo_button.disabled = true; redo_button.pressed.connect(func() -> void: redo_requested.emit()); history_actions.add_child(redo_button)
@@ -124,11 +137,21 @@ func set_selected_object(object: Dictionary) -> void:
 	selected_label.text = "Selected: %s · %s · %.1f%% wear\n%s" % [definition_id, str(object.get("state", "operational")).capitalize(), float(object.get("wear", 0)), move_hint]
 
 func set_history_state(history: Dictionary) -> void:
+	latest_history = history.duplicate(true)
 	if not is_instance_valid(undo_button) or not is_instance_valid(redo_button): return
-	undo_button.disabled = not bool(history.get("canUndo", false))
-	redo_button.disabled = not bool(history.get("canRedo", false))
+	undo_button.disabled = staged_count > 0 or not bool(history.get("canUndo", false))
+	redo_button.disabled = staged_count > 0 or not bool(history.get("canRedo", false))
 	undo_button.text = "Undo %s" % str(history.get("undoAction", "")).capitalize() if not undo_button.disabled else "Undo"
 	redo_button.text = "Redo %s" % str(history.get("redoAction", "")).capitalize() if not redo_button.disabled else "Redo"
+
+func set_staged_state(count: int, commit_in_flight := false) -> void:
+	staged_count = maxi(0, count)
+	staged_commit_in_flight = commit_in_flight
+	if is_instance_valid(staged_label):
+		staged_label.text = "Committing %d edits…" % staged_count if staged_commit_in_flight else ("%d staged edit%s" % [staged_count, "" if staged_count == 1 else "s"] if staged_count > 0 else "No staged edits")
+	if is_instance_valid(commit_button): commit_button.disabled = staged_count == 0 or staged_commit_in_flight
+	if is_instance_valid(cancel_button): cancel_button.disabled = staged_count == 0 or staged_commit_in_flight
+	set_history_state(latest_history)
 
 func set_layout_validation(validation: Dictionary) -> void:
 	if not is_instance_valid(validation_label): return

@@ -3,7 +3,7 @@ import { randomUUID } from "node:crypto";
 import type { ContentRegistry } from "./content.js";
 import { authenticateRequest, login, logout, signup } from "./auth.js";
 import { transaction } from "./database.js";
-import { expandRestaurant, foundRestaurant, getLayout, moveObject, paintFloor, placeObject, redoLayout, repairObject, sellObject, undoLayout, upsertWall } from "./layout-service.js";
+import { commitStagedLayout, expandRestaurant, foundRestaurant, getLayout, moveObject, paintFloor, placeObject, redoLayout, repairObject, sellObject, undoLayout, upsertWall } from "./layout-service.js";
 import { equipInventoryItem, getInventoryCatalog, getInventoryState, purchaseInventoryItem, unequipInventoryItem, useInventoryItem } from "./inventory-service.js";
 import type { LiveService } from "./live-service.js";
 import { ApiError, type AuthenticatedAccount, type Database } from "./types.js";
@@ -229,6 +229,8 @@ export function createHttpServer(db: Database, registry: ContentRegistry, live: 
       if (method === "DELETE" && match) return send(res, 200, sellObject(db, registry, account, decodeURIComponent(match[1]!), decodeURIComponent(match[2]!), await readLayoutMutationBody(req)));
       match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/layout\/objects\/([^/]+)\/repair$/);
       if (method === "POST" && match) return send(res, 200, repairObject(db, registry, account, decodeURIComponent(match[1]!), decodeURIComponent(match[2]!), await readLayoutMutationBody(req)));
+      match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/layout\/commit$/);
+      if (method === "POST" && match) return send(res, 200, commitStagedLayout(db, registry, account, decodeURIComponent(match[1]!), await readLayoutMutationBody(req)));
       match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/layout\/expand$/);
       if (method === "POST" && match) return send(res, 200, expandRestaurant(db, registry, account, decodeURIComponent(match[1]!), await readLayoutMutationBody(req)));
       match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/layout\/undo$/);

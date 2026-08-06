@@ -75,6 +75,56 @@ func set_layout(value: Dictionary) -> void:
 	layout = value
 	queue_redraw()
 
+func set_staged_layout(authoritative: Dictionary, operations: Array) -> void:
+	layout = authoritative.duplicate(true)
+	for operation in operations:
+		if operation is Dictionary:
+			apply_staged_operation(operation)
+	queue_redraw()
+
+func staged_wall_key(x: int, y: int, edge: String) -> String:
+	match edge:
+		"north": return "h:%d:%d" % [x, y]
+		"south": return "h:%d:%d" % [x, y + 1]
+		"west": return "v:%d:%d" % [x, y]
+		"east": return "v:%d:%d" % [x + 1, y]
+	return "invalid:%d:%d:%s" % [x, y, edge]
+
+func apply_staged_operation(operation: Dictionary) -> void:
+	match str(operation.get("type", "")):
+		"floor":
+			var selected_cells := {}
+			for cell in operation.get("cells", []): selected_cells["%d:%d" % [int(cell.get("x", -1)), int(cell.get("y", -1))]] = true
+			var cells: Array = layout.get("cells", [])
+			for cell in cells:
+				if selected_cells.has("%d:%d" % [int(cell.get("x", -1)), int(cell.get("y", -1))]):
+					cell["surfaceId"] = str(operation.get("surfaceId", cell.get("surfaceId", "")))
+					if operation.has("roomTag"): cell["roomTag"] = str(operation.get("roomTag", ""))
+			layout["cells"] = cells
+		"wall":
+			var walls: Array = layout.get("walls", [])
+			var target_key := staged_wall_key(int(operation.get("x", -1)), int(operation.get("y", -1)), str(operation.get("edge", "")))
+			var replaced := false
+			for wall in walls:
+				if staged_wall_key(int(wall.get("x", -1)), int(wall.get("y", -1)), str(wall.get("edge", ""))) == target_key:
+					wall.merge(operation, true); replaced = true; break
+			if not replaced:
+				var staged_wall := operation.duplicate(true); staged_wall["id"] = "staged-wall-%s" % target_key; walls.append(staged_wall)
+			layout["walls"] = walls
+		"place":
+			var objects: Array = layout.get("objects", [])
+			objects.append({"id": str(operation.get("clientId", "staged-object")), "definitionId": str(operation.get("definitionId", "")), "x": int(operation.get("x", 0)), "y": int(operation.get("y", 0)), "rotation": int(operation.get("rotation", 0)), "state": "staged", "wear": 0})
+			layout["objects"] = objects
+		"move":
+			var objects: Array = layout.get("objects", [])
+			for object in objects:
+				if str(object.get("id", "")) == str(operation.get("id", "")):
+					object["x"] = int(operation.get("x", object.get("x", 0)))
+					object["y"] = int(operation.get("y", object.get("y", 0)))
+					object["rotation"] = int(operation.get("rotation", object.get("rotation", 0)))
+					break
+			layout["objects"] = objects
+
 func set_build_mode(enabled: bool) -> void:
 	build_mode = enabled
 	build_tool = "select"

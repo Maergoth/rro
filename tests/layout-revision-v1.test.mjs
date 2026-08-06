@@ -168,6 +168,7 @@ test("HTTP builder mutations require a revision and return a machine-readable co
       ["PATCH", `/v1/restaurants/${founded.id}/layout/objects/${placed.id}`, { x: 13, y: 2, rotation: 0 }],
       ["DELETE", `/v1/restaurants/${founded.id}/layout/objects/${placed.id}`, {}],
       ["POST", `/v1/restaurants/${founded.id}/layout/objects/${placed.id}/repair`, {}],
+      ["POST", `/v1/restaurants/${founded.id}/layout/commit`, { operations: [{ type: "floor", surfaceId: "quarry-tile", cells: [{ x: 0, y: 0 }] }] }],
       ["POST", `/v1/restaurants/${founded.id}/layout/expand`, { addWidth: 1, addHeight: 0 }],
       ["POST", `/v1/restaurants/${founded.id}/layout/undo`, {}],
       ["POST", `/v1/restaurants/${founded.id}/layout/redo`, {}],
@@ -205,7 +206,7 @@ test("Godot builder sends revisions on every mutation and refreshes only revisio
   const main = readFileSync(resolve(root, "apps/client-godot/scripts/main.gd"), "utf8");
   const api = readFileSync(resolve(root, "apps/client-godot/scripts/api_client.gd"), "utf8");
   const nextSteps = JSON.parse(readFileSync(resolve(root, "planning/next-steps.json"), "utf8"));
-  assert.match(main, /payload = builder_revision_payload\(payload\)/);
+  assert.match(main, /layout\/commit" % current_restaurant_id, builder_revision_payload\(\{"operations": staged_builder_operations\}\)/);
   assert.match(main, /layout\/%s" % \[current_restaurant_id, direction\], builder_revision_payload\(\)/);
   assert.match(main, /delete_json\([^\n]+builder_revision_payload\(\)/);
   assert.match(main, /\/repair[^\n]+builder_revision_payload\(\)/);
@@ -214,6 +215,7 @@ test("Godot builder sends revisions on every mutation and refreshes only revisio
   assert.match(main, /api\.get_json\("\/v1\/restaurants\/%s\/layout"/);
   assert.match(api, /request_body := "" if method == HTTPClient\.METHOD_GET else JSON\.stringify\(payload\)/);
   const task = nextSteps.tasks.find((entry) => entry.id === "RRO-403");
-  assert.equal(task.status, "in-progress");
+  assert.equal(task.status, "implemented-in-branch");
+  assert.ok(task.acceptance.some((value) => /staged batch commits atomically/i.test(value)));
   assert.ok(task.acceptance.some((value) => /stale layout revision/i.test(value)));
 });
