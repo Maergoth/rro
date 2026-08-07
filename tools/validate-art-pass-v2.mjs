@@ -23,13 +23,17 @@ const runtimeCompositeBlockedAssetIds = new Set(furnitureRuntimeContract.runtime
 const runtimeCompositePendingAssetIds = new Set(furnitureRuntimeContract.runtimeCompositePendingAssetIds ?? []);
 const directionalSelectionBound = furnitureRuntimeContract.capability.directionalTextureSelection === true;
 const latestFurnitureRuntimeQa = [...(pass.runtimeQaAttempts ?? [])].reverse().find((attempt) => Array.isArray(attempt.acceptedAssetIds));
-const runtimeReviewRemoteVerified = Boolean(
-  latestFurnitureRuntimeQa?.evidence
-    && file(latestFurnitureRuntimeQa.evidence)
-    && /^[0-9a-f]{40}$/.test(latestFurnitureRuntimeQa.reviewPreservation?.commit ?? "")
-    && /^[0-9a-f]{40}$/.test(latestFurnitureRuntimeQa.reviewPreservation?.tree ?? "")
-    && /^https:\/\/github\.com\/Maergoth\/rro\/actions\/runs\/\d+$/.test(latestFurnitureRuntimeQa.reviewPreservation?.ci ?? ""),
+const reviewIsRemoteVerified = (attempt) => Boolean(
+  attempt?.evidence
+    && file(attempt.evidence)
+    && /^[0-9a-f]{40}$/.test(attempt.reviewPreservation?.commit ?? "")
+    && /^[0-9a-f]{40}$/.test(attempt.reviewPreservation?.tree ?? "")
+    && /^https:\/\/github\.com\/Maergoth\/rro\/actions\/runs\/\d+$/.test(attempt.reviewPreservation?.ci ?? ""),
 );
+const runtimeReviewRemoteVerified = reviewIsRemoteVerified(latestFurnitureRuntimeQa);
+const latestDurableFurnitureRuntimeQa = [...(pass.runtimeQaAttempts ?? [])].reverse().find((attempt) =>
+  Array.isArray(attempt.acceptedAssetIds) && reviewIsRemoteVerified(attempt));
+const contractFurnitureRuntimeQa = runtimeReviewRemoteVerified ? latestFurnitureRuntimeQa : latestDurableFurnitureRuntimeQa;
 const missingCoverage = [];
 const invalid = [];
 const hashes = new Map();
@@ -238,14 +242,19 @@ if (!latestFurnitureRuntimeQa?.evidence || !file(latestFurnitureRuntimeQa.eviden
     const digest = createHash("sha256").update(readFileSync(resolve(ROOT, capture.path))).digest("hex");
     if (digest !== capture.sha256) invalid.push(`latest durable native-review capture hash mismatch: ${capture.path}`);
   }
-  if (JSON.stringify(acceptedFromEvidence) !== JSON.stringify([...runtimeCompositeAcceptedAssetIds].sort())) {
+  const contractNativeReview = contractFurnitureRuntimeQa?.evidence && file(contractFurnitureRuntimeQa.evidence)
+    ? read(contractFurnitureRuntimeQa.evidence)
+    : null;
+  const acceptedFromContractEvidence = [...(contractNativeReview?.visualReview?.acceptedAssetIds ?? [])].sort();
+  const blockedFromContractEvidence = [...(contractNativeReview?.visualReview?.rejectedAssetIds ?? [])].sort();
+  if (JSON.stringify(acceptedFromContractEvidence) !== JSON.stringify([...runtimeCompositeAcceptedAssetIds].sort())) {
     invalid.push("runtimeCompositeAcceptedAssetIds do not match the latest durable native review");
   }
-  if (JSON.stringify(blockedFromEvidence) !== JSON.stringify([...runtimeCompositeBlockedAssetIds].sort())) {
+  if (JSON.stringify(blockedFromContractEvidence) !== JSON.stringify([...runtimeCompositeBlockedAssetIds].sort())) {
     invalid.push("runtimeCompositeBlockedAssetIds do not match the latest durable native review");
   }
   const pendingFromEvidence = furnitureRuntimeContract.acceptedDirectionalAssetIds
-    .filter((assetId) => !acceptedFromEvidence.includes(assetId) && !blockedFromEvidence.includes(assetId))
+    .filter((assetId) => !acceptedFromContractEvidence.includes(assetId) && !blockedFromContractEvidence.includes(assetId))
     .sort();
   if (JSON.stringify(pendingFromEvidence) !== JSON.stringify([...runtimeCompositePendingAssetIds].sort())) {
     invalid.push("runtimeCompositePendingAssetIds must contain exactly the source-accepted assets absent from the latest durable native review");

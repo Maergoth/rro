@@ -8,7 +8,7 @@ import { inflateSync } from "node:zlib";
 const ROOT = resolve(import.meta.dirname, "..");
 const QA_ROOT = "planning/art-qa/furniture-core-directional-010";
 const QA_PATH = `${QA_ROOT}/qa.json`;
-const EXPECTED_QA_SHA256 = "5b1134af8dd1eb9287ee18f22f67e4fc9e585ef635c42fd5a0ecd3cfa9aa5245";
+const EXPECTED_QA_SHA256 = "11aa439c4d1755a4e28d6888dd0c786bfd2309d94f80757d8ff4febc37c2d6ed";
 const DIRECTIONS = ["north", "east", "south", "west"];
 const ASSETS = ["furniture-prep-table-refrigerated", "furniture-walkin-rack", "furniture-dry-storage-rack"];
 const PLACEMENT = { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" };
@@ -155,41 +155,51 @@ function visibleMagentaFringePixels(image) {
   return count;
 }
 
-test("furniture directional batch 010 has exact durable local provenance without inflating runtime acceptance", () => {
+test("furniture directional batch 010 has exact remote source provenance and pending review-evidence preservation", () => {
   const qa = json(QA_PATH);
   const artPass = json("planning/art-pass-v2.json");
-  const batch = artPass.pendingBatches.find((entry) => entry.id === "furniture-core-directional-010");
+  const batch = artPass.batches.find((entry) => entry.id === "furniture-core-directional-010");
   assert.equal(fileSha256(QA_PATH), EXPECTED_QA_SHA256);
   assert.equal(qa.batchId, "furniture-core-directional-010");
   assert.deepEqual(qa.assets, ASSETS);
   assert.equal(qa.artReviewStatus, "accepted");
   assert.equal(qa.productionComplete, false);
   assert.deepEqual(qa.repositoryPromotion, {
-    status: "local-verified-pending-remote",
+    status: "remote-verified-source-and-runtime-review-pending-evidence-preservation",
     runtimeFiles: 12,
     alphaSourceFiles: 12,
     contactSheets: 2,
     provenanceDocuments: 2,
     totalFiles: 28,
   });
-  assert.equal(qa.remotePreservation, null);
+  assert.deepEqual(qa.remotePreservation, {
+    commit: "0a6e36b40dada458e9f3c2af70d73f58477f494b",
+    tree: "90d89bc60d20bb2fe287e2e03320c371d71ddc29",
+    ci: "https://github.com/Maergoth/rro/actions/runs/31161334873",
+    artifactId: 8987205444,
+    artifactSha256: "62bfb9f325aedb59180ccaef9d5483007ed6926c364860b4901dadf850314913",
+  });
   assert.deepEqual(batch, {
     id: "furniture-core-directional-010",
     assets: ASSETS,
     files: 28,
     qa: "passed",
-    runtimeQa: "pending-native-gameplay-composite",
+    runtimeQa: "passed-native-gameplay-composite-attempt-008",
     sourcePromptMode: "built-in image generation; three separately prompted rigid elevated-isometric four-direction prep/storage atlases with two semantic corrections, strict chroma remediation, common-pivot normalization, and full/gameplay-scale contact review",
+    remoteCommit: "0a6e36b40dada458e9f3c2af70d73f58477f494b",
+    remoteTree: "90d89bc60d20bb2fe287e2e03320c371d71ddc29",
+    ci: "https://github.com/Maergoth/rro/actions/runs/31161334873",
+    artifactId: 8987205444,
+    artifactSha256: "62bfb9f325aedb59180ccaef9d5483007ed6926c364860b4901dadf850314913",
     qaEvidence: "planning/art-qa/furniture-core-directional-010/contact-627-dark.png",
     qaManifest: QA_PATH,
-    notes: "Refrigerated prep table, walk-in storage rack, and dry-storage rack are source-accepted and locally runtime-bound. Exact GitHub preservation, hosted CI, and native four-rotation gameplay-composite review remain pending.",
+    notes: "Refrigerated prep table, walk-in storage rack, and dry-storage rack are source-accepted, remotely preserved, and visually accepted in native four-rotation gameplay review attempt 008. That review evidence is committed locally but does not earn production-complete credit until its own exact GitHub preservation and green hosted CI.",
   });
   assert.deepEqual(qa.promotionScope, {
     runtimeFiles: 12, alphaSourceFiles: 12, contactSheets: 2, provenanceDocuments: 2, totalFiles: 28,
   });
-  assert.equal(qa.productionCompletionBlockers.length, 2);
-  assert.match(qa.productionCompletionBlockers[0], /GitHub.*green hosted Windows and Ubuntu CI/i);
-  assert.match(qa.productionCompletionBlockers[1], /native Godot four-rotation gameplay composite/i);
+  assert.equal(qa.productionCompletionBlockers.length, 1);
+  assert.match(qa.productionCompletionBlockers[0], /review evidence.*GitHub preservation.*green hosted Windows and Ubuntu CI/i);
   assert.doesNotMatch(JSON.stringify(qa), /\/tmp\/|\/workspace\//, "durable QA must not reference transient storage");
   assert.equal(fileSha256(qa.source.promptLog), qa.source.promptLogSha256);
   assert.equal(qa.source.chromaHelperSha256, "3f7b9b14ad5c90f37618bc1c16a039a2076abca12ddc41b3ae470e2b1cad6c0e");

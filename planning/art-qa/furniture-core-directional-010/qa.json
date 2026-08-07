@@ -9,8 +9,7 @@
   "artReviewStatus": "accepted",
   "productionComplete": false,
   "productionCompletionBlockers": [
-    "The accepted local checkpoint still requires exact GitHub tree preservation and green hosted Windows and Ubuntu CI.",
-    "The three new identities still require exact native Godot four-rotation gameplay composite capture and human review before runtime-composite acceptance."
+    "Native four-rotation gameplay review attempt 008 passes all three identities, but that exact review evidence still requires its own GitHub preservation and green hosted Windows and Ubuntu CI before production-complete credit."
   ],
   "promotionScope": {
     "runtimeFiles": 12,
@@ -20,14 +19,20 @@
     "totalFiles": 28
   },
   "repositoryPromotion": {
-    "status": "local-verified-pending-remote",
+    "status": "remote-verified-source-and-runtime-review-pending-evidence-preservation",
     "runtimeFiles": 12,
     "alphaSourceFiles": 12,
     "contactSheets": 2,
     "provenanceDocuments": 2,
     "totalFiles": 28
   },
-  "remotePreservation": null,
+  "remotePreservation": {
+    "commit": "0a6e36b40dada458e9f3c2af70d73f58477f494b",
+    "tree": "90d89bc60d20bb2fe287e2e03320c371d71ddc29",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31161334873",
+    "artifactId": 8987205444,
+    "artifactSha256": "62bfb9f325aedb59180ccaef9d5483007ed6926c364860b4901dadf850314913"
+  },
   "quarantineArchive": {
     "filename": "RRO-furniture-core-directional-010-quarantine.tar.gz",
     "note": "The safe archive and SHA-256 sidecar are preserved outside the repository; raw/rejected/process binaries are intentionally excluded from the promoted 28-file payload."
@@ -134,6 +139,7 @@
     "noClippingTextLogosWatermarksShadowsOrExtraObjects": "pass",
     "visualReviewAtFullScale": "pass: planning/art-qa/furniture-core-directional-010/contact-627-dark.png independently inspected at original resolution after final alpha remediation; construction, counts, camera, silhouettes, alpha, and floor contact pass.",
     "visualReviewAtGameplayScale128px": "pass: planning/art-qa/furniture-core-directional-010/contact-128-light.png independently inspected at original resolution; six-well prep, five-shelf walk-in, and four-shelf dry-rack identities/facings remain distinct.",
+    "nativeGameplayCompositeReview": "pass: runtime-isometric-integration-001-attempt-008; all three identities preserve directional selection, footprint contact, scale, depth, and gameplay legibility across exact 1800x1100 north/east/south/west captures from CI run 31161334873.",
     "proceduralOrDeterministicStandIn": false
   },
   "contactSheets": [

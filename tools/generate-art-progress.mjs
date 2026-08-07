@@ -92,6 +92,7 @@ const runtimeCompositeBlockedAssetIds = new Set(furnitureRuntimeContract.runtime
 const runtimeCompositePendingAssetIds = new Set(furnitureRuntimeContract.runtimeCompositePendingAssetIds ?? []);
 const projectionAligned = furnitureRuntimeContract.capability.projectionAligned === true;
 const latestFurnitureRuntimeQa = [...runtimeQaAttempts].reverse().find((attempt) => Array.isArray(attempt.acceptedAssetIds));
+const latestRuntimeAcceptedAssetIds = new Set(latestFurnitureRuntimeQa?.acceptedAssetIds ?? []);
 const runtimeReviewRemoteVerified = latestFurnitureRuntimeQa?.reviewRemoteVerified === true;
 const equipmentRuntimeLoader = runtimeInventory.includes("res://assets/items/%s.png");
 const characterRuntimeBound = runtimeFloor.includes("assets/characters") && !runtimeFloor.includes("draw_circle(draw_position, 10, primary)");
@@ -331,13 +332,15 @@ lines.push(`${equipmentIcons.filter((item) => item.productionComplete).length} e
 const pendingRuntimeEntries = furniture.filter((item) => item.runtimeCompositePending);
 const localOnlyPendingRuntimeEntries = pendingRuntimeEntries.filter((item) => !item.remoteVerified);
 const pendingRuntimeSummary = pendingRuntimeEntries.length > 0
-  ? `${pendingRuntimeEntries.map((item) => `\`${item.assetId}\``).join(", ")} are source-accepted but pending their first native four-rotation gameplay composite; ${localOnlyPendingRuntimeEntries.length}/${pendingRuntimeEntries.length} are also local-only pending an immutable remote checkpoint and green hosted CI.`
+  ? pendingRuntimeEntries.every((item) => latestRuntimeAcceptedAssetIds.has(item.assetId))
+    ? `${pendingRuntimeEntries.map((item) => `\`${item.assetId}\``).join(", ")} pass the latest native four-rotation gameplay review but remain outside the runtime-accepted partition until that exact review evidence is remotely preserved with green hosted CI.`
+    : `${pendingRuntimeEntries.map((item) => `\`${item.assetId}\``).join(", ")} are source-accepted but pending their first native four-rotation gameplay composite; ${localOnlyPendingRuntimeEntries.length}/${pendingRuntimeEntries.length} are also local-only pending an immutable remote checkpoint and green hosted CI.`
   : "No source-accepted directional sets are pending their first native four-rotation gameplay composite.";
 const blockedRuntimeEntries = furniture.filter((item) => item.runtimeCompositeBlocked);
 const blockedRuntimeSummary = blockedRuntimeEntries.length > 0
   ? `${blockedRuntimeEntries.map((item) => `\`${item.assetId}\``).join(", ")} remain blocked by the latest native gameplay review.`
   : "No source-accepted directional sets remain blocked by the latest native gameplay review.";
-lines.push(`Directional furniture texture selection is ${yes(directionalSelectionBound)} and projection alignment is ${yes(projectionAligned)}. Latest native review \`${latestFurnitureRuntimeQa?.id ?? "unavailable"}\` accepted ${runtimeCompositeAcceptedAssetIds.size}/${furniture.filter((item) => item.present).length} present sets; its durable review checkpoint is remote-verified: ${yes(runtimeReviewRemoteVerified)}. ${blockedRuntimeSummary} ${pendingRuntimeSummary}`);
+lines.push(`Directional furniture texture selection is ${yes(directionalSelectionBound)} and projection alignment is ${yes(projectionAligned)}. Latest native review \`${latestFurnitureRuntimeQa?.id ?? "unavailable"}\` accepted ${latestRuntimeAcceptedAssetIds.size}/${furniture.filter((item) => item.present).length} present sets; its durable review checkpoint is remote-verified: ${yes(runtimeReviewRemoteVerified)}. ${blockedRuntimeSummary} ${pendingRuntimeSummary}`);
 lines.push("");
 lines.push("## Character truth");
 lines.push("");
