@@ -39,6 +39,13 @@ const CATEGORY_COLORS := {
 	"Utility": Color("52758f"), "Decor": Color("6e9364"), "Storage": Color("80705d"), "Office": Color("776487")
 }
 
+const ROOM_TAG_COLORS := {
+	"dining": Color("c88d5a"), "kitchen": Color("c85f55"), "service": Color("4f958b"),
+	"storage": Color("8b765f"), "bar": Color("9a6b9b"), "entry": Color("d3a64f"),
+	"office": Color("776b9d"), "restroom": Color("5f8fa7"), "utility": Color("667d89"),
+	"unassigned": Color("6a6f72")
+}
+
 # Visual elevation is deliberately client-only. Persisted x/y/rotation keep
 # the exact server contract while art is raised from its wall edge or ceiling
 # cell anchor in the elevated orthographic-isometric view. These solid-color
@@ -99,7 +106,14 @@ func apply_staged_operation(operation: Dictionary) -> void:
 			for cell in cells:
 				if selected_cells.has("%d:%d" % [int(cell.get("x", -1)), int(cell.get("y", -1))]):
 					cell["surfaceId"] = str(operation.get("surfaceId", cell.get("surfaceId", "")))
-					if operation.has("roomTag"): cell["roomTag"] = str(operation.get("roomTag", ""))
+			layout["cells"] = cells
+		"room-tag":
+			var selected_cells := {}
+			for cell in operation.get("cells", []): selected_cells["%d:%d" % [int(cell.get("x", -1)), int(cell.get("y", -1))]] = true
+			var cells: Array = layout.get("cells", [])
+			for cell in cells:
+				if selected_cells.has("%d:%d" % [int(cell.get("x", -1)), int(cell.get("y", -1))]):
+					cell["roomTag"] = str(operation.get("roomTag", cell.get("roomTag", "unassigned")))
 			layout["cells"] = cells
 		"wall":
 			var walls: Array = layout.get("walls", [])
@@ -366,7 +380,7 @@ func _gui_input(event: InputEvent) -> void:
 		hover_cell = cell
 		hover_screen_position = event.position
 		if event.pressed:
-			if build_tool == "floor":
+			if build_tool in ["floor", "room-tag"]:
 				painting = true; paint_cells.clear(); paint_cells["%d:%d" % [cell.x, cell.y]] = {"x": cell.x, "y": cell.y}; queue_redraw()
 			elif build_tool in ["wall", "door", "arch"]:
 				var edge := nearest_cell_edge(cell, event.position)
@@ -400,7 +414,10 @@ func _gui_input(event: InputEvent) -> void:
 		else:
 			if painting:
 				painting = false
-				build_action_requested.emit("floor", {"surfaceId": selected_catalog_id, "cells": paint_cells.values()})
+				if build_tool == "room-tag":
+					build_action_requested.emit("room-tag", {"roomTag": selected_catalog_id, "cells": paint_cells.values()})
+				else:
+					build_action_requested.emit("floor", {"surfaceId": selected_catalog_id, "cells": paint_cells.values()})
 				paint_cells.clear()
 			elif not dragging_object.is_empty():
 				var definition := furniture_definition(str(dragging_object.get("definitionId", "")))
@@ -440,11 +457,16 @@ func _draw() -> void:
 		var color: Color = FLOOR_COLORS.get(str(cell.get("surfaceId", "sealed-concrete")), Color("586367"))
 		draw_colored_polygon(polygon, color)
 		draw_polyline(closed_polygon(polygon), Color(color).darkened(0.22), 1.0, true)
+		if build_tool == "room-tag":
+			var room_color: Color = ROOM_TAG_COLORS.get(str(cell.get("roomTag", "unassigned")), Color("6a6f72"))
+			draw_colored_polygon(polygon, Color(room_color, 0.36))
+			draw_polyline(closed_polygon(polygon), Color(room_color, 0.78), 1.5, true)
 	if painting:
 		for value in paint_cells.values():
 			var polygon := IsometricGridProjection.cell_polygon(Vector2i(int(value.x), int(value.y)), camera_offset, cell_pixels)
-			draw_colored_polygon(polygon, Color("efbc54", 0.55))
-			draw_polyline(closed_polygon(polygon), Color("ffd982", 0.8), 2.0, true)
+			var brush_color: Color = ROOM_TAG_COLORS.get(selected_catalog_id, Color("efbc54")) if build_tool == "room-tag" else Color("efbc54")
+			draw_colored_polygon(polygon, Color(brush_color, 0.62))
+			draw_polyline(closed_polygon(polygon), Color(brush_color.lightened(0.2), 0.9), 2.0, true)
 	var world_items: Array = []
 	for wall in layout.get("walls", []):
 		world_items.append(world_item("wall", wall, wall_grid_position(wall)))

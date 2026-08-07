@@ -166,7 +166,8 @@ test("width, height, and combined expansions relocate the perimeter without orph
           assert.equal(movedSouth.id, oldSouth.id);
         }
         const validation = validateLayout(db, registry, restaurantId);
-        assert.equal(validation.validForService, true);
+        assert.equal(validation.validForService, false, "new expansion cells remain deliberately unassigned until the owner zones them");
+        assert.ok(validation.errors.some((error) => error.code === "unassigned-room"));
         assert.equal(validation.missingPerimeterEdges, 0);
         assert.equal(validation.usableExits, 2, "the north door and relocated east service door remain legal");
         assert.equal(validation.reachableCells, validation.walkableCells);
@@ -194,7 +195,8 @@ test("expansion relocates supported wall mounts and is exactly durable through r
 
     const expanded = expandRestaurant(db, state.registry, state.account, state.restaurantId, { addWidth: 2, addHeight: 3 });
     assert.equal(expanded.relocatedMounts, 2);
-    assert.equal(expanded.layout.validation.validForService, true);
+    assert.equal(expanded.layout.validation.validForService, false);
+    assert.ok(expanded.layout.validation.errors.some((error) => error.code === "unassigned-room"));
     const positions = Object.fromEntries(expanded.layout.objects.map((object) => [object.id, { x: object.x, y: object.y, rotation: object.rotation }]));
     assert.deepEqual(positions[east.id], { x: 25, y: 4, rotation: 90 });
     assert.deepEqual(positions[south.id], { x: 4, y: 18, rotation: 180 });
@@ -215,7 +217,8 @@ test("expansion relocates supported wall mounts and is exactly durable through r
     const redone = redoLayout(db, state.registry, state.account, state.restaurantId);
     assert.equal(redone.action, "expand restaurant");
     assert.deepEqual(comparableLayout(db, state.registry, state.restaurantId), afterExpansion);
-    assert.equal(redone.layout.validation.validForService, true);
+    assert.equal(redone.layout.validation.validForService, false, "redo restores the exact unassigned expansion state");
+    assert.ok(redone.layout.validation.errors.some((error) => error.code === "unassigned-room"));
   } finally {
     db.close();
     rmSync(directory, { recursive: true, force: true });

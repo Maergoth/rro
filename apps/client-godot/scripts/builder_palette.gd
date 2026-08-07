@@ -11,6 +11,7 @@ signal commit_staged_requested
 signal cancel_staged_requested
 
 var content: Dictionary = {}
+var room_tags: Array = []
 var category_tabs: TabContainer
 var rotation_label: Label
 var selected_label: Label
@@ -32,7 +33,7 @@ func _ready() -> void:
 	title.add_theme_color_override("font_color", Color("efbc54"))
 	add_child(title)
 	var instructions := Label.new()
-	instructions.text = "Left-drag flooring and objects. Wall decor snaps to the pointed cell edge; ceiling fixtures use their grid footprint. Changes stay staged until Commit; Cancel or Escape restores the authoritative layout without spending."
+	instructions.text = "Left-drag flooring or room tags. Wall decor snaps to the pointed cell edge; ceiling fixtures use their grid footprint. Changes stay staged until Commit; Cancel or Escape restores the authoritative layout without spending."
 	instructions.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	instructions.add_theme_color_override("font_color", Color("95a6a6"))
 	instructions.custom_minimum_size = Vector2(310, 66)
@@ -71,6 +72,11 @@ func set_content(value: Dictionary) -> void:
 	if not is_node_ready(): return
 	rebuild()
 
+func set_room_tags(value: Array) -> void:
+	room_tags = value.duplicate(true)
+	if not is_node_ready(): return
+	rebuild()
+
 func rebuild() -> void:
 	for child in category_tabs.get_children(): child.queue_free()
 	var floors := make_catalog("Floor tiles")
@@ -79,6 +85,11 @@ func rebuild() -> void:
 		var surface_label := str(surface.get("label", "Floor"))
 		var stats: Dictionary = surface.get("stats", {})
 		add_catalog_button(floors, "%s\n$%.2f/cell  ·  sanitation %+d  ·  ambience %+d" % [surface_label, float(surface.get("costCents", 0))/100.0, int(stats.get("sanitation", 0)), int(stats.get("ambience", 0))], select_catalog.bind("floor", surface_id, "%s floor brush" % surface_label))
+	var rooms := make_catalog("Room tags")
+	for room in room_tags:
+		var room_id := str(room.get("id", ""))
+		var room_label := str(room.get("label", room_id.capitalize()))
+		add_catalog_button(rooms, "%s\nOperational zone · no construction cost" % room_label, select_catalog.bind("room-tag", room_id, "%s room-tag brush" % room_label))
 	var walls := make_catalog("Walls & doors")
 	for wall in content.get("construction", {}).get("wallStyles", []):
 		var wall_id := str(wall.get("id", ""))
@@ -157,12 +168,15 @@ func set_layout_validation(validation: Dictionary) -> void:
 	if not is_instance_valid(validation_label): return
 	var errors: Array = validation.get("errors", [])
 	var warnings: Array = validation.get("warnings", [])
-	if bool(validation.get("validForService", false)):
-		validation_label.text = "✓ Service-ready · %d exits · %d/%d walkable cells reachable" % [int(validation.get("usableExits", 0)), int(validation.get("reachableCells", 0)), int(validation.get("walkableCells", 0))]
+	var checks: Array = validation.get("operationalChecks", [])
+	if bool(validation.get("openingReady", validation.get("validForService", false))):
+		validation_label.text = "✓ Operational opening checklist passed · %d exits · %d/%d walkable cells reachable · %d checks" % [int(validation.get("usableExits", 0)), int(validation.get("reachableCells", 0)), int(validation.get("walkableCells", 0)), checks.size()]
 		validation_label.add_theme_color_override("font_color", Color("7fd0b2"))
 	else:
 		var messages: Array[String] = []
 		for issue in errors: messages.append(str(issue.get("message", "Layout error")))
 		for issue in warnings: messages.append(str(issue.get("message", "Layout warning")))
-		validation_label.text = "⚠ Service readiness\n" + "\n".join(messages)
+		for check in checks:
+			if not bool(check.get("passed", false)): messages.append("%s: %s" % [str(check.get("label", "Check")), str(check.get("detail", "Action required"))])
+		validation_label.text = "⚠ Operational opening checklist\n" + "\n".join(messages)
 		validation_label.add_theme_color_override("font_color", Color("ef8f83"))

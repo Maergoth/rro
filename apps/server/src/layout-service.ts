@@ -32,7 +32,7 @@ type LayoutState = {
   objects: any[];
 };
 type AppliedLayoutOperation = {
-  type: "floor" | "wall" | "place" | "move";
+  type: "floor" | "room-tag" | "wall" | "place" | "move";
   costCents: number;
   changed?: number;
   id?: string;
@@ -40,6 +40,21 @@ type AppliedLayoutOperation = {
 };
 
 const MAX_STAGED_LAYOUT_OPERATIONS = 128;
+
+export const ROOM_TAGS = [
+  { id: "dining", label: "Dining", color: "#c88d5a" },
+  { id: "kitchen", label: "Kitchen", color: "#c85f55" },
+  { id: "service", label: "Service", color: "#4f958b" },
+  { id: "storage", label: "Storage", color: "#8b765f" },
+  { id: "bar", label: "Bar", color: "#9a6b9b" },
+  { id: "entry", label: "Entry / host", color: "#d3a64f" },
+  { id: "office", label: "Office", color: "#776b9d" },
+  { id: "restroom", label: "Restroom", color: "#5f8fa7" },
+  { id: "utility", label: "Utility", color: "#667d89" },
+  { id: "unassigned", label: "Unassigned", color: "#6a6f72" },
+] as const;
+
+const ROOM_TAG_IDS = new Set<string>(ROOM_TAGS.map((tag) => tag.id));
 
 function integer(value: unknown, label: string): number {
   const result = Number(value);
@@ -290,6 +305,12 @@ const CARDINAL_STEPS = [
 
 function validateLayoutState(db: Database, registry: ContentRegistry, restaurantId: string): Record<string, unknown> {
   const restaurant = restaurantRow(db, restaurantId);
+  const roomTagRows = db.prepare("SELECT room_tag AS roomTag, COUNT(*) AS count FROM floor_cells WHERE restaurant_id = ? GROUP BY room_tag ORDER BY room_tag").all(restaurantId) as Array<{ roomTag: string; count: number }>;
+  const roomTagCounts = Object.fromEntries(roomTagRows.map((row) => [String(row.roomTag), Number(row.count)]));
+  const invalidRoomTagCount = roomTagRows
+    .filter((row) => !ROOM_TAG_IDS.has(String(row.roomTag)))
+    .reduce((total, row) => total + Number(row.count), 0);
+  const unassignedRoomCount = Number(roomTagCounts.unassigned ?? 0);
   const walls = db.prepare("SELECT grid_x, grid_y, edge, opening_type FROM wall_edges WHERE restaurant_id = ?").all(restaurantId) as any[];
   const objects = db.prepare("SELECT id, definition_id, grid_x, grid_y, rotation FROM object_instances WHERE restaurant_id = ?").all(restaurantId) as PlacedObjectRow[];
   const wallMap = new Map(walls.map((wall) => [canonicalWallSegmentKey(Number(wall.grid_x), Number(wall.grid_y), String(wall.edge) as CardinalEdge), String(wall.opening_type)]));
@@ -378,10 +399,25 @@ function validateLayoutState(db: Database, registry: ContentRegistry, restaurant
   if (inaccessibleObjects.length) errors.push({ code: "inaccessible-object", message: "Some placed objects have no reachable interaction edge.", count: inaccessibleObjects.length });
   if (invalidMountObjectIds.length) errors.push({ code: "invalid-object-mount", message: "Some mounted objects have missing or incompatible support.", count: invalidMountObjectIds.length });
   if (overlappingObjectIds.size) errors.push({ code: "overlapping-object", message: "Some objects overlap another object in the same mount layer.", count: overlappingObjectIds.size });
+  if (invalidRoomTagCount) errors.push({ code: "invalid-room-tag", message: "Some floor cells use an unsupported room tag.", count: invalidRoomTagCount });
+  if (unassignedRoomCount) errors.push({ code: "unassigned-room", message: "Assign every expanded floor cell to an operational room.", count: unassignedRoomCount });
+  if (!roomTagCounts.dining) errors.push({ code: "missing-dining-room", message: "Assign at least one floor cell to Dining." });
+  if (!roomTagCounts.kitchen) errors.push({ code: "missing-kitchen-room", message: "Assign at least one floor cell to Kitchen." });
+  const operationalChecks = [
+    { code: "room-vocabulary", label: "Supported room vocabulary", passed: invalidRoomTagCount === 0, detail: invalidRoomTagCount ? `${invalidRoomTagCount} unsupported cells` : "All room tags are recognized" },
+    { code: "rooms-assigned", label: "All floor cells assigned", passed: unassignedRoomCount === 0, detail: unassignedRoomCount ? `${unassignedRoomCount} cells remain unassigned` : "No unassigned expansion cells" },
+    { code: "dining-zone", label: "Dining area present", passed: Number(roomTagCounts.dining ?? 0) > 0, detail: `${Number(roomTagCounts.dining ?? 0)} cells` },
+    { code: "kitchen-zone", label: "Kitchen area present", passed: Number(roomTagCounts.kitchen ?? 0) > 0, detail: `${Number(roomTagCounts.kitchen ?? 0)} cells` },
+    { code: "egress", label: "Exterior egress", passed: usableExits.length > 0 && missingPerimeter.length === 0, detail: `${usableExits.length} usable exterior exits` },
+    { code: "circulation-clearance", label: "Reachable circulation and service edges", passed: reachable.size === walkableCells && inaccessibleObjects.length === 0, detail: `${reachable.size}/${walkableCells} walkable cells reachable` },
+  ];
   return {
     validForService: errors.length === 0,
+    openingReady: errors.length === 0,
     errors,
     warnings,
+    roomTagCounts,
+    operationalChecks,
     usableExits: usableExits.length,
     exteriorOpenings: exits.length,
     reachableCells: reachable.size,
@@ -482,6 +518,7 @@ export function getLayout(db: Database, registry: ContentRegistry, restaurantId:
     width: restaurant.build_width,
     height: restaurant.build_height,
     cellMeters: registry.content.construction.grid.cellMeters,
+    roomTags: ROOM_TAGS,
     cells: db.prepare("SELECT grid_x AS x, grid_y AS y, surface_id AS surfaceId, room_tag AS roomTag, walkable FROM floor_cells WHERE restaurant_id = ? ORDER BY grid_y, grid_x").all(restaurantId),
     walls: db.prepare("SELECT id, grid_x AS x, grid_y AS y, edge, wall_style_id AS wallStyleId, opening_type AS openingType, rotation FROM wall_edges WHERE restaurant_id = ? ORDER BY grid_y, grid_x, edge, id").all(restaurantId),
     objects: db.prepare("SELECT id, definition_id AS definitionId, grid_x AS x, grid_y AS y, rotation, state, wear, primary_color AS primaryColor, secondary_color AS secondaryColor FROM object_instances WHERE restaurant_id = ? ORDER BY placed_at, id").all(restaurantId),
@@ -549,12 +586,32 @@ function applyFloorOperation(db: Database, registry: ContentRegistry, account: A
   const cost = surface.costCents * unique.size;
   if (restaurant.treasury_cents < cost) throw new ApiError(409, "Restaurant treasury cannot cover this floor purchase.");
   const now = Date.now();
-  const update = db.prepare("UPDATE floor_cells SET surface_id = ?, room_tag = COALESCE(?, room_tag), updated_at = ? WHERE restaurant_id = ? AND grid_x = ? AND grid_y = ?");
-  for (const cell of unique.values()) update.run(surfaceId, body.roomTag ? String(body.roomTag).slice(0, 20) : null, now, restaurantId, cell.x, cell.y);
+  if (body.roomTag !== undefined) throw new ApiError(400, "Use the dedicated room-tag builder tool to zone floor cells.");
+  const update = db.prepare("UPDATE floor_cells SET surface_id = ?, updated_at = ? WHERE restaurant_id = ? AND grid_x = ? AND grid_y = ?");
+  for (const cell of unique.values()) update.run(surfaceId, now, restaurantId, cell.x, cell.y);
   db.prepare("UPDATE restaurants SET treasury_cents = treasury_cents - ? WHERE id = ?").run(cost, restaurantId);
   db.prepare("INSERT INTO ledger_entries (id, restaurant_id, character_id, category, amount_cents, reference_type, reference_id, created_at) VALUES (?, ?, ?, 'construction', ?, 'surface', ?, ?)")
     .run(newId("ledger"), restaurantId, account.characterId, -cost, surfaceId, now);
   return { type: "floor", costCents: cost, changed: unique.size };
+}
+
+function applyRoomTagOperation(db: Database, account: AuthenticatedAccount, restaurantId: string, body: Record<string, unknown>): AppliedLayoutOperation {
+  const restaurant = assertOwner(db, restaurantId, account);
+  assertLayoutEditable(db, restaurantId);
+  const roomTag = String(body.roomTag ?? "");
+  if (!ROOM_TAG_IDS.has(roomTag)) throw new ApiError(400, "Unknown room tag.");
+  const input = Array.isArray(body.cells) ? body.cells.slice(0, 512) : [];
+  const unique = new Map<string, CellInput>();
+  for (const value of input as any[]) {
+    const cell = { x: integer(value.x, "cell x"), y: integer(value.y, "cell y") };
+    ensureInside(restaurant, cell.x, cell.y);
+    unique.set(`${cell.x}:${cell.y}`, cell);
+  }
+  if (!unique.size) throw new ApiError(400, "Select at least one floor cell to tag.");
+  const update = db.prepare("UPDATE floor_cells SET room_tag = ?, updated_at = ? WHERE restaurant_id = ? AND grid_x = ? AND grid_y = ?");
+  const now = Date.now();
+  for (const cell of unique.values()) update.run(roomTag, now, restaurantId, cell.x, cell.y);
+  return { type: "room-tag", costCents: 0, changed: unique.size };
 }
 
 export function upsertWall(db: Database, registry: ContentRegistry, account: AuthenticatedAccount, restaurantId: string, body: Record<string, unknown>): Record<string, unknown> {
@@ -664,6 +721,7 @@ export function commitStagedLayout(db: Database, registry: ContentRegistry, acco
   const results = recordLayoutMutation(db, restaurantId, account, `commit ${operations.length} staged edits`, expectedRevision, () => operations.map((operation, index) => {
     const type = String(operation.type ?? "");
     if (type === "floor") return applyFloorOperation(db, registry, account, restaurantId, operation);
+    if (type === "room-tag") return applyRoomTagOperation(db, account, restaurantId, operation);
     if (type === "wall") return applyWallOperation(db, registry, account, restaurantId, operation);
     if (type === "place") return applyPlaceOperation(db, registry, account, restaurantId, operation);
     if (type === "move") {

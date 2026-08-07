@@ -710,6 +710,7 @@ func cancel_staged_builder_edits() -> void:
 func accept_authoritative_builder_layout(data: Dictionary) -> void:
 	authoritative_builder_layout = data.duplicate(true)
 	if is_instance_valid(current_floor): current_floor.set_layout(authoritative_builder_layout.duplicate(true))
+	if is_instance_valid(current_builder): current_builder.set_room_tags(authoritative_builder_layout.get("roomTags", []))
 	update_builder_history(authoritative_builder_layout)
 	if is_instance_valid(current_builder): current_builder.set_staged_state(staged_builder_operations.size(), staged_commit_in_flight)
 
