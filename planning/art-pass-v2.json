@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "0a6e36b40dada458e9f3c2af70d73f58477f494b",
-    "tree": "90d89bc60d20bb2fe287e2e03320c371d71ddc29",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/31161334873"
+    "commit": "ce1477eb4a47d06158d01190c53a4cf9633050c1",
+    "tree": "a917cc9e1394ec85658d7183acae59215226e756",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31181870397"
   },
   "completionRule": "generated, processed, raster-validated, visually accepted, runtime-bound assets whose exact reviewed bytes are remotely verified on GitHub with green CI",
   "artDirection": {
@@ -30,7 +30,7 @@
     ]
   },
   "coverage": {
-    "furniture": { "catalogTotal": 229, "acceptedSets": 31, "acceptedDirectionalFiles": 124, "runtimeCompositeAcceptedSets": 28 },
+    "furniture": { "catalogTotal": 229, "acceptedSets": 31, "acceptedDirectionalFiles": 124, "runtimeCompositeAcceptedSets": 31 },
     "equipmentIcons": { "catalogTotal": 45, "accepted": 45 },
     "characterSystem": {
       "status": "in_progress",
@@ -342,7 +342,11 @@
         "range", "recycling", "service-station", "table-four", "table-two"
       ],
       "rejectedAssetIds": [],
-      "reviewPreservation": null,
+      "reviewPreservation": {
+        "commit": "ce1477eb4a47d06158d01190c53a4cf9633050c1",
+        "tree": "a917cc9e1394ec85658d7183acae59215226e756",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31181870397"
+      },
       "productionComplete": false
     }
   ],
@@ -366,7 +370,7 @@
       "artifactSha256": "62bfb9f325aedb59180ccaef9d5483007ed6926c364860b4901dadf850314913",
       "qaEvidence": "planning/art-qa/furniture-core-directional-010/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-010/qa.json",
-      "notes": "Refrigerated prep table, walk-in storage rack, and dry-storage rack are source-accepted, remotely preserved, and visually accepted in native four-rotation gameplay review attempt 008. That review evidence is committed locally but does not earn production-complete credit until its own exact GitHub preservation and green hosted CI."
+      "notes": "Refrigerated prep table, walk-in storage rack, and dry-storage rack are source-accepted, remotely preserved, visually accepted in native four-rotation gameplay review attempt 008, and backed by an exact remote review-evidence checkpoint with green hosted CI."
     }
     ,
     {

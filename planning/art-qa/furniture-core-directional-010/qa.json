@@ -7,10 +7,8 @@
     "furniture-dry-storage-rack"
   ],
   "artReviewStatus": "accepted",
-  "productionComplete": false,
-  "productionCompletionBlockers": [
-    "Native four-rotation gameplay review attempt 008 passes all three identities, but that exact review evidence still requires its own GitHub preservation and green hosted Windows and Ubuntu CI before production-complete credit."
-  ],
+  "productionComplete": true,
+  "productionCompletionBlockers": [],
   "promotionScope": {
     "runtimeFiles": 12,
     "alphaSourceFiles": 12,
@@ -19,7 +17,7 @@
     "totalFiles": 28
   },
   "repositoryPromotion": {
-    "status": "remote-verified-source-and-runtime-review-pending-evidence-preservation",
+    "status": "remote-verified-production-complete",
     "runtimeFiles": 12,
     "alphaSourceFiles": 12,
     "contactSheets": 2,

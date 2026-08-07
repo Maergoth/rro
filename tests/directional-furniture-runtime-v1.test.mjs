@@ -82,11 +82,11 @@ test("the runtime contract covers every source-accepted directional set without 
   assert.equal(contract.capability.runtimeProjection, "elevated-orthographic-isometric-grid");
   assert.equal(contract.capability.projectionIntegrated, true);
   assert.equal(contract.capability.projectionAligned, true);
-  assert.equal(contract.capability.runtimeCompositeAccepted, false);
+  assert.equal(contract.capability.runtimeCompositeAccepted, true);
   assert.equal(contract.capability.productionComplete, false);
   assert.deepEqual(contract.runtimeCompositeAcceptedAssetIds, contract.acceptedDirectionalAssetIds.filter((assetId) => !contract.runtimeCompositePendingAssetIds.includes(assetId)));
   assert.deepEqual(contract.runtimeCompositeBlockedAssetIds, []);
-  assert.deepEqual(contract.runtimeCompositePendingAssetIds, ["furniture-dry-storage-rack", "furniture-prep-table-refrigerated", "furniture-walkin-rack"]);
+  assert.deepEqual(contract.runtimeCompositePendingAssetIds, []);
   assert.deepEqual(
     [...contract.runtimeCompositeAcceptedAssetIds, ...contract.runtimeCompositeBlockedAssetIds, ...contract.runtimeCompositePendingAssetIds].sort(),
     [...contract.acceptedDirectionalAssetIds].sort(),
@@ -96,7 +96,7 @@ test("the runtime contract covers every source-accepted directional set without 
     ...contract.runtimeCompositeBlockedAssetIds,
     ...contract.runtimeCompositePendingAssetIds,
   ]).size, contract.acceptedDirectionalAssetIds.length, "runtime states must be pairwise disjoint");
-  assert.match(contract.capability.remainingVisualGate, /twenty-eight previously reviewed.*refrigerated prep table.*walk-in storage rack.*dry-storage rack.*198 catalog identities/i);
+  assert.match(contract.capability.remainingVisualGate, /all thirty-one present directional sets.*198 catalog identities/i);
   assert.match(validator, /runtimeCompositeAccepted must be true iff runtime acceptance exactly covers every source-accepted directional set with no blocked or pending identities/);
 });
 

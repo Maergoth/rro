@@ -8,7 +8,7 @@ import { inflateSync } from "node:zlib";
 const ROOT = resolve(import.meta.dirname, "..");
 const QA_ROOT = "planning/art-qa/furniture-core-directional-010";
 const QA_PATH = `${QA_ROOT}/qa.json`;
-const EXPECTED_QA_SHA256 = "11aa439c4d1755a4e28d6888dd0c786bfd2309d94f80757d8ff4febc37c2d6ed";
+const EXPECTED_QA_SHA256 = "36baa714480b45a90b5940fd9925aaf3e0b858172139333850de0695f4ea7ea0";
 const DIRECTIONS = ["north", "east", "south", "west"];
 const ASSETS = ["furniture-prep-table-refrigerated", "furniture-walkin-rack", "furniture-dry-storage-rack"];
 const PLACEMENT = { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" };
@@ -155,7 +155,7 @@ function visibleMagentaFringePixels(image) {
   return count;
 }
 
-test("furniture directional batch 010 has exact remote source provenance and pending review-evidence preservation", () => {
+test("furniture directional batch 010 has exact remote source and runtime-review provenance", () => {
   const qa = json(QA_PATH);
   const artPass = json("planning/art-pass-v2.json");
   const batch = artPass.batches.find((entry) => entry.id === "furniture-core-directional-010");
@@ -163,9 +163,9 @@ test("furniture directional batch 010 has exact remote source provenance and pen
   assert.equal(qa.batchId, "furniture-core-directional-010");
   assert.deepEqual(qa.assets, ASSETS);
   assert.equal(qa.artReviewStatus, "accepted");
-  assert.equal(qa.productionComplete, false);
+  assert.equal(qa.productionComplete, true);
   assert.deepEqual(qa.repositoryPromotion, {
-    status: "remote-verified-source-and-runtime-review-pending-evidence-preservation",
+    status: "remote-verified-production-complete",
     runtimeFiles: 12,
     alphaSourceFiles: 12,
     contactSheets: 2,
@@ -193,13 +193,12 @@ test("furniture directional batch 010 has exact remote source provenance and pen
     artifactSha256: "62bfb9f325aedb59180ccaef9d5483007ed6926c364860b4901dadf850314913",
     qaEvidence: "planning/art-qa/furniture-core-directional-010/contact-627-dark.png",
     qaManifest: QA_PATH,
-    notes: "Refrigerated prep table, walk-in storage rack, and dry-storage rack are source-accepted, remotely preserved, and visually accepted in native four-rotation gameplay review attempt 008. That review evidence is committed locally but does not earn production-complete credit until its own exact GitHub preservation and green hosted CI.",
+    notes: "Refrigerated prep table, walk-in storage rack, and dry-storage rack are source-accepted, remotely preserved, visually accepted in native four-rotation gameplay review attempt 008, and backed by an exact remote review-evidence checkpoint with green hosted CI.",
   });
   assert.deepEqual(qa.promotionScope, {
     runtimeFiles: 12, alphaSourceFiles: 12, contactSheets: 2, provenanceDocuments: 2, totalFiles: 28,
   });
-  assert.equal(qa.productionCompletionBlockers.length, 1);
-  assert.match(qa.productionCompletionBlockers[0], /review evidence.*GitHub preservation.*green hosted Windows and Ubuntu CI/i);
+  assert.deepEqual(qa.productionCompletionBlockers, []);
   assert.doesNotMatch(JSON.stringify(qa), /\/tmp\/|\/workspace\//, "durable QA must not reference transient storage");
   assert.equal(fileSha256(qa.source.promptLog), qa.source.promptLogSha256);
   assert.equal(qa.source.chromaHelperSha256, "3f7b9b14ad5c90f37618bc1c16a039a2076abca12ddc41b3ae470e2b1cad6c0e");

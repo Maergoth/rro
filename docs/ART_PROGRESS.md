@@ -12,15 +12,15 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 - Branch: `agent/complete-production-art`
 - Draft PR: https://github.com/Maergoth/rro/pull/2
-- Last verified remote head before this ledger check-in: `0a6e36b40dada458e9f3c2af70d73f58477f494b`
-- Verified tree: `90d89bc60d20bb2fe287e2e03320c371d71ddc29`
-- CI: https://github.com/Maergoth/rro/actions/runs/31161334873
+- Last verified remote head before this ledger check-in: `ce1477eb4a47d06158d01190c53a4cf9633050c1`
+- Verified tree: `a917cc9e1394ec85658d7183acae59215226e756`
+- CI: https://github.com/Maergoth/rro/actions/runs/31181870397
 
 ## Launch coverage
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
-| Furniture directional sets | 229 | 31 | 31 | 31 | 0 |
+| Furniture directional sets | 229 | 31 | 31 | 31 | 31 |
 | Equipment inventory icons | 45 | 45 | 45 | 45 | 45 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
@@ -34,8 +34,8 @@ Only the final state is production-complete. Existing files, historical narrativ
 | Equipment attachment body-fits | 62 | 0 | 0 | 0 | 0 |
 | Activity → animation bindings | 89 | 0 | 0 | 0 | 0 |
 
-45 equipment icons and 0 furniture directional sets are production-complete because their exact reviewed bytes are visually accepted, runtime-bound, remotely verified, and CI-green. Character art and the other missing lanes remain explicit below.
-Directional furniture texture selection is yes and projection alignment is yes. Latest native review `runtime-isometric-integration-001-attempt-008` accepted 31/31 present sets; its durable review checkpoint is remote-verified: no. No source-accepted directional sets remain blocked by the latest native gameplay review. `furniture-prep-table-refrigerated`, `furniture-walkin-rack`, `furniture-dry-storage-rack` pass the latest native four-rotation gameplay review but remain outside the runtime-accepted partition until that exact review evidence is remotely preserved with green hosted CI.
+45 equipment icons and 31 furniture directional sets are production-complete because their exact reviewed bytes are visually accepted, runtime-bound, remotely verified, and CI-green. Character art and the other missing lanes remain explicit below.
+Directional furniture texture selection is yes and projection alignment is yes. Latest native review `runtime-isometric-integration-001-attempt-008` accepted 31/31 present sets; its durable review checkpoint is remote-verified: yes. No source-accepted directional sets remain blocked by the latest native gameplay review. No source-accepted directional sets are pending their first native four-rotation gameplay composite.
 
 ## Character truth
 
@@ -157,7 +157,6 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 ## Contract gaps blocking a truthful 100% denominator
 
 - Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.
-- Resolve the latest native directional-furniture review for furniture-dry-storage-rack, furniture-prep-table-refrigerated, furniture-walkin-rack before those source-accepted sets receive production credit.
 - Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.
 - Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete.
 
@@ -183,9 +182,9 @@ This JSON block is part of this same authoritative document and contains every c
   "durableBaseline": {
     "branch": "agent/complete-production-art",
     "pullRequest": "https://github.com/Maergoth/rro/pull/2",
-    "commit": "0a6e36b40dada458e9f3c2af70d73f58477f494b",
-    "tree": "90d89bc60d20bb2fe287e2e03320c371d71ddc29",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/31161334873"
+    "commit": "ce1477eb4a47d06158d01190c53a4cf9633050c1",
+    "tree": "a917cc9e1394ec85658d7183acae59215226e756",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31181870397"
   },
   "completionPipeline": [
     "generated",
@@ -206,9 +205,9 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeProjection": "elevated-orthographic-isometric-grid",
       "projectionIntegrated": true,
       "projectionAligned": true,
-      "runtimeCompositeAccepted": false,
+      "runtimeCompositeAccepted": true,
       "productionComplete": false,
-      "remainingVisualGate": "The twenty-eight previously reviewed sets remain accepted. Refrigerated prep table, walk-in storage rack, and dry-storage rack require exact native four-rotation gameplay review and remote preservation; the other 198 catalog identities still require source acceptance, runtime binding, review, and green hosted CI.",
+      "remainingVisualGate": "All thirty-one present directional sets are accepted in exact native four-rotation gameplay review. The other 198 catalog identities still require source acceptance, runtime binding, remote preservation, gameplay review, and green hosted CI.",
       "acceptedDirectionalAssetIds": [
         "banquette",
         "booth",
@@ -250,14 +249,17 @@ This JSON block is part of this same authoritative document and contains every c
         "furniture-banquette-section",
         "furniture-commercial-chair",
         "furniture-convection-oven",
+        "furniture-dry-storage-rack",
         "furniture-expo-pass-heated",
         "furniture-host-stand-pro",
         "furniture-oak-two-top",
         "furniture-plancha-commercial",
         "furniture-pos-terminal",
         "furniture-premium-chair",
+        "furniture-prep-table-refrigerated",
         "furniture-server-station-pro",
         "furniture-six-burner-range",
+        "furniture-walkin-rack",
         "furniture-walnut-four-top",
         "host-stand",
         "local-art",
@@ -273,12 +275,8 @@ This JSON block is part of this same authoritative document and contains every c
         "table-two"
       ],
       "runtimeCompositeBlockedAssetIds": [],
-      "runtimeCompositePendingAssetIds": [
-        "furniture-dry-storage-rack",
-        "furniture-prep-table-refrigerated",
-        "furniture-walkin-rack"
-      ],
-      "runtimeReviewRemoteVerified": false
+      "runtimeCompositePendingAssetIds": [],
+      "runtimeReviewRemoteVerified": true
     }
   },
   "summaries": [
@@ -288,7 +286,7 @@ This JSON block is part of this same authoritative document and contains every c
       "present": 31,
       "sourceAccepted": 31,
       "remoteVerified": 31,
-      "productionComplete": 0
+      "productionComplete": 31
     },
     {
       "lane": "Equipment inventory icons",
@@ -441,8 +439,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "table-four",
@@ -497,8 +495,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "booth",
@@ -553,8 +551,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "banquette",
@@ -609,8 +607,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "host-stand",
@@ -665,8 +663,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "service-station",
@@ -721,8 +719,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "espresso",
@@ -777,8 +775,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "range",
@@ -833,8 +831,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "prep",
@@ -889,8 +887,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "pass",
@@ -945,8 +943,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "dish-machine",
@@ -1001,8 +999,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "mop-sink",
@@ -1057,8 +1055,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "recycling",
@@ -1113,8 +1111,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "pendants",
@@ -1169,8 +1167,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "plants",
@@ -1228,8 +1226,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "local-art",
@@ -1287,8 +1285,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "oak-two-top",
@@ -1343,8 +1341,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "walnut-four-top",
@@ -1399,8 +1397,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "banquette-section",
@@ -1455,8 +1453,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "commercial-chair",
@@ -1511,8 +1509,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "premium-chair",
@@ -1567,8 +1565,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "host-stand-pro",
@@ -1623,8 +1621,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "server-station-pro",
@@ -1679,8 +1677,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "pos-terminal",
@@ -1735,8 +1733,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "expo-pass-heated",
@@ -1791,8 +1789,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "six-burner-range",
@@ -1847,8 +1845,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "plancha-commercial",
@@ -1903,8 +1901,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "convection-oven",
@@ -1959,8 +1957,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
       "runtimeBound": true,
-      "productionComplete": false,
-      "status": "runtime_accepted_review_preservation_pending"
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "prep-table-refrigerated",
@@ -2011,12 +2009,12 @@ This JSON block is part of this same authoritative document and contains every c
       "placementDeclared": true,
       "sourceAccepted": true,
       "directionalSelectionBound": true,
-      "runtimeCompositeAccepted": false,
+      "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": true,
-      "runtimeBound": false,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "runtimeCompositePending": false,
+      "runtimeBound": true,
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "walkin-rack",
@@ -2067,12 +2065,12 @@ This JSON block is part of this same authoritative document and contains every c
       "placementDeclared": true,
       "sourceAccepted": true,
       "directionalSelectionBound": true,
-      "runtimeCompositeAccepted": false,
+      "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": true,
-      "runtimeBound": false,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "runtimeCompositePending": false,
+      "runtimeBound": true,
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "dry-storage-rack",
@@ -2123,12 +2121,12 @@ This JSON block is part of this same authoritative document and contains every c
       "placementDeclared": true,
       "sourceAccepted": true,
       "directionalSelectionBound": true,
-      "runtimeCompositeAccepted": false,
+      "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": true,
-      "runtimeBound": false,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "runtimeCompositePending": false,
+      "runtimeBound": true,
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "chemical-cabinet",
@@ -16139,7 +16137,7 @@ This JSON block is part of this same authoritative document and contains every c
       "artifactSha256": "62bfb9f325aedb59180ccaef9d5483007ed6926c364860b4901dadf850314913",
       "qaEvidence": "planning/art-qa/furniture-core-directional-010/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-010/qa.json",
-      "notes": "Refrigerated prep table, walk-in storage rack, and dry-storage rack are source-accepted, remotely preserved, and visually accepted in native four-rotation gameplay review attempt 008. That review evidence is committed locally but does not earn production-complete credit until its own exact GitHub preservation and green hosted CI.",
+      "notes": "Refrigerated prep table, walk-in storage rack, and dry-storage rack are source-accepted, remotely preserved, visually accepted in native four-rotation gameplay review attempt 008, and backed by an exact remote review-evidence checkpoint with green hosted CI.",
       "qaEvidencePresent": true,
       "remoteVerified": true
     },
@@ -17021,10 +17019,14 @@ This JSON block is part of this same authoritative document and contains every c
         "table-two"
       ],
       "rejectedAssetIds": [],
-      "reviewPreservation": null,
+      "reviewPreservation": {
+        "commit": "ce1477eb4a47d06158d01190c53a4cf9633050c1",
+        "tree": "a917cc9e1394ec85658d7183acae59215226e756",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31181870397"
+      },
       "productionComplete": false,
       "evidencePresent": true,
-      "reviewRemoteVerified": false
+      "reviewRemoteVerified": true
     }
   ],
   "preservedReferences": [
@@ -17066,7 +17068,6 @@ This JSON block is part of this same authoritative document and contains every c
   ],
   "contractGaps": [
     "Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.",
-    "Resolve the latest native directional-furniture review for furniture-dry-storage-rack, furniture-prep-table-refrigerated, furniture-walkin-rack before those source-accepted sets receive production credit.",
     "Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.",
     "Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete."
   ]
