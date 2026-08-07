@@ -20,7 +20,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
-| Furniture directional sets | 229 | 28 | 28 | 28 | 28 |
+| Furniture directional sets | 229 | 31 | 31 | 28 | 28 |
 | Equipment inventory icons | 45 | 45 | 45 | 45 | 45 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
@@ -35,7 +35,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 | Activity → animation bindings | 89 | 0 | 0 | 0 | 0 |
 
 45 equipment icons and 28 furniture directional sets are production-complete because their exact reviewed bytes are visually accepted, runtime-bound, remotely verified, and CI-green. Character art and the other missing lanes remain explicit below.
-Directional furniture texture selection is yes and projection alignment is yes. Latest native review `runtime-isometric-integration-001-attempt-007` accepted 28/28 present sets; its durable review checkpoint is remote-verified: yes. No source-accepted directional sets remain blocked by the latest native gameplay review. No source-accepted directional sets are pending their first native four-rotation gameplay composite.
+Directional furniture texture selection is yes and projection alignment is yes. Latest native review `runtime-isometric-integration-001-attempt-007` accepted 28/31 present sets; its durable review checkpoint is remote-verified: yes. No source-accepted directional sets remain blocked by the latest native gameplay review. `furniture-prep-table-refrigerated`, `furniture-walkin-rack`, `furniture-dry-storage-rack` are source-accepted but pending their first native four-rotation gameplay composite; 3/3 are also local-only pending an immutable remote checkpoint and green hosted CI.
 
 ## Character truth
 
@@ -105,17 +105,17 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 | furniture-core-directional-006 | 28 | passed | passed-native-gameplay-composite-attempt-007 | `185ca50` | planning/art-qa/furniture-core-directional-006/contact-627-dark.png |
 | furniture-core-directional-007 | 28 | passed | passed-native-gameplay-composite-attempt-003 | `98e479e` | planning/art-qa/furniture-core-directional-007/contact-627-dark.png |
 
+## Accepted locally, remote checkpoint pending
+
+These batches have passed source/composite QA but deliberately do not count as remotely verified or production-complete until their immutable GitHub commit and hosted CI are recorded.
+
+| Batch | Files | Source QA | Runtime/composite QA | Evidence |
+|---|---:|---|---|---|
+| furniture-core-directional-010 | 28 | passed | pending-native-gameplay-composite | planning/art-qa/furniture-core-directional-010/contact-627-dark.png |
+
 ## Missing furniture directional sets
 
-28 of 229 elevated four-direction sets are present. The 20 attractive overhead singles are preserved as references but do not satisfy this camera contract.
-
-### Kitchen — 43 missing
-
-`furniture-prep-table-refrigerated`, `furniture-essential-restaurant-range`, `furniture-craftsman-restaurant-range`, `furniture-endurance-restaurant-range`, `furniture-hospitality-restaurant-range`, `furniture-precision-restaurant-range`, `furniture-reclaimed-restaurant-range`, `furniture-essential-convection-oven-line`, `furniture-craftsman-convection-oven-line`, `furniture-endurance-convection-oven-line`, `furniture-hospitality-convection-oven-line`, `furniture-precision-convection-oven-line`, `furniture-reclaimed-convection-oven-line`, `furniture-essential-plancha-griddle`, `furniture-craftsman-plancha-griddle`, `furniture-endurance-plancha-griddle`, `furniture-hospitality-plancha-griddle`, `furniture-precision-plancha-griddle`, `furniture-reclaimed-plancha-griddle`, `furniture-essential-fry-station`, `furniture-craftsman-fry-station`, `furniture-endurance-fry-station`, `furniture-hospitality-fry-station`, `furniture-precision-fry-station`, `furniture-reclaimed-fry-station`, `furniture-essential-prep-counter`, `furniture-craftsman-prep-counter`, `furniture-endurance-prep-counter`, `furniture-hospitality-prep-counter`, `furniture-precision-prep-counter`, `furniture-reclaimed-prep-counter`, `furniture-essential-expo-pass`, `furniture-craftsman-expo-pass`, `furniture-endurance-expo-pass`, `furniture-hospitality-expo-pass`, `furniture-precision-expo-pass`, `furniture-reclaimed-expo-pass`, `furniture-essential-combi-oven`, `furniture-craftsman-combi-oven`, `furniture-endurance-combi-oven`, `furniture-hospitality-combi-oven`, `furniture-precision-combi-oven`, `furniture-reclaimed-combi-oven`
-
-### Storage — 20 missing
-
-`furniture-walkin-rack`, `furniture-dry-storage-rack`, `furniture-essential-dry-rack-line`, `furniture-craftsman-dry-rack-line`, `furniture-endurance-dry-rack-line`, `furniture-hospitality-dry-rack-line`, `furniture-precision-dry-rack-line`, `furniture-reclaimed-dry-rack-line`, `furniture-essential-cold-rack`, `furniture-craftsman-cold-rack`, `furniture-endurance-cold-rack`, `furniture-hospitality-cold-rack`, `furniture-precision-cold-rack`, `furniture-reclaimed-cold-rack`, `furniture-essential-linen-cabinet`, `furniture-craftsman-linen-cabinet`, `furniture-endurance-linen-cabinet`, `furniture-hospitality-linen-cabinet`, `furniture-precision-linen-cabinet`, `furniture-reclaimed-linen-cabinet`
+31 of 229 elevated four-direction sets are present. The 20 attractive overhead singles are preserved as references but do not satisfy this camera contract.
 
 ### Utility — 36 missing
 
@@ -137,6 +137,14 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 
 `furniture-essential-cafe-two-top`, `furniture-craftsman-cafe-two-top`, `furniture-endurance-cafe-two-top`, `furniture-hospitality-cafe-two-top`, `furniture-precision-cafe-two-top`, `furniture-reclaimed-cafe-two-top`, `furniture-essential-family-four-top`, `furniture-craftsman-family-four-top`, `furniture-endurance-family-four-top`, `furniture-hospitality-family-four-top`, `furniture-precision-family-four-top`, `furniture-reclaimed-family-four-top`, `furniture-essential-communal-table`, `furniture-craftsman-communal-table`, `furniture-endurance-communal-table`, `furniture-hospitality-communal-table`, `furniture-precision-communal-table`, `furniture-reclaimed-communal-table`, `furniture-essential-dining-chair`, `furniture-craftsman-dining-chair`, `furniture-endurance-dining-chair`, `furniture-hospitality-dining-chair`, `furniture-precision-dining-chair`, `furniture-reclaimed-dining-chair`, `furniture-essential-dining-booth`, `furniture-craftsman-dining-booth`, `furniture-endurance-dining-booth`, `furniture-hospitality-dining-booth`, `furniture-precision-dining-booth`, `furniture-reclaimed-dining-booth`, `summer-patio-two`
 
+### Kitchen — 42 missing
+
+`furniture-essential-restaurant-range`, `furniture-craftsman-restaurant-range`, `furniture-endurance-restaurant-range`, `furniture-hospitality-restaurant-range`, `furniture-precision-restaurant-range`, `furniture-reclaimed-restaurant-range`, `furniture-essential-convection-oven-line`, `furniture-craftsman-convection-oven-line`, `furniture-endurance-convection-oven-line`, `furniture-hospitality-convection-oven-line`, `furniture-precision-convection-oven-line`, `furniture-reclaimed-convection-oven-line`, `furniture-essential-plancha-griddle`, `furniture-craftsman-plancha-griddle`, `furniture-endurance-plancha-griddle`, `furniture-hospitality-plancha-griddle`, `furniture-precision-plancha-griddle`, `furniture-reclaimed-plancha-griddle`, `furniture-essential-fry-station`, `furniture-craftsman-fry-station`, `furniture-endurance-fry-station`, `furniture-hospitality-fry-station`, `furniture-precision-fry-station`, `furniture-reclaimed-fry-station`, `furniture-essential-prep-counter`, `furniture-craftsman-prep-counter`, `furniture-endurance-prep-counter`, `furniture-hospitality-prep-counter`, `furniture-precision-prep-counter`, `furniture-reclaimed-prep-counter`, `furniture-essential-expo-pass`, `furniture-craftsman-expo-pass`, `furniture-endurance-expo-pass`, `furniture-hospitality-expo-pass`, `furniture-precision-expo-pass`, `furniture-reclaimed-expo-pass`, `furniture-essential-combi-oven`, `furniture-craftsman-combi-oven`, `furniture-endurance-combi-oven`, `furniture-hospitality-combi-oven`, `furniture-precision-combi-oven`, `furniture-reclaimed-combi-oven`
+
+### Storage — 18 missing
+
+`furniture-essential-dry-rack-line`, `furniture-craftsman-dry-rack-line`, `furniture-endurance-dry-rack-line`, `furniture-hospitality-dry-rack-line`, `furniture-precision-dry-rack-line`, `furniture-reclaimed-dry-rack-line`, `furniture-essential-cold-rack`, `furniture-craftsman-cold-rack`, `furniture-endurance-cold-rack`, `furniture-hospitality-cold-rack`, `furniture-precision-cold-rack`, `furniture-reclaimed-cold-rack`, `furniture-essential-linen-cabinet`, `furniture-craftsman-linen-cabinet`, `furniture-endurance-linen-cabinet`, `furniture-hospitality-linen-cabinet`, `furniture-precision-linen-cabinet`, `furniture-reclaimed-linen-cabinet`
+
 ## Other exact incomplete catalogs
 
 - Equipment icons (0): none
@@ -155,6 +163,7 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 ## Contract gaps blocking a truthful 100% denominator
 
 - Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.
+- Resolve the latest native directional-furniture review for furniture-dry-storage-rack, furniture-prep-table-refrigerated, furniture-walkin-rack before those source-accepted sets receive production credit.
 - Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.
 - Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete.
 
@@ -203,9 +212,9 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeProjection": "elevated-orthographic-isometric-grid",
       "projectionIntegrated": true,
       "projectionAligned": true,
-      "runtimeCompositeAccepted": true,
+      "runtimeCompositeAccepted": false,
       "productionComplete": false,
-      "remainingVisualGate": "No runtime visual blocker remains for the twenty-eight present source-accepted directional furniture sets. The other 201 catalog identities still require source acceptance, exact remote preservation, native gameplay-scale review, and green hosted CI.",
+      "remainingVisualGate": "The twenty-eight previously reviewed sets remain accepted. Refrigerated prep table, walk-in storage rack, and dry-storage rack require exact native four-rotation gameplay review and remote preservation; the other 198 catalog identities still require source acceptance, runtime binding, review, and green hosted CI.",
       "acceptedDirectionalAssetIds": [
         "banquette",
         "booth",
@@ -214,14 +223,17 @@ This JSON block is part of this same authoritative document and contains every c
         "furniture-banquette-section",
         "furniture-commercial-chair",
         "furniture-convection-oven",
+        "furniture-dry-storage-rack",
         "furniture-expo-pass-heated",
         "furniture-host-stand-pro",
         "furniture-oak-two-top",
         "furniture-plancha-commercial",
         "furniture-pos-terminal",
         "furniture-premium-chair",
+        "furniture-prep-table-refrigerated",
         "furniture-server-station-pro",
         "furniture-six-burner-range",
+        "furniture-walkin-rack",
         "furniture-walnut-four-top",
         "host-stand",
         "local-art",
@@ -267,7 +279,11 @@ This JSON block is part of this same authoritative document and contains every c
         "table-two"
       ],
       "runtimeCompositeBlockedAssetIds": [],
-      "runtimeCompositePendingAssetIds": [],
+      "runtimeCompositePendingAssetIds": [
+        "furniture-dry-storage-rack",
+        "furniture-prep-table-refrigerated",
+        "furniture-walkin-rack"
+      ],
       "runtimeReviewRemoteVerified": true
     }
   },
@@ -275,8 +291,8 @@ This JSON block is part of this same authoritative document and contains every c
     {
       "lane": "Furniture directional sets",
       "required": 229,
-      "present": 28,
-      "sourceAccepted": 28,
+      "present": 31,
+      "sourceAccepted": 31,
       "remoteVerified": 28,
       "productionComplete": 28
     },
@@ -1967,42 +1983,46 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-prep-table-refrigerated/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "ccf70067ddf6b22a68a6c41631ca1309fb345ccf4ecd17aba6fb8bf9a019ecd0"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-prep-table-refrigerated/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "f6635d477516610c3070239b4f82e7d7841403dfcaaa60a504843f5056c11220"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-prep-table-refrigerated/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "46d94ae7d2920b2e288c4cf0ad01bc688bdae43ac7ca8b79c0ed9195817d1cc4"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-prep-table-refrigerated/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "7030d1df14e0a6ef10a75466f4b74d354c82851e6f62a23bf68bd2c6ff1af5ef"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "furniture-core-directional-010",
+      "review": "passed",
+      "runtimeQa": "pending-native-gameplay-composite",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "placement": null,
-      "placementDeclared": false,
-      "sourceAccepted": false,
-      "directionalSelectionBound": false,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-010/contact-627-dark.png",
+      "qaEvidencePresent": true,
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "placementDeclared": true,
+      "sourceAccepted": true,
+      "directionalSelectionBound": true,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": false,
+      "runtimeCompositePending": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "walkin-rack",
@@ -2019,42 +2039,46 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-walkin-rack/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "5c6ee08ce63045f863d197dec9f6cea84a6889ffa9d55e1011fe9945324418d3"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-walkin-rack/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "a5ddd48a57e776b3f294a45d5cba66a5828074ca5a4bef6114f69144186234a8"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-walkin-rack/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "75973f5d8f0937299ad7b5735c393fd245c29ab8441d65354dc92a5de540b0e8"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-walkin-rack/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "b659a3eb491b79d9cfcd7791347f63af3abbfa54689a12bdf12c4a93fd5f4554"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "furniture-core-directional-010",
+      "review": "passed",
+      "runtimeQa": "pending-native-gameplay-composite",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "placement": null,
-      "placementDeclared": false,
-      "sourceAccepted": false,
-      "directionalSelectionBound": false,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-010/contact-627-dark.png",
+      "qaEvidencePresent": true,
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "placementDeclared": true,
+      "sourceAccepted": true,
+      "directionalSelectionBound": true,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": false,
+      "runtimeCompositePending": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "dry-storage-rack",
@@ -2071,42 +2095,46 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-dry-storage-rack/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "d6050027e9154ff31681cac09b3ab52cb0a6fb0a7c05c9dafdc1d737ffc4e370"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-dry-storage-rack/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "ddc22db377de6108a5ce06fca49a75f124630d90438a568f9cee0c4c45f4f179"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-dry-storage-rack/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "2467b0a953b6fc5c5a697e15bdcb17b5209b2bfa5a4b575a56fb29be9b02ebdb"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-dry-storage-rack/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "d88cc6670a047361fc63252efa1267595518b42784be45c17406923bfb9cf994"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "furniture-core-directional-010",
+      "review": "passed",
+      "runtimeQa": "pending-native-gameplay-composite",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "placement": null,
-      "placementDeclared": false,
-      "sourceAccepted": false,
-      "directionalSelectionBound": false,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-010/contact-627-dark.png",
+      "qaEvidencePresent": true,
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "placementDeclared": true,
+      "sourceAccepted": true,
+      "directionalSelectionBound": true,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": false,
+      "runtimeCompositePending": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "chemical-cabinet",
@@ -16543,7 +16571,26 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": true
     }
   ],
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "furniture-core-directional-010",
+      "assets": [
+        "furniture-prep-table-refrigerated",
+        "furniture-walkin-rack",
+        "furniture-dry-storage-rack"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "pending-native-gameplay-composite",
+      "sourcePromptMode": "built-in image generation; three separately prompted rigid elevated-isometric four-direction prep/storage atlases with two semantic corrections, strict chroma remediation, common-pivot normalization, and full/gameplay-scale contact review",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-010/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-010/qa.json",
+      "notes": "Refrigerated prep table, walk-in storage rack, and dry-storage rack are source-accepted and locally runtime-bound. Exact GitHub preservation, hosted CI, and native four-rotation gameplay-composite review remain pending.",
+      "qaEvidencePresent": true,
+      "remoteVerified": false,
+      "preservationPending": true
+    }
+  ],
   "runtimeQaAttempts": [
     {
       "id": "runtime-isometric-integration-001-attempt-001",
@@ -16962,6 +17009,7 @@ This JSON block is part of this same authoritative document and contains every c
   ],
   "contractGaps": [
     "Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.",
+    "Resolve the latest native directional-furniture review for furniture-dry-storage-rack, furniture-prep-table-refrigerated, furniture-walkin-rack before those source-accepted sets receive production credit.",
     "Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.",
     "Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete."
   ]

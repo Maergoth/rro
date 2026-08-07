@@ -561,6 +561,11 @@
       "kitchen",
       "asset:furniture-prep-table-refrigerated"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-prep-table-refrigerated",
     "upkeepCents": 1699,
@@ -599,6 +604,11 @@
       "storage",
       "asset:furniture-walkin-rack"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-walkin-rack",
     "upkeepCents": 473,
@@ -637,6 +647,11 @@
       "storage",
       "asset:furniture-dry-storage-rack"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-dry-storage-rack",
     "upkeepCents": 322,

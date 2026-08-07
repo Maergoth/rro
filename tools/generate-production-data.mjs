@@ -285,6 +285,9 @@ const acceptedFurniturePlacements = {
   "six-burner-range": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
   "plancha-commercial": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
   "convection-oven": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "prep-table-refrigerated": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "walkin-rack": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "dry-storage-rack": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
 };
 
 function operationalStrength(stats) {

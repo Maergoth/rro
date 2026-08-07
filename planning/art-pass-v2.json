@@ -30,7 +30,7 @@
     ]
   },
   "coverage": {
-    "furniture": { "catalogTotal": 229, "acceptedSets": 28, "acceptedDirectionalFiles": 112, "runtimeCompositeAcceptedSets": 28 },
+    "furniture": { "catalogTotal": 229, "acceptedSets": 31, "acceptedDirectionalFiles": 124, "runtimeCompositeAcceptedSets": 28 },
     "equipmentIcons": { "catalogTotal": 45, "accepted": 45 },
     "characterSystem": {
       "status": "in_progress",
@@ -321,7 +321,23 @@
       "productionComplete": false
     }
   ],
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "furniture-core-directional-010",
+      "assets": [
+        "furniture-prep-table-refrigerated",
+        "furniture-walkin-rack",
+        "furniture-dry-storage-rack"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "pending-native-gameplay-composite",
+      "sourcePromptMode": "built-in image generation; three separately prompted rigid elevated-isometric four-direction prep/storage atlases with two semantic corrections, strict chroma remediation, common-pivot normalization, and full/gameplay-scale contact review",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-010/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-010/qa.json",
+      "notes": "Refrigerated prep table, walk-in storage rack, and dry-storage rack are source-accepted and locally runtime-bound. Exact GitHub preservation, hosted CI, and native four-rotation gameplay-composite review remain pending."
+    }
+  ],
   "batches": [
     {
       "id": "furniture-core-directional-009",

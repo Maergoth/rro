@@ -6,16 +6,16 @@ import test from "node:test";
 import { inflateSync } from "node:zlib";
 
 const ROOT = resolve(import.meta.dirname, "..");
-const QA_ROOT = "planning/art-qa/furniture-core-directional-009";
+const QA_ROOT = "planning/art-qa/furniture-core-directional-010";
 const QA_PATH = `${QA_ROOT}/qa.json`;
-const EXPECTED_QA_SHA256 = "42f4cca63d7e15abbdd208d70f89e3da413e698611b0e9fdeacb079c32d007c2";
+const EXPECTED_QA_SHA256 = "5b1134af8dd1eb9287ee18f22f67e4fc9e585ef635c42fd5a0ecd3cfa9aa5245";
 const DIRECTIONS = ["north", "east", "south", "west"];
-const ASSETS = ["furniture-expo-pass-heated", "furniture-plancha-commercial", "furniture-convection-oven"];
+const ASSETS = ["furniture-prep-table-refrigerated", "furniture-walkin-rack", "furniture-dry-storage-rack"];
 const PLACEMENT = { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" };
 const EXPECTED_CATALOG = {
-  "expo-pass-heated": { name: "Heated Expo Pass", category: "Kitchen", style: "Modern", width: 4, height: 2 },
-  "plancha-commercial": { name: "Commercial Plancha", category: "Kitchen", style: "Modern", width: 3, height: 2 },
-  "convection-oven": { name: "Convection Oven", category: "Kitchen", style: "Modern", width: 3, height: 3 },
+  "prep-table-refrigerated": { name: "Refrigerated Prep Table", category: "Kitchen", style: "Modern", width: 4, height: 2 },
+  "walkin-rack": { name: "Walk-In Storage Rack", category: "Storage", style: "Modern", width: 3, height: 1 },
+  "dry-storage-rack": { name: "Dry Storage Rack", category: "Storage", style: "Modern", width: 3, height: 1 },
 };
 const PNG_SIGNATURE = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
 
@@ -155,85 +155,61 @@ function visibleMagentaFringePixels(image) {
   return count;
 }
 
-test("furniture directional batch 009 has exact durable remote and runtime provenance", () => {
+test("furniture directional batch 010 has exact durable local provenance without inflating runtime acceptance", () => {
   const qa = json(QA_PATH);
   const artPass = json("planning/art-pass-v2.json");
-  const batch = artPass.batches.find((entry) => entry.id === "furniture-core-directional-009");
+  const batch = artPass.pendingBatches.find((entry) => entry.id === "furniture-core-directional-010");
   assert.equal(fileSha256(QA_PATH), EXPECTED_QA_SHA256);
-  assert.equal(qa.batchId, "furniture-core-directional-009");
+  assert.equal(qa.batchId, "furniture-core-directional-010");
   assert.deepEqual(qa.assets, ASSETS);
   assert.equal(qa.artReviewStatus, "accepted");
-  assert.equal(qa.productionComplete, true);
+  assert.equal(qa.productionComplete, false);
   assert.deepEqual(qa.repositoryPromotion, {
-    status: "remote-verified",
+    status: "local-verified-pending-remote",
     runtimeFiles: 12,
     alphaSourceFiles: 12,
     contactSheets: 2,
     provenanceDocuments: 2,
     totalFiles: 28,
   });
-  assert.deepEqual(qa.remotePreservation, {
-    commit: "447a203e8f6d2dc1f014a49c3dc1f0b57b442e11",
-    tree: "262ecc0c84e6a79dc1194d38de6cd8aa0dcd3a3f",
-    ci: "https://github.com/Maergoth/rro/actions/runs/31015657101",
-    artifactId: 8934364142,
-    artifactSha256: "529ae6a0791f38c0fb9d9ba1522eb4c1a3044e19c81dcdf2d453ab202da8d7ce",
-  });
+  assert.equal(qa.remotePreservation, null);
   assert.deepEqual(batch, {
-    id: "furniture-core-directional-009",
+    id: "furniture-core-directional-010",
     assets: ASSETS,
     files: 28,
     qa: "passed",
-    runtimeQa: "passed-native-gameplay-composite-attempt-007",
-    sourcePromptMode: "built-in image generation; three separately prompted rigid elevated-isometric four-direction kitchen equipment atlases with rejected attempts quarantined, chroma removal, common-pivot normalization, and full/gameplay-scale contact review",
-    remoteCommit: "447a203e8f6d2dc1f014a49c3dc1f0b57b442e11",
-    remoteTree: "262ecc0c84e6a79dc1194d38de6cd8aa0dcd3a3f",
-    ci: "https://github.com/Maergoth/rro/actions/runs/31015657101",
-    artifactId: 8934364142,
-    artifactSha256: "529ae6a0791f38c0fb9d9ba1522eb4c1a3044e19c81dcdf2d453ab202da8d7ce",
-    qaEvidence: "planning/art-qa/furniture-core-directional-009/contact-627-dark.png",
+    runtimeQa: "pending-native-gameplay-composite",
+    sourcePromptMode: "built-in image generation; three separately prompted rigid elevated-isometric four-direction prep/storage atlases with two semantic corrections, strict chroma remediation, common-pivot normalization, and full/gameplay-scale contact review",
+    qaEvidence: "planning/art-qa/furniture-core-directional-010/contact-627-dark.png",
     qaManifest: QA_PATH,
-    notes: "Heated expo pass, commercial plancha, and convection oven are source-accepted, remotely preserved, and accepted with every other present directional identity in exact native four-rotation gameplay review attempt 007; that review evidence is also remotely preserved with green Windows and Ubuntu CI.",
+    notes: "Refrigerated prep table, walk-in storage rack, and dry-storage rack are source-accepted and locally runtime-bound. Exact GitHub preservation, hosted CI, and native four-rotation gameplay-composite review remain pending.",
   });
   assert.deepEqual(qa.promotionScope, {
     runtimeFiles: 12, alphaSourceFiles: 12, contactSheets: 2, provenanceDocuments: 2, totalFiles: 28,
   });
-  assert.deepEqual(qa.productionCompletionBlockers, []);
+  assert.equal(qa.productionCompletionBlockers.length, 2);
+  assert.match(qa.productionCompletionBlockers[0], /GitHub.*green hosted Windows and Ubuntu CI/i);
+  assert.match(qa.productionCompletionBlockers[1], /native Godot four-rotation gameplay composite/i);
   assert.doesNotMatch(JSON.stringify(qa), /\/tmp\/|\/workspace\//, "durable QA must not reference transient storage");
-  assert.equal(qa.quarantineArchive.sha256, "489aba694c71206f91f10251d0b937a958bcb333b4907adad0f4c76122ced72e");
-  assert.equal(qa.quarantineArchive.memberCount, 121);
-  assert.match(qa.quarantineArchive.safetyReview, /^pass:/);
   assert.equal(fileSha256(qa.source.promptLog), qa.source.promptLogSha256);
-  assert.equal(qa.source.quarantinedChromaHelperSha256, "3f7b9b14ad5c90f37618bc1c16a039a2076abca12ddc41b3ae470e2b1cad6c0e");
-  assert.equal(qa.source.quarantinedProcessorSha256, "4312ccd0182280fa42ef7794dff32704102dd3998cdd991db14e93f2762d18d3");
-  assert.equal(qa.source.quarantinedValidatorSha256, "b31f921fb1f01b69ac259c23480b5213060957db0a7bf8aa188530c5e87c0b04");
+  assert.equal(qa.source.chromaHelperSha256, "3f7b9b14ad5c90f37618bc1c16a039a2076abca12ddc41b3ae470e2b1cad6c0e");
   assert.deepEqual(qa.source.rawSha256, {
-    "furniture-expo-pass-heated": "7381c954cdcc0c8ec7642ca51355b369c4a27ff70c3d4410ba451ff196ad6dc9",
-    "furniture-plancha-commercial": "b8141ba6002ae46464604ccdc7d3f31ab0f4d4229e9565e577a3a4df8cb96371",
-    "furniture-convection-oven": "1c41531e61c4ca5c6be5d187ab21ea1437e526cbf5b1bee2ad1bb2d7c676d0ad",
+    "furniture-prep-table-refrigerated": "8e10e1e42b53e38b912f97a4698aaa8c4b3a4eb0a2738c2f945553631ae95c70",
+    "furniture-walkin-rack": "a17fd1c8770312a9681a924f63a720115d8443ee1bbf52d334a270e451d02a00",
+    "furniture-dry-storage-rack": "6704e7848e83ad0906db9fca63d0bbc42d7e6678809941e55f4119b41551802f",
   });
   assert.deepEqual(qa.source.alphaAtlasSha256, {
-    "furniture-expo-pass-heated": "60672228bd72a5f4c7d66d04ef79736aa095b2502fc2e6656cb5047a7eb3cf9a",
-    "furniture-plancha-commercial": "a5fc27b8e77e365f117048bcf46eb78bdf89a1d921c6806686e9f792253ac71a",
-    "furniture-convection-oven": "de301bfb65e376b5d259cf1f89326d2eb6ad7eb8adbc2bb2f4a014b8f01863ef",
-  });
-  assert.deepEqual(qa.excludedQuarantinePayload, {
-    rawAtlases: 3,
-    rawAttemptBinaries: 6,
-    alphaAtlases: 3,
-    alphaAttemptBinaries: 4,
-    rejectedPayloadFiles: 38,
-    processScripts: 4,
-    policy: "Raw, rejected, alpha-atlas, process, and validation binaries remain outside the repository; exact accepted source hashes, attempt hashes, rejection hashes, and reasons are retained above.",
+    "furniture-prep-table-refrigerated": "76b45eaf5583288bc6cc332ae102a8b4344f757c5846f5716367bd5d4d35f2ca",
+    "furniture-walkin-rack": "e6c644be81eedf68def4533c5ea7965506222898a2af5a1e75b615f2b22419ba",
+    "furniture-dry-storage-rack": "de39d1304f1430e80cbd714c7c8efe496caf8e331186e92047a018495501799c",
   });
   assert.deepEqual(qa.rejectedAttempts.map((entry) => entry.generatorOutputSha256), [
-    "603a57d27674ee1e34c379eefbbda60123528fc4eaf8c0f0d314a792a55f06b4",
-    "13c88577f764bc6e398bb7be792c31c33f89749b6a285a923f37b3a36347ac67",
-    "80d31153e204a8532d9753a6286388caaf7ab6121ede4a44998a0556a68ada87",
-    "e3c221f724ff3046d38723ff7daebeea4d281b08c4603ceae4fe6006f74c5ced",
-    "60672228bd72a5f4c7d66d04ef79736aa095b2502fc2e6656cb5047a7eb3cf9a",
+    "4b54042fbc248c81afe855299ea074eacd533c9d185dd2192e6446599e423f89",
+    "b9816b19fc5f6f321f641c7f2658d09d0871508df3eb406ac07352c377959969",
+    "ff1f0b39c43fb327c009c0c6fa1ed38f7583e1d097772274e038e81fdec285b8",
+    "1bc2f82da9a87433aad7df2c88ac35744e1f42d9cb3cfc205ee0af74aff8efe7",
+    "e057ec020e81e289af9890ba6f1302e1a610d8a5ab5bc053ad650f0b4546a8fc",
   ]);
-  assert.equal(sha256(Buffer.from(JSON.stringify(qa.rejectedAttempts))), "ae2167c391fed37b19fa56f5ccfea5665c12b1a85edd1f6116e315dc2cd3aef9");
   for (const rejection of qa.rejectedAttempts) assert.match(rejection.reason, /^Rejected/);
   const expectedEvidence = [
     `${QA_ROOT}/contact-128-light.png`, `${QA_ROOT}/contact-627-dark.png`, `${QA_ROOT}/prompts.md`, `${QA_ROOT}/qa.json`,
@@ -242,7 +218,7 @@ test("furniture directional batch 009 has exact durable remote and runtime prove
   assert.deepEqual(repositoryFiles(QA_ROOT), expectedEvidence, "only accepted evidence may enter the QA directory");
 });
 
-test("furniture directional batch 009 matches catalog, placement, raster, pivot, and uniqueness contracts", () => {
+test("furniture directional batch 010 matches catalog, placement, raster, pivot, and uniqueness contracts", () => {
   const qa = json(QA_PATH);
   const catalog = [
     ...json("packages/game-data/core/furniture.json"),
@@ -317,11 +293,11 @@ test("furniture directional batch 009 matches catalog, placement, raster, pivot,
   for (const hash of runtimePixelHashes) assert.ok(!otherPixelHashes.has(hash), `runtime pixels duplicate earlier art: ${hash}`);
 });
 
-test("furniture directional batch 009 contact sheets are the exact reviewed evidence", () => {
+test("furniture directional batch 010 contact sheets are the exact reviewed evidence", () => {
   const qa = json(QA_PATH);
   assert.deepEqual(qa.contactSheets, [
-    { path: `${QA_ROOT}/contact-627-dark.png`, purpose: "Exact 627px runtime candidates on a dark checkerboard", sha256: "ddb4f8d272bd5cca6388d1b745f6445ac15c71368f61eb2a9ec9de9e19351f4d" },
-    { path: `${QA_ROOT}/contact-128-light.png`, purpose: "Same runtime candidates reduced to 128px on a light checkerboard", sha256: "faa186b634702657819fee597f38abcbe8fcce2d85927c1cffb67b59d35de021" },
+    { path: `${QA_ROOT}/contact-627-dark.png`, purpose: "Exact 627px runtime candidates on a dark checkerboard", sha256: "2f626c728bf724a0d509eefecb6219bc3fbb29b7c4dd5def51047f1d3c778e94" },
+    { path: `${QA_ROOT}/contact-128-light.png`, purpose: "Same runtime candidates reduced to 128px on a light checkerboard", sha256: "a250546037f9e9ac080ad84e378df1104aef4d71c883d40e5e938d3de09a7c7b" },
   ]);
   for (const contact of qa.contactSheets) assert.equal(fileSha256(contact.path), contact.sha256);
   assert.deepEqual(pngHeader(`${QA_ROOT}/contact-627-dark.png`), { width: 2508, height: 1989, bitDepth: 8, colorType: 2 });
@@ -330,7 +306,7 @@ test("furniture directional batch 009 contact sheets are the exact reviewed evid
   assert.match(qa.gates.visualReviewAtGameplayScale128px, /^pass:/);
   assert.equal(qa.gates.samePhysicalObjectAcrossDirections, "pass");
   assert.equal(qa.gates.fixedElevatedOrthographicIsometricCamera, "pass");
-  assert.equal(qa.gates.repositoryDirectionalPngsCompared, 100);
+  assert.equal(qa.gates.repositoryDirectionalPngsCompared, 112);
   assert.equal(qa.gates.exactFileCollisionsAgainstRepository, 0);
   assert.equal(qa.gates.exactPixelCollisionsAgainstRepository, 0);
   assert.equal(qa.gates.exactPerceptualHashCollisionsAgainstRepository, 0);

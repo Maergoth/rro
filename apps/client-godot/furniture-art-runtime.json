@@ -23,14 +23,17 @@
     "furniture-banquette-section",
     "furniture-commercial-chair",
     "furniture-convection-oven",
+    "furniture-dry-storage-rack",
     "furniture-expo-pass-heated",
     "furniture-host-stand-pro",
     "furniture-oak-two-top",
     "furniture-plancha-commercial",
     "furniture-pos-terminal",
     "furniture-premium-chair",
+    "furniture-prep-table-refrigerated",
     "furniture-server-station-pro",
     "furniture-six-burner-range",
+    "furniture-walkin-rack",
     "furniture-walnut-four-top",
     "host-stand",
     "local-art",
@@ -76,7 +79,11 @@
     "table-two"
   ],
   "runtimeCompositeBlockedAssetIds": [],
-  "runtimeCompositePendingAssetIds": [],
+  "runtimeCompositePendingAssetIds": [
+    "furniture-dry-storage-rack",
+    "furniture-prep-table-refrigerated",
+    "furniture-walkin-rack"
+  ],
   "capability": {
     "directionalTextureSelection": true,
     "commonFloorContactPivot": true,
@@ -85,8 +92,8 @@
     "runtimeProjection": "elevated-orthographic-isometric-grid",
     "projectionIntegrated": true,
     "projectionAligned": true,
-    "runtimeCompositeAccepted": true,
+    "runtimeCompositeAccepted": false,
     "productionComplete": false,
-    "remainingVisualGate": "No runtime visual blocker remains for the twenty-eight present source-accepted directional furniture sets. The other 201 catalog identities still require source acceptance, exact remote preservation, native gameplay-scale review, and green hosted CI."
+    "remainingVisualGate": "The twenty-eight previously reviewed sets remain accepted. Refrigerated prep table, walk-in storage rack, and dry-storage rack require exact native four-rotation gameplay review and remote preservation; the other 198 catalog identities still require source acceptance, runtime binding, review, and green hosted CI."
   }
 }
