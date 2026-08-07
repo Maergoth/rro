@@ -693,6 +693,11 @@
       "utility",
       "asset:furniture-chemical-cabinet"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-chemical-cabinet",
     "upkeepCents": 373,
@@ -735,6 +740,11 @@
       "utility",
       "asset:furniture-dish-machine-high-temp"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-dish-machine-high-temp",
     "upkeepCents": 3510,
@@ -776,6 +786,11 @@
       "utility",
       "asset:furniture-three-comp-sink"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-three-comp-sink",
     "upkeepCents": 1203,

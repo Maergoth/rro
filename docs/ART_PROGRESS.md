@@ -12,15 +12,15 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 - Branch: `agent/complete-production-art`
 - Draft PR: https://github.com/Maergoth/rro/pull/2
-- Last verified remote head before this ledger check-in: `ce1477eb4a47d06158d01190c53a4cf9633050c1`
-- Verified tree: `a917cc9e1394ec85658d7183acae59215226e756`
-- CI: https://github.com/Maergoth/rro/actions/runs/31181870397
+- Last verified remote head before this ledger check-in: `407fb5db6d73d50ad88efa5c3c22081ccdec64d6`
+- Verified tree: `7f39e1a85905994e12494cda558a49f878c32125`
+- CI: https://github.com/Maergoth/rro/actions/runs/31182392238
 
 ## Launch coverage
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
-| Furniture directional sets | 229 | 31 | 31 | 31 | 31 |
+| Furniture directional sets | 229 | 34 | 34 | 31 | 31 |
 | Equipment inventory icons | 45 | 45 | 45 | 45 | 45 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
@@ -35,7 +35,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 | Activity → animation bindings | 89 | 0 | 0 | 0 | 0 |
 
 45 equipment icons and 31 furniture directional sets are production-complete because their exact reviewed bytes are visually accepted, runtime-bound, remotely verified, and CI-green. Character art and the other missing lanes remain explicit below.
-Directional furniture texture selection is yes and projection alignment is yes. Latest native review `runtime-isometric-integration-001-attempt-008` accepted 31/31 present sets; its durable review checkpoint is remote-verified: yes. No source-accepted directional sets remain blocked by the latest native gameplay review. No source-accepted directional sets are pending their first native four-rotation gameplay composite.
+Directional furniture texture selection is yes and projection alignment is yes. Latest native review `runtime-isometric-integration-001-attempt-008` accepted 31/34 present sets; its durable review checkpoint is remote-verified: yes. No source-accepted directional sets remain blocked by the latest native gameplay review. `furniture-chemical-cabinet`, `furniture-dish-machine-high-temp`, `furniture-three-comp-sink` are source-accepted but pending their first native four-rotation gameplay composite; 3/3 are also local-only pending an immutable remote checkpoint and green hosted CI.
 
 ## Character truth
 
@@ -107,13 +107,21 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 | furniture-core-directional-006 | 28 | passed | passed-native-gameplay-composite-attempt-007 | `185ca50` | planning/art-qa/furniture-core-directional-006/contact-627-dark.png |
 | furniture-core-directional-007 | 28 | passed | passed-native-gameplay-composite-attempt-003 | `98e479e` | planning/art-qa/furniture-core-directional-007/contact-627-dark.png |
 
+## Accepted locally, remote checkpoint pending
+
+These batches have passed source/composite QA but deliberately do not count as remotely verified or production-complete until their immutable GitHub commit and hosted CI are recorded.
+
+| Batch | Files | Source QA | Runtime/composite QA | Evidence |
+|---|---:|---|---|---|
+| furniture-core-directional-011 | 28 | passed | pending-native-four-rotation-gameplay-composite | planning/art-qa/furniture-core-directional-011/contact-627-dark.png |
+
 ## Missing furniture directional sets
 
-31 of 229 elevated four-direction sets are present. The 20 attractive overhead singles are preserved as references but do not satisfy this camera contract.
+34 of 229 elevated four-direction sets are present. The 20 attractive overhead singles are preserved as references but do not satisfy this camera contract.
 
-### Utility — 36 missing
+### Utility — 33 missing
 
-`furniture-chemical-cabinet`, `furniture-dish-machine-high-temp`, `furniture-three-comp-sink`, `furniture-glass-rack-system`, `furniture-floor-drain`, `furniture-wet-floor-station`, `furniture-essential-dish-machine`, `furniture-craftsman-dish-machine`, `furniture-endurance-dish-machine`, `furniture-hospitality-dish-machine`, `furniture-precision-dish-machine`, `furniture-reclaimed-dish-machine`, `furniture-essential-pot-wash-sink`, `furniture-craftsman-pot-wash-sink`, `furniture-endurance-pot-wash-sink`, `furniture-hospitality-pot-wash-sink`, `furniture-precision-pot-wash-sink`, `furniture-reclaimed-pot-wash-sink`, `furniture-essential-mop-basin`, `furniture-craftsman-mop-basin`, `furniture-endurance-mop-basin`, `furniture-hospitality-mop-basin`, `furniture-precision-mop-basin`, `furniture-reclaimed-mop-basin`, `furniture-essential-waste-sorter`, `furniture-craftsman-waste-sorter`, `furniture-endurance-waste-sorter`, `furniture-hospitality-waste-sorter`, `furniture-precision-waste-sorter`, `furniture-reclaimed-waste-sorter`, `furniture-essential-spill-cart`, `furniture-craftsman-spill-cart`, `furniture-endurance-spill-cart`, `furniture-hospitality-spill-cart`, `furniture-precision-spill-cart`, `furniture-reclaimed-spill-cart`
+`furniture-glass-rack-system`, `furniture-floor-drain`, `furniture-wet-floor-station`, `furniture-essential-dish-machine`, `furniture-craftsman-dish-machine`, `furniture-endurance-dish-machine`, `furniture-hospitality-dish-machine`, `furniture-precision-dish-machine`, `furniture-reclaimed-dish-machine`, `furniture-essential-pot-wash-sink`, `furniture-craftsman-pot-wash-sink`, `furniture-endurance-pot-wash-sink`, `furniture-hospitality-pot-wash-sink`, `furniture-precision-pot-wash-sink`, `furniture-reclaimed-pot-wash-sink`, `furniture-essential-mop-basin`, `furniture-craftsman-mop-basin`, `furniture-endurance-mop-basin`, `furniture-hospitality-mop-basin`, `furniture-precision-mop-basin`, `furniture-reclaimed-mop-basin`, `furniture-essential-waste-sorter`, `furniture-craftsman-waste-sorter`, `furniture-endurance-waste-sorter`, `furniture-hospitality-waste-sorter`, `furniture-precision-waste-sorter`, `furniture-reclaimed-waste-sorter`, `furniture-essential-spill-cart`, `furniture-craftsman-spill-cart`, `furniture-endurance-spill-cart`, `furniture-hospitality-spill-cart`, `furniture-precision-spill-cart`, `furniture-reclaimed-spill-cart`
 
 ### Decor — 24 missing
 
@@ -157,6 +165,7 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 ## Contract gaps blocking a truthful 100% denominator
 
 - Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.
+- Resolve the latest native directional-furniture review for furniture-chemical-cabinet, furniture-dish-machine-high-temp, furniture-three-comp-sink before those source-accepted sets receive production credit.
 - Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.
 - Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete.
 
@@ -182,9 +191,9 @@ This JSON block is part of this same authoritative document and contains every c
   "durableBaseline": {
     "branch": "agent/complete-production-art",
     "pullRequest": "https://github.com/Maergoth/rro/pull/2",
-    "commit": "ce1477eb4a47d06158d01190c53a4cf9633050c1",
-    "tree": "a917cc9e1394ec85658d7183acae59215226e756",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/31181870397"
+    "commit": "407fb5db6d73d50ad88efa5c3c22081ccdec64d6",
+    "tree": "7f39e1a85905994e12494cda558a49f878c32125",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31182392238"
   },
   "completionPipeline": [
     "generated",
@@ -205,17 +214,19 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeProjection": "elevated-orthographic-isometric-grid",
       "projectionIntegrated": true,
       "projectionAligned": true,
-      "runtimeCompositeAccepted": true,
+      "runtimeCompositeAccepted": false,
       "productionComplete": false,
-      "remainingVisualGate": "All thirty-one present directional sets are accepted in exact native four-rotation gameplay review. The other 198 catalog identities still require source acceptance, runtime binding, remote preservation, gameplay review, and green hosted CI.",
+      "remainingVisualGate": "Thirty-one previously reviewed directional sets remain accepted. The locked chemical cabinet, high-temperature dish machine, and three-compartment sink await exact native four-rotation gameplay review; the other 195 catalog identities still require source acceptance, runtime binding, remote preservation, gameplay review, and green hosted CI.",
       "acceptedDirectionalAssetIds": [
         "banquette",
         "booth",
         "dish-machine",
         "espresso",
         "furniture-banquette-section",
+        "furniture-chemical-cabinet",
         "furniture-commercial-chair",
         "furniture-convection-oven",
+        "furniture-dish-machine-high-temp",
         "furniture-dry-storage-rack",
         "furniture-expo-pass-heated",
         "furniture-host-stand-pro",
@@ -226,6 +237,7 @@ This JSON block is part of this same authoritative document and contains every c
         "furniture-prep-table-refrigerated",
         "furniture-server-station-pro",
         "furniture-six-burner-range",
+        "furniture-three-comp-sink",
         "furniture-walkin-rack",
         "furniture-walnut-four-top",
         "host-stand",
@@ -275,7 +287,11 @@ This JSON block is part of this same authoritative document and contains every c
         "table-two"
       ],
       "runtimeCompositeBlockedAssetIds": [],
-      "runtimeCompositePendingAssetIds": [],
+      "runtimeCompositePendingAssetIds": [
+        "furniture-chemical-cabinet",
+        "furniture-dish-machine-high-temp",
+        "furniture-three-comp-sink"
+      ],
       "runtimeReviewRemoteVerified": true
     }
   },
@@ -283,8 +299,8 @@ This JSON block is part of this same authoritative document and contains every c
     {
       "lane": "Furniture directional sets",
       "required": 229,
-      "present": 31,
-      "sourceAccepted": 31,
+      "present": 34,
+      "sourceAccepted": 34,
       "remoteVerified": 31,
       "productionComplete": 31
     },
@@ -2143,42 +2159,46 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-chemical-cabinet/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "75e05e4274e6b03e602d197631cc3725fd69ed590440438e040651a2a4a4992f"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-chemical-cabinet/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "49f7c4f0be7d9642bfeb73960af6b5e7e7ba6c4392c327733e27ab75d61623e4"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-chemical-cabinet/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "214e188d4c4e1de76d272441acd83c31849b9679ea406206a7d7e543e7261da6"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-chemical-cabinet/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "2c3eaa1862deb0a5d3c24bfdaf57e70d0ab0ce8d401e76367c6a99dd066a380f"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "furniture-core-directional-011",
+      "review": "passed",
+      "runtimeQa": "pending-native-four-rotation-gameplay-composite",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "placement": null,
-      "placementDeclared": false,
-      "sourceAccepted": false,
-      "directionalSelectionBound": false,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-011/contact-627-dark.png",
+      "qaEvidencePresent": true,
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "placementDeclared": true,
+      "sourceAccepted": true,
+      "directionalSelectionBound": true,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": false,
+      "runtimeCompositePending": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "dish-machine-high-temp",
@@ -2195,42 +2215,46 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-dish-machine-high-temp/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "40004fd8e304cc5e732166cb656531530871e1604fc5637edfe60ff849b65e6c"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-dish-machine-high-temp/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "449203836399257dcf95de182abb21643decc1eb1d91f06bd7c22e2c597f0d23"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-dish-machine-high-temp/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "daaede8fe2a55788e8f1c268441ccdb796cb0113896a20f5110b17b1f4217de5"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-dish-machine-high-temp/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "b158c76184017193af4d8080b2eaa4fd4b6e6d4643d3126b9a14683e8df42f15"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "furniture-core-directional-011",
+      "review": "passed",
+      "runtimeQa": "pending-native-four-rotation-gameplay-composite",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "placement": null,
-      "placementDeclared": false,
-      "sourceAccepted": false,
-      "directionalSelectionBound": false,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-011/contact-627-dark.png",
+      "qaEvidencePresent": true,
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "placementDeclared": true,
+      "sourceAccepted": true,
+      "directionalSelectionBound": true,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": false,
+      "runtimeCompositePending": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "three-comp-sink",
@@ -2247,42 +2271,46 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-three-comp-sink/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "a5885d93bfd39d2ae4c091a56a5fa4267a98bd31b2b698963b34899942683a1b"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-three-comp-sink/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "21e7a613d4ffbda51eeed10ca8761bab72eef01c5cca1b2b0655695d7361a1c7"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-three-comp-sink/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "18aa249733a63509a7d10d14d9c8ce89db4c29dbb27a8e645bfca1e3b0540df4"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-three-comp-sink/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "d79613c3ad795848ef44e3546e318344389b04e089a4931cab3175ce5cbdbbcf"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "furniture-core-directional-011",
+      "review": "passed",
+      "runtimeQa": "pending-native-four-rotation-gameplay-composite",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "placement": null,
-      "placementDeclared": false,
-      "sourceAccepted": false,
-      "directionalSelectionBound": false,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-011/contact-627-dark.png",
+      "qaEvidencePresent": true,
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "placementDeclared": true,
+      "sourceAccepted": true,
+      "directionalSelectionBound": true,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": false,
+      "runtimeCompositePending": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "glass-rack-system",
@@ -16585,7 +16613,29 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": true
     }
   ],
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "furniture-core-directional-011",
+      "assets": [
+        "furniture-chemical-cabinet",
+        "furniture-dish-machine-high-temp",
+        "furniture-three-comp-sink"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "pending-native-four-rotation-gameplay-composite",
+      "sourcePromptMode": "built-in image generation; three separately prompted rigid elevated-isometric four-direction utility-fixture atlases, official chroma-key edge remediation, common-pivot normalization, and full/gameplay-scale contact review",
+      "remoteCommit": null,
+      "remoteTree": null,
+      "ci": null,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-011/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-011/qa.json",
+      "notes": "Locked chemical cabinet, high-temperature dish machine, and three-compartment sink are source-accepted locally and await exact remote preservation, hosted CI, and native four-rotation gameplay composite review.",
+      "qaEvidencePresent": true,
+      "remoteVerified": false,
+      "preservationPending": true
+    }
+  ],
   "runtimeQaAttempts": [
     {
       "id": "runtime-isometric-integration-001-attempt-001",
@@ -17068,6 +17118,7 @@ This JSON block is part of this same authoritative document and contains every c
   ],
   "contractGaps": [
     "Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.",
+    "Resolve the latest native directional-furniture review for furniture-chemical-cabinet, furniture-dish-machine-high-temp, furniture-three-comp-sink before those source-accepted sets receive production credit.",
     "Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.",
     "Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete."
   ]

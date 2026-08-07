@@ -288,6 +288,9 @@ const acceptedFurniturePlacements = {
   "prep-table-refrigerated": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
   "walkin-rack": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
   "dry-storage-rack": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "chemical-cabinet": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "dish-machine-high-temp": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "three-comp-sink": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
 };
 
 function operationalStrength(stats) {

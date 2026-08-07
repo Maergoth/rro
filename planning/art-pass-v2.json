@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "ce1477eb4a47d06158d01190c53a4cf9633050c1",
-    "tree": "a917cc9e1394ec85658d7183acae59215226e756",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/31181870397"
+    "commit": "407fb5db6d73d50ad88efa5c3c22081ccdec64d6",
+    "tree": "7f39e1a85905994e12494cda558a49f878c32125",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31182392238"
   },
   "completionRule": "generated, processed, raster-validated, visually accepted, runtime-bound assets whose exact reviewed bytes are remotely verified on GitHub with green CI",
   "artDirection": {
@@ -30,7 +30,7 @@
     ]
   },
   "coverage": {
-    "furniture": { "catalogTotal": 229, "acceptedSets": 31, "acceptedDirectionalFiles": 124, "runtimeCompositeAcceptedSets": 31 },
+    "furniture": { "catalogTotal": 229, "acceptedSets": 34, "acceptedDirectionalFiles": 136, "runtimeCompositeAcceptedSets": 31 },
     "equipmentIcons": { "catalogTotal": 45, "accepted": 45 },
     "characterSystem": {
       "status": "in_progress",
@@ -350,7 +350,26 @@
       "productionComplete": false
     }
   ],
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "furniture-core-directional-011",
+      "assets": [
+        "furniture-chemical-cabinet",
+        "furniture-dish-machine-high-temp",
+        "furniture-three-comp-sink"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "pending-native-four-rotation-gameplay-composite",
+      "sourcePromptMode": "built-in image generation; three separately prompted rigid elevated-isometric four-direction utility-fixture atlases, official chroma-key edge remediation, common-pivot normalization, and full/gameplay-scale contact review",
+      "remoteCommit": null,
+      "remoteTree": null,
+      "ci": null,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-011/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-011/qa.json",
+      "notes": "Locked chemical cabinet, high-temperature dish machine, and three-compartment sink are source-accepted locally and await exact remote preservation, hosted CI, and native four-rotation gameplay composite review."
+    }
+  ],
   "batches": [
     {
       "id": "furniture-core-directional-010",

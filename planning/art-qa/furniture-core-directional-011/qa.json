@@ -1,0 +1,428 @@
+{
+  "schemaVersion": 1,
+  "batchId": "furniture-core-directional-011",
+  "assets": [
+    "furniture-chemical-cabinet",
+    "furniture-dish-machine-high-temp",
+    "furniture-three-comp-sink"
+  ],
+  "artReviewStatus": "accepted",
+  "productionComplete": false,
+  "productionCompletionBlockers": [
+    "The exact 28-file source/runtime evidence checkpoint requires GitHub preservation and green hosted CI.",
+    "The three identities require exact native four-rotation gameplay composite capture and human acceptance after runtime binding."
+  ],
+  "promotionScope": {
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "repositoryPromotion": {
+    "status": "local-verified-pending-remote",
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "remotePreservation": null,
+  "source": {
+    "generator": "OpenAI built-in image generation",
+    "mode": "three separately prompted rigid 2x2 N/E/S/W utility-fixture atlases; no source edit was required",
+    "useCases": [
+      "stylized-concept"
+    ],
+    "promptLog": "planning/art-qa/furniture-core-directional-011/prompts.md",
+    "promptLogSha256": "d84114b78b76b58a635a8b11d7ce2573fca569b4223808a5e45a6518eec23063",
+    "rawSha256": {
+      "furniture-chemical-cabinet": "4b69c322dcd10012e627398c918fbcab6f0fce202b55e3cd1593db21059ab3d2",
+      "furniture-dish-machine-high-temp": "1a1dc5dc1eebb70ba4bbf47331218218d1a53550f497a24d43072127996e745a",
+      "furniture-three-comp-sink": "37f0a6e2fb8935c8b47b4677643fe4fadff4828d2f3e1ea41a0aa0b6b674861b"
+    },
+    "alphaAtlasSha256": {
+      "furniture-chemical-cabinet": "b23cf6f3450abecf6aae42ddf54efd41b2958541424bcaf28ed2c1e9a83a9496",
+      "furniture-dish-machine-high-temp": "721b62dd1fb4e2a897340910de8235c0afbaadeaa9aa1343ff556363dd80fc5f",
+      "furniture-three-comp-sink": "fd649a3941ac283c16cca23f51146d145ddfbac7a15a8352ee4c0cf48c416314"
+    },
+    "chromaHelperSha256": "3f7b9b14ad5c90f37618bc1c16a039a2076abca12ddc41b3ae470e2b1cad6c0e",
+    "processorSha256": "9ba6ee585472949b1c59f14ea685cde9380c69c3d6549498037158af6469bc10",
+    "matteProcess": "Official imagegen border auto-key, soft matte, thresholds 12/220, despill, and one-pixel edge contraction; runtime normalization removes only residual pixels matching the strict visible magenta-key QA predicate.",
+    "normalization": "Largest connected component per cell, exact 627x627 sRGBA canvases, one uniform proportional scale per identity bounded by 550x525, pivot x=313.5, exclusive floor baseline y=590, and transparent outer borders."
+  },
+  "rejectedAttempts": [
+    {
+      "assetId": "furniture-chemical-cabinet",
+      "attempt": 1,
+      "stage": "alpha-and-runtime-raster-validation",
+      "generatorOutputSha256": "4cc27fef24561f7a1334ba8bfa99e06a3b32e8a110f3b1686ec98ee9d183727a",
+      "reason": "Rejected matte: strict runtime validation found isolated low-alpha magenta-key pixels; the official helper was rerun with its documented one-pixel edge contraction before final narrow key-color cleanup."
+    },
+    {
+      "assetId": "furniture-dish-machine-high-temp",
+      "attempt": 1,
+      "stage": "alpha-and-runtime-raster-validation",
+      "generatorOutputSha256": "49b5cbb56f4e0e3fa07ec83d9116686ab4bc796aad610e4b3e17088ee070f860",
+      "reason": "Rejected matte: strict runtime validation found isolated low-alpha magenta-key pixels; the official helper was rerun with its documented one-pixel edge contraction before final narrow key-color cleanup."
+    },
+    {
+      "assetId": "furniture-three-comp-sink",
+      "attempt": 1,
+      "stage": "alpha-and-runtime-raster-validation",
+      "generatorOutputSha256": "777fe733bb90c9fe10f9f7febc015dd9eeab955fe2f16d8d0efd51bf65fe8ac8",
+      "reason": "Rejected matte: strict runtime validation found isolated low-alpha magenta-key pixels; the official helper was rerun with its documented one-pixel edge contraction before final narrow key-color cleanup."
+    }
+  ],
+  "gates": {
+    "requiredDirections": [
+      "north",
+      "east",
+      "south",
+      "west"
+    ],
+    "runtimeDimensions": "627x627",
+    "colorMode": "sRGBA",
+    "commonCanvasPivot": [
+      313.5,
+      590
+    ],
+    "commonFloorContactBaselineY": 590,
+    "transparentBottomMarginPixels": 37,
+    "allOuterBordersTransparent": true,
+    "zeroVisibleMagentaFringePixelsAboveAlpha2": true,
+    "oneUniformScalePerIdentity": true,
+    "uniqueRuntimeFileHashes": true,
+    "uniqueRuntimePixelHashes": true,
+    "uniqueRuntimePerceptualHashes": true,
+    "repositoryDirectionalPngsCompared": 124,
+    "uniqueAgainstRepositoryDirectionalPngs": true,
+    "exactFileCollisionsAgainstRepository": 0,
+    "exactPixelCollisionsAgainstRepository": 0,
+    "exactPerceptualHashCollisionsAgainstRepository": 0,
+    "samePhysicalObjectAcrossDirections": "pass",
+    "fixedElevatedOrthographicIsometricCamera": "pass",
+    "noClippingTextLogosWatermarksShadowsOrExtraObjects": "pass",
+    "visualReviewAtFullScale": "pass: planning/art-qa/furniture-core-directional-011/contact-627-dark.png inspected at original resolution; construction, counts, camera, alpha, silhouettes, and floor contact pass.",
+    "visualReviewAtGameplayScale128px": "pass: planning/art-qa/furniture-core-directional-011/contact-128-light.png inspected at original resolution; locked cabinet, hood dish machine, and three-basin sink remain distinct.",
+    "nativeGameplayCompositeReview": "pending remote source preservation, runtime binding, native capture, and human acceptance",
+    "proceduralOrDeterministicStandIn": false
+  },
+  "contactSheets": [
+    {
+      "path": "planning/art-qa/furniture-core-directional-011/contact-627-dark.png",
+      "purpose": "Exact 627px runtime candidates on a dark checkerboard",
+      "sha256": "87e7bf3cd1eda4a354b2d06fd74fcae0a35bd969066052ee216082fd8a8d5283"
+    },
+    {
+      "path": "planning/art-qa/furniture-core-directional-011/contact-128-light.png",
+      "purpose": "Same runtime candidates reduced to 128px on a light checkerboard",
+      "sha256": "d9cd9e2b85814d19769de33ef91c4e70ad986ce1c5fc1f4701c2f97742cce1e2"
+    }
+  ],
+  "items": [
+    {
+      "catalogId": "chemical-cabinet",
+      "name": "Locked Chemical Cabinet",
+      "category": "Utility",
+      "style": "Modern",
+      "footprint": [
+        2,
+        1
+      ],
+      "identityContract": "One Modern 2x1 brushed-stainless locked chemical cabinet with two teal front doors, one centered padlock hasp, two amber hazard diamonds, one physical-right grille, two rear rails, and four feet.",
+      "semanticVerdict": "pass: two-door locked front, right-side grille, plain left side, and two-rail rear preserve one coherent cabinet across four quarter turns.",
+      "gameplayLegibility": "pass: teal doors, brass lock/hazard diamonds, side grille, and rear rails remain distinct at 128px.",
+      "assetId": "furniture-chemical-cabinet",
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-chemical-cabinet/north.png",
+          "sha256": "75e05e4274e6b03e602d197631cc3725fd69ed590440438e040651a2a4a4992f",
+          "pixelSha256": "047770d30d8122bf904ea920f9aee13101f6f683827cad065f625e1128f11f62",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-chemical-cabinet-north.png",
+          "sourceAlphaSha256": "39cdbf0c30961e0e575a903e342874c7550eee9c46c95c09aa503f43d84823c6",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            74,
+            96,
+            551,
+            590
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-chemical-cabinet/east.png",
+          "sha256": "49f7c4f0be7d9642bfeb73960af6b5e7e7ba6c4392c327733e27ab75d61623e4",
+          "pixelSha256": "c49efbe7a8be9bdd9d515ef9a2323d2122dbfbe9077f3845739051d42b37ff6c",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-chemical-cabinet-east.png",
+          "sourceAlphaSha256": "6b235cc7045a2c1d26eb3ae6bce108ef2296b58ba31f96f6e0ceea2498668750",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            90,
+            66,
+            536,
+            590
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-chemical-cabinet/south.png",
+          "sha256": "214e188d4c4e1de76d272441acd83c31849b9679ea406206a7d7e543e7261da6",
+          "pixelSha256": "5ba4f0269a12fd35bec48e9f8233cf13774d8a06f8b8adf2d89a9d04608134b3",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-chemical-cabinet-south.png",
+          "sourceAlphaSha256": "502cb54396a2e36e2a517244cc597d5fcb9c39ae7fc66991f2e4ebce573151fd",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            88,
+            100,
+            538,
+            590
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-chemical-cabinet/west.png",
+          "sha256": "2c3eaa1862deb0a5d3c24bfdaf57e70d0ab0ce8d401e76367c6a99dd066a380f",
+          "pixelSha256": "2f94646c037bcf2673944c4f91b56abb01c83fc8b0ff57e6c8453b01564a1ae3",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-chemical-cabinet-west.png",
+          "sourceAlphaSha256": "930599d3127038ece9ced68aa23ae4806d6cbd573f7c99a338b9a350d5b00ec2",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            100,
+            83,
+            526,
+            590
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0
+        }
+      ]
+    },
+    {
+      "catalogId": "dish-machine-high-temp",
+      "name": "High-Temperature Dish Machine",
+      "category": "Utility",
+      "style": "Modern",
+      "footprint": [
+        4,
+        3
+      ],
+      "identityContract": "One Modern 4x3 pass-through hood dishwasher with one hood and handle, open rack bay, right-side controls and teal rinse pipe, two lower service panels, rear louvered grille and braces, and four feet.",
+      "semanticVerdict": "pass: front handle/control bay, right-side rinse pipe, plain left side, and rear grille remain coherent through four genuine rotations.",
+      "gameplayLegibility": "pass: tall hood silhouette, teal handle/pipe, open bay, lower panels, and rear grille remain distinct at 128px.",
+      "assetId": "furniture-dish-machine-high-temp",
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-dish-machine-high-temp/north.png",
+          "sha256": "40004fd8e304cc5e732166cb656531530871e1604fc5637edfe60ff849b65e6c",
+          "pixelSha256": "eac54b2e95719d93214b61ea6f6c51878a830b922973980c1e47f9855df57c8e",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-dish-machine-high-temp-north.png",
+          "sourceAlphaSha256": "3d568ff017c751566ce7c9d14d013722f8eed327dbb0df3006c39da50edddbba",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            136,
+            89,
+            490,
+            590
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-dish-machine-high-temp/east.png",
+          "sha256": "449203836399257dcf95de182abb21643decc1eb1d91f06bd7c22e2c597f0d23",
+          "pixelSha256": "e3dbb27bb0d88e182162c70e14859a56cff2d0fac7949e4043000292f1359735",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-dish-machine-high-temp-east.png",
+          "sourceAlphaSha256": "a7f933c1fd576bf4fa20f2c4ec608a70525caa8a2b23673cc57e2e3ef8534ade",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            141,
+            66,
+            485,
+            590
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-dish-machine-high-temp/south.png",
+          "sha256": "daaede8fe2a55788e8f1c268441ccdb796cb0113896a20f5110b17b1f4217de5",
+          "pixelSha256": "ac0f54b8f70ded60f922fc4f37ca9945dde5a45def5308ee1304970479bbc806",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-dish-machine-high-temp-south.png",
+          "sourceAlphaSha256": "0b1c627864df2f584b49f3f56ab6e15cc0a803caf6ddb01a0f457dc8faf4c780",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            142,
+            90,
+            484,
+            590
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-dish-machine-high-temp/west.png",
+          "sha256": "b158c76184017193af4d8080b2eaa4fd4b6e6d4643d3126b9a14683e8df42f15",
+          "pixelSha256": "dbc1c12eccd9f378f510d4575619d9d38feefe14e4fe8d638d6b098ed12bd071",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-dish-machine-high-temp-west.png",
+          "sourceAlphaSha256": "f766fa5118c8bdc629acde79eefc50f92d32b89d78d525e7ad4b9c5738cac6ba",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            156,
+            72,
+            470,
+            590
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0
+        }
+      ]
+    },
+    {
+      "catalogId": "three-comp-sink",
+      "name": "Three-Compartment Sink",
+      "category": "Utility",
+      "style": "Modern",
+      "footprint": [
+        4,
+        2
+      ],
+      "identityContract": "One Modern 4x2 stainless warewashing sink with exactly three basins, two drainboards, one centered pre-rinse faucet, three front access panels, a physical-right soap cage, three rear brackets, six legs, and a lower brace.",
+      "semanticVerdict": "pass: basin count, drainboards, faucet, front access panels, right-side cage, rear brackets, and frame remain coherent across four quarter turns.",
+      "gameplayLegibility": "pass: three-basin rhythm, faucet arch, front panels, rear backsplash, and open leg frame remain readable at 128px.",
+      "assetId": "furniture-three-comp-sink",
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-three-comp-sink/north.png",
+          "sha256": "a5885d93bfd39d2ae4c091a56a5fa4267a98bd31b2b698963b34899942683a1b",
+          "pixelSha256": "821622bc72b1759cc018e4528ccaf01e7e368119749d06d1141585c95971328b",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-three-comp-sink-north.png",
+          "sourceAlphaSha256": "fb8e7b3bf46e73598e1d0a825486c4bf1c8c1e2f1a30d8986c112f49ea91bd1b",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            38,
+            155,
+            587,
+            590
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-three-comp-sink/east.png",
+          "sha256": "21e7a613d4ffbda51eeed10ca8761bab72eef01c5cca1b2b0655695d7361a1c7",
+          "pixelSha256": "0013260a491b583bf74785d29da597faaed981aaa9005e8a06398417df5e5eab",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-three-comp-sink-east.png",
+          "sourceAlphaSha256": "7c5d8e2af9ff755a33c495e4558acef28286f2fd08a6103b7a3268e3274c919d",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            67,
+            134,
+            559,
+            590
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-three-comp-sink/south.png",
+          "sha256": "18aa249733a63509a7d10d14d9c8ce89db4c29dbb27a8e645bfca1e3b0540df4",
+          "pixelSha256": "5e942783dd3bc359150f97981b29d587fabf4e7e20285595ca95430a77f3bb5e",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-three-comp-sink-south.png",
+          "sourceAlphaSha256": "b9a13dceae6c349eaa123521930af75a2b42cee1ab70158b65ce0f8013c7ec29",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            39,
+            151,
+            587,
+            590
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-three-comp-sink/west.png",
+          "sha256": "d79613c3ad795848ef44e3546e318344389b04e089a4931cab3175ce5cbdbbcf",
+          "pixelSha256": "d0264c6d381507f9517f774235cf5939deff3859bc2194477277190b1c2e043c",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-three-comp-sink-west.png",
+          "sourceAlphaSha256": "bd7e41d45b5a3e8d05da6583f0921f30545b3406284e4ccfb0d236cfa7af3c2e",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            63,
+            132,
+            563,
+            590
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0
+        }
+      ]
+    }
+  ]
+}
