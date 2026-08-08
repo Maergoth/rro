@@ -67,6 +67,7 @@
     "furniture-dry-storage-rack",
     "furniture-expo-pass-heated",
     "furniture-host-stand-pro",
+    "furniture-linen-storage",
     "furniture-oak-two-top",
     "furniture-plancha-commercial",
     "furniture-pos-terminal",
@@ -77,6 +78,8 @@
     "furniture-three-comp-sink",
     "furniture-walkin-rack",
     "furniture-walnut-four-top",
+    "furniture-water-station",
+    "furniture-wet-floor-station",
     "host-stand",
     "local-art",
     "mop-sink",
@@ -91,11 +94,7 @@
     "table-two"
   ],
   "runtimeCompositeBlockedAssetIds": [],
-  "runtimeCompositePendingAssetIds": [
-    "furniture-linen-storage",
-    "furniture-water-station",
-    "furniture-wet-floor-station"
-  ],
+  "runtimeCompositePendingAssetIds": [],
   "capability": {
     "directionalTextureSelection": true,
     "commonFloorContactPivot": true,
@@ -104,8 +103,8 @@
     "runtimeProjection": "elevated-orthographic-isometric-grid",
     "projectionIntegrated": true,
     "projectionAligned": true,
-    "runtimeCompositeAccepted": false,
+    "runtimeCompositeAccepted": true,
     "productionComplete": false,
-    "remainingVisualGate": "Thirty-four of thirty-seven present directional sets are accepted in exact native four-rotation gameplay review. The linen cabinet, filtered water station, and spill response station require remote preservation and exact hosted four-rotation review; the other 192 catalog identities remain absent."
+    "remainingVisualGate": "All thirty-seven present directional sets are accepted in exact native four-rotation gameplay review. The other 192 catalog identities still require source acceptance, runtime binding, remote preservation, gameplay review, and green hosted CI."
   }
 }

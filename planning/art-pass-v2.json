@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "dd542537e372b7d726a375e48540c7ca066caaf4",
-    "tree": "51db0b01d7719e0d4474afeb4f5bc0484cbccc84",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/31233762203"
+    "commit": "1f5f585cd8565a3e97c4519c54d7e86f1ca44acb",
+    "tree": "c3f932f96eb4775716ba54cf96355862c6d3a94b",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31253942201"
   },
   "completionRule": "generated, processed, raster-validated, visually accepted, runtime-bound assets whose exact reviewed bytes are remotely verified on GitHub with green CI",
   "artDirection": {
@@ -30,7 +30,7 @@
     ]
   },
   "coverage": {
-    "furniture": { "catalogTotal": 229, "acceptedSets": 37, "acceptedDirectionalFiles": 148, "runtimeCompositeAcceptedSets": 34 },
+    "furniture": { "catalogTotal": 229, "acceptedSets": 37, "acceptedDirectionalFiles": 148, "runtimeCompositeAcceptedSets": 37 },
     "equipmentIcons": { "catalogTotal": 45, "accepted": 45 },
     "characterSystem": {
       "status": "in_progress",
@@ -403,7 +403,11 @@
         "range", "recycling", "service-station", "table-four", "table-two"
       ],
       "rejectedAssetIds": [],
-      "reviewPreservation": null,
+      "reviewPreservation": {
+        "commit": "1f5f585cd8565a3e97c4519c54d7e86f1ca44acb",
+        "tree": "c3f932f96eb4775716ba54cf96355862c6d3a94b",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31253942201"
+      },
       "productionComplete": false
     }
   ],
@@ -418,7 +422,7 @@
       ],
       "files": 28,
       "qa": "passed",
-      "runtimeQa": "passed-native-gameplay-composite-attempt-010-review-preservation-pending",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-010",
       "sourcePromptMode": "built-in image generation; three separately prompted rigid elevated-isometric four-direction service-fixture atlases with two semantic corrections, official chroma-key edge remediation, common-pivot normalization, and full/gameplay-scale contact review",
       "remoteCommit": "dd542537e372b7d726a375e48540c7ca066caaf4",
       "remoteTree": "51db0b01d7719e0d4474afeb4f5bc0484cbccc84",
@@ -427,7 +431,7 @@
       "artifactSha256": "6ac765908a7871ee29e06f4407ef7e2b74ffcdbccace6e0ab5ac634e8774e310",
       "qaEvidence": "planning/art-qa/furniture-core-directional-012/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-012/qa.json",
-      "notes": "Spill response station, linen/reset cabinet, and filtered water station are source-accepted, remotely preserved, and visually accepted in native four-rotation gameplay review attempt 010. The exact review evidence awaits its own remote preservation and green hosted CI before production-complete credit."
+      "notes": "Spill response station, linen/reset cabinet, and filtered water station are source-accepted, remotely preserved, visually accepted in native four-rotation gameplay review attempt 010, and backed by an exact remote review-evidence checkpoint with green hosted CI."
     },
     {
       "id": "furniture-core-directional-011",
