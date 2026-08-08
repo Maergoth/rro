@@ -57,8 +57,10 @@
     "dish-machine",
     "espresso",
     "furniture-banquette-section",
+    "furniture-chemical-cabinet",
     "furniture-commercial-chair",
     "furniture-convection-oven",
+    "furniture-dish-machine-high-temp",
     "furniture-dry-storage-rack",
     "furniture-expo-pass-heated",
     "furniture-host-stand-pro",
@@ -69,6 +71,7 @@
     "furniture-prep-table-refrigerated",
     "furniture-server-station-pro",
     "furniture-six-burner-range",
+    "furniture-three-comp-sink",
     "furniture-walkin-rack",
     "furniture-walnut-four-top",
     "host-stand",
@@ -85,11 +88,7 @@
     "table-two"
   ],
   "runtimeCompositeBlockedAssetIds": [],
-  "runtimeCompositePendingAssetIds": [
-    "furniture-chemical-cabinet",
-    "furniture-dish-machine-high-temp",
-    "furniture-three-comp-sink"
-  ],
+  "runtimeCompositePendingAssetIds": [],
   "capability": {
     "directionalTextureSelection": true,
     "commonFloorContactPivot": true,
@@ -98,8 +97,8 @@
     "runtimeProjection": "elevated-orthographic-isometric-grid",
     "projectionIntegrated": true,
     "projectionAligned": true,
-    "runtimeCompositeAccepted": false,
+    "runtimeCompositeAccepted": true,
     "productionComplete": false,
-    "remainingVisualGate": "Thirty-one previously reviewed directional sets remain accepted. The locked chemical cabinet, high-temperature dish machine, and three-compartment sink await exact native four-rotation gameplay review; the other 195 catalog identities still require source acceptance, runtime binding, remote preservation, gameplay review, and green hosted CI."
+    "remainingVisualGate": "All thirty-four present directional sets are accepted in exact native four-rotation gameplay review. The other 195 catalog identities still require source acceptance, runtime binding, remote preservation, gameplay review, and green hosted CI."
   }
 }

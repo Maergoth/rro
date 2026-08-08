@@ -34,10 +34,10 @@ test("restaurant floor delegates every grid transform and pick to the elevated i
   assert.doesNotMatch(runtime, /\(point - camera_offset\) \/ cell_pixels/);
   assert.equal(contract.capability.runtimeProjection, "elevated-orthographic-isometric-grid");
   assert.equal(contract.capability.projectionIntegrated, true);
-  assert.equal(contract.capability.runtimeCompositeAccepted, false, "new source-accepted furniture must remain pending until durable native gameplay QA");
-  assert.equal(contract.runtimeCompositeAcceptedAssetIds.length, 31);
+  assert.equal(contract.capability.runtimeCompositeAccepted, true, "every source-accepted set has durable native gameplay QA");
+  assert.equal(contract.runtimeCompositeAcceptedAssetIds.length, 34);
   assert.deepEqual(contract.runtimeCompositeBlockedAssetIds, []);
-  assert.deepEqual(contract.runtimeCompositePendingAssetIds, ["furniture-chemical-cabinet", "furniture-dish-machine-high-temp", "furniture-three-comp-sink"]);
+  assert.deepEqual(contract.runtimeCompositePendingAssetIds, []);
 });
 
 test("zoom keeps the exact fractional world point under the cursor", () => {

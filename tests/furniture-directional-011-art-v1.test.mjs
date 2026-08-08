@@ -8,7 +8,7 @@ import { inflateSync } from "node:zlib";
 const ROOT = resolve(import.meta.dirname, "..");
 const QA_ROOT = "planning/art-qa/furniture-core-directional-011";
 const QA_PATH = `${QA_ROOT}/qa.json`;
-const QA_SHA256 = "13428b63e89df1325a184c151f6a28301441f85cd9858c240351a96317b382bb";
+const QA_SHA256 = "a9942fc796bb62b7670d14b63dd5e92735b3308b6d6307045a5cd13f9fd527f7";
 const ASSETS = ["furniture-chemical-cabinet", "furniture-dish-machine-high-temp", "furniture-three-comp-sink"];
 const DIRECTIONS = ["north", "east", "south", "west"];
 const PLACEMENT = { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" };
@@ -110,8 +110,9 @@ test("furniture directional batch 011 preserves exact accepted source evidence",
   assert.equal(qa.batchId, "furniture-core-directional-011");
   assert.deepEqual(qa.assets, ASSETS);
   assert.equal(qa.artReviewStatus, "accepted");
-  assert.equal(qa.productionComplete, false);
-  assert.equal(qa.repositoryPromotion.status, "remote-verified-source-and-runtime-review-pending-evidence-preservation");
+  assert.equal(qa.productionComplete, true);
+  assert.equal(qa.repositoryPromotion.status, "remote-verified-production-complete");
+  assert.deepEqual(qa.productionCompletionBlockers, []);
   assert.deepEqual(qa.remotePreservation, {
     commit: "d0d4f9111e23b488c8886bd773f75eb81c2dac38",
     tree: "858d1f601b278e59ce34187fd68374ef9a076c88",
