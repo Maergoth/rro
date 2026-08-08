@@ -8,7 +8,7 @@ import { inflateSync } from "node:zlib";
 const ROOT = resolve(import.meta.dirname, "..");
 const QA_ROOT = "planning/art-qa/furniture-core-directional-011";
 const QA_PATH = `${QA_ROOT}/qa.json`;
-const QA_SHA256 = "a0c24e8e1814e30ae8420f12734483a6a6ab098d7432b5c6865470a139b5852c";
+const QA_SHA256 = "13428b63e89df1325a184c151f6a28301441f85cd9858c240351a96317b382bb";
 const ASSETS = ["furniture-chemical-cabinet", "furniture-dish-machine-high-temp", "furniture-three-comp-sink"];
 const DIRECTIONS = ["north", "east", "south", "west"];
 const PLACEMENT = { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" };
@@ -111,8 +111,15 @@ test("furniture directional batch 011 preserves exact accepted source evidence",
   assert.deepEqual(qa.assets, ASSETS);
   assert.equal(qa.artReviewStatus, "accepted");
   assert.equal(qa.productionComplete, false);
-  assert.equal(qa.repositoryPromotion.status, "local-verified-pending-remote");
-  assert.equal(qa.remotePreservation, null);
+  assert.equal(qa.repositoryPromotion.status, "remote-verified-source-and-runtime-review-pending-evidence-preservation");
+  assert.deepEqual(qa.remotePreservation, {
+    commit: "d0d4f9111e23b488c8886bd773f75eb81c2dac38",
+    tree: "858d1f601b278e59ce34187fd68374ef9a076c88",
+    ci: "https://github.com/Maergoth/rro/actions/runs/31184950416",
+    artifactId: 8996352192,
+    artifactSha256: "3b9f431c59473ccf9524de03454859928b7430601ef1c7c73c29ff11f353e072",
+  });
+  assert.match(qa.gates.nativeGameplayCompositeReview, /^pass: runtime-isometric-integration-001-attempt-009/);
   assert.deepEqual(qa.promotionScope, { runtimeFiles: 12, alphaSourceFiles: 12, contactSheets: 2, provenanceDocuments: 2, totalFiles: 28 });
   assert.doesNotMatch(JSON.stringify(qa), /\/tmp\/|\/workspace\//);
   assert.equal(fileSha256(qa.source.promptLog), qa.source.promptLogSha256);

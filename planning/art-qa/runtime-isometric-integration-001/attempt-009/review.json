@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "id": "runtime-isometric-integration-001-attempt-009",
+  "reviewedAt": "2026-08-08T01:12:00Z",
+  "source": {
+    "remoteCommit": "d0d4f9111e23b488c8886bd773f75eb81c2dac38",
+    "remoteTree": "858d1f601b278e59ce34187fd68374ef9a076c88",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31184950416",
+    "artifactId": 8996352192,
+    "artifactName": "elevated-isometric-runtime-qa",
+    "artifactSha256": "3b9f431c59473ccf9524de03454859928b7430601ef1c7c73c29ff11f353e072"
+  },
+  "automatedGates": {
+    "windowsCi": "passed",
+    "ubuntuCi": "passed",
+    "nativeGodotCapture": "passed",
+    "captureCount": 4,
+    "viewport": [1800, 1100],
+    "minimumSampledColors": 410,
+    "exactArtifactDigestVerified": true,
+    "exactCaptureHashesVerified": true,
+    "legalMountedPlacementRecordsPresent": true
+  },
+  "visualReview": {
+    "status": "passed-all-present-assets",
+    "productionComplete": false,
+    "reviewers": [
+      "root original-scale and gameplay-scale inspection"
+    ],
+    "passed": [
+      "The locked chemical cabinet preserves one coherent closed commercial cabinet identity, lock and hazard-cue details, correct four-direction facing, credible 2x1 scale, and stable footprint contact.",
+      "The high-temperature dish machine preserves its pass-through hood, wash chamber, control details, correct four-direction facing, credible 4x3 scale, and stable footprint contact.",
+      "The three-compartment sink preserves exactly three basins, drainboards and commercial plumbing construction, correct four-direction facing, credible 4x2 scale, and stable footprint contact.",
+      "All three new fixtures remain fully readable at gameplay scale with coherent floor contact, depth ordering, wall context, and no clipping, floating, overlays, or viewport cropping.",
+      "The thirty-one previously accepted identities retain coherent projection, mounted context, placement, depth, scale, and gameplay legibility without a visible regression.",
+      "The exact artifact digest, four capture hashes, remote commit, exact tree, and green Windows and Ubuntu CI are verified."
+    ],
+    "blockers": [],
+    "acceptedAssetIds": [
+      "banquette",
+      "booth",
+      "dish-machine",
+      "espresso",
+      "furniture-banquette-section",
+      "furniture-chemical-cabinet",
+      "furniture-commercial-chair",
+      "furniture-convection-oven",
+      "furniture-dish-machine-high-temp",
+      "furniture-dry-storage-rack",
+      "furniture-expo-pass-heated",
+      "furniture-host-stand-pro",
+      "furniture-oak-two-top",
+      "furniture-plancha-commercial",
+      "furniture-pos-terminal",
+      "furniture-premium-chair",
+      "furniture-prep-table-refrigerated",
+      "furniture-server-station-pro",
+      "furniture-six-burner-range",
+      "furniture-three-comp-sink",
+      "furniture-walkin-rack",
+      "furniture-walnut-four-top",
+      "host-stand",
+      "local-art",
+      "mop-sink",
+      "pass",
+      "pendants",
+      "plants",
+      "prep",
+      "range",
+      "recycling",
+      "service-station",
+      "table-four",
+      "table-two"
+    ],
+    "rejectedAssetIds": [],
+    "nextCaptureRequirements": [
+      "No remaining directional-furniture runtime visual blocker exists for the thirty-four present source-accepted identities.",
+      "Later catalog identities still require source acceptance, exact remote preservation, native gameplay-scale review, durable evidence preservation, and green hosted CI before receiving production credit."
+    ]
+  },
+  "captures": [
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-009/restaurant-north.png",
+      "sha256": "f93d66f40e72e5d60e4454bb923bdc33aa8dfb1ec1cc8665d31355054f52ca57"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-009/restaurant-east.png",
+      "sha256": "b14e57d25c7860b7de76b0e7671d54042e812726be93ea87912d06687aee256d"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-009/restaurant-south.png",
+      "sha256": "38e365a48a828ae91f92e3a6939da094d83a500499714c1c22a8319014967c00"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-009/restaurant-west.png",
+      "sha256": "1b51f553dc850328b3a2538c7c930157570ba3f7da5659c0f50f703d9f9386ec"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-009/qa.json",
+      "sha256": "3a223d0602843ae75c6d8355925e8286b56e51df9eec666256b83fdcc0ebd4ce"
+    }
+  ]
+}

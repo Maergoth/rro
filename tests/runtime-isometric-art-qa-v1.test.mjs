@@ -14,8 +14,9 @@ const reviewPaths = [
   "planning/art-qa/runtime-isometric-integration-001/attempt-006/review.json",
   "planning/art-qa/runtime-isometric-integration-001/attempt-007/review.json",
   "planning/art-qa/runtime-isometric-integration-001/attempt-008/review.json",
+  "planning/art-qa/runtime-isometric-integration-001/attempt-009/review.json",
 ];
-const [attempt001, attempt002, attempt003, attempt004, attempt005, attempt006, attempt007, attempt008] = reviewPaths.map((path) => JSON.parse(read(path).toString("utf8")));
+const [attempt001, attempt002, attempt003, attempt004, attempt005, attempt006, attempt007, attempt008, attempt009] = reviewPaths.map((path) => JSON.parse(read(path).toString("utf8")));
 
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 
@@ -124,8 +125,23 @@ test("native isometric attempt 008 accepts all thirty-one present assets without
   assert.deepEqual(attempt008.visualReview.blockers, []);
 });
 
+test("native isometric attempt 009 accepts all thirty-four present assets without blockers", () => {
+  assert.equal(attempt009.source.remoteCommit, "d0d4f9111e23b488c8886bd773f75eb81c2dac38");
+  assert.equal(attempt009.source.remoteTree, "858d1f601b278e59ce34187fd68374ef9a076c88");
+  assert.equal(attempt009.source.artifactId, 8996352192);
+  assert.equal(attempt009.source.artifactSha256, "3b9f431c59473ccf9524de03454859928b7430601ef1c7c73c29ff11f353e072");
+  assert.equal(attempt009.visualReview.status, "passed-all-present-assets");
+  assert.equal(attempt009.visualReview.productionComplete, false, "the review evidence is not remotely preserved yet");
+  assert.equal(attempt009.visualReview.acceptedAssetIds.length, 34);
+  assert.ok(attempt009.visualReview.acceptedAssetIds.includes("furniture-chemical-cabinet"));
+  assert.ok(attempt009.visualReview.acceptedAssetIds.includes("furniture-dish-machine-high-temp"));
+  assert.ok(attempt009.visualReview.acceptedAssetIds.includes("furniture-three-comp-sink"));
+  assert.deepEqual(attempt009.visualReview.rejectedAssetIds, []);
+  assert.deepEqual(attempt009.visualReview.blockers, []);
+});
+
 test("every durable native capture has exact bytes and the required gameplay viewport", () => {
-  for (const review of [attempt001, attempt002, attempt003, attempt004, attempt005, attempt006, attempt007, attempt008]) {
+  for (const review of [attempt001, attempt002, attempt003, attempt004, attempt005, attempt006, attempt007, attempt008, attempt009]) {
     assert.equal(review.captures.length, 5);
     for (const capture of review.captures) {
       const bytes = read(capture.path);

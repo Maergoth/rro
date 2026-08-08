@@ -9,8 +9,7 @@
   "artReviewStatus": "accepted",
   "productionComplete": false,
   "productionCompletionBlockers": [
-    "The exact 28-file source/runtime evidence checkpoint requires GitHub preservation and green hosted CI.",
-    "The three identities require exact native four-rotation gameplay composite capture and human acceptance after runtime binding."
+    "Native four-rotation gameplay review attempt 009 passes all three identities, but that exact review evidence still requires its own GitHub preservation and green hosted Windows and Ubuntu CI before production-complete credit."
   ],
   "promotionScope": {
     "runtimeFiles": 12,
@@ -20,14 +19,20 @@
     "totalFiles": 28
   },
   "repositoryPromotion": {
-    "status": "local-verified-pending-remote",
+    "status": "remote-verified-source-and-runtime-review-pending-evidence-preservation",
     "runtimeFiles": 12,
     "alphaSourceFiles": 12,
     "contactSheets": 2,
     "provenanceDocuments": 2,
     "totalFiles": 28
   },
-  "remotePreservation": null,
+  "remotePreservation": {
+    "commit": "d0d4f9111e23b488c8886bd773f75eb81c2dac38",
+    "tree": "858d1f601b278e59ce34187fd68374ef9a076c88",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31184950416",
+    "artifactId": 8996352192,
+    "artifactSha256": "3b9f431c59473ccf9524de03454859928b7430601ef1c7c73c29ff11f353e072"
+  },
   "source": {
     "generator": "OpenAI built-in image generation",
     "mode": "three separately prompted rigid 2x2 N/E/S/W utility-fixture atlases; no source edit was required",
@@ -105,7 +110,7 @@
     "noClippingTextLogosWatermarksShadowsOrExtraObjects": "pass",
     "visualReviewAtFullScale": "pass: planning/art-qa/furniture-core-directional-011/contact-627-dark.png inspected at original resolution; construction, counts, camera, alpha, silhouettes, and floor contact pass.",
     "visualReviewAtGameplayScale128px": "pass: planning/art-qa/furniture-core-directional-011/contact-128-light.png inspected at original resolution; locked cabinet, hood dish machine, and three-basin sink remain distinct.",
-    "nativeGameplayCompositeReview": "pending remote source preservation, runtime binding, native capture, and human acceptance",
+    "nativeGameplayCompositeReview": "pass: runtime-isometric-integration-001-attempt-009; all three identities preserve directional selection, footprint contact, scale, depth, and gameplay legibility across exact 1800x1100 north/east/south/west captures from CI run 31184950416.",
     "proceduralOrDeterministicStandIn": false
   },
   "contactSheets": [
