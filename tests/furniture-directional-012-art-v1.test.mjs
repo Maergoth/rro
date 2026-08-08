@@ -8,7 +8,7 @@ import { inflateSync } from "node:zlib";
 const ROOT = resolve(import.meta.dirname, "..");
 const QA_ROOT = "planning/art-qa/furniture-core-directional-012";
 const QA_PATH = `${QA_ROOT}/qa.json`;
-const QA_SHA256 = "2d1b3558b497bf27bfdf8a5caacc9c85970f13abc51f07317284f8d6ef06b7f6";
+const QA_SHA256 = "4dd63afd6571eeb4ec6b0dd9a03cf60e8164350c42b07616f0fb2b9579b65bb4";
 const ASSETS = ["furniture-wet-floor-station", "furniture-linen-storage", "furniture-water-station"];
 const DIRECTIONS = ["north", "east", "south", "west"];
 const PLACEMENT = { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" };
@@ -111,10 +111,16 @@ test("furniture directional batch 012 preserves exact accepted source evidence",
   assert.deepEqual(qa.assets, ASSETS);
   assert.equal(qa.artReviewStatus, "accepted");
   assert.equal(qa.productionComplete, false);
-  assert.equal(qa.repositoryPromotion.status, "local-verified-pending-remote");
-  assert.equal(qa.productionCompletionBlockers.length, 2);
-  assert.equal(qa.remotePreservation, null);
-  assert.match(qa.gates.nativeGameplayCompositeReview, /^pending:/);
+  assert.equal(qa.repositoryPromotion.status, "remote-verified-source-and-runtime-review-pending-evidence-preservation");
+  assert.equal(qa.productionCompletionBlockers.length, 1);
+  assert.deepEqual(qa.remotePreservation, {
+    commit: "dd542537e372b7d726a375e48540c7ca066caaf4",
+    tree: "51db0b01d7719e0d4474afeb4f5bc0484cbccc84",
+    ci: "https://github.com/Maergoth/rro/actions/runs/31233762203",
+    artifactId: 9014716339,
+    artifactSha256: "6ac765908a7871ee29e06f4407ef7e2b74ffcdbccace6e0ab5ac634e8774e310",
+  });
+  assert.match(qa.gates.nativeGameplayCompositeReview, /^pass: runtime-isometric-integration-001-attempt-010/);
   assert.deepEqual(qa.promotionScope, { runtimeFiles: 12, alphaSourceFiles: 12, contactSheets: 2, provenanceDocuments: 2, totalFiles: 28 });
   assert.doesNotMatch(JSON.stringify(qa), /\/tmp\/|\/workspace\//);
   assert.equal(fileSha256(qa.source.promptLog), qa.source.promptLogSha256);

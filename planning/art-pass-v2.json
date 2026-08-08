@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "822a53c1e9b4ae3bc6cb2b11e55c0aa6afcd2dbe",
-    "tree": "c202d06b36cc543d4ec64ebac905665269440329",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/31232119268"
+    "commit": "dd542537e372b7d726a375e48540c7ca066caaf4",
+    "tree": "51db0b01d7719e0d4474afeb4f5bc0484cbccc84",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31233762203"
   },
   "completionRule": "generated, processed, raster-validated, visually accepted, runtime-bound assets whose exact reviewed bytes are remotely verified on GitHub with green CI",
   "artDirection": {
@@ -378,9 +378,37 @@
         "ci": "https://github.com/Maergoth/rro/actions/runs/31232119268"
       },
       "productionComplete": false
+    },
+    {
+      "id": "runtime-isometric-integration-001-attempt-010",
+      "status": "passed-all-present-assets",
+      "remoteCommit": "dd542537e372b7d726a375e48540c7ca066caaf4",
+      "remoteTree": "51db0b01d7719e0d4474afeb4f5bc0484cbccc84",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31233762203",
+      "artifactId": 9014716339,
+      "artifactSha256": "6ac765908a7871ee29e06f4407ef7e2b74ffcdbccace6e0ab5ac634e8774e310",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-010/review.json",
+      "passed": ["native-four-rotation-capture", "elevated-projection", "directional-selection", "floor-contact-pivots", "mixed-world-depth", "gameplay-legibility", "legal-mounted-placement-records", "wall-and-ceiling-context", "thirty-seven-present-assets"],
+      "blockers": [],
+      "acceptedAssetIds": [
+        "banquette", "booth", "dish-machine", "espresso", "furniture-banquette-section",
+        "furniture-chemical-cabinet", "furniture-commercial-chair", "furniture-convection-oven",
+        "furniture-dish-machine-high-temp", "furniture-dry-storage-rack", "furniture-expo-pass-heated",
+        "furniture-host-stand-pro", "furniture-linen-storage", "furniture-oak-two-top",
+        "furniture-plancha-commercial", "furniture-pos-terminal", "furniture-premium-chair",
+        "furniture-prep-table-refrigerated", "furniture-server-station-pro",
+        "furniture-six-burner-range", "furniture-three-comp-sink", "furniture-walkin-rack",
+        "furniture-walnut-four-top", "furniture-water-station", "furniture-wet-floor-station",
+        "host-stand", "local-art", "mop-sink", "pass", "pendants", "plants", "prep",
+        "range", "recycling", "service-station", "table-four", "table-two"
+      ],
+      "rejectedAssetIds": [],
+      "reviewPreservation": null,
+      "productionComplete": false
     }
   ],
-  "pendingBatches": [
+  "pendingBatches": [],
+  "batches": [
     {
       "id": "furniture-core-directional-012",
       "assets": [
@@ -390,17 +418,17 @@
       ],
       "files": 28,
       "qa": "passed",
-      "runtimeQa": "pending-native-four-rotation-gameplay-composite",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-010-review-preservation-pending",
       "sourcePromptMode": "built-in image generation; three separately prompted rigid elevated-isometric four-direction service-fixture atlases with two semantic corrections, official chroma-key edge remediation, common-pivot normalization, and full/gameplay-scale contact review",
-      "remoteCommit": null,
-      "remoteTree": null,
-      "ci": null,
+      "remoteCommit": "dd542537e372b7d726a375e48540c7ca066caaf4",
+      "remoteTree": "51db0b01d7719e0d4474afeb4f5bc0484cbccc84",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31233762203",
+      "artifactId": 9014716339,
+      "artifactSha256": "6ac765908a7871ee29e06f4407ef7e2b74ffcdbccace6e0ab5ac634e8774e310",
       "qaEvidence": "planning/art-qa/furniture-core-directional-012/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-012/qa.json",
-      "notes": "Spill response station, linen/reset cabinet, and filtered water station are source-accepted locally and await exact remote preservation, hosted CI, and native four-rotation gameplay composite review."
-    }
-  ],
-  "batches": [
+      "notes": "Spill response station, linen/reset cabinet, and filtered water station are source-accepted, remotely preserved, and visually accepted in native four-rotation gameplay review attempt 010. The exact review evidence awaits its own remote preservation and green hosted CI before production-complete credit."
+    },
     {
       "id": "furniture-core-directional-011",
       "assets": [

@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "id": "runtime-isometric-integration-001-attempt-010",
+  "reviewedAt": "2026-08-08T02:00:00Z",
+  "source": {
+    "remoteCommit": "dd542537e372b7d726a375e48540c7ca066caaf4",
+    "remoteTree": "51db0b01d7719e0d4474afeb4f5bc0484cbccc84",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31233762203",
+    "artifactId": 9014716339,
+    "artifactName": "elevated-isometric-runtime-qa",
+    "artifactSha256": "6ac765908a7871ee29e06f4407ef7e2b74ffcdbccace6e0ab5ac634e8774e310"
+  },
+  "automatedGates": {
+    "windowsCi": "passed",
+    "ubuntuCi": "passed",
+    "nativeGodotCapture": "passed",
+    "captureCount": 4,
+    "viewport": [1800, 1100],
+    "minimumSampledColors": 410,
+    "exactArtifactDigestVerified": true,
+    "exactCaptureHashesVerified": true,
+    "legalMountedPlacementRecordsPresent": true
+  },
+  "visualReview": {
+    "status": "passed-all-present-assets",
+    "productionComplete": false,
+    "reviewers": [
+      "root original-scale and gameplay-scale inspection"
+    ],
+    "passed": [
+      "The Spill Response Station preserves one coherent teal-and-charcoal wheeled utility identity: teal and amber front, physical-right red wringer bucket, rear rail, physical-left blue mop, stable 2x1 floor contact, and true quarter turns.",
+      "The Linen and Reset Cabinet preserves its two front doors, physical-right grille, rear shelving, physical-left/rear view, and the same three folded-linen stacks with stable 2x1 contact through all four directions.",
+      "The Filtered Water Station preserves its three-tap front bay, physical-right grille, two rear blue caps, plain physical-left/rear view, and stable 2x2 floor contact through all four directions.",
+      "All three new fixtures remain fully readable at gameplay scale with coherent elevated projection, floor contact, depth ordering, wall context, and no clipping, floating, overlays, or viewport cropping.",
+      "The thirty-four previously accepted identities retain coherent projection, mounted context, placement, depth, scale, and gameplay legibility without a visible regression.",
+      "The exact artifact digest, four capture hashes, remote commit, exact tree, and green Windows and Ubuntu CI are verified."
+    ],
+    "blockers": [],
+    "acceptedAssetIds": [
+      "banquette",
+      "booth",
+      "dish-machine",
+      "espresso",
+      "furniture-banquette-section",
+      "furniture-chemical-cabinet",
+      "furniture-commercial-chair",
+      "furniture-convection-oven",
+      "furniture-dish-machine-high-temp",
+      "furniture-dry-storage-rack",
+      "furniture-expo-pass-heated",
+      "furniture-host-stand-pro",
+      "furniture-linen-storage",
+      "furniture-oak-two-top",
+      "furniture-plancha-commercial",
+      "furniture-pos-terminal",
+      "furniture-premium-chair",
+      "furniture-prep-table-refrigerated",
+      "furniture-server-station-pro",
+      "furniture-six-burner-range",
+      "furniture-three-comp-sink",
+      "furniture-walkin-rack",
+      "furniture-walnut-four-top",
+      "furniture-water-station",
+      "furniture-wet-floor-station",
+      "host-stand",
+      "local-art",
+      "mop-sink",
+      "pass",
+      "pendants",
+      "plants",
+      "prep",
+      "range",
+      "recycling",
+      "service-station",
+      "table-four",
+      "table-two"
+    ],
+    "rejectedAssetIds": [],
+    "nextCaptureRequirements": [
+      "No remaining directional-furniture runtime visual blocker exists for the thirty-seven present source-accepted identities.",
+      "Later catalog identities still require source acceptance, exact remote preservation, native gameplay-scale review, durable evidence preservation, and green hosted CI before receiving production credit."
+    ]
+  },
+  "captures": [
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-010/restaurant-north.png",
+      "sha256": "58425c836890046b5aeef1a29604ca80b19ab21358670eb581819b27e7baf975"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-010/restaurant-east.png",
+      "sha256": "be1d7f0f76f22a745a819a32394b58fa4217504184110af1ddfab53ea1698268"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-010/restaurant-south.png",
+      "sha256": "5bcd8c40734c000d2d8d869ff55884dabdb1713cc0c28536fa499f75d9b6e397"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-010/restaurant-west.png",
+      "sha256": "b0e8620a62b7dfa0316df9e0d8d1a801f2cbc6167f0174b39fb62b6e3866c01d"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-010/qa.json",
+      "sha256": "379a3f13a61752063bad84c442e7c03a642e3138af6de0650f12ff8f752a8605"
+    }
+  ]
+}
