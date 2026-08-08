@@ -20,7 +20,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
-| Furniture directional sets | 229 | 34 | 34 | 34 | 34 |
+| Furniture directional sets | 229 | 37 | 37 | 34 | 34 |
 | Equipment inventory icons | 45 | 45 | 45 | 45 | 45 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
@@ -35,7 +35,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 | Activity → animation bindings | 89 | 0 | 0 | 0 | 0 |
 
 45 equipment icons and 34 furniture directional sets are production-complete because their exact reviewed bytes are visually accepted, runtime-bound, remotely verified, and CI-green. Character art and the other missing lanes remain explicit below.
-Directional furniture texture selection is yes and projection alignment is yes. Latest native review `runtime-isometric-integration-001-attempt-009` accepted 34/34 present sets; its durable review checkpoint is remote-verified: yes. No source-accepted directional sets remain blocked by the latest native gameplay review. No source-accepted directional sets are pending their first native four-rotation gameplay composite.
+Directional furniture texture selection is yes and projection alignment is yes. Latest native review `runtime-isometric-integration-001-attempt-009` accepted 34/37 present sets; its durable review checkpoint is remote-verified: yes. No source-accepted directional sets remain blocked by the latest native gameplay review. `furniture-wet-floor-station`, `furniture-linen-storage`, `furniture-water-station` are source-accepted but pending their first native four-rotation gameplay composite; 3/3 are also local-only pending an immutable remote checkpoint and green hosted CI.
 
 ## Character truth
 
@@ -109,21 +109,25 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 | furniture-core-directional-006 | 28 | passed | passed-native-gameplay-composite-attempt-007 | `185ca50` | planning/art-qa/furniture-core-directional-006/contact-627-dark.png |
 | furniture-core-directional-007 | 28 | passed | passed-native-gameplay-composite-attempt-003 | `98e479e` | planning/art-qa/furniture-core-directional-007/contact-627-dark.png |
 
+## Accepted locally, remote checkpoint pending
+
+These batches have passed source/composite QA but deliberately do not count as remotely verified or production-complete until their immutable GitHub commit and hosted CI are recorded.
+
+| Batch | Files | Source QA | Runtime/composite QA | Evidence |
+|---|---:|---|---|---|
+| furniture-core-directional-012 | 28 | passed | pending-native-four-rotation-gameplay-composite | planning/art-qa/furniture-core-directional-012/contact-627-dark.png |
+
 ## Missing furniture directional sets
 
-34 of 229 elevated four-direction sets are present. The 20 attractive overhead singles are preserved as references but do not satisfy this camera contract.
+37 of 229 elevated four-direction sets are present. The 20 attractive overhead singles are preserved as references but do not satisfy this camera contract.
 
-### Utility — 33 missing
+### Utility — 32 missing
 
-`furniture-glass-rack-system`, `furniture-floor-drain`, `furniture-wet-floor-station`, `furniture-essential-dish-machine`, `furniture-craftsman-dish-machine`, `furniture-endurance-dish-machine`, `furniture-hospitality-dish-machine`, `furniture-precision-dish-machine`, `furniture-reclaimed-dish-machine`, `furniture-essential-pot-wash-sink`, `furniture-craftsman-pot-wash-sink`, `furniture-endurance-pot-wash-sink`, `furniture-hospitality-pot-wash-sink`, `furniture-precision-pot-wash-sink`, `furniture-reclaimed-pot-wash-sink`, `furniture-essential-mop-basin`, `furniture-craftsman-mop-basin`, `furniture-endurance-mop-basin`, `furniture-hospitality-mop-basin`, `furniture-precision-mop-basin`, `furniture-reclaimed-mop-basin`, `furniture-essential-waste-sorter`, `furniture-craftsman-waste-sorter`, `furniture-endurance-waste-sorter`, `furniture-hospitality-waste-sorter`, `furniture-precision-waste-sorter`, `furniture-reclaimed-waste-sorter`, `furniture-essential-spill-cart`, `furniture-craftsman-spill-cart`, `furniture-endurance-spill-cart`, `furniture-hospitality-spill-cart`, `furniture-precision-spill-cart`, `furniture-reclaimed-spill-cart`
+`furniture-glass-rack-system`, `furniture-floor-drain`, `furniture-essential-dish-machine`, `furniture-craftsman-dish-machine`, `furniture-endurance-dish-machine`, `furniture-hospitality-dish-machine`, `furniture-precision-dish-machine`, `furniture-reclaimed-dish-machine`, `furniture-essential-pot-wash-sink`, `furniture-craftsman-pot-wash-sink`, `furniture-endurance-pot-wash-sink`, `furniture-hospitality-pot-wash-sink`, `furniture-precision-pot-wash-sink`, `furniture-reclaimed-pot-wash-sink`, `furniture-essential-mop-basin`, `furniture-craftsman-mop-basin`, `furniture-endurance-mop-basin`, `furniture-hospitality-mop-basin`, `furniture-precision-mop-basin`, `furniture-reclaimed-mop-basin`, `furniture-essential-waste-sorter`, `furniture-craftsman-waste-sorter`, `furniture-endurance-waste-sorter`, `furniture-hospitality-waste-sorter`, `furniture-precision-waste-sorter`, `furniture-reclaimed-waste-sorter`, `furniture-essential-spill-cart`, `furniture-craftsman-spill-cart`, `furniture-endurance-spill-cart`, `furniture-hospitality-spill-cart`, `furniture-precision-spill-cart`, `furniture-reclaimed-spill-cart`
 
 ### Decor — 24 missing
 
 `furniture-oak-partition`, `furniture-large-planter`, `furniture-wall-art-local`, `furniture-acoustic-panel`, `furniture-pendant-light`, `furniture-essential-room-divider`, `furniture-craftsman-room-divider`, `furniture-endurance-room-divider`, `furniture-hospitality-room-divider`, `furniture-precision-room-divider`, `furniture-reclaimed-room-divider`, `furniture-essential-planter-feature`, `furniture-craftsman-planter-feature`, `furniture-endurance-planter-feature`, `furniture-hospitality-planter-feature`, `furniture-precision-planter-feature`, `furniture-reclaimed-planter-feature`, `furniture-essential-acoustic-light`, `furniture-craftsman-acoustic-light`, `furniture-endurance-acoustic-light`, `furniture-hospitality-acoustic-light`, `furniture-precision-acoustic-light`, `furniture-reclaimed-acoustic-light`, `summer-canopy`
-
-### Service — 33 missing
-
-`furniture-linen-storage`, `furniture-water-station`, `furniture-essential-host-podium`, `furniture-craftsman-host-podium`, `furniture-endurance-host-podium`, `furniture-hospitality-host-podium`, `furniture-precision-host-podium`, `furniture-reclaimed-host-podium`, `furniture-essential-server-console`, `furniture-craftsman-server-console`, `furniture-endurance-server-console`, `furniture-hospitality-server-console`, `furniture-precision-server-console`, `furniture-reclaimed-server-console`, `furniture-essential-beverage-station`, `furniture-craftsman-beverage-station`, `furniture-endurance-beverage-station`, `furniture-hospitality-beverage-station`, `furniture-precision-beverage-station`, `furniture-reclaimed-beverage-station`, `furniture-essential-pos-workstation`, `furniture-craftsman-pos-workstation`, `furniture-endurance-pos-workstation`, `furniture-hospitality-pos-workstation`, `furniture-precision-pos-workstation`, `furniture-reclaimed-pos-workstation`, `furniture-essential-bussing-station`, `furniture-craftsman-bussing-station`, `furniture-endurance-bussing-station`, `furniture-hospitality-bussing-station`, `furniture-precision-bussing-station`, `furniture-reclaimed-bussing-station`, `summer-lemonade`
 
 ### Office — 14 missing
 
@@ -132,6 +136,10 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 ### Dining — 31 missing
 
 `furniture-essential-cafe-two-top`, `furniture-craftsman-cafe-two-top`, `furniture-endurance-cafe-two-top`, `furniture-hospitality-cafe-two-top`, `furniture-precision-cafe-two-top`, `furniture-reclaimed-cafe-two-top`, `furniture-essential-family-four-top`, `furniture-craftsman-family-four-top`, `furniture-endurance-family-four-top`, `furniture-hospitality-family-four-top`, `furniture-precision-family-four-top`, `furniture-reclaimed-family-four-top`, `furniture-essential-communal-table`, `furniture-craftsman-communal-table`, `furniture-endurance-communal-table`, `furniture-hospitality-communal-table`, `furniture-precision-communal-table`, `furniture-reclaimed-communal-table`, `furniture-essential-dining-chair`, `furniture-craftsman-dining-chair`, `furniture-endurance-dining-chair`, `furniture-hospitality-dining-chair`, `furniture-precision-dining-chair`, `furniture-reclaimed-dining-chair`, `furniture-essential-dining-booth`, `furniture-craftsman-dining-booth`, `furniture-endurance-dining-booth`, `furniture-hospitality-dining-booth`, `furniture-precision-dining-booth`, `furniture-reclaimed-dining-booth`, `summer-patio-two`
+
+### Service — 31 missing
+
+`furniture-essential-host-podium`, `furniture-craftsman-host-podium`, `furniture-endurance-host-podium`, `furniture-hospitality-host-podium`, `furniture-precision-host-podium`, `furniture-reclaimed-host-podium`, `furniture-essential-server-console`, `furniture-craftsman-server-console`, `furniture-endurance-server-console`, `furniture-hospitality-server-console`, `furniture-precision-server-console`, `furniture-reclaimed-server-console`, `furniture-essential-beverage-station`, `furniture-craftsman-beverage-station`, `furniture-endurance-beverage-station`, `furniture-hospitality-beverage-station`, `furniture-precision-beverage-station`, `furniture-reclaimed-beverage-station`, `furniture-essential-pos-workstation`, `furniture-craftsman-pos-workstation`, `furniture-endurance-pos-workstation`, `furniture-hospitality-pos-workstation`, `furniture-precision-pos-workstation`, `furniture-reclaimed-pos-workstation`, `furniture-essential-bussing-station`, `furniture-craftsman-bussing-station`, `furniture-endurance-bussing-station`, `furniture-hospitality-bussing-station`, `furniture-precision-bussing-station`, `furniture-reclaimed-bussing-station`, `summer-lemonade`
 
 ### Kitchen — 42 missing
 
@@ -159,6 +167,7 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 ## Contract gaps blocking a truthful 100% denominator
 
 - Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.
+- Resolve the latest native directional-furniture review for furniture-linen-storage, furniture-water-station, furniture-wet-floor-station before those source-accepted sets receive production credit.
 - Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.
 - Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete.
 
@@ -207,9 +216,9 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeProjection": "elevated-orthographic-isometric-grid",
       "projectionIntegrated": true,
       "projectionAligned": true,
-      "runtimeCompositeAccepted": true,
+      "runtimeCompositeAccepted": false,
       "productionComplete": false,
-      "remainingVisualGate": "All thirty-four present directional sets are accepted in exact native four-rotation gameplay review. The other 195 catalog identities still require source acceptance, runtime binding, remote preservation, gameplay review, and green hosted CI.",
+      "remainingVisualGate": "Thirty-four of thirty-seven present directional sets are accepted in exact native four-rotation gameplay review. The linen cabinet, filtered water station, and spill response station require remote preservation and exact hosted four-rotation review; the other 192 catalog identities remain absent.",
       "acceptedDirectionalAssetIds": [
         "banquette",
         "booth",
@@ -223,6 +232,7 @@ This JSON block is part of this same authoritative document and contains every c
         "furniture-dry-storage-rack",
         "furniture-expo-pass-heated",
         "furniture-host-stand-pro",
+        "furniture-linen-storage",
         "furniture-oak-two-top",
         "furniture-plancha-commercial",
         "furniture-pos-terminal",
@@ -233,6 +243,8 @@ This JSON block is part of this same authoritative document and contains every c
         "furniture-three-comp-sink",
         "furniture-walkin-rack",
         "furniture-walnut-four-top",
+        "furniture-water-station",
+        "furniture-wet-floor-station",
         "host-stand",
         "local-art",
         "mop-sink",
@@ -283,7 +295,11 @@ This JSON block is part of this same authoritative document and contains every c
         "table-two"
       ],
       "runtimeCompositeBlockedAssetIds": [],
-      "runtimeCompositePendingAssetIds": [],
+      "runtimeCompositePendingAssetIds": [
+        "furniture-linen-storage",
+        "furniture-water-station",
+        "furniture-wet-floor-station"
+      ],
       "runtimeReviewRemoteVerified": true
     }
   },
@@ -291,8 +307,8 @@ This JSON block is part of this same authoritative document and contains every c
     {
       "lane": "Furniture directional sets",
       "required": 229,
-      "present": 34,
-      "sourceAccepted": 34,
+      "present": 37,
+      "sourceAccepted": 37,
       "remoteVerified": 34,
       "productionComplete": 34
     },
@@ -2683,42 +2699,46 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-wet-floor-station/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "a636914639f29f9b010597906efe35942e12e316b5a446aaa103a016fb183c27"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-wet-floor-station/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "d1e6cb7187b775a029fe6d05ed1ae5d84650df7166c0785d12bd465558ce858c"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-wet-floor-station/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "e2ff7e69a9ab14e7cfd0d532165280dfce1b9187f5c3683403818cb3cbd1f835"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-wet-floor-station/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "9bab69f4cd4153269ffab657ca014fe29bb5988bcb0ef2133cb890ed5cf20ee5"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "furniture-core-directional-012",
+      "review": "passed",
+      "runtimeQa": "pending-native-four-rotation-gameplay-composite",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "placement": null,
-      "placementDeclared": false,
-      "sourceAccepted": false,
-      "directionalSelectionBound": false,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-012/contact-627-dark.png",
+      "qaEvidencePresent": true,
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "placementDeclared": true,
+      "sourceAccepted": true,
+      "directionalSelectionBound": true,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": false,
+      "runtimeCompositePending": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "linen-storage",
@@ -2735,42 +2755,46 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-linen-storage/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "a4cbc08a42a9e98ce38d2dfb8f63109ffecc09aa82cf468f0b3be6341f215c94"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-linen-storage/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "484a8912c08b2f9142906ec87578046ed6aec2f1c935876b701b9886e7f285d2"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-linen-storage/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "42508620aed26c433876143dc664f8bf3296387aa543885b119c77241c08cbb6"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-linen-storage/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "1f1f60c3cbf8720e318d0c1c4d9d43a9b0f953d4214166690a6ca03d71291f0d"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "furniture-core-directional-012",
+      "review": "passed",
+      "runtimeQa": "pending-native-four-rotation-gameplay-composite",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "placement": null,
-      "placementDeclared": false,
-      "sourceAccepted": false,
-      "directionalSelectionBound": false,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-012/contact-627-dark.png",
+      "qaEvidencePresent": true,
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "placementDeclared": true,
+      "sourceAccepted": true,
+      "directionalSelectionBound": true,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": false,
+      "runtimeCompositePending": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "water-station",
@@ -2787,42 +2811,46 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-water-station/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "77b22aa0c28e3ed2ad4cc0821e47a37bc5c154643058ee811308d737aad45b77"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-water-station/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "1805f19d822b49ba189d45d02698e7aac2e51182ded82136d51883a0b6b3cac1"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-water-station/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "e38b66589ff0a4aae2089fb9b18376adc8abcace90c3ba27115b4218ecff2fbc"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-water-station/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "c44d917af5e0dda6852a92a8e2809c294c60dccbb4d23c7d9e61af3c3d350f66"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "furniture-core-directional-012",
+      "review": "passed",
+      "runtimeQa": "pending-native-four-rotation-gameplay-composite",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "placement": null,
-      "placementDeclared": false,
-      "sourceAccepted": false,
-      "directionalSelectionBound": false,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-012/contact-627-dark.png",
+      "qaEvidencePresent": true,
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "placementDeclared": true,
+      "sourceAccepted": true,
+      "directionalSelectionBound": true,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": false,
+      "runtimeCompositePending": true,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "office-desk",
@@ -16627,7 +16655,29 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": true
     }
   ],
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "furniture-core-directional-012",
+      "assets": [
+        "furniture-wet-floor-station",
+        "furniture-linen-storage",
+        "furniture-water-station"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "pending-native-four-rotation-gameplay-composite",
+      "sourcePromptMode": "built-in image generation; three separately prompted rigid elevated-isometric four-direction service-fixture atlases with two semantic corrections, official chroma-key edge remediation, common-pivot normalization, and full/gameplay-scale contact review",
+      "remoteCommit": null,
+      "remoteTree": null,
+      "ci": null,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-012/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-012/qa.json",
+      "notes": "Spill response station, linen/reset cabinet, and filtered water station are source-accepted locally and await exact remote preservation, hosted CI, and native four-rotation gameplay composite review.",
+      "qaEvidencePresent": true,
+      "remoteVerified": false,
+      "preservationPending": true
+    }
+  ],
   "runtimeQaAttempts": [
     {
       "id": "runtime-isometric-integration-001-attempt-001",
@@ -17177,6 +17227,7 @@ This JSON block is part of this same authoritative document and contains every c
   ],
   "contractGaps": [
     "Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.",
+    "Resolve the latest native directional-furniture review for furniture-linen-storage, furniture-water-station, furniture-wet-floor-station before those source-accepted sets receive production credit.",
     "Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.",
     "Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete."
   ]

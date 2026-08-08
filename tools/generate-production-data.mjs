@@ -291,6 +291,9 @@ const acceptedFurniturePlacements = {
   "chemical-cabinet": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
   "dish-machine-high-temp": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
   "three-comp-sink": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "wet-floor-station": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "linen-storage": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "water-station": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
 };
 
 function operationalStrength(stats) {

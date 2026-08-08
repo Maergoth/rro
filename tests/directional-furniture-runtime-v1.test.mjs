@@ -20,6 +20,7 @@ const furnitureBatch008Qa = JSON.parse(read("planning/art-qa/furniture-core-dire
 const furnitureBatch009Qa = JSON.parse(read("planning/art-qa/furniture-core-directional-009/qa.json"));
 const furnitureBatch010Qa = JSON.parse(read("planning/art-qa/furniture-core-directional-010/qa.json"));
 const furnitureBatch011Qa = JSON.parse(read("planning/art-qa/furniture-core-directional-011/qa.json"));
+const furnitureBatch012Qa = JSON.parse(read("planning/art-qa/furniture-core-directional-012/qa.json"));
 
 const canonicalRotation = (rotation) => ((rotation % 360) + 360) % 360;
 const directionForRotation = (rotation) => contract.directionsByRotation[String(canonicalRotation(rotation))] ?? "";
@@ -32,7 +33,7 @@ const directionalPath = (assetId, rotation) => {
 test("accepted furniture resolves exact directional paths for canonical rotations", () => {
   assert.equal(contract.schemaVersion, 1);
   assert.deepEqual(contract.directionsByRotation, { "0": "north", "90": "east", "180": "south", "270": "west" });
-  assert.deepEqual(contract.acceptedDirectionalAssetIds, ["banquette", "booth", "dish-machine", "espresso", "furniture-banquette-section", "furniture-chemical-cabinet", "furniture-commercial-chair", "furniture-convection-oven", "furniture-dish-machine-high-temp", "furniture-dry-storage-rack", "furniture-expo-pass-heated", "furniture-host-stand-pro", "furniture-oak-two-top", "furniture-plancha-commercial", "furniture-pos-terminal", "furniture-premium-chair", "furniture-prep-table-refrigerated", "furniture-server-station-pro", "furniture-six-burner-range", "furniture-three-comp-sink", "furniture-walkin-rack", "furniture-walnut-four-top", "host-stand", "local-art", "mop-sink", "pass", "pendants", "plants", "prep", "range", "recycling", "service-station", "table-four", "table-two"]);
+  assert.deepEqual(contract.acceptedDirectionalAssetIds, ["banquette", "booth", "dish-machine", "espresso", "furniture-banquette-section", "furniture-chemical-cabinet", "furniture-commercial-chair", "furniture-convection-oven", "furniture-dish-machine-high-temp", "furniture-dry-storage-rack", "furniture-expo-pass-heated", "furniture-host-stand-pro", "furniture-linen-storage", "furniture-oak-two-top", "furniture-plancha-commercial", "furniture-pos-terminal", "furniture-premium-chair", "furniture-prep-table-refrigerated", "furniture-server-station-pro", "furniture-six-burner-range", "furniture-three-comp-sink", "furniture-walkin-rack", "furniture-walnut-four-top", "furniture-water-station", "furniture-wet-floor-station", "host-stand", "local-art", "mop-sink", "pass", "pendants", "plants", "prep", "range", "recycling", "service-station", "table-four", "table-two"]);
 
   const expectedDirections = [[0, "north"], [90, "east"], [180, "south"], [270, "west"]];
   for (const assetId of contract.acceptedDirectionalAssetIds) {
@@ -61,7 +62,7 @@ test("accepted furniture resolves exact directional paths for canonical rotation
 test("the runtime contract covers every source-accepted directional set without inflating production completion", () => {
   const accepted = new Set();
   const sourceAcceptedBatches = [...artPass.batches, ...(artPass.pendingBatches ?? [])];
-  for (const qa of [furnitureBatch002Qa, furnitureBatch003Qa, furnitureBatch004Qa, furnitureBatch005Qa, furnitureBatch006Qa, furnitureBatch007Qa, furnitureBatch008Qa, furnitureBatch009Qa, furnitureBatch010Qa, furnitureBatch011Qa]) {
+  for (const qa of [furnitureBatch002Qa, furnitureBatch003Qa, furnitureBatch004Qa, furnitureBatch005Qa, furnitureBatch006Qa, furnitureBatch007Qa, furnitureBatch008Qa, furnitureBatch009Qa, furnitureBatch010Qa, furnitureBatch011Qa, furnitureBatch012Qa]) {
     if (sourceAcceptedBatches.some((batch) => batch.id === qa.batchId)) continue;
     sourceAcceptedBatches.push({
       id: qa.batchId,
@@ -83,11 +84,11 @@ test("the runtime contract covers every source-accepted directional set without 
   assert.equal(contract.capability.runtimeProjection, "elevated-orthographic-isometric-grid");
   assert.equal(contract.capability.projectionIntegrated, true);
   assert.equal(contract.capability.projectionAligned, true);
-  assert.equal(contract.capability.runtimeCompositeAccepted, true);
+  assert.equal(contract.capability.runtimeCompositeAccepted, false);
   assert.equal(contract.capability.productionComplete, false);
   assert.deepEqual(contract.runtimeCompositeAcceptedAssetIds, contract.acceptedDirectionalAssetIds.filter((assetId) => !contract.runtimeCompositePendingAssetIds.includes(assetId)));
   assert.deepEqual(contract.runtimeCompositeBlockedAssetIds, []);
-  assert.deepEqual(contract.runtimeCompositePendingAssetIds, []);
+  assert.deepEqual(contract.runtimeCompositePendingAssetIds, ["furniture-linen-storage", "furniture-water-station", "furniture-wet-floor-station"]);
   assert.deepEqual(
     [...contract.runtimeCompositeAcceptedAssetIds, ...contract.runtimeCompositeBlockedAssetIds, ...contract.runtimeCompositePendingAssetIds].sort(),
     [...contract.acceptedDirectionalAssetIds].sort(),
@@ -97,7 +98,7 @@ test("the runtime contract covers every source-accepted directional set without 
     ...contract.runtimeCompositeBlockedAssetIds,
     ...contract.runtimeCompositePendingAssetIds,
   ]).size, contract.acceptedDirectionalAssetIds.length, "runtime states must be pairwise disjoint");
-  assert.match(contract.capability.remainingVisualGate, /all thirty-four present directional sets.*195 catalog identities/i);
+  assert.match(contract.capability.remainingVisualGate, /thirty-four of thirty-seven present directional sets.*192 catalog identities/i);
   assert.match(validator, /runtimeCompositeAccepted must be true iff runtime acceptance exactly covers every source-accepted directional set with no blocked or pending identities/);
 });
 

@@ -27,7 +27,7 @@ test("native Godot QA fixture renders every accepted directional furniture ident
     .map((match) => [match[1], { x: Number(match[2]), y: Number(match[3]) }]));
   assert.deepEqual(fixtureIds, contract.acceptedDirectionalAssetIds);
   assert.equal(new Set(fixtureIds).size, fixtureIds.length);
-  assert.equal(floorPositions.size, 31, "all source-accepted floor identities retain explicit positions");
+  assert.equal(floorPositions.size, 34, "all source-accepted floor identities retain explicit positions");
   assert.deepEqual(Object.fromEntries(floorPositions), {
     banquette: { x: 2, y: 2 },
     booth: { x: 9, y: 2 },
@@ -41,6 +41,7 @@ test("native Godot QA fixture renders every accepted directional furniture ident
     "furniture-dry-storage-rack": { x: 24, y: 8 },
     "furniture-expo-pass-heated": { x: 3, y: 14 },
     "furniture-host-stand-pro": { x: 16, y: 6 },
+    "furniture-linen-storage": { x: 4, y: 1 },
     "furniture-oak-two-top": { x: 22, y: 6 },
     "furniture-plancha-commercial": { x: 18, y: 1 },
     "furniture-pos-terminal": { x: 2, y: 12 },
@@ -51,6 +52,8 @@ test("native Godot QA fixture renders every accepted directional furniture ident
     "furniture-three-comp-sink": { x: 18, y: 10 },
     "furniture-walkin-rack": { x: 1, y: 8 },
     "furniture-walnut-four-top": { x: 5, y: 16 },
+    "furniture-water-station": { x: 7, y: 1 },
+    "furniture-wet-floor-station": { x: 1, y: 1 },
     "host-stand": { x: 11, y: 16 },
     "mop-sink": { x: 23, y: 16 },
     pass: { x: 8, y: 20 },

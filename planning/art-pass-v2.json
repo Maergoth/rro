@@ -30,7 +30,7 @@
     ]
   },
   "coverage": {
-    "furniture": { "catalogTotal": 229, "acceptedSets": 34, "acceptedDirectionalFiles": 136, "runtimeCompositeAcceptedSets": 34 },
+    "furniture": { "catalogTotal": 229, "acceptedSets": 37, "acceptedDirectionalFiles": 148, "runtimeCompositeAcceptedSets": 34 },
     "equipmentIcons": { "catalogTotal": 45, "accepted": 45 },
     "characterSystem": {
       "status": "in_progress",
@@ -380,7 +380,26 @@
       "productionComplete": false
     }
   ],
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "furniture-core-directional-012",
+      "assets": [
+        "furniture-wet-floor-station",
+        "furniture-linen-storage",
+        "furniture-water-station"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "pending-native-four-rotation-gameplay-composite",
+      "sourcePromptMode": "built-in image generation; three separately prompted rigid elevated-isometric four-direction service-fixture atlases with two semantic corrections, official chroma-key edge remediation, common-pivot normalization, and full/gameplay-scale contact review",
+      "remoteCommit": null,
+      "remoteTree": null,
+      "ci": null,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-012/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-012/qa.json",
+      "notes": "Spill response station, linen/reset cabinet, and filtered water station are source-accepted locally and await exact remote preservation, hosted CI, and native four-rotation gameplay composite review."
+    }
+  ],
   "batches": [
     {
       "id": "furniture-core-directional-011",

@@ -1106,6 +1106,11 @@
       "utility",
       "asset:furniture-wet-floor-station"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-wet-floor-station",
     "upkeepCents": 545,
@@ -1144,6 +1149,11 @@
       "service",
       "asset:furniture-linen-storage"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-linen-storage",
     "upkeepCents": 460,
@@ -1184,6 +1194,11 @@
       "service",
       "asset:furniture-water-station"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-water-station",
     "upkeepCents": 821,

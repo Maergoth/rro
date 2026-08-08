@@ -17,7 +17,7 @@ test("every source-accepted furniture identity has one explicit reviewed placeme
   const acceptedDefinitions = rawFurniture.filter((item) => acceptedAssetIds.has(item.assetId ?? item.id));
   const explicitDefinitions = rawFurniture.filter((item) => item.placement !== undefined);
 
-  assert.equal(acceptedDefinitions.length, 34);
+  assert.equal(acceptedDefinitions.length, 37);
   assert.deepEqual(
     explicitDefinitions.map((item) => item.id).sort(),
     acceptedDefinitions.map((item) => item.id).sort(),
@@ -31,9 +31,9 @@ test("every source-accepted furniture identity has one explicit reviewed placeme
     explicitDefinitions.filter((item) => item.placement.mount === "ceiling").map((item) => item.id),
     ["pendants"],
   );
-  assert.equal(explicitDefinitions.filter((item) => item.placement.mount === "floor").length, 31);
+  assert.equal(explicitDefinitions.filter((item) => item.placement.mount === "floor").length, 34);
   const expectedFloorPlacement = { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" };
-  for (const id of ["banquette-section", "commercial-chair", "premium-chair", "host-stand-pro", "server-station-pro", "pos-terminal", "expo-pass-heated", "plancha-commercial", "convection-oven", "prep-table-refrigerated", "walkin-rack", "dry-storage-rack", "chemical-cabinet", "dish-machine-high-temp", "three-comp-sink"]) {
+  for (const id of ["banquette-section", "commercial-chair", "premium-chair", "host-stand-pro", "server-station-pro", "pos-terminal", "expo-pass-heated", "plancha-commercial", "convection-oven", "prep-table-refrigerated", "walkin-rack", "dry-storage-rack", "chemical-cabinet", "dish-machine-high-temp", "three-comp-sink", "wet-floor-station", "linen-storage", "water-station"]) {
     assert.deepEqual(rawFurniture.find((item) => item.id === id)?.placement, expectedFloorPlacement, `${id} explicit placement`);
   }
   assert.ok(explicitDefinitions.filter((item) => item.placement.mount !== "floor").every((item) => item.placement.occupancy === "nonblocking"));
