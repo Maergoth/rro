@@ -447,6 +447,25 @@ if (CHECK) {
   const existing = existsSync(OUTPUT) ? readFileSync(OUTPUT, "utf8").replace(/\r\n/g, "\n") : "";
   if (existing !== output) {
     console.error("docs/ART_PROGRESS.md is stale. Run npm run art:ledger and commit the result.");
+    const existingLines = existing.split("\n");
+    const generatedLines = output.split("\n");
+    const lineCount = Math.max(existingLines.length, generatedLines.length);
+    let firstDifference = null;
+    for (let index = 0; index < lineCount; index += 1) {
+      if (existingLines[index] !== generatedLines[index]) {
+        firstDifference = index;
+        break;
+      }
+    }
+    console.error(JSON.stringify({
+      existingSha256: createHash("sha256").update(existing).digest("hex"),
+      generatedSha256: createHash("sha256").update(output).digest("hex"),
+      existingBytes: Buffer.byteLength(existing),
+      generatedBytes: Buffer.byteLength(output),
+      firstDifferingLine: firstDifference === null ? null : firstDifference + 1,
+      existingLine: firstDifference === null ? null : (existingLines[firstDifference] ?? "").slice(0, 240),
+      generatedLine: firstDifference === null ? null : (generatedLines[firstDifference] ?? "").slice(0, 240),
+    }, null, 2));
     process.exitCode = 1;
   } else {
     console.log(JSON.stringify({ ok: true, output: "docs/ART_PROGRESS.md", summaries }, null, 2));
