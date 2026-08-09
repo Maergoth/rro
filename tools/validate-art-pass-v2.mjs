@@ -265,19 +265,26 @@ if (!latestFurnitureRuntimeQa?.evidence || !file(latestFurnitureRuntimeQa.eviden
   const contractNativeReview = contractFurnitureRuntimeQa?.evidence && file(contractFurnitureRuntimeQa.evidence)
     ? read(contractFurnitureRuntimeQa.evidence)
     : null;
-  const acceptedFromContractEvidence = [...(contractNativeReview?.visualReview?.acceptedAssetIds ?? [])].sort();
   const blockedFromContractEvidence = [...(contractNativeReview?.visualReview?.rejectedAssetIds ?? [])].sort();
-  if (JSON.stringify(acceptedFromContractEvidence) !== JSON.stringify([...runtimeCompositeAcceptedAssetIds].sort())) {
-    invalid.push("runtimeCompositeAcceptedAssetIds do not match the latest durable native review");
+  const durablyAcceptedAssetIds = new Set(
+    (pass.runtimeQaAttempts ?? [])
+      .filter(reviewIsRemoteVerified)
+      .flatMap((attempt) => attempt.acceptedAssetIds ?? []),
+  );
+  const acceptedFromDurableEvidence = furnitureRuntimeContract.acceptedDirectionalAssetIds
+    .filter((assetId) => durablyAcceptedAssetIds.has(assetId) && !blockedFromContractEvidence.includes(assetId))
+    .sort();
+  if (JSON.stringify(acceptedFromDurableEvidence) !== JSON.stringify([...runtimeCompositeAcceptedAssetIds].sort())) {
+    invalid.push("runtimeCompositeAcceptedAssetIds do not match cumulative durable native reviews");
   }
   if (JSON.stringify(blockedFromContractEvidence) !== JSON.stringify([...runtimeCompositeBlockedAssetIds].sort())) {
     invalid.push("runtimeCompositeBlockedAssetIds do not match the latest durable native review");
   }
   const pendingFromEvidence = furnitureRuntimeContract.acceptedDirectionalAssetIds
-    .filter((assetId) => !acceptedFromContractEvidence.includes(assetId) && !blockedFromContractEvidence.includes(assetId))
+    .filter((assetId) => !runtimeCompositeAcceptedAssetIds.has(assetId) && !blockedFromContractEvidence.includes(assetId))
     .sort();
   if (JSON.stringify(pendingFromEvidence) !== JSON.stringify([...runtimeCompositePendingAssetIds].sort())) {
-    invalid.push("runtimeCompositePendingAssetIds must contain exactly the source-accepted assets absent from the latest durable native review");
+    invalid.push("runtimeCompositePendingAssetIds must contain exactly the source-accepted assets absent from cumulative durable native reviews");
   }
 }
 

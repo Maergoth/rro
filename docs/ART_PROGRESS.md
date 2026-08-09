@@ -20,7 +20,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
-| Furniture directional sets | 229 | 40 | 40 | 40 | 0 |
+| Furniture directional sets | 229 | 40 | 40 | 40 | 3 |
 | Equipment inventory icons | 45 | 45 | 45 | 45 | 45 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
@@ -34,8 +34,8 @@ Only the final state is production-complete. Existing files, historical narrativ
 | Equipment attachment body-fits | 62 | 0 | 0 | 0 | 0 |
 | Activity → animation bindings | 89 | 0 | 0 | 0 | 0 |
 
-45 equipment icons and 0 furniture directional sets are production-complete because their exact reviewed bytes are visually accepted, runtime-bound, remotely verified, and CI-green. Character art and the other missing lanes remain explicit below.
-Directional furniture texture selection is yes and projection alignment is yes. Latest native review `runtime-isometric-integration-001-attempt-011` accepted 3/40 present sets; its durable review checkpoint is remote-verified: no. No source-accepted directional sets remain blocked by the latest native gameplay review. `furniture-office-desk`, `furniture-manager-console`, `furniture-essential-cafe-two-top` pass the latest native four-rotation gameplay review but remain outside the runtime-accepted partition until that exact review evidence is remotely preserved with green hosted CI.
+45 equipment icons and 3 furniture directional sets are production-complete because their exact reviewed bytes are visually accepted, runtime-bound, remotely verified, and CI-green. Character art and the other missing lanes remain explicit below.
+Directional furniture texture selection is yes and projection alignment is yes. Latest native review `runtime-isometric-integration-001-attempt-011` accepted 3/40 present sets; its durable review checkpoint is remote-verified: yes. No source-accepted directional sets remain blocked by the latest native gameplay review. No source-accepted directional sets are pending their first native four-rotation gameplay composite.
 
 ## Character truth
 
@@ -87,7 +87,7 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 
 | Batch | Files | Source QA | Runtime/composite QA | Remote commit | Contact sheet |
 |---|---:|---|---|---|---|
-| furniture-core-directional-013 | 28 | passed | passed-native-gameplay-composite-attempt-011-review-preservation-pending | `a22e505` | planning/art-qa/furniture-core-directional-013/contact-627-dark.png |
+| furniture-core-directional-013 | 28 | passed | passed-native-gameplay-composite-attempt-011 | `a22e505` | planning/art-qa/furniture-core-directional-013/contact-627-dark.png |
 | furniture-core-directional-012 | 28 | passed | passed-native-gameplay-composite-attempt-010 | `dd54253` | planning/art-qa/furniture-core-directional-012/contact-627-dark.png |
 | furniture-core-directional-011 | 28 | passed | passed-native-gameplay-composite-attempt-009 | `d0d4f91` | planning/art-qa/furniture-core-directional-011/contact-627-dark.png |
 | furniture-core-directional-010 | 28 | passed | passed-native-gameplay-composite-attempt-008 | `0a6e36b` | planning/art-qa/furniture-core-directional-010/contact-627-dark.png |
@@ -163,7 +163,6 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 ## Contract gaps blocking a truthful 100% denominator
 
 - Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.
-- Resolve the latest native directional-furniture review for furniture-essential-cafe-two-top, furniture-manager-console, furniture-office-desk before those source-accepted sets receive production credit.
 - Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.
 - Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete.
 
@@ -213,7 +212,7 @@ This JSON block is part of this same authoritative document and contains every c
       "projectionIntegrated": true,
       "projectionAligned": true,
       "cameraConformanceValidated": false,
-      "runtimeCompositeAccepted": false,
+      "runtimeCompositeAccepted": true,
       "productionComplete": false,
       "remainingVisualGate": "Batch 013 is the first three-set group rebuilt and reviewed against the explicit fixed-camera projection. The other thirty-seven present directional sets require camera-conformance re-audit or correction before production credit; the other 189 catalog identities still require source creation and the full review pipeline.",
       "acceptedDirectionalAssetIds": [
@@ -269,10 +268,13 @@ This JSON block is part of this same authoritative document and contains every c
         "furniture-convection-oven",
         "furniture-dish-machine-high-temp",
         "furniture-dry-storage-rack",
+        "furniture-essential-cafe-two-top",
         "furniture-expo-pass-heated",
         "furniture-host-stand-pro",
         "furniture-linen-storage",
+        "furniture-manager-console",
         "furniture-oak-two-top",
+        "furniture-office-desk",
         "furniture-plancha-commercial",
         "furniture-pos-terminal",
         "furniture-premium-chair",
@@ -298,11 +300,7 @@ This JSON block is part of this same authoritative document and contains every c
         "table-two"
       ],
       "runtimeCompositeBlockedAssetIds": [],
-      "runtimeCompositePendingAssetIds": [
-        "furniture-essential-cafe-two-top",
-        "furniture-manager-console",
-        "furniture-office-desk"
-      ],
+      "runtimeCompositePendingAssetIds": [],
       "cameraProjection": {
         "type": "elevated-orthographic-isometric",
         "fixedCamera": true,
@@ -368,7 +366,7 @@ This JSON block is part of this same authoritative document and contains every c
         "table-four",
         "table-two"
       ],
-      "runtimeReviewRemoteVerified": false
+      "runtimeReviewRemoteVerified": true
     }
   },
   "summaries": [
@@ -378,7 +376,7 @@ This JSON block is part of this same authoritative document and contains every c
       "present": 40,
       "sourceAccepted": 40,
       "remoteVerified": 40,
-      "productionComplete": 0
+      "productionComplete": 3
     },
     {
       "lane": "Equipment inventory icons",
@@ -3045,7 +3043,7 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-013",
       "review": "passed",
-      "runtimeQa": "passed-native-gameplay-composite-attempt-011-review-preservation-pending",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-011",
       "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-013/contact-627-dark.png",
       "qaEvidencePresent": true,
@@ -3057,14 +3055,14 @@ This JSON block is part of this same authoritative document and contains every c
       "placementDeclared": true,
       "sourceAccepted": true,
       "directionalSelectionBound": true,
-      "runtimeCompositeAccepted": false,
+      "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": true,
+      "runtimeCompositePending": false,
       "cameraConformant": true,
       "cameraConformancePending": false,
-      "runtimeBound": false,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "runtimeBound": true,
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "manager-console",
@@ -3103,7 +3101,7 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-013",
       "review": "passed",
-      "runtimeQa": "passed-native-gameplay-composite-attempt-011-review-preservation-pending",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-011",
       "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-013/contact-627-dark.png",
       "qaEvidencePresent": true,
@@ -3115,14 +3113,14 @@ This JSON block is part of this same authoritative document and contains every c
       "placementDeclared": true,
       "sourceAccepted": true,
       "directionalSelectionBound": true,
-      "runtimeCompositeAccepted": false,
+      "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": true,
+      "runtimeCompositePending": false,
       "cameraConformant": true,
       "cameraConformancePending": false,
-      "runtimeBound": false,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "runtimeBound": true,
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "essential-cafe-two-top",
@@ -3161,7 +3159,7 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-013",
       "review": "passed",
-      "runtimeQa": "passed-native-gameplay-composite-attempt-011-review-preservation-pending",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-011",
       "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-013/contact-627-dark.png",
       "qaEvidencePresent": true,
@@ -3173,14 +3171,14 @@ This JSON block is part of this same authoritative document and contains every c
       "placementDeclared": true,
       "sourceAccepted": true,
       "directionalSelectionBound": true,
-      "runtimeCompositeAccepted": false,
+      "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": true,
+      "runtimeCompositePending": false,
       "cameraConformant": true,
       "cameraConformancePending": false,
-      "runtimeBound": false,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "runtimeBound": true,
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "craftsman-cafe-two-top",
@@ -16714,7 +16712,7 @@ This JSON block is part of this same authoritative document and contains every c
       ],
       "files": 28,
       "qa": "passed",
-      "runtimeQa": "passed-native-gameplay-composite-attempt-011-review-preservation-pending",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-011",
       "sourcePromptMode": "built-in image generation; twelve separately prompted fixed-camera directional frames with two correction retries, official chroma-key removal, common-pivot normalization, and full/gameplay-scale contact review",
       "remoteCommit": "a22e5055646184cef0d4d34ebb2a66cc5435c052",
       "remoteTree": "1a42c3e55c04b03b4a0e14c0189395195f35d8d7",
@@ -16723,7 +16721,7 @@ This JSON block is part of this same authoritative document and contains every c
       "artifactSha256": "41c3b80ed02da62ff97fcb9b781fb3bd7087fac96bd0800538817c096a371cb3",
       "qaEvidence": "planning/art-qa/furniture-core-directional-013/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-013/qa.json",
-      "notes": "Owner operations desk, live operations console, and Essential Cafe Two-Top were rebuilt after the original atlases mixed frontal elevations with arbitrary three-quarter views. The corrected frames pass the explicit fixed elevated orthographic-isometric camera, adjacent-face quarter-turn, identity, alpha, pivot, full-resolution, 128px, and exact native four-rotation review. Their exact review evidence now awaits its own remote preservation and green hosted CI; the other thirty-seven present identities remain explicitly pending camera-conformance audit.",
+      "notes": "Owner operations desk, live operations console, and Essential Cafe Two-Top were rebuilt after the original atlases mixed frontal elevations with arbitrary three-quarter views. The corrected frames pass the explicit fixed elevated orthographic-isometric camera, adjacent-face quarter-turn, identity, alpha, pivot, full-resolution, 128px, and exact native four-rotation review. Their exact review evidence is remotely preserved with green hosted CI; the other thirty-seven present identities remain explicitly pending camera-conformance audit.",
       "qaEvidencePresent": true,
       "remoteVerified": true
     },
@@ -17843,10 +17841,14 @@ This JSON block is part of this same authoritative document and contains every c
         "furniture-office-desk"
       ],
       "rejectedAssetIds": [],
-      "reviewPreservation": null,
+      "reviewPreservation": {
+        "commit": "70b1adc1f15c5ac04a711d01737786eb291f1794",
+        "tree": "4cbbf7d8a0d8ca1a110d70d56fb0d4b4d217f14c",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31290164561"
+      },
       "productionComplete": false,
       "evidencePresent": true,
-      "reviewRemoteVerified": false
+      "reviewRemoteVerified": true
     }
   ],
   "preservedReferences": [
@@ -17888,7 +17890,6 @@ This JSON block is part of this same authoritative document and contains every c
   ],
   "contractGaps": [
     "Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.",
-    "Resolve the latest native directional-furniture review for furniture-essential-cafe-two-top, furniture-manager-console, furniture-office-desk before those source-accepted sets receive production credit.",
     "Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.",
     "Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete."
   ]

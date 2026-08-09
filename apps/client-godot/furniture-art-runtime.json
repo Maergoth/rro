@@ -133,10 +133,13 @@
     "furniture-convection-oven",
     "furniture-dish-machine-high-temp",
     "furniture-dry-storage-rack",
+    "furniture-essential-cafe-two-top",
     "furniture-expo-pass-heated",
     "furniture-host-stand-pro",
     "furniture-linen-storage",
+    "furniture-manager-console",
     "furniture-oak-two-top",
+    "furniture-office-desk",
     "furniture-plancha-commercial",
     "furniture-pos-terminal",
     "furniture-premium-chair",
@@ -162,11 +165,7 @@
     "table-two"
   ],
   "runtimeCompositeBlockedAssetIds": [],
-  "runtimeCompositePendingAssetIds": [
-    "furniture-essential-cafe-two-top",
-    "furniture-manager-console",
-    "furniture-office-desk"
-  ],
+  "runtimeCompositePendingAssetIds": [],
   "capability": {
     "directionalTextureSelection": true,
     "commonFloorContactPivot": true,
@@ -176,7 +175,7 @@
     "projectionIntegrated": true,
     "projectionAligned": true,
     "cameraConformanceValidated": false,
-    "runtimeCompositeAccepted": false,
+    "runtimeCompositeAccepted": true,
     "productionComplete": false,
     "remainingVisualGate": "Batch 013 is the first three-set group rebuilt and reviewed against the explicit fixed-camera projection. The other thirty-seven present directional sets require camera-conformance re-audit or correction before production credit; the other 189 catalog identities still require source creation and the full review pipeline."
   }

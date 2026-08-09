@@ -86,11 +86,11 @@ test("the runtime contract covers every source-accepted directional set without 
   assert.equal(contract.capability.projectionIntegrated, true);
   assert.equal(contract.capability.projectionAligned, true);
   assert.equal(contract.capability.cameraConformanceValidated, false);
-  assert.equal(contract.capability.runtimeCompositeAccepted, false);
+  assert.equal(contract.capability.runtimeCompositeAccepted, true);
   assert.equal(contract.capability.productionComplete, false);
   assert.deepEqual(contract.runtimeCompositeAcceptedAssetIds, contract.acceptedDirectionalAssetIds.filter((assetId) => !contract.runtimeCompositePendingAssetIds.includes(assetId)));
   assert.deepEqual(contract.runtimeCompositeBlockedAssetIds, []);
-  assert.deepEqual(contract.runtimeCompositePendingAssetIds, ["furniture-essential-cafe-two-top", "furniture-manager-console", "furniture-office-desk"]);
+  assert.deepEqual(contract.runtimeCompositePendingAssetIds, []);
   assert.deepEqual(
     [...contract.runtimeCompositeAcceptedAssetIds, ...contract.runtimeCompositeBlockedAssetIds, ...contract.runtimeCompositePendingAssetIds].sort(),
     [...contract.acceptedDirectionalAssetIds].sort(),

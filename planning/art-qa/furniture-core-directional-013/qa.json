@@ -7,10 +7,8 @@
     "furniture-essential-cafe-two-top"
   ],
   "artReviewStatus": "accepted",
-  "productionComplete": false,
-  "productionCompletionBlockers": [
-    "The exact fixed-camera native gameplay review passes, but its attempt-011 evidence requires its own remote preservation and green hosted CI before production-complete credit."
-  ],
+  "productionComplete": true,
+  "productionCompletionBlockers": [],
   "cameraContract": {
     "type": "elevated-orthographic-isometric",
     "fixedCamera": true,
@@ -368,7 +366,7 @@
     "totalFiles": 28
   },
   "repositoryPromotion": {
-    "status": "remote-verified-source-and-runtime-review-pending-evidence-preservation",
+    "status": "remote-verified-production-complete",
     "runtimeFiles": 12,
     "alphaSourceFiles": 12,
     "contactSheets": 2,
