@@ -451,10 +451,17 @@ if (CHECK) {
     const generatedLines = output.split("\n");
     const lineCount = Math.max(existingLines.length, generatedLines.length);
     let firstDifference = null;
+    let differingLineCount = 0;
+    const differences = [];
     for (let index = 0; index < lineCount; index += 1) {
       if (existingLines[index] !== generatedLines[index]) {
-        firstDifference = index;
-        break;
+        if (firstDifference === null) firstDifference = index;
+        differingLineCount += 1;
+        if (differences.length < 100) differences.push({
+          line: index + 1,
+          existing: (existingLines[index] ?? "").slice(0, 240),
+          generated: (generatedLines[index] ?? "").slice(0, 240),
+        });
       }
     }
     console.error(JSON.stringify({
@@ -465,6 +472,8 @@ if (CHECK) {
       firstDifferingLine: firstDifference === null ? null : firstDifference + 1,
       existingLine: firstDifference === null ? null : (existingLines[firstDifference] ?? "").slice(0, 240),
       generatedLine: firstDifference === null ? null : (generatedLines[firstDifference] ?? "").slice(0, 240),
+      differingLineCount,
+      differences,
     }, null, 2));
     process.exitCode = 1;
   } else {
