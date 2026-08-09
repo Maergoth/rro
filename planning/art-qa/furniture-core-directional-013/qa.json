@@ -9,8 +9,7 @@
   "artReviewStatus": "accepted",
   "productionComplete": false,
   "productionCompletionBlockers": [
-    "Verify the exact promoted repository tree and hosted CI remotely.",
-    "Pass exact native elevated-isometric four-rotation gameplay-composite review after runtime binding."
+    "The exact fixed-camera native gameplay review passes, but its attempt-011 evidence requires its own remote preservation and green hosted CI before production-complete credit."
   ],
   "cameraContract": {
     "type": "elevated-orthographic-isometric",
@@ -369,12 +368,18 @@
     "totalFiles": 28
   },
   "repositoryPromotion": {
-    "status": "local-verified-pending-remote",
+    "status": "remote-verified-source-and-runtime-review-pending-evidence-preservation",
     "runtimeFiles": 12,
     "alphaSourceFiles": 12,
     "contactSheets": 2,
     "provenanceDocuments": 2,
     "totalFiles": 28
   },
-  "remotePreservation": null
+  "remotePreservation": {
+    "commit": "a22e5055646184cef0d4d34ebb2a66cc5435c052",
+    "tree": "1a42c3e55c04b03b4a0e14c0189395195f35d8d7",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31289514663",
+    "artifactId": 9030941364,
+    "artifactSha256": "41c3b80ed02da62ff97fcb9b781fb3bd7087fac96bd0800538817c096a371cb3"
+  }
 }
