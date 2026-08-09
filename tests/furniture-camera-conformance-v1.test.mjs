@@ -40,11 +40,15 @@ test("camera-conformant and pending assets exactly partition source-accepted fur
   const pending = [...runtime.cameraConformancePendingAssetIds].sort();
   assert.deepEqual(conformant, [
     "furniture-essential-cafe-two-top",
+    "furniture-linen-storage",
     "furniture-manager-console",
     "furniture-office-desk",
+    "furniture-water-station",
+    "furniture-wet-floor-station",
   ]);
   assert.deepEqual([...conformant, ...pending].sort(), accepted);
   assert.equal(new Set([...conformant, ...pending]).size, accepted.length);
+  assert.equal(pending.length, 34);
   assert.equal(runtime.capability.cameraConformanceValidated, false);
   assert.equal(runtime.capability.productionComplete, false);
 });
