@@ -8,7 +8,7 @@ import { inflateSync } from "node:zlib";
 const ROOT = resolve(import.meta.dirname, "..");
 const QA_ROOT = "planning/art-qa/furniture-core-directional-012";
 const QA_PATH = `${QA_ROOT}/qa.json`;
-const QA_SHA256 = "22bb1ff141b9859c9e75c8d73421548782d454f2c3ef9353258193aedb4bda94";
+const QA_SHA256 = "8af6ef263eeb4306f268feae16ca33d48d5a56a3871793aab2aa78612c6824ae";
 const ASSETS = ["furniture-wet-floor-station", "furniture-linen-storage", "furniture-water-station"];
 const DIRECTIONS = ["north", "east", "south", "west"];
 const PLACEMENT = { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" };
@@ -109,23 +109,40 @@ test("furniture directional batch 012 preserves exact accepted source evidence",
   assert.equal(fileSha256(QA_PATH), QA_SHA256);
   assert.equal(qa.batchId, "furniture-core-directional-012");
   assert.deepEqual(qa.assets, ASSETS);
-  assert.equal(qa.artReviewStatus, "accepted");
-  assert.equal(qa.productionComplete, true);
-  assert.equal(qa.repositoryPromotion.status, "remote-verified-production-complete");
-  assert.deepEqual(qa.productionCompletionBlockers, []);
-  assert.deepEqual(qa.remotePreservation, {
-    commit: "dd542537e372b7d726a375e48540c7ca066caaf4",
-    tree: "51db0b01d7719e0d4474afeb4f5bc0484cbccc84",
-    ci: "https://github.com/Maergoth/rro/actions/runs/31233762203",
-    artifactId: 9014716339,
-    artifactSha256: "6ac765908a7871ee29e06f4407ef7e2b74ffcdbccace6e0ab5ac634e8774e310",
+  assert.equal(qa.artReviewStatus, "accepted-fixed-camera-source-native-pending");
+  assert.equal(qa.productionComplete, false);
+  assert.equal(qa.repositoryPromotion.status, "promoted-local-pending-remote-verification");
+  assert.deepEqual(qa.productionCompletionBlockers, [
+    "exact-source-checkpoint-remote-verification-and-green-ci",
+    "new-native-four-rotation-gameplay-composite-review",
+    "durable-review-preservation-and-green-ci",
+  ]);
+  assert.equal(qa.remotePreservation, null);
+  assert.match(qa.gates.nativeGameplayCompositeReview, /^pending: exact corrected bytes require/);
+  assert.deepEqual(qa.cameraProjection, {
+    type: "elevated-orthographic-isometric",
+    fixedCamera: true,
+    azimuthDegrees: 315,
+    elevationDegrees: 26.565,
+    basisX: [0.5, 0.25],
+    basisY: [-0.5, 0.25],
+    groundEdgeScreenSlopes: [-0.5, 0.5],
+    verticalEdges: "screen-vertical",
+    perspective: false,
+    rotationStepDegrees: 90,
+    visibleFacesByDirection: {
+      north: ["front", "right"],
+      east: ["right", "rear"],
+      south: ["rear", "left"],
+      west: ["left", "front"],
+    },
   });
-  assert.match(qa.gates.nativeGameplayCompositeReview, /^pass: runtime-isometric-integration-001-attempt-010/);
   assert.deepEqual(qa.promotionScope, { runtimeFiles: 12, alphaSourceFiles: 12, contactSheets: 2, provenanceDocuments: 2, totalFiles: 28 });
   assert.doesNotMatch(JSON.stringify(qa), /\/tmp\/|\/workspace\//);
   assert.equal(fileSha256(qa.source.promptLog), qa.source.promptLogSha256);
-  assert.equal(qa.rejectedAttempts.length, 2);
+  assert.equal(qa.rejectedAttempts.length, 3);
   assert.ok(qa.rejectedAttempts.every((entry) => entry.generatorOutputSha256 && entry.reason.startsWith("Rejected source:")));
+  assert.deepEqual(new Set(qa.items.flatMap((item) => item.directions.map((direction) => direction.rawGeneratorSha256))).size, 12);
   const expected = [
     `${QA_ROOT}/contact-128-light.png`, `${QA_ROOT}/contact-627-dark.png`, `${QA_ROOT}/prompts.md`, `${QA_ROOT}/qa.json`,
     ...ASSETS.flatMap((asset) => DIRECTIONS.map((direction) => `${QA_ROOT}/alpha-source/${asset}-${direction}.png`)),
@@ -184,13 +201,13 @@ test("furniture directional batch 012 matches catalog, placement, pivot, alpha, 
 test("furniture directional batch 012 contact sheets are exact reviewed full and gameplay evidence", () => {
   const qa = json(QA_PATH);
   assert.deepEqual(qa.contactSheets.map(({ path, sha256: hash }) => ({ path, sha256: hash })), [
-    { path: `${QA_ROOT}/contact-627-dark.png`, sha256: "e5f5061f48b6b2995b4b8626510f6ade9708abaa4dda0ac0039fe2853e26e0f1" },
-    { path: `${QA_ROOT}/contact-128-light.png`, sha256: "32df1ccdfdb8a302b2cc585e5ae9754ae87a0183792fbfaeeba5f397a329a502" },
+    { path: `${QA_ROOT}/contact-627-dark.png`, sha256: "0d2a9530163cad654cb71dcaf2e603ca3bee443f536f9e62de113ef39841037a" },
+    { path: `${QA_ROOT}/contact-128-light.png`, sha256: "bf1d6385a559be0f431175684b51241b52f3cc3b4af3155b6f427d474f3aca27" },
   ]);
   for (const contact of qa.contactSheets) assert.equal(fileSha256(contact.path), contact.sha256);
   assert.match(qa.gates.visualReviewAtFullScale, /^pass:/);
   assert.match(qa.gates.visualReviewAtGameplayScale128px, /^pass:/);
-  assert.equal(qa.gates.repositoryDirectionalPngsCompared, 136);
+  assert.equal(qa.gates.repositoryDirectionalPngsCompared, 148);
   assert.equal(qa.gates.exactFileCollisionsAgainstRepository, 0);
   assert.equal(qa.gates.exactPixelCollisionsAgainstRepository, 0);
   assert.equal(qa.gates.exactPerceptualHashCollisionsAgainstRepository, 0);
