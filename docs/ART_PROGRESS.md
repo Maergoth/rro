@@ -3023,22 +3023,22 @@ This JSON block is part of this same authoritative document and contains every c
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-office-desk/north.png",
           "present": true,
-          "sha256": "076320cd1fdeee8d31ac002579282278a4126e1e6e93c49de32356f07ae50572"
+          "sha256": "7f7faf03f79d0a5b735b68b9ffab0bbb21724cc8e5528d670da85e06f43d3934"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-office-desk/east.png",
           "present": true,
-          "sha256": "4f2098e8e710f67ee2a4601bad572b46f959d4fb3de504de5d67455f01d5e0bb"
+          "sha256": "d8359e40364d84d9af8c34d40f1657663bd8562e49edbf58c9ffa545f09265a2"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-office-desk/south.png",
           "present": true,
-          "sha256": "19f930b7034f9805ecaeaf5e3025be7ce52b177dc663255c06cb6cf39f70dc04"
+          "sha256": "1a55eeccd59752ef63f0f2ab1fbdb18ae301abc5636ef8b93e53df52ecc5a2c7"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-office-desk/west.png",
           "present": true,
-          "sha256": "45a4b648669c0c140bf9bdd7d0a6192261d36972bb262a3fa00191d1165bfa02"
+          "sha256": "69a8b2deb8680cad3e31ff4e998e5cd288fa5d290b61807a80c986cc18d7b52e"
         }
       ],
       "present": true,
@@ -3081,22 +3081,22 @@ This JSON block is part of this same authoritative document and contains every c
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-manager-console/north.png",
           "present": true,
-          "sha256": "34bd53a525ad529e5dd6c4c5f32095c297e81676aa460ebede3234e394c522fc"
+          "sha256": "bb2f755a90384400bed5fcd725c8febd8faf11eb0a6c26bab5c401ad67ae2daa"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-manager-console/east.png",
           "present": true,
-          "sha256": "02d311df6f0bb8349e1287ebfd58852ba3c03545073bb7673b7d645c9aeebc8e"
+          "sha256": "74a62628da0a5423467c3bcaf09770ec8e20597e11b71d378fbf11b7cdf46bd8"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-manager-console/south.png",
           "present": true,
-          "sha256": "553d4e329570fb1963cb680a2aeeba9f29a4fb93ed7e2f600209d7ecb64645b8"
+          "sha256": "ac9f81ab57325f2d19a1addbcca59dd55eb39d82108e6d6b29068636e9dfc464"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-manager-console/west.png",
           "present": true,
-          "sha256": "e20261193aff1a1837e355b74010876423a02b72fcb7553414e4e02a295d1979"
+          "sha256": "06d9466b2986a64e623a5f3d9f2f05702309333b23801b73628dcf4140719536"
         }
       ],
       "present": true,
@@ -3139,22 +3139,22 @@ This JSON block is part of this same authoritative document and contains every c
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-essential-cafe-two-top/north.png",
           "present": true,
-          "sha256": "ca8ce9538daa9a42893e8e6604cab9b89390a01ff48fda6a7e3b8f41dc15bbad"
+          "sha256": "2d20a0e85bfc549921d2ff88d9aed606548b1bd0c245b343ee5ef783e0c5af8f"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-essential-cafe-two-top/east.png",
           "present": true,
-          "sha256": "96501f0ac2bdf6366d73ee2fb27db869f5dbcd409bed0af55290d88d474da102"
+          "sha256": "29406f5d1fe2937f539f0f05c6935e2c40e5dfab8113f209a8ffd6faa12cdc98"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-essential-cafe-two-top/south.png",
           "present": true,
-          "sha256": "17dc02882a3b3a5584e866d6d0e586f7c5af1467b2978e34ba704ef421a9591c"
+          "sha256": "66cd8fb56b63d3694134186172eeb103bb4804cc22ced17dbd2a68d9fabaacee"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-essential-cafe-two-top/west.png",
           "present": true,
-          "sha256": "1e64c40a1314dcf8cb4993fcca9b856af1840738e5c716808990fbf12a2da748"
+          "sha256": "10187c3544c9ee7ee90d4f5f12f51729af2b04f6fecfaebbcc8a59b51937b9f6"
         }
       ],
       "present": true,
