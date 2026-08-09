@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "id": "runtime-isometric-integration-001-attempt-012",
+  "reviewedAt": "2026-08-09T13:50:00Z",
+  "source": {
+    "remoteCommit": "4ed663373440bedffcc4812618eb413adeaf484e",
+    "remoteTree": "a1a257363562e05fa5526654930c0fbdda786375",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31316662076",
+    "artifactId": 9038954590,
+    "artifactName": "elevated-isometric-runtime-qa",
+    "artifactSha256": "369ff4e10c48bb6efad31076c3819d3d8dc050c66eed8dd1080eba2bae9ca285"
+  },
+  "automatedGates": {
+    "windowsCi": "passed",
+    "ubuntuCi": "passed",
+    "nativeGodotCapture": "passed",
+    "captureCount": 4,
+    "viewport": [1800, 1100],
+    "minimumSampledColors": 451,
+    "exactArtifactDigestVerified": true,
+    "exactCaptureHashesVerified": true,
+    "legalMountedPlacementRecordsPresent": true,
+    "fixedCameraContractPresent": true
+  },
+  "visualReview": {
+    "status": "passed-camera-conformant-assets",
+    "productionComplete": false,
+    "reviewers": [
+      "root original-scale and gameplay-scale inspection"
+    ],
+    "passed": [
+      "The Spill Response Station preserves one rigid identity through front plus physical-right, physical-right plus rear, rear plus physical-left, and physical-left plus front. The teal front doors and amber panel remain front-only, the red bucket remains physical-right, the blue mop remains physical-left, and the rear rail remains rear-only without mirroring or duplication.",
+      "The Linen and Reset Cabinet preserves one rigid identity through the same four quarter turns. Front doors and brass pulls remain front-only, the black grille remains physical-right, open shelves remain rear-only, the physical-left face stays plain, and all three linen stacks retain their count and order.",
+      "The Filtered Water Station preserves one rigid identity through the same four quarter turns. Three taps and teal doors remain front-only, the black grille remains physical-right, the two blue filter housings remain rear-only, and the physical-left face stays plain.",
+      "All three corrected identities use one elevated orthographic-isometric camera, sit on their declared footprints with stable floor contact, retain coherent scale and depth, and remain readable without clipping, overlays, floating, or viewport cropping at gameplay scale.",
+      "The exact GitHub artifact digest, four capture hashes, remote commit, exact tree, and green Windows and Ubuntu CI are verified."
+    ],
+    "blockers": [],
+    "acceptedAssetIds": [
+      "furniture-linen-storage",
+      "furniture-water-station",
+      "furniture-wet-floor-station"
+    ],
+    "rejectedAssetIds": [],
+    "cameraConformancePendingAssetIds": [
+      "the other thirty-four present directional identities"
+    ],
+    "nextCaptureRequirements": [
+      "Preserve this exact review evidence in GitHub with green hosted CI before giving the three corrected identities production-complete credit.",
+      "Re-audit or correct the other thirty-four present directional identities against the same fixed camera contract in small, independently reviewed batches.",
+      "Continue creating the other 189 catalog identities only under the fixed camera contract and full source-to-native review pipeline."
+    ]
+  },
+  "captures": [
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-012/restaurant-north.png",
+      "sha256": "3bc2cdcba37c322c7634c0b0314155cc088a700d8a65df308f45487b18b7a1de"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-012/restaurant-east.png",
+      "sha256": "0117b312fdc5677f448f09d7efdcac99dc1a6816d367cee0d71495823a89b4a7"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-012/restaurant-south.png",
+      "sha256": "0651ea43c7ebd134f8b8509e253b3131e85f7def4ab2cf863725e0f430b036f3"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-012/restaurant-west.png",
+      "sha256": "d5fc1e769fba925ad384017f4c4056eb45e75862fe1696830aa968cda93257a0"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-012/qa.json",
+      "sha256": "3011619e81f887a9f0e98a16ea0800ef74f0a82250a744a86d2a001675b1180f"
+    }
+  ]
+}
