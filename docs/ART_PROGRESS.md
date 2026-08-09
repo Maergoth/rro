@@ -2848,22 +2848,22 @@ This JSON block is part of this same authoritative document and contains every c
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-wet-floor-station/north.png",
           "present": true,
-          "sha256": "a636914639f29f9b010597906efe35942e12e316b5a446aaa103a016fb183c27"
+          "sha256": "c3d9c8cc8daeb4f18971c26d8977196b80ed5dbd9028760a9d5cc4a10b59219f"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-wet-floor-station/east.png",
           "present": true,
-          "sha256": "d1e6cb7187b775a029fe6d05ed1ae5d84650df7166c0785d12bd465558ce858c"
+          "sha256": "96b7655a401491dc9014797223b71dceb3c573176da84538525f9ed18c6c2b17"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-wet-floor-station/south.png",
           "present": true,
-          "sha256": "e2ff7e69a9ab14e7cfd0d532165280dfce1b9187f5c3683403818cb3cbd1f835"
+          "sha256": "3a3b2420c3c2512a3089465aaf9f5613b4d4889f964286b5064a60680cf403e8"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-wet-floor-station/west.png",
           "present": true,
-          "sha256": "9bab69f4cd4153269ffab657ca014fe29bb5988bcb0ef2133cb890ed5cf20ee5"
+          "sha256": "b2de62396ae62e27c5b11a5804e760a8a92b89a473c99a4081304cefafc83ed2"
         }
       ],
       "present": true,
@@ -2906,22 +2906,22 @@ This JSON block is part of this same authoritative document and contains every c
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-linen-storage/north.png",
           "present": true,
-          "sha256": "a4cbc08a42a9e98ce38d2dfb8f63109ffecc09aa82cf468f0b3be6341f215c94"
+          "sha256": "42d72887ff06825ea7aef3d2b760e49932affe2614b75fb510a7c03ff75f4873"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-linen-storage/east.png",
           "present": true,
-          "sha256": "484a8912c08b2f9142906ec87578046ed6aec2f1c935876b701b9886e7f285d2"
+          "sha256": "ca14d686dda796782b97ed7f20e98e7a7493d2baa2908f08c928d9cf1c7a86f2"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-linen-storage/south.png",
           "present": true,
-          "sha256": "42508620aed26c433876143dc664f8bf3296387aa543885b119c77241c08cbb6"
+          "sha256": "fa8bf8b138a9e90ce04f500310f7b7b181ceb604c63dca32deeff6dc7fc2046b"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-linen-storage/west.png",
           "present": true,
-          "sha256": "1f1f60c3cbf8720e318d0c1c4d9d43a9b0f953d4214166690a6ca03d71291f0d"
+          "sha256": "6440b1d0a138e6ea5857ed711bc148fda5084e4f44af450ca709ae80ac4f8a69"
         }
       ],
       "present": true,
@@ -2964,22 +2964,22 @@ This JSON block is part of this same authoritative document and contains every c
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-water-station/north.png",
           "present": true,
-          "sha256": "77b22aa0c28e3ed2ad4cc0821e47a37bc5c154643058ee811308d737aad45b77"
+          "sha256": "4d14cda8c4feed96a6e686dbec3ed2fb68b11852e64bbee0a568bbf9cbd2fc3d"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-water-station/east.png",
           "present": true,
-          "sha256": "1805f19d822b49ba189d45d02698e7aac2e51182ded82136d51883a0b6b3cac1"
+          "sha256": "20011c0108135c2c4f8289285a06ddd0ac6b3309a5c39e3a83ab082b8f698860"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-water-station/south.png",
           "present": true,
-          "sha256": "e38b66589ff0a4aae2089fb9b18376adc8abcace90c3ba27115b4218ecff2fbc"
+          "sha256": "f271c4f8af2512aacf74fd271bfd5413b9efea6b4e9d155d8ccc33d7b9cfc12a"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-water-station/west.png",
           "present": true,
-          "sha256": "c44d917af5e0dda6852a92a8e2809c294c60dccbb4d23c7d9e61af3c3d350f66"
+          "sha256": "dd1cfd0e80f3adf88bfe106ac18afcbbf070077563b8ed9c6475f3c5a652241c"
         }
       ],
       "present": true,
