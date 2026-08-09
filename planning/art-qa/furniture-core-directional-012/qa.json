@@ -6,8 +6,8 @@
     "furniture-linen-storage",
     "furniture-water-station"
   ],
-  "artReviewStatus": "accepted-fixed-camera-source-native-pending",
-  "productionComplete": false,
+  "artReviewStatus": "accepted",
+  "productionComplete": true,
   "source": {
     "generator": "OpenAI built-in image generation",
     "mode": "twelve separately prompted fixed-camera direction sources; object-only quarter turns under one numeric orthographic-isometric camera",
@@ -112,7 +112,7 @@
     "noClippingTextLogosWatermarksOrExtraObjects": "pass",
     "visualReviewAtFullScale": "pass: planning/art-qa/furniture-core-directional-012/contact-627-dark.png inspected at original 627px scale; camera, face sequence, identity, materials, asymmetric details, alpha, and grounding pass.",
     "visualReviewAtGameplayScale128px": "pass: planning/art-qa/furniture-core-directional-012/contact-128-light.png inspected at gameplay scale; all three identities and their direction cues remain distinct.",
-    "nativeGameplayCompositeReview": "pending: exact corrected bytes require a new hosted native Godot N/E/S/W capture and human gameplay-scale review.",
+    "nativeGameplayCompositeReview": "pass: runtime-isometric-integration-001-attempt-012 accepts the exact three corrected identities across native N/E/S/W gameplay composites; evidence is durably preserved at fee22ea72daa496b4a590ff45df2c8b9872e2de7 with green CI run 31317025179.",
     "proceduralOrDeterministicStandIn": false
   },
   "contactSheets": [
@@ -550,17 +550,19 @@
     "totalFiles": 28
   },
   "repositoryPromotion": {
-    "status": "promoted-local-pending-remote-verification",
+    "status": "remote-verified-production-complete",
     "runtimeFiles": 12,
     "alphaSourceFiles": 12,
     "contactSheets": 2,
     "provenanceDocuments": 2,
     "totalFiles": 28
   },
-  "productionCompletionBlockers": [
-    "exact-source-checkpoint-remote-verification-and-green-ci",
-    "new-native-four-rotation-gameplay-composite-review",
-    "durable-review-preservation-and-green-ci"
-  ],
-  "remotePreservation": null
+  "productionCompletionBlockers": [],
+  "remotePreservation": {
+    "commit": "da9a828fc47c2b8c8e015cc2e4f648516985b577",
+    "tree": "f1f329f726d35db4650c5f8958c3e32c564dc027",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31316662076",
+    "artifactId": 9038954590,
+    "artifactSha256": "369ff4e10c48bb6efad31076c3819d3d8dc050c66eed8dd1080eba2bae9ca285"
+  }
 }

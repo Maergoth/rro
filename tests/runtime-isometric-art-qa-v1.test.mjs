@@ -17,8 +17,9 @@ const reviewPaths = [
   "planning/art-qa/runtime-isometric-integration-001/attempt-009/review.json",
   "planning/art-qa/runtime-isometric-integration-001/attempt-010/review.json",
   "planning/art-qa/runtime-isometric-integration-001/attempt-011/review.json",
+  "planning/art-qa/runtime-isometric-integration-001/attempt-012/review.json",
 ];
-const [attempt001, attempt002, attempt003, attempt004, attempt005, attempt006, attempt007, attempt008, attempt009, attempt010, attempt011] = reviewPaths.map((path) => JSON.parse(read(path).toString("utf8")));
+const [attempt001, attempt002, attempt003, attempt004, attempt005, attempt006, attempt007, attempt008, attempt009, attempt010, attempt011, attempt012] = reviewPaths.map((path) => JSON.parse(read(path).toString("utf8")));
 
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 
@@ -171,8 +172,22 @@ test("native isometric attempt 011 accepts only the three fixed-camera corrected
   assert.match(attempt011.visualReview.cameraConformancePendingAssetIds[0], /thirty-seven/);
 });
 
+test("native isometric attempt 012 accepts the corrected service-furniture perspectives", () => {
+  assert.equal(attempt012.source.remoteCommit, "4ed663373440bedffcc4812618eb413adeaf484e");
+  assert.equal(attempt012.source.remoteTree, "a1a257363562e05fa5526654930c0fbdda786375");
+  assert.equal(attempt012.source.artifactId, 9038954590);
+  assert.equal(attempt012.source.artifactSha256, "369ff4e10c48bb6efad31076c3819d3d8dc050c66eed8dd1080eba2bae9ca285");
+  assert.equal(attempt012.automatedGates.fixedCameraContractPresent, true);
+  assert.equal(attempt012.visualReview.status, "passed-camera-conformant-assets");
+  assert.equal(attempt012.visualReview.productionComplete, false, "the complete furniture catalog remains unfinished");
+  assert.deepEqual(attempt012.visualReview.acceptedAssetIds, ["furniture-linen-storage", "furniture-water-station", "furniture-wet-floor-station"]);
+  assert.deepEqual(attempt012.visualReview.rejectedAssetIds, []);
+  assert.deepEqual(attempt012.visualReview.blockers, []);
+  assert.match(attempt012.visualReview.cameraConformancePendingAssetIds[0], /thirty-four/);
+});
+
 test("every durable native capture has exact bytes and the required gameplay viewport", () => {
-  for (const review of [attempt001, attempt002, attempt003, attempt004, attempt005, attempt006, attempt007, attempt008, attempt009, attempt010, attempt011]) {
+  for (const review of [attempt001, attempt002, attempt003, attempt004, attempt005, attempt006, attempt007, attempt008, attempt009, attempt010, attempt011, attempt012]) {
     assert.equal(review.captures.length, 5);
     for (const capture of review.captures) {
       const bytes = read(capture.path);

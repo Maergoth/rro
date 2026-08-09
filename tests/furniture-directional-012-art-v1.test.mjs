@@ -8,7 +8,7 @@ import { inflateSync } from "node:zlib";
 const ROOT = resolve(import.meta.dirname, "..");
 const QA_ROOT = "planning/art-qa/furniture-core-directional-012";
 const QA_PATH = `${QA_ROOT}/qa.json`;
-const QA_SHA256 = "8af6ef263eeb4306f268feae16ca33d48d5a56a3871793aab2aa78612c6824ae";
+const QA_SHA256 = "55e9624cff37038c693e0a8bb51e475a5bc696547597f0ddcc20828f58a5e746";
 const ASSETS = ["furniture-wet-floor-station", "furniture-linen-storage", "furniture-water-station"];
 const DIRECTIONS = ["north", "east", "south", "west"];
 const PLACEMENT = { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" };
@@ -109,16 +109,18 @@ test("furniture directional batch 012 preserves exact accepted source evidence",
   assert.equal(fileSha256(QA_PATH), QA_SHA256);
   assert.equal(qa.batchId, "furniture-core-directional-012");
   assert.deepEqual(qa.assets, ASSETS);
-  assert.equal(qa.artReviewStatus, "accepted-fixed-camera-source-native-pending");
-  assert.equal(qa.productionComplete, false);
-  assert.equal(qa.repositoryPromotion.status, "promoted-local-pending-remote-verification");
-  assert.deepEqual(qa.productionCompletionBlockers, [
-    "exact-source-checkpoint-remote-verification-and-green-ci",
-    "new-native-four-rotation-gameplay-composite-review",
-    "durable-review-preservation-and-green-ci",
-  ]);
-  assert.equal(qa.remotePreservation, null);
-  assert.match(qa.gates.nativeGameplayCompositeReview, /^pending: exact corrected bytes require/);
+  assert.equal(qa.artReviewStatus, "accepted");
+  assert.equal(qa.productionComplete, true);
+  assert.equal(qa.repositoryPromotion.status, "remote-verified-production-complete");
+  assert.deepEqual(qa.productionCompletionBlockers, []);
+  assert.deepEqual(qa.remotePreservation, {
+    commit: "da9a828fc47c2b8c8e015cc2e4f648516985b577",
+    tree: "f1f329f726d35db4650c5f8958c3e32c564dc027",
+    ci: "https://github.com/Maergoth/rro/actions/runs/31316662076",
+    artifactId: 9038954590,
+    artifactSha256: "369ff4e10c48bb6efad31076c3819d3d8dc050c66eed8dd1080eba2bae9ca285",
+  });
+  assert.match(qa.gates.nativeGameplayCompositeReview, /^pass: runtime-isometric-integration-001-attempt-012/);
   assert.deepEqual(qa.cameraProjection, {
     type: "elevated-orthographic-isometric",
     fixedCamera: true,

@@ -81,7 +81,7 @@ test("the authoritative art ledger cannot hide missing, failed, local-only, or u
     && entry.runtimeQa === "passed-native-gameplay-composite-attempt-011"));
   assert.ok(art.reviewedBatches.some((entry) => entry.id === "furniture-core-directional-012"
     && entry.qaEvidencePresent && entry.remoteVerified
-    && entry.runtimeQa === "passed-native-gameplay-composite-attempt-010"));
+    && entry.runtimeQa === "passed-native-gameplay-composite-attempt-012"));
   assert.ok(art.reviewedBatches.some((entry) => entry.id === "furniture-core-directional-011"
     && entry.qaEvidencePresent && entry.remoteVerified
     && entry.runtimeQa === "passed-native-gameplay-composite-attempt-009"));
@@ -108,6 +108,7 @@ test("the authoritative art ledger cannot hide missing, failed, local-only, or u
     "runtime-isometric-integration-001-attempt-009",
     "runtime-isometric-integration-001-attempt-010",
     "runtime-isometric-integration-001-attempt-011",
+    "runtime-isometric-integration-001-attempt-012",
   ]);
   assert.equal(art.runtimeQaAttempts[0].status, "failed-needs-remediation");
   assert.equal(art.runtimeQaAttempts[0].evidencePresent, true);
@@ -171,6 +172,12 @@ test("the authoritative art ledger cannot hide missing, failed, local-only, or u
   assert.deepEqual(art.runtimeQaAttempts[10].rejectedAssetIds, []);
   assert.deepEqual(art.runtimeQaAttempts[10].blockers, []);
   assert.equal(art.runtimeQaAttempts[10].reviewRemoteVerified, true);
+  assert.equal(art.runtimeQaAttempts[11].status, "passed-camera-conformant-assets");
+  assert.equal(art.runtimeQaAttempts[11].evidencePresent, true);
+  assert.deepEqual(art.runtimeQaAttempts[11].acceptedAssetIds, ["furniture-linen-storage", "furniture-water-station", "furniture-wet-floor-station"]);
+  assert.deepEqual(art.runtimeQaAttempts[11].rejectedAssetIds, []);
+  assert.deepEqual(art.runtimeQaAttempts[11].blockers, []);
+  assert.equal(art.runtimeQaAttempts[11].reviewRemoteVerified, true);
   const equipmentSummary = art.summaries.find((entry) => entry.lane === "Equipment inventory icons");
   const furnitureSummary = art.summaries.find((entry) => entry.lane === "Furniture directional sets");
   assert.equal(equipmentSummary.present, 45);
@@ -180,7 +187,7 @@ test("the authoritative art ledger cannot hide missing, failed, local-only, or u
   assert.equal(furnitureSummary.present, 40);
   assert.equal(furnitureSummary.sourceAccepted, 40);
   assert.equal(furnitureSummary.remoteVerified, 40);
-  assert.equal(furnitureSummary.productionComplete, 3);
+  assert.equal(furnitureSummary.productionComplete, 6);
   assert.equal(art.runtimeCapabilities.directionalFurniture.directionalTextureSelection, true);
   assert.equal(art.runtimeCapabilities.directionalFurniture.projectionAligned, true);
   assert.equal(art.runtimeCapabilities.directionalFurniture.cameraConformanceValidated, false);
@@ -188,8 +195,8 @@ test("the authoritative art ledger cannot hide missing, failed, local-only, or u
   assert.equal(art.runtimeCapabilities.directionalFurniture.runtimeCompositeAcceptedAssetIds.length, 40);
   assert.deepEqual(art.runtimeCapabilities.directionalFurniture.runtimeCompositeBlockedAssetIds, []);
   assert.deepEqual(art.runtimeCapabilities.directionalFurniture.runtimeCompositePendingAssetIds, []);
-  assert.deepEqual(art.runtimeCapabilities.directionalFurniture.cameraConformantAssetIds, ["furniture-essential-cafe-two-top", "furniture-manager-console", "furniture-office-desk"]);
-  assert.equal(art.runtimeCapabilities.directionalFurniture.cameraConformancePendingAssetIds.length, 37);
+  assert.deepEqual(art.runtimeCapabilities.directionalFurniture.cameraConformantAssetIds, ["furniture-essential-cafe-two-top", "furniture-linen-storage", "furniture-manager-console", "furniture-office-desk", "furniture-water-station", "furniture-wet-floor-station"]);
+  assert.equal(art.runtimeCapabilities.directionalFurniture.cameraConformancePendingAssetIds.length, 34);
   assert.equal(art.runtimeCapabilities.directionalFurniture.runtimeReviewRemoteVerified, true);
   const runtimeAcceptedFurnitureIds = new Set(
     art.runtimeCapabilities.directionalFurniture.runtimeCompositeAcceptedAssetIds,
@@ -207,12 +214,12 @@ test("the authoritative art ledger cannot hide missing, failed, local-only, or u
     );
   }
   assert.equal(art.runtimeCapabilities.directionalFurniture.productionComplete, false, "the complete 229-item furniture catalog and other art lanes remain unfinished");
-  assert.match(document, /Latest native review `runtime-isometric-integration-001-attempt-011` accepted 3\/40 present sets; its durable review checkpoint is remote-verified: yes\./);
+  assert.match(document, /Latest native review `runtime-isometric-integration-001-attempt-012` accepted 3\/40 present sets; its durable review checkpoint is remote-verified: yes\./);
   assert.ok(art.furniture.filter((entry) => entry.present).every((entry) => entry.directionalSelectionBound === true && entry.placementDeclared === true));
-  assert.equal(art.furniture.filter((entry) => entry.runtimeBound).length, 3);
-  assert.equal(art.furniture.filter((entry) => entry.productionComplete).length, 3);
-  assert.equal(art.furniture.filter((entry) => entry.present && !entry.runtimeBound).length, 37);
-  assert.deepEqual(art.furniture.filter((entry) => entry.cameraConformant).map((entry) => entry.assetId), ["furniture-office-desk", "furniture-manager-console", "furniture-essential-cafe-two-top"]);
+  assert.equal(art.furniture.filter((entry) => entry.runtimeBound).length, 6);
+  assert.equal(art.furniture.filter((entry) => entry.productionComplete).length, 6);
+  assert.equal(art.furniture.filter((entry) => entry.present && !entry.runtimeBound).length, 34);
+  assert.deepEqual(art.furniture.filter((entry) => entry.cameraConformant).map((entry) => entry.assetId), ["furniture-wet-floor-station", "furniture-linen-storage", "furniture-water-station", "furniture-office-desk", "furniture-manager-console", "furniture-essential-cafe-two-top"]);
   assert.deepEqual(art.furniture.filter((entry) => entry.runtimeCompositePending), []);
   assert.ok(art.furniture.filter((entry) => entry.cameraConformant).every((entry) =>
     entry.sourceAccepted && entry.remoteVerified && entry.runtimeCompositeAccepted

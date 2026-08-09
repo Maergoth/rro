@@ -10,28 +10,86 @@
   "completionRule": "generated, processed, raster-validated, visually accepted, runtime-bound assets whose exact reviewed bytes are remotely verified on GitHub with green CI",
   "artDirection": {
     "camera": "orthographic semi-isometric",
-    "furnitureDirections": ["north", "east", "south", "west"],
-    "characterDirections": ["north", "north_east", "east", "south_east", "south", "south_west", "west", "north_west"],
+    "furnitureDirections": [
+      "north",
+      "east",
+      "south",
+      "west"
+    ],
+    "characterDirections": [
+      "north",
+      "north_east",
+      "east",
+      "south_east",
+      "south",
+      "south_west",
+      "west",
+      "north_west"
+    ],
     "transparency": "flat chroma-key source with locally validated alpha runtime files"
   },
   "launchScope": {
     "construction": {
-      "openingTypes": ["solid", "door", "service-door", "window", "arch"],
-      "openingDirections": ["north", "east", "south", "west"],
-      "utilityOverlays": ["power", "gas", "water", "drain", "ventilation"],
+      "openingTypes": [
+        "solid",
+        "door",
+        "service-door",
+        "window",
+        "arch"
+      ],
+      "openingDirections": [
+        "north",
+        "east",
+        "south",
+        "west"
+      ],
+      "utilityOverlays": [
+        "power",
+        "gas",
+        "water",
+        "drain",
+        "ventilation"
+      ],
       "note": "Floor and wall material IDs come from packages/game-data/core/construction.json. Opening geometry is shared across materials; material tint/texture is applied separately."
     },
-    "world": ["world-atlas"],
-    "environment": ["contact-shadow", "selection-ring", "steam-puff", "service-sparkles"],
+    "world": [
+      "world-atlas"
+    ],
+    "environment": [
+      "contact-shadow",
+      "selection-ring",
+      "steam-puff",
+      "service-sparkles"
+    ],
     "ui": [
-      "builder-pointer", "builder-floor", "builder-wall", "builder-furniture", "builder-rotate",
-      "builder-repair", "builder-sell", "builder-expand", "builder-power", "builder-gas",
-      "builder-water", "builder-drain", "builder-ventilation", "login-hero", "rro-mark"
+      "builder-pointer",
+      "builder-floor",
+      "builder-wall",
+      "builder-furniture",
+      "builder-rotate",
+      "builder-repair",
+      "builder-sell",
+      "builder-expand",
+      "builder-power",
+      "builder-gas",
+      "builder-water",
+      "builder-drain",
+      "builder-ventilation",
+      "login-hero",
+      "rro-mark"
     ]
   },
   "coverage": {
-    "furniture": { "catalogTotal": 229, "acceptedSets": 40, "acceptedDirectionalFiles": 160, "runtimeCompositeAcceptedSets": 40 },
-    "equipmentIcons": { "catalogTotal": 45, "accepted": 45 },
+    "furniture": {
+      "catalogTotal": 229,
+      "acceptedSets": 40,
+      "acceptedDirectionalFiles": 160,
+      "runtimeCompositeAcceptedSets": 40
+    },
+    "equipmentIcons": {
+      "catalogTotal": 45,
+      "accepted": 45
+    },
     "characterSystem": {
       "status": "in_progress",
       "sourceAcceptedBodyPresentations": 2,
@@ -43,7 +101,20 @@
       "preservedPrototypeOutfitFiles": 96,
       "productionAcceptedOutfitDesigns": 0,
       "runtimeReadyCharacterAssets": 0,
-      "required": ["body_skin", "face", "hair_headwear", "base_outfit", "role_layer", "footwear", "accessory", "carried_object", "effects", "skin_masks", "primary_color_masks", "secondary_color_masks"]
+      "required": [
+        "body_skin",
+        "face",
+        "hair_headwear",
+        "base_outfit",
+        "role_layer",
+        "footwear",
+        "accessory",
+        "carried_object",
+        "effects",
+        "skin_masks",
+        "primary_color_masks",
+        "secondary_color_masks"
+      ]
     }
   },
   "runtimeQaAttempts": [
@@ -56,8 +127,17 @@
       "artifactId": 8927474963,
       "artifactSha256": "933842483b6a38a31eb9da837b665bd1799a320e343adb59b126564f815edbfd",
       "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-001/review.json",
-      "passed": ["native-four-rotation-capture", "elevated-projection", "directional-selection", "floor-contact-pivots", "mixed-world-depth"],
-      "blockers": ["mounted-object-anchor-contract", "world-label-collision"],
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth"
+      ],
+      "blockers": [
+        "mounted-object-anchor-contract",
+        "world-label-collision"
+      ],
       "productionComplete": false
     },
     {
@@ -69,8 +149,18 @@
       "artifactId": 8927966443,
       "artifactSha256": "fba441164880464b7a240bcc10ce1a02e70f688092c7e38e4d713214013ebca8",
       "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-002/review.json",
-      "passed": ["native-four-rotation-capture", "elevated-projection", "directional-selection", "floor-contact-pivots", "mixed-world-depth", "gameplay-legibility", "sixteen-floor-assets"],
-      "blockers": ["mounted-object-anchor-contract"],
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility",
+        "sixteen-floor-assets"
+      ],
+      "blockers": [
+        "mounted-object-anchor-contract"
+      ],
       "acceptedAssetIds": [
         "banquette",
         "booth",
@@ -89,7 +179,11 @@
         "table-four",
         "table-two"
       ],
-      "rejectedAssetIds": ["local-art", "pendants", "plants"],
+      "rejectedAssetIds": [
+        "local-art",
+        "pendants",
+        "plants"
+      ],
       "reviewPreservation": {
         "commit": "1eb321395d7c9562e79fcf7a39a5c334ce3e05f9",
         "tree": "e2d69e0f8c39e4dd1f372e5abec2b66c4d4d0c1a",
@@ -106,8 +200,18 @@
       "artifactId": 8929624396,
       "artifactSha256": "ee92f4309c99bd6b580550e1c5f31c91f45f2107c8e053e49ffc980788a80cd8",
       "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-003/review.json",
-      "passed": ["native-four-rotation-capture", "elevated-projection", "directional-selection", "floor-contact-pivots", "mixed-world-depth", "gameplay-legibility", "nineteen-floor-assets"],
-      "blockers": ["mounted-object-anchor-contract"],
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility",
+        "nineteen-floor-assets"
+      ],
+      "blockers": [
+        "mounted-object-anchor-contract"
+      ],
       "acceptedAssetIds": [
         "banquette",
         "booth",
@@ -129,7 +233,11 @@
         "table-four",
         "table-two"
       ],
-      "rejectedAssetIds": ["local-art", "pendants", "plants"],
+      "rejectedAssetIds": [
+        "local-art",
+        "pendants",
+        "plants"
+      ],
       "reviewPreservation": {
         "commit": "10a0f705af46ae9737b27830af59fc5b1fa3b5bf",
         "tree": "6cb40312461f9afc5f2624b797dd6b2dc5915c0e",
@@ -146,8 +254,18 @@
       "artifactId": 8931752495,
       "artifactSha256": "25f2b0e993ad9c283d5be84dd2e08a5763d5b1c1931ed704a8dc8daa27a25332",
       "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-004/review.json",
-      "passed": ["native-four-rotation-capture", "elevated-projection", "directional-selection", "floor-contact-pivots", "mixed-world-depth", "gameplay-legibility", "twenty-two-floor-assets"],
-      "blockers": ["mounted-object-anchor-contract"],
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility",
+        "twenty-two-floor-assets"
+      ],
+      "blockers": [
+        "mounted-object-anchor-contract"
+      ],
       "acceptedAssetIds": [
         "banquette",
         "booth",
@@ -172,7 +290,11 @@
         "table-four",
         "table-two"
       ],
-      "rejectedAssetIds": ["local-art", "pendants", "plants"],
+      "rejectedAssetIds": [
+        "local-art",
+        "pendants",
+        "plants"
+      ],
       "reviewPreservation": {
         "commit": "34daaef7744926b79ff68962c78f93bee218da4d",
         "tree": "4110008c5540c913cb14ac72222087d33d84f096",
@@ -189,8 +311,19 @@
       "artifactId": 8933468440,
       "artifactSha256": "953e1ec3f134cfef827e7f97afd0750c942521244dfcf3ec84004f9b1b8aa74e",
       "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-005/review.json",
-      "passed": ["native-four-rotation-capture", "elevated-projection", "directional-selection", "floor-contact-pivots", "mixed-world-depth", "legal-mounted-placement-records", "twenty-two-floor-assets"],
-      "blockers": ["visible-wall-plane-and-room-facing-depth", "ceiling-context-and-elevation"],
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "legal-mounted-placement-records",
+        "twenty-two-floor-assets"
+      ],
+      "blockers": [
+        "visible-wall-plane-and-room-facing-depth",
+        "ceiling-context-and-elevation"
+      ],
       "acceptedAssetIds": [
         "banquette",
         "booth",
@@ -215,7 +348,11 @@
         "table-four",
         "table-two"
       ],
-      "rejectedAssetIds": ["local-art", "pendants", "plants"],
+      "rejectedAssetIds": [
+        "local-art",
+        "pendants",
+        "plants"
+      ],
       "reviewPreservation": {
         "commit": "cb1cd7f5c29d953abe94cb27a70891ede9d842c8",
         "tree": "f73c8171ba200f58eac682e4fc7cfb43f6825200",
@@ -232,8 +369,20 @@
       "artifactId": 8934792593,
       "artifactSha256": "663b165ee0b1622924d2c9ae5df3c76e451432690b38f6e41f4205b38bb404cb",
       "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-006/review.json",
-      "passed": ["native-four-rotation-capture", "elevated-projection", "directional-selection", "floor-contact-pivots", "mixed-world-depth", "gameplay-legibility", "legal-mounted-placement-records", "wall-and-ceiling-context", "twenty-seven-present-assets"],
-      "blockers": ["convection-oven-foreground-wall-occlusion"],
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility",
+        "legal-mounted-placement-records",
+        "wall-and-ceiling-context",
+        "twenty-seven-present-assets"
+      ],
+      "blockers": [
+        "convection-oven-foreground-wall-occlusion"
+      ],
       "acceptedAssetIds": [
         "banquette",
         "booth",
@@ -263,7 +412,9 @@
         "table-four",
         "table-two"
       ],
-      "rejectedAssetIds": ["furniture-convection-oven"],
+      "rejectedAssetIds": [
+        "furniture-convection-oven"
+      ],
       "reviewPreservation": {
         "commit": "f2cc4afc3dca51ae468d9c95e2b036dedd8c3ee5",
         "tree": "3307f0ba9abf9505af1e3410895da28a890d7cdf",
@@ -280,7 +431,17 @@
       "artifactId": 8935706427,
       "artifactSha256": "640bc60b9e699dbe3ce84c05ce5258f2a60336f6d97d1d0b95849636fd1d2376",
       "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-007/review.json",
-      "passed": ["native-four-rotation-capture", "elevated-projection", "directional-selection", "floor-contact-pivots", "mixed-world-depth", "gameplay-legibility", "legal-mounted-placement-records", "wall-and-ceiling-context", "twenty-eight-present-assets"],
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility",
+        "legal-mounted-placement-records",
+        "wall-and-ceiling-context",
+        "twenty-eight-present-assets"
+      ],
       "blockers": [],
       "acceptedAssetIds": [
         "banquette",
@@ -329,17 +490,50 @@
       "artifactId": 8987205444,
       "artifactSha256": "62bfb9f325aedb59180ccaef9d5483007ed6926c364860b4901dadf850314913",
       "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-008/review.json",
-      "passed": ["native-four-rotation-capture", "elevated-projection", "directional-selection", "floor-contact-pivots", "mixed-world-depth", "gameplay-legibility", "legal-mounted-placement-records", "wall-and-ceiling-context", "thirty-one-present-assets"],
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility",
+        "legal-mounted-placement-records",
+        "wall-and-ceiling-context",
+        "thirty-one-present-assets"
+      ],
       "blockers": [],
       "acceptedAssetIds": [
-        "banquette", "booth", "dish-machine", "espresso", "furniture-banquette-section",
-        "furniture-commercial-chair", "furniture-convection-oven", "furniture-dry-storage-rack",
-        "furniture-expo-pass-heated", "furniture-host-stand-pro", "furniture-oak-two-top",
-        "furniture-plancha-commercial", "furniture-pos-terminal", "furniture-premium-chair",
-        "furniture-prep-table-refrigerated", "furniture-server-station-pro",
-        "furniture-six-burner-range", "furniture-walkin-rack", "furniture-walnut-four-top",
-        "host-stand", "local-art", "mop-sink", "pass", "pendants", "plants", "prep",
-        "range", "recycling", "service-station", "table-four", "table-two"
+        "banquette",
+        "booth",
+        "dish-machine",
+        "espresso",
+        "furniture-banquette-section",
+        "furniture-commercial-chair",
+        "furniture-convection-oven",
+        "furniture-dry-storage-rack",
+        "furniture-expo-pass-heated",
+        "furniture-host-stand-pro",
+        "furniture-oak-two-top",
+        "furniture-plancha-commercial",
+        "furniture-pos-terminal",
+        "furniture-premium-chair",
+        "furniture-prep-table-refrigerated",
+        "furniture-server-station-pro",
+        "furniture-six-burner-range",
+        "furniture-walkin-rack",
+        "furniture-walnut-four-top",
+        "host-stand",
+        "local-art",
+        "mop-sink",
+        "pass",
+        "pendants",
+        "plants",
+        "prep",
+        "range",
+        "recycling",
+        "service-station",
+        "table-four",
+        "table-two"
       ],
       "rejectedAssetIds": [],
       "reviewPreservation": {
@@ -358,18 +552,53 @@
       "artifactId": 8996352192,
       "artifactSha256": "3b9f431c59473ccf9524de03454859928b7430601ef1c7c73c29ff11f353e072",
       "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-009/review.json",
-      "passed": ["native-four-rotation-capture", "elevated-projection", "directional-selection", "floor-contact-pivots", "mixed-world-depth", "gameplay-legibility", "legal-mounted-placement-records", "wall-and-ceiling-context", "thirty-four-present-assets"],
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility",
+        "legal-mounted-placement-records",
+        "wall-and-ceiling-context",
+        "thirty-four-present-assets"
+      ],
       "blockers": [],
       "acceptedAssetIds": [
-        "banquette", "booth", "dish-machine", "espresso", "furniture-banquette-section",
-        "furniture-chemical-cabinet", "furniture-commercial-chair", "furniture-convection-oven",
-        "furniture-dish-machine-high-temp", "furniture-dry-storage-rack", "furniture-expo-pass-heated",
-        "furniture-host-stand-pro", "furniture-oak-two-top", "furniture-plancha-commercial",
-        "furniture-pos-terminal", "furniture-premium-chair", "furniture-prep-table-refrigerated",
-        "furniture-server-station-pro", "furniture-six-burner-range", "furniture-three-comp-sink",
-        "furniture-walkin-rack", "furniture-walnut-four-top", "host-stand", "local-art",
-        "mop-sink", "pass", "pendants", "plants", "prep", "range", "recycling",
-        "service-station", "table-four", "table-two"
+        "banquette",
+        "booth",
+        "dish-machine",
+        "espresso",
+        "furniture-banquette-section",
+        "furniture-chemical-cabinet",
+        "furniture-commercial-chair",
+        "furniture-convection-oven",
+        "furniture-dish-machine-high-temp",
+        "furniture-dry-storage-rack",
+        "furniture-expo-pass-heated",
+        "furniture-host-stand-pro",
+        "furniture-oak-two-top",
+        "furniture-plancha-commercial",
+        "furniture-pos-terminal",
+        "furniture-premium-chair",
+        "furniture-prep-table-refrigerated",
+        "furniture-server-station-pro",
+        "furniture-six-burner-range",
+        "furniture-three-comp-sink",
+        "furniture-walkin-rack",
+        "furniture-walnut-four-top",
+        "host-stand",
+        "local-art",
+        "mop-sink",
+        "pass",
+        "pendants",
+        "plants",
+        "prep",
+        "range",
+        "recycling",
+        "service-station",
+        "table-four",
+        "table-two"
       ],
       "rejectedAssetIds": [],
       "reviewPreservation": {
@@ -388,19 +617,56 @@
       "artifactId": 9014716339,
       "artifactSha256": "6ac765908a7871ee29e06f4407ef7e2b74ffcdbccace6e0ab5ac634e8774e310",
       "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-010/review.json",
-      "passed": ["native-four-rotation-capture", "elevated-projection", "directional-selection", "floor-contact-pivots", "mixed-world-depth", "gameplay-legibility", "legal-mounted-placement-records", "wall-and-ceiling-context", "thirty-seven-present-assets"],
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility",
+        "legal-mounted-placement-records",
+        "wall-and-ceiling-context",
+        "thirty-seven-present-assets"
+      ],
       "blockers": [],
       "acceptedAssetIds": [
-        "banquette", "booth", "dish-machine", "espresso", "furniture-banquette-section",
-        "furniture-chemical-cabinet", "furniture-commercial-chair", "furniture-convection-oven",
-        "furniture-dish-machine-high-temp", "furniture-dry-storage-rack", "furniture-expo-pass-heated",
-        "furniture-host-stand-pro", "furniture-linen-storage", "furniture-oak-two-top",
-        "furniture-plancha-commercial", "furniture-pos-terminal", "furniture-premium-chair",
-        "furniture-prep-table-refrigerated", "furniture-server-station-pro",
-        "furniture-six-burner-range", "furniture-three-comp-sink", "furniture-walkin-rack",
-        "furniture-walnut-four-top", "furniture-water-station", "furniture-wet-floor-station",
-        "host-stand", "local-art", "mop-sink", "pass", "pendants", "plants", "prep",
-        "range", "recycling", "service-station", "table-four", "table-two"
+        "banquette",
+        "booth",
+        "dish-machine",
+        "espresso",
+        "furniture-banquette-section",
+        "furniture-chemical-cabinet",
+        "furniture-commercial-chair",
+        "furniture-convection-oven",
+        "furniture-dish-machine-high-temp",
+        "furniture-dry-storage-rack",
+        "furniture-expo-pass-heated",
+        "furniture-host-stand-pro",
+        "furniture-linen-storage",
+        "furniture-oak-two-top",
+        "furniture-plancha-commercial",
+        "furniture-pos-terminal",
+        "furniture-premium-chair",
+        "furniture-prep-table-refrigerated",
+        "furniture-server-station-pro",
+        "furniture-six-burner-range",
+        "furniture-three-comp-sink",
+        "furniture-walkin-rack",
+        "furniture-walnut-four-top",
+        "furniture-water-station",
+        "furniture-wet-floor-station",
+        "host-stand",
+        "local-art",
+        "mop-sink",
+        "pass",
+        "pendants",
+        "plants",
+        "prep",
+        "range",
+        "recycling",
+        "service-station",
+        "table-four",
+        "table-two"
       ],
       "rejectedAssetIds": [],
       "reviewPreservation": {
@@ -419,7 +685,16 @@
       "artifactId": 9030941364,
       "artifactSha256": "41c3b80ed02da62ff97fcb9b781fb3bd7087fac96bd0800538817c096a371cb3",
       "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-011/review.json",
-      "passed": ["native-four-rotation-capture", "fixed-camera-contract", "elevated-projection", "directional-selection", "floor-contact-pivots", "mixed-world-depth", "gameplay-legibility", "three-camera-conformant-assets"],
+      "passed": [
+        "native-four-rotation-capture",
+        "fixed-camera-contract",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility",
+        "three-camera-conformant-assets"
+      ],
       "blockers": [],
       "acceptedAssetIds": [
         "furniture-essential-cafe-two-top",
@@ -431,6 +706,39 @@
         "commit": "70b1adc1f15c5ac04a711d01737786eb291f1794",
         "tree": "4cbbf7d8a0d8ca1a110d70d56fb0d4b4d217f14c",
         "ci": "https://github.com/Maergoth/rro/actions/runs/31290164561"
+      },
+      "productionComplete": false
+    },
+    {
+      "id": "runtime-isometric-integration-001-attempt-012",
+      "status": "passed-camera-conformant-assets",
+      "remoteCommit": "4ed663373440bedffcc4812618eb413adeaf484e",
+      "remoteTree": "a1a257363562e05fa5526654930c0fbdda786375",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31316662076",
+      "artifactId": 9038954590,
+      "artifactSha256": "369ff4e10c48bb6efad31076c3819d3d8dc050c66eed8dd1080eba2bae9ca285",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-012/review.json",
+      "passed": [
+        "native-four-rotation-capture",
+        "fixed-camera-contract",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility",
+        "three-camera-conformant-assets"
+      ],
+      "blockers": [],
+      "acceptedAssetIds": [
+        "furniture-linen-storage",
+        "furniture-water-station",
+        "furniture-wet-floor-station"
+      ],
+      "rejectedAssetIds": [],
+      "reviewPreservation": {
+        "commit": "fee22ea72daa496b4a590ff45df2c8b9872e2de7",
+        "tree": "86058e2f2428abf575240c5ad73ce4280f8a4aff",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31317025179"
       },
       "productionComplete": false
     }
@@ -466,16 +774,16 @@
       ],
       "files": 28,
       "qa": "passed",
-      "runtimeQa": "passed-native-gameplay-composite-attempt-010",
-      "sourcePromptMode": "built-in image generation; three separately prompted rigid elevated-isometric four-direction service-fixture atlases with two semantic corrections, official chroma-key edge remediation, common-pivot normalization, and full/gameplay-scale contact review",
-      "remoteCommit": "dd542537e372b7d726a375e48540c7ca066caaf4",
-      "remoteTree": "51db0b01d7719e0d4474afeb4f5bc0484cbccc84",
-      "ci": "https://github.com/Maergoth/rro/actions/runs/31233762203",
-      "artifactId": 9014716339,
-      "artifactSha256": "6ac765908a7871ee29e06f4407ef7e2b74ffcdbccace6e0ab5ac634e8774e310",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-012",
+      "sourcePromptMode": "built-in image generation; twelve separately prompted fixed-camera directional frames, official chroma-key removal, common-pivot normalization, and full/gameplay-scale contact review",
+      "remoteCommit": "da9a828fc47c2b8c8e015cc2e4f648516985b577",
+      "remoteTree": "f1f329f726d35db4650c5f8958c3e32c564dc027",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31316662076",
+      "artifactId": 9038954590,
+      "artifactSha256": "369ff4e10c48bb6efad31076c3819d3d8dc050c66eed8dd1080eba2bae9ca285",
       "qaEvidence": "planning/art-qa/furniture-core-directional-012/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-012/qa.json",
-      "notes": "Spill response station, linen/reset cabinet, and filtered water station are source-accepted, remotely preserved, visually accepted in native four-rotation gameplay review attempt 010, and backed by an exact remote review-evidence checkpoint with green hosted CI."
+      "notes": "Spill response station, linen/reset cabinet, and filtered water station were rebuilt after their original atlases mixed frontal elevations with arbitrary three-quarter views. The corrected frames pass the explicit fixed elevated orthographic-isometric camera, adjacent-face quarter-turn, identity, alpha, pivot, full-resolution, 128px, and exact native four-rotation review. Their source, native review, and review evidence are remotely preserved with green hosted CI; the other thirty-four present identities remain explicitly pending camera-conformance audit."
     },
     {
       "id": "furniture-core-directional-011",
@@ -496,8 +804,7 @@
       "qaEvidence": "planning/art-qa/furniture-core-directional-011/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-011/qa.json",
       "notes": "Locked chemical cabinet, high-temperature dish machine, and three-compartment sink are source-accepted, remotely preserved, visually accepted in native four-rotation gameplay review attempt 009, and backed by an exact remote review-evidence checkpoint with green hosted CI."
-    }
-    ,
+    },
     {
       "id": "furniture-core-directional-010",
       "assets": [
@@ -517,8 +824,7 @@
       "qaEvidence": "planning/art-qa/furniture-core-directional-010/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-010/qa.json",
       "notes": "Refrigerated prep table, walk-in storage rack, and dry-storage rack are source-accepted, remotely preserved, visually accepted in native four-rotation gameplay review attempt 008, and backed by an exact remote review-evidence checkpoint with green hosted CI."
-    }
-    ,
+    },
     {
       "id": "furniture-core-directional-009",
       "assets": [
@@ -559,7 +865,9 @@
     },
     {
       "id": "furniture-pilot-001",
-      "assets": ["furniture-six-burner-range"],
+      "assets": [
+        "furniture-six-burner-range"
+      ],
       "files": 4,
       "qa": "passed",
       "runtimeQa": "passed-native-gameplay-composite-attempt-002",
@@ -570,7 +878,9 @@
     },
     {
       "id": "character-foundation-001",
-      "assets": ["body-base-a-idle-isometric"],
+      "assets": [
+        "body-base-a-idle-isometric"
+      ],
       "files": 8,
       "qa": "passed",
       "runtimeQa": "blocked-anchor-and-chroma-normalization",
@@ -582,7 +892,9 @@
     },
     {
       "id": "character-foundation-002",
-      "assets": ["body-base-b-idle-isometric"],
+      "assets": [
+        "body-base-b-idle-isometric"
+      ],
       "files": 8,
       "qa": "passed",
       "runtimeQa": "blocked-anchor-and-chroma-normalization",
@@ -594,7 +906,12 @@
     },
     {
       "id": "character-modular-classic-001",
-      "assets": ["body-skin-masks-base-a", "body-skin-masks-base-b", "outfit-classic-base-a", "outfit-classic-base-b"],
+      "assets": [
+        "body-skin-masks-base-a",
+        "body-skin-masks-base-b",
+        "outfit-classic-base-a",
+        "outfit-classic-base-b"
+      ],
       "files": 80,
       "qa": "mixed",
       "runtimeQa": "failed-needs-remediation",
@@ -653,7 +970,11 @@
     },
     {
       "id": "furniture-core-directional-001",
-      "assets": ["table-two", "table-four", "host-stand"],
+      "assets": [
+        "table-two",
+        "table-four",
+        "host-stand"
+      ],
       "files": 20,
       "qa": "passed",
       "runtimeQa": "passed-native-gameplay-composite-attempt-002",
@@ -799,7 +1120,11 @@
     },
     {
       "id": "furniture-core-directional-002",
-      "assets": ["booth", "banquette", "service-station"],
+      "assets": [
+        "booth",
+        "banquette",
+        "service-station"
+      ],
       "files": 28,
       "qa": "passed",
       "runtimeQa": "passed-native-gameplay-composite-attempt-002",
@@ -813,7 +1138,11 @@
     },
     {
       "id": "furniture-core-directional-003",
-      "assets": ["range", "prep", "pass"],
+      "assets": [
+        "range",
+        "prep",
+        "pass"
+      ],
       "files": 28,
       "qa": "passed",
       "runtimeQa": "passed-native-gameplay-composite-attempt-002",
@@ -827,7 +1156,11 @@
     },
     {
       "id": "furniture-core-directional-004",
-      "assets": ["espresso", "dish-machine", "mop-sink"],
+      "assets": [
+        "espresso",
+        "dish-machine",
+        "mop-sink"
+      ],
       "files": 28,
       "qa": "passed",
       "runtimeQa": "passed-native-gameplay-composite-attempt-002",
@@ -841,7 +1174,11 @@
     },
     {
       "id": "furniture-core-directional-005",
-      "assets": ["recycling", "pendants", "plants"],
+      "assets": [
+        "recycling",
+        "pendants",
+        "plants"
+      ],
       "files": 28,
       "qa": "passed",
       "runtimeQa": "passed-native-gameplay-composite-attempt-007",
@@ -855,7 +1192,11 @@
     },
     {
       "id": "furniture-core-directional-006",
-      "assets": ["local-art", "furniture-oak-two-top", "furniture-walnut-four-top"],
+      "assets": [
+        "local-art",
+        "furniture-oak-two-top",
+        "furniture-walnut-four-top"
+      ],
       "files": 28,
       "qa": "passed",
       "runtimeQa": "passed-native-gameplay-composite-attempt-007",
