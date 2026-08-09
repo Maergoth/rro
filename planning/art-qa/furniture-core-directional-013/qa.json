@@ -1,0 +1,380 @@
+{
+  "schemaVersion": 1,
+  "batchId": "furniture-core-directional-013",
+  "assets": [
+    "furniture-office-desk",
+    "furniture-manager-console",
+    "furniture-essential-cafe-two-top"
+  ],
+  "artReviewStatus": "accepted",
+  "productionComplete": false,
+  "productionCompletionBlockers": [
+    "Verify the exact promoted repository tree and hosted CI remotely.",
+    "Pass exact native elevated-isometric four-rotation gameplay-composite review after runtime binding."
+  ],
+  "cameraContract": {
+    "type": "elevated-orthographic-isometric",
+    "fixedCamera": true,
+    "rotationStepDegrees": 90,
+    "azimuthDegrees": 315,
+    "elevationDegrees": 26.565,
+    "basisX": [
+      0.5,
+      0.25
+    ],
+    "basisY": [
+      -0.5,
+      0.25
+    ],
+    "groundEdgeScreenSlopes": [
+      -0.5,
+      0.5
+    ],
+    "verticalEdges": "screen-vertical",
+    "perspective": false,
+    "adjacentFacesByDirection": {
+      "north": [
+        "front",
+        "right"
+      ],
+      "east": [
+        "right",
+        "rear"
+      ],
+      "south": [
+        "rear",
+        "left"
+      ],
+      "west": [
+        "left",
+        "front"
+      ]
+    }
+  },
+  "source": {
+    "promptLog": "planning/art-qa/furniture-core-directional-013/prompts.md",
+    "promptLogSha256": "e108ef0e480b6fa6c7156572b2d67e40d89b8d4fc598142f6e68e9611cc4bd7a"
+  },
+  "processorSha256": "c033bb6dd49057e11117879c07bd759abdfb1eb0b03a1e29ff410c9ae4913a8f",
+  "contactSheets": [
+    {
+      "path": "planning/art-qa/furniture-core-directional-013/contact-627-dark.png",
+      "sha256": "37a78b29316a7b98820534d55ff47edcf2ae31a995eff6f5ebd7d41a1e6a0c36"
+    },
+    {
+      "path": "planning/art-qa/furniture-core-directional-013/contact-128-light.png",
+      "sha256": "da64e08069214dcd7afd1b2a6488791ee49d732e8d2ed34306f84703898f4f6c"
+    }
+  ],
+  "rejectedAttempts": [
+    {
+      "generatorOutputSha256": "76894de0777105c585c8cff36eb4b3c84458254ceb27b1d2d708cd00123c6915",
+      "reason": "Rejected source: original desk atlas mixed straight-on elevations with arbitrary three-quarter camera views."
+    },
+    {
+      "generatorOutputSha256": "fe17a118ca3be678b21690efb751478b06e525490be7cd9a8337e916ddca90f7",
+      "reason": "Rejected source: original console atlas mixed straight-on elevations with arbitrary three-quarter camera views."
+    },
+    {
+      "generatorOutputSha256": "cee25c424e4af4599e0796981bddf9c861e405e191a24eb054f6695e39c7808e",
+      "reason": "Rejected source: original cafe two-top atlas used orthographic top/front elevations instead of one fixed elevated isometric camera."
+    },
+    {
+      "generatorOutputSha256": "7174f7f3f25c4e6a50947c56e6a0fdc9ca5b93f7f852f48bcd8c59f9c282265c",
+      "reason": "Rejected source: first corrected desk EAST repeated NORTH's front-right faces instead of completing a quarter turn."
+    },
+    {
+      "generatorOutputSha256": "c63e16d0ead080f4efe2b07282e1498793e10ee15db3756e1593b68067801203",
+      "reason": "Rejected source: first corrected cafe SOUTH used the EAST/WEST chair diagonal rather than NORTH/SOUTH's diagonal."
+    }
+  ],
+  "gates": {
+    "visualReviewAtFullScale": "pass: exact 627px review confirms one fixed elevated orthographic-isometric camera, alternating ground diagonals, adjacent-face quarter turns, and preserved asymmetric identities",
+    "visualReviewAtGameplayScale128px": "pass: all three fixed-camera identities and their quarter-turn states remain readable at 128px",
+    "rasterContract": "pass: 12/12 627x627 RGBA, common pivot (313.5,590), bottom margin 37, transparent borders",
+    "repositoryDirectionalPngsCompared": 148,
+    "exactFileCollisionsAgainstRepository": 0,
+    "exactPixelCollisionsAgainstRepository": 0,
+    "exactPerceptualHashCollisionsAgainstRepository": 0,
+    "visibleMagentaDefects": 0,
+    "proceduralOrDeterministicStandIn": false,
+    "nativeGameplayCompositeReview": "pending: exact repository-bound four-rotation native capture and human review",
+    "cameraConformance": "pass: fixed camera; N front+right, E right+rear, S rear+left, W left+front; no straight-on elevation or perspective change"
+  },
+  "items": [
+    {
+      "assetId": "furniture-office-desk",
+      "catalogId": "office-desk",
+      "name": "Owner's Operations Desk",
+      "category": "Office",
+      "style": "Modern",
+      "footprint": [
+        3,
+        2
+      ],
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "commonScale": 1,
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-office-desk/north.png",
+          "sha256": "7f7faf03f79d0a5b735b68b9ffab0bbb21724cc8e5528d670da85e06f43d3934",
+          "pixelSha256": "0e9a0de6f5df3650543322ffd6fee4181553c2b0d12e55a8cf67d5ad8e236275",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-office-desk-north.png",
+          "sourceAlphaSha256": "12d6432d62fdac6b5a6b7f24e0ca96fc2e8ab4a10fae6fb4169efb93c546077e",
+          "alphaBoundingBox": [
+            92,
+            238,
+            534,
+            589
+          ],
+          "alphaBaselineY": 590
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-office-desk/east.png",
+          "sha256": "d8359e40364d84d9af8c34d40f1657663bd8562e49edbf58c9ffa545f09265a2",
+          "pixelSha256": "58b4e9e357a8c39b63690a47e28aa8cb006c33bbd89b749623507766603e4adf",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-office-desk-east.png",
+          "sourceAlphaSha256": "b91b8c509bd21431f6cc57f619cb6a373c0fc009f21922f22bfdd50b39d6f72c",
+          "alphaBoundingBox": [
+            87,
+            184,
+            539,
+            589
+          ],
+          "alphaBaselineY": 590
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-office-desk/south.png",
+          "sha256": "1a55eeccd59752ef63f0f2ab1fbdb18ae301abc5636ef8b93e53df52ecc5a2c7",
+          "pixelSha256": "ac4e61933bab41e667fcfb7f6025faacebffe3ad00a229a17bddb1a31fd3314e",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-office-desk-south.png",
+          "sourceAlphaSha256": "c646cd830550cfd4c20a671e430d5252fb2fc6d71649bb9188338a67af1333bd",
+          "alphaBoundingBox": [
+            84,
+            163,
+            543,
+            589
+          ],
+          "alphaBaselineY": 590
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-office-desk/west.png",
+          "sha256": "69a8b2deb8680cad3e31ff4e998e5cd288fa5d290b61807a80c986cc18d7b52e",
+          "pixelSha256": "751c4aca54f5b3a9803c98c2eed01f1047108dc7ef4c7761c9a9e1823da9c1ea",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-office-desk-west.png",
+          "sourceAlphaSha256": "e8fb4ee5f9fc294c290a8ba75d44e46ffce1537cb579c994a9d6a26c75cef64d",
+          "alphaBoundingBox": [
+            85,
+            182,
+            541,
+            589
+          ],
+          "alphaBaselineY": 590
+        }
+      ],
+      "sourceMode": "four separately generated fixed-camera directional frames",
+      "rawGeneratorOutputSha256ByDirection": {
+        "north": "0d785f7a205a5b99a3059102ec27ae61168aa1580a8d681cd8696de2c1b2547d",
+        "east": "90d29b2f307c281a61e3f24aee8e69dec690323b77a2be5dc90f47764739aba0",
+        "south": "987b9d4a985add8f584a01cfa3c0434d6ff621c767c67ab10bbd5bfa5a4e8338",
+        "west": "a2c8978bfb17edcf8753ab1019d45247ff1e2125bcba6ce60c5f59778312a30f"
+      }
+    },
+    {
+      "assetId": "furniture-manager-console",
+      "catalogId": "manager-console",
+      "name": "Live Operations Console",
+      "category": "Office",
+      "style": "Modern",
+      "footprint": [
+        3,
+        2
+      ],
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "commonScale": 1,
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-manager-console/north.png",
+          "sha256": "bb2f755a90384400bed5fcd725c8febd8faf11eb0a6c26bab5c401ad67ae2daa",
+          "pixelSha256": "d5d15a0a2633c1a6f2574547d3e2b276eac318d5bfd849a7b3851341a395c3c9",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-manager-console-north.png",
+          "sourceAlphaSha256": "b7236aeac012d7abf967c7ca174c8e2996f98c206f1cc93c5467ba44855c3c8a",
+          "alphaBoundingBox": [
+            86,
+            123,
+            540,
+            589
+          ],
+          "alphaBaselineY": 590
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-manager-console/east.png",
+          "sha256": "74a62628da0a5423467c3bcaf09770ec8e20597e11b71d378fbf11b7cdf46bd8",
+          "pixelSha256": "dae2ef30a60919639b205cbe4cdf0303adcda317941d6d9e55289e0a27996154",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-manager-console-east.png",
+          "sourceAlphaSha256": "69c134c135bb032748de6a9236453a4fecae9552df278d48ada3f58f9d2251d0",
+          "alphaBoundingBox": [
+            134,
+            159,
+            492,
+            589
+          ],
+          "alphaBaselineY": 590
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-manager-console/south.png",
+          "sha256": "ac9f81ab57325f2d19a1addbcca59dd55eb39d82108e6d6b29068636e9dfc464",
+          "pixelSha256": "583680b52d800a82799ab347678e80bdb17f2f60a8bcfcc58dfc59c6da1d1bb5",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-manager-console-south.png",
+          "sourceAlphaSha256": "44298c027edc2e26400b976e67135d0ba2ea7638c426f22659f6497c1d302251",
+          "alphaBoundingBox": [
+            118,
+            141,
+            508,
+            589
+          ],
+          "alphaBaselineY": 590
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-manager-console/west.png",
+          "sha256": "06d9466b2986a64e623a5f3d9f2f05702309333b23801b73628dcf4140719536",
+          "pixelSha256": "63680fda1a59801b614bb2c3c59048b27cc90d7d6cd708dafc0097897a6f2a5a",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-manager-console-west.png",
+          "sourceAlphaSha256": "7a4ea61b47bd379dfcf846e22b760778922cd5a32ed8302b6fc9be2aa616c088",
+          "alphaBoundingBox": [
+            90,
+            94,
+            537,
+            589
+          ],
+          "alphaBaselineY": 590
+        }
+      ],
+      "sourceMode": "four separately generated fixed-camera directional frames",
+      "rawGeneratorOutputSha256ByDirection": {
+        "north": "f0aebf405423bd591ffe3a36713c3bd52f723971dce1b1540c539a0ea0e2e981",
+        "east": "e294d6bf9da2e1bda2456abe194ea2b3c0351ab848e46aebb2cd6b48999f3895",
+        "south": "d0bcf18bf0d30ea5b98551efc6e4e7c1e34181104039013ab925611f43e721b7",
+        "west": "193ed089927580a92e658c5bf5dad7b95968ab37bb352e6304031d0fe1483bac"
+      }
+    },
+    {
+      "assetId": "furniture-essential-cafe-two-top",
+      "catalogId": "essential-cafe-two-top",
+      "name": "Essential Cafe Two-Top",
+      "category": "Dining",
+      "style": "Modern",
+      "footprint": [
+        2,
+        2
+      ],
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "commonScale": 1,
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-essential-cafe-two-top/north.png",
+          "sha256": "2d20a0e85bfc549921d2ff88d9aed606548b1bd0c245b343ee5ef783e0c5af8f",
+          "pixelSha256": "4247636197bb6b3a32e65351633518d7e46c2e243153e9a4e727085533e50a9e",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-essential-cafe-two-top-north.png",
+          "sourceAlphaSha256": "6810d42dee7082391ab19c6b3b1a18f128ca4c624c70b72cfd0bcd04089614e2",
+          "alphaBoundingBox": [
+            98,
+            157,
+            529,
+            589
+          ],
+          "alphaBaselineY": 590
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-essential-cafe-two-top/east.png",
+          "sha256": "29406f5d1fe2937f539f0f05c6935e2c40e5dfab8113f209a8ffd6faa12cdc98",
+          "pixelSha256": "4f5d840186419387782af494a4e263dc9a0b6a07e855ca4276b9c01f0aec93bf",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-essential-cafe-two-top-east.png",
+          "sourceAlphaSha256": "112c06cea963c4947af9a78b4a6c65ac3b5edab9dc63cce7f6670080075f23c1",
+          "alphaBoundingBox": [
+            85,
+            100,
+            541,
+            589
+          ],
+          "alphaBaselineY": 590
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-essential-cafe-two-top/south.png",
+          "sha256": "66cd8fb56b63d3694134186172eeb103bb4804cc22ced17dbd2a68d9fabaacee",
+          "pixelSha256": "5f00550fe05330e7b19f4e7bb0aa96976c2e0b90512f87387967907a465c1564",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-essential-cafe-two-top-south.png",
+          "sourceAlphaSha256": "972d256d82a56a07ee7ae8b369cc4444cdbca3a3ef381461ebd2ad8686f8960f",
+          "alphaBoundingBox": [
+            90,
+            154,
+            537,
+            589
+          ],
+          "alphaBaselineY": 590
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-essential-cafe-two-top/west.png",
+          "sha256": "10187c3544c9ee7ee90d4f5f12f51729af2b04f6fecfaebbcc8a59b51937b9f6",
+          "pixelSha256": "79d383d330cde0b3c6f0026ac27baa8be590f50ed0eb06795e1884a45c2e8689",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-essential-cafe-two-top-west.png",
+          "sourceAlphaSha256": "e9caec7a65f3a8ab36537676888f9b852b47c70319834124da0c2c271bc60c83",
+          "alphaBoundingBox": [
+            83,
+            106,
+            543,
+            589
+          ],
+          "alphaBaselineY": 590
+        }
+      ],
+      "sourceMode": "four separately generated fixed-camera directional frames",
+      "rawGeneratorOutputSha256ByDirection": {
+        "north": "785c70f8e44d21c293e75e2f7b77968cf3fb9f0c8d0d464d1761fb078bff571f",
+        "east": "45504011e76ac00f783a3c03cbf8b4832fad925174c166070a4b668782878457",
+        "south": "9906221d25cc2331b30f36b06191e6d6cc526d6b6ad6a35261c87dc7b24b5b53",
+        "west": "7e7ad8a8ee9f1a659e25a5d33d69c88b5c9662b476bf35594ca620431a7f7031"
+      }
+    }
+  ],
+  "promotionScope": {
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "repositoryPromotion": {
+    "status": "local-verified-pending-remote",
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "remotePreservation": null
+}

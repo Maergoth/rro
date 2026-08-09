@@ -294,6 +294,9 @@ const acceptedFurniturePlacements = {
   "wet-floor-station": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
   "linen-storage": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
   "water-station": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "office-desk": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "manager-console": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "essential-cafe-two-top": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
 };
 
 function operationalStrength(stats) {

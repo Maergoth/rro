@@ -30,7 +30,7 @@
     ]
   },
   "coverage": {
-    "furniture": { "catalogTotal": 229, "acceptedSets": 37, "acceptedDirectionalFiles": 148, "runtimeCompositeAcceptedSets": 37 },
+    "furniture": { "catalogTotal": 229, "acceptedSets": 40, "acceptedDirectionalFiles": 160, "runtimeCompositeAcceptedSets": 37 },
     "equipmentIcons": { "catalogTotal": 45, "accepted": 45 },
     "characterSystem": {
       "status": "in_progress",
@@ -411,7 +411,23 @@
       "productionComplete": false
     }
   ],
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "furniture-core-directional-013",
+      "assets": [
+        "furniture-office-desk",
+        "furniture-manager-console",
+        "furniture-essential-cafe-two-top"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "pending-native-gameplay-composite",
+      "sourcePromptMode": "built-in image generation; twelve separately prompted fixed-camera directional frames with two correction retries, official chroma-key removal, common-pivot normalization, and full/gameplay-scale contact review",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-013/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-013/qa.json",
+      "notes": "Owner operations desk, live operations console, and Essential Cafe Two-Top were rebuilt after the original atlases mixed frontal elevations with arbitrary three-quarter views. The corrected frames pass the explicit fixed elevated orthographic-isometric camera, adjacent-face quarter-turn, identity, alpha, pivot, full-resolution, and 128px review. Remote preservation, hosted CI, and exact native four-rotation gameplay-composite review remain pending."
+    }
+  ],
   "batches": [
     {
       "id": "furniture-core-directional-012",

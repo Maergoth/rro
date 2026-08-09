@@ -174,7 +174,7 @@ test("furniture directional batch 012 matches catalog, placement, pivot, alpha, 
   assert.equal(sourceHashes.size, 12);
   const prefixes = ASSETS.map((asset) => `apps/client-godot/assets/objects/directional/${asset}/`);
   const previous = repositoryFiles("apps/client-godot/assets/objects/directional").filter((path) => path.endsWith(".png") && !prefixes.some((prefix) => path.startsWith(prefix)));
-  assert.equal(previous.length, 136);
+  assert.equal(previous.length, 148);
   const previousHashes = new Set(previous.map(fileSha256));
   const previousPixelHashes = new Set(previous.map((path) => sha256(decodeRgbaPng(path).rgba)));
   assert.ok([...runtimeHashes].every((hash) => !previousHashes.has(hash)));

@@ -310,7 +310,7 @@ test("furniture directional batch 009 matches catalog, placement, raster, pivot,
   const batchPrefixes = ASSETS.map((asset) => `apps/client-godot/assets/objects/directional/${asset}/`);
   const otherPaths = repositoryFiles("apps/client-godot/assets/objects/directional")
     .filter((path) => path.endsWith(".png") && !batchPrefixes.some((prefix) => path.startsWith(prefix)));
-  assert.equal(otherPaths.length, 136, "repository comparison set drift");
+  assert.equal(otherPaths.length, 148, "repository comparison set drift");
   const otherFileHashes = new Set(otherPaths.map(fileSha256));
   const otherPixelHashes = new Set(otherPaths.map((path) => sha256(decodeRgbaPng(path).rgba)));
   for (const hash of runtimeHashes) assert.ok(!otherFileHashes.has(hash), `runtime file hash duplicates earlier art: ${hash}`);

@@ -1240,6 +1240,11 @@
       "office",
       "asset:furniture-office-desk"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-office-desk",
     "upkeepCents": 419,
@@ -1281,6 +1286,11 @@
       "office",
       "asset:furniture-manager-console"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-manager-console",
     "upkeepCents": 1123,
@@ -1319,6 +1329,11 @@
       "dining",
       "asset:furniture-essential-cafe-two-top"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-essential-cafe-two-top",
     "upkeepCents": 194,

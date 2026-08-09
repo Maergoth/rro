@@ -75,7 +75,10 @@ test("the authoritative art ledger cannot hide missing, failed, local-only, or u
   assert.ok(art.preservedReferences.some((entry) => entry.productionStatus === "preserved-reference-wrong-camera"));
   assert.ok(art.characters.prototypeOutfits.filter((entry) => entry.outfit === "classic").every((entry) => entry.status === "source_accepted_runtime_blocked"));
   assert.ok(art.characters.prototypeOutfits.filter((entry) => entry.outfit === "apron").every((entry) => entry.status === "qa_failed_needs_remediation"));
-  assert.equal(art.pendingBatches.length, 0);
+  assert.equal(art.pendingBatches.length, 1);
+  assert.ok(art.pendingBatches.some((entry) => entry.id === "furniture-core-directional-013"
+    && entry.qaEvidencePresent && !entry.remoteVerified
+    && entry.runtimeQa === "pending-native-gameplay-composite"));
   assert.ok(art.reviewedBatches.some((entry) => entry.id === "furniture-core-directional-012"
     && entry.qaEvidencePresent && entry.remoteVerified
     && entry.runtimeQa === "passed-native-gameplay-composite-attempt-010"));
@@ -167,16 +170,19 @@ test("the authoritative art ledger cannot hide missing, failed, local-only, or u
   assert.equal(equipmentSummary.sourceAccepted, 45);
   assert.equal(equipmentSummary.remoteVerified, 45);
   assert.equal(equipmentSummary.productionComplete, 45);
-  assert.equal(furnitureSummary.present, 37);
-  assert.equal(furnitureSummary.sourceAccepted, 37);
+  assert.equal(furnitureSummary.present, 40);
+  assert.equal(furnitureSummary.sourceAccepted, 40);
   assert.equal(furnitureSummary.remoteVerified, 37);
-  assert.equal(furnitureSummary.productionComplete, 37);
+  assert.equal(furnitureSummary.productionComplete, 0);
   assert.equal(art.runtimeCapabilities.directionalFurniture.directionalTextureSelection, true);
   assert.equal(art.runtimeCapabilities.directionalFurniture.projectionAligned, true);
-  assert.equal(art.runtimeCapabilities.directionalFurniture.runtimeCompositeAccepted, true);
+  assert.equal(art.runtimeCapabilities.directionalFurniture.cameraConformanceValidated, false);
+  assert.equal(art.runtimeCapabilities.directionalFurniture.runtimeCompositeAccepted, false);
   assert.equal(art.runtimeCapabilities.directionalFurniture.runtimeCompositeAcceptedAssetIds.length, 37);
   assert.deepEqual(art.runtimeCapabilities.directionalFurniture.runtimeCompositeBlockedAssetIds, []);
-  assert.deepEqual(art.runtimeCapabilities.directionalFurniture.runtimeCompositePendingAssetIds, []);
+  assert.deepEqual(art.runtimeCapabilities.directionalFurniture.runtimeCompositePendingAssetIds, ["furniture-essential-cafe-two-top", "furniture-manager-console", "furniture-office-desk"]);
+  assert.deepEqual(art.runtimeCapabilities.directionalFurniture.cameraConformantAssetIds, ["furniture-essential-cafe-two-top", "furniture-manager-console", "furniture-office-desk"]);
+  assert.equal(art.runtimeCapabilities.directionalFurniture.cameraConformancePendingAssetIds.length, 37);
   assert.equal(art.runtimeCapabilities.directionalFurniture.runtimeReviewRemoteVerified, true);
   const runtimeAcceptedFurnitureIds = new Set(
     art.runtimeCapabilities.directionalFurniture.runtimeCompositeAcceptedAssetIds,
@@ -194,15 +200,17 @@ test("the authoritative art ledger cannot hide missing, failed, local-only, or u
     );
   }
   assert.equal(art.runtimeCapabilities.directionalFurniture.productionComplete, false, "the complete 229-item furniture catalog and other art lanes remain unfinished");
-  assert.match(document, /Latest native review `runtime-isometric-integration-001-attempt-010` accepted 37\/37 present sets; its durable review checkpoint is remote-verified: yes\./);
+  assert.match(document, /Latest native review `runtime-isometric-integration-001-attempt-010` accepted 37\/40 present sets; its durable review checkpoint is remote-verified: yes\./);
   assert.ok(art.furniture.filter((entry) => entry.present).every((entry) => entry.directionalSelectionBound === true && entry.placementDeclared === true));
-  assert.equal(art.furniture.filter((entry) => entry.runtimeBound).length, 37);
-  assert.equal(art.furniture.filter((entry) => entry.productionComplete).length, 37);
-  assert.deepEqual(art.furniture.filter((entry) => entry.present && !entry.runtimeBound), []);
-  assert.deepEqual(art.furniture.filter((entry) => entry.runtimeCompositePending), []);
+  assert.equal(art.furniture.filter((entry) => entry.runtimeBound).length, 0);
+  assert.equal(art.furniture.filter((entry) => entry.productionComplete).length, 0);
+  assert.equal(art.furniture.filter((entry) => entry.present && !entry.runtimeBound).length, 40);
+  assert.deepEqual(art.furniture.filter((entry) => entry.cameraConformant).map((entry) => entry.assetId), ["furniture-office-desk", "furniture-manager-console", "furniture-essential-cafe-two-top"]);
+  const pendingAssetIds = ["furniture-office-desk", "furniture-manager-console", "furniture-essential-cafe-two-top"];
+  assert.deepEqual(art.furniture.filter((entry) => entry.runtimeCompositePending).map((entry) => entry.assetId), pendingAssetIds);
   assert.ok(art.furniture.filter((entry) => entry.runtimeCompositeAccepted).every((entry) =>
-    entry.sourceAccepted && entry.remoteVerified && entry.runtimeBound && entry.productionComplete
-      && entry.status === "production_complete"));
+    entry.sourceAccepted && entry.remoteVerified && entry.cameraConformancePending
+      && !entry.runtimeBound && !entry.productionComplete));
   assert.equal(art.summaries.find((entry) => entry.lane === "Body animation sets (body × animation)").productionComplete, 0);
   assert.equal(art.summaries.find((entry) => entry.lane === "Character body source foundations").remoteVerified, 2);
   assert.ok(art.reviewedBatches.every((entry) => entry.qaEvidencePresent && entry.remoteVerified));

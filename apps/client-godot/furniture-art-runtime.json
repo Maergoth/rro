@@ -15,7 +15,33 @@
     "180": "south",
     "270": "west"
   },
-  "acceptedDirectionalAssetIds": [
+  "cameraProjection": {
+    "type": "elevated-orthographic-isometric",
+    "fixedCamera": true,
+    "rotationStepDegrees": 90,
+    "azimuthDegrees": 315,
+    "elevationDegrees": 26.565,
+    "basisX": [
+      0.5,
+      0.25
+    ],
+    "basisY": [
+      -0.5,
+      0.25
+    ],
+    "groundEdgeScreenSlopes": [
+      -0.5,
+      0.5
+    ],
+    "verticalEdges": "screen-vertical",
+    "perspective": false
+  },
+  "cameraConformantAssetIds": [
+    "furniture-essential-cafe-two-top",
+    "furniture-manager-console",
+    "furniture-office-desk"
+  ],
+  "cameraConformancePendingAssetIds": [
     "banquette",
     "booth",
     "dish-machine",
@@ -30,6 +56,48 @@
     "furniture-host-stand-pro",
     "furniture-linen-storage",
     "furniture-oak-two-top",
+    "furniture-plancha-commercial",
+    "furniture-pos-terminal",
+    "furniture-premium-chair",
+    "furniture-prep-table-refrigerated",
+    "furniture-server-station-pro",
+    "furniture-six-burner-range",
+    "furniture-three-comp-sink",
+    "furniture-walkin-rack",
+    "furniture-walnut-four-top",
+    "furniture-water-station",
+    "furniture-wet-floor-station",
+    "host-stand",
+    "local-art",
+    "mop-sink",
+    "pass",
+    "pendants",
+    "plants",
+    "prep",
+    "range",
+    "recycling",
+    "service-station",
+    "table-four",
+    "table-two"
+  ],
+  "acceptedDirectionalAssetIds": [
+    "banquette",
+    "booth",
+    "dish-machine",
+    "espresso",
+    "furniture-banquette-section",
+    "furniture-chemical-cabinet",
+    "furniture-commercial-chair",
+    "furniture-convection-oven",
+    "furniture-dish-machine-high-temp",
+    "furniture-dry-storage-rack",
+    "furniture-essential-cafe-two-top",
+    "furniture-expo-pass-heated",
+    "furniture-host-stand-pro",
+    "furniture-linen-storage",
+    "furniture-manager-console",
+    "furniture-oak-two-top",
+    "furniture-office-desk",
     "furniture-plancha-commercial",
     "furniture-pos-terminal",
     "furniture-premium-chair",
@@ -94,7 +162,11 @@
     "table-two"
   ],
   "runtimeCompositeBlockedAssetIds": [],
-  "runtimeCompositePendingAssetIds": [],
+  "runtimeCompositePendingAssetIds": [
+    "furniture-essential-cafe-two-top",
+    "furniture-manager-console",
+    "furniture-office-desk"
+  ],
   "capability": {
     "directionalTextureSelection": true,
     "commonFloorContactPivot": true,
@@ -103,8 +175,9 @@
     "runtimeProjection": "elevated-orthographic-isometric-grid",
     "projectionIntegrated": true,
     "projectionAligned": true,
-    "runtimeCompositeAccepted": true,
+    "cameraConformanceValidated": false,
+    "runtimeCompositeAccepted": false,
     "productionComplete": false,
-    "remainingVisualGate": "All thirty-seven present directional sets are accepted in exact native four-rotation gameplay review. The other 192 catalog identities still require source acceptance, runtime binding, remote preservation, gameplay review, and green hosted CI."
+    "remainingVisualGate": "Batch 013 is the first three-set group rebuilt and reviewed against the explicit fixed-camera projection. The other thirty-seven present directional sets require camera-conformance re-audit or correction before production credit; the other 189 catalog identities still require source creation and the full review pipeline."
   }
 }

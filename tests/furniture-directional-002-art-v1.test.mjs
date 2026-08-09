@@ -188,10 +188,13 @@ test("furniture directional batch 002 matches the authoritative catalog and comm
     "furniture-convection-oven",
     "furniture-dish-machine-high-temp",
     "furniture-dry-storage-rack",
+    "furniture-essential-cafe-two-top",
     "furniture-expo-pass-heated",
     "furniture-host-stand-pro",
     "furniture-linen-storage",
+    "furniture-manager-console",
     "furniture-oak-two-top",
+    "furniture-office-desk",
     "furniture-plancha-commercial",
     "furniture-pos-terminal",
     "furniture-premium-chair",
@@ -218,7 +221,8 @@ test("furniture directional batch 002 matches the authoritative catalog and comm
   ]);
   assert.equal(runtimeContract.capability.projectionIntegrated, true);
   assert.equal(runtimeContract.capability.projectionAligned, true);
-  assert.equal(runtimeContract.capability.runtimeCompositeAccepted, true);
+  assert.equal(runtimeContract.capability.cameraConformanceValidated, false);
+  assert.equal(runtimeContract.capability.runtimeCompositeAccepted, false);
   assert.equal(runtimeContract.capability.productionComplete, false);
   assert.deepEqual(qa.gates.requiredDirections, DIRECTIONS);
   assert.deepEqual(qa.gates.commonCanvasPivot, [313.5, 590]);

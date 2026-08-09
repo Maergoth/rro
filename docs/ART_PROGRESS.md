@@ -20,7 +20,7 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
-| Furniture directional sets | 229 | 37 | 37 | 37 | 37 |
+| Furniture directional sets | 229 | 40 | 40 | 37 | 0 |
 | Equipment inventory icons | 45 | 45 | 45 | 45 | 45 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
@@ -34,8 +34,8 @@ Only the final state is production-complete. Existing files, historical narrativ
 | Equipment attachment body-fits | 62 | 0 | 0 | 0 | 0 |
 | Activity → animation bindings | 89 | 0 | 0 | 0 | 0 |
 
-45 equipment icons and 37 furniture directional sets are production-complete because their exact reviewed bytes are visually accepted, runtime-bound, remotely verified, and CI-green. Character art and the other missing lanes remain explicit below.
-Directional furniture texture selection is yes and projection alignment is yes. Latest native review `runtime-isometric-integration-001-attempt-010` accepted 37/37 present sets; its durable review checkpoint is remote-verified: yes. No source-accepted directional sets remain blocked by the latest native gameplay review. No source-accepted directional sets are pending their first native four-rotation gameplay composite.
+45 equipment icons and 0 furniture directional sets are production-complete because their exact reviewed bytes are visually accepted, runtime-bound, remotely verified, and CI-green. Character art and the other missing lanes remain explicit below.
+Directional furniture texture selection is yes and projection alignment is yes. Latest native review `runtime-isometric-integration-001-attempt-010` accepted 37/40 present sets; its durable review checkpoint is remote-verified: yes. No source-accepted directional sets remain blocked by the latest native gameplay review. `furniture-office-desk`, `furniture-manager-console`, `furniture-essential-cafe-two-top` are source-accepted but pending their first native four-rotation gameplay composite; 3/3 are also local-only pending an immutable remote checkpoint and green hosted CI.
 
 ## Character truth
 
@@ -111,9 +111,17 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 | furniture-core-directional-006 | 28 | passed | passed-native-gameplay-composite-attempt-007 | `185ca50` | planning/art-qa/furniture-core-directional-006/contact-627-dark.png |
 | furniture-core-directional-007 | 28 | passed | passed-native-gameplay-composite-attempt-003 | `98e479e` | planning/art-qa/furniture-core-directional-007/contact-627-dark.png |
 
+## Accepted locally, remote checkpoint pending
+
+These batches have passed source/composite QA but deliberately do not count as remotely verified or production-complete until their immutable GitHub commit and hosted CI are recorded.
+
+| Batch | Files | Source QA | Runtime/composite QA | Evidence |
+|---|---:|---|---|---|
+| furniture-core-directional-013 | 28 | passed | pending-native-gameplay-composite | planning/art-qa/furniture-core-directional-013/contact-627-dark.png |
+
 ## Missing furniture directional sets
 
-37 of 229 elevated four-direction sets are present. The 20 attractive overhead singles are preserved as references but do not satisfy this camera contract.
+40 of 229 elevated four-direction sets are present. The 20 attractive overhead singles are preserved as references but do not satisfy this camera contract.
 
 ### Utility — 32 missing
 
@@ -123,13 +131,9 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 
 `furniture-oak-partition`, `furniture-large-planter`, `furniture-wall-art-local`, `furniture-acoustic-panel`, `furniture-pendant-light`, `furniture-essential-room-divider`, `furniture-craftsman-room-divider`, `furniture-endurance-room-divider`, `furniture-hospitality-room-divider`, `furniture-precision-room-divider`, `furniture-reclaimed-room-divider`, `furniture-essential-planter-feature`, `furniture-craftsman-planter-feature`, `furniture-endurance-planter-feature`, `furniture-hospitality-planter-feature`, `furniture-precision-planter-feature`, `furniture-reclaimed-planter-feature`, `furniture-essential-acoustic-light`, `furniture-craftsman-acoustic-light`, `furniture-endurance-acoustic-light`, `furniture-hospitality-acoustic-light`, `furniture-precision-acoustic-light`, `furniture-reclaimed-acoustic-light`, `summer-canopy`
 
-### Office — 14 missing
+### Dining — 30 missing
 
-`furniture-office-desk`, `furniture-manager-console`, `furniture-essential-manager-desk-line`, `furniture-craftsman-manager-desk-line`, `furniture-endurance-manager-desk-line`, `furniture-hospitality-manager-desk-line`, `furniture-precision-manager-desk-line`, `furniture-reclaimed-manager-desk-line`, `furniture-essential-scheduling-board`, `furniture-craftsman-scheduling-board`, `furniture-endurance-scheduling-board`, `furniture-hospitality-scheduling-board`, `furniture-precision-scheduling-board`, `furniture-reclaimed-scheduling-board`
-
-### Dining — 31 missing
-
-`furniture-essential-cafe-two-top`, `furniture-craftsman-cafe-two-top`, `furniture-endurance-cafe-two-top`, `furniture-hospitality-cafe-two-top`, `furniture-precision-cafe-two-top`, `furniture-reclaimed-cafe-two-top`, `furniture-essential-family-four-top`, `furniture-craftsman-family-four-top`, `furniture-endurance-family-four-top`, `furniture-hospitality-family-four-top`, `furniture-precision-family-four-top`, `furniture-reclaimed-family-four-top`, `furniture-essential-communal-table`, `furniture-craftsman-communal-table`, `furniture-endurance-communal-table`, `furniture-hospitality-communal-table`, `furniture-precision-communal-table`, `furniture-reclaimed-communal-table`, `furniture-essential-dining-chair`, `furniture-craftsman-dining-chair`, `furniture-endurance-dining-chair`, `furniture-hospitality-dining-chair`, `furniture-precision-dining-chair`, `furniture-reclaimed-dining-chair`, `furniture-essential-dining-booth`, `furniture-craftsman-dining-booth`, `furniture-endurance-dining-booth`, `furniture-hospitality-dining-booth`, `furniture-precision-dining-booth`, `furniture-reclaimed-dining-booth`, `summer-patio-two`
+`furniture-craftsman-cafe-two-top`, `furniture-endurance-cafe-two-top`, `furniture-hospitality-cafe-two-top`, `furniture-precision-cafe-two-top`, `furniture-reclaimed-cafe-two-top`, `furniture-essential-family-four-top`, `furniture-craftsman-family-four-top`, `furniture-endurance-family-four-top`, `furniture-hospitality-family-four-top`, `furniture-precision-family-four-top`, `furniture-reclaimed-family-four-top`, `furniture-essential-communal-table`, `furniture-craftsman-communal-table`, `furniture-endurance-communal-table`, `furniture-hospitality-communal-table`, `furniture-precision-communal-table`, `furniture-reclaimed-communal-table`, `furniture-essential-dining-chair`, `furniture-craftsman-dining-chair`, `furniture-endurance-dining-chair`, `furniture-hospitality-dining-chair`, `furniture-precision-dining-chair`, `furniture-reclaimed-dining-chair`, `furniture-essential-dining-booth`, `furniture-craftsman-dining-booth`, `furniture-endurance-dining-booth`, `furniture-hospitality-dining-booth`, `furniture-precision-dining-booth`, `furniture-reclaimed-dining-booth`, `summer-patio-two`
 
 ### Service — 31 missing
 
@@ -142,6 +146,10 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 ### Storage — 18 missing
 
 `furniture-essential-dry-rack-line`, `furniture-craftsman-dry-rack-line`, `furniture-endurance-dry-rack-line`, `furniture-hospitality-dry-rack-line`, `furniture-precision-dry-rack-line`, `furniture-reclaimed-dry-rack-line`, `furniture-essential-cold-rack`, `furniture-craftsman-cold-rack`, `furniture-endurance-cold-rack`, `furniture-hospitality-cold-rack`, `furniture-precision-cold-rack`, `furniture-reclaimed-cold-rack`, `furniture-essential-linen-cabinet`, `furniture-craftsman-linen-cabinet`, `furniture-endurance-linen-cabinet`, `furniture-hospitality-linen-cabinet`, `furniture-precision-linen-cabinet`, `furniture-reclaimed-linen-cabinet`
+
+### Office — 12 missing
+
+`furniture-essential-manager-desk-line`, `furniture-craftsman-manager-desk-line`, `furniture-endurance-manager-desk-line`, `furniture-hospitality-manager-desk-line`, `furniture-precision-manager-desk-line`, `furniture-reclaimed-manager-desk-line`, `furniture-essential-scheduling-board`, `furniture-craftsman-scheduling-board`, `furniture-endurance-scheduling-board`, `furniture-hospitality-scheduling-board`, `furniture-precision-scheduling-board`, `furniture-reclaimed-scheduling-board`
 
 ## Other exact incomplete catalogs
 
@@ -161,6 +169,7 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 ## Contract gaps blocking a truthful 100% denominator
 
 - Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.
+- Resolve the latest native directional-furniture review for furniture-essential-cafe-two-top, furniture-manager-console, furniture-office-desk before those source-accepted sets receive production credit.
 - Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.
 - Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete.
 
@@ -209,9 +218,10 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeProjection": "elevated-orthographic-isometric-grid",
       "projectionIntegrated": true,
       "projectionAligned": true,
-      "runtimeCompositeAccepted": true,
+      "cameraConformanceValidated": false,
+      "runtimeCompositeAccepted": false,
       "productionComplete": false,
-      "remainingVisualGate": "All thirty-seven present directional sets are accepted in exact native four-rotation gameplay review. The other 192 catalog identities still require source acceptance, runtime binding, remote preservation, gameplay review, and green hosted CI.",
+      "remainingVisualGate": "Batch 013 is the first three-set group rebuilt and reviewed against the explicit fixed-camera projection. The other thirty-seven present directional sets require camera-conformance re-audit or correction before production credit; the other 189 catalog identities still require source creation and the full review pipeline.",
       "acceptedDirectionalAssetIds": [
         "banquette",
         "booth",
@@ -223,10 +233,13 @@ This JSON block is part of this same authoritative document and contains every c
         "furniture-convection-oven",
         "furniture-dish-machine-high-temp",
         "furniture-dry-storage-rack",
+        "furniture-essential-cafe-two-top",
         "furniture-expo-pass-heated",
         "furniture-host-stand-pro",
         "furniture-linen-storage",
+        "furniture-manager-console",
         "furniture-oak-two-top",
+        "furniture-office-desk",
         "furniture-plancha-commercial",
         "furniture-pos-terminal",
         "furniture-premium-chair",
@@ -291,7 +304,76 @@ This JSON block is part of this same authoritative document and contains every c
         "table-two"
       ],
       "runtimeCompositeBlockedAssetIds": [],
-      "runtimeCompositePendingAssetIds": [],
+      "runtimeCompositePendingAssetIds": [
+        "furniture-essential-cafe-two-top",
+        "furniture-manager-console",
+        "furniture-office-desk"
+      ],
+      "cameraProjection": {
+        "type": "elevated-orthographic-isometric",
+        "fixedCamera": true,
+        "rotationStepDegrees": 90,
+        "azimuthDegrees": 315,
+        "elevationDegrees": 26.565,
+        "basisX": [
+          0.5,
+          0.25
+        ],
+        "basisY": [
+          -0.5,
+          0.25
+        ],
+        "groundEdgeScreenSlopes": [
+          -0.5,
+          0.5
+        ],
+        "verticalEdges": "screen-vertical",
+        "perspective": false
+      },
+      "cameraConformantAssetIds": [
+        "furniture-essential-cafe-two-top",
+        "furniture-manager-console",
+        "furniture-office-desk"
+      ],
+      "cameraConformancePendingAssetIds": [
+        "banquette",
+        "booth",
+        "dish-machine",
+        "espresso",
+        "furniture-banquette-section",
+        "furniture-chemical-cabinet",
+        "furniture-commercial-chair",
+        "furniture-convection-oven",
+        "furniture-dish-machine-high-temp",
+        "furniture-dry-storage-rack",
+        "furniture-expo-pass-heated",
+        "furniture-host-stand-pro",
+        "furniture-linen-storage",
+        "furniture-oak-two-top",
+        "furniture-plancha-commercial",
+        "furniture-pos-terminal",
+        "furniture-premium-chair",
+        "furniture-prep-table-refrigerated",
+        "furniture-server-station-pro",
+        "furniture-six-burner-range",
+        "furniture-three-comp-sink",
+        "furniture-walkin-rack",
+        "furniture-walnut-four-top",
+        "furniture-water-station",
+        "furniture-wet-floor-station",
+        "host-stand",
+        "local-art",
+        "mop-sink",
+        "pass",
+        "pendants",
+        "plants",
+        "prep",
+        "range",
+        "recycling",
+        "service-station",
+        "table-four",
+        "table-two"
+      ],
       "runtimeReviewRemoteVerified": true
     }
   },
@@ -299,10 +381,10 @@ This JSON block is part of this same authoritative document and contains every c
     {
       "lane": "Furniture directional sets",
       "required": 229,
-      "present": 37,
-      "sourceAccepted": 37,
+      "present": 40,
+      "sourceAccepted": 40,
       "remoteVerified": 37,
-      "productionComplete": 37
+      "productionComplete": 0
     },
     {
       "lane": "Equipment inventory icons",
@@ -454,9 +536,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "table-four",
@@ -510,9 +594,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "booth",
@@ -566,9 +652,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "banquette",
@@ -622,9 +710,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "host-stand",
@@ -678,9 +768,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "service-station",
@@ -734,9 +826,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "espresso",
@@ -790,9 +884,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "range",
@@ -846,9 +942,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "prep",
@@ -902,9 +1000,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "pass",
@@ -958,9 +1058,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "dish-machine",
@@ -1014,9 +1116,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "mop-sink",
@@ -1070,9 +1174,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "recycling",
@@ -1126,9 +1232,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "pendants",
@@ -1182,9 +1290,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "plants",
@@ -1241,9 +1351,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "local-art",
@@ -1300,9 +1412,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "oak-two-top",
@@ -1356,9 +1470,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "walnut-four-top",
@@ -1412,9 +1528,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "banquette-section",
@@ -1468,9 +1586,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "commercial-chair",
@@ -1524,9 +1644,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "premium-chair",
@@ -1580,9 +1702,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "host-stand-pro",
@@ -1636,9 +1760,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "server-station-pro",
@@ -1692,9 +1818,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "pos-terminal",
@@ -1748,9 +1876,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "expo-pass-heated",
@@ -1804,9 +1934,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "six-burner-range",
@@ -1860,9 +1992,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "plancha-commercial",
@@ -1916,9 +2050,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "convection-oven",
@@ -1972,9 +2108,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "prep-table-refrigerated",
@@ -2028,9 +2166,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "walkin-rack",
@@ -2084,9 +2224,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "dry-storage-rack",
@@ -2140,9 +2282,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "chemical-cabinet",
@@ -2196,9 +2340,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "dish-machine-high-temp",
@@ -2252,9 +2398,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "three-comp-sink",
@@ -2308,9 +2456,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "glass-rack-system",
@@ -2360,6 +2510,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2412,6 +2564,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2464,6 +2618,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2516,6 +2672,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2568,6 +2726,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2620,6 +2780,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2672,6 +2834,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -2728,9 +2892,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "linen-storage",
@@ -2784,9 +2950,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "water-station",
@@ -2840,9 +3008,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "runtimeBound": true,
-      "productionComplete": true,
-      "status": "production_complete"
+      "cameraConformant": false,
+      "cameraConformancePending": true,
+      "runtimeBound": false,
+      "productionComplete": false,
+      "status": "source_accepted_runtime_blocked"
     },
     {
       "id": "office-desk",
@@ -2859,42 +3029,48 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-office-desk/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "7f7faf03f79d0a5b735b68b9ffab0bbb21724cc8e5528d670da85e06f43d3934"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-office-desk/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "d8359e40364d84d9af8c34d40f1657663bd8562e49edbf58c9ffa545f09265a2"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-office-desk/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "1a55eeccd59752ef63f0f2ab1fbdb18ae301abc5636ef8b93e53df52ecc5a2c7"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-office-desk/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "69a8b2deb8680cad3e31ff4e998e5cd288fa5d290b61807a80c986cc18d7b52e"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "furniture-core-directional-013",
+      "review": "passed",
+      "runtimeQa": "pending-native-gameplay-composite",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "placement": null,
-      "placementDeclared": false,
-      "sourceAccepted": false,
-      "directionalSelectionBound": false,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-013/contact-627-dark.png",
+      "qaEvidencePresent": true,
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "placementDeclared": true,
+      "sourceAccepted": true,
+      "directionalSelectionBound": true,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": false,
+      "runtimeCompositePending": true,
+      "cameraConformant": true,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "manager-console",
@@ -2911,42 +3087,48 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-manager-console/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "bb2f755a90384400bed5fcd725c8febd8faf11eb0a6c26bab5c401ad67ae2daa"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-manager-console/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "74a62628da0a5423467c3bcaf09770ec8e20597e11b71d378fbf11b7cdf46bd8"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-manager-console/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "ac9f81ab57325f2d19a1addbcca59dd55eb39d82108e6d6b29068636e9dfc464"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-manager-console/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "06d9466b2986a64e623a5f3d9f2f05702309333b23801b73628dcf4140719536"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "furniture-core-directional-013",
+      "review": "passed",
+      "runtimeQa": "pending-native-gameplay-composite",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "placement": null,
-      "placementDeclared": false,
-      "sourceAccepted": false,
-      "directionalSelectionBound": false,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-013/contact-627-dark.png",
+      "qaEvidencePresent": true,
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "placementDeclared": true,
+      "sourceAccepted": true,
+      "directionalSelectionBound": true,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": false,
+      "runtimeCompositePending": true,
+      "cameraConformant": true,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "essential-cafe-two-top",
@@ -2963,42 +3145,48 @@ This JSON block is part of this same authoritative document and contains every c
       "files": [
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-essential-cafe-two-top/north.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "2d20a0e85bfc549921d2ff88d9aed606548b1bd0c245b343ee5ef783e0c5af8f"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-essential-cafe-two-top/east.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "29406f5d1fe2937f539f0f05c6935e2c40e5dfab8113f209a8ffd6faa12cdc98"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-essential-cafe-two-top/south.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "66cd8fb56b63d3694134186172eeb103bb4804cc22ced17dbd2a68d9fabaacee"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-essential-cafe-two-top/west.png",
-          "present": false,
-          "sha256": null
+          "present": true,
+          "sha256": "10187c3544c9ee7ee90d4f5f12f51729af2b04f6fecfaebbcc8a59b51937b9f6"
         }
       ],
-      "present": false,
-      "batchId": null,
-      "review": "unreviewed",
-      "runtimeQa": "not-reviewed",
+      "present": true,
+      "batchId": "furniture-core-directional-013",
+      "review": "passed",
+      "runtimeQa": "pending-native-gameplay-composite",
       "remoteVerified": false,
-      "qaEvidence": null,
-      "qaEvidencePresent": false,
-      "placement": null,
-      "placementDeclared": false,
-      "sourceAccepted": false,
-      "directionalSelectionBound": false,
+      "qaEvidence": "planning/art-qa/furniture-core-directional-013/contact-627-dark.png",
+      "qaEvidencePresent": true,
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "placementDeclared": true,
+      "sourceAccepted": true,
+      "directionalSelectionBound": true,
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
-      "runtimeCompositePending": false,
+      "runtimeCompositePending": true,
+      "cameraConformant": true,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
-      "status": "missing"
+      "status": "source_accepted_local_only"
     },
     {
       "id": "craftsman-cafe-two-top",
@@ -3048,6 +3236,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3100,6 +3290,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3152,6 +3344,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3204,6 +3398,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3256,6 +3452,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3308,6 +3506,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3360,6 +3560,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3412,6 +3614,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3464,6 +3668,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3516,6 +3722,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3568,6 +3776,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3620,6 +3830,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3672,6 +3884,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3724,6 +3938,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3776,6 +3992,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3828,6 +4046,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3880,6 +4100,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3932,6 +4154,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -3984,6 +4208,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4036,6 +4262,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4088,6 +4316,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4140,6 +4370,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4192,6 +4424,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4244,6 +4478,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4296,6 +4532,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4348,6 +4586,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4400,6 +4640,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4452,6 +4694,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4504,6 +4748,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4556,6 +4802,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4608,6 +4856,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4660,6 +4910,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4712,6 +4964,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4764,6 +5018,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4816,6 +5072,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4868,6 +5126,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4920,6 +5180,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -4972,6 +5234,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5024,6 +5288,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5076,6 +5342,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5128,6 +5396,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5180,6 +5450,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5232,6 +5504,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5284,6 +5558,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5336,6 +5612,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5388,6 +5666,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5440,6 +5720,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5492,6 +5774,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5544,6 +5828,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5596,6 +5882,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5648,6 +5936,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5700,6 +5990,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5752,6 +6044,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5804,6 +6098,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5856,6 +6152,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5908,6 +6206,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -5960,6 +6260,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6012,6 +6314,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6064,6 +6368,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6116,6 +6422,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6168,6 +6476,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6220,6 +6530,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6272,6 +6584,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6324,6 +6638,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6376,6 +6692,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6428,6 +6746,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6480,6 +6800,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6532,6 +6854,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6584,6 +6908,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6636,6 +6962,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6688,6 +7016,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6740,6 +7070,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6792,6 +7124,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6844,6 +7178,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6896,6 +7232,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -6948,6 +7286,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7000,6 +7340,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7052,6 +7394,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7104,6 +7448,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7156,6 +7502,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7208,6 +7556,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7260,6 +7610,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7312,6 +7664,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7364,6 +7718,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7416,6 +7772,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7468,6 +7826,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7520,6 +7880,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7572,6 +7934,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7624,6 +7988,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7676,6 +8042,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7728,6 +8096,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7780,6 +8150,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7832,6 +8204,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7884,6 +8258,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7936,6 +8312,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -7988,6 +8366,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8040,6 +8420,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8092,6 +8474,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8144,6 +8528,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8196,6 +8582,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8248,6 +8636,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8300,6 +8690,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8352,6 +8744,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8404,6 +8798,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8456,6 +8852,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8508,6 +8906,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8560,6 +8960,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8612,6 +9014,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8664,6 +9068,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8716,6 +9122,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8768,6 +9176,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8820,6 +9230,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8872,6 +9284,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8924,6 +9338,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -8976,6 +9392,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9028,6 +9446,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9080,6 +9500,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9132,6 +9554,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9184,6 +9608,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9236,6 +9662,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9288,6 +9716,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9340,6 +9770,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9392,6 +9824,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9444,6 +9878,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9496,6 +9932,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9548,6 +9986,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9600,6 +10040,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9652,6 +10094,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9704,6 +10148,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9756,6 +10202,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9808,6 +10256,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9860,6 +10310,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9912,6 +10364,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -9964,6 +10418,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10016,6 +10472,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10068,6 +10526,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10120,6 +10580,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10172,6 +10634,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10224,6 +10688,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10276,6 +10742,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10328,6 +10796,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10380,6 +10850,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10432,6 +10904,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10484,6 +10958,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10536,6 +11012,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10588,6 +11066,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10640,6 +11120,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10692,6 +11174,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10744,6 +11228,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10796,6 +11282,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10848,6 +11336,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10900,6 +11390,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -10952,6 +11444,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11004,6 +11498,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11056,6 +11552,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11108,6 +11606,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11160,6 +11660,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11212,6 +11714,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11264,6 +11768,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11316,6 +11822,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11368,6 +11876,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11420,6 +11930,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11472,6 +11984,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11524,6 +12038,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11576,6 +12092,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11628,6 +12146,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11680,6 +12200,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11732,6 +12254,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11784,6 +12308,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11836,6 +12362,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11888,6 +12416,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11940,6 +12470,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -11992,6 +12524,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -12044,6 +12578,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -12096,6 +12632,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -12148,6 +12686,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -12200,6 +12740,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -12252,6 +12794,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -12304,6 +12848,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -12356,6 +12902,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -12408,6 +12956,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -12460,6 +13010,8 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": false,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
+      "cameraConformant": false,
+      "cameraConformancePending": false,
       "runtimeBound": false,
       "productionComplete": false,
       "status": "missing"
@@ -16669,7 +17221,26 @@ This JSON block is part of this same authoritative document and contains every c
       "remoteVerified": true
     }
   ],
-  "pendingBatches": [],
+  "pendingBatches": [
+    {
+      "id": "furniture-core-directional-013",
+      "assets": [
+        "furniture-office-desk",
+        "furniture-manager-console",
+        "furniture-essential-cafe-two-top"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "pending-native-gameplay-composite",
+      "sourcePromptMode": "built-in image generation; twelve separately prompted fixed-camera directional frames with two correction retries, official chroma-key removal, common-pivot normalization, and full/gameplay-scale contact review",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-013/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-013/qa.json",
+      "notes": "Owner operations desk, live operations console, and Essential Cafe Two-Top were rebuilt after the original atlases mixed frontal elevations with arbitrary three-quarter views. The corrected frames pass the explicit fixed elevated orthographic-isometric camera, adjacent-face quarter-turn, identity, alpha, pivot, full-resolution, and 128px review. Remote preservation, hosted CI, and exact native four-rotation gameplay-composite review remain pending.",
+      "qaEvidencePresent": true,
+      "remoteVerified": false,
+      "preservationPending": true
+    }
+  ],
   "runtimeQaAttempts": [
     {
       "id": "runtime-isometric-integration-001-attempt-001",
@@ -17289,6 +17860,7 @@ This JSON block is part of this same authoritative document and contains every c
   ],
   "contractGaps": [
     "Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.",
+    "Resolve the latest native directional-furniture review for furniture-essential-cafe-two-top, furniture-manager-console, furniture-office-desk before those source-accepted sets receive production credit.",
     "Implement character animation storage/rigging and phase-level task choreography against the frozen launch applicability matrix; static direction art and metadata-only aliases do not satisfy its raster-cell contract.",
     "Enumerate production minigame presentation art and regional/world overlays beyond the single launch atlas before whole-game art can be called complete."
   ]

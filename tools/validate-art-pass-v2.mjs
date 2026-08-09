@@ -21,6 +21,8 @@ const furnitureDefinitionByAssetId = new Map(furnitureDefinitions.map((item) => 
 const runtimeCompositeAcceptedAssetIds = new Set(furnitureRuntimeContract.runtimeCompositeAcceptedAssetIds ?? []);
 const runtimeCompositeBlockedAssetIds = new Set(furnitureRuntimeContract.runtimeCompositeBlockedAssetIds ?? []);
 const runtimeCompositePendingAssetIds = new Set(furnitureRuntimeContract.runtimeCompositePendingAssetIds ?? []);
+const cameraConformantAssetIds = new Set(furnitureRuntimeContract.cameraConformantAssetIds ?? []);
+const cameraConformancePendingAssetIds = new Set(furnitureRuntimeContract.cameraConformancePendingAssetIds ?? []);
 const directionalSelectionBound = furnitureRuntimeContract.capability.directionalTextureSelection === true;
 const latestFurnitureRuntimeQa = [...(pass.runtimeQaAttempts ?? [])].reverse().find((attempt) => Array.isArray(attempt.acceptedAssetIds));
 const reviewIsRemoteVerified = (attempt) => Boolean(
@@ -184,6 +186,7 @@ for (const item of production.furniture) {
   const runtimeBound = count === paths.length
     && directionalSelectionBound
     && furnitureRuntimeContract.capability.projectionAligned === true
+    && cameraConformantAssetIds.has(item.assetId)
     && runtimeCompositeAcceptedAssetIds.has(item.assetId);
   if (runtimeBound) furnitureRuntimeBoundSets += 1;
   if (sourceAccepted && furnitureDefinitionByAssetId.get(item.assetId)?.placement && runtimeBound && runtimeReviewRemoteVerified) furnitureProductionCompleteSets += 1;
@@ -209,6 +212,23 @@ const runtimeStateAssetIds = new Set([
 if (runtimeStateAssetIds.size !== furnitureRuntimeContract.acceptedDirectionalAssetIds.length
     || [...runtimeStateAssetIds].some((assetId) => !furnitureRuntimeContract.acceptedDirectionalAssetIds.includes(assetId))) {
   invalid.push("directional furniture runtime-composite accepted, blocked, and pending sets must exactly partition acceptedDirectionalAssetIds");
+}
+const cameraStateAssetIds = new Set([
+  ...cameraConformantAssetIds,
+  ...cameraConformancePendingAssetIds,
+]);
+if ([...cameraConformantAssetIds].some((assetId) => cameraConformancePendingAssetIds.has(assetId))) {
+  invalid.push("directional furniture cannot be both camera-conformant and pending camera review");
+}
+if (cameraStateAssetIds.size !== furnitureRuntimeContract.acceptedDirectionalAssetIds.length
+    || [...cameraStateAssetIds].some((assetId) => !furnitureRuntimeContract.acceptedDirectionalAssetIds.includes(assetId))) {
+  invalid.push("camera-conformant and camera-pending sets must exactly partition acceptedDirectionalAssetIds");
+}
+const cameraConformanceCoversEverySourceAcceptedSet = cameraConformantAssetIds.size === sourceAcceptedDirectionalAssetIds.length
+  && JSON.stringify([...cameraConformantAssetIds].sort()) === JSON.stringify([...sourceAcceptedDirectionalAssetIds].sort())
+  && cameraConformancePendingAssetIds.size === 0;
+if ((furnitureRuntimeContract.capability.cameraConformanceValidated === true) !== cameraConformanceCoversEverySourceAcceptedSet) {
+  invalid.push("directional furniture capability.cameraConformanceValidated must be true iff every source-accepted set passes the fixed-camera contract");
 }
 const runtimeAcceptedIds = furnitureRuntimeContract.runtimeCompositeAcceptedAssetIds ?? [];
 const runtimeCompositeCoversEverySourceAcceptedSet = runtimeAcceptedIds.length === sourceAcceptedDirectionalAssetIds.length

@@ -90,6 +90,8 @@ const directionalSelectionBound = furnitureRuntimeContract.capability.directiona
 const runtimeCompositeAcceptedAssetIds = new Set(furnitureRuntimeContract.runtimeCompositeAcceptedAssetIds ?? []);
 const runtimeCompositeBlockedAssetIds = new Set(furnitureRuntimeContract.runtimeCompositeBlockedAssetIds ?? []);
 const runtimeCompositePendingAssetIds = new Set(furnitureRuntimeContract.runtimeCompositePendingAssetIds ?? []);
+const cameraConformantAssetIds = new Set(furnitureRuntimeContract.cameraConformantAssetIds ?? []);
+const cameraConformancePendingAssetIds = new Set(furnitureRuntimeContract.cameraConformancePendingAssetIds ?? []);
 const projectionAligned = furnitureRuntimeContract.capability.projectionAligned === true;
 const latestFurnitureRuntimeQa = [...runtimeQaAttempts].reverse().find((attempt) => Array.isArray(attempt.acceptedAssetIds));
 const latestRuntimeAcceptedAssetIds = new Set(latestFurnitureRuntimeQa?.acceptedAssetIds ?? []);
@@ -104,7 +106,8 @@ const furniture = production.furniture.map((item) => {
   const placementDeclared = Boolean(definition?.placement);
   const isPresent = allPresent(runtimeFiles);
   const sourceAccepted = isPresent && placementDeclared && review.review === "passed" && review.qaEvidencePresent;
-  const runtimeBound = isPresent && directionalSelectionBound && projectionAligned && runtimeCompositeAcceptedAssetIds.has(item.assetId);
+  const cameraConformant = cameraConformantAssetIds.has(item.assetId);
+  const runtimeBound = isPresent && directionalSelectionBound && projectionAligned && cameraConformant && runtimeCompositeAcceptedAssetIds.has(item.assetId);
   const productionComplete = sourceAccepted && review.remoteVerified && runtimeBound && runtimeReviewRemoteVerified;
   return {
     id: item.id, assetId: item.assetId, name: item.name, category: item.category, sourcePack: item.sourcePack,
@@ -114,6 +117,8 @@ const furniture = production.furniture.map((item) => {
     runtimeCompositeAccepted: runtimeCompositeAcceptedAssetIds.has(item.assetId),
     runtimeCompositeBlocked: runtimeCompositeBlockedAssetIds.has(item.assetId),
     runtimeCompositePending: runtimeCompositePendingAssetIds.has(item.assetId),
+    cameraConformant,
+    cameraConformancePending: cameraConformancePendingAssetIds.has(item.assetId),
     runtimeBound, productionComplete,
     status: status({ isPresent, review: review.review, remoteVerified: review.remoteVerified, runtimeBound, productionComplete }),
   };
@@ -250,6 +255,9 @@ const ledger = {
       runtimeCompositeAcceptedAssetIds: furnitureRuntimeContract.runtimeCompositeAcceptedAssetIds,
       runtimeCompositeBlockedAssetIds: furnitureRuntimeContract.runtimeCompositeBlockedAssetIds,
       runtimeCompositePendingAssetIds: furnitureRuntimeContract.runtimeCompositePendingAssetIds,
+      cameraProjection: furnitureRuntimeContract.cameraProjection,
+      cameraConformantAssetIds: furnitureRuntimeContract.cameraConformantAssetIds,
+      cameraConformancePendingAssetIds: furnitureRuntimeContract.cameraConformancePendingAssetIds,
       runtimeReviewRemoteVerified,
     },
   },
