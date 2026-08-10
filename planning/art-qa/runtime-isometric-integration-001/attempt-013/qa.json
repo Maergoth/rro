@@ -1,0 +1,358 @@
+{
+	"acceptedAssetIds": [
+		"banquette",
+		"booth",
+		"dish-machine",
+		"espresso",
+		"furniture-banquette-section",
+		"furniture-chemical-cabinet",
+		"furniture-commercial-chair",
+		"furniture-convection-oven",
+		"furniture-dish-machine-high-temp",
+		"furniture-dry-storage-rack",
+		"furniture-essential-cafe-two-top",
+		"furniture-expo-pass-heated",
+		"furniture-host-stand-pro",
+		"furniture-linen-storage",
+		"furniture-manager-console",
+		"furniture-oak-two-top",
+		"furniture-office-desk",
+		"furniture-plancha-commercial",
+		"furniture-pos-terminal",
+		"furniture-premium-chair",
+		"furniture-prep-table-refrigerated",
+		"furniture-server-station-pro",
+		"furniture-six-burner-range",
+		"furniture-three-comp-sink",
+		"furniture-walkin-rack",
+		"furniture-walnut-four-top",
+		"furniture-water-station",
+		"furniture-wet-floor-station",
+		"host-stand",
+		"local-art",
+		"mop-sink",
+		"pass",
+		"pendants",
+		"plants",
+		"prep",
+		"range",
+		"recycling",
+		"service-station",
+		"table-four",
+		"table-two"
+	],
+	"captures": [
+		{
+			"direction": "north",
+			"mountedPlacements": [
+				{
+					"anchor": [
+						6.0,
+						0.0
+					],
+					"assetId": "local-art",
+					"footprint": [
+						5.0,
+						0.0,
+						2.0,
+						1.0
+					],
+					"mount": "wall",
+					"occupancy": "nonblocking",
+					"rotation": 0,
+					"supportEdge": "north",
+					"x": 5,
+					"y": 0
+				},
+				{
+					"anchor": [
+						6.0,
+						16.5
+					],
+					"assetId": "pendants",
+					"footprint": [
+						5.0,
+						16.0,
+						2.0,
+						1.0
+					],
+					"mount": "ceiling",
+					"occupancy": "nonblocking",
+					"rotation": 0,
+					"x": 5,
+					"y": 16
+				},
+				{
+					"anchor": [
+						21.5,
+						0.0
+					],
+					"assetId": "plants",
+					"footprint": [
+						20.0,
+						0.0,
+						3.0,
+						1.0
+					],
+					"mount": "wall",
+					"occupancy": "nonblocking",
+					"rotation": 0,
+					"supportEdge": "north",
+					"x": 20,
+					"y": 0
+				}
+			],
+			"path": "restaurant-north.png",
+			"rotation": 0,
+			"sampledColors": 475,
+			"sha256": "36fdcbd90525fd4a644d37dfabe0f40bb4fc64a926774d1b1f0c94ba16f0c267"
+		},
+		{
+			"direction": "east",
+			"mountedPlacements": [
+				{
+					"anchor": [
+						30.0,
+						4.0
+					],
+					"assetId": "local-art",
+					"footprint": [
+						29.0,
+						3.0,
+						1.0,
+						2.0
+					],
+					"mount": "wall",
+					"occupancy": "nonblocking",
+					"rotation": 90,
+					"supportEdge": "east",
+					"x": 29,
+					"y": 3
+				},
+				{
+					"anchor": [
+						5.5,
+						17.0
+					],
+					"assetId": "pendants",
+					"footprint": [
+						5.0,
+						16.0,
+						1.0,
+						2.0
+					],
+					"mount": "ceiling",
+					"occupancy": "nonblocking",
+					"rotation": 90,
+					"x": 5,
+					"y": 16
+				},
+				{
+					"anchor": [
+						30.0,
+						13.5
+					],
+					"assetId": "plants",
+					"footprint": [
+						29.0,
+						12.0,
+						1.0,
+						3.0
+					],
+					"mount": "wall",
+					"occupancy": "nonblocking",
+					"rotation": 90,
+					"supportEdge": "east",
+					"x": 29,
+					"y": 12
+				}
+			],
+			"path": "restaurant-east.png",
+			"rotation": 90,
+			"sampledColors": 446,
+			"sha256": "5648cdaf669f08302fab0d4935b6528fb8993bfadc4bee036d0a89c09a0a6fdf"
+		},
+		{
+			"direction": "south",
+			"mountedPlacements": [
+				{
+					"anchor": [
+						6.0,
+						23.0
+					],
+					"assetId": "local-art",
+					"footprint": [
+						5.0,
+						22.0,
+						2.0,
+						1.0
+					],
+					"mount": "wall",
+					"occupancy": "nonblocking",
+					"rotation": 180,
+					"supportEdge": "south",
+					"x": 5,
+					"y": 22
+				},
+				{
+					"anchor": [
+						6.0,
+						16.5
+					],
+					"assetId": "pendants",
+					"footprint": [
+						5.0,
+						16.0,
+						2.0,
+						1.0
+					],
+					"mount": "ceiling",
+					"occupancy": "nonblocking",
+					"rotation": 180,
+					"x": 5,
+					"y": 16
+				},
+				{
+					"anchor": [
+						21.5,
+						23.0
+					],
+					"assetId": "plants",
+					"footprint": [
+						20.0,
+						22.0,
+						3.0,
+						1.0
+					],
+					"mount": "wall",
+					"occupancy": "nonblocking",
+					"rotation": 180,
+					"supportEdge": "south",
+					"x": 20,
+					"y": 22
+				}
+			],
+			"path": "restaurant-south.png",
+			"rotation": 180,
+			"sampledColors": 457,
+			"sha256": "e537e10c42752d32a6cc61117225ab2ab006f10301be6bf8da2e3737b8444dcb"
+		},
+		{
+			"direction": "west",
+			"mountedPlacements": [
+				{
+					"anchor": [
+						0.0,
+						4.0
+					],
+					"assetId": "local-art",
+					"footprint": [
+						0.0,
+						3.0,
+						1.0,
+						2.0
+					],
+					"mount": "wall",
+					"occupancy": "nonblocking",
+					"rotation": 270,
+					"supportEdge": "west",
+					"x": 0,
+					"y": 3
+				},
+				{
+					"anchor": [
+						5.5,
+						17.0
+					],
+					"assetId": "pendants",
+					"footprint": [
+						5.0,
+						16.0,
+						1.0,
+						2.0
+					],
+					"mount": "ceiling",
+					"occupancy": "nonblocking",
+					"rotation": 270,
+					"x": 5,
+					"y": 16
+				},
+				{
+					"anchor": [
+						0.0,
+						13.5
+					],
+					"assetId": "plants",
+					"footprint": [
+						0.0,
+						12.0,
+						1.0,
+						3.0
+					],
+					"mount": "wall",
+					"occupancy": "nonblocking",
+					"rotation": 270,
+					"supportEdge": "west",
+					"x": 0,
+					"y": 12
+				}
+			],
+			"path": "restaurant-west.png",
+			"rotation": 270,
+			"sampledColors": 463,
+			"sha256": "1d59d9caaac3412f7ab56c12f04a9eb3c0d8fdf92e0382b77da6a589f7c50c5c"
+		}
+	],
+	"fixture": "40 source-accepted directional identities (37 floor and 3 mounted) plus walls, openings, incidents, parties, and avatars",
+	"productionComplete": false,
+	"remainingGate": "Human visual acceptance of these exact native Godot captures and durable repository preservation.",
+	"runtimeCompositeAcceptedAssetIds": [
+		"banquette",
+		"booth",
+		"dish-machine",
+		"espresso",
+		"furniture-banquette-section",
+		"furniture-chemical-cabinet",
+		"furniture-commercial-chair",
+		"furniture-convection-oven",
+		"furniture-dish-machine-high-temp",
+		"furniture-dry-storage-rack",
+		"furniture-essential-cafe-two-top",
+		"furniture-expo-pass-heated",
+		"furniture-host-stand-pro",
+		"furniture-linen-storage",
+		"furniture-manager-console",
+		"furniture-oak-two-top",
+		"furniture-office-desk",
+		"furniture-plancha-commercial",
+		"furniture-pos-terminal",
+		"furniture-premium-chair",
+		"furniture-prep-table-refrigerated",
+		"furniture-server-station-pro",
+		"furniture-six-burner-range",
+		"furniture-three-comp-sink",
+		"furniture-walkin-rack",
+		"furniture-walnut-four-top",
+		"furniture-water-station",
+		"furniture-wet-floor-station",
+		"host-stand",
+		"local-art",
+		"mop-sink",
+		"pass",
+		"pendants",
+		"plants",
+		"prep",
+		"range",
+		"recycling",
+		"service-station",
+		"table-four",
+		"table-two"
+	],
+	"runtimeCompositeBlockedAssetIds": [],
+	"runtimeCompositePendingAssetIds": [],
+	"schemaVersion": 1,
+	"viewport": [
+		1800,
+		1100
+	]
+}

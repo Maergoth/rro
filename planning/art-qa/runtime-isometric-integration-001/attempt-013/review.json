@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "id": "runtime-isometric-integration-001-attempt-013",
+  "reviewedAt": "2026-08-10T02:14:20Z",
+  "source": {
+    "remoteCommit": "124359a3ff083b3cf8b73dd5b387368819cf9639",
+    "remoteTree": "0121cb8c82814a03426824174f9bdcb126318083",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31348885720",
+    "artifactId": 9048282911,
+    "artifactName": "elevated-isometric-runtime-qa",
+    "artifactSha256": "01f19b7bfaa17af2e65644f7c83675912f63d5ab0c0a2952290c67404eac8c75"
+  },
+  "automatedGates": {
+    "windowsCi": "passed",
+    "ubuntuCi": "passed",
+    "nativeGodotCapture": "passed",
+    "captureCount": 4,
+    "viewport": [1800, 1100],
+    "minimumSampledColors": 446,
+    "exactArtifactDigestVerified": true,
+    "exactCaptureHashesVerified": true,
+    "legalMountedPlacementRecordsPresent": true,
+    "fixedCameraContractPresent": true
+  },
+  "visualReview": {
+    "status": "passed-camera-conformant-assets",
+    "productionComplete": false,
+    "reviewers": [
+      "root original-scale and gameplay-scale inspection"
+    ],
+    "passed": [
+      "The Locked Chemical Cabinet preserves one rigid identity through front plus physical-right, physical-right plus rear, rear plus physical-left, and physical-left plus front. The teal doors, lock, and amber diamonds remain front-only; the grille remains physical-right; the two rails remain rear-only; and the physical-left face stays plain.",
+      "The High-Temperature Dish Machine preserves one rigid identity through the same four quarter turns. The wash bay, handle, controls, and lower doors remain front-only; the external pipe remains physical-right; the grille remains rear-only; and the physical-left face stays plain.",
+      "The Three-Compartment Sink preserves exactly three basins, two drainboards, one faucet, three front doors, one physical-right basket, and three rear brackets through all four quarter turns without mirroring, duplication, or count drift.",
+      "North and south use the long-axis footprint family while east and west physically swap the projected long and short axes. This is genuine object-only rotation under the fixed camera, not arbitrary three-quarter illustration or face relabeling.",
+      "All three corrected identities sit on their declared footprints with stable floor contact, coherent scale and mixed-world depth, and remain readable without clipping, overlays, floating, or viewport cropping at gameplay scale.",
+      "The exact GitHub artifact digest, four capture hashes, remote commit, exact tree, and green Windows and Ubuntu CI are verified."
+    ],
+    "blockers": [],
+    "acceptedAssetIds": [
+      "furniture-chemical-cabinet",
+      "furniture-dish-machine-high-temp",
+      "furniture-three-comp-sink"
+    ],
+    "rejectedAssetIds": [],
+    "cameraConformancePendingAssetIds": [
+      "the other thirty-one present directional identities"
+    ],
+    "nextCaptureRequirements": [
+      "Preserve this exact review evidence in GitHub with green hosted CI before giving the three corrected identities production-complete credit.",
+      "Re-audit or correct the other thirty-one present directional identities against the same fixed camera contract in small, independently reviewed batches.",
+      "Continue creating the other 189 catalog identities only under the fixed camera contract and full source-to-native review pipeline."
+    ]
+  },
+  "captures": [
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-013/restaurant-north.png",
+      "sha256": "36fdcbd90525fd4a644d37dfabe0f40bb4fc64a926774d1b1f0c94ba16f0c267"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-013/restaurant-east.png",
+      "sha256": "5648cdaf669f08302fab0d4935b6528fb8993bfadc4bee036d0a89c09a0a6fdf"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-013/restaurant-south.png",
+      "sha256": "e537e10c42752d32a6cc61117225ab2ab006f10301be6bf8da2e3737b8444dcb"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-013/restaurant-west.png",
+      "sha256": "1d59d9caaac3412f7ab56c12f04a9eb3c0d8fdf92e0382b77da6a589f7c50c5c"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-013/qa.json",
+      "sha256": "309aa1986b094e1c94ff14f692a7f81a9a989ccdb9bba5209bfa28fb627ac6ca"
+    }
+  ]
+}
