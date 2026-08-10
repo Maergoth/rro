@@ -2297,22 +2297,22 @@ This JSON block is part of this same authoritative document and contains every c
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-chemical-cabinet/north.png",
           "present": true,
-          "sha256": "75e05e4274e6b03e602d197631cc3725fd69ed590440438e040651a2a4a4992f"
+          "sha256": "07fd213f07d2bc037ec526af51d04ac8d2301345e7532dcd6c2e079ff9cf8384"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-chemical-cabinet/east.png",
           "present": true,
-          "sha256": "49f7c4f0be7d9642bfeb73960af6b5e7e7ba6c4392c327733e27ab75d61623e4"
+          "sha256": "b2a6fe0aec6eeab6824df3dcf6c3825ea8dbd0aceaecedfea9952fd95b4d1e26"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-chemical-cabinet/south.png",
           "present": true,
-          "sha256": "214e188d4c4e1de76d272441acd83c31849b9679ea406206a7d7e543e7261da6"
+          "sha256": "4cfced5352bb85b6584c50c2c3166c8b1375b45b6dae90e3d409e18de4e78048"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-chemical-cabinet/west.png",
           "present": true,
-          "sha256": "2c3eaa1862deb0a5d3c24bfdaf57e70d0ab0ce8d401e76367c6a99dd066a380f"
+          "sha256": "bc383e5aefd8b495d44cb6dd66ea5d5dc8a80730278e05eb4fa107d1fa6bc2fa"
         }
       ],
       "present": true,
@@ -2355,22 +2355,22 @@ This JSON block is part of this same authoritative document and contains every c
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-dish-machine-high-temp/north.png",
           "present": true,
-          "sha256": "40004fd8e304cc5e732166cb656531530871e1604fc5637edfe60ff849b65e6c"
+          "sha256": "3756405795501a5cdec79f78899c2cbcb02b1294122eaff933940a5f11d55937"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-dish-machine-high-temp/east.png",
           "present": true,
-          "sha256": "449203836399257dcf95de182abb21643decc1eb1d91f06bd7c22e2c597f0d23"
+          "sha256": "cbce800f1b6af25d8b7d578a6ae33003068d6362720ee5395bab72ddff5162e0"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-dish-machine-high-temp/south.png",
           "present": true,
-          "sha256": "daaede8fe2a55788e8f1c268441ccdb796cb0113896a20f5110b17b1f4217de5"
+          "sha256": "fb97acd136450ba37922461d61092b8910633306d29edcc1c136e5a07bb75f50"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-dish-machine-high-temp/west.png",
           "present": true,
-          "sha256": "b158c76184017193af4d8080b2eaa4fd4b6e6d4643d3126b9a14683e8df42f15"
+          "sha256": "60413d800d7a16536978f18401d2d97d0936379c1005131c97f3721e65a479cc"
         }
       ],
       "present": true,
@@ -2413,22 +2413,22 @@ This JSON block is part of this same authoritative document and contains every c
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-three-comp-sink/north.png",
           "present": true,
-          "sha256": "a5885d93bfd39d2ae4c091a56a5fa4267a98bd31b2b698963b34899942683a1b"
+          "sha256": "1433f6beccf729326587772afb0382e203db96913e91beb4506e67aef5c0f2ee"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-three-comp-sink/east.png",
           "present": true,
-          "sha256": "21e7a613d4ffbda51eeed10ca8761bab72eef01c5cca1b2b0655695d7361a1c7"
+          "sha256": "a8a80054313fd5189f523219c8839a1d6238b90f3817c60a8bd9b3c12d747011"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-three-comp-sink/south.png",
           "present": true,
-          "sha256": "18aa249733a63509a7d10d14d9c8ce89db4c29dbb27a8e645bfca1e3b0540df4"
+          "sha256": "128ad2ec4dd0c3b2354d2c156d967373a3e787c9f4e5e309c2e0aa052094b97a"
         },
         {
           "path": "apps/client-godot/assets/objects/directional/furniture-three-comp-sink/west.png",
           "present": true,
-          "sha256": "d79613c3ad795848ef44e3546e318344389b04e089a4931cab3175ce5cbdbbcf"
+          "sha256": "60393418d911de52f27f07f496a570708f983ffbbf0831fd9c7ebb9170397d93"
         }
       ],
       "present": true,
