@@ -21,8 +21,8 @@ for (const pack of manifest.packs.filter((entry) => entry.enabled)) {
 
 const furniture = [...furnitureById.values()].map((item, sequence) => {
   const assetId = item.assetId ?? item.id;
-  const relativeOutput = `apps/client-godot/assets/objects/generated/${assetId}.png`;
-  const generated = existsSync(resolve(ROOT, relativeOutput));
+  const legacyReferencePath = `apps/client-godot/assets/objects/generated/${assetId}.png`;
+  const legacyReferencePresent = existsSync(resolve(ROOT, legacyReferencePath));
   return {
     sequence: sequence + 1,
     id: item.id,
@@ -34,9 +34,11 @@ const furniture = [...furnitureById.values()].map((item, sequence) => {
     tier: item.tier ?? "core",
     footprint: { width: item.width, height: item.height },
     stats: item.stats,
-    output: relativeOutput,
-    status: generated ? "generated" : "missing",
-    promptBrief: `Direct-overhead isolated top-down game sprite of ${item.name}, a ${item.style} ${item.category.toLowerCase()} object for an adult restaurant management sim; readable materials and operational details; ${item.width}x${item.height} footprint; no people, text, labels, floor, room, border, cast-off canvas elements, or perspective; complete centered silhouette on flat chroma green for transparent-background extraction.`,
+    legacyReference: {
+      path: legacyReferencePath,
+      status: legacyReferencePresent ? "legacy-reference-only" : "not-preserved",
+      excludedFromProductionCompletion: true,
+    },
   };
 });
 
@@ -44,7 +46,6 @@ const roleEquipment = read("core/role-equipment.json");
 const roleItems = roleEquipment.items.map((item, sequence) => {
   const fileName = String(item.iconId).replaceAll(".", "-").replaceAll("/", "-");
   const relativeOutput = `apps/client-godot/assets/items/${fileName}.png`;
-  const generated = existsSync(resolve(ROOT, relativeOutput));
   return {
     sequence: sequence + 1,
     id: item.id,
@@ -54,33 +55,39 @@ const roleItems = roleEquipment.items.map((item, sequence) => {
     qualityTier: item.qualityTier,
     allowedRoleIds: item.allowedRoleIds,
     output: relativeOutput,
-    status: generated ? "generated" : "procedural-fallback",
-    promptBrief: `Single isolated inventory icon of ${item.name} for a polished restaurant role-equipment UI; clear silhouette at 64px, tactile professional materials, no text, letters, hands, people, border, room, or unrelated props; centered on flat chroma green for transparent-background extraction.`,
   };
 });
 
-const furnitureGenerated = furniture.filter((item) => item.status === "generated").length;
-const roleItemsGenerated = roleItems.filter((item) => item.status === "generated").length;
 const result = {
-  schemaVersion: 1,
-  generatorRevision: 1,
+  schemaVersion: 2,
+  generatorRevision: 2,
   product: "Rush & Revenue Online",
-  artDirection: {
-    mode: "built-in image generation with flat chroma-key removal",
-    view: "direct overhead / orthographic top-down",
-    format: "transparent PNG, trimmed with a clear margin, maximum 768x768",
-    reviewCriteria: [
-      "one stable content ID maps to one output file",
-      "complete silhouette with no clipped edges",
-      "no perspective, people, text, watermark, or baked room/background",
-      "materials and operational details distinguish the item at gameplay scale",
-      "sprite rotation remains aligned with the authoritative grid footprint",
-    ],
+  purpose: "catalog-and-legacy-reference-index",
+  authoritativeProgress: {
+    document: "docs/ART_PROGRESS.md",
+    rule: "This file contains no live art-completion counters. Production status comes only from the generated authoritative art ledger.",
   },
-  counts: {
-    furniture: { total: furniture.length, generated: furnitureGenerated, remaining: furniture.length - furnitureGenerated },
-    coreFurniture: { total: furniture.filter((item) => item.sourcePack === "core-hospitality" && !item.assetId.startsWith("furniture-")).length, generated: furniture.filter((item) => item.sourcePack === "core-hospitality" && !item.assetId.startsWith("furniture-") && item.status === "generated").length },
-    roleItems: { total: roleItems.length, generated: roleItemsGenerated, remaining: roleItems.length - roleItemsGenerated },
+  productionContract: {
+    furnitureCamera: "elevated orthographic-isometric",
+    furnitureDirections: ["north", "east", "south", "west"],
+    characterDirections: ["north", "north-east", "east", "south-east", "south", "south-west", "west", "north-west"],
+    runtimeRule: "Furniture must use true independently authored quarter-turn views aligned to the elevated orthographic-isometric restaurant floor. Direct-overhead files are identity/material references only.",
+    completionRule: "Files count only through docs/ART_PROGRESS.md after visual QA at gameplay scale, runtime binding, remote preservation, and green CI.",
+  },
+  standingAuthorization: {
+    productionArtGeneration: true,
+    publicRepositoryPublication: true,
+    repository: "Maergoth/rro",
+    branch: "agent/complete-production-art",
+    pullRequest: "https://github.com/Maergoth/rro/pull/2",
+    workflow: "Generate, review, and publish small reversible production-art checkpoints without requesting repeated permission.",
+  },
+  legacyReferencePolicy: {
+    root: "apps/client-godot/assets/objects/generated",
+    view: "legacy direct-overhead",
+    status: "reference-only",
+    allowedUses: ["identity reference", "material reference"],
+    forbiddenUses: ["runtime production art", "production-completion evidence", "directional-set substitution"],
   },
   furniture,
   roleItems,
@@ -88,4 +95,4 @@ const result = {
 
 mkdirSync(dirname(OUTPUT), { recursive: true });
 writeFileSync(OUTPUT, `${JSON.stringify(result, null, 2)}\n`, "utf8");
-console.log(JSON.stringify({ ok: true, output: "planning/art-production.json", counts: result.counts }, null, 2));
+console.log(JSON.stringify({ ok: true, output: "planning/art-production.json", purpose: result.purpose }, null, 2));

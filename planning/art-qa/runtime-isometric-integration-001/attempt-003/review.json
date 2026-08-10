@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "id": "runtime-isometric-integration-001-attempt-003",
+  "reviewedAt": "2026-08-05T12:20:18Z",
+  "source": {
+    "remoteCommit": "98e479eaa5afed6c95e0abe1026dfcf8e09e062a",
+    "remoteTree": "bcfcb076d26c1d3b8a973dbe601c6a921563348b",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31004267533",
+    "artifactId": 8929624396,
+    "artifactName": "elevated-isometric-runtime-qa",
+    "artifactSha256": "ee92f4309c99bd6b580550e1c5f31c91f45f2107c8e053e49ffc980788a80cd8"
+  },
+  "automatedGates": {
+    "windowsCi": "passed",
+    "ubuntuCi": "passed",
+    "nativeGodotCapture": "passed",
+    "captureCount": 4,
+    "viewport": [1800, 1100],
+    "minimumSampledColors": 279,
+    "exactArtifactDigestVerified": true,
+    "exactCaptureHashesVerified": true
+  },
+  "visualReview": {
+    "status": "passed-partial-floor-assets",
+    "productionComplete": false,
+    "reviewers": ["root gameplay-scale inspection", "independent gameplay-scale inspection"],
+    "passed": [
+      "The three newly reviewed floor-mounted identities preserve coherent north, east, south, and west facings, footprint contact, scale, clipping, and mixed world depth at gameplay scale.",
+      "The upholstered banquette preserves its two opposed benches, central table, materials, and front-versus-back state in every rotation.",
+      "The commercial and premium chair silhouettes preserve their distinct frames, seats, backs, four-legged floor contact, and direction changes in every rotation.",
+      "The sixteen previously accepted floor-mounted identities remain visually coherent in the expanded twenty-two-item fixture."
+    ],
+    "blockers": [
+      {
+        "id": "mounted-object-anchor-contract",
+        "assets": ["local-art", "pendants", "plants"],
+        "reason": "Local art and the herb wall still stand on free floor cells, while pendant canopies and stems remain on the floor plane. They require legal wall/ceiling placement, mount-specific source anchors, and mounted depth behavior before runtime acceptance."
+      }
+    ],
+    "acceptedAssetIds": [
+      "banquette",
+      "booth",
+      "dish-machine",
+      "espresso",
+      "furniture-banquette-section",
+      "furniture-commercial-chair",
+      "furniture-oak-two-top",
+      "furniture-premium-chair",
+      "furniture-six-burner-range",
+      "furniture-walnut-four-top",
+      "host-stand",
+      "mop-sink",
+      "pass",
+      "prep",
+      "range",
+      "recycling",
+      "service-station",
+      "table-four",
+      "table-two"
+    ],
+    "rejectedAssetIds": ["local-art", "pendants", "plants"],
+    "nextCaptureRequirements": [
+      "Implement wall-edge and ceiling-plane placement plus per-direction mount anchors for local-art, plants, and pendants.",
+      "Validate legal mounted placement, nonblocking navigation, picking, depth, persistence, and multiplayer authority.",
+      "Repeat the exact four-rotation native capture and independently review the three corrected mounted assets."
+    ]
+  },
+  "captures": [
+    {"path": "planning/art-qa/runtime-isometric-integration-001/attempt-003/restaurant-north.png", "sha256": "321a2dfa40215acecc061b73a68706cf4cecaefe6aa3449e7c658f327f931e85"},
+    {"path": "planning/art-qa/runtime-isometric-integration-001/attempt-003/restaurant-east.png", "sha256": "bf498366a2c05dcc776313ead7960f18241df1df01150b2d680e484842444f68"},
+    {"path": "planning/art-qa/runtime-isometric-integration-001/attempt-003/restaurant-south.png", "sha256": "455a344a5a09c2044a524a4383cd7ac8e2087a7e7711d06584f1b35e079d60b4"},
+    {"path": "planning/art-qa/runtime-isometric-integration-001/attempt-003/restaurant-west.png", "sha256": "618843df9b0927799814fcad6d31a586342f1a63d6e34775c6087e6f0d190e26"},
+    {"path": "planning/art-qa/runtime-isometric-integration-001/attempt-003/qa.json", "sha256": "801e3ae3271593ef0c5bc54fbc84ff86f1241b8bf5834d7018174a55fc3c599c"}
+  ]
+}

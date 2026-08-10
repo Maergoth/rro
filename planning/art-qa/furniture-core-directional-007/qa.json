@@ -1,0 +1,597 @@
+{
+  "schemaVersion": 1,
+  "batchId": "furniture-core-directional-007",
+  "assets": [
+    "furniture-banquette-section",
+    "furniture-commercial-chair",
+    "furniture-premium-chair"
+  ],
+  "artReviewStatus": "accepted",
+  "productionComplete": false,
+  "productionCompletionBlockers": [
+    "Native Godot attempt 003 passed all three floor-mounted identities in four rotations, but that exact review package has not yet been remotely preserved with an exact GitHub tree and green hosted CI."
+  ],
+  "promotionScope": {
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "repositoryPromotion": {
+    "status": "remote-verified",
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "remotePreservation": {
+    "commit": "98e479eaa5afed6c95e0abe1026dfcf8e09e062a",
+    "tree": "bcfcb076d26c1d3b8a973dbe601c6a921563348b",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31004267533"
+  },
+  "source": {
+    "generator": "OpenAI built-in image generation",
+    "mode": "one separately prompted 2x2 rigid rotation atlas per furniture identity",
+    "promptLog": "planning/art-qa/furniture-core-directional-007/prompts.md",
+    "promptLogSha256": "056a9f74eb85e52048925aa5cf45188aeb2d8668d2889d844b3243649a7ceff8",
+    "processorSha256": "13e636f8434b9663a462f3da21c644c967844926e7658d03f3de27ed2d8e0b80",
+    "identityReferences": [
+      "apps/client-godot/assets/objects/generated/furniture-banquette-section.png",
+      "apps/client-godot/assets/objects/generated/furniture-commercial-chair.png",
+      "packages/game-data/core/furniture-production.json#premium-chair"
+    ],
+    "cameraReference": "accepted furniture-core-directional-002 through 006 and furniture-pilot-001",
+    "matteProcess": "Official imagegen remove_chroma_key.py helper with border auto-keying, soft matte, magenta despill, transparent threshold 12, and opaque threshold 220; the premium chair uses the documented one-pixel edge contraction after a single visible key-color fringe pixel was detected.",
+    "normalization": "Split each 1254x1254 alpha atlas into four exact 627x627 cells, alpha-trim, apply one shared proportional scale across all four views of each identity, center horizontally, and place the bottommost opaque row at baseline y=590 on a transparent 627x627 canvas.",
+    "rawSha256": {
+      "furniture-banquette-section": "4083662a8b6ee7da3f19a4e7f4fdb8710615cb37af2157458618c080a3525dab",
+      "furniture-commercial-chair": "d19f910f29e6ec6ae1b1f72c7743f60c8c25bbd249a22bb3bab3e8af99cc7c7a",
+      "furniture-premium-chair": "c611a7147675bd8ca568b0fcdeb6eb34b58565a4e699d3854777e0da5bb27929"
+    },
+    "alphaAtlasSha256": {
+      "furniture-banquette-section": "028cd5d973e811461464aae95cda518b9186af95f6fbfde6f3ef41dfe930533c",
+      "furniture-commercial-chair": "c33744dead2125d4e8945cc695aefdc3cd5b718347bcb4d39331547d0816c267",
+      "furniture-premium-chair": "f431037bff2ee65d714d103a2f871235b8a01aa5c9d44b485bf93579ad667dff"
+    }
+  },
+  "gates": {
+    "requiredDirections": [
+      "north",
+      "east",
+      "south",
+      "west"
+    ],
+    "runtimeDimensions": "627x627",
+    "colorMode": "sRGBA",
+    "commonCanvasPivot": [
+      313.5,
+      590
+    ],
+    "commonFloorContactBaselineY": 590,
+    "minimumTransparentBottomMarginPixels": 37,
+    "allOuterBordersTransparent": true,
+    "uniqueRuntimeFileHashes": true,
+    "uniqueRuntimePixelHashes": true,
+    "uniqueAgainstRepositoryDirectionalPngs": true,
+    "uniqueAgainstPriorAcceptedTempDirectionalPngs": true,
+    "zeroVisibleMagentaFringePixelsAboveAlpha2": true,
+    "samePhysicalObjectAcrossDirections": "pass",
+    "fixedElevatedOrthographicIsometricCamera": "pass",
+    "noClippingTextLogosWatermarksOrExtraObjects": "pass",
+    "visualReviewAtFullScale": "pass: contact-627-dark.png inspected at original resolution; banquette component counts and front/back reversal, chair leg/back/cushion construction, fixed camera, diagonal ground axes, alpha edges, and safe padding are accepted across all 12 views.",
+    "visualReviewAtGameplayScale128px": "pass: contact-128-light.png inspected at original resolution; the two-bench marble-table assembly, practical orange commercial chair, premium teal/walnut/brass chair, and all four facings remain distinct and readable at gameplay scale.",
+    "proceduralOrDeterministicStandIn": false
+  },
+  "contactSheets": [
+    {
+      "path": "planning/art-qa/furniture-core-directional-007/contact-627-dark.png",
+      "purpose": "Exact 627px runtime candidates on a dark checkerboard",
+      "sha256": "6d96ad34e7eca82e0bc9d4c62743552ac510846fe1f5e71c3a57e9d9cc19db6a"
+    },
+    {
+      "path": "planning/art-qa/furniture-core-directional-007/contact-128-light.png",
+      "purpose": "Same runtime candidates reduced to 128px on a light checkerboard",
+      "sha256": "738ee2ede242655417d194d79e90fe806e19aaee26b593f263988c98a64f89cf"
+    }
+  ],
+  "items": [
+    {
+      "catalogId": "banquette-section",
+      "assetId": "furniture-banquette-section",
+      "name": "Upholstered Banquette",
+      "footprint": [
+        4,
+        2
+      ],
+      "identityContract": "One rigid four-seat dining assembly with exactly two opposing deep-burgundy button-tufted leather benches in dark-walnut and aged-brass frames, exactly one narrow dark-brown marble table centered between them, and exactly one dark pedestal.",
+      "semanticVerdict": "pass: North/east expose the tufted inner bench at the far side and the plain outer back of the near bench on opposite isometric axes; south/west reverse those physical sides as exact 180-degree counterparts. Both benches, the table, pedestal, spacing, materials, and construction remain fixed.",
+      "gameplayLegibility": "pass: Two burgundy benches, one dark marble table, walnut outer backs, brass corners, and near-versus-far state remain clearly readable at 128px.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-banquette-section/north.png",
+          "sha256": "d937914dcb32264e8e723e0c0328ecf26de92697d9bce15065ab483f945d6fa0",
+          "pixelSha256": "71702dcef35b661b37f8abf655b965f9ae0a4296f1113b0b00999697c93cd0ea",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-007/alpha-source/furniture-banquette-section-north.png",
+          "sourceAlphaSha256": "35f881a66c6196a8c36d49fe5689913c452f14ee77ea6f26b50b2d250c534ca0",
+          "sourceOpaqueBounds": "509x519+74+59",
+          "uniformScale": 1.01156069,
+          "opaqueBounds": "515x525+56+65",
+          "transparentMargins": {
+            "left": 56,
+            "right": 56,
+            "top": 65,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 140453,
+          "fullyOpaquePixelCount": 134008,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-banquette-section/east.png",
+          "sha256": "f7949286866ec30801a108662e07cb7371f0de4f0d49111b33b558cd369e63b7",
+          "pixelSha256": "1759b5c5ad2016170d91b0a3e31fd2461b9f744e283acaf5f189c7066b29ea18",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-007/alpha-source/furniture-banquette-section-east.png",
+          "sourceAlphaSha256": "f6a1b12bced46c5e288b708fa3a6bdf0431f2018ae8c0b6231eb9d7f85021937",
+          "sourceOpaqueBounds": "482x508+62+68",
+          "uniformScale": 1.01156069,
+          "opaqueBounds": "488x514+69+76",
+          "transparentMargins": {
+            "left": 69,
+            "right": 70,
+            "top": 76,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 131326,
+          "fullyOpaquePixelCount": 124979,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-banquette-section/south.png",
+          "sha256": "84a9bf4870b8d78d7aece2b878c97bec7eb15df6de186dd033b1fb70da86cb53",
+          "pixelSha256": "6ccf9af1dfccb47172d98483462687fb8e973973502b3981a50fc8b2baa21491",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-007/alpha-source/furniture-banquette-section-south.png",
+          "sourceAlphaSha256": "1706fd1950aa5aae14ac625380eba22f545534938327522c4bf7bbd3ae0c23b0",
+          "sourceOpaqueBounds": "482x483+88+51",
+          "uniformScale": 1.01156069,
+          "opaqueBounds": "488x489+69+101",
+          "transparentMargins": {
+            "left": 69,
+            "right": 70,
+            "top": 101,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 123271,
+          "fullyOpaquePixelCount": 117018,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-banquette-section/west.png",
+          "sha256": "8b5929a6981b4ffa341e055b571dc8dbb3ccb4b5d210ee4355ef1937f1c8b693",
+          "pixelSha256": "987ae0840a0c70ed2209222904f3bfd80b02449f77af43aa85567340306fff80",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-007/alpha-source/furniture-banquette-section-west.png",
+          "sourceAlphaSha256": "a7f727c05d76b96239fe48df6803997c9a870742eee6796a29b0b97465b06ca6",
+          "sourceOpaqueBounds": "468x474+47+68",
+          "uniformScale": 1.01156069,
+          "opaqueBounds": "473x479+77+111",
+          "transparentMargins": {
+            "left": 77,
+            "right": 77,
+            "top": 111,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 119063,
+          "fullyOpaquePixelCount": 112930,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        }
+      ]
+    },
+    {
+      "catalogId": "commercial-chair",
+      "assetId": "furniture-commercial-chair",
+      "name": "Commercial Dining Chair",
+      "footprint": [
+        1,
+        1
+      ],
+      "identityContract": "One armless stackable commercial chair with one curved charcoal-black solid backrest, one charcoal powder-coated tubular-steel frame, exactly four slender legs, and one square rust-orange textured vinyl seat cushion with rounded corners and dark piping.",
+      "semanticVerdict": "pass: North/east expose the front and open seat edge on opposite isometric axes; south/west expose the outer backrest on those axes. Backrest, cushion, piping, tubular frame, four-leg construction, proportions, and materials rotate coherently.",
+      "gameplayLegibility": "pass: The charcoal curved back, orange square cushion, slim frame, four-leg silhouette, and front-versus-back state remain distinct at 128px.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-commercial-chair/north.png",
+          "sha256": "0d261ce08b2631d480a91ef2273676449542fa00cc3a3bb032910c3e87cf6c8c",
+          "pixelSha256": "5fd61042766961d60d5ac0f5f408becac631c7bc2ab28a977ee1005744c8b848",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-007/alpha-source/furniture-commercial-chair-north.png",
+          "sourceAlphaSha256": "1c05104084559c05265f6be85d50c65e1e8f4096eec72a8664ac51ef2ce61788",
+          "sourceOpaqueBounds": "362x566+129+35",
+          "uniformScale": 0.94522968,
+          "opaqueBounds": "342x535+142+55",
+          "transparentMargins": {
+            "left": 142,
+            "right": 143,
+            "top": 55,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 79583,
+          "fullyOpaquePixelCount": 71545,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-commercial-chair/east.png",
+          "sha256": "be3a2dc2a277ed916638bdbc3dc5110961b33775e086eacbe252dee52f230de9",
+          "pixelSha256": "a53ef33b817b3ce95e0a2c3c4f37dfeb38f4b5e3a3ecaac676f05fec613de38a",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-007/alpha-source/furniture-commercial-chair-east.png",
+          "sourceAlphaSha256": "ca0752b6ecfd9534359a0c86c41c7dd8ac9a9f642107f81e20916a51837eb680",
+          "sourceOpaqueBounds": "363x566+134+35",
+          "uniformScale": 0.94522968,
+          "opaqueBounds": "343x535+142+55",
+          "transparentMargins": {
+            "left": 142,
+            "right": 142,
+            "top": 55,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 79768,
+          "fullyOpaquePixelCount": 71708,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-commercial-chair/south.png",
+          "sha256": "aef6b7508f0954a9ad19b66475d5e985c71c4186cec9fbed5b618db378fb0997",
+          "pixelSha256": "f7f3edfad2cf34df4822afbb4253f0f481550e730e6cc5254293a8335627c60d",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-007/alpha-source/furniture-commercial-chair-south.png",
+          "sourceAlphaSha256": "bac6c7b351870a9721c9d262df74ca29ccde8e057f96d757600d6c038c49e394",
+          "sourceOpaqueBounds": "367x433+120+140",
+          "uniformScale": 0.94522968,
+          "opaqueBounds": "347x409+140+181",
+          "transparentMargins": {
+            "left": 140,
+            "right": 140,
+            "top": 181,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 61839,
+          "fullyOpaquePixelCount": 55868,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-commercial-chair/west.png",
+          "sha256": "e16f1e98fe0ff708a4e503e02a57ad340c1df03c5193f2c510cf2f9f62d4892d",
+          "pixelSha256": "02b034beceba13448c266ca780cd34039b89d486d837fe610c824e8fb6579810",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-007/alpha-source/furniture-commercial-chair-west.png",
+          "sourceAlphaSha256": "4e21a7822b51644af60cb236392949e4280331379443a0412390064e86968e13",
+          "sourceOpaqueBounds": "368x433+135+140",
+          "uniformScale": 0.94522968,
+          "opaqueBounds": "348x409+139+181",
+          "transparentMargins": {
+            "left": 139,
+            "right": 140,
+            "top": 181,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 61948,
+          "fullyOpaquePixelCount": 55976,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        }
+      ]
+    },
+    {
+      "catalogId": "premium-chair",
+      "assetId": "furniture-premium-chair",
+      "name": "Premium Dining Chair",
+      "footprint": [
+        1,
+        1
+      ],
+      "identityContract": "One refined armless upright dining chair with a dark American-walnut frame, exactly four tapered legs, one deep-teal velvet piped seat, one tall curved deep-teal upholstered back with three restrained vertical stitched divisions, and brushed-brass ferrules on all four feet.",
+      "semanticVerdict": "pass: North/east expose the velvet front and open seat edge on opposite isometric axes; south/west expose the outer upholstered back. Walnut framing, teal upholstery, stitched divisions, four tapered legs, brass ferrules, proportions, and construction rotate coherently.",
+      "gameplayLegibility": "pass: The tall teal channel-stitched back, thick teal seat, walnut frame, and bright brass feet remain readable and visually distinct from the commercial chair at 128px.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-premium-chair/north.png",
+          "sha256": "3a73aaea575414ee3cb1f0aa31152786ffee7b6c7b67f855ba82fc12ed178377",
+          "pixelSha256": "65ab743957302736fdc57714f3fa6f6782c9f3d90323a8d372152f3227cca5e0",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-007/alpha-source/furniture-premium-chair-north.png",
+          "sourceAlphaSha256": "450c423c5d3ff26545d52d07aaa6de25ff3eb6e9d45ad202b7f263adb5aac31d",
+          "sourceOpaqueBounds": "354x584+131+31",
+          "uniformScale": 0.91609589,
+          "opaqueBounds": "324x535+151+55",
+          "transparentMargins": {
+            "left": 151,
+            "right": 152,
+            "top": 55,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 85122,
+          "fullyOpaquePixelCount": 79235,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-premium-chair/east.png",
+          "sha256": "02be7d1338faa6f69cc07cb49d8b156faa995be65bde9fc92bbb4004ba6d46bc",
+          "pixelSha256": "0e21da55b5de4874a529c0196734cb976022dc00d0736d5aa2531ccc2108948e",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-007/alpha-source/furniture-premium-chair-east.png",
+          "sourceAlphaSha256": "e9ac5ece075acea9d37378f51d463f92523769735a70e8a008257808d0881d52",
+          "sourceOpaqueBounds": "353x584+139+31",
+          "uniformScale": 0.91609589,
+          "opaqueBounds": "323x535+152+55",
+          "transparentMargins": {
+            "left": 152,
+            "right": 152,
+            "top": 55,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 85138,
+          "fullyOpaquePixelCount": 79301,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-premium-chair/south.png",
+          "sha256": "087a230b15866c590a00c301dfb6a3d9671dfac420952528a01954beaebe2239",
+          "pixelSha256": "f57d6c8efec701ae867b29e60b65fa63ceabad95ed33ef9af30eec1b6bcc89e4",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-007/alpha-source/furniture-premium-chair-south.png",
+          "sourceAlphaSha256": "07a9cbb24bc2edeae8b543f2964ac499c22bd7637e2b64d3ba910d08965694ec",
+          "sourceOpaqueBounds": "356x494+125+62",
+          "uniformScale": 0.91609589,
+          "opaqueBounds": "326x453+150+137",
+          "transparentMargins": {
+            "left": 150,
+            "right": 151,
+            "top": 137,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 68213,
+          "fullyOpaquePixelCount": 62579,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-premium-chair/west.png",
+          "sha256": "aea1e2a84edc667480935766281ed0c168aa4ad7ac054b4a6cb12c6bb7863a85",
+          "pixelSha256": "0dc8512325b135ba3cc8debf91d36bca12bf7c16e4c04e79aaa4c4666360ea73",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-007/alpha-source/furniture-premium-chair-west.png",
+          "sourceAlphaSha256": "45ebd531b4ed092a0cc9b7ad3f67df182bb38279531d5f78630d03913a4df1dd",
+          "sourceOpaqueBounds": "356x493+138+62",
+          "uniformScale": 0.91609589,
+          "opaqueBounds": "326x452+150+138",
+          "transparentMargins": {
+            "left": 150,
+            "right": 151,
+            "top": 138,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 68200,
+          "fullyOpaquePixelCount": 62551,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        }
+      ]
+    }
+  ],
+  "rejectedAttempts": [
+    {
+      "reason": "North and south placed the banquette and table long axes screen-horizontal instead of on either diagonal isometric ground-plane axis.",
+      "generatorOutputSha256": "ffb6107830be54a1b0c2f0f72c00ca42303978e9f498a75197311f2e33c04a7c"
+    },
+    {
+      "reason": "The correction moved every cell onto a diagonal but collapsed the atlas to two repeated orientations rather than four coherent quarter turns.",
+      "generatorOutputSha256": "04dee88e6a7c7500223c5569c36a07e21a44ac229e3bced3012f087cc253b999"
+    }
+  ]
+}

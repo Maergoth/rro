@@ -17,6 +17,11 @@ var current_builder: BuilderPalette
 var current_inventory_panel: InventoryPanel
 var pending_inventory_catalog: Dictionary = {}
 var selected_builder_object: Dictionary = {}
+var current_layout_revision := 0
+var authoritative_builder_layout: Dictionary = {}
+var staged_builder_operations: Array[Dictionary] = []
+var staged_object_counter := 0
+var staged_commit_in_flight := false
 var status_label: Label
 var screen_root: Control
 var shift_tasks_completed := 0
@@ -46,6 +51,10 @@ func _ready() -> void:
 	try_connect()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE and not staged_builder_operations.is_empty() and not staged_commit_in_flight:
+		cancel_staged_builder_edits()
+		get_viewport().set_input_as_handled()
+		return
 	if event is InputEventKey and event.pressed and event.keycode == KEY_F12:
 		debug_visible = not debug_visible
 		debug_console.visible = debug_visible
@@ -144,6 +153,9 @@ func make_theme() -> Theme:
 	return result
 
 func clear_screen() -> void:
+	staged_builder_operations.clear()
+	authoritative_builder_layout = {}
+	staged_commit_in_flight = false
 	for child in get_children():
 		if child != api and child != realtime and child != debug_console: child.queue_free()
 	screen_root = null
@@ -601,9 +613,10 @@ func show_my_restaurant() -> void:
 		if is_instance_valid(current_builder): current_builder.set_selected_object(object)
 	)
 	split.add_child(current_floor)
-	var panel := PanelContainer.new(); panel.custom_minimum_size.x = 390; split.add_child(panel); current_builder = BuilderPalette.new(); current_builder.set_content(bootstrap.get("content", {})); current_builder.tool_selected.connect(func(tool: String, id: String) -> void: current_floor.select_tool(tool, id)); current_builder.repair_selected_requested.connect(repair_selected_builder_object); current_builder.sell_selected_requested.connect(sell_selected_builder_object); current_builder.expand_requested.connect(expand_builder); panel.add_child(current_builder)
+	var panel := PanelContainer.new(); panel.custom_minimum_size.x = 390; split.add_child(panel); current_builder = BuilderPalette.new(); current_builder.set_content(bootstrap.get("content", {})); current_builder.tool_selected.connect(func(tool: String, id: String) -> void: current_floor.select_tool(tool, id)); current_builder.repair_selected_requested.connect(repair_selected_builder_object); current_builder.sell_selected_requested.connect(sell_selected_builder_object); current_builder.expand_requested.connect(expand_builder); current_builder.undo_requested.connect(func() -> void: apply_builder_history("undo")); current_builder.redo_requested.connect(func() -> void: apply_builder_history("redo")); current_builder.commit_staged_requested.connect(commit_staged_builder_edits); current_builder.cancel_staged_requested.connect(cancel_staged_builder_edits); panel.add_child(current_builder)
+	staged_builder_operations.clear(); authoritative_builder_layout = {}; staged_commit_in_flight = false; current_builder.set_staged_state(0)
 	api.get_json("/v1/restaurants/%s/layout" % current_restaurant_id, func(ok: bool, data: Dictionary, _code: int) -> void:
-		if ok and is_instance_valid(current_floor): current_floor.set_layout(data)
+		if ok: accept_authoritative_builder_layout(data)
 	)
 
 func show_found_restaurant() -> void:
@@ -636,34 +649,137 @@ func show_found_restaurant() -> void:
 	)
 
 func handle_build_action(action: String, payload: Dictionary) -> void:
-	if current_restaurant_id.is_empty(): return
-	match action:
-		"floor": api.patch_json("/v1/restaurants/%s/layout/floor" % current_restaurant_id, payload, build_response)
-		"wall": api.put_json("/v1/restaurants/%s/layout/walls" % current_restaurant_id, payload, build_response)
-		"place": api.post_json("/v1/restaurants/%s/layout/objects" % current_restaurant_id, payload, build_response)
-		"move":
-			var id := str(payload.get("id", "")); payload.erase("id"); api.patch_json("/v1/restaurants/%s/layout/objects/%s" % [current_restaurant_id, id], payload, build_response)
+	if current_restaurant_id.is_empty() or staged_commit_in_flight: return
+	if staged_builder_operations.size() >= 128:
+		show_status("A staged commit is limited to 128 edits. Commit or cancel this batch first.")
+		return
+	var operation := payload.duplicate(true)
+	operation["type"] = action
+	if action == "place":
+		staged_object_counter += 1
+		operation["clientId"] = "staged-object-%d" % staged_object_counter
+	elif action == "move":
+		var object_id := str(operation.get("id", ""))
+		if object_id.begins_with("staged-object-"):
+			for staged in staged_builder_operations:
+				if str(staged.get("type", "")) == "place" and str(staged.get("clientId", "")) == object_id:
+					staged["x"] = operation.get("x", staged.get("x", 0)); staged["y"] = operation.get("y", staged.get("y", 0)); staged["rotation"] = operation.get("rotation", staged.get("rotation", 0))
+					rebuild_staged_builder_preview(); return
+		for index in range(staged_builder_operations.size() - 1, -1, -1):
+			if str(staged_builder_operations[index].get("type", "")) == "move" and str(staged_builder_operations[index].get("id", "")) == object_id:
+				staged_builder_operations[index] = operation; rebuild_staged_builder_preview(); return
+	elif action == "wall":
+		for index in range(staged_builder_operations.size() - 1, -1, -1):
+			var staged: Dictionary = staged_builder_operations[index]
+			if str(staged.get("type", "")) == "wall" and int(staged.get("x", -1)) == int(operation.get("x", -2)) and int(staged.get("y", -1)) == int(operation.get("y", -2)) and str(staged.get("edge", "")) == str(operation.get("edge", "invalid")):
+				staged_builder_operations[index] = operation; rebuild_staged_builder_preview(); return
+	staged_builder_operations.append(operation)
+	rebuild_staged_builder_preview()
 
-func build_response(ok: bool, data: Dictionary, _code: int) -> void:
-	if ok and is_instance_valid(current_floor): current_floor.set_layout(data.get("layout", data)); show_status("Layout committed to the authoritative restaurant database.")
+func rebuild_staged_builder_preview() -> void:
+	if is_instance_valid(current_floor): current_floor.set_staged_layout(authoritative_builder_layout, staged_builder_operations)
+	if is_instance_valid(current_builder): current_builder.set_staged_state(staged_builder_operations.size(), staged_commit_in_flight)
+	show_status("%d edit%s staged locally. Commit validates and spends atomically; Cancel or Escape discards them." % [staged_builder_operations.size(), "" if staged_builder_operations.size() == 1 else "s"])
+
+func commit_staged_builder_edits() -> void:
+	if staged_builder_operations.is_empty() or staged_commit_in_flight or current_restaurant_id.is_empty(): return
+	staged_commit_in_flight = true
+	if is_instance_valid(current_builder): current_builder.set_staged_state(staged_builder_operations.size(), true)
+	api.post_json("/v1/restaurants/%s/layout/commit" % current_restaurant_id, builder_revision_payload({"operations": staged_builder_operations}), func(ok: bool, data: Dictionary, code: int) -> void:
+		staged_commit_in_flight = false
+		if not ok:
+			if is_instance_valid(current_builder): current_builder.set_staged_state(staged_builder_operations.size(), false)
+			handle_builder_revision_conflict(data, code)
+			return
+		var committed_count := int(data.get("operationCount", staged_builder_operations.size()))
+		var spent := int(data.get("costCents", 0))
+		staged_builder_operations.clear()
+		accept_authoritative_builder_layout(data.get("layout", {}))
+		show_status("Committed %d staged edits atomically for $%.2f." % [committed_count, float(spent) / 100.0])
+	)
+
+func cancel_staged_builder_edits() -> void:
+	if staged_commit_in_flight: return
+	var discarded := staged_builder_operations.size()
+	staged_builder_operations.clear()
+	selected_builder_object = {}
+	if is_instance_valid(current_floor): current_floor.set_layout(authoritative_builder_layout.duplicate(true))
+	if is_instance_valid(current_builder): current_builder.set_staged_state(0); current_builder.set_history_state(authoritative_builder_layout.get("history", {})); current_builder.set_layout_validation(authoritative_builder_layout.get("validation", {}))
+	show_status("Canceled %d staged edit%s; authoritative layout and treasury were unchanged." % [discarded, "" if discarded == 1 else "s"])
+
+func accept_authoritative_builder_layout(data: Dictionary) -> void:
+	authoritative_builder_layout = data.duplicate(true)
+	if is_instance_valid(current_floor): current_floor.set_layout(authoritative_builder_layout.duplicate(true))
+	if is_instance_valid(current_builder): current_builder.set_room_tags(authoritative_builder_layout.get("roomTags", []))
+	update_builder_history(authoritative_builder_layout)
+	if is_instance_valid(current_builder): current_builder.set_staged_state(staged_builder_operations.size(), staged_commit_in_flight)
+
+func build_response(ok: bool, data: Dictionary, code: int) -> void:
+	if not ok:
+		handle_builder_revision_conflict(data, code)
+		return
+	if ok and is_instance_valid(current_floor):
+		var committed: Dictionary = data.get("layout", data)
+		accept_authoritative_builder_layout(committed)
+		show_status("Layout committed to the authoritative restaurant database.")
+
+func update_builder_history(layout_data: Dictionary) -> void:
+	current_layout_revision = int(layout_data.get("revision", layout_data.get("history", {}).get("revision", current_layout_revision)))
+	if is_instance_valid(current_builder):
+		current_builder.set_history_state(layout_data.get("history", {}))
+		current_builder.set_layout_validation(layout_data.get("validation", {}))
+
+func apply_builder_history(direction: String) -> void:
+	if current_restaurant_id.is_empty(): return
+	if not staged_builder_operations.is_empty(): show_status("Commit or cancel staged edits before using history."); return
+	api.post_json("/v1/restaurants/%s/layout/%s" % [current_restaurant_id, direction], builder_revision_payload(), func(ok: bool, data: Dictionary, code: int) -> void:
+		if not ok:
+			handle_builder_revision_conflict(data, code)
+			return
+		selected_builder_object = {}
+		var restored: Dictionary = data.get("layout", {})
+		accept_authoritative_builder_layout(restored)
+		show_status("%s: %s" % [direction.capitalize(), str(data.get("action", "layout action"))])
+	)
 
 func sell_selected_builder_object() -> void:
+	if not staged_builder_operations.is_empty(): show_status("Commit or cancel staged edits before selling furniture."); return
 	if selected_builder_object.is_empty(): show_status("Select a placed object first."); return
-	api.delete_json("/v1/restaurants/%s/layout/objects/%s" % [current_restaurant_id, selected_builder_object.get("id", "")], func(ok: bool, data: Dictionary, _code: int) -> void:
-		if ok: selected_builder_object = {}; current_floor.set_layout(data.get("layout", {})); show_status("Object sold back at its wear-adjusted recovery value.")
+	api.delete_json("/v1/restaurants/%s/layout/objects/%s" % [current_restaurant_id, selected_builder_object.get("id", "")], builder_revision_payload(), func(ok: bool, data: Dictionary, code: int) -> void:
+		if ok: selected_builder_object = {}; accept_authoritative_builder_layout(data.get("layout", {})); show_status("Object sold back at its wear-adjusted recovery value.")
+		else: handle_builder_revision_conflict(data, code)
 	)
 
 func repair_selected_builder_object() -> void:
+	if not staged_builder_operations.is_empty(): show_status("Commit or cancel staged edits before repairing furniture."); return
 	if selected_builder_object.is_empty(): show_status("Select a worn or broken object first."); return
-	api.post_json("/v1/restaurants/%s/layout/objects/%s/repair" % [current_restaurant_id, selected_builder_object.get("id", "")], {}, func(ok: bool, data: Dictionary, _code: int) -> void:
+	api.post_json("/v1/restaurants/%s/layout/objects/%s/repair" % [current_restaurant_id, selected_builder_object.get("id", "")], builder_revision_payload(), func(ok: bool, data: Dictionary, code: int) -> void:
 		if ok:
 			selected_builder_object = {}
-			current_floor.set_layout(data.get("layout", {}))
+			accept_authoritative_builder_layout(data.get("layout", {}))
 			show_status("Furniture restored for $%.2f from restaurant treasury." % (float(data.get("costCents", 0)) / 100.0))
+		else: handle_builder_revision_conflict(data, code)
 	)
 
 func expand_builder(add_width: int, add_height: int) -> void:
-	api.post_json("/v1/restaurants/%s/layout/expand" % current_restaurant_id, {"addWidth": add_width, "addHeight": add_height}, build_response)
+	if not staged_builder_operations.is_empty(): show_status("Commit or cancel staged edits before expanding the restaurant."); return
+	api.post_json("/v1/restaurants/%s/layout/expand" % current_restaurant_id, builder_revision_payload({"addWidth": add_width, "addHeight": add_height}), build_response)
+
+func builder_revision_payload(payload: Dictionary = {}) -> Dictionary:
+	var versioned := payload.duplicate(true)
+	versioned["expectedRevision"] = current_layout_revision
+	return versioned
+
+func handle_builder_revision_conflict(data: Dictionary, code: int) -> void:
+	var error: Dictionary = data.get("error", {})
+	if code != 409 or str(error.get("code", "")) != "layout-revision-conflict": return
+	api.get_json("/v1/restaurants/%s/layout" % current_restaurant_id, func(ok: bool, latest: Dictionary, _refresh_code: int) -> void:
+		if not ok: return
+		staged_builder_operations.clear()
+		selected_builder_object = {}
+		accept_authoritative_builder_layout(latest)
+		show_status("The layout changed in another editor. Local staging was canceled and revision %d was loaded; review and retry." % current_layout_revision)
+	)
 
 func show_inventory() -> void:
 	var root := make_shell("Role Inventory")

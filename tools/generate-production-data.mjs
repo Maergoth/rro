@@ -269,6 +269,36 @@ const utilityDefaults = {
   Dining: [], Service: [], Kitchen: ["power", "ventilation"], Utility: ["water", "drain"], Storage: [], Decor: [], Office: ["power"],
 };
 
+// Placement metadata is explicit only after its art identity and intended
+// mounting plane have been reviewed. The other generated definitions retain
+// the content loader's backward-compatible floor/blocking/adjacent default.
+const acceptedFurniturePlacements = {
+  "oak-two-top": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "walnut-four-top": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "banquette-section": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "commercial-chair": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "premium-chair": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "host-stand-pro": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "server-station-pro": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "pos-terminal": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "expo-pass-heated": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "six-burner-range": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "plancha-commercial": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "convection-oven": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "prep-table-refrigerated": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "walkin-rack": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "dry-storage-rack": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "chemical-cabinet": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "dish-machine-high-temp": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "three-comp-sink": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "wet-floor-station": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "linen-storage": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "water-station": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "office-desk": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "manager-console": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+  "essential-cafe-two-top": { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" },
+};
+
 function operationalStrength(stats) {
   const keys = ["turnover", "route", "accuracy", "payment", "forecast", "handoff", "kitchen", "capacity", "recovery", "speed", "hold", "quality", "consistency", "sanitation", "storage", "organization", "spill", "safety", "rotation", "community"];
   return clamp(Math.max(3, ...keys.map((key) => Math.abs(Number(stats[key] ?? 0)))), 3, 20);
@@ -284,6 +314,7 @@ function finishFurniture(item, profile, roleScale = 1) {
   const roleEffects = Object.fromEntries(roles.map((role, index) => [role, clamp(Math.round((3 + strength * 0.48 - index) * roleScale), 1, 20)]));
   return {
     ...item,
+    ...(acceptedFurniturePlacements[item.id] ? { placement: acceptedFurniturePlacements[item.id] } : {}),
     inventoryScope: "restaurant",
     assetId: `furniture-${item.id}`,
     stats,

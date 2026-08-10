@@ -1,0 +1,1333 @@
+{
+  "schemaVersion": 2,
+  "branch": "agent/complete-production-art",
+  "pullRequest": "https://github.com/Maergoth/rro/pull/2",
+  "lastVerifiedRemote": {
+    "commit": "8557c266c761d53c84148ab298ad0857e5c6596b",
+    "tree": "bd2832e475239b1108fbbfa13460370c53e7178a",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31349580572"
+  },
+  "completionRule": "generated, processed, raster-validated, visually accepted, runtime-bound assets whose exact reviewed bytes are remotely verified on GitHub with green CI",
+  "artDirection": {
+    "camera": "orthographic semi-isometric",
+    "furnitureDirections": [
+      "north",
+      "east",
+      "south",
+      "west"
+    ],
+    "characterDirections": [
+      "north",
+      "north_east",
+      "east",
+      "south_east",
+      "south",
+      "south_west",
+      "west",
+      "north_west"
+    ],
+    "transparency": "flat chroma-key source with locally validated alpha runtime files"
+  },
+  "launchScope": {
+    "construction": {
+      "openingTypes": [
+        "solid",
+        "door",
+        "service-door",
+        "window",
+        "arch"
+      ],
+      "openingDirections": [
+        "north",
+        "east",
+        "south",
+        "west"
+      ],
+      "utilityOverlays": [
+        "power",
+        "gas",
+        "water",
+        "drain",
+        "ventilation"
+      ],
+      "note": "Floor and wall material IDs come from packages/game-data/core/construction.json. Opening geometry is shared across materials; material tint/texture is applied separately."
+    },
+    "world": [
+      "world-atlas"
+    ],
+    "environment": [
+      "contact-shadow",
+      "selection-ring",
+      "steam-puff",
+      "service-sparkles"
+    ],
+    "ui": [
+      "builder-pointer",
+      "builder-floor",
+      "builder-wall",
+      "builder-furniture",
+      "builder-rotate",
+      "builder-repair",
+      "builder-sell",
+      "builder-expand",
+      "builder-power",
+      "builder-gas",
+      "builder-water",
+      "builder-drain",
+      "builder-ventilation",
+      "login-hero",
+      "rro-mark"
+    ]
+  },
+  "coverage": {
+    "furniture": {
+      "catalogTotal": 229,
+      "acceptedSets": 40,
+      "acceptedDirectionalFiles": 160,
+      "runtimeCompositeAcceptedSets": 40
+    },
+    "equipmentIcons": {
+      "catalogTotal": 45,
+      "accepted": 45
+    },
+    "characterSystem": {
+      "status": "in_progress",
+      "sourceAcceptedBodyPresentations": 2,
+      "sourceAcceptedIdleDirectionalFiles": 16,
+      "sourceAcceptedSkinFoundationFiles": 32,
+      "sourceAcceptedClassicOutfitBodyVariants": 2,
+      "preservedPrototypeOutfitDesigns": 2,
+      "preservedPrototypeOutfitBodyVariants": 4,
+      "preservedPrototypeOutfitFiles": 96,
+      "productionAcceptedOutfitDesigns": 0,
+      "runtimeReadyCharacterAssets": 0,
+      "required": [
+        "body_skin",
+        "face",
+        "hair_headwear",
+        "base_outfit",
+        "role_layer",
+        "footwear",
+        "accessory",
+        "carried_object",
+        "effects",
+        "skin_masks",
+        "primary_color_masks",
+        "secondary_color_masks"
+      ]
+    }
+  },
+  "cameraGeometryAudits": [
+    {
+      "id": "furniture-camera-geometry-audit-001",
+      "status": "failed-retract-all-nine-camera-credits",
+      "validator": "tools/validate-furniture-camera-geometry-v1.mjs",
+      "evidence": "planning/art-qa/furniture-camera-geometry-audit-001.json",
+      "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+      "expectedGroundSlopes": [
+        -0.5,
+        0.5
+      ],
+      "expectedGroundAnglesDegrees": [
+        -26.56505117707799,
+        26.56505117707799
+      ],
+      "groundAngleToleranceDegrees": 1.25,
+      "groundSlopeTolerance": 0.03,
+      "expectedVerticalAngleDegrees": 90,
+      "verticalAngleToleranceDegrees": 1.25,
+      "auditedAssetIds": [
+        "furniture-chemical-cabinet",
+        "furniture-dish-machine-high-temp",
+        "furniture-three-comp-sink",
+        "furniture-wet-floor-station",
+        "furniture-linen-storage",
+        "furniture-water-station",
+        "furniture-office-desk",
+        "furniture-manager-console",
+        "furniture-essential-cafe-two-top"
+      ],
+      "measuredConformantAssetIds": [],
+      "retractedAssetIds": [
+        "furniture-chemical-cabinet",
+        "furniture-dish-machine-high-temp",
+        "furniture-three-comp-sink",
+        "furniture-wet-floor-station",
+        "furniture-linen-storage",
+        "furniture-water-station",
+        "furniture-office-desk",
+        "furniture-manager-console",
+        "furniture-essential-cafe-two-top"
+      ],
+      "notes": "All 36 exact alpha-source frames were measured. Every previously credited identity fails at least one directional source under the explicit +/-0.5 ground-axis gate; the native captures remain useful scale, placement, depth, and legibility evidence but no longer grant camera credit."
+    }
+  ],
+  "runtimeQaAttempts": [
+    {
+      "id": "runtime-isometric-integration-001-attempt-001",
+      "status": "failed-needs-remediation",
+      "remoteCommit": "00f9a36dccf35ca2c82dbf2689d982749ab27f5c",
+      "remoteTree": "7c95a33e679232e99cfc9cb472abfbb478fa3ae9",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30999133497",
+      "artifactId": 8927474963,
+      "artifactSha256": "933842483b6a38a31eb9da837b665bd1799a320e343adb59b126564f815edbfd",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-001/review.json",
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth"
+      ],
+      "blockers": [
+        "mounted-object-anchor-contract",
+        "world-label-collision"
+      ],
+      "productionComplete": false
+    },
+    {
+      "id": "runtime-isometric-integration-001-attempt-002",
+      "status": "passed-partial-floor-assets",
+      "remoteCommit": "24781e2f08acc97c0189d05af3b6a72285f2cfbd",
+      "remoteTree": "8e9eba95e0c54de9e4513bc6474ff5c5c9722778",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31000326415",
+      "artifactId": 8927966443,
+      "artifactSha256": "fba441164880464b7a240bcc10ce1a02e70f688092c7e38e4d713214013ebca8",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-002/review.json",
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility",
+        "sixteen-floor-assets"
+      ],
+      "blockers": [
+        "mounted-object-anchor-contract"
+      ],
+      "acceptedAssetIds": [
+        "banquette",
+        "booth",
+        "dish-machine",
+        "espresso",
+        "furniture-oak-two-top",
+        "furniture-six-burner-range",
+        "furniture-walnut-four-top",
+        "host-stand",
+        "mop-sink",
+        "pass",
+        "prep",
+        "range",
+        "recycling",
+        "service-station",
+        "table-four",
+        "table-two"
+      ],
+      "rejectedAssetIds": [
+        "local-art",
+        "pendants",
+        "plants"
+      ],
+      "reviewPreservation": {
+        "commit": "1eb321395d7c9562e79fcf7a39a5c334ce3e05f9",
+        "tree": "e2d69e0f8c39e4dd1f372e5abec2b66c4d4d0c1a",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31001558391"
+      },
+      "productionComplete": false
+    },
+    {
+      "id": "runtime-isometric-integration-001-attempt-003",
+      "status": "passed-partial-floor-assets",
+      "remoteCommit": "98e479eaa5afed6c95e0abe1026dfcf8e09e062a",
+      "remoteTree": "bcfcb076d26c1d3b8a973dbe601c6a921563348b",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31004267533",
+      "artifactId": 8929624396,
+      "artifactSha256": "ee92f4309c99bd6b580550e1c5f31c91f45f2107c8e053e49ffc980788a80cd8",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-003/review.json",
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility",
+        "nineteen-floor-assets"
+      ],
+      "blockers": [
+        "mounted-object-anchor-contract"
+      ],
+      "acceptedAssetIds": [
+        "banquette",
+        "booth",
+        "dish-machine",
+        "espresso",
+        "furniture-banquette-section",
+        "furniture-commercial-chair",
+        "furniture-oak-two-top",
+        "furniture-premium-chair",
+        "furniture-six-burner-range",
+        "furniture-walnut-four-top",
+        "host-stand",
+        "mop-sink",
+        "pass",
+        "prep",
+        "range",
+        "recycling",
+        "service-station",
+        "table-four",
+        "table-two"
+      ],
+      "rejectedAssetIds": [
+        "local-art",
+        "pendants",
+        "plants"
+      ],
+      "reviewPreservation": {
+        "commit": "10a0f705af46ae9737b27830af59fc5b1fa3b5bf",
+        "tree": "6cb40312461f9afc5f2624b797dd6b2dc5915c0e",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31006311867"
+      },
+      "productionComplete": false
+    },
+    {
+      "id": "runtime-isometric-integration-001-attempt-004",
+      "status": "passed-partial-floor-assets",
+      "remoteCommit": "9749406830ce8fa0139ff479c98a67d5d38c6882",
+      "remoteTree": "4c0becd361bc5c6fa722caa3252f7588e512f898",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31009371429",
+      "artifactId": 8931752495,
+      "artifactSha256": "25f2b0e993ad9c283d5be84dd2e08a5763d5b1c1931ed704a8dc8daa27a25332",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-004/review.json",
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility",
+        "twenty-two-floor-assets"
+      ],
+      "blockers": [
+        "mounted-object-anchor-contract"
+      ],
+      "acceptedAssetIds": [
+        "banquette",
+        "booth",
+        "dish-machine",
+        "espresso",
+        "furniture-banquette-section",
+        "furniture-commercial-chair",
+        "furniture-host-stand-pro",
+        "furniture-oak-two-top",
+        "furniture-pos-terminal",
+        "furniture-premium-chair",
+        "furniture-server-station-pro",
+        "furniture-six-burner-range",
+        "furniture-walnut-four-top",
+        "host-stand",
+        "mop-sink",
+        "pass",
+        "prep",
+        "range",
+        "recycling",
+        "service-station",
+        "table-four",
+        "table-two"
+      ],
+      "rejectedAssetIds": [
+        "local-art",
+        "pendants",
+        "plants"
+      ],
+      "reviewPreservation": {
+        "commit": "34daaef7744926b79ff68962c78f93bee218da4d",
+        "tree": "4110008c5540c913cb14ac72222087d33d84f096",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31011336304"
+      },
+      "productionComplete": false
+    },
+    {
+      "id": "runtime-isometric-integration-001-attempt-005",
+      "status": "failed-mounted-visual-context",
+      "remoteCommit": "f6014d2e647ba8b6333279075cfbace0d7857bec",
+      "remoteTree": "f9284c2bc7202a410b3d00399791b635ffdefe6e",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31013459664",
+      "artifactId": 8933468440,
+      "artifactSha256": "953e1ec3f134cfef827e7f97afd0750c942521244dfcf3ec84004f9b1b8aa74e",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-005/review.json",
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "legal-mounted-placement-records",
+        "twenty-two-floor-assets"
+      ],
+      "blockers": [
+        "visible-wall-plane-and-room-facing-depth",
+        "ceiling-context-and-elevation"
+      ],
+      "acceptedAssetIds": [
+        "banquette",
+        "booth",
+        "dish-machine",
+        "espresso",
+        "furniture-banquette-section",
+        "furniture-commercial-chair",
+        "furniture-host-stand-pro",
+        "furniture-oak-two-top",
+        "furniture-pos-terminal",
+        "furniture-premium-chair",
+        "furniture-server-station-pro",
+        "furniture-six-burner-range",
+        "furniture-walnut-four-top",
+        "host-stand",
+        "mop-sink",
+        "pass",
+        "prep",
+        "range",
+        "recycling",
+        "service-station",
+        "table-four",
+        "table-two"
+      ],
+      "rejectedAssetIds": [
+        "local-art",
+        "pendants",
+        "plants"
+      ],
+      "reviewPreservation": {
+        "commit": "cb1cd7f5c29d953abe94cb27a70891ede9d842c8",
+        "tree": "f73c8171ba200f58eac682e4fc7cfb43f6825200",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31016663766"
+      },
+      "productionComplete": false
+    },
+    {
+      "id": "runtime-isometric-integration-001-attempt-006",
+      "status": "passed-partial-present-assets",
+      "remoteCommit": "cb1cd7f5c29d953abe94cb27a70891ede9d842c8",
+      "remoteTree": "f73c8171ba200f58eac682e4fc7cfb43f6825200",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31016663766",
+      "artifactId": 8934792593,
+      "artifactSha256": "663b165ee0b1622924d2c9ae5df3c76e451432690b38f6e41f4205b38bb404cb",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-006/review.json",
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility",
+        "legal-mounted-placement-records",
+        "wall-and-ceiling-context",
+        "twenty-seven-present-assets"
+      ],
+      "blockers": [
+        "convection-oven-foreground-wall-occlusion"
+      ],
+      "acceptedAssetIds": [
+        "banquette",
+        "booth",
+        "dish-machine",
+        "espresso",
+        "furniture-banquette-section",
+        "furniture-commercial-chair",
+        "furniture-expo-pass-heated",
+        "furniture-host-stand-pro",
+        "furniture-oak-two-top",
+        "furniture-plancha-commercial",
+        "furniture-pos-terminal",
+        "furniture-premium-chair",
+        "furniture-server-station-pro",
+        "furniture-six-burner-range",
+        "furniture-walnut-four-top",
+        "host-stand",
+        "local-art",
+        "mop-sink",
+        "pass",
+        "pendants",
+        "plants",
+        "prep",
+        "range",
+        "recycling",
+        "service-station",
+        "table-four",
+        "table-two"
+      ],
+      "rejectedAssetIds": [
+        "furniture-convection-oven"
+      ],
+      "reviewPreservation": {
+        "commit": "f2cc4afc3dca51ae468d9c95e2b036dedd8c3ee5",
+        "tree": "3307f0ba9abf9505af1e3410895da28a890d7cdf",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31018806421"
+      },
+      "productionComplete": false
+    },
+    {
+      "id": "runtime-isometric-integration-001-attempt-007",
+      "status": "passed-all-present-assets",
+      "remoteCommit": "f2cc4afc3dca51ae468d9c95e2b036dedd8c3ee5",
+      "remoteTree": "3307f0ba9abf9505af1e3410895da28a890d7cdf",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31018806421",
+      "artifactId": 8935706427,
+      "artifactSha256": "640bc60b9e699dbe3ce84c05ce5258f2a60336f6d97d1d0b95849636fd1d2376",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-007/review.json",
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility",
+        "legal-mounted-placement-records",
+        "wall-and-ceiling-context",
+        "twenty-eight-present-assets"
+      ],
+      "blockers": [],
+      "acceptedAssetIds": [
+        "banquette",
+        "booth",
+        "dish-machine",
+        "espresso",
+        "furniture-banquette-section",
+        "furniture-commercial-chair",
+        "furniture-convection-oven",
+        "furniture-expo-pass-heated",
+        "furniture-host-stand-pro",
+        "furniture-oak-two-top",
+        "furniture-plancha-commercial",
+        "furniture-pos-terminal",
+        "furniture-premium-chair",
+        "furniture-server-station-pro",
+        "furniture-six-burner-range",
+        "furniture-walnut-four-top",
+        "host-stand",
+        "local-art",
+        "mop-sink",
+        "pass",
+        "pendants",
+        "plants",
+        "prep",
+        "range",
+        "recycling",
+        "service-station",
+        "table-four",
+        "table-two"
+      ],
+      "rejectedAssetIds": [],
+      "reviewPreservation": {
+        "commit": "19128970c6e8b1de849987784911d5a4201aca19",
+        "tree": "5d8939aaebf95d0524bcb61892916a56984dd5c3",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31019720470"
+      },
+      "productionComplete": false
+    },
+    {
+      "id": "runtime-isometric-integration-001-attempt-008",
+      "status": "passed-all-present-assets",
+      "remoteCommit": "0a6e36b40dada458e9f3c2af70d73f58477f494b",
+      "remoteTree": "90d89bc60d20bb2fe287e2e03320c371d71ddc29",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31161334873",
+      "artifactId": 8987205444,
+      "artifactSha256": "62bfb9f325aedb59180ccaef9d5483007ed6926c364860b4901dadf850314913",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-008/review.json",
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility",
+        "legal-mounted-placement-records",
+        "wall-and-ceiling-context",
+        "thirty-one-present-assets"
+      ],
+      "blockers": [],
+      "acceptedAssetIds": [
+        "banquette",
+        "booth",
+        "dish-machine",
+        "espresso",
+        "furniture-banquette-section",
+        "furniture-commercial-chair",
+        "furniture-convection-oven",
+        "furniture-dry-storage-rack",
+        "furniture-expo-pass-heated",
+        "furniture-host-stand-pro",
+        "furniture-oak-two-top",
+        "furniture-plancha-commercial",
+        "furniture-pos-terminal",
+        "furniture-premium-chair",
+        "furniture-prep-table-refrigerated",
+        "furniture-server-station-pro",
+        "furniture-six-burner-range",
+        "furniture-walkin-rack",
+        "furniture-walnut-four-top",
+        "host-stand",
+        "local-art",
+        "mop-sink",
+        "pass",
+        "pendants",
+        "plants",
+        "prep",
+        "range",
+        "recycling",
+        "service-station",
+        "table-four",
+        "table-two"
+      ],
+      "rejectedAssetIds": [],
+      "reviewPreservation": {
+        "commit": "ce1477eb4a47d06158d01190c53a4cf9633050c1",
+        "tree": "a917cc9e1394ec85658d7183acae59215226e756",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31181870397"
+      },
+      "productionComplete": false
+    },
+    {
+      "id": "runtime-isometric-integration-001-attempt-009",
+      "status": "passed-all-present-assets",
+      "remoteCommit": "d0d4f9111e23b488c8886bd773f75eb81c2dac38",
+      "remoteTree": "858d1f601b278e59ce34187fd68374ef9a076c88",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31184950416",
+      "artifactId": 8996352192,
+      "artifactSha256": "3b9f431c59473ccf9524de03454859928b7430601ef1c7c73c29ff11f353e072",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-009/review.json",
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility",
+        "legal-mounted-placement-records",
+        "wall-and-ceiling-context",
+        "thirty-four-present-assets"
+      ],
+      "blockers": [],
+      "acceptedAssetIds": [
+        "banquette",
+        "booth",
+        "dish-machine",
+        "espresso",
+        "furniture-banquette-section",
+        "furniture-chemical-cabinet",
+        "furniture-commercial-chair",
+        "furniture-convection-oven",
+        "furniture-dish-machine-high-temp",
+        "furniture-dry-storage-rack",
+        "furniture-expo-pass-heated",
+        "furniture-host-stand-pro",
+        "furniture-oak-two-top",
+        "furniture-plancha-commercial",
+        "furniture-pos-terminal",
+        "furniture-premium-chair",
+        "furniture-prep-table-refrigerated",
+        "furniture-server-station-pro",
+        "furniture-six-burner-range",
+        "furniture-three-comp-sink",
+        "furniture-walkin-rack",
+        "furniture-walnut-four-top",
+        "host-stand",
+        "local-art",
+        "mop-sink",
+        "pass",
+        "pendants",
+        "plants",
+        "prep",
+        "range",
+        "recycling",
+        "service-station",
+        "table-four",
+        "table-two"
+      ],
+      "rejectedAssetIds": [],
+      "reviewPreservation": {
+        "commit": "822a53c1e9b4ae3bc6cb2b11e55c0aa6afcd2dbe",
+        "tree": "c202d06b36cc543d4ec64ebac905665269440329",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31232119268"
+      },
+      "productionComplete": false
+    },
+    {
+      "id": "runtime-isometric-integration-001-attempt-010",
+      "status": "passed-all-present-assets",
+      "remoteCommit": "dd542537e372b7d726a375e48540c7ca066caaf4",
+      "remoteTree": "51db0b01d7719e0d4474afeb4f5bc0484cbccc84",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31233762203",
+      "artifactId": 9014716339,
+      "artifactSha256": "6ac765908a7871ee29e06f4407ef7e2b74ffcdbccace6e0ab5ac634e8774e310",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-010/review.json",
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility",
+        "legal-mounted-placement-records",
+        "wall-and-ceiling-context",
+        "thirty-seven-present-assets"
+      ],
+      "blockers": [],
+      "acceptedAssetIds": [
+        "banquette",
+        "booth",
+        "dish-machine",
+        "espresso",
+        "furniture-banquette-section",
+        "furniture-chemical-cabinet",
+        "furniture-commercial-chair",
+        "furniture-convection-oven",
+        "furniture-dish-machine-high-temp",
+        "furniture-dry-storage-rack",
+        "furniture-expo-pass-heated",
+        "furniture-host-stand-pro",
+        "furniture-linen-storage",
+        "furniture-oak-two-top",
+        "furniture-plancha-commercial",
+        "furniture-pos-terminal",
+        "furniture-premium-chair",
+        "furniture-prep-table-refrigerated",
+        "furniture-server-station-pro",
+        "furniture-six-burner-range",
+        "furniture-three-comp-sink",
+        "furniture-walkin-rack",
+        "furniture-walnut-four-top",
+        "furniture-water-station",
+        "furniture-wet-floor-station",
+        "host-stand",
+        "local-art",
+        "mop-sink",
+        "pass",
+        "pendants",
+        "plants",
+        "prep",
+        "range",
+        "recycling",
+        "service-station",
+        "table-four",
+        "table-two"
+      ],
+      "rejectedAssetIds": [],
+      "reviewPreservation": {
+        "commit": "1f5f585cd8565a3e97c4519c54d7e86f1ca44acb",
+        "tree": "c3f932f96eb4775716ba54cf96355862c6d3a94b",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31253942201"
+      },
+      "productionComplete": false
+    },
+    {
+      "id": "runtime-isometric-integration-001-attempt-011",
+      "status": "historical-native-pass-camera-verdict-retracted",
+      "remoteCommit": "a22e5055646184cef0d4d34ebb2a66cc5435c052",
+      "remoteTree": "1a42c3e55c04b03b4a0e14c0189395195f35d8d7",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31289514663",
+      "artifactId": 9030941364,
+      "artifactSha256": "41c3b80ed02da62ff97fcb9b781fb3bd7087fac96bd0800538817c096a371cb3",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-011/review.json",
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility"
+      ],
+      "blockers": [
+        "measured-camera-geometry-failed-audit-001"
+      ],
+      "acceptedAssetIds": [
+        "furniture-essential-cafe-two-top",
+        "furniture-manager-console",
+        "furniture-office-desk"
+      ],
+      "rejectedAssetIds": [],
+      "reviewPreservation": {
+        "commit": "70b1adc1f15c5ac04a711d01737786eb291f1794",
+        "tree": "4cbbf7d8a0d8ca1a110d70d56fb0d4b4d217f14c",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31290164561"
+      },
+      "cameraVerdictSupersededBy": "furniture-camera-geometry-audit-001",
+      "cameraProductionCreditRetracted": true,
+      "productionComplete": false
+    },
+    {
+      "id": "runtime-isometric-integration-001-attempt-012",
+      "status": "historical-native-pass-camera-verdict-retracted",
+      "remoteCommit": "4ed663373440bedffcc4812618eb413adeaf484e",
+      "remoteTree": "a1a257363562e05fa5526654930c0fbdda786375",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31316662076",
+      "artifactId": 9038954590,
+      "artifactSha256": "369ff4e10c48bb6efad31076c3819d3d8dc050c66eed8dd1080eba2bae9ca285",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-012/review.json",
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility"
+      ],
+      "blockers": [
+        "measured-camera-geometry-failed-audit-001"
+      ],
+      "acceptedAssetIds": [
+        "furniture-linen-storage",
+        "furniture-water-station",
+        "furniture-wet-floor-station"
+      ],
+      "rejectedAssetIds": [],
+      "reviewPreservation": {
+        "commit": "fee22ea72daa496b4a590ff45df2c8b9872e2de7",
+        "tree": "86058e2f2428abf575240c5ad73ce4280f8a4aff",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31317025179"
+      },
+      "cameraVerdictSupersededBy": "furniture-camera-geometry-audit-001",
+      "cameraProductionCreditRetracted": true,
+      "productionComplete": false
+    },
+    {
+      "id": "runtime-isometric-integration-001-attempt-013",
+      "status": "historical-native-pass-camera-verdict-retracted",
+      "remoteCommit": "124359a3ff083b3cf8b73dd5b387368819cf9639",
+      "remoteTree": "0121cb8c82814a03426824174f9bdcb126318083",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31348885720",
+      "artifactId": 9048282911,
+      "artifactSha256": "01f19b7bfaa17af2e65644f7c83675912f63d5ab0c0a2952290c67404eac8c75",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-013/review.json",
+      "passed": [
+        "native-four-rotation-capture",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility"
+      ],
+      "blockers": [
+        "measured-camera-geometry-failed-audit-001"
+      ],
+      "acceptedAssetIds": [
+        "furniture-chemical-cabinet",
+        "furniture-dish-machine-high-temp",
+        "furniture-three-comp-sink"
+      ],
+      "rejectedAssetIds": [],
+      "reviewPreservation": {
+        "commit": "8557c266c761d53c84148ab298ad0857e5c6596b",
+        "tree": "bd2832e475239b1108fbbfa13460370c53e7178a",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31349580572"
+      },
+      "cameraVerdictSupersededBy": "furniture-camera-geometry-audit-001",
+      "cameraProductionCreditRetracted": true,
+      "productionComplete": false
+    }
+  ],
+  "pendingBatches": [],
+  "batches": [
+    {
+      "id": "furniture-core-directional-013",
+      "assets": [
+        "furniture-office-desk",
+        "furniture-manager-console",
+        "furniture-essential-cafe-two-top"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "historical-native-gameplay-pass-camera-retracted-at-audit-001",
+      "cameraQa": "failed-measured-camera-geometry-audit-001",
+      "sourcePromptMode": "built-in image generation; twelve separately prompted intended-fixed-camera directional frames with two correction retries, official chroma-key removal, common-pivot normalization, and full/gameplay-scale contact review",
+      "remoteCommit": "a22e5055646184cef0d4d34ebb2a66cc5435c052",
+      "remoteTree": "1a42c3e55c04b03b4a0e14c0189395195f35d8d7",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31289514663",
+      "artifactId": 9030941364,
+      "artifactSha256": "41c3b80ed02da62ff97fcb9b781fb3bd7087fac96bd0800538817c096a371cb3",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-013/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-013/qa.json",
+      "notes": "Owner operations desk, live operations console, and Essential Cafe Two-Top remain source-accepted identity, alpha, pivot, and gameplay-legibility references with exact remote preservation. Measured camera audit 001 supersedes the former visual camera verdict: all three fail the exact -0.5/+0.5 ground-axis gate, receive no production credit, and require replacement directional sources plus a new measured/native review."
+    },
+    {
+      "id": "furniture-core-directional-012",
+      "assets": [
+        "furniture-wet-floor-station",
+        "furniture-linen-storage",
+        "furniture-water-station"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "historical-native-gameplay-pass-camera-retracted-at-audit-001",
+      "cameraQa": "failed-measured-camera-geometry-audit-001",
+      "sourcePromptMode": "built-in image generation; twelve separately prompted intended-fixed-camera directional frames, official chroma-key removal, common-pivot normalization, and full/gameplay-scale contact review",
+      "remoteCommit": "da9a828fc47c2b8c8e015cc2e4f648516985b577",
+      "remoteTree": "f1f329f726d35db4650c5f8958c3e32c564dc027",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31316662076",
+      "artifactId": 9038954590,
+      "artifactSha256": "369ff4e10c48bb6efad31076c3819d3d8dc050c66eed8dd1080eba2bae9ca285",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-012/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-012/qa.json",
+      "notes": "Spill response station, linen/reset cabinet, and filtered water station remain source-accepted identity, alpha, pivot, and gameplay-legibility references with exact remote preservation. Measured camera audit 001 supersedes the former visual camera verdict: all three fail the exact -0.5/+0.5 ground-axis gate, receive no production credit, and require replacement directional sources plus a new measured/native review."
+    },
+    {
+      "id": "furniture-core-directional-011",
+      "assets": [
+        "furniture-chemical-cabinet",
+        "furniture-dish-machine-high-temp",
+        "furniture-three-comp-sink"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "historical-native-gameplay-pass-camera-retracted-at-audit-001",
+      "cameraQa": "failed-measured-camera-geometry-audit-001",
+      "sourcePromptMode": "built-in image generation; twelve separately prompted intended-fixed-camera directional frames with five rejected correction attempts, official chroma-key removal, common-pivot normalization, and full/gameplay-scale contact review",
+      "remoteCommit": "124359a3ff083b3cf8b73dd5b387368819cf9639",
+      "remoteTree": "0121cb8c82814a03426824174f9bdcb126318083",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31348885720",
+      "artifactId": 9048282911,
+      "artifactSha256": "01f19b7bfaa17af2e65644f7c83675912f63d5ab0c0a2952290c67404eac8c75",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-011/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-011/qa.json",
+      "notes": "Locked chemical cabinet, high-temperature dish machine, and three-compartment sink remain source-accepted identity, alpha, pivot, and gameplay-legibility references with exact remote preservation. Measured camera audit 001 supersedes the former visual camera verdict: all three fail the exact -0.5/+0.5 ground-axis gate, receive no production credit, and require replacement directional sources plus a new measured/native review."
+    },
+    {
+      "id": "furniture-core-directional-010",
+      "assets": [
+        "furniture-prep-table-refrigerated",
+        "furniture-walkin-rack",
+        "furniture-dry-storage-rack"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-008",
+      "sourcePromptMode": "built-in image generation; three separately prompted rigid elevated-isometric four-direction prep/storage atlases with two semantic corrections, strict chroma remediation, common-pivot normalization, and full/gameplay-scale contact review",
+      "remoteCommit": "0a6e36b40dada458e9f3c2af70d73f58477f494b",
+      "remoteTree": "90d89bc60d20bb2fe287e2e03320c371d71ddc29",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31161334873",
+      "artifactId": 8987205444,
+      "artifactSha256": "62bfb9f325aedb59180ccaef9d5483007ed6926c364860b4901dadf850314913",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-010/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-010/qa.json",
+      "notes": "Refrigerated prep table, walk-in storage rack, and dry-storage rack are source-accepted, remotely preserved, visually accepted in native four-rotation gameplay review attempt 008, and backed by an exact remote review-evidence checkpoint with green hosted CI."
+    },
+    {
+      "id": "furniture-core-directional-009",
+      "assets": [
+        "furniture-expo-pass-heated",
+        "furniture-plancha-commercial",
+        "furniture-convection-oven"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-007",
+      "sourcePromptMode": "built-in image generation; three separately prompted rigid elevated-isometric four-direction kitchen equipment atlases with rejected attempts quarantined, chroma removal, common-pivot normalization, and full/gameplay-scale contact review",
+      "remoteCommit": "447a203e8f6d2dc1f014a49c3dc1f0b57b442e11",
+      "remoteTree": "262ecc0c84e6a79dc1194d38de6cd8aa0dcd3a3f",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31015657101",
+      "artifactId": 8934364142,
+      "artifactSha256": "529ae6a0791f38c0fb9d9ba1522eb4c1a3044e19c81dcdf2d453ab202da8d7ce",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-009/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-009/qa.json",
+      "notes": "Heated expo pass, commercial plancha, and convection oven are source-accepted, remotely preserved, and accepted with every other present directional identity in exact native four-rotation gameplay review attempt 007; that review evidence is also remotely preserved with green Windows and Ubuntu CI."
+    },
+    {
+      "id": "furniture-core-directional-008",
+      "assets": [
+        "furniture-host-stand-pro",
+        "furniture-server-station-pro",
+        "furniture-pos-terminal"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-004",
+      "sourcePromptMode": "built-in image generation; one separately prompted 2x2 rigid elevated-isometric rotation atlas per identity, with one targeted host-stand correction, chroma removal, common-pivot normalization, and full/gameplay-scale contact review",
+      "remoteCommit": "9749406830ce8fa0139ff479c98a67d5d38c6882",
+      "remoteTree": "4c0becd361bc5c6fa722caa3252f7588e512f898",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31009371429",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-008/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-008/qa.json",
+      "notes": "Reservation host stand, integrated server station, and commercial POS terminal are source-accepted, remotely preserved, and accepted in exact native four-rotation gameplay review attempt 004; that review evidence is also remotely preserved with green Windows and Ubuntu CI."
+    },
+    {
+      "id": "furniture-pilot-001",
+      "assets": [
+        "furniture-six-burner-range"
+      ],
+      "files": 4,
+      "qa": "passed",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-002",
+      "sourcePromptMode": "built-in image generation; one combined 2x2 sheet",
+      "remoteCommit": "1977c47e13190e639ec5f12b8bfec2cb5a44c540",
+      "remoteTree": "ead4914a85cb1bde218300f85c2a196acf51a47f",
+      "qaEvidence": "planning/art-qa/furniture-pilot-001.png"
+    },
+    {
+      "id": "character-foundation-001",
+      "assets": [
+        "body-base-a-idle-isometric"
+      ],
+      "files": 8,
+      "qa": "passed",
+      "runtimeQa": "blocked-anchor-and-chroma-normalization",
+      "sourcePromptMode": "built-in image generation; one combined 4x2 elevated eight-direction atlas",
+      "remoteCommit": "8f450ae29adc0005a81359466c36c5b24465589a",
+      "remoteTree": "81a48b83d643db5abe8f3e4b8ef5a5e45b242e9c",
+      "qaEvidence": "planning/art-qa/character-foundation-001.png",
+      "notes": "Accepted as an elevated source foundation, not a complete animated runtime body. Feet/origin normalization and every required animation remain open."
+    },
+    {
+      "id": "character-foundation-002",
+      "assets": [
+        "body-base-b-idle-isometric"
+      ],
+      "files": 8,
+      "qa": "passed",
+      "runtimeQa": "blocked-anchor-and-chroma-normalization",
+      "sourcePromptMode": "built-in image generation; one combined 4x2 elevated eight-direction atlas",
+      "remoteCommit": "027c5c5a7b9e966e5a9de07f832d40a83cfae516",
+      "remoteTree": "d2a78376f22e3bcae200e1ec707884e3d5c2bf0e",
+      "qaEvidence": "planning/art-qa/character-foundation-002.png",
+      "notes": "Accepted as an elevated source foundation, not a complete animated runtime body. Feet/origin normalization and every required animation remain open."
+    },
+    {
+      "id": "character-modular-classic-001",
+      "assets": [
+        "body-skin-masks-base-a",
+        "body-skin-masks-base-b",
+        "outfit-classic-base-a",
+        "outfit-classic-base-b"
+      ],
+      "files": 80,
+      "qa": "mixed",
+      "runtimeQa": "failed-needs-remediation",
+      "assetReviews": {
+        "body-skin-masks-base-a": "passed-source-foundation",
+        "body-skin-masks-base-b": "passed-source-foundation",
+        "outfit-classic-base-a": "failed-silhouette-leakage",
+        "outfit-classic-base-b": "failed-silhouette-leakage"
+      },
+      "sourcePromptMode": "built-in image generation; identity-preserving 4x2 edits with local chroma removal, direction correction, body-anchor fitting, and red/blue tint extraction",
+      "remoteCommit": "d99c458cadf3534299bada040d235d07980ed477",
+      "remoteTree": "28a0d13faf87a59a2684ec4727dfe849809b07e8",
+      "qaEvidence": "planning/art-qa/character-modular-classic-001.png",
+      "notes": "Preserved as a pose-locked prototype outfit family. It does not satisfy the final independently swappable shirt/pants/apron slot matrix or animated-frame contract until composite QA and skin-protection gates pass."
+    },
+    {
+      "id": "character-modular-apron-001",
+      "assets": [
+        "outfit-apron-base-a",
+        "outfit-apron-base-b"
+      ],
+      "files": 48,
+      "qa": "failed",
+      "runtimeQa": "failed-needs-remediation",
+      "assetReviews": {
+        "outfit-apron-base-a": "failed-silhouette-and-foot-leakage",
+        "outfit-apron-base-b": "failed-silhouette-and-foot-leakage"
+      },
+      "sourcePromptMode": "built-in image generation; identity-preserving 4x2 edits with local chroma removal, body-anchor fitting, and red/blue tint extraction",
+      "remoteCommit": "f01c1e1f9b73e9dfe30c18d38f0bfc3c7979e2a8",
+      "remoteTree": "ec7814a6bde1517746831dab8d43e6d61ed2b70c",
+      "qaEvidence": "planning/art-qa/character-modular-apron-001.png",
+      "notes": "Preserved as a pose-locked prototype outfit family. It does not satisfy the final independently swappable shirt/pants/apron slot matrix or animated-frame contract until composite QA and skin-protection gates pass."
+    },
+    {
+      "id": "equipment-icons-shared-manager-001",
+      "assets": [
+        "economy-nonslip-shoes",
+        "compression-service-shoes",
+        "magnetic-pocket-flashlight",
+        "manager-service-clipboard",
+        "manager-radio-headset",
+        "manager-floor-plan-folio",
+        "manager-recovery-cards",
+        "manager-morale-candy-tin"
+      ],
+      "files": 19,
+      "qa": "passed",
+      "runtimeQa": "passed-full-and-gameplay-scale",
+      "sourcePromptMode": "built-in image generation; eight bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
+      "remoteCommit": "c2158fc261b1ebff9fb5cf2cbff932254593a914",
+      "remoteTree": "e533bccc199ea14378258d58da49d31d43be18a9",
+      "qaEvidence": "planning/art-qa/equipment-icons-shared-manager-001/contact-128-dark.png",
+      "qaManifest": "planning/art-qa/equipment-icons-shared-manager-001/qa.json",
+      "notes": "Eight distinct icons passed full-size and 66px review, exact catalog mapping, unique-content hashing, sRGBA/alpha validation, and a minimum six-pixel transparent margin. High-resolution accepted sources are preserved in the same remote checkpoint."
+    },
+    {
+      "id": "furniture-core-directional-001",
+      "assets": [
+        "table-two",
+        "table-four",
+        "host-stand"
+      ],
+      "files": 20,
+      "qa": "passed",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-002",
+      "sourcePromptMode": "built-in image generation; identity-referenced rigid four-direction elevated isometric sets with chroma removal and common-pivot normalization",
+      "remoteCommit": "9daba41c16eb4803f90a9792535129ddb4844b7c",
+      "remoteTree": "9127f0d6644894f6e87714cc51c33f1b08281504",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-001/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-001/qa.json",
+      "notes": "The source package is remotely preserved with green CI. Native attempt 002 first accepted table-two, table-four, and host-stand in four-rotation gameplay composites; durable attempt 007 retained all three without regression."
+    },
+    {
+      "id": "equipment-icons-owner-server-002",
+      "assets": [
+        "manager-incident-seal-kit",
+        "owner-leather-ledger",
+        "owner-operations-tablet",
+        "owner-lease-calculator",
+        "owner-tasting-notebook",
+        "owner-networking-cards",
+        "owner-market-scout-pass",
+        "server-click-pen"
+      ],
+      "files": 19,
+      "qa": "passed",
+      "runtimeQa": "passed-full-and-gameplay-scale",
+      "sourcePromptMode": "built-in image generation; eight bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
+      "remoteCommit": "0eec73ba38ba302728893459f39421580e82c78f",
+      "remoteTree": "217a1407d5f573286531c36abd6ef03fedfbf769",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30971460656",
+      "qaEvidence": "planning/art-qa/equipment-icons-owner-server-002/contact-128-dark.png",
+      "qaManifest": "planning/art-qa/equipment-icons-owner-server-002/qa.json",
+      "notes": "Eight distinct manager, owner, and server icons passed full-size and 66px review, exact catalog mapping, unique-content and cross-batch hashing, sRGBA/alpha validation, and a minimum six-pixel transparent margin. High-resolution accepted sources are preserved in the same remote checkpoint."
+    },
+    {
+      "id": "character-remediation-idle-classic-v1",
+      "assets": [
+        "body-base-a-idle-isometric",
+        "body-base-b-idle-isometric",
+        "body-skin-masks-base-a",
+        "body-skin-masks-base-b",
+        "outfit-classic-base-a",
+        "outfit-classic-base-b"
+      ],
+      "files": 109,
+      "qa": "passed",
+      "runtimeQa": "blocked-static-idle-and-no-runtime-compositor",
+      "sourcePromptMode": "pose-locked built-in image edits plus deterministic alpha extraction, pivot normalization, tint-mask reconstruction, and byte-reproducible processing",
+      "remoteCommit": "7b2caaf6843e2d1b895870a80103eff57227d15e",
+      "remoteTree": "3892dcc335490ff767d8e17d39a4b5b8b9236a6a",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30973906887",
+      "qaEvidence": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png",
+      "qaManifest": "planning/art-qa/character-remediation-idle-classic-v1/qa.json",
+      "notes": "Two elevated body presentations, normalized skin foundations, and two classic idle outfit body-fits pass exact raster hashes, byte reproduction, a common (192,472) pivot, zero leakage/occlusion gates, and full/gameplay composite review. Static idle art, combined classic clothing, and absent Godot character compositing/animation keep production completion at zero."
+    },
+    {
+      "id": "equipment-icons-server-dish-003",
+      "assets": [
+        "server-waterproof-order-pad",
+        "server-waiters-corkscrew",
+        "server-cork-tray",
+        "server-palate-mints",
+        "server-stain-rescue-pen",
+        "dish-high-pressure-nozzle",
+        "dish-silicone-rack-hook",
+        "dish-digital-test-reader"
+      ],
+      "files": 20,
+      "qa": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
+      "sourcePromptMode": "built-in image generation; eight bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
+      "remoteCommit": "f3408b8f5896f19a7f0a6ffb93843ea818af5ede",
+      "remoteTree": "5a12a7d1bc622ca2e45c8c3e99b3b6449e5a8b75",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30975812146",
+      "qaEvidence": "planning/art-qa/equipment-icons-server-dish-003/contact-128-dark.png",
+      "qaManifest": "planning/art-qa/equipment-icons-server-dish-003/qa.json",
+      "notes": "Eight distinct server and dish icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-24 cross-batch comparison gates. Their exact 20-file package is remotely verified with green Windows and Ubuntu CI."
+    },
+    {
+      "id": "equipment-icons-dish-chef-004",
+      "assets": [
+        "dish-steam-gauntlets",
+        "dish-enzymatic-detergent",
+        "dish-deliming-pouch",
+        "chef-forged-knife",
+        "chef-folding-thermometer",
+        "chef-plating-tweezers",
+        "chef-tasting-spoon-wallet",
+        "chef-diamond-sharpening-strip"
+      ],
+      "files": 20,
+      "qa": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
+      "sourcePromptMode": "built-in image generation; eight bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
+      "remoteCommit": "961fc31230a900ccc7c028a3ae312809b2960b93",
+      "remoteTree": "d2887339e7fc63c52d4549a1e6c6f8b8dfea41e6",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30976714776",
+      "qaEvidence": "planning/art-qa/equipment-icons-dish-chef-004/contact-128-dark.png",
+      "qaManifest": "planning/art-qa/equipment-icons-dish-chef-004/qa.json",
+      "notes": "Eight distinct dish and chef icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-32 cross-batch comparison gates. Their exact 20-file package is remotely verified with green Windows and Ubuntu CI."
+    },
+    {
+      "id": "equipment-icons-chef-cook-host-005",
+      "assets": [
+        "chef-palate-rinse",
+        "cook-fish-turner",
+        "cook-four-channel-timer",
+        "cook-bottle-holster",
+        "cook-chainmail-cut-glove",
+        "cook-pan-seasoning-wipe",
+        "cook-burn-gel-sachet",
+        "host-reservation-book"
+      ],
+      "files": 20,
+      "qa": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
+      "sourcePromptMode": "built-in image generation; eight bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
+      "remoteCommit": "e15aa0031a8477be68b022f5fcfbd6d30309fe9e",
+      "remoteTree": "27350dbb6138e1e75d1fa56219a2509e3bf72924",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30977634704",
+      "qaEvidence": "planning/art-qa/equipment-icons-chef-cook-host-005/contact-128-dark.png",
+      "qaManifest": "planning/art-qa/equipment-icons-chef-cook-host-005/qa.json",
+      "notes": "Eight distinct chef, cook, and host icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-40 cross-batch comparison gates. Their exact 20-file package is remotely verified with green Windows and Ubuntu CI."
+    },
+    {
+      "id": "equipment-icons-host-006",
+      "assets": [
+        "host-seating-tablet",
+        "host-brass-crumb-scraper",
+        "host-bus-tub-harness",
+        "host-sanitizer-caddy-refill",
+        "host-guest-activity-pack"
+      ],
+      "files": 14,
+      "qa": "passed",
+      "runtimeQa": "passed-full-gameplay-and-cross-batch-scale",
+      "sourcePromptMode": "built-in image generation; five bespoke isolated item generations with chroma removal, alpha cleanup, and centered 128x128 runtime processing",
+      "remoteCommit": "dd8c05995b39649132ff5ce8fad29a432f15cebc",
+      "remoteTree": "7231193527236af6538c1d9fcd6e1d11184bdb7b",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30979027528",
+      "qaEvidence": "planning/art-qa/equipment-icons-host-006/contact-128-dark.png",
+      "qaManifest": "planning/art-qa/equipment-icons-host-006/qa.json",
+      "notes": "The final five host icons pass full-size, 66px, semantic, exact-catalog, alpha, margin, unique-content, and all-45 cross-batch comparison gates. Their exact 14-file package is remotely verified with green Windows and Ubuntu CI."
+    },
+    {
+      "id": "furniture-core-directional-002",
+      "assets": [
+        "booth",
+        "banquette",
+        "service-station"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-002",
+      "sourcePromptMode": "built-in image generation; identity-locked elevated four-direction sets with chroma removal, common-pivot normalization, rigid-count review, and full/gameplay-scale contact sheets",
+      "remoteCommit": "daef2aa572f0f855ac95d92402b9af19cc76bc9f",
+      "remoteTree": "36fbf6d8740e2f07f29527ff6e506cf541684b51",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30980689257",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-002/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-002/qa.json",
+      "notes": "The source package is remotely preserved with green Windows and Ubuntu CI. Native attempt 002 first accepted booth, banquette, and service-station in four-rotation gameplay composites; durable attempt 007 retained all three without regression."
+    },
+    {
+      "id": "furniture-core-directional-003",
+      "assets": [
+        "range",
+        "prep",
+        "pass"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-002",
+      "sourcePromptMode": "built-in image generation; three separately prompted rigid 2x2 elevated-direction atlases with chroma removal, common-pivot normalization, exact feature-count review, and full/gameplay-scale contact sheets",
+      "remoteCommit": "998a2e5bf5914debaa1a997de1fc19a275f0ff69",
+      "remoteTree": "c95cdd7d0825bdbf6769a10a329aa5dc08ce8457",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30982693857",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-003/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-003/qa.json",
+      "notes": "The source package is remotely preserved with green Windows and Ubuntu CI. Native attempt 002 first accepted range, prep, and pass in four-rotation gameplay composites; durable attempt 007 retained all three without regression."
+    },
+    {
+      "id": "furniture-core-directional-004",
+      "assets": [
+        "espresso",
+        "dish-machine",
+        "mop-sink"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-002",
+      "sourcePromptMode": "built-in image generation; three separately prompted identity-locked elevated four-direction atlases with chroma removal, common-pivot normalization, exact feature-count review, and full/gameplay-scale contact sheets",
+      "remoteCommit": "708642ffce26407b44daa47d4029e434e6166368",
+      "remoteTree": "9ee2f7817c4e9f11aae59bcf2ae469a6e126d4d4",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30985234904",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-004/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-004/qa.json",
+      "notes": "The source package is remotely preserved with green Windows and Ubuntu CI. Native attempt 002 first accepted espresso, dish-machine, and mop-sink in four-rotation gameplay composites; durable attempt 007 retained all three without regression."
+    },
+    {
+      "id": "furniture-core-directional-005",
+      "assets": [
+        "recycling",
+        "pendants",
+        "plants"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-007",
+      "sourcePromptMode": "built-in image generation; identity-locked elevated four-direction atlases with targeted retries, chroma removal, common-pivot normalization, exact feature-count review, and full/gameplay-scale contact sheets",
+      "remoteCommit": "565869f5c09529d5da7dc30c0a31c042669c5291",
+      "remoteTree": "5bdfdc178b6ebf5ce9f7719f63a417391f4b9ef6",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30996475549",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-005/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-005/qa.json",
+      "notes": "The source package is remotely preserved with green Windows and Ubuntu CI. Native attempt 002 first accepted recycling in four-rotation gameplay composites; durable attempt 007 passed pendants and plants on legal mounts with visible room context and retained recycling without regression."
+    },
+    {
+      "id": "furniture-core-directional-006",
+      "assets": [
+        "local-art",
+        "furniture-oak-two-top",
+        "furniture-walnut-four-top"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-007",
+      "sourcePromptMode": "built-in image generation; three identity-locked elevated four-direction atlases with targeted camera/count corrections, chroma removal, common-pivot normalization, exact identity review, and full/gameplay-scale contact sheets",
+      "remoteCommit": "185ca509f0d52aa3421686880ed94187ae77b35e",
+      "remoteTree": "ef75c179d6c16b0159baa7d675fa870699721bd0",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/30998050059",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-006/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-006/qa.json",
+      "notes": "The source package is remotely preserved with green Windows and Ubuntu CI. Native attempt 002 first accepted furniture-oak-two-top and furniture-walnut-four-top in four-rotation gameplay composites; durable attempt 007 passed local-art on a legal wall mount with visible room context and retained both floor assets without regression."
+    },
+    {
+      "id": "furniture-core-directional-007",
+      "assets": [
+        "furniture-banquette-section",
+        "furniture-commercial-chair",
+        "furniture-premium-chair"
+      ],
+      "files": 28,
+      "qa": "passed",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-003",
+      "sourcePromptMode": "built-in image generation; identity-referenced rigid four-direction elevated isometric sets with chroma removal and common-pivot normalization",
+      "remoteCommit": "98e479eaa5afed6c95e0abe1026dfcf8e09e062a",
+      "remoteTree": "bcfcb076d26c1d3b8a973dbe601c6a921563348b",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31004267533",
+      "qaEvidence": "planning/art-qa/furniture-core-directional-007/contact-627-dark.png",
+      "qaManifest": "planning/art-qa/furniture-core-directional-007/qa.json",
+      "notes": "Banquette section, commercial chair, and premium chair pass exact raster hashes, catalog identity, unique-content, alpha, common-pivot, full-resolution, 128px, and native four-rotation gameplay-composite review. Their exact 28-file source package and the attempt-003 review package are remotely verified with exact GitHub trees and green Windows and Ubuntu CI."
+    }
+  ],
+  "preservedButNotProductionComplete": [
+    {
+      "id": "alpha2-overhead-furniture",
+      "files": 20,
+      "path": "apps/client-godot/assets/objects/generated",
+      "reason": "High-quality identity/material references, but single-view direct-overhead camera does not meet the elevated four-direction runtime contract."
+    }
+  ],
+  "quarantinedWork": [
+    {
+      "id": "alpha3-deterministic-placeholder-pass",
+      "localCommit": "5714bb8",
+      "status": "local-only-rejected",
+      "reason": "Catalog-complete deterministic Pillow stand-ins and metadata-only animation reuse; useful only as scope/provenance evidence and never counted as accepted production art."
+    }
+  ]
+}

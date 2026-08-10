@@ -610,7 +610,7 @@ The V1 alpha begins players with $35,000 personal cash. Opening costs $10,000 an
 
 ### 13.2 Build grid
 
-The launch build surface is a 24×16 collision-checked grid with add-on expansion to 64×64. Floor cells, room tags, wall edges, doors/arches, and object instances are persisted separately. The alpha-2 registry contains 229 stable furniture definitions: 16 core, 210 generated production-catalog, and three seasonal. Items declare width, height, four-way rotation, cost, tier, upkeep, repair cost, durability, wear per shift, breakage horizon, utilities, style, pack, tags, stat effects, role effects, and a one-to-one asset ID.
+The launch build surface is a 24×16 collision-checked grid with add-on expansion to 64×64. Floor cells, room tags, physical wall segments, doors/arches, and object instances are persisted separately. Opposite cell-side descriptions of a shared wall resolve to one canonical segment authority. Width and height expansion relocate the existing east/south perimeter, its openings, and supported wall-mounted objects before adding closed new perimeter runs; the atomic change survives restart and audited undo/redo without leaving an internal shell. The alpha-2 registry contains 229 stable furniture definitions: 16 core, 210 generated production-catalog, and three seasonal. Items declare width, height, four-way rotation, cost, tier, upkeep, repair cost, durability, wear per shift, breakage horizon, utilities, style, pack, tags, stat effects, role effects, and a one-to-one asset ID.
 
 Launch item stats include:
 
@@ -852,7 +852,7 @@ The selected direction is an inviting adult management sim presented through tac
 - walnut, tile, steel, plaster, and scale-model material cues;
 - condensed editorial display type with compact humanist body text.
 
-Furniture artwork uses individual transparent, direct-overhead raster sprites so rotation, collision footprint and simulation identity stay aligned. The alpha-2 measured baseline is 20/229: all 16 core objects plus four production-catalog objects. The remaining 209 furniture sprites and 45 bespoke role-item icons are an explicit production queue in `planning/art-production.json`, with stable outputs and per-item prompt briefs. The validator reports coverage and forbids baked restaurant/world backgrounds; generated art does not silently turn a missing modular asset into a complete scene.
+Furniture artwork uses individual transparent north/east/south/west sprites under one elevated orthographic-isometric camera. Every view is a true rigid quarter-turn of the same object, with a common floor pivot, gameplay-scale readability, and front/rear construction preserved; rotation, collision footprint, depth ordering, and simulation identity remain aligned. Preserved direct-overhead furniture files are identity/material references only and cannot substitute for directional runtime art. The generated [production art ledger](ART_PROGRESS.md) is the single authority for live coverage and requires visual acceptance, runtime binding, remote preservation, and green CI before completion.
 
 ### 20.2 Strategic versus ground views
 
@@ -949,7 +949,7 @@ Important balance measures:
 - seven base classes, exactly 28 nodes each (196 total), 89 continuous-work activities, four work lanes, and 12 reusable minigame grammars;
 - targeted local-rival guest influence with five paid requests, manual live-task/dimension/intensity selection, telegraphing, caps, counterplay and positive staff upside rather than invisible sabotage;
 - restaurant founding, treasury, 24×16 modular layouts, floor painting, room tags, snapped walls/openings, four-way object/art rotation, drag/move, collision, resale, repair and footprint expansion;
-- 229 furniture definitions with non-linear tradeoffs, live ratings/happiness/work/economic effects, upkeep, wear and breakage; 20 measured production sprites with all 16 core objects covered;
+- 229 furniture definitions with non-linear tradeoffs, live ratings/happiness/work/economic effects, upkeep, wear and breakage; production-art completion is tracked only in the generated [production art ledger](ART_PROGRESS.md);
 - 45 persistent purchasable role tools/consumables, four-slot loadouts, stable icons and native shop/inventory UI;
 - seasonal pack loading, role inheritance hooks, content hashing, forward-compatible stable IDs, and static validation;
 - zero-error/zero-warning GDScript analysis, a Godot 4.4.1 Linux import/main-scene launch plus Windows export, strict TypeScript/content checks, explicit art coverage and 29 integration tests;

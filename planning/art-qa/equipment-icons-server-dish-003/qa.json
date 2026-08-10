@@ -1,0 +1,252 @@
+{
+  "schemaVersion": 1,
+  "batchId": "equipment-icons-server-dish-003",
+  "catalogSequences": [
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24
+  ],
+  "status": "accepted",
+  "repositoryPromotion": "remote-verified",
+  "remotePreservation": {
+    "commit": "f3408b8f5896f19a7f0a6ffb93843ea818af5ede",
+    "tree": "5a12a7d1bc622ca2e45c8c3e99b3b6449e5a8b75",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30975812146"
+  },
+  "source": {
+    "generator": "OpenAI built-in image generation",
+    "useCase": "stylized-concept",
+    "styleReference": "planning/art-qa/equipment-icons-owner-server-002/contact-128-dark.png",
+    "sharedPromptContract": "One bespoke Rush & Revenue Online game inventory icon matching the painterly semi-realistic isolated-object rendering, elevated three-quarter view, tactile professional materials, restrained highlights, clean silhouette, and visual weight of the accepted style reference. Center the complete subject on a perfectly flat solid #FF00FF chroma-key background with generous padding and readability at 64px. No gradient, texture, floor plane, cast/contact shadow, reflection, magenta subject material, text, letters, numbers, pseudo-text, brands, logos, watermark, people, hands, border, frame, room, unrelated props, or procedural emblem.",
+    "matteProcess": "remove_chroma_key.py --auto-key border --soft-matte --transparent-threshold 12 --opaque-threshold 220 --despill",
+    "runtimeResize": "trim transparent bounds, scale proportionally to at most 116x116, center on a 128x128 transparent canvas",
+    "notes": "The preserved high-resolution files are post-chroma alpha sources. Runtime assets are the 128x128 PNGs under apps/client-godot/assets/items; dark, light, and all-24 comparison sheets are retained as visual QA evidence.",
+    "preservedHighResolutionSource": "planning/art-qa/equipment-icons-server-dish-003/alpha-source"
+  },
+  "gates": {
+    "dimensions": "128x128",
+    "colorMode": "sRGBA",
+    "minimumTransparentMarginPixels": 6,
+    "actualMinimumTransparentMarginPixels": 6,
+    "allCornersTransparent": true,
+    "uniqueRuntimeContentHashes": true,
+    "noCollisionWithPreviouslyAcceptedItemHashes": true,
+    "previouslyAcceptedRepositoryRuntimeIconCount": 16,
+    "visualComparisonAcrossAll24AcceptedIcons": "pass",
+    "noLettersNumbersPseudoTextBrandsOrWatermarks": true,
+    "visualReviewAtFullScale": "pass",
+    "visualReviewAtGameplayScale66px": "pass",
+    "duplicateOrAmbiguousSilhouettes": "none",
+    "chromaFringeOnDarkAndLightBackgrounds": "none visible"
+  },
+  "contactSheets": [
+    {
+      "path": "planning/art-qa/equipment-icons-server-dish-003/contact-128-dark.png",
+      "purpose": "128px runtime icons on a dark background",
+      "sha256": "a903a0530115bdc3ed77a1389003c37f90a6f90c1f70241a19d2412135fbf14e"
+    },
+    {
+      "path": "planning/art-qa/equipment-icons-server-dish-003/contact-66-light.png",
+      "purpose": "66px gameplay-scale icons on a light background",
+      "sha256": "12964d583a9f5215fe330cb3251bd601a7d222d64ddb144cd3704845773747ac"
+    },
+    {
+      "path": "planning/art-qa/equipment-icons-server-dish-003/comparison-all-24-66-dark.png",
+      "purpose": "Gameplay-scale semantic and silhouette comparison of accepted sequences 1-24",
+      "sha256": "fd9782ae62ea577b3980f5f11f3fc5f3dcc0ef4ad2c4b3318f5ba6080e24b9cb"
+    }
+  ],
+  "items": [
+    {
+      "sequence": 17,
+      "catalogId": "server-waterproof-order-pad",
+      "iconId": "role-equipment.server.waterproof-order-pad",
+      "name": "Waterproof Order Pad",
+      "kind": "equipment",
+      "subjectPrompt": "One compact narrow top-bound order pad made from reusable slate-blue synthetic paper, partially open, with a rubberized spine, rounded waterproof corners, water beads, and a visible sheet using only a six-seat table diagram, three colored course blocks, and one amber allergy-warning triangle; no text-like marks.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-server-waterproof-order-pad.png",
+      "runtimeSha256": "b30e478815b774e489256d06d5ff2e04cba119b8d21cb9b3dcecfac0ae199338",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-server-dish-003/alpha-source/role-equipment-server-waterproof-order-pad.png",
+      "alphaSourceSha256": "b702186fd5859cd164ba3ab8a60bd86ee348f9c183ecc60f70d826a3dad4b481",
+      "rawChromaSourceSha256": "1f6d9d40ea228a0f4adfb46eae8671d649f1e1b255a8de9f5b1f6371e6aa7046",
+      "opaqueBounds": "93x116+17+6",
+      "transparentMargins": {
+        "left": 17,
+        "right": 18,
+        "top": 6,
+        "bottom": 6
+      },
+      "semanticVerdict": "pass: water-beaded top-bound pad and pictorial seating/course/allergy layout read as a reusable order tool without any writing",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 18,
+      "catalogId": "server-waiters-corkscrew",
+      "iconId": "role-equipment.server.double-hinge-corkscrew",
+      "name": "Double-Hinge Waiter's Corkscrew",
+      "kind": "equipment",
+      "subjectPrompt": "One compact professional waiter's corkscrew fully opened into a clear zig-zag silhouette, with a worn burgundy hardwood handle, polished stainless double-step hinge and bottle-rest lever, centered black helical worm, and folded-in foil knife; no bottle or cork.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-server-double-hinge-corkscrew.png",
+      "runtimeSha256": "0a55e0705d726c7193644684f870080aaba4544b91cc26e6c702e22bb4853ed5",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-server-dish-003/alpha-source/role-equipment-server-double-hinge-corkscrew.png",
+      "alphaSourceSha256": "93d69eb0c7088b0af62835417c13d9c73806f0e5ec51dc20f0e08c2670d4ef66",
+      "rawChromaSourceSha256": "a7a4e4ca754fce40b39936c8d1f04ad73e3c0bd14ade6199d97747cfb2464fb1",
+      "opaqueBounds": "111x116+8+6",
+      "transparentMargins": {
+        "left": 8,
+        "right": 9,
+        "top": 6,
+        "bottom": 6
+      },
+      "semanticVerdict": "pass: hardwood handle, worm, and two-stage lever geometry remain unmistakable as a waiter's corkscrew at 66px",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 19,
+      "catalogId": "server-cork-tray",
+      "iconId": "role-equipment.server.high-grip-cork-tray",
+      "name": "High-Grip Cork Tray",
+      "kind": "equipment",
+      "subjectPrompt": "One compact empty round serving tray in a shallow elevated view, with a low matte-black resin rim, warm natural cork top inset with large honeycomb grip texture, two dark anti-slide arcs, and a visible ribbed rubber underside along the front profile.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-server-high-grip-cork-tray.png",
+      "runtimeSha256": "170a12efed157285234d2db2cbae04c11705a8562226cc8e1f36722410cd97a1",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-server-dish-003/alpha-source/role-equipment-server-high-grip-cork-tray.png",
+      "alphaSourceSha256": "bebfe4f673d517848e038a13637f786675a1e98ff81af1695d2401e96042edb3",
+      "rawChromaSourceSha256": "0fe4ada252acb0c75215674197b1ac1bd7d27ce42e975847f9cc815522e01cbe",
+      "opaqueBounds": "116x76+6+26",
+      "transparentMargins": {
+        "left": 6,
+        "right": 6,
+        "top": 26,
+        "bottom": 26
+      },
+      "semanticVerdict": "pass: cork inset, high rim, grip arcs and shallow side profile read as an empty high-control serving tray",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 20,
+      "catalogId": "server-palate-mints",
+      "iconId": "role-equipment.server.unscented-palate-mints",
+      "name": "Unscented Palate Mints",
+      "kind": "consumable",
+      "subjectPrompt": "One slim brushed-aluminum pocket slide case half open, revealing two neat rows of plain ivory beveled square mint tablets, with a cool pale-blue enamel lid and one tiny unlabeled recessed grip dot; restrained and distinct from the earlier round citrus candy tin.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-server-unscented-palate-mints.png",
+      "runtimeSha256": "6323f47afcff7ac1dd54a36005283ae9d7800a45306c79e37f5eb2f7d2035797",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-server-dish-003/alpha-source/role-equipment-server-unscented-palate-mints.png",
+      "alphaSourceSha256": "6f8b88252fede5ab99b94484e52237670aefdb0983647e6580c52a9b95d579ae",
+      "rawChromaSourceSha256": "cc3364563f728e328ece9704a5b3dd3c46a1ba70667b0c4348dbeecfb786d4d9",
+      "opaqueBounds": "116x76+6+26",
+      "transparentMargins": {
+        "left": 6,
+        "right": 6,
+        "top": 26,
+        "bottom": 26
+      },
+      "semanticVerdict": "pass: cool rectangular slide case and orderly ivory tablets are legible and cannot be confused with the colorful round candy tin",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 21,
+      "catalogId": "server-stain-rescue-pen",
+      "iconId": "role-equipment.server.tablecloth-rescue-pen",
+      "name": "Tablecloth Rescue Pen",
+      "kind": "consumable",
+      "subjectPrompt": "One short chunky precision stain-cleaner applicator with a matte ivory squeeze barrel, pale-aqua fluid window, burnt-orange collar, broad white felt chisel nib, and ribbed dark-teal twist base; clearly a cleaner, not the long navy weighted writing pen.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-server-tablecloth-rescue-pen.png",
+      "runtimeSha256": "f6b75ea619c8f7cdd3844ff308b54a3dcfd5148c663021f3fa7c0b4ce79bcd0a",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-server-dish-003/alpha-source/role-equipment-server-tablecloth-rescue-pen.png",
+      "alphaSourceSha256": "c5fa45b874e7fc67d18742a64cb59cc5edee05a376429004376abcb075e860db",
+      "rawChromaSourceSha256": "1c001d506d41983dcecc2f1923ab28582854e87856119d4938892bcee7985a69",
+      "opaqueBounds": "116x111+6+8",
+      "transparentMargins": {
+        "left": 6,
+        "right": 6,
+        "top": 8,
+        "bottom": 9
+      },
+      "semanticVerdict": "pass: thick squeeze barrel, fluid window, orange collar and felt chisel nib remain a distinct cleaning-applicator silhouette at 66px",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 22,
+      "catalogId": "dish-high-pressure-nozzle",
+      "iconId": "role-equipment.dish.focused-pre-rinse-nozzle",
+      "name": "Focused Pre-Rinse Nozzle",
+      "kind": "equipment",
+      "subjectPrompt": "One compact commercial stainless-steel pre-rinse spray nozzle with a narrow tapered perforated outlet, dark navy rubber impact guard, curved squeeze lever, black ribbed grip, short spring collar, and threaded brass hose coupling; dry and clearly industrial dish-sprayer hardware.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-dish-focused-pre-rinse-nozzle.png",
+      "runtimeSha256": "1975869aae276527b0496b56ede3ad12a66b56dcdeacbdd331772fedd5827cbe",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-server-dish-003/alpha-source/role-equipment-dish-focused-pre-rinse-nozzle.png",
+      "alphaSourceSha256": "df7c18ee5449a454c86e8d912181cfc5b59cff496a11ba9cd99fe548bc35ad58",
+      "rawChromaSourceSha256": "6df4cfebb4daea37fcaf1608c346387310ee58282082f20276f0768d8950c446",
+      "opaqueBounds": "116x79+6+24",
+      "transparentMargins": {
+        "left": 6,
+        "right": 6,
+        "top": 24,
+        "bottom": 25
+      },
+      "semanticVerdict": "pass: perforated spray outlet, squeeze lever, spring collar and threaded coupling distinguish it from the magnetic flashlight and non-dish tools",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 23,
+      "catalogId": "dish-silicone-rack-hook",
+      "iconId": "role-equipment.dish.silicone-rack-hook",
+      "name": "Silicone Rack Hook",
+      "kind": "equipment",
+      "subjectPrompt": "One short stout rack-pulling tool with a deep blunt J-hook fully coated in burnt-orange heat-safe silicone, a gunmetal shaft, dark-teal ribbed T-handle with integrated hanging hole, and orange safety collar.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-dish-silicone-rack-hook.png",
+      "runtimeSha256": "7cc09e53b1e2988e8209bc9cbe67226f85157f0537f24c5b79ce6686b92f9fed",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-server-dish-003/alpha-source/role-equipment-dish-silicone-rack-hook.png",
+      "alphaSourceSha256": "af939e39a1cc7e2026c7ce890fe15738302cd41b1db77be0fddfa384f99a84e1",
+      "rawChromaSourceSha256": "57724a4adbebd4734207e6def0111390ebbafde0cda6362aa277291af6a8788c",
+      "opaqueBounds": "109x116+9+6",
+      "transparentMargins": {
+        "left": 9,
+        "right": 10,
+        "top": 6,
+        "bottom": 6
+      },
+      "semanticVerdict": "pass: blunt orange silicone J-hook plus broad T-handle read as a safe rack-pulling tool rather than a cane or sharp utility hook",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 24,
+      "catalogId": "dish-digital-test-reader",
+      "iconId": "role-equipment.dish.digital-sanitizer-test-reader",
+      "name": "Digital Sanitizer Test Reader",
+      "kind": "equipment",
+      "subjectPrompt": "One pocket-sized off-white and dark-teal sanitizer chemistry reader with burnt-orange edge bumpers, a top slot holding one short plain reagent strip, a protected screen showing only three large color bars and a circular check indicator, two blank buttons, and a ribbed calibration wheel.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-dish-digital-sanitizer-test-reader.png",
+      "runtimeSha256": "8fc81d4560511d34b25d94e7977eff232f5544b2f156a6c6afd0e8c8d9f4e8e9",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-server-dish-003/alpha-source/role-equipment-dish-digital-sanitizer-test-reader.png",
+      "alphaSourceSha256": "507239c23a408e5c4f041b9a90113a993d92a64bcc2331c6f02c4c8b85a0e3bd",
+      "rawChromaSourceSha256": "d1c6eda9581ac06bcccfad05e252a0a62ba65b8054c20555808265f8dc40a105",
+      "opaqueBounds": "67x116+30+6",
+      "transparentMargins": {
+        "left": 30,
+        "right": 31,
+        "top": 6,
+        "bottom": 6
+      },
+      "semanticVerdict": "pass: inserted reagent strip, chemistry color bars, check indicator and compact rugged body read as a test reader without digits or writing",
+      "gameplayLegibility": "pass"
+    }
+  ],
+  "assets": [
+    "server-waterproof-order-pad",
+    "server-waiters-corkscrew",
+    "server-cork-tray",
+    "server-palate-mints",
+    "server-stain-rescue-pen",
+    "dish-high-pressure-nozzle",
+    "dish-silicone-rack-hook",
+    "dish-digital-test-reader"
+  ]
+}

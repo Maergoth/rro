@@ -27,7 +27,7 @@ func request_json(path: String, method: int, payload: Dictionary, callback: Call
 	var headers := PackedStringArray(["Content-Type: application/json", "Accept: application/json"])
 	if not session_token.is_empty():
 		headers.append("Authorization: Bearer %s" % session_token)
-	var request_body := "" if method == HTTPClient.METHOD_GET or method == HTTPClient.METHOD_DELETE else JSON.stringify(payload)
+	var request_body := "" if method == HTTPClient.METHOD_GET else JSON.stringify(payload)
 	var error := request.request(server_url.trim_suffix("/") + path, headers, method, request_body)
 	if error != OK:
 		request_failed.emit("Could not connect to the local world server.")
@@ -46,5 +46,5 @@ func patch_json(path: String, payload: Dictionary, callback: Callable) -> void:
 func put_json(path: String, payload: Dictionary, callback: Callable) -> void:
 	request_json(path, HTTPClient.METHOD_PUT, payload, callback)
 
-func delete_json(path: String, callback: Callable) -> void:
-	request_json(path, HTTPClient.METHOD_DELETE, {}, callback)
+func delete_json(path: String, payload: Dictionary, callback: Callable) -> void:
+	request_json(path, HTTPClient.METHOD_DELETE, payload, callback)

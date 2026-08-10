@@ -1,0 +1,252 @@
+{
+  "schemaVersion": 1,
+  "batchId": "equipment-icons-chef-cook-host-005",
+  "status": "accepted",
+  "repositoryPromotion": "remote-verified",
+  "remotePreservation": {
+    "commit": "e15aa0031a8477be68b022f5fcfbd6d30309fe9e",
+    "tree": "27350dbb6138e1e75d1fa56219a2509e3bf72924",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30977634704"
+  },
+  "catalogSequences": [
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40
+  ],
+  "source": {
+    "generator": "OpenAI built-in image generation",
+    "useCase": "stylized-concept",
+    "styleReference": "planning/art-qa/equipment-icons-owner-server-002/contact-128-dark.png",
+    "sharedPromptContract": "One bespoke Rush & Revenue Online game inventory icon matching the painterly semi-realistic isolated-object rendering, elevated three-quarter view, tactile professional materials, restrained highlights, clean silhouette, and visual weight of the accepted style reference. Center the complete subject on a perfectly flat solid #FF00FF chroma-key background with generous padding and readability at 64px. No gradient, texture, floor plane, cast/contact shadow, reflection, magenta subject material, text, letters, numbers, pseudo-text, brands, logos, watermark, people, hands, border, frame, room, unrelated props, or procedural emblem.",
+    "matteProcess": "remove_chroma_key.py --auto-key border --soft-matte --transparent-threshold 12 --opaque-threshold 220 --despill",
+    "runtimeResize": "trim transparent bounds, scale proportionally to at most 116x116, center on a 128x128 transparent canvas",
+    "notes": "The preserved high-resolution files are post-chroma 1254x1254 alpha sources. Runtime assets are the 128x128 PNGs under apps/client-godot/assets/items; dark, light, and all-40 comparison sheets are retained as visual QA evidence.",
+    "preservedHighResolutionSource": "planning/art-qa/equipment-icons-chef-cook-host-005/alpha-source"
+  },
+  "gates": {
+    "dimensions": "128x128",
+    "colorMode": "sRGBA",
+    "minimumTransparentMarginPixels": 6,
+    "actualMinimumTransparentMarginPixels": 6,
+    "allCornersTransparent": true,
+    "uniqueRuntimeContentHashes": true,
+    "previouslyAcceptedRepositoryRuntimeIconCount": 32,
+    "noLettersNumbersPseudoTextBrandsOrWatermarks": true,
+    "visualReviewAtFullScale": "pass",
+    "visualReviewAtGameplayScale66px": "pass",
+    "duplicateOrAmbiguousSilhouettes": "none",
+    "chromaFringeOnDarkAndLightBackgrounds": "none visible",
+    "noCollisionWithPreviouslyAcceptedItemHashes": true,
+    "visualComparisonAcrossAll40AcceptedIcons": "pass"
+  },
+  "contactSheets": [
+    {
+      "path": "planning/art-qa/equipment-icons-chef-cook-host-005/contact-128-dark.png",
+      "purpose": "128px runtime icons on a dark background",
+      "sha256": "4072df2ba68206242b9c83d2fa5d5b8b03c4b1306ea41e88029fb4dadd96b127"
+    },
+    {
+      "path": "planning/art-qa/equipment-icons-chef-cook-host-005/contact-66-light.png",
+      "purpose": "66px gameplay-scale icons on a light background",
+      "sha256": "62523171ccac21bd9ac128c73bc8559377f5e24025a46075c6cda6ad784fb7ce"
+    },
+    {
+      "path": "planning/art-qa/equipment-icons-chef-cook-host-005/comparison-all-40-66-dark.png",
+      "purpose": "Gameplay-scale semantic and silhouette comparison of accepted sequences 1-40",
+      "sha256": "4d8382489dccfa9fc4a7bf748af343b1c3ff67662b2751811397fb431862c727"
+    }
+  ],
+  "items": [
+    {
+      "sequence": 33,
+      "catalogId": "chef-palate-rinse",
+      "iconId": "role-equipment.chef.neutral-palate-rinse",
+      "name": "Neutral Palate Rinse",
+      "kind": "consumable",
+      "subjectPrompt": "A small frosted-glass professional carafe with pouring lip and one low tasting cup, crystal-clear pale-aqua rinse, dark-teal silicone grip, and burnt-orange stopper accent; visibly distinct from medicine or cleaning chemicals.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-chef-neutral-palate-rinse.png",
+      "runtimeSha256": "a4d2c9c77a6c5fba89c3afbc898602b8b65fa00726acef4d2a15eaf864c34249",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-chef-cook-host-005/alpha-source/role-equipment-chef-neutral-palate-rinse.png",
+      "alphaSourceSha256": "52f540f997cd5531855d479f690ea42d9fb535aa0ac428df067ee69e5eee5069",
+      "rawChromaSourceSha256": "3b40e38fe3ee2c15d271edda6ec3e7f6886e484df1aa7444c2a33196e00abae6",
+      "opaqueBounds": "93x116+17+6",
+      "transparentMargins": {
+        "left": 17,
+        "right": 18,
+        "top": 6,
+        "bottom": 6
+      },
+      "semanticVerdict": "pass: paired hospitality carafe and tasting cup with clear rinse read as a deliberate palate-reset service item, not a chemical bottle",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 34,
+      "catalogId": "cook-fish-turner",
+      "iconId": "role-equipment.cook.flexible-fish-turner",
+      "name": "Flexible Fish Turner",
+      "kind": "equipment",
+      "subjectPrompt": "One long restaurant-grade fish spatula with a thin broad flexible stainless blade, five open lengthwise slots, upturned beveled leading edge, walnut handle, teal collar, and orange rivet.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-cook-flexible-fish-turner.png",
+      "runtimeSha256": "51e24b8dbf782c0c5e41eeac67505f1b3cac5e226754fc38a7467bfbb34e286f",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-chef-cook-host-005/alpha-source/role-equipment-cook-flexible-fish-turner.png",
+      "alphaSourceSha256": "d49a7e9410f1c75fadb8143e70fac5a0b1432a3a9b950046a8bb58139a575345",
+      "rawChromaSourceSha256": "d8cfe379ef87a41355a1daf88bb6d3f6069520b786485ce0d21e53fa2d79af55",
+      "opaqueBounds": "116x103+6+12",
+      "transparentMargins": {
+        "left": 6,
+        "right": 6,
+        "top": 12,
+        "bottom": 13
+      },
+      "semanticVerdict": "pass: broad thin five-slot blade and angled leading edge clearly distinguish a flexible fish turner from a knife or solid grill spatula",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 35,
+      "catalogId": "cook-four-channel-timer",
+      "iconId": "role-equipment.cook.four-channel-station-timer",
+      "name": "Four-Channel Station Timer",
+      "kind": "equipment",
+      "subjectPrompt": "One rugged wedge-shaped kitchen timer console in dark teal and brushed steel with exactly four large color-coded buttons, four matching indicator lights, a blank dark display, kickstand, and corner bumpers.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-cook-four-channel-station-timer.png",
+      "runtimeSha256": "b40a79d11508d3fcc86fdc7ce1c1ef826bf936f8a5d10277cbbce1613ad49eb6",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-chef-cook-host-005/alpha-source/role-equipment-cook-four-channel-station-timer.png",
+      "alphaSourceSha256": "e39cfc7e890ca83a3e3edf46a002cc91dd5457385a8a89647cb2562d9ad4ae79",
+      "rawChromaSourceSha256": "14b5f475234c35a982a67b3eba3cacc7427f59f4673f58b9330a1e5badd9ddc4",
+      "opaqueBounds": "109x116+9+6",
+      "transparentMargins": {
+        "left": 9,
+        "right": 10,
+        "top": 6,
+        "bottom": 6
+      },
+      "semanticVerdict": "pass: four color-coded tactile channels, four status lamps, blank display, and kickstand read as a rugged multi-channel station timer without text or digits",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 36,
+      "catalogId": "cook-bottle-holster",
+      "iconId": "role-equipment.cook.color-coded-bottle-holster",
+      "name": "Color-Coded Bottle Holster",
+      "kind": "equipment",
+      "subjectPrompt": "One dark-teal canvas and leather cook's waist holster with a short belt and exactly three cream squeeze bottles in snug loops, capped in orange, pale blue, and mustard.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-cook-color-coded-bottle-holster.png",
+      "runtimeSha256": "0e3533394cccd33c8fce3bfd2cb9836d938364cb42ba5993e5a93f1d8d74c8e6",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-chef-cook-host-005/alpha-source/role-equipment-cook-color-coded-bottle-holster.png",
+      "alphaSourceSha256": "a7039358e6cb2e2a591c0b86a106a21f2cf8758fa65f87f65bf04c5f7410aac5",
+      "rawChromaSourceSha256": "7ad29c29750c83a3969a17659925febe2ab47334955a92f571529cc42ac771a8",
+      "opaqueBounds": "116x114+6+7",
+      "transparentMargins": {
+        "left": 6,
+        "right": 6,
+        "top": 7,
+        "bottom": 7
+      },
+      "semanticVerdict": "pass: worn belt, three fitted loops, and three color-coded capped squeeze bottles clearly read as a cook's bottle holster rather than a beverage or chemical caddy",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 37,
+      "catalogId": "cook-chainmail-cut-glove",
+      "iconId": "role-equipment.cook.fine-mesh-cut-glove",
+      "name": "Fine-Mesh Cut Glove",
+      "kind": "equipment",
+      "subjectPrompt": "One empty five-finger professional chainmail safety glove, palm-forward, made from fine interlocking stainless rings with a dark-teal fabric wrist cuff and orange adjustable clasp.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-cook-fine-mesh-cut-glove.png",
+      "runtimeSha256": "f6b32043e69aa42448c341e54a6a97f5c27d1def69bed276f268c08f8d267c43",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-chef-cook-host-005/alpha-source/role-equipment-cook-fine-mesh-cut-glove.png",
+      "alphaSourceSha256": "8b24479a5fb71ef6e90a1b91777d2a222798a5924b3c481ec385e30dcbf787d6",
+      "rawChromaSourceSha256": "8cea33cf3877a0129e05ddb57e07638c2fada624dfc0a2be333b1653e15d7c3d",
+      "opaqueBounds": "82x116+23+6",
+      "transparentMargins": {
+        "left": 23,
+        "right": 23,
+        "top": 6,
+        "bottom": 6
+      },
+      "semanticVerdict": "pass: one articulated fine-chain glove with distinct fingers and fitted cuff is visibly unlike the paired bulky steam gauntlets",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 38,
+      "catalogId": "cook-pan-seasoning-wipe",
+      "iconId": "role-equipment.cook.pan-seasoning-wipe",
+      "name": "Pan Seasoning Wipe",
+      "kind": "consumable",
+      "subjectPrompt": "One square heavy-duty woven seasoning cloth partly unfolded from a small open dark-teal restaurant tin, visibly saturated with warm amber cooking oil and showing a dark cast-iron transfer edge.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-cook-pan-seasoning-wipe.png",
+      "runtimeSha256": "8d6ecbb91fbc0eb2652e15d85c398a0a1e01c9bb9b6f19dbaae661b44c9da8ff",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-chef-cook-host-005/alpha-source/role-equipment-cook-pan-seasoning-wipe.png",
+      "alphaSourceSha256": "8ce4fca016c642a88be43059ad0a3ca102f274b3c14fe83f0c1fc631ede74d08",
+      "rawChromaSourceSha256": "04b92ff5cab1f2b3ee69f23ecb3c5442a8234e03a251c47d3ec6e2cf22caf7f0",
+      "opaqueBounds": "106x116+11+6",
+      "transparentMargins": {
+        "left": 11,
+        "right": 11,
+        "top": 6,
+        "bottom": 6
+      },
+      "semanticVerdict": "pass: visible woven cloth, oil saturation, dark cookware-transfer edge, and dedicated open tin read as a pan-treatment wipe rather than a food or generic packet",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 39,
+      "catalogId": "cook-burn-gel-sachet",
+      "iconId": "role-equipment.cook.kitchen-burn-gel-sachet",
+      "name": "Kitchen Burn Gel Sachet",
+      "kind": "consumable",
+      "subjectPrompt": "One turquoise and brushed-silver single-dose medical foil sachet dispensing a bead of aqua cooling gel onto folded sterile gauze, with an orange heat-wave mark and white first-aid cross but no writing.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-cook-kitchen-burn-gel-sachet.png",
+      "runtimeSha256": "4eaa169272b0691c47ec977e1f13aff1f9bb543ec3a04f94a7128ca0aa73d9eb",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-chef-cook-host-005/alpha-source/role-equipment-cook-kitchen-burn-gel-sachet.png",
+      "alphaSourceSha256": "5d40b0387880da939ab3229a2588e92ce85e86be501af4b9e7653273414a5a90",
+      "rawChromaSourceSha256": "f12c6d733003bb871053d2717e35bb7283c6a280385c7a21f8baf05744994f37",
+      "opaqueBounds": "108x116+10+6",
+      "transparentMargins": {
+        "left": 10,
+        "right": 10,
+        "top": 6,
+        "bottom": 6
+      },
+      "semanticVerdict": "pass: first-aid cross, heat waves, cooling gel bead, and sterile gauze distinguish burn treatment from food, detergent, or deliming consumables",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 40,
+      "catalogId": "host-reservation-book",
+      "iconId": "role-equipment.host.tabbed-reservation-book",
+      "name": "Tabbed Reservation Book",
+      "kind": "equipment",
+      "subjectPrompt": "One thick landscape restaurant planner bound in dark-teal pebbled leather with brass corners, orange elastic closure, cream ribbon, and exactly six muted color-coded index tabs; blank cover.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-host-tabbed-reservation-book.png",
+      "runtimeSha256": "0d772216b75c0959fea830a30211f4d0b2de1b68b4fd506316659a28e2a44dd2",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-chef-cook-host-005/alpha-source/role-equipment-host-tabbed-reservation-book.png",
+      "alphaSourceSha256": "1ab021d1500b3ea91f6d0e662568958b646a434fd8ea701eb360d2164e36fb79",
+      "rawChromaSourceSha256": "8b4246e6d6f5393e2f8dc931dc8079acbb3780e3aa0746da8fbada1be42def7f",
+      "opaqueBounds": "116x96+6+16",
+      "transparentMargins": {
+        "left": 6,
+        "right": 6,
+        "top": 16,
+        "bottom": 16
+      },
+      "semanticVerdict": "pass: thick landscape binding, six protruding tabs, elastic closure, ribbon, and blank leather cover read as a durable reservation planner rather than a clipboard, tablet, or loose order pad",
+      "gameplayLegibility": "pass"
+    }
+  ],
+  "assets": [
+    "chef-palate-rinse",
+    "cook-fish-turner",
+    "cook-four-channel-timer",
+    "cook-bottle-holster",
+    "cook-chainmail-cut-glove",
+    "cook-pan-seasoning-wipe",
+    "cook-burn-gel-sachet",
+    "host-reservation-book"
+  ]
+}

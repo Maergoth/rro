@@ -1,0 +1,519 @@
+{
+  "schemaVersion": 1,
+  "batchId": "furniture-core-directional-011",
+  "assets": [
+    "furniture-chemical-cabinet",
+    "furniture-dish-machine-high-temp",
+    "furniture-three-comp-sink"
+  ],
+  "artReviewStatus": "accepted-source-camera-retracted",
+  "productionComplete": false,
+  "productionCompletionBlockers": [
+    "measured camera geometry audit 001 rejects every asset in this batch under the exact +/-0.5 ground-axis contract",
+    "replacement N/E/S/W bytes must pass deterministic geometry measurement and a new native gameplay review"
+  ],
+  "promotionScope": {
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "repositoryPromotion": {
+    "status": "remote-verified-source-accepted-camera-retracted",
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "remotePreservation": {
+    "commit": "124359a3ff083b3cf8b73dd5b387368819cf9639",
+    "tree": "0121cb8c82814a03426824174f9bdcb126318083",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31348885720",
+    "artifactId": 9048282911,
+    "artifactSha256": "01f19b7bfaa17af2e65644f7c83675912f63d5ab0c0a2952290c67404eac8c75"
+  },
+  "source": {
+    "generator": "OpenAI built-in image generation",
+    "mode": "separate directional generation intended for one fixed camera plus identity-preserving edits; measured audit 001 later proved the intended camera contract was not achieved",
+    "useCases": [
+      "stylized-concept"
+    ],
+    "promptLog": "planning/art-qa/furniture-core-directional-011/prompts.md",
+    "promptLogSha256": "122643ab4950111ccf0a657b3cbf58d5f3e50ac6125fa116fe7e3d73a3dfc1c3",
+    "acceptedRawDirectionalSha256": {
+      "furniture-chemical-cabinet": {
+        "north": "ccc69efcc0c33cb370a7601b91e7c6a728ec2831e6cf2fabada60fe2d420ce62",
+        "east": "78f0f132d74d81fa9dc161e7f49d815e2ad3fe24553a44b576fdb4c433fc1728",
+        "south": "c6f734d129d163a463d406686add25e0f65ac0186776dee40b123933c5a01990",
+        "west": "0043a0cf39e1c2a897a2e819a5ca055af97e927aa3e6fd47a2f368a9c8f5b3a4"
+      },
+      "furniture-dish-machine-high-temp": {
+        "north": "3ebcb53d85c8b2ae0dfdadbc36004be83b6f5bd42cbaf9ffb75e2ab873245d62",
+        "east": "5e81bdd29d7411787dbe70c4fd721692c6c11df38d25b9d43291be2803be2b7b",
+        "south": "bd017c1f09c85cad4ce478c634a1db2280572cb69064b0d38c3ac10de10ce9ad",
+        "west": "46af5dcc1af7531bc0cf7337a07ade5947703a79f176b052f699b17bd75130d8"
+      },
+      "furniture-three-comp-sink": {
+        "north": "d43be85e91fb0bd2eef3f69c81c0d16d129102c957463ef83cf6418a76f120d9",
+        "east": "8ad21380dae48966c042313a3eec9d0edf1782f561fd8aafe5d36e77cf5729e0",
+        "south": "81868c453824b3e73e21535472b7ab1132f04f019d351a00f131f0ac59ffcb78",
+        "west": "12418299a68a5bff246dc8c44d3d3e5ab18708ac8fd0b774e87e212782325875"
+      }
+    },
+    "chromaHelperSha256": "3f7b9b14ad5c90f37618bc1c16a039a2076abca12ddc41b3ae470e2b1cad6c0e",
+    "processorSha256": "1ae6abc4f8b3c29147c543033405d7d749b81f4cbf4d04cbb026c7aa2e02b688",
+    "matteProcess": "Official imagegen border auto-key, soft matte, thresholds 12/220, and despill; normalization removes sub-alpha-3 resampling dust and zeroes fully transparent runtime RGB.",
+    "normalization": "Exact 627x627 sRGBA canvases; one uniform proportional scale per identity; centered pivot x=313.5; exclusive floor baseline y=590; transparent outer borders and 37-pixel bottom margin."
+  },
+  "rejectedAttempts": [
+    {
+      "assetId": "furniture-chemical-cabinet",
+      "attempt": 1,
+      "stage": "fixed-camera-source-review",
+      "generatorOutputSha256": "fdd67179cffcc5f1edb89928b1e61d70232e6241149196ca516b207267a743d7",
+      "reason": "East relabeled faces without physically swapping the 2x1 projected footprint axes."
+    },
+    {
+      "assetId": "furniture-chemical-cabinet",
+      "attempt": 2,
+      "stage": "fixed-camera-source-review",
+      "generatorOutputSha256": "c0d80d976feb882b210b4e2cac2b3e7e2074194d4404f9b64b687e2a3f1bedfb",
+      "reason": "East again retained the north/south footprint orientation."
+    },
+    {
+      "assetId": "furniture-chemical-cabinet",
+      "attempt": 3,
+      "stage": "fixed-camera-source-review",
+      "generatorOutputSha256": "cb2d92aaba3c47f02168cee6ac0beb2249ccae7296de143673e11763d990ed1c",
+      "reason": "East achieved the swapped footprint but placed rear rails and the right grille on incorrect proportional faces."
+    },
+    {
+      "assetId": "furniture-chemical-cabinet",
+      "attempt": 4,
+      "stage": "fixed-camera-source-review",
+      "generatorOutputSha256": "11e365d12f6a71e8e2af127601e6dcebd05baff9e9f836f9614e5aca5781563c",
+      "reason": "South used the east/west projected footprint axis instead of the north/south family."
+    },
+    {
+      "assetId": "furniture-three-comp-sink",
+      "attempt": 1,
+      "stage": "fixed-camera-source-review",
+      "generatorOutputSha256": "1a6784e42e011ccfcd6bcf1d8d959314649804dd6da1b5ff165842e47f61354d",
+      "reason": "South invented a fourth rear mounting bracket; identity contract requires exactly three."
+    }
+  ],
+  "gates": {
+    "requiredDirections": [
+      "north",
+      "east",
+      "south",
+      "west"
+    ],
+    "runtimeDimensions": "627x627",
+    "colorMode": "sRGBA",
+    "commonCanvasPivot": [
+      313.5,
+      590
+    ],
+    "commonFloorContactBaselineY": 590,
+    "transparentBottomMarginPixels": 37,
+    "allOuterBordersTransparent": true,
+    "zeroVisibleMagentaFringePixelsAboveAlpha2": true,
+    "oneUniformScalePerIdentity": true,
+    "uniqueRuntimeFileHashes": true,
+    "uniqueRuntimePixelHashes": true,
+    "uniqueRuntimePerceptualHashes": true,
+    "repositoryDirectionalPngsCompared": 148,
+    "uniqueAgainstRepositoryDirectionalPngs": true,
+    "exactFileCollisionsAgainstRepository": 0,
+    "exactPixelCollisionsAgainstRepository": 0,
+    "exactPerceptualHashCollisionsAgainstRepository": 0,
+    "samePhysicalObjectAcrossDirections": "pass",
+    "fixedElevatedOrthographicIsometricCamera": "fail: deterministic source-pixel measurement finds dominant ground axes outside exact slopes -0.5/+0.5 in every asset; see furniture-camera-geometry-audit-001",
+    "noClippingTextLogosWatermarksShadowsOrExtraObjects": "pass",
+    "visualReviewAtFullScale": "superseded: the former visual review passed identity, counts, alpha, silhouettes, and floor contact but incorrectly inferred camera conformance without measuring ground-axis geometry.",
+    "visualReviewAtGameplayScale128px": "pass: planning/art-qa/furniture-core-directional-011/contact-128-light.png inspected at original resolution; all three identities and directional cues remain legible.",
+    "nativeGameplayCompositeReview": "historical pass: attempt 013 remains durable evidence for runtime selection, placement, scale, depth, and legibility, but its camera-conformance verdict is superseded by measured camera audit 001.",
+    "proceduralOrDeterministicStandIn": false,
+    "trueObjectOnlyQuarterTurns": "unproven for production: asymmetric detail continuity remains useful source evidence, but the prior visual axis-swap judgement cannot substitute for measured camera geometry"
+  },
+  "cameraGeometryMeasurement": {
+    "status": "failed-measured-camera-geometry",
+    "audit": "planning/art-qa/furniture-camera-geometry-audit-001.json",
+    "validator": "tools/validate-furniture-camera-geometry-v1.mjs",
+    "retractedAssetIds": [
+      "furniture-chemical-cabinet",
+      "furniture-dish-machine-high-temp",
+      "furniture-three-comp-sink"
+    ]
+  },
+  "contactSheets": [
+    {
+      "path": "planning/art-qa/furniture-core-directional-011/contact-627-dark.png",
+      "purpose": "Exact 627px fixed-camera runtime candidates on dark background",
+      "sha256": "cdbc05f9d5700d78addc5ae650d34881b559c2e6ef26c0ce189e7ae930fd7490"
+    },
+    {
+      "path": "planning/art-qa/furniture-core-directional-011/contact-128-light.png",
+      "purpose": "Same fixed-camera runtime candidates reduced to 128px on light background",
+      "sha256": "d5c4b584f6d1dcbc0b09bb4b26cabdfcc3fb01d5832a1fc50252a9527bad9b59"
+    }
+  ],
+  "items": [
+    {
+      "catalogId": "chemical-cabinet",
+      "name": "Locked Chemical Cabinet",
+      "category": "Utility",
+      "style": "Modern",
+      "footprint": [
+        2,
+        1
+      ],
+      "identityContract": "One Modern 2x1 brushed-stainless locked chemical cabinet with two teal front doors, one centered padlock hasp, two amber hazard diamonds, one physical-right grille, two rear rails, and four feet.",
+      "semanticVerdict": "identity pass, camera fail: physical-side details remain useful reference evidence, but measured ground-axis geometry retracts fixed-camera and footprint-axis production credit.",
+      "gameplayLegibility": "pass: exact 128px contact review preserves identity, component counts, silhouette, and directional cues.",
+      "assetId": "furniture-chemical-cabinet",
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-chemical-cabinet/north.png",
+          "sha256": "07fd213f07d2bc037ec526af51d04ac8d2301345e7532dcd6c2e079ff9cf8384",
+          "pixelSha256": "30a84eb2caf64fcd65a918f26878cf5b9981c144df06a35e408548142f2ba8ba",
+          "perceptualDHash": "3c0f03260303825c",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-chemical-cabinet-north.png",
+          "sourceAlphaSha256": "07fd213f07d2bc037ec526af51d04ac8d2301345e7532dcd6c2e079ff9cf8384",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            72,
+            29,
+            555,
+            589
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-chemical-cabinet/east.png",
+          "sha256": "b2a6fe0aec6eeab6824df3dcf6c3825ea8dbd0aceaecedfea9952fd95b4d1e26",
+          "pixelSha256": "91f78add05da8cca13316f03a13438466e91effa3a758990555812e631609f9b",
+          "perceptualDHash": "1866871f4f0f9c42",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-chemical-cabinet-east.png",
+          "sourceAlphaSha256": "b2a6fe0aec6eeab6824df3dcf6c3825ea8dbd0aceaecedfea9952fd95b4d1e26",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            132,
+            120,
+            494,
+            589
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-chemical-cabinet/south.png",
+          "sha256": "4cfced5352bb85b6584c50c2c3166c8b1375b45b6dae90e3d409e18de4e78048",
+          "pixelSha256": "5aa3840e506a975753dcdafaf3b41b5a663c9ac247bccf58e80599181f5c6704",
+          "perceptualDHash": "1e1f073b0f038670",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-chemical-cabinet-south.png",
+          "sourceAlphaSha256": "4cfced5352bb85b6584c50c2c3166c8b1375b45b6dae90e3d409e18de4e78048",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            76,
+            20,
+            551,
+            589
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-chemical-cabinet/west.png",
+          "sha256": "bc383e5aefd8b495d44cb6dd66ea5d5dc8a80730278e05eb4fa107d1fa6bc2fa",
+          "pixelSha256": "6a12cf23537706185ca816dc053223f6f0f5e6cf265178695f74c9f76dbbe0b1",
+          "perceptualDHash": "1866871f1b1f9842",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-chemical-cabinet-west.png",
+          "sourceAlphaSha256": "bc383e5aefd8b495d44cb6dd66ea5d5dc8a80730278e05eb4fa107d1fa6bc2fa",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            132,
+            118,
+            494,
+            589
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        }
+      ]
+    },
+    {
+      "catalogId": "dish-machine-high-temp",
+      "name": "High-Temperature Dish Machine",
+      "category": "Utility",
+      "style": "Modern",
+      "footprint": [
+        4,
+        3
+      ],
+      "identityContract": "One Modern 4x3 pass-through hood dishwasher with one hood and handle, open rack bay, right-side controls and teal rinse pipe, two lower service panels, rear louvered grille and braces, and four feet.",
+      "semanticVerdict": "identity pass, camera fail: physical-side details remain useful reference evidence, but measured ground-axis geometry retracts fixed-camera and footprint-axis production credit.",
+      "gameplayLegibility": "pass: exact 128px contact review preserves identity, component counts, silhouette, and directional cues.",
+      "assetId": "furniture-dish-machine-high-temp",
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-dish-machine-high-temp/north.png",
+          "sha256": "3756405795501a5cdec79f78899c2cbcb02b1294122eaff933940a5f11d55937",
+          "pixelSha256": "e60649049524fd7db0fc310d52ddab4f01e382cda64e44a8eb5023d5ccd8ca75",
+          "perceptualDHash": "1e0f07270f0717c4",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-dish-machine-high-temp-north.png",
+          "sourceAlphaSha256": "3756405795501a5cdec79f78899c2cbcb02b1294122eaff933940a5f11d55937",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            128,
+            20,
+            497,
+            589
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-dish-machine-high-temp/east.png",
+          "sha256": "cbce800f1b6af25d8b7d578a6ae33003068d6362720ee5395bab72ddff5162e0",
+          "pixelSha256": "4d9e20b2a64b29a233865fab4e1b0fbb879e970815f0f138aa2cf8a0bc352777",
+          "perceptualDHash": "61869e9a9a868e58",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-dish-machine-high-temp-east.png",
+          "sourceAlphaSha256": "cbce800f1b6af25d8b7d578a6ae33003068d6362720ee5395bab72ddff5162e0",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            160,
+            86,
+            467,
+            589
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-dish-machine-high-temp/south.png",
+          "sha256": "fb97acd136450ba37922461d61092b8910633306d29edcc1c136e5a07bb75f50",
+          "pixelSha256": "597a3b4410ee4bf6a9c18cbca3e5e5c4846adf7a94877784ce5a4ee186c14216",
+          "perceptualDHash": "d89e2727371f0644",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-dish-machine-high-temp-south.png",
+          "sourceAlphaSha256": "fb97acd136450ba37922461d61092b8910633306d29edcc1c136e5a07bb75f50",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            137,
+            89,
+            489,
+            589
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-dish-machine-high-temp/west.png",
+          "sha256": "60413d800d7a16536978f18401d2d97d0936379c1005131c97f3721e65a479cc",
+          "pixelSha256": "c8c494c6c3347fd8147efb42e9d7bc18e126c2c589968fb1d27b932c95526fbd",
+          "perceptualDHash": "6d869e9e929e9e4c",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-dish-machine-high-temp-west.png",
+          "sourceAlphaSha256": "60413d800d7a16536978f18401d2d97d0936379c1005131c97f3721e65a479cc",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            156,
+            80,
+            469,
+            589
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        }
+      ]
+    },
+    {
+      "catalogId": "three-comp-sink",
+      "name": "Three-Compartment Sink",
+      "category": "Utility",
+      "style": "Modern",
+      "footprint": [
+        4,
+        2
+      ],
+      "identityContract": "One Modern 4x2 stainless warewashing sink with exactly three basins, two drainboards, one centered pre-rinse faucet, three front access panels, a physical-right soap cage, three rear brackets, six legs, and a lower brace.",
+      "semanticVerdict": "identity pass, camera fail: physical-side details remain useful reference evidence, but measured ground-axis geometry retracts fixed-camera and footprint-axis production credit.",
+      "gameplayLegibility": "pass: exact 128px contact review preserves identity, component counts, silhouette, and directional cues.",
+      "assetId": "furniture-three-comp-sink",
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-three-comp-sink/north.png",
+          "sha256": "1433f6beccf729326587772afb0382e203db96913e91beb4506e67aef5c0f2ee",
+          "pixelSha256": "98fde37d09ad430fc95fd3f8cdfd7199e06206d393704a97a6b088008278eb3f",
+          "perceptualDHash": "c2383f51490353ab",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-three-comp-sink-north.png",
+          "sourceAlphaSha256": "1433f6beccf729326587772afb0382e203db96913e91beb4506e67aef5c0f2ee",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            20,
+            115,
+            605,
+            589
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-three-comp-sink/east.png",
+          "sha256": "a8a80054313fd5189f523219c8839a1d6238b90f3817c60a8bd9b3c12d747011",
+          "pixelSha256": "17556c03fc84ea4940ef2a026e86b659d05d62af42fd9fd7aea2430cf5c4d23e",
+          "perceptualDHash": "1a6309316f3e35a8",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-three-comp-sink-east.png",
+          "sourceAlphaSha256": "a8a80054313fd5189f523219c8839a1d6238b90f3817c60a8bd9b3c12d747011",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            36,
+            78,
+            591,
+            589
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-three-comp-sink/south.png",
+          "sha256": "128ad2ec4dd0c3b2354d2c156d967373a3e787c9f4e5e309c2e0aa052094b97a",
+          "pixelSha256": "c702702f1ff7d91cde8a994239b89ae2b1d9fb296f10dbba3116eb0bac3d3aed",
+          "perceptualDHash": "cc393e7f0983432b",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-three-comp-sink-south.png",
+          "sourceAlphaSha256": "128ad2ec4dd0c3b2354d2c156d967373a3e787c9f4e5e309c2e0aa052094b97a",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            26,
+            90,
+            600,
+            589
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-three-comp-sink/west.png",
+          "sha256": "60393418d911de52f27f07f496a570708f983ffbbf0831fd9c7ebb9170397d93",
+          "pixelSha256": "41f62bf3437be4dbaa6c58cbffcea448c8aa13aac74436f2b335941c2718934c",
+          "perceptualDHash": "1cc303756d6e6d62",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-three-comp-sink-west.png",
+          "sourceAlphaSha256": "60393418d911de52f27f07f496a570708f983ffbbf0831fd9c7ebb9170397d93",
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "alphaBoundingBox": [
+            20,
+            93,
+            606,
+            589
+          ],
+          "alphaBaselineY": 590,
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        }
+      ]
+    }
+  ],
+  "cameraContract": {
+    "projection": "true-orthographic",
+    "perspective": false,
+    "azimuthDegrees": 315,
+    "elevationDegrees": 26.565,
+    "groundAxisSlopeRatio": "2-horizontal-to-1-vertical",
+    "uprights": "screen-vertical",
+    "northVisibleFaces": [
+      "front",
+      "physical-right"
+    ],
+    "eastVisibleFaces": [
+      "physical-right",
+      "rear"
+    ],
+    "southVisibleFaces": [
+      "rear",
+      "physical-left"
+    ],
+    "westVisibleFaces": [
+      "physical-left",
+      "front"
+    ],
+    "objectOnlyQuarterTurns": true,
+    "longShortFootprintAxesSwapAtQuarterTurns": true
+  }
+}

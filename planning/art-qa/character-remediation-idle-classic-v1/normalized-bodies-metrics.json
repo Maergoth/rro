@@ -1,0 +1,820 @@
+{
+  "schemaVersion": 1,
+  "batch": "character-remediation-idle-classic-v1",
+  "component": "normalized-idle-bodies",
+  "sourceCommit": "20e83ef4dbac4f616686023007f4eb9ee7801445",
+  "canvas": [
+    384,
+    512
+  ],
+  "groundContactPivot": [
+    192,
+    472
+  ],
+  "sourcePreservation": {
+    "method": "Exact pre-normalization bytes remain in sourceCommit; SHA-256 values are recorded before replacement.",
+    "files": [
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/east.png",
+        "sha256": "fa98730813e2facba98e15478da260b9232aea7ce8be0f830895db450689ff2b"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/north.png",
+        "sha256": "d3691a101b5d042c85828d214961a7a9c3121159214bd12e27518dfd39203943"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/north_east.png",
+        "sha256": "382a60b92e140cc015ad4d6da3755e24e3414e9a89265d51759d57092681a4e0"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/north_west.png",
+        "sha256": "17a0d0edc078ded6d9a2dddbf71a52cfb14b647ccd99385df2be8164a735b97c"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/east.png",
+        "sha256": "e648f765e66ab5f8f0473642951a087c73fb4bbc814cd0cadb98c01bc4abd133"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/north.png",
+        "sha256": "64a263899ff4c941b30ecc650deb017ddf2df7ce0904ec7ba7eaace1eb0bfead"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/north_east.png",
+        "sha256": "4c317f23407c8369a6efd2bc277c29ea0c427af5db676a1cb6451e5b0f5b75e9"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/north_west.png",
+        "sha256": "d02f197a101a8bc71eef6a1bc186ae97d0c86058d33cf32c788a59dbab71765e"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/south.png",
+        "sha256": "14cd69513b442f5d7c431bbd837055fa09397f6c31fe00c2d7adab2574a68f46"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/south_east.png",
+        "sha256": "ceb1f6f465e574d39a8ccee0699ff96b617864381ae7ca3c1e0000c896683a00"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/south_west.png",
+        "sha256": "d29f035ddd2474ffd40121efb0bde806af98111064c04e890bbf56019235b72e"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/west.png",
+        "sha256": "85938123fb32cc40e2c1fcacb2c06424fbc71f0c913176e7ceea8210a06e9e1b"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/east.png",
+        "sha256": "4a96f96f79ef305702629d2e9bfa12b5acc1fbf3adb2fb03f733d59cea67bb16"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/north.png",
+        "sha256": "5d8ca370690b14b8bbab69ac07d4acfdf14f879ec033928e0871696c44b4720c"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/north_east.png",
+        "sha256": "ef26127919b5a4c5745cb4e6930b17e156094fb22c76409ef0dfbabce058a608"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/north_west.png",
+        "sha256": "c5855ab406a62bd423bc70fdedf2bcd4c62edd3ede84d79ba195305519206762"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/south.png",
+        "sha256": "05fa25ee7b974de9a9ae3f48d0454a2f7ccb26cc17e3c5911aea8c66a7c4f608"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/south_east.png",
+        "sha256": "d9f27d74da211f31f8d61d7d28ec4139cc9ec867fd98381f5da428f6137a24d6"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/south_west.png",
+        "sha256": "62e754867c3935823b28223dcff3508915d95739e705ac9782ec0767a59cf572"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/west.png",
+        "sha256": "0f4489706623fad88da442e0e77930c8154a2035bea48248a77f1beaa4dc911d"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/south.png",
+        "sha256": "14d8873a2556229d0151554bf1d923b899fba6398ea08ec08ed23c675305c7c1"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/south_east.png",
+        "sha256": "07fcad8c86bfa62eefe347ccfbce1c72adb000e6268f3bdc4608e818bbdf88e7"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/south_west.png",
+        "sha256": "8f629eceffb91a073db567b21bc838fdd8452bd783b3ae569c2260aea32fa488"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-a/idle/west.png",
+        "sha256": "bbba114213f84e136f55edee94c6fdd49e850f8719cfcd3c723468fb7d639318"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/east.png",
+        "sha256": "54c9cd7fb1f078eb2072f8fae5998807bb7b06046d49a6167a97e5393471f866"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/north.png",
+        "sha256": "bda63f0e4d58300a1101a2592e5924629e742c998fe9761b4b53e077d62d441a"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/north_east.png",
+        "sha256": "a15e3e169b314e6c3d00fc266406dea3c5bba99560fcdfcf197dccfd8cb2ddef"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/north_west.png",
+        "sha256": "dc60212868e1f11f295c09268d3adc7590a310b287c0881d6371e6fcbf9d7a82"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/east.png",
+        "sha256": "f828f2b5692fe756a4f996f2bd135b7239743e67296167bf755f3d8eacf063be"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/north.png",
+        "sha256": "c876a3778bc9d507bb19c5d6353caf603ba9a150cc504e8adef7072634ef2728"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/north_east.png",
+        "sha256": "e1ea126d367971c44e0fb1af104ff7714435fa15caadd2a44e232e34fef2a6a9"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/north_west.png",
+        "sha256": "e06895b94d5d293eac2b71c7a2f534e7e69842cff6627691400e561072847774"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/south.png",
+        "sha256": "c7d5b1639155e2b4bee0ee64e6e4d61a6aa26b98b1bdb468b8f30430327185bf"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/south_east.png",
+        "sha256": "dd64dd31ef9d4495ae7ce3e7a620d50c5eade411d4e408967a0b1c61913d2390"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/south_west.png",
+        "sha256": "157c657cbc320bb4466ed2fe15786535a44fa3145ad53baa1122e48ffbadd401"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/west.png",
+        "sha256": "5f22e93b093cf7967093dcc7820163eabcfa37255dbd38cd910d462788bf3e76"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/east.png",
+        "sha256": "4cbde5f2dcf779d9afa90fd7109b25c8db9437709ee8370568180cc21ed310c1"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/north.png",
+        "sha256": "c013939414e8c21c2ad2fcc7d4c9f18fb8287809b7a64f8a92fb9e49aa9105d6"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/north_east.png",
+        "sha256": "877a50a0f5fadd8de86e250c01bf562fc6351abb7d385bdf4c1a22fd90e940db"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/north_west.png",
+        "sha256": "efc985279adc93a1daacdd358d2835dd7170b73a61f2cd1740d5b6aae785f8cd"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/south.png",
+        "sha256": "59933f176158a6ef0624ab111bff1fb091fcd4330ea279a63cac7bc82d683b34"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/south_east.png",
+        "sha256": "79a6ba3c7e53bb58c4f7e8f074ce8514ab3b714367c8831d181492e9116a9d8f"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/south_west.png",
+        "sha256": "a978f74e0edf6873e51f23d94eb0b288ebfa248eeea6d71b012730e7c51e3da6"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/west.png",
+        "sha256": "b4906d863a11f60386e63a4e0911647b5695b080bf2821659d7065d627b134a9"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/south.png",
+        "sha256": "b39a95c7404c7b292db4871f9fec93a0008e9291ee34813e3bfff16c198722d0"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/south_east.png",
+        "sha256": "47ba65dbdd6aa51e7be8075a973d00c1e23217404bfdd4da2152773555a3a0ce"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/south_west.png",
+        "sha256": "449083dc4f1e391b12aec7e34e0e2e35c6b0bd91026f1368aee55625461b33c7"
+      },
+      {
+        "path": "apps/client-godot/assets/characters/body/base-b/idle/west.png",
+        "sha256": "55c6b6cae4ef61140d10f59074e1d882148e3ed571345f9fe725124a1fd2afe4"
+      }
+    ]
+  },
+  "directions": [
+    {
+      "body": "base-a",
+      "direction": "north",
+      "sourceAnchor": [
+        212.96,
+        421
+      ],
+      "translation": [
+        -21,
+        51
+      ],
+      "normalizedAnchor": [
+        191.96,
+        472
+      ],
+      "normalizedBounds": [
+        109,
+        69,
+        277,
+        472
+      ],
+      "despilledPixels": 304,
+      "remainingGreenEdgePixels": 0,
+      "skinPixels": 20742
+    },
+    {
+      "body": "base-a",
+      "direction": "north_east",
+      "sourceAnchor": [
+        170.794,
+        454
+      ],
+      "translation": [
+        21,
+        18
+      ],
+      "normalizedAnchor": [
+        191.794,
+        472
+      ],
+      "normalizedBounds": [
+        106,
+        62,
+        241,
+        472
+      ],
+      "despilledPixels": 248,
+      "remainingGreenEdgePixels": 0,
+      "skinPixels": 21814
+    },
+    {
+      "body": "base-a",
+      "direction": "east",
+      "sourceAnchor": [
+        180.385,
+        454
+      ],
+      "translation": [
+        12,
+        18
+      ],
+      "normalizedAnchor": [
+        192.385,
+        472
+      ],
+      "normalizedBounds": [
+        145,
+        61,
+        228,
+        472
+      ],
+      "despilledPixels": 348,
+      "remainingGreenEdgePixels": 0,
+      "skinPixels": 16961
+    },
+    {
+      "body": "base-a",
+      "direction": "south_east",
+      "sourceAnchor": [
+        216.394,
+        456
+      ],
+      "translation": [
+        -24,
+        16
+      ],
+      "normalizedAnchor": [
+        192.394,
+        472
+      ],
+      "normalizedBounds": [
+        104,
+        59,
+        246,
+        472
+      ],
+      "despilledPixels": 272,
+      "remainingGreenEdgePixels": 0,
+      "skinPixels": 22003
+    },
+    {
+      "body": "base-a",
+      "direction": "south",
+      "sourceAnchor": [
+        215.381,
+        452
+      ],
+      "translation": [
+        -23,
+        20
+      ],
+      "normalizedAnchor": [
+        192.381,
+        472
+      ],
+      "normalizedBounds": [
+        109,
+        61,
+        279,
+        472
+      ],
+      "despilledPixels": 387,
+      "remainingGreenEdgePixels": 0,
+      "skinPixels": 22098
+    },
+    {
+      "body": "base-a",
+      "direction": "south_west",
+      "sourceAnchor": [
+        122.946,
+        434
+      ],
+      "translation": [
+        69,
+        38
+      ],
+      "normalizedAnchor": [
+        191.946,
+        472
+      ],
+      "normalizedBounds": [
+        142,
+        60,
+        289,
+        472
+      ],
+      "despilledPixels": 280,
+      "remainingGreenEdgePixels": 0,
+      "skinPixels": 22026
+    },
+    {
+      "body": "base-a",
+      "direction": "west",
+      "sourceAnchor": [
+        168.326,
+        432
+      ],
+      "translation": [
+        24,
+        40
+      ],
+      "normalizedAnchor": [
+        192.326,
+        472
+      ],
+      "normalizedBounds": [
+        160,
+        62,
+        242,
+        472
+      ],
+      "despilledPixels": 370,
+      "remainingGreenEdgePixels": 0,
+      "skinPixels": 16916
+    },
+    {
+      "body": "base-a",
+      "direction": "north_west",
+      "sourceAnchor": [
+        169.09,
+        428
+      ],
+      "translation": [
+        23,
+        44
+      ],
+      "normalizedAnchor": [
+        192.09,
+        472
+      ],
+      "normalizedBounds": [
+        145,
+        65,
+        283,
+        472
+      ],
+      "despilledPixels": 166,
+      "remainingGreenEdgePixels": 0,
+      "skinPixels": 21453
+    },
+    {
+      "body": "base-b",
+      "direction": "north",
+      "sourceAnchor": [
+        242.948,
+        407
+      ],
+      "translation": [
+        -51,
+        65
+      ],
+      "normalizedAnchor": [
+        191.948,
+        472
+      ],
+      "normalizedBounds": [
+        112,
+        69,
+        273,
+        472
+      ],
+      "despilledPixels": 270,
+      "remainingGreenEdgePixels": 0,
+      "skinPixels": 19714
+    },
+    {
+      "body": "base-b",
+      "direction": "north_east",
+      "sourceAnchor": [
+        163.117,
+        453
+      ],
+      "translation": [
+        29,
+        19
+      ],
+      "normalizedAnchor": [
+        192.117,
+        472
+      ],
+      "normalizedBounds": [
+        107,
+        63,
+        238,
+        472
+      ],
+      "despilledPixels": 177,
+      "remainingGreenEdgePixels": 0,
+      "skinPixels": 20536
+    },
+    {
+      "body": "base-b",
+      "direction": "east",
+      "sourceAnchor": [
+        192.007,
+        457
+      ],
+      "translation": [
+        0,
+        15
+      ],
+      "normalizedAnchor": [
+        192.007,
+        472
+      ],
+      "normalizedBounds": [
+        148,
+        54,
+        238,
+        472
+      ],
+      "despilledPixels": 204,
+      "remainingGreenEdgePixels": 0,
+      "skinPixels": 18151
+    },
+    {
+      "body": "base-b",
+      "direction": "south_east",
+      "sourceAnchor": [
+        195.233,
+        462
+      ],
+      "translation": [
+        -3,
+        10
+      ],
+      "normalizedAnchor": [
+        192.233,
+        472
+      ],
+      "normalizedBounds": [
+        147,
+        49,
+        288,
+        472
+      ],
+      "despilledPixels": 267,
+      "remainingGreenEdgePixels": 0,
+      "skinPixels": 21665
+    },
+    {
+      "body": "base-b",
+      "direction": "south",
+      "sourceAnchor": [
+        245.527,
+        455
+      ],
+      "translation": [
+        -54,
+        17
+      ],
+      "normalizedAnchor": [
+        191.527,
+        472
+      ],
+      "normalizedBounds": [
+        111,
+        56,
+        274,
+        472
+      ],
+      "despilledPixels": 298,
+      "remainingGreenEdgePixels": 0,
+      "skinPixels": 21424
+    },
+    {
+      "body": "base-b",
+      "direction": "south_west",
+      "sourceAnchor": [
+        134.784,
+        415
+      ],
+      "translation": [
+        57,
+        57
+      ],
+      "normalizedAnchor": [
+        191.784,
+        472
+      ],
+      "normalizedBounds": [
+        104,
+        58,
+        238,
+        472
+      ],
+      "despilledPixels": 217,
+      "remainingGreenEdgePixels": 0,
+      "skinPixels": 20661
+    },
+    {
+      "body": "base-b",
+      "direction": "west",
+      "sourceAnchor": [
+        157.299,
+        414
+      ],
+      "translation": [
+        35,
+        58
+      ],
+      "normalizedAnchor": [
+        192.299,
+        472
+      ],
+      "normalizedBounds": [
+        162,
+        63,
+        238,
+        472
+      ],
+      "despilledPixels": 220,
+      "remainingGreenEdgePixels": 0,
+      "skinPixels": 15699
+    },
+    {
+      "body": "base-b",
+      "direction": "north_west",
+      "sourceAnchor": [
+        171.167,
+        407
+      ],
+      "translation": [
+        21,
+        65
+      ],
+      "normalizedAnchor": [
+        192.167,
+        472
+      ],
+      "normalizedBounds": [
+        153,
+        66,
+        283,
+        472
+      ],
+      "despilledPixels": 210,
+      "remainingGreenEdgePixels": 0,
+      "skinPixels": 19998
+    }
+  ],
+  "totals": {
+    "bodyDirectionFiles": 16,
+    "skinRuntimeFiles": 32,
+    "despilledPixels": 4238,
+    "remainingGreenEdgePixels": 0,
+    "maximumPivotXError": 0.4730000000000132,
+    "minimumSkinPixels": 15699
+  },
+  "visualQa": "planning/art-qa/character-remediation-idle-classic-v1/normalized-bodies-full.png",
+  "outputs": [
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/east.png",
+      "sha256": "9b5f09e15d2e26ade4558ec47caa9400313e606ecdde300e89aadb6176ba0e35"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/north.png",
+      "sha256": "cd5b4408bef68aea28c59fc4e532d1c25426b51e5f7333cd020b71f7bc341357"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/north_east.png",
+      "sha256": "e0344851c62e316bbcdcdef6d043b46652296dd7c319e3f0f28bf84f720ff4b5"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/north_west.png",
+      "sha256": "08f9e5e90a40b61d5fe0877f3ad036daf847ccda8d3f294230db315aecfa359a"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/east.png",
+      "sha256": "ce860ed2daae2ee480881e49a8745d77293139ea1f877361c7fc5bbb582c5961"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/north.png",
+      "sha256": "7f87b161f649b6bda5d2a9717fe469b51befa1608c9369b9fec93436c9d59ba9"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/north_east.png",
+      "sha256": "c45ca8a41604d4ec0e65d7cc673009e9ae357e67f97a9dcd44514fd0ff135e5e"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/north_west.png",
+      "sha256": "fe34f729882e5a4c22d345b33ce6a710622a126d2e1b57e12ed5dc3ad60513f4"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/south.png",
+      "sha256": "e0d0b7d8a167c34b79feda63252447a5d7d3a253afae30dbdcdf12c65daf6826"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/south_east.png",
+      "sha256": "5bf57ea22ad9855a5c01311c026bf7658089a7cda365b2bd9b03631fa39ec840"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/south_west.png",
+      "sha256": "ea105574ca2317eddee550c366f8fbbf7a095103f5e844e2db0ca1b39273d86b"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-diffuse/west.png",
+      "sha256": "c159996359ecc1f4098f3cbd4cc4fee15ee765becc7c905e5932cd33faaee160"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/east.png",
+      "sha256": "f78fde572591ce4391b9cabb3e9c896128915eaf2cb9bb1b2ad9973a4862b1b7"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/north.png",
+      "sha256": "f86aaafbbdf74b1764cbdd89fcd74863b058ccb7d48bd651536969b43871c034"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/north_east.png",
+      "sha256": "bb090830d878f48984ecf7f0b52b45b891c731d17da69bf5aa59670f10152ea9"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/north_west.png",
+      "sha256": "c60a44cf799faf5ce0d70bf370c0d0101031e5d4e72e71f0230ac96dd83b4b93"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/south.png",
+      "sha256": "c664cae847030a011e503b4ff6359857dd937bac396b0c74e47109bf47e5bc4d"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/south_east.png",
+      "sha256": "f90b84cc0073194a8e2a4f59e4a9fa83f3ed0ea42d339563ccdfd86ca298c632"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/south_west.png",
+      "sha256": "d4f4add6cf640504da710661a84aadc6fbbe328df337a8ea2afca2bd9b49a026"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/skin-mask/west.png",
+      "sha256": "61d88d0c960372052a2c574fc529e22f4908ad1d22b5ab42b03535841683ef46"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/south.png",
+      "sha256": "164752e457b0a9a190c19220c6a0d19c90f14791c0ef64d0d4b7ed254a442759"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/south_east.png",
+      "sha256": "d14c717abb21d7f38fa251d1f969e3d42d50f4b3be171d54e9ca764525c31b46"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/south_west.png",
+      "sha256": "ebdf1d813d186e8f228bb92d69fa8d86001bb2cd069552b72991c25e1357c7ce"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-a/idle/west.png",
+      "sha256": "8db85cbe50f0863a316ef446aac219917b0ffb90566339b0e3a4edf7403175f8"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/east.png",
+      "sha256": "032790d1c65156412d5ecbaf6569ecd0bd564857401f05fae89646d37aae579f"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/north.png",
+      "sha256": "e4cc3b8b9bdb474ef14d169318b4f6ba530389b5c98162f4bdee75acc8767007"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/north_east.png",
+      "sha256": "f5ffb5cf79e1b7a834e6217c4abd99196dff7837ed70a8223ea2a0ade52cfb07"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/north_west.png",
+      "sha256": "a6cc7f48496c04d36e1fffe2258716fa6604742a92de56bd42938d6283409ef7"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/east.png",
+      "sha256": "6bfb5babb36486a91fec8439d8c7d05e0a3c3ad4922ec0a80cb721988769da4f"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/north.png",
+      "sha256": "f82c5492eb955d78b8a1700ba2f49e892d5e788059a603b5ad7e465d7aa80c03"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/north_east.png",
+      "sha256": "f685951a7e1ae67367ae18193f0ac191c6b4fe36a679c8bc50b613659ef44a43"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/north_west.png",
+      "sha256": "a0c922029d289aa04c9ee0a8e714377f1604ef9ee550858fb8e5e169b74e0e8f"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/south.png",
+      "sha256": "a19448e5e595ba3f748660a9dddac74b8e4d1871c1f33bbbb19da73dee15b4cf"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/south_east.png",
+      "sha256": "36b10221d31b1ae2b775c13b1fa006d57875f34f9108c8f43bf8e025efcedd2a"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/south_west.png",
+      "sha256": "a3ca3723e3e403501f55f53be576937c4b785af9a79ddaa42a24e5697acd2b02"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-diffuse/west.png",
+      "sha256": "e39fe11acf1d39c645513a7a8fbc3aeed109bddb607fc84f6c3b5eff755b6374"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/east.png",
+      "sha256": "cafc3c4d9bbb75c37ab833783b1c220b5aabcc8fd7d9aed711084b233725d257"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/north.png",
+      "sha256": "8068c9b86f3ad8d21a8a45391d312d98e2c5d7aad0cfa30ca2f072478e5403d6"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/north_east.png",
+      "sha256": "1d9f88b3b1b2ed28ca9e4ae4429c1d977f22f6204adcf6458ed2a2ce4034cfb7"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/north_west.png",
+      "sha256": "118e78422673627cfb577355e2e0927a00c27344918b6de6bac5fafc7ae95b4e"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/south.png",
+      "sha256": "05837f0d502bfbabffc4ee905762c35003cbcb27b1677216738f13db8d33094a"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/south_east.png",
+      "sha256": "82d0114c36b2070ab174dddd9defc2a769b0596fd65e95b8b7235e237ac8c2a9"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/south_west.png",
+      "sha256": "35fa6b7b8b34b2ee839605312a9d2b6143eb6ccb758c6d1f610c91ef0598d5d5"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/skin-mask/west.png",
+      "sha256": "522b5cea0ea655c1d9cce63a0fad4bcc87fc9f7850cd666099ab04e02fca0531"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/south.png",
+      "sha256": "d139afee6de151b2755fc3e0101cfcedb36ee982d442b6a4786a316dafeb0f94"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/south_east.png",
+      "sha256": "08b80520d332fa6e7e428aa02fb29c3d1872f74e0d52e1c2ade710da96120e66"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/south_west.png",
+      "sha256": "5193017bb29dd57e784826cfbcf46be03cd54df097e3a272056dbcede54678c1"
+    },
+    {
+      "path": "apps/client-godot/assets/characters/body/base-b/idle/west.png",
+      "sha256": "08502cdd3e0b99ae2cbf02c18d543271b6350ea983e5f272c13e2e8d37ed5e8b"
+    },
+    {
+      "path": "planning/art-qa/character-remediation-idle-classic-v1/normalized-bodies-full.png",
+      "sha256": "5bbccb23e37830c55aed3cf1728cd7724089a3d0e4b76a7d960f2a3066c5f70e"
+    }
+  ]
+}

@@ -1,0 +1,1849 @@
+{
+  "schemaVersion": 1,
+  "id": "furniture-camera-geometry-audit-001",
+  "status": "failed-retract-all-nine-camera-credits",
+  "auditedOn": "2026-08-10",
+  "validator": "tools/validate-furniture-camera-geometry-v1.mjs",
+  "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+  "contract": {
+    "schemaVersion": 1,
+    "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+    "requiredDirections": [
+      "north",
+      "east",
+      "south",
+      "west"
+    ],
+    "expectedGroundSlopes": [
+      -0.5,
+      0.5
+    ],
+    "expectedGroundAnglesDegrees": [
+      -26.56505117707799,
+      26.56505117707799
+    ],
+    "groundAngleToleranceDegrees": 1.25,
+    "groundSlopeTolerance": 0.03,
+    "expectedVerticalAngleDegrees": 90,
+    "verticalAngleToleranceDegrees": 1.25,
+    "scanStepDegrees": 0.5,
+    "edgeOrientationToleranceDegrees": 2.5,
+    "strongEdgePercentile": 0.82,
+    "minimumEdgeMagnitude": 100,
+    "minimumDominantLineScore": 8
+  },
+  "auditedBatchIds": [
+    "furniture-core-directional-011",
+    "furniture-core-directional-012",
+    "furniture-core-directional-013"
+  ],
+  "previouslyCreditedAssetIds": [
+    "furniture-chemical-cabinet",
+    "furniture-dish-machine-high-temp",
+    "furniture-three-comp-sink",
+    "furniture-wet-floor-station",
+    "furniture-linen-storage",
+    "furniture-water-station",
+    "furniture-office-desk",
+    "furniture-manager-console",
+    "furniture-essential-cafe-two-top"
+  ],
+  "measuredConformantAssetIds": [],
+  "retractedAssetIds": [
+    "furniture-chemical-cabinet",
+    "furniture-dish-machine-high-temp",
+    "furniture-three-comp-sink",
+    "furniture-wet-floor-station",
+    "furniture-linen-storage",
+    "furniture-water-station",
+    "furniture-office-desk",
+    "furniture-manager-console",
+    "furniture-essential-cafe-two-top"
+  ],
+  "auditedAssets": [
+    {
+      "batchId": "furniture-core-directional-011",
+      "assetId": "furniture-chemical-cabinet",
+      "status": "failed-measured-camera-geometry",
+      "passed": false,
+      "failedDirections": [
+        "north",
+        "east",
+        "south",
+        "west"
+      ],
+      "measurements": {
+        "north": {
+          "path": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-chemical-cabinet-north.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 327.769,
+          "strongEdgePixels": 12153,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 15,
+              "slope": 0.267949,
+              "score": 353.782,
+              "strongestParallelLineSupports": [
+                209.251,
+                122.428,
+                105.42
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -28.5,
+              "slope": -0.542956,
+              "score": 75.134,
+              "strongestParallelLineSupports": [
+                49.851,
+                24.58,
+                13.696
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 261.182,
+              "strongestParallelLineSupports": [
+                121.395,
+                112.534,
+                110.774
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 15.0° / slope 0.268 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -28.5° / slope -0.543 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        },
+        "east": {
+          "path": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-chemical-cabinet-east.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 307.598,
+          "strongEdgePixels": 7932,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 21.5,
+              "slope": 0.39391,
+              "score": 124.934,
+              "strongestParallelLineSupports": [
+                77.018,
+                45.228,
+                27.99
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -26.5,
+              "slope": -0.498582,
+              "score": 237.866,
+              "strongestParallelLineSupports": [
+                132.839,
+                110.835,
+                43.8
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 235.9,
+              "strongestParallelLineSupports": [
+                112.84,
+                112.696,
+                77.077
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 21.5° / slope 0.394 is outside +26.565° / +0.500 tolerance"
+          ],
+          "passed": false
+        },
+        "south": {
+          "path": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-chemical-cabinet-south.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 205.34,
+          "strongEdgePixels": 16791,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 16,
+              "slope": 0.286745,
+              "score": 387.094,
+              "strongestParallelLineSupports": [
+                204.102,
+                154.536,
+                134.18
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -25,
+              "slope": -0.466308,
+              "score": 136.507,
+              "strongestParallelLineSupports": [
+                85.757,
+                41.764,
+                38.855
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 357.789,
+              "strongestParallelLineSupports": [
+                177.539,
+                147.235,
+                139.647
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 16.0° / slope 0.287 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -25.0° / slope -0.466 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        },
+        "west": {
+          "path": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-chemical-cabinet-west.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 323.194,
+          "strongEdgePixels": 6882,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 21,
+              "slope": 0.383864,
+              "score": 141.974,
+              "strongestParallelLineSupports": [
+                89.416,
+                43.104,
+                40.459
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -26.5,
+              "slope": -0.498582,
+              "score": 261.973,
+              "strongestParallelLineSupports": [
+                160.649,
+                87.944,
+                70.733
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 278.574,
+              "strongestParallelLineSupports": [
+                127.774,
+                123.231,
+                116.756
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 21.0° / slope 0.384 is outside +26.565° / +0.500 tolerance"
+          ],
+          "passed": false
+        }
+      }
+    },
+    {
+      "batchId": "furniture-core-directional-011",
+      "assetId": "furniture-dish-machine-high-temp",
+      "status": "failed-measured-camera-geometry",
+      "passed": false,
+      "failedDirections": [
+        "north",
+        "east",
+        "south",
+        "west"
+      ],
+      "measurements": {
+        "north": {
+          "path": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-dish-machine-high-temp-north.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 338.189,
+          "strongEdgePixels": 7985,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 14,
+              "slope": 0.249328,
+              "score": 264.048,
+              "strongestParallelLineSupports": [
+                172.917,
+                87.222,
+                51.431
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -21.5,
+              "slope": -0.39391,
+              "score": 104.972,
+              "strongestParallelLineSupports": [
+                59.266,
+                44.104,
+                25.256
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 88.5,
+              "score": 304.404,
+              "strongestParallelLineSupports": [
+                149.932,
+                137.511,
+                102.677
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 14.0° / slope 0.249 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -21.5° / slope -0.394 is outside -26.565° / -0.500 tolerance",
+            "dominant upright 88.5° is outside screen-vertical tolerance"
+          ],
+          "passed": false
+        },
+        "east": {
+          "path": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-dish-machine-high-temp-east.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 299.908,
+          "strongEdgePixels": 7035,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 24.5,
+              "slope": 0.455726,
+              "score": 126.465,
+              "strongestParallelLineSupports": [
+                70.734,
+                58.437,
+                23.807
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -23.5,
+              "slope": -0.434812,
+              "score": 171.335,
+              "strongestParallelLineSupports": [
+                106.044,
+                64.524,
+                33.796
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 267.757,
+              "strongestParallelLineSupports": [
+                124.027,
+                119.199,
+                108.662
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 24.5° / slope 0.456 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -23.5° / slope -0.435 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        },
+        "south": {
+          "path": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-dish-machine-high-temp-south.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 292.385,
+          "strongEdgePixels": 8495,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 11.5,
+              "slope": 0.203452,
+              "score": 243.451,
+              "strongestParallelLineSupports": [
+                143.875,
+                86.032,
+                70.103
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -24.5,
+              "slope": -0.455726,
+              "score": 93.595,
+              "strongestParallelLineSupports": [
+                62.494,
+                32.724,
+                13.115
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 338.936,
+              "strongestParallelLineSupports": [
+                178.914,
+                137.901,
+                113.192
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 11.5° / slope 0.203 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -24.5° / slope -0.456 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        },
+        "west": {
+          "path": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-dish-machine-high-temp-west.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 364.197,
+          "strongEdgePixels": 5256,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 25,
+              "slope": 0.466308,
+              "score": 117.873,
+              "strongestParallelLineSupports": [
+                65.797,
+                57.676,
+                17.639
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -23.5,
+              "slope": -0.434812,
+              "score": 214.035,
+              "strongestParallelLineSupports": [
+                109.369,
+                91.109,
+                72.668
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 233.66,
+              "strongestParallelLineSupports": [
+                136.676,
+                78.459,
+                76.28
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 25.0° / slope 0.466 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -23.5° / slope -0.435 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        }
+      }
+    },
+    {
+      "batchId": "furniture-core-directional-011",
+      "assetId": "furniture-three-comp-sink",
+      "status": "failed-measured-camera-geometry",
+      "passed": false,
+      "failedDirections": [
+        "north",
+        "east",
+        "south",
+        "west"
+      ],
+      "measurements": {
+        "north": {
+          "path": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-three-comp-sink-north.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 388.075,
+          "strongEdgePixels": 12228,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 18.5,
+              "slope": 0.334595,
+              "score": 635.757,
+              "strongestParallelLineSupports": [
+                316.786,
+                268.377,
+                235.376
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -34.5,
+              "slope": -0.687281,
+              "score": 176.822,
+              "strongestParallelLineSupports": [
+                84.709,
+                82.089,
+                61.092
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 150.985,
+              "strongestParallelLineSupports": [
+                78.936,
+                64.035,
+                48.046
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 18.5° / slope 0.335 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -34.5° / slope -0.687 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        },
+        "east": {
+          "path": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-three-comp-sink-east.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 423.142,
+          "strongEdgePixels": 10674,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 33.5,
+              "slope": 0.661886,
+              "score": 160.87,
+              "strongestParallelLineSupports": [
+                84.104,
+                69.12,
+                49.852
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -26.5,
+              "slope": -0.498582,
+              "score": 560.041,
+              "strongestParallelLineSupports": [
+                296.401,
+                214.665,
+                205.281
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 111.848,
+              "strongestParallelLineSupports": [
+                58.11,
+                44.009,
+                41.464
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 33.5° / slope 0.662 is outside +26.565° / +0.500 tolerance"
+          ],
+          "passed": false
+        },
+        "south": {
+          "path": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-three-comp-sink-south.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 417.897,
+          "strongEdgePixels": 8824,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 22,
+              "slope": 0.404026,
+              "score": 528.976,
+              "strongestParallelLineSupports": [
+                250.047,
+                239.865,
+                198.06
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -36,
+              "slope": -0.726543,
+              "score": 130.717,
+              "strongestParallelLineSupports": [
+                65.402,
+                59.901,
+                40.78
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 107.483,
+              "strongestParallelLineSupports": [
+                50.63,
+                46.717,
+                43.631
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 22.0° / slope 0.404 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -36.0° / slope -0.727 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        },
+        "west": {
+          "path": "planning/art-qa/furniture-core-directional-011/alpha-source/furniture-three-comp-sink-west.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 433.172,
+          "strongEdgePixels": 12015,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 38,
+              "slope": 0.781286,
+              "score": 175.058,
+              "strongestParallelLineSupports": [
+                93.188,
+                73.35,
+                53.716
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -17.5,
+              "slope": -0.315299,
+              "score": 611.364,
+              "strongestParallelLineSupports": [
+                391.037,
+                202.694,
+                136.614
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 119.519,
+              "strongestParallelLineSupports": [
+                56.574,
+                51.427,
+                48.751
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 38.0° / slope 0.781 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -17.5° / slope -0.315 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        }
+      }
+    },
+    {
+      "batchId": "furniture-core-directional-012",
+      "assetId": "furniture-wet-floor-station",
+      "status": "failed-measured-camera-geometry",
+      "passed": false,
+      "failedDirections": [
+        "north",
+        "east",
+        "south",
+        "west"
+      ],
+      "measurements": {
+        "north": {
+          "path": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-wet-floor-station-north.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 245.938,
+          "strongEdgePixels": 8848,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 36.5,
+              "slope": 0.739961,
+              "score": 36.219,
+              "strongestParallelLineSupports": [
+                18.288,
+                15.944,
+                11.946
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -19,
+              "slope": -0.344328,
+              "score": 183.613,
+              "strongestParallelLineSupports": [
+                91.652,
+                75.748,
+                70.301
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 213.393,
+              "strongestParallelLineSupports": [
+                106.919,
+                85.452,
+                84.772
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 36.5° / slope 0.740 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -19.0° / slope -0.344 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        },
+        "east": {
+          "path": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-wet-floor-station-east.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 196.869,
+          "strongEdgePixels": 8680,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 37,
+              "slope": 0.753554,
+              "score": 46.133,
+              "strongestParallelLineSupports": [
+                22.069,
+                19.946,
+                18.209
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -19.5,
+              "slope": -0.354119,
+              "score": 106.393,
+              "strongestParallelLineSupports": [
+                56.373,
+                49.187,
+                26.259
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 53.311,
+              "strongestParallelLineSupports": [
+                26.325,
+                25.012,
+                16.454
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 37.0° / slope 0.754 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -19.5° / slope -0.354 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        },
+        "south": {
+          "path": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-wet-floor-station-south.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 204.898,
+          "strongEdgePixels": 7497,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 37.5,
+              "slope": 0.767327,
+              "score": 44.189,
+              "strongestParallelLineSupports": [
+                27.002,
+                15.009,
+                11.861
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -19.5,
+              "slope": -0.354119,
+              "score": 108.592,
+              "strongestParallelLineSupports": [
+                53.738,
+                51.268,
+                32.804
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 86.5,
+              "score": 51.627,
+              "strongestParallelLineSupports": [
+                24.738,
+                22.093,
+                20.638
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 37.5° / slope 0.767 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -19.5° / slope -0.354 is outside -26.565° / -0.500 tolerance",
+            "dominant upright 86.5° is outside screen-vertical tolerance"
+          ],
+          "passed": false
+        },
+        "west": {
+          "path": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-wet-floor-station-west.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 238.899,
+          "strongEdgePixels": 7399,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 36,
+              "slope": 0.726543,
+              "score": 45.147,
+              "strongestParallelLineSupports": [
+                27.151,
+                16.037,
+                11.937
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -19.5,
+              "slope": -0.354119,
+              "score": 112.801,
+              "strongestParallelLineSupports": [
+                60.517,
+                44.023,
+                38.534
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 183.339,
+              "strongestParallelLineSupports": [
+                97.196,
+                74.249,
+                60.91
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 36.0° / slope 0.727 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -19.5° / slope -0.354 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        }
+      }
+    },
+    {
+      "batchId": "furniture-core-directional-012",
+      "assetId": "furniture-linen-storage",
+      "status": "failed-measured-camera-geometry",
+      "passed": false,
+      "failedDirections": [
+        "north",
+        "east",
+        "south",
+        "west"
+      ],
+      "measurements": {
+        "north": {
+          "path": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-linen-storage-north.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 276.325,
+          "strongEdgePixels": 10978,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 18,
+              "slope": 0.32492,
+              "score": 328.495,
+              "strongestParallelLineSupports": [
+                201.513,
+                115.341,
+                80.953
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -38,
+              "slope": -0.781286,
+              "score": 111.19,
+              "strongestParallelLineSupports": [
+                62.101,
+                49.517,
+                23.904
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 265.935,
+              "strongestParallelLineSupports": [
+                120.532,
+                117.407,
+                114.695
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 18.0° / slope 0.325 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -38.0° / slope -0.781 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        },
+        "east": {
+          "path": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-linen-storage-east.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 262.585,
+          "strongEdgePixels": 9772,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 19.5,
+              "slope": 0.354119,
+              "score": 157.615,
+              "strongestParallelLineSupports": [
+                84.08,
+                63.428,
+                51.927
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -42,
+              "slope": -0.900404,
+              "score": 286.704,
+              "strongestParallelLineSupports": [
+                133.426,
+                128.619,
+                113.627
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 193.681,
+              "strongestParallelLineSupports": [
+                93.488,
+                81.523,
+                78.102
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 19.5° / slope 0.354 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -42.0° / slope -0.900 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        },
+        "south": {
+          "path": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-linen-storage-south.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 289.446,
+          "strongEdgePixels": 9580,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 34,
+              "slope": 0.674509,
+              "score": 140.352,
+              "strongestParallelLineSupports": [
+                95.717,
+                42.264,
+                25.874
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -20,
+              "slope": -0.36397,
+              "score": 306.713,
+              "strongestParallelLineSupports": [
+                192.425,
+                118.91,
+                50.21
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 210.478,
+              "strongestParallelLineSupports": [
+                112.733,
+                80.778,
+                74.325
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 34.0° / slope 0.675 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -20.0° / slope -0.364 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        },
+        "west": {
+          "path": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-linen-storage-west.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 271.22,
+          "strongEdgePixels": 11518,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 36.5,
+              "slope": 0.739961,
+              "score": 164.032,
+              "strongestParallelLineSupports": [
+                110.148,
+                50.903,
+                31.414
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -21,
+              "slope": -0.383864,
+              "score": 333.916,
+              "strongestParallelLineSupports": [
+                179.717,
+                172.993,
+                48.907
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 234.264,
+              "strongestParallelLineSupports": [
+                117.101,
+                94.432,
+                92.68
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 36.5° / slope 0.740 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -21.0° / slope -0.384 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        }
+      }
+    },
+    {
+      "batchId": "furniture-core-directional-012",
+      "assetId": "furniture-water-station",
+      "status": "failed-measured-camera-geometry",
+      "passed": false,
+      "failedDirections": [
+        "north",
+        "east",
+        "south",
+        "west"
+      ],
+      "measurements": {
+        "north": {
+          "path": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-water-station-north.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 355.446,
+          "strongEdgePixels": 6981,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 21,
+              "slope": 0.383864,
+              "score": 259.1,
+              "strongestParallelLineSupports": [
+                121.926,
+                114.307,
+                102.888
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -24,
+              "slope": -0.445229,
+              "score": 149.771,
+              "strongestParallelLineSupports": [
+                88.277,
+                67.728,
+                21.396
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 375.754,
+              "strongestParallelLineSupports": [
+                193.439,
+                147.758,
+                142.992
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 21.0° / slope 0.384 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -24.0° / slope -0.445 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        },
+        "east": {
+          "path": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-water-station-east.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 362.368,
+          "strongEdgePixels": 5913,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 20.5,
+              "slope": 0.373885,
+              "score": 195.067,
+              "strongestParallelLineSupports": [
+                119.804,
+                66.449,
+                50.853
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -24,
+              "slope": -0.445229,
+              "score": 149.412,
+              "strongestParallelLineSupports": [
+                84.346,
+                76.32,
+                15.651
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 423.757,
+              "strongestParallelLineSupports": [
+                219.224,
+                165.407,
+                160.955
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 20.5° / slope 0.374 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -24.0° / slope -0.445 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        },
+        "south": {
+          "path": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-water-station-south.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 356.432,
+          "strongEdgePixels": 4806,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 21,
+              "slope": 0.383864,
+              "score": 189.753,
+              "strongestParallelLineSupports": [
+                121.746,
+                61.9,
+                43.164
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -24.5,
+              "slope": -0.455726,
+              "score": 134.464,
+              "strongestParallelLineSupports": [
+                86.261,
+                53.574,
+                16.045
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 307.011,
+              "strongestParallelLineSupports": [
+                154.892,
+                125.422,
+                116.105
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 21.0° / slope 0.384 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -24.5° / slope -0.456 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        },
+        "west": {
+          "path": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-water-station-west.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 389.391,
+          "strongEdgePixels": 5886,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 25,
+              "slope": 0.466308,
+              "score": 149.842,
+              "strongestParallelLineSupports": [
+                98.565,
+                48.753,
+                29.424
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -22,
+              "slope": -0.404026,
+              "score": 203.467,
+              "strongestParallelLineSupports": [
+                108.219,
+                82.005,
+                67.489
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 389.196,
+              "strongestParallelLineSupports": [
+                204.984,
+                149.775,
+                143.761
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 25.0° / slope 0.466 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -22.0° / slope -0.404 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        }
+      }
+    },
+    {
+      "batchId": "furniture-core-directional-013",
+      "assetId": "furniture-office-desk",
+      "status": "failed-measured-camera-geometry",
+      "passed": false,
+      "failedDirections": [
+        "north",
+        "east",
+        "south",
+        "west"
+      ],
+      "measurements": {
+        "north": {
+          "path": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-office-desk-north.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 164.46,
+          "strongEdgePixels": 7157,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 12,
+              "slope": 0.212557,
+              "score": 82.51,
+              "strongestParallelLineSupports": [
+                43.743,
+                31.134,
+                30.832
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -29.5,
+              "slope": -0.565773,
+              "score": 39.399,
+              "strongestParallelLineSupports": [
+                21.317,
+                16.688,
+                11.13
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 72.222,
+              "strongestParallelLineSupports": [
+                33.248,
+                31.237,
+                31.092
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 12.0° / slope 0.213 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -29.5° / slope -0.566 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        },
+        "east": {
+          "path": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-office-desk-east.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 185.986,
+          "strongEdgePixels": 7087,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 16,
+              "slope": 0.286745,
+              "score": 72.65,
+              "strongestParallelLineSupports": [
+                47.101,
+                20.745,
+                19.981
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -26,
+              "slope": -0.487733,
+              "score": 48.143,
+              "strongestParallelLineSupports": [
+                31.698,
+                14.234,
+                11.538
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 63.15,
+              "strongestParallelLineSupports": [
+                31.073,
+                27.89,
+                22.319
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 16.0° / slope 0.287 is outside +26.565° / +0.500 tolerance"
+          ],
+          "passed": false
+        },
+        "south": {
+          "path": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-office-desk-south.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 164.515,
+          "strongEdgePixels": 7827,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 28.5,
+              "slope": 0.542956,
+              "score": 47.154,
+              "strongestParallelLineSupports": [
+                25.376,
+                21.124,
+                11.869
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -16,
+              "slope": -0.286745,
+              "score": 47.041,
+              "strongestParallelLineSupports": [
+                23.713,
+                21.72,
+                14.077
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 56.388,
+              "strongestParallelLineSupports": [
+                28.528,
+                23.071,
+                21.115
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 28.5° / slope 0.543 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -16.0° / slope -0.287 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        },
+        "west": {
+          "path": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-office-desk-west.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 122.54,
+          "strongEdgePixels": 10584,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 28,
+              "slope": 0.531709,
+              "score": 47.38,
+              "strongestParallelLineSupports": [
+                25.041,
+                21.346,
+                12.659
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -19,
+              "slope": -0.344328,
+              "score": 84.731,
+              "strongestParallelLineSupports": [
+                45.628,
+                34.919,
+                25.827
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 36.075,
+              "strongestParallelLineSupports": [
+                19.207,
+                14.214,
+                12.415
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 28.0° / slope 0.532 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -19.0° / slope -0.344 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        }
+      }
+    },
+    {
+      "batchId": "furniture-core-directional-013",
+      "assetId": "furniture-manager-console",
+      "status": "failed-measured-camera-geometry",
+      "passed": false,
+      "failedDirections": [
+        "north",
+        "east",
+        "south",
+        "west"
+      ],
+      "measurements": {
+        "north": {
+          "path": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-manager-console-north.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 202.087,
+          "strongEdgePixels": 5829,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 19.5,
+              "slope": 0.354119,
+              "score": 72.528,
+              "strongestParallelLineSupports": [
+                54.184,
+                14.851,
+                14.412
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -26,
+              "slope": -0.487733,
+              "score": 14.361,
+              "strongestParallelLineSupports": [
+                9.08,
+                4.836,
+                3.309
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 34.3,
+              "strongestParallelLineSupports": [
+                16.778,
+                15.075,
+                12.431
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 19.5° / slope 0.354 is outside +26.565° / +0.500 tolerance"
+          ],
+          "passed": false
+        },
+        "east": {
+          "path": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-manager-console-east.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 168.395,
+          "strongEdgePixels": 4956,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 21.5,
+              "slope": 0.39391,
+              "score": 26.445,
+              "strongestParallelLineSupports": [
+                15.431,
+                10.116,
+                6.856
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -29.5,
+              "slope": -0.565773,
+              "score": 47.863,
+              "strongestParallelLineSupports": [
+                27.537,
+                21.36,
+                8.612
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 83.273,
+              "strongestParallelLineSupports": [
+                40.204,
+                39.031,
+                27.591
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 21.5° / slope 0.394 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -29.5° / slope -0.566 is outside -26.565° / -0.500 tolerance"
+          ],
+          "passed": false
+        },
+        "south": {
+          "path": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-manager-console-south.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 212.329,
+          "strongEdgePixels": 4331,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 23.5,
+              "slope": 0.434812,
+              "score": 45.039,
+              "strongestParallelLineSupports": [
+                30.516,
+                15.572,
+                5.687
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -27.5,
+              "slope": -0.520567,
+              "score": 103.691,
+              "strongestParallelLineSupports": [
+                51.675,
+                45.013,
+                36.511
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 89.5,
+              "score": 100.631,
+              "strongestParallelLineSupports": [
+                51.208,
+                44.18,
+                32.576
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 23.5° / slope 0.435 is outside +26.565° / +0.500 tolerance"
+          ],
+          "passed": false
+        },
+        "west": {
+          "path": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-manager-console-west.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 214.156,
+          "strongEdgePixels": 4780,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 20.5,
+              "slope": 0.373885,
+              "score": 35.981,
+              "strongestParallelLineSupports": [
+                23.637,
+                13.924,
+                3.801
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -21.5,
+              "slope": -0.39391,
+              "score": 128.219,
+              "strongestParallelLineSupports": [
+                66.406,
+                64.124,
+                27.438
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 75.5,
+              "score": 48.893,
+              "strongestParallelLineSupports": [
+                33.53,
+                12.531,
+                11.931
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 20.5° / slope 0.374 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -21.5° / slope -0.394 is outside -26.565° / -0.500 tolerance",
+            "dominant upright 75.5° is outside screen-vertical tolerance"
+          ],
+          "passed": false
+        }
+      }
+    },
+    {
+      "batchId": "furniture-core-directional-013",
+      "assetId": "furniture-essential-cafe-two-top",
+      "status": "failed-measured-camera-geometry",
+      "passed": false,
+      "failedDirections": [
+        "north",
+        "east",
+        "south",
+        "west"
+      ],
+      "measurements": {
+        "north": {
+          "path": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-essential-cafe-two-top-north.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 233.199,
+          "strongEdgePixels": 5339,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 30.5,
+              "slope": 0.589045,
+              "score": 92.264,
+              "strongestParallelLineSupports": [
+                58.88,
+                30.335,
+                21.265
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -32,
+              "slope": -0.624869,
+              "score": 93.663,
+              "strongestParallelLineSupports": [
+                51.28,
+                34.657,
+                32.779
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 86.5,
+              "score": 11.288,
+              "strongestParallelLineSupports": [
+                6.089,
+                4.395,
+                3.807
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 30.5° / slope 0.589 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -32.0° / slope -0.625 is outside -26.565° / -0.500 tolerance",
+            "dominant upright 86.5° is outside screen-vertical tolerance"
+          ],
+          "passed": false
+        },
+        "east": {
+          "path": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-essential-cafe-two-top-east.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 234.689,
+          "strongEdgePixels": 5275,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 32,
+              "slope": 0.624869,
+              "score": 66.418,
+              "strongestParallelLineSupports": [
+                33.684,
+                29.071,
+                21.861
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -32.5,
+              "slope": -0.63707,
+              "score": 86.235,
+              "strongestParallelLineSupports": [
+                49.433,
+                33.909,
+                22.74
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 85,
+              "score": 36.096,
+              "strongestParallelLineSupports": [
+                21.525,
+                12.509,
+                10.378
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 32.0° / slope 0.625 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -32.5° / slope -0.637 is outside -26.565° / -0.500 tolerance",
+            "dominant upright 85.0° is outside screen-vertical tolerance"
+          ],
+          "passed": false
+        },
+        "south": {
+          "path": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-essential-cafe-two-top-south.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 224.205,
+          "strongEdgePixels": 5639,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 31,
+              "slope": 0.600861,
+              "score": 77.687,
+              "strongestParallelLineSupports": [
+                38.709,
+                32.363,
+                29.411
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -32,
+              "slope": -0.624869,
+              "score": 85.167,
+              "strongestParallelLineSupports": [
+                42.873,
+                39.283,
+                25.664
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 85.5,
+              "score": 12.555,
+              "strongestParallelLineSupports": [
+                7.804,
+                3.814,
+                3.78
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 31.0° / slope 0.601 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -32.0° / slope -0.625 is outside -26.565° / -0.500 tolerance",
+            "dominant upright 85.5° is outside screen-vertical tolerance"
+          ],
+          "passed": false
+        },
+        "west": {
+          "path": "planning/art-qa/furniture-core-directional-013/alpha-source/furniture-essential-cafe-two-top-west.png",
+          "dimensions": [
+            627,
+            627
+          ],
+          "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+          "strongEdgeThreshold": 224.856,
+          "strongEdgePixels": 5523,
+          "dominantLines": {
+            "positiveGround": {
+              "angleDegrees": 32,
+              "slope": 0.624869,
+              "score": 77.917,
+              "strongestParallelLineSupports": [
+                41.517,
+                32.478,
+                24.083
+              ]
+            },
+            "negativeGround": {
+              "angleDegrees": -32.5,
+              "slope": -0.63707,
+              "score": 91.656,
+              "strongestParallelLineSupports": [
+                52.123,
+                38.333,
+                21.566
+              ]
+            },
+            "vertical": {
+              "angleDegrees": 86.5,
+              "score": 41.439,
+              "strongestParallelLineSupports": [
+                21.39,
+                16.625,
+                15.161
+              ]
+            }
+          },
+          "reasons": [
+            "positive ground axis 32.0° / slope 0.625 is outside +26.565° / +0.500 tolerance",
+            "negative ground axis -32.5° / slope -0.637 is outside -26.565° / -0.500 tolerance",
+            "dominant upright 86.5° is outside screen-vertical tolerance"
+          ],
+          "passed": false
+        }
+      }
+    }
+  ],
+  "conclusion": "All nine previously credited assets fail at least one of the four exact source-frame geometry checks. Historical source, contact-sheet, and native runtime evidence remains durable, but visual acceptance did not prove the declared ±0.5 ground axes. Production camera credit is retracted until replacement bytes pass this deterministic measurement gate and a new native review."
+}

@@ -26,6 +26,11 @@
       "dining",
       "asset:furniture-oak-two-top"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-oak-two-top",
     "upkeepCents": 337,
@@ -63,6 +68,11 @@
       "dining",
       "asset:furniture-walnut-four-top"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-walnut-four-top",
     "upkeepCents": 616,
@@ -100,6 +110,11 @@
       "dining",
       "asset:furniture-banquette-section"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-banquette-section",
     "upkeepCents": 1155,
@@ -138,6 +153,11 @@
       "dining",
       "asset:furniture-commercial-chair"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-commercial-chair",
     "upkeepCents": 102,
@@ -175,6 +195,11 @@
       "dining",
       "asset:furniture-premium-chair"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-premium-chair",
     "upkeepCents": 225,
@@ -213,6 +238,11 @@
       "service",
       "asset:furniture-host-stand-pro"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-host-stand-pro",
     "upkeepCents": 808,
@@ -253,6 +283,11 @@
       "service",
       "asset:furniture-server-station-pro"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-server-station-pro",
     "upkeepCents": 1010,
@@ -292,6 +327,11 @@
       "service",
       "asset:furniture-pos-terminal"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-pos-terminal",
     "upkeepCents": 408,
@@ -335,6 +375,11 @@
       "kitchen",
       "asset:furniture-expo-pass-heated"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-expo-pass-heated",
     "upkeepCents": 1806,
@@ -377,6 +422,11 @@
       "kitchen",
       "asset:furniture-six-burner-range"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-six-burner-range",
     "upkeepCents": 2918,
@@ -418,6 +468,11 @@
       "kitchen",
       "asset:furniture-plancha-commercial"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-plancha-commercial",
     "upkeepCents": 1476,
@@ -459,6 +514,11 @@
       "kitchen",
       "asset:furniture-convection-oven"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-convection-oven",
     "upkeepCents": 2461,
@@ -501,6 +561,11 @@
       "kitchen",
       "asset:furniture-prep-table-refrigerated"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-prep-table-refrigerated",
     "upkeepCents": 1699,
@@ -539,6 +604,11 @@
       "storage",
       "asset:furniture-walkin-rack"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-walkin-rack",
     "upkeepCents": 473,
@@ -577,6 +647,11 @@
       "storage",
       "asset:furniture-dry-storage-rack"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-dry-storage-rack",
     "upkeepCents": 322,
@@ -618,6 +693,11 @@
       "utility",
       "asset:furniture-chemical-cabinet"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-chemical-cabinet",
     "upkeepCents": 373,
@@ -660,6 +740,11 @@
       "utility",
       "asset:furniture-dish-machine-high-temp"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-dish-machine-high-temp",
     "upkeepCents": 3510,
@@ -701,6 +786,11 @@
       "utility",
       "asset:furniture-three-comp-sink"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-three-comp-sink",
     "upkeepCents": 1203,
@@ -1016,6 +1106,11 @@
       "utility",
       "asset:furniture-wet-floor-station"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-wet-floor-station",
     "upkeepCents": 545,
@@ -1054,6 +1149,11 @@
       "service",
       "asset:furniture-linen-storage"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-linen-storage",
     "upkeepCents": 460,
@@ -1094,6 +1194,11 @@
       "service",
       "asset:furniture-water-station"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-water-station",
     "upkeepCents": 821,
@@ -1135,6 +1240,11 @@
       "office",
       "asset:furniture-office-desk"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-office-desk",
     "upkeepCents": 419,
@@ -1176,6 +1286,11 @@
       "office",
       "asset:furniture-manager-console"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-manager-console",
     "upkeepCents": 1123,
@@ -1214,6 +1329,11 @@
       "dining",
       "asset:furniture-essential-cafe-two-top"
     ],
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "inventoryScope": "restaurant",
     "assetId": "furniture-essential-cafe-two-top",
     "upkeepCents": 194,

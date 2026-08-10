@@ -108,7 +108,7 @@ The starting shell is 24×16 cells and can expand to the configured limit. Floor
 
 Placed items immediately change effective restaurant rating, arriving-party happiness, visible role workload, maintenance-task volume, reliability risk, task support, review baselines and shift economics. Wear advances at settlement, transitions through worn and broken states, raises role-authentic maintenance pressure, and can be repaired by the owner with audited treasury spending.
 
-Artwork is still a measured production track: all 16 core pieces and four production-catalog pieces have unique generated top-down raster sprites. The validator reports 20/229 furniture coverage, so the remaining 209 sprites and 45 bespoke role-item icons are explicit blockers rather than silent fallback claims. Role items currently render unique deterministic badge icons until their raster icon exists.
+Production furniture uses transparent north/east/south/west sprites authored for the elevated orthographic-isometric restaurant floor. Files under `assets/objects/generated/` use the obsolete direct-overhead camera and remain identity/material references only; they never count as runtime production art. Live furniture, equipment, construction, world/UI, and modular-character status is reported only by the generated [production art ledger](ART_PROGRESS.md), including every visual-review, runtime-binding, remote-preservation, and CI gate.
 
 Current studio validation covers plot bounds, footprint overlap, owner authority, cost, four rotations, and sale. Utility routing, building-code clearance, undo/history, floor switching, collaborative blueprints, and flow heatmaps remain roadmap work.
 

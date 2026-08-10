@@ -19,7 +19,8 @@ assert.match(project, /run\/main_scene="res:\/\/main\.tscn"/);
 assert.match(project, /config\/features=PackedStringArray\("4\.4"/);
 assert.doesNotMatch(project, /WebView|JavaScript|browser/i);
 
-const scripts = walk(resolve(CLIENT, "scripts")).filter((path) => extname(path) === ".gd");
+const scriptRoots = [resolve(CLIENT, "scripts"), resolve(CLIENT, "tests")].filter(existsSync);
+const scripts = scriptRoots.flatMap(walk).filter((path) => extname(path) === ".gd");
 const required = ["main.gd", "api_client.gd", "realtime_client.gd", "world_globe.gd", "restaurant_floor.gd", "task_panel.gd", "minigame_stage.gd", "builder_palette.gd", "inventory_panel.gd"];
 for (const name of required) assert.ok(scripts.some((p) => p.endsWith(`/${name}`) || p.endsWith(`\\${name}`)), `Missing ${name}.`);
 
@@ -84,14 +85,19 @@ assert.ok(svgs.length >= 10, "At least ten individual native SVG assets are requ
 const rasterAssets = walk(resolve(CLIENT, "assets")).filter((path) => /\.(png|jpe?g|webp)$/i.test(path));
 const approvedRasterRoots = [
   resolve(CLIENT, "assets/objects/generated"),
+  resolve(CLIENT, "assets/objects/directional"),
+  resolve(CLIENT, "assets/characters"),
+  resolve(CLIENT, "assets/construction"),
+  resolve(CLIENT, "assets/environment"),
   resolve(CLIENT, "assets/items"),
   resolve(CLIENT, "assets/ui"),
+  resolve(CLIENT, "assets/world"),
 ];
 const unscopedRasters = rasterAssets.filter((path) => !approvedRasterRoots.some((root) => path.startsWith(`${root}/`) || path.startsWith(`${root}\\`)));
-assert.deepEqual(unscopedRasters, [], "Raster art must remain modular object, item, or UI art; baked restaurant/world backgrounds are forbidden.");
+assert.deepEqual(unscopedRasters, [], "Raster art must remain inside an explicit modular object, character, construction, environment, item, UI, or world-art root; baked restaurant backgrounds are forbidden.");
 const coreFurniture = JSON.parse(readFileSync(resolve(ROOT, "packages/game-data/core/furniture.json"), "utf8"));
 for (const item of coreFurniture) {
-  assert.ok(existsSync(resolve(CLIENT, "assets/objects/generated", `${item.id}.png`)), `Core furniture ${item.id} is missing its individual production sprite.`);
+  assert.ok(existsSync(resolve(CLIENT, "assets/objects/generated", `${item.id}.png`)), `Core furniture ${item.id} is missing its preserved legacy reference sprite.`);
 }
 
 const dataRoot = resolve(ROOT, "packages/game-data");
@@ -110,32 +116,56 @@ const furnitureWithArtwork = [...furnitureById.values()].filter((item) => {
   const candidates = [...new Set([item.assetId, item.id].filter(Boolean))];
   return candidates.some((candidate) => existsSync(resolve(generatedFurnitureRoot, `${candidate}.png`)));
 });
-const furnitureArtwork = {
-  complete: furnitureWithArtwork.length,
-  total: furnitureById.size,
-  remaining: furnitureById.size - furnitureWithArtwork.length,
-  coveragePercent: Math.round((furnitureWithArtwork.length / furnitureById.size) * 1_000) / 10,
-};
-
 const roleEquipment = JSON.parse(readFileSync(resolve(dataRoot, "core/role-equipment.json"), "utf8"));
 const roleEquipmentWithArtwork = roleEquipment.items.filter((item) => {
   const fileName = String(item.iconId).replaceAll(".", "-").replaceAll("/", "-");
   return existsSync(resolve(CLIENT, "assets/items", `${fileName}.png`));
 });
+
+const progressDocument = readFileSync(resolve(ROOT, "docs/ART_PROGRESS.md"), "utf8");
+const progressMatch = progressDocument.match(/<!-- ART_LEDGER_JSON_BEGIN -->\r?\n```json\r?\n([\s\S]+?)\r?\n```\r?\n<!-- ART_LEDGER_JSON_END -->/);
+assert.ok(progressMatch, "ART_PROGRESS.md is missing its machine-readable ledger block.");
+const artLedger = JSON.parse(progressMatch[1]);
+const furnitureSummary = artLedger.summaries.find((entry) => entry.lane === "Furniture directional sets");
+const equipmentSummary = artLedger.summaries.find((entry) => entry.lane === "Equipment inventory icons");
+assert.ok(furnitureSummary && equipmentSummary, "ART_PROGRESS.md is missing required furniture/equipment summaries.");
+
+const furnitureArtwork = {
+  catalogTotal: furnitureById.size,
+  legacyReferenceSprites: furnitureWithArtwork.length,
+  directionalSetsPresent: furnitureSummary.present,
+  directionalSelectionBound: artLedger.runtimeCapabilities.directionalFurniture.directionalTextureSelection,
+  projectionAligned: artLedger.runtimeCapabilities.directionalFurniture.projectionAligned,
+  runtimeCompositeAccepted: artLedger.runtimeCapabilities.directionalFurniture.runtimeCompositeAccepted,
+  runtimeCompositeAcceptedSets: artLedger.runtimeCapabilities.directionalFurniture.runtimeCompositeAcceptedAssetIds.length,
+  sourceAccepted: furnitureSummary.sourceAccepted,
+  remoteVerified: furnitureSummary.remoteVerified,
+  productionComplete: furnitureSummary.productionComplete,
+  remainingDirectionalSets: furnitureById.size - furnitureSummary.present,
+  remainingProductionComplete: furnitureById.size - furnitureSummary.productionComplete,
+};
 const roleEquipmentArtwork = {
-  complete: roleEquipmentWithArtwork.length,
-  total: roleEquipment.items.length,
-  remaining: roleEquipment.items.length - roleEquipmentWithArtwork.length,
+  catalogTotal: roleEquipment.items.length,
+  filesPresent: roleEquipmentWithArtwork.length,
+  sourceAccepted: equipmentSummary.sourceAccepted,
+  remoteVerified: equipmentSummary.remoteVerified,
+  productionComplete: equipmentSummary.productionComplete,
+  remainingProductionComplete: roleEquipment.items.length - equipmentSummary.productionComplete,
   proceduralFallbacks: roleEquipment.items.length - roleEquipmentWithArtwork.length,
 };
 
 const artProduction = JSON.parse(readFileSync(resolve(ROOT, "planning/art-production.json"), "utf8"));
-assert.equal(artProduction.schemaVersion, 1, "Art-production queue has an unsupported schema.");
-assert.equal(artProduction.furniture.length, furnitureById.size, "Art-production queue must cover every furniture ID.");
-assert.equal(artProduction.roleItems.length, roleEquipment.items.length, "Art-production queue must cover every role-item icon ID.");
-assert.equal(artProduction.counts.furniture.generated, furnitureArtwork.complete, "Art-production furniture status is stale; run npm run generate:art.");
-assert.equal(artProduction.counts.furniture.remaining, furnitureArtwork.remaining, "Art-production furniture queue is stale; run npm run generate:art.");
-assert.equal(artProduction.counts.roleItems.generated, roleEquipmentArtwork.complete, "Art-production role-item status is stale; run npm run generate:art.");
-assert.equal(artProduction.counts.roleItems.remaining, roleEquipmentArtwork.remaining, "Art-production role-item queue is stale; run npm run generate:art.");
+assert.equal(artProduction.schemaVersion, 2, "Art-production index has an unsupported schema.");
+assert.equal(artProduction.authoritativeProgress.document, "docs/ART_PROGRESS.md", "Art-production index must defer live status to the authoritative ledger.");
+assert.equal(artProduction.productionContract.furnitureCamera, "elevated orthographic-isometric", "Art-production index has the wrong furniture camera contract.");
+assert.equal(artProduction.legacyReferencePolicy.status, "reference-only", "Legacy overhead sprites must be reference-only.");
+assert.equal(artProduction.furniture.length, furnitureById.size, "Art-production index must cover every furniture ID.");
+assert.equal(artProduction.roleItems.length, roleEquipment.items.length, "Art-production index must cover every role-item icon ID.");
+assert.ok(!Object.hasOwn(artProduction, "counts"), "Art-production index must not duplicate the authoritative ledger's live counters.");
+for (const item of artProduction.furniture) {
+  const legacyPresent = existsSync(resolve(ROOT, item.legacyReference.path));
+  assert.equal(item.legacyReference.status, legacyPresent ? "legacy-reference-only" : "not-preserved", `Legacy-reference status is stale for ${item.assetId}; run npm run generate:art.`);
+  assert.equal(item.legacyReference.excludedFromProductionCompletion, true, `${item.assetId} legacy overhead art must be excluded from production completion.`);
+}
 
-console.log(JSON.stringify({ ok: true, engine: "Godot 4.4+", scripts: scripts.length, globalClasses: classNames.length, analyzerErrors: errors.length, analyzerWarnings: warnings.length, modularSvgAssets: svgs.length, modularRasterAssets: rasterAssets.length, coreFurnitureSprites: coreFurniture.length, furnitureArtwork, roleEquipmentArtwork, artProductionQueue: artProduction.furniture.length + artProduction.roleItems.length, minigameGrammars: 12, bakedBackgrounds: 0 }, null, 2));
+console.log(JSON.stringify({ ok: true, engine: "Godot 4.4+", scripts: scripts.length, globalClasses: classNames.length, analyzerErrors: errors.length, analyzerWarnings: warnings.length, modularSvgAssets: svgs.length, modularRasterAssets: rasterAssets.length, coreLegacyFurnitureReferences: coreFurniture.length, furnitureArtwork, roleEquipmentArtwork, artProductionIndex: artProduction.furniture.length + artProduction.roleItems.length, minigameGrammars: 12, bakedBackgrounds: 0 }, null, 2));

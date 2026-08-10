@@ -1,0 +1,581 @@
+{
+  "schemaVersion": 1,
+  "batchId": "furniture-core-directional-012",
+  "assets": [
+    "furniture-wet-floor-station",
+    "furniture-linen-storage",
+    "furniture-water-station"
+  ],
+  "artReviewStatus": "accepted-source-camera-retracted",
+  "productionComplete": false,
+  "source": {
+    "generator": "OpenAI built-in image generation",
+    "mode": "twelve separately prompted directional sources intended for one numeric orthographic-isometric camera; measured audit 001 later proved the intended camera contract was not achieved",
+    "useCases": [
+      "stylized-concept",
+      "precise-object-edit"
+    ],
+    "promptLog": "planning/art-qa/furniture-core-directional-012/prompts.md",
+    "promptLogSha256": "0c7c5dea3eda66a661499c0235f8febf38e63c66ff8902a55aa087a3287daf4e",
+    "rawSha256": {
+      "furniture-wet-floor-station": {
+        "north": "83fa2d9c671f851523fa11c926ec65097003a2b77450502bb09713a4f3159e65",
+        "east": "3473b300f3f15481cb2e612b268ac499487692e66c6e65772c08c58089fdc647",
+        "south": "79264bacc9ed73148aa5427fb144d80da5d5866b50929651871a5b242c6c15d4",
+        "west": "3c2a24924928cccc85cc6b1fdb0ba47e888871a6cb3b7702496f34a2ca233e82"
+      },
+      "furniture-linen-storage": {
+        "north": "59aac55d8c5b3c5978eb1d20af12e94bde37fc2ede7b86928948ad33833f25fe",
+        "east": "4017b6969e27e1094e33d28930401d76e00347d00341a4260bf8e658450c3b5a",
+        "south": "739bad46834d72afcc4bfab0405b7bd75869c8d5d6ad35eef6ae1712b445799d",
+        "west": "1e4f60ba9572c08679f9634014ef8952d35295877c8ad2986abd56a8b238aefc"
+      },
+      "furniture-water-station": {
+        "north": "d6fe8ba77dca1537eea003c3ac01901e9b6bd7b16aacd097aca58b58de9078e4",
+        "east": "3aab260d59b982b5555d0f30d902f5dc2d50448ff675d62051bdd942ff92f53f",
+        "south": "8b35728d717c77b46aacab007a7928c6588527f5c6d937aefb96d8529ec22066",
+        "west": "2a0bd0fd831732735b326ffcaa79cbf06626cd5f40575b7dbfb0d64f29c5a10e"
+      }
+    },
+    "chromaHelperSha256": "3f7b9b14ad5c90f37618bc1c16a039a2076abca12ddc41b3ae470e2b1cad6c0e",
+    "processorSha256": "626e95d88644136557a3ce3c09615dd3b125f87fb63e7389d09b612d183a6c13",
+    "matteProcess": "Official imagegen border auto-key, soft matte, thresholds 12/220, and despill.",
+    "normalization": "627x627 sRGBA, proportional fit without stretch, pivot x=313.5, last nontransparent row y=589, contract floor pivot y=590, transparent outer borders."
+  },
+  "cameraProjection": {
+    "type": "elevated-orthographic-isometric",
+    "fixedCamera": true,
+    "azimuthDegrees": 315,
+    "elevationDegrees": 26.565,
+    "basisX": [
+      0.5,
+      0.25
+    ],
+    "basisY": [
+      -0.5,
+      0.25
+    ],
+    "groundEdgeScreenSlopes": [
+      -0.5,
+      0.5
+    ],
+    "verticalEdges": "screen-vertical",
+    "perspective": false,
+    "rotationStepDegrees": 90,
+    "visibleFacesByDirection": {
+      "north": [
+        "front",
+        "right"
+      ],
+      "east": [
+        "right",
+        "rear"
+      ],
+      "south": [
+        "rear",
+        "left"
+      ],
+      "west": [
+        "left",
+        "front"
+      ]
+    }
+  },
+  "gates": {
+    "requiredDirections": [
+      "north",
+      "east",
+      "south",
+      "west"
+    ],
+    "runtimeDimensions": "627x627",
+    "colorMode": "sRGBA",
+    "commonCanvasPivot": [
+      313.5,
+      590
+    ],
+    "commonFloorContactBaselineY": 590,
+    "transparentBottomMarginPixels": 37,
+    "allOuterBordersTransparent": true,
+    "zeroVisibleMagentaFringePixelsAboveAlpha2": true,
+    "oneUniformScalePerIdentity": true,
+    "uniqueRuntimeFileHashes": true,
+    "uniqueRuntimePixelHashes": true,
+    "repositoryDirectionalPngsCompared": 148,
+    "uniqueRuntimePerceptualHashes": true,
+    "uniqueAgainstRepositoryDirectionalPngs": true,
+    "exactFileCollisionsAgainstRepository": 0,
+    "exactPixelCollisionsAgainstRepository": 0,
+    "exactPerceptualHashCollisionsAgainstRepository": 0,
+    "samePhysicalObjectAcrossDirections": "pass",
+    "fixedElevatedOrthographicIsometricCamera": "fail: deterministic source-pixel measurement finds dominant ground axes outside exact slopes -0.5/+0.5 in every asset; see furniture-camera-geometry-audit-001",
+    "noClippingTextLogosWatermarksOrExtraObjects": "pass",
+    "visualReviewAtFullScale": "superseded: the former visual review passed identity, materials, alpha, and grounding but incorrectly inferred camera conformance without measuring ground-axis geometry.",
+    "visualReviewAtGameplayScale128px": "pass: planning/art-qa/furniture-core-directional-012/contact-128-light.png inspected at gameplay scale; all three identities and their direction cues remain distinct.",
+    "nativeGameplayCompositeReview": "historical pass: attempt 012 remains durable evidence for runtime selection, placement, scale, depth, and legibility, but its camera-conformance verdict is superseded by measured camera audit 001.",
+    "proceduralOrDeterministicStandIn": false
+  },
+  "cameraGeometryMeasurement": {
+    "status": "failed-measured-camera-geometry",
+    "audit": "planning/art-qa/furniture-camera-geometry-audit-001.json",
+    "validator": "tools/validate-furniture-camera-geometry-v1.mjs",
+    "retractedAssetIds": [
+      "furniture-wet-floor-station",
+      "furniture-linen-storage",
+      "furniture-water-station"
+    ]
+  },
+  "contactSheets": [
+    {
+      "path": "planning/art-qa/furniture-core-directional-012/contact-627-dark.png",
+      "purpose": "Exact corrected 627px sources on a dark checkerboard",
+      "sha256": "0d2a9530163cad654cb71dcaf2e603ca3bee443f536f9e62de113ef39841037a"
+    },
+    {
+      "path": "planning/art-qa/furniture-core-directional-012/contact-128-light.png",
+      "purpose": "Corrected sources at 128px gameplay scale",
+      "sha256": "bf1d6385a559be0f431175684b51241b52f3cc3b4af3155b6f427d474f3aca27"
+    }
+  ],
+  "rejectedAttempts": [
+    {
+      "reason": "Rejected source: old Spill Response Station atlas mixed frontal elevations and arbitrary three-quarter cameras.",
+      "generatorOutputSha256": "e0a8e151703d9f9ea69a93ec3753299503bb03b1669e41c38ee83edccc9a157d"
+    },
+    {
+      "reason": "Rejected source: old Linen and Reset Cabinet atlas mixed frontal elevations and arbitrary three-quarter cameras.",
+      "generatorOutputSha256": "b5043a1c01f6c6601034fb0ba32e4076836fd591bf7f3a72ff28e0197996c794"
+    },
+    {
+      "reason": "Rejected source: old Filtered Water Station atlas mixed frontal elevations and arbitrary three-quarter cameras.",
+      "generatorOutputSha256": "7d492d204834eb728e56389b28bc26dcb83f47d82a32097efb6e09667fd47fb1"
+    }
+  ],
+  "items": [
+    {
+      "catalogId": "wet-floor-station",
+      "name": "Spill Response Station",
+      "category": "Utility",
+      "style": "Modern",
+      "footprint": [
+        2,
+        1
+      ],
+      "identityContract": "One Modern 2x1 charcoal wheeled spill-response cabinet with teal front doors, one amber caution panel, one physical-left blue mop, one physical-right red wringer bucket, a rear utility rail, and four casters.",
+      "semanticVerdict": "identity pass, camera fail: asymmetric station details remain useful reference evidence, but measured ground-axis geometry retracts fixed-camera production credit.",
+      "gameplayLegibility": "pass: teal doors, amber panel, red bucket, blue mop, casters, and rear rail remain distinct at 128px.",
+      "assetId": "furniture-wet-floor-station",
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-wet-floor-station/north.png",
+          "sha256": "c3d9c8cc8daeb4f18971c26d8977196b80ed5dbd9028760a9d5cc4a10b59219f",
+          "pixelSha256": "f6259112555af761b1e2478848bd03befc4c1f3b34461bdfd87eb5927f47deef",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-wet-floor-station-north.png",
+          "sourceAlphaSha256": "c3d9c8cc8daeb4f18971c26d8977196b80ed5dbd9028760a9d5cc4a10b59219f",
+          "rawGeneratorSha256": "83fa2d9c671f851523fa11c926ec65097003a2b77450502bb09713a4f3159e65",
+          "uniformScale": 1.0,
+          "alphaBoundingBox": [
+            34,
+            98,
+            593,
+            589
+          ],
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0,
+          "differenceHash": "0498f2f0e0c06304",
+          "alphaBaselineY": 590
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-wet-floor-station/east.png",
+          "sha256": "96b7655a401491dc9014797223b71dceb3c573176da84538525f9ed18c6c2b17",
+          "pixelSha256": "50c8d61a1fd16e026f98668e7472fddcffbd34548c6c4e4de6e6bae7da509d0d",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-wet-floor-station-east.png",
+          "sourceAlphaSha256": "96b7655a401491dc9014797223b71dceb3c573176da84538525f9ed18c6c2b17",
+          "rawGeneratorSha256": "3473b300f3f15481cb2e612b268ac499487692e66c6e65772c08c58089fdc647",
+          "uniformScale": 1.0,
+          "alphaBoundingBox": [
+            34,
+            72,
+            593,
+            589
+          ],
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0,
+          "differenceHash": "0cbcbaacbcf8e302",
+          "alphaBaselineY": 590
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-wet-floor-station/south.png",
+          "sha256": "3a3b2420c3c2512a3089465aaf9f5613b4d4889f964286b5064a60680cf403e8",
+          "pixelSha256": "51fc91b530f8260bd307e08b29c6b98cce0577f5250bb33ace6c43d615aff216",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-wet-floor-station-south.png",
+          "sourceAlphaSha256": "3a3b2420c3c2512a3089465aaf9f5613b4d4889f964286b5064a60680cf403e8",
+          "rawGeneratorSha256": "79264bacc9ed73148aa5427fb144d80da5d5866b50929651871a5b242c6c15d4",
+          "uniformScale": 1.0,
+          "alphaBoundingBox": [
+            34,
+            58,
+            593,
+            589
+          ],
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0,
+          "differenceHash": "08b8b0aab8f0c004",
+          "alphaBaselineY": 590
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-wet-floor-station/west.png",
+          "sha256": "b2de62396ae62e27c5b11a5804e760a8a92b89a473c99a4081304cefafc83ed2",
+          "pixelSha256": "2b963c198c184c93161e90a203087d8af24da33167a62731bb9b5773e528dc85",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-wet-floor-station-west.png",
+          "sourceAlphaSha256": "b2de62396ae62e27c5b11a5804e760a8a92b89a473c99a4081304cefafc83ed2",
+          "rawGeneratorSha256": "3c2a24924928cccc85cc6b1fdb0ba47e888871a6cb3b7702496f34a2ca233e82",
+          "uniformScale": 1.0,
+          "alphaBoundingBox": [
+            34,
+            60,
+            593,
+            589
+          ],
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0,
+          "differenceHash": "2408b8e0e0e0c042",
+          "alphaBaselineY": 590
+        }
+      ]
+    },
+    {
+      "catalogId": "linen-storage",
+      "name": "Linen and Reset Cabinet",
+      "category": "Service",
+      "style": "Modern",
+      "footprint": [
+        2,
+        1
+      ],
+      "identityContract": "One Modern 2x1 stainless-and-cream linen cabinet with front doors and brass pulls, cream/teal/gray linen stacks, a physical-right grille, rear shelving, a plain physical-left side, and four feet.",
+      "semanticVerdict": "identity pass, camera fail: face details and linen-stack identity remain useful reference evidence, but measured ground-axis geometry retracts fixed-camera production credit.",
+      "gameplayLegibility": "pass: door, grille, shelf, and linen color cues remain readable at 128px.",
+      "assetId": "furniture-linen-storage",
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-linen-storage/north.png",
+          "sha256": "42d72887ff06825ea7aef3d2b760e49932affe2614b75fb510a7c03ff75f4873",
+          "pixelSha256": "800778251d66aa5d7436fd16ec34aabafe9918e3cf9beaeb4ca4da0d1f9d6f51",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-linen-storage-north.png",
+          "sourceAlphaSha256": "42d72887ff06825ea7aef3d2b760e49932affe2614b75fb510a7c03ff75f4873",
+          "rawGeneratorSha256": "59aac55d8c5b3c5978eb1d20af12e94bde37fc2ede7b86928948ad33833f25fe",
+          "uniformScale": 1.0,
+          "alphaBoundingBox": [
+            34,
+            103,
+            593,
+            589
+          ],
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0,
+          "differenceHash": "46c0e0febefc3c81",
+          "alphaBaselineY": 590
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-linen-storage/east.png",
+          "sha256": "ca14d686dda796782b97ed7f20e98e7a7493d2baa2908f08c928d9cf1c7a86f2",
+          "pixelSha256": "d422f6f80434884fa457cde79d9c82122fc9d65ea1c99c247f8dc917f6b6a605",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-linen-storage-east.png",
+          "sourceAlphaSha256": "ca14d686dda796782b97ed7f20e98e7a7493d2baa2908f08c928d9cf1c7a86f2",
+          "rawGeneratorSha256": "4017b6969e27e1094e33d28930401d76e00347d00341a4260bf8e658450c3b5a",
+          "uniformScale": 1.0,
+          "alphaBoundingBox": [
+            79,
+            45,
+            547,
+            589
+          ],
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0,
+          "differenceHash": "58b872d0f4c9e264",
+          "alphaBaselineY": 590
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-linen-storage/south.png",
+          "sha256": "fa8bf8b138a9e90ce04f500310f7b7b181ceb604c63dca32deeff6dc7fc2046b",
+          "pixelSha256": "17be68ba34c86b76f40a3f50e65005041031e4334f5f455b0b4ff1823be18e85",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-linen-storage-south.png",
+          "sourceAlphaSha256": "fa8bf8b138a9e90ce04f500310f7b7b181ceb604c63dca32deeff6dc7fc2046b",
+          "rawGeneratorSha256": "739bad46834d72afcc4bfab0405b7bd75869c8d5d6ad35eef6ae1712b445799d",
+          "uniformScale": 1.0,
+          "alphaBoundingBox": [
+            34,
+            80,
+            593,
+            589
+          ],
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0,
+          "differenceHash": "8c3ce68cf2c0c006",
+          "alphaBaselineY": 590
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-linen-storage/west.png",
+          "sha256": "6440b1d0a138e6ea5857ed711bc148fda5084e4f44af450ca709ae80ac4f8a69",
+          "pixelSha256": "1addc6e99cbbce2d2f114973795fd1c03fe7941d479a988fa6771ee3c72958c8",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-linen-storage-west.png",
+          "sourceAlphaSha256": "6440b1d0a138e6ea5857ed711bc148fda5084e4f44af450ca709ae80ac4f8a69",
+          "rawGeneratorSha256": "1e4f60ba9572c08679f9634014ef8952d35295877c8ad2986abd56a8b238aefc",
+          "uniformScale": 1.0,
+          "alphaBoundingBox": [
+            34,
+            66,
+            593,
+            589
+          ],
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0,
+          "differenceHash": "c43cf8c28c9cc046",
+          "alphaBaselineY": 590
+        }
+      ]
+    },
+    {
+      "catalogId": "water-station",
+      "name": "Filtered Water Station",
+      "category": "Service",
+      "style": "Modern",
+      "footprint": [
+        2,
+        2
+      ],
+      "identityContract": "One Modern 2x2 brushed-stainless water station with three front taps, a black drip bay, two teal front doors, a physical-right grille, two rear blue filter housings, a plain physical-left side, and four feet.",
+      "semanticVerdict": "identity pass, camera fail: taps, grille, filters, and face details remain useful reference evidence, but measured ground-axis geometry retracts fixed-camera production credit.",
+      "gameplayLegibility": "pass: black bay, teal doors, right grille, and blue rear filters remain distinct at 128px.",
+      "assetId": "furniture-water-station",
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-water-station/north.png",
+          "sha256": "4d14cda8c4feed96a6e686dbec3ed2fb68b11852e64bbee0a568bbf9cbd2fc3d",
+          "pixelSha256": "01c325120f7f69fab38e104b41eeee9e3acf9a0c7b8e0abdcb8f9e41e4b1ab1c",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-water-station-north.png",
+          "sourceAlphaSha256": "4d14cda8c4feed96a6e686dbec3ed2fb68b11852e64bbee0a568bbf9cbd2fc3d",
+          "rawGeneratorSha256": "d6fe8ba77dca1537eea003c3ac01901e9b6bd7b16aacd097aca58b58de9078e4",
+          "uniformScale": 1.0,
+          "alphaBoundingBox": [
+            134,
+            45,
+            491,
+            589
+          ],
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0,
+          "differenceHash": "30f0f4e4e4e0f030",
+          "alphaBaselineY": 590
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-water-station/east.png",
+          "sha256": "20011c0108135c2c4f8289285a06ddd0ac6b3309a5c39e3a83ab082b8f698860",
+          "pixelSha256": "76b6a6e6837721ba350313e46f2d9439659e73db9453f347cf2ae90b7993d172",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-water-station-east.png",
+          "sourceAlphaSha256": "20011c0108135c2c4f8289285a06ddd0ac6b3309a5c39e3a83ab082b8f698860",
+          "rawGeneratorSha256": "3aab260d59b982b5555d0f30d902f5dc2d50448ff675d62051bdd942ff92f53f",
+          "uniformScale": 1.0,
+          "alphaBoundingBox": [
+            136,
+            45,
+            491,
+            589
+          ],
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0,
+          "differenceHash": "30f4e4f8d8fcf030",
+          "alphaBaselineY": 590
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-water-station/south.png",
+          "sha256": "f271c4f8af2512aacf74fd271bfd5413b9efea6b4e9d155d8ccc33d7b9cfc12a",
+          "pixelSha256": "47962a96feb34da017f8a0ddf537fee53af528f3e88b287dc749235c6e3671f3",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-water-station-south.png",
+          "sourceAlphaSha256": "f271c4f8af2512aacf74fd271bfd5413b9efea6b4e9d155d8ccc33d7b9cfc12a",
+          "rawGeneratorSha256": "8b35728d717c77b46aacab007a7928c6588527f5c6d937aefb96d8529ec22066",
+          "uniformScale": 1.0,
+          "alphaBoundingBox": [
+            136,
+            45,
+            490,
+            589
+          ],
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0,
+          "differenceHash": "30f0f8f8d8f8f030",
+          "alphaBaselineY": 590
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-water-station/west.png",
+          "sha256": "dd1cfd0e80f3adf88bfe106ac18afcbbf070077563b8ed9c6475f3c5a652241c",
+          "pixelSha256": "fbf40291f94c79acb798849e9b4b2b3a67c48dd3bf66a936b2a414ee5ab194a3",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-012/alpha-source/furniture-water-station-west.png",
+          "sourceAlphaSha256": "dd1cfd0e80f3adf88bfe106ac18afcbbf070077563b8ed9c6475f3c5a652241c",
+          "rawGeneratorSha256": "2a0bd0fd831732735b326ffcaa79cbf06626cd5f40575b7dbfb0d64f29c5a10e",
+          "uniformScale": 1.0,
+          "alphaBoundingBox": [
+            139,
+            45,
+            487,
+            589
+          ],
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "outerBorderAlphaMax": 0,
+          "visibleMagentaFringePixelsAboveAlpha2": 0,
+          "differenceHash": "10f8d8d8d8f8f030",
+          "alphaBaselineY": 590
+        }
+      ]
+    }
+  ],
+  "promotionScope": {
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "repositoryPromotion": {
+    "status": "remote-verified-source-accepted-camera-retracted",
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "productionCompletionBlockers": [
+    "measured camera geometry audit 001 rejects every asset in this batch under the exact +/-0.5 ground-axis contract",
+    "replacement N/E/S/W bytes must pass deterministic geometry measurement and a new native gameplay review"
+  ],
+  "remotePreservation": {
+    "commit": "da9a828fc47c2b8c8e015cc2e4f648516985b577",
+    "tree": "f1f329f726d35db4650c5f8958c3e32c564dc027",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31316662076",
+    "artifactId": 9038954590,
+    "artifactSha256": "369ff4e10c48bb6efad31076c3819d3d8dc050c66eed8dd1080eba2bae9ca285"
+  }
+}

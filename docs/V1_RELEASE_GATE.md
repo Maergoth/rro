@@ -25,15 +25,15 @@ This gate prevents “source exists” from being confused with “production ga
 | Skill trees | Pass (data/runtime) | 28 nodes per base role, prerequisites, cost, unlock endpoint | Skill-effect integration, loadouts, respec economy and subclasses |
 | Role equipment | Pass (slice) | 45 purchasable tools/consumables, role/level eligibility, four-slot loadouts, persistent quantities, shop/inventory UI and audited personal-cash actions | Bind all effects into minigames, equipment wear/repair, balance, and 45 bespoke icons |
 | Furniture economy | Pass (slice) | 229 inventory definitions with non-linear price/stat tradeoffs; live rating, happiness, workload, role/task, revenue/upkeep, wear, broken-state and owner repair effects | Balance/telemetry, utilities, placement storage, maintenance staffing and full art coverage |
-| Modular layout | Pass (slice) | 24×16 cells, surfaces, room tags, walls/openings, objects, drag, 4 rotations with rotating artwork, collision, sale, add-on and repair | Utilities, code/clearance, undo, collaboration, nav/flow heatmap |
-| Modular art | Partial (measured) | 20 unique top-down raster furniture sprites; all 16 core items covered; validator forbids baked backgrounds and reports 20/229 coverage | Generate and art-direct the remaining 209 furniture sprites plus 45 bespoke role-item icons; animation, LOD/import, audio/VFX |
+| Modular layout | Pass (slice) | 24×16 cells; authoritative native room-tag brush; operational assignment/dining/kitchen/egress/circulation/service-clearance checklist; one canonical authority per physical wall segment; walls/openings; floor, wall and ceiling objects; mount-aware drag/rotation; local staged preview with atomic commit/cancel; collision; path/egress validation; sale/repair; expansion that relocates perimeter openings and wall mounts; monotonic optimistic revisions; persistent audited undo/redo | Routed utilities/ventilation, jurisdiction-specific code policy, richer collaboration and nav/flow heatmap |
+| Modular art | Partial (authoritative ledger) | Elevated orthographic-isometric directional runtime is integrated; legacy direct-overhead furniture files are reference-only; the generated [production art ledger](ART_PROGRESS.md) records per-asset visual QA, runtime binding, remote preservation, and CI evidence | Complete every unresolved ledger lane, including directional furniture, construction/world/UI art, modular character layers and animation; audio/VFX remain separate production work |
 | Godot parse/type quality | Pass | Godot 4 engine-model GDScript analyzer reports 0 errors and 0 warnings | Keep as CI gate; CI also imports with a real editor |
 | Godot native execution | Pass (Linux headless) | Godot 4.4.1 imported all assets, registered the inventory UI and launched the main scene with exit code 0 | Complete graphical/two-client acceptance on target Windows hardware |
 | Windows client export | Runtime required | Tagged workflow installs Godot/templates and exports preset | Produce, hash and launch real EXE on Windows; no source-only substitution |
 | Windows server controller | Source pass / runtime required | Hidden start, health, graceful loopback-token stop, exact-PID fallback | Execute start/stop/delete/restart tests on supported Windows versions |
 | Standalone server artifact | Pass after release | Pinned Node 24.14.0 PE runtime with SHA-512 verification, app/data/config/control, separate ZIP | Windows runtime smoke and malware/signature pipeline |
 | Separate distribution | Pass | Server, GitHub source, planning and client runtime/source artifacts have distinct names/manifests | Preserve separation in CI publishing |
-| Automated server tests | Pass | 28 content, furniture, inventory, layout, live simulation, rivalry, persistence and HTTP/WebSocket tests | Add chaos, persistence upgrade, security, load, property and replay tests |
+| Automated server tests | Pass | Full content, furniture, inventory, canonical-wall/expansion, mount, layout-history, live simulation, rivalry, persistence and HTTP/WebSocket regression suite | Add chaos, persistence-upgrade, security, load, broader property and replay tests |
 | Accessibility | Production required | Non-color cues and data-driven input concept only | Requirements, remapping, screen reader, timing alternatives, disabled-player tests |
 | Localization | Production required | Strings are not yet fully externalized | Localization architecture, fonts, RTL, terminology and functional QA |
 | Security/trust | Production required | Local authority and rate/body limits exist | Threat model, MFA, signing, moderation, anti-cheat, pen test, privacy/compliance |
@@ -55,7 +55,7 @@ npm run verify
 2. full GDScript parse/type diagnostics with zero errors/warnings plus explicit furniture/item artwork coverage;
 3. strict TypeScript type checking;
 4. deterministic content generation and server compilation;
-5. 28 Node tests for content, furniture effects/wear/repair, persistent role equipment, building, role work, targeted rivalry, HTTP auth, and WebSockets.
+5. the full Node suite for content, furniture effects/wear/repair, persistent role equipment, canonical wall topology and expansion, building history, role work, targeted rivalry, HTTP auth, and WebSockets.
 
 The release build additionally requires:
 
@@ -82,7 +82,7 @@ Before promoting alpha to beta, record one complete test with at least two clien
 8. leave/rejoin without duplicating rewards or claims;
 9. visit a local rival as a guest, target a visible party task, choose its difficulty dimension/intensity, and verify telegraphing, counterplay, caps, rewards and review evidence;
 10. buy, equip, unequip and use role inventory; restart and confirm the persistent loadout and quantities;
-11. found a restaurant, paint/zone, wall, door, place mixed furniture, verify rating/workload/economy changes, advance wear, repair, drag, rotate, sell and expand;
+11. found a restaurant, paint and room-zone, confirm the operational opening checklist, wall, door, place mixed furniture, verify rating/workload/economy changes, advance wear, repair, drag, rotate, sell and expand;
 12. close client and server, restart, and verify the same account/world/layout/inventory;
 13. stop gracefully and immediately rename/delete the extracted old folder.
 

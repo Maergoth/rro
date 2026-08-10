@@ -7,6 +7,31 @@ const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const DATA = resolve(ROOT, "packages/game-data");
 const read = (path) => JSON.parse(readFileSync(resolve(DATA, path), "utf8"));
 const unique = (values, label) => assert.equal(new Set(values).size, values.length, `${label} ids must be unique.`);
+const furnitureMounts = new Set(["floor", "wall", "ceiling"]);
+const furnitureOccupancies = new Set(["blocking", "nonblocking"]);
+const furnitureServiceAccess = new Set(["adjacent", "none"]);
+const furnitureWallOpenings = new Set(["solid", "window"]);
+const furniturePlacementKeys = new Set(["mount", "occupancy", "serviceAccess", "allowedWallOpenings"]);
+
+function validateFurniturePlacement(item) {
+  if (item.placement === undefined) return;
+  assert.ok(item.placement && typeof item.placement === "object" && !Array.isArray(item.placement), `${item.id} placement must be an object`);
+  for (const key of Object.keys(item.placement)) assert.ok(furniturePlacementKeys.has(key), `${item.id} placement has unknown field ${key}`);
+  const { mount, occupancy, serviceAccess } = item.placement;
+  assert.ok(furnitureMounts.has(mount), `${item.id} placement mount`);
+  assert.ok(furnitureOccupancies.has(occupancy), `${item.id} placement occupancy`);
+  assert.ok(furnitureServiceAccess.has(serviceAccess), `${item.id} placement serviceAccess`);
+  if (mount !== "floor") assert.equal(occupancy, "nonblocking", `${item.id} ${mount} placement must be nonblocking`);
+  const hasWallOpenings = Object.hasOwn(item.placement, "allowedWallOpenings");
+  if (mount === "wall") {
+    assert.equal(item.height, 1, `${item.id} wall placement height`);
+    assert.ok(Array.isArray(item.placement.allowedWallOpenings) && item.placement.allowedWallOpenings.length > 0, `${item.id} wall placement openings`);
+    assert.ok(item.placement.allowedWallOpenings.every((opening) => furnitureWallOpenings.has(opening)), `${item.id} wall placement opening value`);
+    unique(item.placement.allowedWallOpenings, `${item.id} wall placement opening`);
+  } else {
+    assert.equal(hasWallOpenings, false, `${item.id} allowedWallOpenings is only valid for wall placement`);
+  }
+}
 
 const manifest = read("manifest.json");
 assert.equal(manifest.schemaVersion, 1);
@@ -79,6 +104,7 @@ for (const activity of activities) {
 for (const item of furniture) {
   assert.ok(Number.isInteger(item.costCents) && item.costCents >= 0, `${item.id} price`);
   assert.ok(Number.isInteger(item.width) && item.width > 0 && Number.isInteger(item.height) && item.height > 0, `${item.id} footprint`);
+  validateFurniturePlacement(item);
   assert.ok(item.stats && Object.keys(item.stats).length > 0, `${item.id} modifiers`);
   assert.ok(Object.values(item.stats).every((value) => Number.isFinite(value)), `${item.id} modifiers must be finite numbers`);
 }

@@ -1,0 +1,483 @@
+{
+  "schemaVersion": 1,
+  "batchId": "furniture-core-directional-005",
+  "assets": [
+    "recycling",
+    "pendants",
+    "plants"
+  ],
+  "artReviewStatus": "accepted",
+  "productionComplete": false,
+  "productionCompletionBlockers": [
+    "The elevated-isometric floor, wall, picking, floor-contact, and mixed-world depth paths are integrated; a native Godot gameplay capture and composite review have not yet passed."
+  ],
+  "promotionScope": {
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "repositoryPromotion": "remote-verified",
+  "remotePreservation": {
+    "commit": "565869f5c09529d5da7dc30c0a31c042669c5291",
+    "tree": "5bdfdc178b6ebf5ce9f7719f63a417391f4b9ef6",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30996475549"
+  },
+  "source": {
+    "generator": "OpenAI built-in image generation",
+    "mode": "one separately prompted 2x2 rigid rotation atlas per furniture identity",
+    "promptLog": "planning/art-qa/furniture-core-directional-005/prompts.md",
+    "promptLogSha256": "10cf821e0390ca832883636fdbda59c0b1b2729a7d0c30dd3c015bc4a1019103",
+    "identityReferences": [
+      "apps/client-godot/assets/objects/generated/recycling.png",
+      "apps/client-godot/assets/objects/generated/pendants.png",
+      "apps/client-godot/assets/objects/generated/plants.png"
+    ],
+    "cameraReference": "accepted furniture-core-directional-002/003/004 and furniture-pilot-001",
+    "matteProcess": "Official imagegen remove_chroma_key.py helper with border auto-keying, soft matte, magenta despill, transparent threshold 12, and opaque threshold 220.",
+    "normalization": "Split each 1254x1254 alpha atlas into four exact 627x627 cells, alpha-trim, apply one shared proportional scale across all four views of each identity, center horizontally, and place the bottommost opaque row at baseline y=590 on a transparent 627x627 canvas.",
+    "rawSha256": {
+      "recycling": "7f085a39aaa552935ce6ce4d8bad9b86d8fd0863abd35b2d650f1ac9fab68017",
+      "pendants": "c9254bc18b7da3084cd7ca9092e5343778af96e3ae5947c00ad53e4b82a7d4c9",
+      "plants": "87bdc85e0072f4e0054d46f107c245ea82f619139a9c141c94c6b940f3ac5dbe"
+    },
+    "alphaAtlasSha256": {
+      "recycling": "72c640e41be9fe9b4c053c2f04fcdc3935ea2ed6d6b6f5327ee366a4d94d8ef3",
+      "pendants": "b57c7ef586598ead216f6ede22d030f3bf70f6510ede8d0aed760e2adcc55f07",
+      "plants": "e4af1d652bdf5ee4fae521231523cc06da27465c7262a61381c0f17774eafe76"
+    }
+  },
+  "gates": {
+    "requiredDirections": [
+      "north",
+      "east",
+      "south",
+      "west"
+    ],
+    "runtimeDimensions": "627x627",
+    "colorMode": "sRGBA",
+    "commonCanvasPivot": [
+      313.5,
+      590
+    ],
+    "commonFloorContactBaselineY": 590,
+    "minimumTransparentBottomMarginPixels": 37,
+    "allOuterBordersTransparent": true,
+    "uniqueRuntimeFileHashes": true,
+    "uniqueRuntimePixelHashes": true,
+    "uniqueAgainstRepositoryDirectionalPngs": true,
+    "samePhysicalObjectAcrossDirections": "pass",
+    "fixedElevatedOrthographicIsometricCamera": "pass",
+    "noClippingTextLogosWatermarksOrExtraObjects": "pass",
+    "visualReviewAtFullScale": "pass: contact-627-dark.png inspected at original resolution; identity, rigid feature counts, service-front/rear states, camera, silhouettes, alpha edges, and padding accepted.",
+    "visualReviewAtGameplayScale128px": "pass: contact-128-light.png inspected at original resolution; all three identities and each front/rear state remain readable.",
+    "proceduralOrDeterministicStandIn": false
+  },
+  "contactSheets": [
+    {
+      "path": "planning/art-qa/furniture-core-directional-005/contact-627-dark.png",
+      "purpose": "Exact 627px runtime candidates on a dark checkerboard",
+      "sha256": "412b8134f796748d3a50935eb67798c9f45dd6f3acd5765a82ecd93afba1cabd"
+    },
+    {
+      "path": "planning/art-qa/furniture-core-directional-005/contact-128-light.png",
+      "purpose": "Same runtime candidates reduced to 128px on a light checkerboard",
+      "sha256": "933b701062ac08ee377e4064c559b561f7ca8c3f4f2a1a27eb79b4d1fa1534c3"
+    }
+  ],
+  "items": [
+    {
+      "catalogId": "recycling",
+      "assetId": "recycling",
+      "name": "Sorting Station",
+      "footprint": [
+        2,
+        1
+      ],
+      "identityContract": "One waist-high brushed-stainless three-stream sorting station; exactly three equal lids in charcoal/cobalt/mustard order, with circular/slot/circular openings; three front doors and handles; three groups of rear ventilation slots; four short black feet.",
+      "semanticVerdict": "pass: North/east expose the operational front from opposite isometric axes; south/west expose the continuous handle-free rear with three ventilation groups. The charcoal/cobalt/mustard lids and circular/slot/circular apertures rotate in fixed physical order.",
+      "gameplayLegibility": "pass: The three colored streams, distinct aperture shapes, stainless cabinet silhouette, and front-door versus vented-rear state remain identifiable at 128px.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/recycling/north.png",
+          "sha256": "bf7e5c521e20feab7316bcaeda1c42950e4242bfefee1e9a56ec8e1063858f03",
+          "pixelSha256": "f637f0550ab89f4dd9ef437997520a7c0e25b59786da1c1c83d335aaec1fcf50",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-005/alpha-source/recycling-north.png",
+          "sourceAlphaSha256": "338ae49c86317208702f4b5081d2d887f52595009a3567874af0dfd3d13598cc",
+          "sourceOpaqueBounds": "518x445+42+101",
+          "uniformScale": 1.00961538,
+          "opaqueBounds": "523x449+52+141",
+          "transparentMargins": {
+            "left": 52,
+            "right": 52,
+            "top": 141,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/recycling/east.png",
+          "sha256": "e42fbcc7593f3e178d627ba3386c23fd308efea86c704ec9fa88c0dc9896c316",
+          "pixelSha256": "099560ea42c49638d607c5dbdc3b714301166d63046b80e9c3a967c967c3391b",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-005/alpha-source/recycling-east.png",
+          "sourceAlphaSha256": "a4ceb31e19047eed37df82ca288e35d3dd989d6bf1ce34d98ef6517ae12ca7bb",
+          "sourceOpaqueBounds": "505x462+55+100",
+          "uniformScale": 1.00961538,
+          "opaqueBounds": "510x466+58+124",
+          "transparentMargins": {
+            "left": 58,
+            "right": 59,
+            "top": 124,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/recycling/south.png",
+          "sha256": "c9f7739ff2e3391511a6014710414d3f0314d1d544b725a0d3292cb33020081d",
+          "pixelSha256": "2cea43f07ab48ec20b01914f7a2d1a87ebe4c9d87786942b43f49e3578e59dad",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-005/alpha-source/recycling-south.png",
+          "sourceAlphaSha256": "d1ba144e6a6cbecd84125cdf63fa2c33199cf576ea99da95ca29f5205e49ee98",
+          "sourceOpaqueBounds": "506x391+47+104",
+          "uniformScale": 1.00961538,
+          "opaqueBounds": "511x395+58+195",
+          "transparentMargins": {
+            "left": 58,
+            "right": 58,
+            "top": 195,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/recycling/west.png",
+          "sha256": "73e2e9a7d6d95689f15ce1f7de882c20f3643290e240579f16b1b1896ee0dbe3",
+          "pixelSha256": "e427081f83bbd75b3f6c96ddd49e3004397d6e598e77ee51cbea837717abc75d",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-005/alpha-source/recycling-west.png",
+          "sourceAlphaSha256": "1f9dc293260f81aee2747605f3393735dfe9858c5e3d03334208e60131ea0458",
+          "sourceOpaqueBounds": "520x468+45+61",
+          "uniformScale": 1.00961538,
+          "opaqueBounds": "525x472+51+118",
+          "transparentMargins": {
+            "left": 51,
+            "right": 51,
+            "top": 118,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        }
+      ]
+    },
+    {
+      "catalogId": "pendants",
+      "assetId": "pendants",
+      "name": "Mustard Pendant Lights",
+      "footprint": [
+        2,
+        1
+      ],
+      "identityContract": "One rigid aged-brass rail carrying exactly three mustard enamel dome shades, three vertical brass stems, and three round brass ceiling canopies; the elevated camera exposes the convex shade tops rather than bulb interiors.",
+      "semanticVerdict": "pass: The same three-lamp assembly occupies both isometric axes and their 180-degree counterparts. Rail direction, staggered canopy depth, highlights, and end hardware rotate coherently without introducing or losing a fixture.",
+      "gameplayLegibility": "pass: All three mustard domes, all three stems/canopies, and the single aged-brass rail remain countable as one suspended 2x1 fixture at 128px.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/pendants/north.png",
+          "sha256": "231af1cfc1ed6e73130c90b99553dc6c3f4448216828e65877b56254dc0525d2",
+          "pixelSha256": "6180ac7cd6ea8f2bc459586401d78d3e5cd88f84a6d018b17d3623f00a497967",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-005/alpha-source/pendants-north.png",
+          "sourceAlphaSha256": "e9c2186ec3e3c2d8e302654435c90e5d8f775825199bb57de506936e5029bbd0",
+          "sourceOpaqueBounds": "485x338+73+148",
+          "uniformScale": 1.10309278,
+          "opaqueBounds": "535x373+46+217",
+          "transparentMargins": {
+            "left": 46,
+            "right": 46,
+            "top": 217,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/pendants/east.png",
+          "sha256": "1e762a03ad26d160960f0012444d5581dc1f619fb1c5f4499bf6106e9ed3ceb8",
+          "pixelSha256": "619aa27153c2272e254ed26c1729edefa56709f7fe1118380ac9e132aad08822",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-005/alpha-source/pendants-east.png",
+          "sourceAlphaSha256": "a0aa5b03298b7a30af17ee6159d10665167aecba90f733cd7965cd256f055dbc",
+          "sourceOpaqueBounds": "485x338+70+148",
+          "uniformScale": 1.10309278,
+          "opaqueBounds": "535x373+46+217",
+          "transparentMargins": {
+            "left": 46,
+            "right": 46,
+            "top": 217,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/pendants/south.png",
+          "sha256": "36ceb7759dc6c6b5b313acc3cd10ff7a12d178e89eabc4beeff7618aa0b1f456",
+          "pixelSha256": "8fea6ddc925b20af3889ad01a55fd3ce1856a3d1d1cc070b6f7b1ee7ca766f39",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-005/alpha-source/pendants-south.png",
+          "sourceAlphaSha256": "b3752989c264a8f0a2e20fe2d3681fcefd09d3251475778c7ffe8e4c74824060",
+          "sourceOpaqueBounds": "483x331+76+153",
+          "uniformScale": 1.10309278,
+          "opaqueBounds": "533x365+47+225",
+          "transparentMargins": {
+            "left": 47,
+            "right": 47,
+            "top": 225,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/pendants/west.png",
+          "sha256": "998e38d0ba72e32c7dc643b22da508947f08010d16034533d02ff8065213930d",
+          "pixelSha256": "d534977bba1d595ed9cd1c36c0af354fd4c0453e725bc8cffc0dccf39a89c709",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-005/alpha-source/pendants-west.png",
+          "sourceAlphaSha256": "9545f93cce146a5ed94d674ec3c876ce93f7427697b4f35816de64a110e0b348",
+          "sourceOpaqueBounds": "483x399+70+150",
+          "uniformScale": 1.10309278,
+          "opaqueBounds": "533x440+47+150",
+          "transparentMargins": {
+            "left": 47,
+            "right": 47,
+            "top": 150,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        }
+      ]
+    },
+    {
+      "catalogId": "plants",
+      "assetId": "plants",
+      "name": "Window Herb Wall",
+      "footprint": [
+        3,
+        1
+      ],
+      "identityContract": "One long dark-walnut backboard with brass corner guards and top rail; exactly six terracotta pots in fixed basil/rosemary/thyme/sage/chive/parsley order; exactly two flat brass mounting cleats on the plain rear.",
+      "semanticVerdict": "pass: North/east show all six planted front pots across opposite isometric axes; south/west expose the unbroken rear panel and two cleats while foliage remains physically visible only above its top edge. Herb order reverses naturally at 180 degrees.",
+      "gameplayLegibility": "pass: The six-pot rhythm, distinct foliage silhouettes, walnut/brass structure, planted front, and two-cleat rear remain readable at 128px.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/plants/north.png",
+          "sha256": "f7fe5524710b3a50fa9a250d90bd47560879007e33e2a98e79a983d04c836799",
+          "pixelSha256": "12fe56a3b1b6ae38f79aa714529dfc3f19e017422696cf936d5ac14ae89315b9",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-005/alpha-source/plants-north.png",
+          "sourceAlphaSha256": "3b8a73ba91f43e1f05fc300512063b464758f506b343efc85c2c300e08b3a971",
+          "sourceOpaqueBounds": "586x366+24+163",
+          "uniformScale": 0.94709898,
+          "opaqueBounds": "555x347+36+243",
+          "transparentMargins": {
+            "left": 36,
+            "right": 36,
+            "top": 243,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/plants/east.png",
+          "sha256": "a92fd8bcb2db27804fff4b4a187633daa63edb55f3ae60014484dedcd946282a",
+          "pixelSha256": "174cabe6062ad8e7d8e93065dd6e77498c8438ca56a7fd4d82eff69820e0823d",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-005/alpha-source/plants-east.png",
+          "sourceAlphaSha256": "26db631ff5f50116770c32823b65e140b726c64080970ae366af2db35a3c0932",
+          "sourceOpaqueBounds": "562x380+27+158",
+          "uniformScale": 0.94709898,
+          "opaqueBounds": "532x360+47+230",
+          "transparentMargins": {
+            "left": 47,
+            "right": 48,
+            "top": 230,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/plants/south.png",
+          "sha256": "64928227775721d6566ca26c0f292545c5ce5402b7157ccb9d767630cfe10429",
+          "pixelSha256": "e2878f7bf100ee1b664a620899b7cca209dbf41f9ed4bbe0bc7af759742862cd",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-005/alpha-source/plants-south.png",
+          "sourceAlphaSha256": "912b1510136d892ff23ca3dbc07a3b1c82a5f039190883fb010fb4baae4b98a8",
+          "sourceOpaqueBounds": "563x334+42+113",
+          "uniformScale": 0.94709898,
+          "opaqueBounds": "533x316+47+274",
+          "transparentMargins": {
+            "left": 47,
+            "right": 47,
+            "top": 274,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/plants/west.png",
+          "sha256": "3f13140bad7621759144860efefbd50fd84c607596601fc38a0b8157ee2d49b1",
+          "pixelSha256": "b6aed62f0b88ccd6b5098d2f714439b3d44ebdd342bec09a107ebb52f91ef312",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-005/alpha-source/plants-west.png",
+          "sourceAlphaSha256": "0b7e7c761d41b3d43712aecb3162f0ba14ec86b79ef9d96b5bdc1c007dcdee78",
+          "sourceOpaqueBounds": "536x352+33+108",
+          "uniformScale": 0.94709898,
+          "opaqueBounds": "508x333+59+257",
+          "transparentMargins": {
+            "left": 59,
+            "right": 60,
+            "top": 257,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        }
+      ]
+    }
+  ],
+  "rejectedAttempts": [
+    {
+      "generatorOutputSha256": "b770e97910228e520a08a4c767dddb3e84f1a67d20da82e5e973336b0bbc84a8",
+      "reason": "West cell repeated the operational front instead of exposing the vented rear."
+    },
+    {
+      "generatorOutputSha256": "5654d50c43a2c3567b4cd3bdac62045e812a18418d5d64294c0fe980d2c4711b",
+      "reason": "Camera looked upward into the shade interiors and failed the elevated-isometric gate."
+    },
+    {
+      "generatorOutputSha256": "befae8215ca485713687bc2a64df33acf7594be02682424f4cebe955cbed8584",
+      "reason": "West cell repeated the north/south diagonal axis rather than the east/west axis."
+    }
+  ]
+}

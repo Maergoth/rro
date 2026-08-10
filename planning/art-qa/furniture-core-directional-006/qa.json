@@ -1,0 +1,614 @@
+{
+  "schemaVersion": 1,
+  "batchId": "furniture-core-directional-006",
+  "assets": [
+    "local-art",
+    "furniture-oak-two-top",
+    "furniture-walnut-four-top"
+  ],
+  "artReviewStatus": "accepted",
+  "productionComplete": false,
+  "productionCompletionBlockers": [
+    "Native Godot attempt 001 passed projection, directional selection, and floor furniture alignment, but local-art lacks an explicit wall-mount contract.",
+    "Always-on world labels collided with furniture, walls, actors, and status text; a corrected native capture has not yet passed."
+  ],
+  "promotionScope": {
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "repositoryPromotion": {
+    "status": "remote-verified",
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "remotePreservation": {
+    "commit": "185ca509f0d52aa3421686880ed94187ae77b35e",
+    "tree": "ef75c179d6c16b0159baa7d675fa870699721bd0",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30998050059"
+  },
+  "source": {
+    "generator": "OpenAI built-in image generation",
+    "mode": "one separately prompted 2x2 rigid rotation atlas per furniture identity",
+    "promptLog": "planning/art-qa/furniture-core-directional-006/prompts.md",
+    "promptLogSha256": "00eeb4c7c96f9f779036c309492d01e02f1da617e4f7231ca48c59245c79fed7",
+    "processorSha256": "8bee1b015f9143e101e595f7ce04f9393242441acc5c574c609e3f6a81ec251e",
+    "identityReferences": [
+      "apps/client-godot/assets/objects/generated/local-art.png",
+      "apps/client-godot/assets/objects/generated/furniture-oak-two-top.png",
+      "apps/client-godot/assets/objects/generated/furniture-walnut-four-top.png"
+    ],
+    "cameraReference": "accepted furniture-core-directional-002/003 and furniture-pilot-001",
+    "matteProcess": "Official imagegen remove_chroma_key.py helper with border auto-keying, soft matte, magenta despill, transparent threshold 12, and opaque threshold 220.",
+    "normalization": "Split each 1254x1254 alpha atlas into four exact 627x627 cells, alpha-trim, apply one shared proportional scale across all four views of each identity, center horizontally, and place the bottommost opaque row at baseline y=590 on a transparent 627x627 canvas.",
+    "rawSha256": {
+      "local-art": "874c3fc6ba4cf026188cd187873a9e9f6432a220c025db50a1e359a233631c06",
+      "furniture-oak-two-top": "897d9d0159323773ce93215c2f5e2101526d4ffda6d9b8d545fa31dfa8eb3059",
+      "furniture-walnut-four-top": "15d38ea2af5fb40144e4bbace79b8c646ea6f3ae3efaf2d60c4c765ea8f31dc4"
+    },
+    "alphaAtlasSha256": {
+      "local-art": "3adc4f2baa8b6676908fe14116f0794b564fd7d2ce0a1dcc256f497c755adc25",
+      "furniture-oak-two-top": "f0d5b4760e402de5067bfabd64ae2fd3bc28a41e8f5a5d929bbc2337e17f4508",
+      "furniture-walnut-four-top": "0cdc6c0732de128bd35589195a7c78bcec965d5495918e3fdaeb6a471693e448"
+    }
+  },
+  "gates": {
+    "requiredDirections": [
+      "north",
+      "east",
+      "south",
+      "west"
+    ],
+    "runtimeDimensions": "627x627",
+    "colorMode": "sRGBA",
+    "commonCanvasPivot": [
+      313.5,
+      590
+    ],
+    "commonFloorContactBaselineY": 590,
+    "minimumTransparentBottomMarginPixels": 37,
+    "allOuterBordersTransparent": true,
+    "uniqueRuntimeFileHashes": true,
+    "uniqueRuntimePixelHashes": true,
+    "uniqueAgainstRepositoryDirectionalPngs": true,
+    "uniqueAgainstPriorAcceptedTempDirectionalPngs": true,
+    "zeroVisibleMagentaFringePixelsAboveAlpha2": true,
+    "samePhysicalObjectAcrossDirections": "pass",
+    "fixedElevatedOrthographicIsometricCamera": "pass",
+    "noClippingTextLogosWatermarksOrExtraObjects": "pass",
+    "visualReviewAtFullScale": "pass: contact-627-dark.png inspected at original resolution; component counts, front/rear state, elevated camera, silhouettes, alpha edges, and safe padding are accepted across all 12 views.",
+    "visualReviewAtGameplayScale128px": "pass: contact-128-light.png inspected at original resolution; triptych identity, two-chair table, four-chair table, materials, and every facing remain readable at gameplay scale.",
+    "proceduralOrDeterministicStandIn": false
+  },
+  "contactSheets": [
+    {
+      "path": "planning/art-qa/furniture-core-directional-006/contact-627-dark.png",
+      "purpose": "Exact 627px runtime candidates on a dark checkerboard",
+      "sha256": "9e533b4d4d5f1c7ad4b4a32ac2583d8fc205590c15feda8e20bd7c10ffe78cfc"
+    },
+    {
+      "path": "planning/art-qa/furniture-core-directional-006/contact-128-light.png",
+      "purpose": "Same runtime candidates reduced to 128px on a light checkerboard",
+      "sha256": "ac71047011fa4092b6e38517596e098ee7b14b4c8cb9c90e57a9da271d97728d"
+    }
+  ],
+  "items": [
+    {
+      "catalogId": "local-art",
+      "assetId": "local-art",
+      "name": "Local Print Set",
+      "footprint": [
+        2,
+        1
+      ],
+      "identityContract": "One rigid 2x1 wall-mounted heritage triptych: exactly three adjacent dark-walnut frames with aged-brass corner brackets; fixed front order of terracotta botanical still life, ochre village architecture, and navy/rust peacock; exactly three plain dark-wood rear panels with one brass keyhole hanger apiece.",
+      "semanticVerdict": "pass: North/east expose the three illustrated fronts from opposite isometric axes; south/west expose exactly three plain backed frames with one keyhole hanger each. The botanical/village/peacock order reverses physically under 180-degree rotation.",
+      "gameplayLegibility": "pass: Three framed panels, walnut/brass construction, botanical-village-peacock front, and three-hanger plain rear remain distinct at 128px without relying on text.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/local-art/north.png",
+          "sha256": "15517f5f05092075c2f753fb5e1f23cf4d6025aade0f0d8bf92ee0fbb06f906c",
+          "pixelSha256": "350ffd1b241ffa1f71c8c014a66440fd9bfa53ad2140345e4b840023b252db9d",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-006/alpha-source/local-art-north.png",
+          "sourceAlphaSha256": "4b3e3a897f4dd7ffe547382e777ea018e3cdeee1200bd7a0c256894efef01ae4",
+          "sourceOpaqueBounds": "560x473+44+106",
+          "uniformScale": 0.95535714,
+          "opaqueBounds": "535x452+46+138",
+          "transparentMargins": {
+            "left": 46,
+            "right": 46,
+            "top": 138,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 164991,
+          "fullyOpaquePixelCount": 159895,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/local-art/east.png",
+          "sha256": "08f153340927cee22f31c0358135b2a5b4947fff8d677bbad2f0cd5cc3b020e8",
+          "pixelSha256": "073861c02023381a9de3df8ff4776b8ef7d3e734ff5e1dde1964a6131fb814ce",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-006/alpha-source/local-art-east.png",
+          "sourceAlphaSha256": "538dc1f8d5f98821e6eb183f0dd133cdcbc23027a93a15eabc20cf57658b06cc",
+          "sourceOpaqueBounds": "560x475+22+106",
+          "uniformScale": 0.95535714,
+          "opaqueBounds": "535x454+46+136",
+          "transparentMargins": {
+            "left": 46,
+            "right": 46,
+            "top": 136,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 164144,
+          "fullyOpaquePixelCount": 159201,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/local-art/south.png",
+          "sha256": "9218d12571ef3779288f09ed39d964fc11a353a4ef293c1017fc29d1312f0545",
+          "pixelSha256": "5a436bfa2c9e131c0bb8866541c60a22e58fc8e17f9d3c09c43eaa0511a8e6b4",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-006/alpha-source/local-art-south.png",
+          "sourceAlphaSha256": "389278dbb7c3d01557e06570292cda076c61dc7aa52d610e58d0123c7c3f4ae1",
+          "sourceOpaqueBounds": "557x481+44+65",
+          "uniformScale": 0.95535714,
+          "opaqueBounds": "532x460+47+130",
+          "transparentMargins": {
+            "left": 47,
+            "right": 48,
+            "top": 130,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 165038,
+          "fullyOpaquePixelCount": 160110,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/local-art/west.png",
+          "sha256": "9653242d5e91293d42e0b55ddd96ddabc91141b52e207e2c3dbecbbefa655847",
+          "pixelSha256": "cd81e4495a0aa5f60673e0a926a050a546cf4284a904ac1e5a0f0d67a1ee8e62",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-006/alpha-source/local-art-west.png",
+          "sourceAlphaSha256": "1427e07330d2e82fcc48d272f1dbcfa626a1f45605452c3cf1477dc4ace032fb",
+          "sourceOpaqueBounds": "557x480+25+66",
+          "uniformScale": 0.95535714,
+          "opaqueBounds": "532x459+47+131",
+          "transparentMargins": {
+            "left": 47,
+            "right": 48,
+            "top": 131,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 165124,
+          "fullyOpaquePixelCount": 160123,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        }
+      ]
+    },
+    {
+      "catalogId": "oak-two-top",
+      "assetId": "furniture-oak-two-top",
+      "name": "Oak Two-Top",
+      "footprint": [
+        2,
+        2
+      ],
+      "identityContract": "One pale radial-grain round oak tabletop on one centered matte-black trumpet pedestal, paired with exactly two identical navy upholstered curved-back chairs in blackened-ash frames on opposite sides.",
+      "semanticVerdict": "pass: The two chairs remain exactly opposite on one physical axis while table, pedestal, chair spacing, upholstery, frames, and lighting rotate coherently. North/south share the rising isometric ground diagonal as 180-degree counterparts; east/west share the falling diagonal as 180-degree counterparts; no facing uses a screen-horizontal or vertical chair axis.",
+      "gameplayLegibility": "pass: The pale circular top, black pedestal, and exactly two opposite navy chairs remain clearly countable and materially distinct at 128px.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-oak-two-top/north.png",
+          "sha256": "d6a5abc9e7306b0d8cf4f9ed5ebf2e8bf63e78a98c75d6455f948ff4589eca76",
+          "pixelSha256": "563a96d6645e31cbf93354dc64bdcd321c1b3fcf3c3dc92e51e9b4cc8a4a2fd8",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-006/alpha-source/furniture-oak-two-top-north.png",
+          "sourceAlphaSha256": "e364470bca26487b5029b6896dac0df35209b7a03c52cbdd80b69f64b4062aba",
+          "sourceOpaqueBounds": "488x456+61+124",
+          "uniformScale": 1.09406953,
+          "opaqueBounds": "534x499+46+91",
+          "transparentMargins": {
+            "left": 46,
+            "right": 47,
+            "top": 91,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 121953,
+          "fullyOpaquePixelCount": 112179,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-oak-two-top/east.png",
+          "sha256": "59354c68b6f1eb9d57aaefe6718d5d5334e7aaa87e903b01c16401dbda6dbb24",
+          "pixelSha256": "c7612422684ad40a5067d508546fbf104b9e749443640d4f9d52294630c6a845",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-006/alpha-source/furniture-oak-two-top-east.png",
+          "sourceAlphaSha256": "a08c9a01a5f2c7a62198349d0a451424f0d666d8799dae1cc7279e8ad523a109",
+          "sourceOpaqueBounds": "489x456+76+124",
+          "uniformScale": 1.09406953,
+          "opaqueBounds": "535x499+46+91",
+          "transparentMargins": {
+            "left": 46,
+            "right": 46,
+            "top": 91,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 122257,
+          "fullyOpaquePixelCount": 112389,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-oak-two-top/south.png",
+          "sha256": "fb19a998f3a331f8224cb8debeaadd1efbace08f5835543ce1bf9cf2911711be",
+          "pixelSha256": "5d415ac174b628180daf1f6c948948aed7303e365c87b15efbefd6331f1f9c1f",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-006/alpha-source/furniture-oak-two-top-south.png",
+          "sourceAlphaSha256": "f555c1aa7e02b41343aa4c9e8c4a822580a0e8a9da9490da5d1b5ecd1f0f8aab",
+          "sourceOpaqueBounds": "486x454+61+91",
+          "uniformScale": 1.09406953,
+          "opaqueBounds": "532x497+47+93",
+          "transparentMargins": {
+            "left": 47,
+            "right": 48,
+            "top": 93,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 121179,
+          "fullyOpaquePixelCount": 111417,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-oak-two-top/west.png",
+          "sha256": "748b1d5cddebcd450ae757db353eafd5c187a0525d3a9aad24a42a4e4a9408fd",
+          "pixelSha256": "115be029e1e29cd280c5931906cb8c7125cbe26fb5651e08d1bab5c695ee4151",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-006/alpha-source/furniture-oak-two-top-west.png",
+          "sourceAlphaSha256": "f6bbf2a8d8c9a147429bfbc486fa8a608d3988795632e0f64bbd834f04b54f6e",
+          "sourceOpaqueBounds": "487x448+77+92",
+          "uniformScale": 1.09406953,
+          "opaqueBounds": "533x490+47+100",
+          "transparentMargins": {
+            "left": 47,
+            "right": 47,
+            "top": 100,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 120265,
+          "fullyOpaquePixelCount": 110555,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        }
+      ]
+    },
+    {
+      "catalogId": "walnut-four-top",
+      "assetId": "furniture-walnut-four-top",
+      "name": "Walnut Four-Top",
+      "footprint": [
+        3,
+        3
+      ],
+      "identityContract": "One thick square American-walnut table with rounded bullnose edges, exactly one flush centered square brushed-brass inset, one centered dark pedestal base, and exactly four identical deep-teal curved-back walnut-frame chairs, one per side.",
+      "semanticVerdict": "pass: Every view preserves one chair centered on each physical table side, the same walnut grain family, brass inset, pedestal, teal upholstery, spacing, and construction. The rigid square set rotates on the two isometric screen axes without a camera change.",
+      "gameplayLegibility": "pass: The dark square top, centered brass inset, pedestal, and exactly four teal chairs remain distinct and countable at 128px.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-walnut-four-top/north.png",
+          "sha256": "34ffe15db9881dc44c3e8268ce291574b677d8c211274b5e5c4eb0c423f46ca5",
+          "pixelSha256": "48ff16967c60d709627284be3dcfd19b7f63ff147dce3723fea8decc6d8140f0",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-006/alpha-source/furniture-walnut-four-top-north.png",
+          "sourceAlphaSha256": "c955be3562806e36a2b2a05cbcba613f5cc25fcdc2e52fe98716b9d5791a2cb0",
+          "sourceOpaqueBounds": "551x515+34+48",
+          "uniformScale": 0.99243856,
+          "opaqueBounds": "547x511+40+79",
+          "transparentMargins": {
+            "left": 40,
+            "right": 40,
+            "top": 79,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 124393,
+          "fullyOpaquePixelCount": 115073,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-walnut-four-top/east.png",
+          "sha256": "1b4c0ea9182885f63f34d98c877203fbe16f5eb07a5962b2029e95ae6df31774",
+          "pixelSha256": "a780f3f44de73181a96bef4e64da47cf5bb59b1c80754ab9f129017014947798",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-006/alpha-source/furniture-walnut-four-top-east.png",
+          "sourceAlphaSha256": "4c075e56e225d17ed250524d5172a42af062841ccaa28a26a98b5c8f4a89d8ca",
+          "sourceOpaqueBounds": "514x525+33+59",
+          "uniformScale": 0.99243856,
+          "opaqueBounds": "510x521+58+69",
+          "transparentMargins": {
+            "left": 58,
+            "right": 59,
+            "top": 69,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 146748,
+          "fullyOpaquePixelCount": 136638,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-walnut-four-top/south.png",
+          "sha256": "bd11b2dbce979698820a2e33251efccc22ea91c49d1ac285ce2f7b1d971a6dcf",
+          "pixelSha256": "8fddea72e2eeb7a14f42f45b41cdba779a842e42427c5f34a3b524ef375066c6",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-006/alpha-source/furniture-walnut-four-top-south.png",
+          "sourceAlphaSha256": "a24fa458ebc037487c9ae5188c437e9a4707b0b9a2dc7b5274b4e37b8b1b0567",
+          "sourceOpaqueBounds": "518x529+47+38",
+          "uniformScale": 0.99243856,
+          "opaqueBounds": "514x525+56+65",
+          "transparentMargins": {
+            "left": 56,
+            "right": 57,
+            "top": 65,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 151681,
+          "fullyOpaquePixelCount": 141727,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-walnut-four-top/west.png",
+          "sha256": "ca6949890089823f1987e68c2ed8407a8f6f29b186a8ef7ba84e136819b5674c",
+          "pixelSha256": "d169b53b9f2403cd212da1dccf2a7b73d4cb82951718923f9d6d5901d205b4f0",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-006/alpha-source/furniture-walnut-four-top-west.png",
+          "sourceAlphaSha256": "4bc83c3b4a9f545211dac92258551aa0e58b001681e7abb1cf68822144265eff",
+          "sourceOpaqueBounds": "504x496+28+70",
+          "uniformScale": 0.99243856,
+          "opaqueBounds": "500x492+63+98",
+          "transparentMargins": {
+            "left": 63,
+            "right": 64,
+            "top": 98,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0,
+          "cornerAlphas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visiblePixelCount": 142642,
+          "fullyOpaquePixelCount": 132139,
+          "visibleMagentaFringePixelsAboveAlpha2": 0
+        }
+      ]
+    }
+  ],
+  "rejectedAttempts": [
+    {
+      "reason": "North and south placed the two-chair axis screen-horizontal instead of on either diagonal isometric ground-plane axis.",
+      "generatorOutputSha256": "8897fdaa3f4769d279678f5fb85e08dcb5c7206ea21ca9e1b7a9e5edf764b096"
+    },
+    {
+      "reason": "Every cell was elevated and diagonal, but three cells repeated the same projected ground axis instead of alternating coherent north/south and east/west axes.",
+      "generatorOutputSha256": "13dcf7c96c24b4ce495535485b808e513d4a558814fcba5c4193e6032bd81885"
+    },
+    {
+      "reason": "East/west were corrected to a falling diagonal, but north/south regressed to the rejected screen-horizontal axis.",
+      "generatorOutputSha256": "da90162f0b2eed92a258c9a2a8a21250df88754b947851778ce03ee7d598601e"
+    },
+    {
+      "reason": "North cell drifted toward a direct-overhead, screen-aligned tabletop while the other three cells retained the elevated isometric camera.",
+      "generatorOutputSha256": "f179cf00f8b78fe72a83795178bd9a6b55d8a48862c209c0c8c6ef565e5ca0d9"
+    },
+    {
+      "reason": "The corrected north camera added a fifth chair, violating the fixed four-seat identity contract.",
+      "generatorOutputSha256": "3a09988e286d0b38cabe70c4ab1f8ba68994f9b3a48498da2d3e085913f2ffd5"
+    },
+    {
+      "reason": "The count correction restored four chairs but regressed north to the inconsistent near-overhead camera.",
+      "generatorOutputSha256": "9df28646f85d24fa8c21be212881bc948e54f1f18e78eaae2217db0bf9e6f477"
+    }
+  ]
+}

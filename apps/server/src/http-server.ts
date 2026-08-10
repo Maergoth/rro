@@ -3,7 +3,7 @@ import { randomUUID } from "node:crypto";
 import type { ContentRegistry } from "./content.js";
 import { authenticateRequest, login, logout, signup } from "./auth.js";
 import { transaction } from "./database.js";
-import { expandRestaurant, foundRestaurant, getLayout, moveObject, paintFloor, placeObject, repairObject, sellObject, upsertWall } from "./layout-service.js";
+import { commitStagedLayout, expandRestaurant, foundRestaurant, getLayout, moveObject, paintFloor, placeObject, redoLayout, repairObject, sellObject, undoLayout, upsertWall } from "./layout-service.js";
 import { equipInventoryItem, getInventoryCatalog, getInventoryState, purchaseInventoryItem, unequipInventoryItem, useInventoryItem } from "./inventory-service.js";
 import type { LiveService } from "./live-service.js";
 import { ApiError, type AuthenticatedAccount, type Database } from "./types.js";
@@ -38,6 +38,18 @@ async function readBody(req: IncomingMessage): Promise<Record<string, unknown>> 
   } catch {
     throw new ApiError(400, "Request body must be a JSON object.");
   }
+}
+
+async function readLayoutMutationBody(req: IncomingMessage): Promise<Record<string, unknown>> {
+  const body = await readBody(req);
+  if (!("expectedRevision" in body)) {
+    throw new ApiError(
+      428,
+      "Layout changes require expectedRevision from the latest layout response.",
+      "layout-revision-required",
+    );
+  }
+  return body;
 }
 
 function bearer(req: IncomingMessage): string {
@@ -207,18 +219,24 @@ export function createHttpServer(db: Database, registry: ContentRegistry, live: 
       match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/layout$/);
       if (method === "GET" && match) return send(res, 200, getLayout(db, registry, decodeURIComponent(match[1]!)));
       match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/layout\/floor$/);
-      if (method === "PATCH" && match) return send(res, 200, paintFloor(db, registry, account, decodeURIComponent(match[1]!), await readBody(req)));
+      if (method === "PATCH" && match) return send(res, 200, paintFloor(db, registry, account, decodeURIComponent(match[1]!), await readLayoutMutationBody(req)));
       match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/layout\/walls$/);
-      if (method === "PUT" && match) return send(res, 200, upsertWall(db, registry, account, decodeURIComponent(match[1]!), await readBody(req)));
+      if (method === "PUT" && match) return send(res, 200, upsertWall(db, registry, account, decodeURIComponent(match[1]!), await readLayoutMutationBody(req)));
       match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/layout\/objects$/);
-      if (method === "POST" && match) return send(res, 201, placeObject(db, registry, account, decodeURIComponent(match[1]!), await readBody(req)));
+      if (method === "POST" && match) return send(res, 201, placeObject(db, registry, account, decodeURIComponent(match[1]!), await readLayoutMutationBody(req)));
       match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/layout\/objects\/([^/]+)$/);
-      if (method === "PATCH" && match) return send(res, 200, moveObject(db, registry, account, decodeURIComponent(match[1]!), decodeURIComponent(match[2]!), await readBody(req)));
-      if (method === "DELETE" && match) return send(res, 200, sellObject(db, registry, account, decodeURIComponent(match[1]!), decodeURIComponent(match[2]!)));
+      if (method === "PATCH" && match) return send(res, 200, moveObject(db, registry, account, decodeURIComponent(match[1]!), decodeURIComponent(match[2]!), await readLayoutMutationBody(req)));
+      if (method === "DELETE" && match) return send(res, 200, sellObject(db, registry, account, decodeURIComponent(match[1]!), decodeURIComponent(match[2]!), await readLayoutMutationBody(req)));
       match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/layout\/objects\/([^/]+)\/repair$/);
-      if (method === "POST" && match) return send(res, 200, repairObject(db, registry, account, decodeURIComponent(match[1]!), decodeURIComponent(match[2]!)));
+      if (method === "POST" && match) return send(res, 200, repairObject(db, registry, account, decodeURIComponent(match[1]!), decodeURIComponent(match[2]!), await readLayoutMutationBody(req)));
+      match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/layout\/commit$/);
+      if (method === "POST" && match) return send(res, 200, commitStagedLayout(db, registry, account, decodeURIComponent(match[1]!), await readLayoutMutationBody(req)));
       match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/layout\/expand$/);
-      if (method === "POST" && match) return send(res, 200, expandRestaurant(db, registry, account, decodeURIComponent(match[1]!), await readBody(req)));
+      if (method === "POST" && match) return send(res, 200, expandRestaurant(db, registry, account, decodeURIComponent(match[1]!), await readLayoutMutationBody(req)));
+      match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/layout\/undo$/);
+      if (method === "POST" && match) return send(res, 200, undoLayout(db, registry, account, decodeURIComponent(match[1]!), await readLayoutMutationBody(req)));
+      match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/layout\/redo$/);
+      if (method === "POST" && match) return send(res, 200, redoLayout(db, registry, account, decodeURIComponent(match[1]!), await readLayoutMutationBody(req)));
       match = url.pathname.match(/^\/v1\/restaurants\/([^/]+)\/shifts$/);
       if (method === "POST" && match) return send(res, 201, live.openShift(decodeURIComponent(match[1]!), account));
       match = url.pathname.match(/^\/v1\/shifts\/([^/]+)$/);
@@ -235,7 +253,9 @@ export function createHttpServer(db: Database, registry: ContentRegistry, live: 
       const status = error instanceof ApiError ? error.status : 500;
       const message = error instanceof Error ? error.message : "Unexpected server error.";
       if (status >= 500) console.error(`[${requestId}]`, error);
-      send(res, status, { error: { status, message, requestId } });
+      const code = error instanceof ApiError ? error.code : undefined;
+      const details = error instanceof ApiError ? error.details : undefined;
+      send(res, status, { error: { status, message, requestId, ...(code ? { code } : {}), ...(details ?? {}) } });
     }
   });
 }

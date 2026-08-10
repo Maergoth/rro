@@ -16,7 +16,8 @@ Use the following documents as the current planning set:
 | `V2_AAA_ROADMAP.md` | V2 MoSCoW scope, phases, team topology, and guardrails |
 | `V2_TEAM_BACKLOG.md` | Human-readable 240-task development inventory |
 | `planning/v2-backlog.json` | Issue-tracker-ready canonical task records with IDs, dependencies, discipline, priority, target, size, and acceptance |
-| `planning/art-production.json` | Deterministic one-to-one queue for 229 furniture sprites and 45 role-item icons, including output paths, prompt briefs, and live status |
+| [`ART_PROGRESS.md`](ART_PROGRESS.md) | Single authoritative generated art-status ledger, including visual QA, runtime binding, remote preservation, CI evidence, blockers, and next work |
+| `planning/art-production.json` | Non-authoritative catalog and legacy-reference index; preserved direct-overhead furniture files are explicitly excluded from production completion |
 | `ROLE_GAMEPLAY_OPEN_SHIFTS.md` | Detailed crew-workload and drop-in shift design companion |
 
 ## Executive assessment
@@ -48,7 +49,7 @@ The repository is intentionally honest about these boundaries. Packaging will em
 | World ecology | Finite regional capacity/resources, exact 20% NPC opening, closure and replacement generation |
 | Extensibility | Stable IDs, manifest packs, content hash, seasonal events, role inheritance hook, generated data |
 | Local operation | Separate server/client packages, hidden start, health, tokenized graceful stop, exact-PID fallback |
-| Team handoff | Architecture/runbooks/GDD, deterministic generators, a 274-item art-production queue, explicit coverage, strict checks, 29 tests and assignable backlog |
+| Team handoff | Architecture/runbooks/GDD, deterministic generators, one authoritative generated art ledger, strict checks and an assignable backlog |
 
 ## Blocking gaps before native V1 promotion
 
@@ -59,7 +60,7 @@ The repository is intentionally honest about these boundaries. Packaging will em
 - add reconnect ownership restoration and better client prediction before wider multiplayer testing;
 - wire more skill effects into live simulation rather than presenting progression data alone;
 - connect every role-equipment modifier/consumable to live minigame behavior and add equipment condition;
-- generate/art-direct the remaining 209 furniture sprites and 45 bespoke equipment icons; current coverage is 20/229 furniture plus procedural role icons;
+- complete every unresolved furniture, equipment, construction/world/UI and modular-character lane in the generated [production art ledger](ART_PROGRESS.md), using the elevated orthographic-isometric runtime contract;
 - add ingredient lots, tickets, recipes, food safety, utilities, and deeper guest service causality;
 - perform a minimum accessibility/input-remapping pass and paid restaurant-role playtests;
 - produce complete licenses/SBOM, scan artifacts, and sign any build described as public 1.0.

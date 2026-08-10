@@ -59,6 +59,18 @@ export interface ActivityDefinition {
   tags: string[];
 }
 
+export type FurnitureMount = "floor" | "wall" | "ceiling";
+export type FurnitureOccupancy = "blocking" | "nonblocking";
+export type FurnitureServiceAccess = "adjacent" | "none";
+export type FurnitureWallOpening = "solid" | "window";
+
+export interface FurniturePlacement {
+  mount: FurnitureMount;
+  occupancy: FurnitureOccupancy;
+  serviceAccess: FurnitureServiceAccess;
+  allowedWallOpenings?: FurnitureWallOpening[];
+}
+
 export interface FurnitureDefinition {
   id: string;
   name: string;
@@ -68,6 +80,16 @@ export interface FurnitureDefinition {
   costCents: number;
   width: number;
   height: number;
+  /**
+   * Authoritative mounting and spatial behavior. Legacy definitions without
+   * this field are normalized to floor/blocking/adjacent when content loads.
+   *
+   * For wall-mounted instances, rotation selects the room-side mount edge:
+   * 0=north, 90=east, 180=south, 270=west. The eventual renderer must face
+   * the artwork inward, opposite that edge; rotation is not a second wall
+   * coordinate and does not require a persistence migration.
+   */
+  placement: FurniturePlacement;
   symbol: string;
   assetId?: string;
   legacyAssetId?: string;
@@ -198,7 +220,12 @@ export interface Snapshot {
 }
 
 export class ApiError extends Error {
-  constructor(public readonly status: number, message: string) {
+  constructor(
+    public readonly status: number,
+    message: string,
+    public readonly code?: string,
+    public readonly details?: Record<string, unknown>,
+  ) {
     super(message);
   }
 }

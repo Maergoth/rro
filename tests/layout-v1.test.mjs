@@ -1,9 +1,127 @@
 import assert from "node:assert/strict";
+import { mkdtempSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import test from "node:test";
 import { signup } from "../dist/server/auth.js";
 import { loadContent } from "../dist/server/content.js";
 import { createDatabase } from "../dist/server/database.js";
-import { expandRestaurant, foundRestaurant, getFurnitureEffects, getLayout, moveObject, paintFloor, placeObject, repairObject, sellObject, upsertWall } from "../dist/server/layout-service.js";
+import { expandRestaurant, foundRestaurant, getFurnitureEffects, getLayout, moveObject, paintFloor, placeObject, redoLayout, repairObject, sellObject, undoLayout, upsertWall, validateLayout } from "../dist/server/layout-service.js";
+
+function comparableLayout(db, registry, restaurantId) {
+  const layout = getLayout(db, registry, restaurantId);
+  const restaurant = db.prepare("SELECT treasury_cents AS treasuryCents FROM restaurants WHERE id = ?").get(restaurantId);
+  return {
+    width: layout.width,
+    height: layout.height,
+    treasuryCents: restaurant.treasuryCents,
+    cells: layout.cells,
+    walls: layout.walls,
+    objects: layout.objects,
+  };
+}
+
+test("layout undo and redo survive restart, restore treasury atomically, and discard divergent redo", () => {
+  const directory = mkdtempSync(join(tmpdir(), "rro-layout-history-"));
+  const databasePath = join(directory, "world.sqlite");
+  const registry = loadContent();
+  let db = createDatabase(databasePath, registry);
+  const stamp = Date.now().toString(36).slice(-8);
+  const auth = signup(db, registry, { username: `history_${stamp}`, email: `history_${stamp}@test.invalid`, displayName: "History Owner", password: "Production!234" });
+  const outsider = signup(db, registry, { username: `history_guest_${stamp}`, email: `history_guest_${stamp}@test.invalid`, displayName: "History Guest", password: "Production!234" });
+  const founded = foundRestaurant(db, registry, auth.account, { regionId: "us-mid-atlantic", name: "History Test House", concept: registry.content.concepts[0], style: registry.content.styles[0] });
+  try {
+    const baseline = comparableLayout(db, registry, founded.id);
+    paintFloor(db, registry, auth.account, founded.id, { surfaceId: "quarry-tile", cells: [{ x: 0, y: 0 }, { x: 1, y: 0 }] });
+    const afterPaint = comparableLayout(db, registry, founded.id);
+    const placed = placeObject(db, registry, auth.account, founded.id, { definitionId: "table-two", x: 12, y: 2, rotation: 90, primaryColor: "#123456", secondaryColor: "#abcdef" });
+    const afterPlace = comparableLayout(db, registry, founded.id);
+    assert.equal(getLayout(db, registry, founded.id).history.canUndo, true);
+    assert.equal(getLayout(db, registry, founded.id).history.canRedo, false);
+
+    db.close();
+    db = createDatabase(databasePath, registry);
+    assert.deepEqual(comparableLayout(db, registry, founded.id), afterPlace, "committed layout history must survive a server restart");
+    assert.throws(() => undoLayout(db, registry, outsider.account, founded.id), (error) => error.status === 403);
+    const now = Date.now();
+    db.prepare("INSERT INTO service_shifts (id, restaurant_id, opened_by_character_id, state, opened_at, closes_at) VALUES (?, ?, ?, 'open', ?, ?)")
+      .run("shift_history_lock", founded.id, auth.account.characterId, now, now + 60_000);
+    assert.throws(() => undoLayout(db, registry, auth.account, founded.id), (error) => error.status === 409 && /layout is locked/i.test(error.message));
+    assert.throws(() => moveObject(db, registry, auth.account, founded.id, placed.id, { x: 13, y: 3, rotation: 0 }), (error) => error.status === 409 && /layout is locked/i.test(error.message));
+    db.prepare("UPDATE service_shifts SET state = 'closed', closed_at = ? WHERE id = 'shift_history_lock'").run(Date.now());
+
+    const undoPlace = undoLayout(db, registry, auth.account, founded.id);
+    assert.equal(undoPlace.action, "place object");
+    assert.deepEqual(comparableLayout(db, registry, founded.id), afterPaint);
+    assert.equal(undoPlace.layout.history.canRedo, true);
+    assert.ok(!undoPlace.layout.objects.some((object) => object.id === placed.id));
+
+    const undoPaint = undoLayout(db, registry, auth.account, founded.id);
+    assert.equal(undoPaint.action, "paint floor");
+    assert.deepEqual(comparableLayout(db, registry, founded.id), baseline);
+
+    db.close();
+    db = createDatabase(databasePath, registry);
+    const redoPaint = redoLayout(db, registry, auth.account, founded.id);
+    assert.equal(redoPaint.action, "paint floor");
+    assert.deepEqual(comparableLayout(db, registry, founded.id), afterPaint);
+
+    upsertWall(db, registry, auth.account, founded.id, { x: 5, y: 5, edge: "north", wallStyleId: "subway-tile", openingType: "arch", rotation: 0 });
+    assert.equal(getLayout(db, registry, founded.id).history.canRedo, false, "a divergent edit must invalidate the redo branch");
+    assert.throws(() => redoLayout(db, registry, auth.account, founded.id), (error) => error.status === 409 && /no layout action to redo/i.test(error.message));
+    const audit = db.prepare("SELECT category, amount_cents AS amountCents FROM ledger_entries WHERE reference_type = 'layout-history' ORDER BY created_at").all();
+    assert.equal(audit.length, 3);
+    assert.ok(audit.some((entry) => entry.category === "construction-undo" && entry.amountCents > 0));
+    assert.ok(audit.some((entry) => entry.category === "construction-redo" && entry.amountCents < 0));
+  } finally {
+    db.close();
+    rmSync(directory, { recursive: true, force: true });
+  }
+});
+
+test("service-readiness validation detects open perimeters, blocked egress, and wall-isolated floor", () => {
+  const registry = loadContent();
+  const db = createDatabase(":memory:", registry);
+  const stamp = Date.now().toString(36).slice(-8);
+  const auth = signup(db, registry, { username: `egress_${stamp}`, email: `egress_${stamp}@test.invalid`, displayName: "Egress Owner", password: "Production!234" });
+  try {
+    const founded = foundRestaurant(db, registry, auth.account, { regionId: "us-mid-atlantic", name: "Egress Test House", concept: registry.content.concepts[0], style: registry.content.styles[0] });
+    const healthy = validateLayout(db, registry, founded.id);
+    assert.equal(healthy.validForService, true);
+    assert.equal(healthy.usableExits, 2);
+    assert.equal(healthy.reachableCells, healthy.walkableCells);
+
+    const removed = db.prepare("SELECT * FROM wall_edges WHERE restaurant_id = ? AND grid_x = 0 AND grid_y = 0 AND edge = 'west'").get(founded.id);
+    db.prepare("DELETE FROM wall_edges WHERE id = ?").run(removed.id);
+    const openPerimeter = validateLayout(db, registry, founded.id);
+    assert.equal(openPerimeter.validForService, false);
+    assert.ok(openPerimeter.errors.some((error) => error.code === "open-perimeter"));
+    db.prepare("INSERT INTO wall_edges (id, restaurant_id, grid_x, grid_y, edge, wall_style_id, opening_type, rotation, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
+      .run(removed.id, removed.restaurant_id, removed.grid_x, removed.grid_y, removed.edge, removed.wall_style_id, removed.opening_type, removed.rotation, removed.updated_at);
+
+    const northBlock = placeObject(db, registry, auth.account, founded.id, { definitionId: "essential-dining-chair", x: 2, y: 0, rotation: 0 });
+    placeObject(db, registry, auth.account, founded.id, { definitionId: "essential-dining-chair", x: 23, y: 2, rotation: 0 });
+    const blocked = validateLayout(db, registry, founded.id);
+    assert.equal(blocked.validForService, false);
+    assert.equal(blocked.usableExits, 0);
+    assert.ok(blocked.errors.some((error) => error.code === "blocked-egress"));
+    undoLayout(db, registry, auth.account, founded.id);
+    const oneExit = validateLayout(db, registry, founded.id);
+    assert.equal(oneExit.validForService, true);
+    assert.equal(oneExit.usableExits, 1);
+    assert.ok(oneExit.warnings.some((warning) => warning.code === "single-egress"));
+    assert.ok(oneExit.inaccessibleObjectIds.includes(northBlock.id) === false, "a blocked exit object remains serviceable from its interior edge");
+
+    for (const [edge, rotation] of [["north", 0], ["east", 90], ["south", 180], ["west", 270]]) {
+      upsertWall(db, registry, auth.account, founded.id, { x: 6, y: 6, edge, wallStyleId: "subway-tile", openingType: "solid", rotation });
+    }
+    const isolated = validateLayout(db, registry, founded.id);
+    assert.equal(isolated.validForService, false);
+    assert.ok(isolated.errors.some((error) => error.code === "unreachable-floor" && error.count >= 1));
+  } finally {
+    db.close();
+  }
+});
 
 test("an owner can found, tile, wall, furnish, rotate, sell, and expand a modular restaurant", () => {
   const registry = loadContent();

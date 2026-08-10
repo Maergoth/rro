@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "id": "runtime-isometric-integration-001-attempt-006",
+  "reviewedAt": "2026-08-05T14:59:40Z",
+  "source": {
+    "remoteCommit": "cb1cd7f5c29d953abe94cb27a70891ede9d842c8",
+    "remoteTree": "f73c8171ba200f58eac682e4fc7cfb43f6825200",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31016663766",
+    "artifactId": 8934792593,
+    "artifactName": "elevated-isometric-runtime-qa",
+    "artifactSha256": "663b165ee0b1622924d2c9ae5df3c76e451432690b38f6e41f4205b38bb404cb"
+  },
+  "automatedGates": {
+    "windowsCi": "passed",
+    "ubuntuCi": "passed",
+    "nativeGodotCapture": "passed",
+    "captureCount": 4,
+    "viewport": [
+      1800,
+      1100
+    ],
+    "minimumSampledColors": 334,
+    "exactArtifactDigestVerified": true,
+    "exactCaptureHashesVerified": true,
+    "legalMountedPlacementRecordsPresent": true
+  },
+  "visualReview": {
+    "status": "passed-partial-present-assets",
+    "productionComplete": false,
+    "reviewers": [
+      "root original-scale and gameplay-scale inspection",
+      "independent original-scale and gameplay-scale inspection"
+    ],
+    "passed": [
+      "Local art and plants are flush-mounted to coherent wall planes in all four directions, with their decorated faces pointing into the room and their backs correctly visible from the fixed exterior camera in the south and west captures.",
+      "Pendants preserve ceiling plates, suspension rods, and a credible overhead relationship to the walnut four-top in all four directions without table collision or clipping.",
+      "The heated expo pass preserves its complete silhouette, directional construction, floor contact, scale, and gameplay legibility in all four captures.",
+      "The commercial plancha preserves its complete silhouette, directional construction, floor contact, scale, and gameplay legibility in all four captures.",
+      "The twenty-two previously accepted floor identities retain their reviewed placements and show no visual regression.",
+      "The exact native artifact, four capture hashes, mounted placement records, remote commit, tree, and green Windows and Ubuntu CI are verified."
+    ],
+    "blockers": [
+      {
+        "id": "convection-oven-foreground-wall-occlusion",
+        "assets": [
+          "furniture-convection-oven"
+        ],
+        "reason": "The foreground wall hides roughly the lower half of the convection oven in every capture, preventing review of its full silhouette and floor contact. Relocate only its QA fixture away from the foreground wall and repeat the exact native review without changing accepted art bytes."
+      }
+    ],
+    "acceptedAssetIds": [
+      "banquette",
+      "booth",
+      "dish-machine",
+      "espresso",
+      "furniture-banquette-section",
+      "furniture-commercial-chair",
+      "furniture-expo-pass-heated",
+      "furniture-host-stand-pro",
+      "furniture-oak-two-top",
+      "furniture-plancha-commercial",
+      "furniture-pos-terminal",
+      "furniture-premium-chair",
+      "furniture-server-station-pro",
+      "furniture-six-burner-range",
+      "furniture-walnut-four-top",
+      "host-stand",
+      "local-art",
+      "mop-sink",
+      "pass",
+      "pendants",
+      "plants",
+      "prep",
+      "range",
+      "recycling",
+      "service-station",
+      "table-four",
+      "table-two"
+    ],
+    "rejectedAssetIds": [
+      "furniture-convection-oven"
+    ],
+    "nextCaptureRequirements": [
+      "Move only the convection-oven QA fixture to an unobstructed interior position while preserving every other floor and mounted fixture position.",
+      "Repeat the exact four-direction native capture and inspect the convection oven's complete silhouette and floor contact at original and gameplay scale.",
+      "Confirm the twenty-seven accepted identities retain their reviewed projection, placement, depth, and gameplay legibility before changing production credit."
+    ]
+  },
+  "captures": [
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-006/restaurant-north.png",
+      "sha256": "e14cd5958640cce56855ac2becd27decbb9543768c43ba9d1a62e18559ab6a30"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-006/restaurant-east.png",
+      "sha256": "37ec3fe2930e9b0ec6d7a28cae3d9326af9b0d04c985c935457b620d0c58ee7e"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-006/restaurant-south.png",
+      "sha256": "fcee7856cb080a5891de56a38748862133fa476869f86a116a5302913e66d45c"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-006/restaurant-west.png",
+      "sha256": "583dccb5493477b4b438f511413f1efb1bcd4df9ddbba0c32db2ac0aae324b83"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-006/qa.json",
+      "sha256": "f7c35a93c15f7ee3b5e7763b60492193d44fe48cb933bee727e3c29ff2801f1e"
+    }
+  ]
+}

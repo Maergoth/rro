@@ -1,0 +1,475 @@
+{
+  "schemaVersion": 1,
+  "batchId": "furniture-core-directional-003",
+  "artReviewStatus": "accepted",
+  "productionComplete": false,
+  "productionCompletionBlockers": [
+    "The current Godot floor projection remains orthogonal; final elevated-isometric footprint alignment and runtime gameplay-composite review have not passed."
+  ],
+  "assets": [
+    "range",
+    "prep",
+    "pass"
+  ],
+  "repositoryPromotion": "remote-verified",
+  "promotionScope": {
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "remotePreservation": {
+    "commit": "998a2e5bf5914debaa1a997de1fc19a275f0ff69",
+    "tree": "c95cdd7d0825bdbf6769a10a329aa5dc08ce8457",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30982693857"
+  },
+  "source": {
+    "generator": "OpenAI built-in image generation",
+    "mode": "one separately prompted 2x2 rigid rotation atlas per furniture identity",
+    "promptLog": "planning/art-qa/furniture-core-directional-003/prompts.md",
+    "promptLogSha256": "3f23f9ffd5fa98d94756719e6071db2abebaa80207b2702a01e3e03ac30500ff",
+    "identityReferences": [
+      "apps/client-godot/assets/objects/generated/range.png",
+      "apps/client-godot/assets/objects/generated/prep.png",
+      "apps/client-godot/assets/objects/generated/pass.png"
+    ],
+    "cameraReference": "accepted furniture-core-directional-001/002 and furniture-pilot-001",
+    "matteProcess": "Official imagegen remove_chroma_key.py helper with border auto-keying, soft matte, magenta despill, transparent threshold 12, and opaque threshold 220.",
+    "normalization": "Split the 1254x1254 alpha atlas into four exact 627x627 cells, alpha-trim, uniformly scale, center horizontally, and place the bottommost opaque row at baseline y=590 on a transparent 627x627 canvas.",
+    "rawSha256": {
+      "range": "d041a9b7f32fddf3c7cba090a1527a85df5a3800df762266139da35b74743d6c",
+      "prep": "49adc0b371ecc1fa8cf61270766bfdae61586e55b316edf07f386a41c680236f",
+      "pass": "1c20e93a4206bd62f6fca7cc25f68653b28446d6fe35b587f08e5741a10ba94f"
+    },
+    "alphaAtlasSha256": {
+      "range": "f9641002b459772fe4c290d6eec07312a2779a8661af6fdcea84f78db1da90b2",
+      "prep": "b926e2d0aaccf6c1342d9d0f9b292b7fd1ec3d0e510ee5f034164d9a85d98e34",
+      "pass": "95b87a9f74604317ff09a993bc875c5c44a749bdfd022759983eb17337ab5213"
+    }
+  },
+  "gates": {
+    "requiredDirections": [
+      "north",
+      "east",
+      "south",
+      "west"
+    ],
+    "runtimeDimensions": "627x627",
+    "colorMode": "sRGBA",
+    "commonCanvasPivot": [
+      313.5,
+      590
+    ],
+    "commonFloorContactBaselineY": 590,
+    "minimumTransparentBottomMarginPixels": 37,
+    "allOuterBordersTransparent": true,
+    "uniqueRuntimeFileHashes": true,
+    "uniqueRuntimePixelHashes": true,
+    "uniqueAgainstRepositoryDirectionalPngs": true,
+    "samePhysicalObjectAcrossDirections": "pass",
+    "fixedElevatedOrthographicIsometricCamera": "pass",
+    "noClippingTextLogosWatermarksOrExtraObjects": "pass",
+    "visualReviewAtFullScale": "pass: contact-627-dark.png inspected at original resolution; all rigid feature counts, front/rear states, camera angles, silhouettes, alpha edges, and padding accepted.",
+    "visualReviewAtGameplayScale128px": "pass: contact-128-light.png inspected at original resolution; each identity and facing state remains legible without detail-dependent ambiguity.",
+    "proceduralOrDeterministicStandIn": false
+  },
+  "contactSheets": [
+    {
+      "path": "planning/art-qa/furniture-core-directional-003/contact-627-dark.png",
+      "purpose": "Exact 627px runtime candidates on a dark checkerboard",
+      "sha256": "de429b47fd1180b6faca4cd2d37b4cd188f32c0be822b3bc898e7ce44f59cb9e"
+    },
+    {
+      "path": "planning/art-qa/furniture-core-directional-003/contact-128-light.png",
+      "purpose": "Same runtime candidates reduced to 128px on a light checkerboard",
+      "sha256": "d67f3f90a46a62dfd4717a5c3f9e58bc11924dd554e9efe12f954d44ea19bc2f"
+    }
+  ],
+  "items": [
+    {
+      "catalogId": "range",
+      "assetId": "range",
+      "name": "Six-Burner Range",
+      "footprint": [
+        3,
+        2
+      ],
+      "identityContract": "Exactly six black burner grates in a 3x2 array, exactly six front control knobs, one centered oven door, one rear vented backsplash, and four leveling feet.",
+      "semanticVerdict": "pass: North/east show the operational front on opposite isometric axes; south/west expose the solid rear while the backsplash stays opposite the hidden knobs. Burner row/column ordering rotates rigidly.",
+      "gameplayLegibility": "pass: Six burner centers, the front control band, oven door, and rear backsplash remain readable at 128px.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/range/north.png",
+          "sha256": "a176cc672131b13c95505e168ffd25ca9528b66d2011ebcdf62d2996adea437d",
+          "pixelSha256": "297c22731ee1a1e6c9c97a10afc2b3c0a9d0192b0edcbab6b802cd2822e2a98a",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-003/alpha-source/range-north.png",
+          "sourceAlphaSha256": "591c3a8a349874503ee3acbced763c8f7438b187df453d78ce64ac2b84995883",
+          "sourceOpaqueBounds": "479x539+57+40",
+          "uniformScale": 0.97402597,
+          "opaqueBounds": "467x525+80+65",
+          "transparentMargins": {
+            "left": 80,
+            "right": 80,
+            "top": 65,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/range/east.png",
+          "sha256": "de992dcb255c731a1976cbf3aaed3bb804cde66c92318e814852a9cb633bbd15",
+          "pixelSha256": "940f353d0823ea8103989a7b2964c576e6fea2015e894d3439714e97d72d61ee",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-003/alpha-source/range-east.png",
+          "sourceAlphaSha256": "65ab11ea8fb52b095061c8a07101422945d5b11ab4661c9948521600ff02414f",
+          "sourceOpaqueBounds": "486x543+62+37",
+          "uniformScale": 0.96685083,
+          "opaqueBounds": "470x525+78+65",
+          "transparentMargins": {
+            "left": 78,
+            "right": 79,
+            "top": 65,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/range/south.png",
+          "sha256": "187e51b1ec23af1670072ae7b7decccfb6a04006dd4be9defda41e3801dbc809",
+          "pixelSha256": "81603bb2b31c59c742cd9703850b5339fb73d6624a9b7f2ec944e1b689a2b343",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-003/alpha-source/range-south.png",
+          "sourceAlphaSha256": "e94b67833e33e2ac65e1810b3187299b0c510ed101073488f39677b7baff69cb",
+          "sourceOpaqueBounds": "477x504+58+71",
+          "uniformScale": 1.04166667,
+          "opaqueBounds": "497x525+65+65",
+          "transparentMargins": {
+            "left": 65,
+            "right": 65,
+            "top": 65,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/range/west.png",
+          "sha256": "66e930305412aee7b8feb2b005a9c9099216b913e254ec055a9bc2e97a63ac04",
+          "pixelSha256": "d59ba7b39eb8af96da62f02ad0a3c741ebd0a509612907bfcb4afbd817b7817a",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-003/alpha-source/range-west.png",
+          "sourceAlphaSha256": "a35a50cddcaec3d0fa72d7e6c3313f7250a3adeec69854b93c68840e45c9d20e",
+          "sourceOpaqueBounds": "479x507+59+73",
+          "uniformScale": 1.03550296,
+          "opaqueBounds": "496x525+65+65",
+          "transparentMargins": {
+            "left": 65,
+            "right": 66,
+            "top": 65,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        }
+      ]
+    },
+    {
+      "catalogId": "prep",
+      "assetId": "prep",
+      "name": "Cold Prep Table",
+      "footprint": [
+        3,
+        1
+      ],
+      "identityContract": "Exactly six lidded stainless ingredient pans along the rear rail, one cream cutting-board zone, two front refrigerator doors, two rear compressor vents, and four leveling feet.",
+      "semanticVerdict": "pass: North/east show two operational-front refrigerator doors; south/west show the opposite solid rear with two vents and zero doors. The six-pan rail crosses from far to near under 180-degree rotation.",
+      "gameplayLegibility": "pass: The long 3x1 silhouette, six-pan rhythm, cream work surface, and front-door versus rear-vent state remain distinct at 128px.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/prep/north.png",
+          "sha256": "34441736681b75c28c087a513fb95500965d8ed2b7a0cb20cb8bd2b657854c2d",
+          "pixelSha256": "7edd7b954276444fe9cda7db6d6a2a4220ec0b8091ee795f18b9eee67a06706e",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-003/alpha-source/prep-north.png",
+          "sourceAlphaSha256": "aa12b9e481c8e3d32c3875393530b0c9580a0c1af1316288d08ed9938b391dda",
+          "sourceOpaqueBounds": "521x491+52+92",
+          "uniformScale": 0.87576375,
+          "opaqueBounds": "456x430+85+160",
+          "transparentMargins": {
+            "left": 85,
+            "right": 86,
+            "top": 160,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/prep/east.png",
+          "sha256": "c7b9c5c932d3d8278cd1d09f5424ece7b57b40e6c67dcfb46952bbf96762df9f",
+          "pixelSha256": "676a1c661478da601e8bf195dbeb0ea3056efcfe606a4a07a7a04bda34dc1e7c",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-003/alpha-source/prep-east.png",
+          "sourceAlphaSha256": "940add5ceb779dd057be4d0d3af3000b5f01d63555dbc8a687fcdece5a0155ed",
+          "sourceOpaqueBounds": "518x490+51+92",
+          "uniformScale": 0.87755102,
+          "opaqueBounds": "455x430+86+160",
+          "transparentMargins": {
+            "left": 86,
+            "right": 86,
+            "top": 160,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/prep/south.png",
+          "sha256": "bccf615fae62b1df44811a87a2f439b933ffc58fdcb441cefef5b34c4f82fc20",
+          "pixelSha256": "09a3fba75510882b414587578c549cddfc1eb450a37f9d568e1c6730452dbf83",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-003/alpha-source/prep-south.png",
+          "sourceAlphaSha256": "c598acc67390e01a827ce1664d64ec75e2e4bfadfaf78861fc3210ac242c7dda",
+          "sourceOpaqueBounds": "522x469+50+56",
+          "uniformScale": 0.91684435,
+          "opaqueBounds": "479x430+74+160",
+          "transparentMargins": {
+            "left": 74,
+            "right": 74,
+            "top": 160,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/prep/west.png",
+          "sha256": "add69ee4158a5f45d168d012366765bf6211a259a38228a1d6596952f4e041c5",
+          "pixelSha256": "2e33cc23566fdba90e258833a712b6ac272e77458e581634eab4b9d5fd728de2",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-003/alpha-source/prep-west.png",
+          "sourceAlphaSha256": "c33dacd698364f00a724923221c5ae4d33bb2a12f04762c7ff6c827a069989b7",
+          "sourceOpaqueBounds": "525x475+51+54",
+          "uniformScale": 0.90526316,
+          "opaqueBounds": "475x430+76+160",
+          "transparentMargins": {
+            "left": 76,
+            "right": 76,
+            "top": 160,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        }
+      ]
+    },
+    {
+      "catalogId": "pass",
+      "assetId": "pass",
+      "name": "Heated Pass",
+      "footprint": [
+        3,
+        1
+      ],
+      "identityContract": "Exactly three ivory plate positions on the service side, one copper heat rail on two end posts, exactly five clipped tickets on the rear, and one amber control at the operational right end.",
+      "semanticVerdict": "pass: North/east expose the three-plate service side; south/west expose the five-ticket rear. The fixed copper rail and cabinet rotate as one object rather than mirroring front-only views.",
+      "gameplayLegibility": "pass: The three plate disks, copper rail, and five-ticket rear silhouette remain readable at 128px.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/pass/north.png",
+          "sha256": "da834099de8fa75c97192327fb3ca0cebbee43c4db70b9d6ec97903801a93771",
+          "pixelSha256": "175936c40b5f3f0b34ee7aa566d26b080ba1ee56ca374f1052271ad9337e4645",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-003/alpha-source/pass-north.png",
+          "sourceAlphaSha256": "a9cec4b6614687c1947119c72bb3b71e49abb90da52c6df7e7f1998f8db3b608",
+          "sourceOpaqueBounds": "580x488+17+86",
+          "uniformScale": 0.88114754,
+          "opaqueBounds": "511x430+58+160",
+          "transparentMargins": {
+            "left": 58,
+            "right": 58,
+            "top": 160,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/pass/east.png",
+          "sha256": "534a2e83475a9cbf426f88aa50405755ca00bd837a93e354ad9da1e52cae00ff",
+          "pixelSha256": "1affce0d0d11b51be7a149fe22d50494643e2f6c43865d41ea638e8d6dbb75b7",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-003/alpha-source/pass-east.png",
+          "sourceAlphaSha256": "850f238f356a7a2b1a85ed274df68e4c402083f0cb9ad2c390685730ebbd622b",
+          "sourceOpaqueBounds": "577x487+28+91",
+          "uniformScale": 0.88295688,
+          "opaqueBounds": "509x430+59+160",
+          "transparentMargins": {
+            "left": 59,
+            "right": 59,
+            "top": 160,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/pass/south.png",
+          "sha256": "6e75b82365438e266729129fe145b4eab4aaa6c75c328a5a17093ae558a273a6",
+          "pixelSha256": "0e17eb9fbae4679097c6d1c9b997c15eca703c114b27c72b211f50e139bfa2a9",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-003/alpha-source/pass-south.png",
+          "sourceAlphaSha256": "71863cc78ea160290fde5778f441ba9bc381c4aa6e946a97a77ae95bd1777ea5",
+          "sourceOpaqueBounds": "572x495+16+57",
+          "uniformScale": 0.86868687,
+          "opaqueBounds": "497x430+65+160",
+          "transparentMargins": {
+            "left": 65,
+            "right": 65,
+            "top": 160,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/pass/west.png",
+          "sha256": "f69607e3a51722f6aba9da39951fbd2e9f0acf1d5dee4c9f044b769660653bec",
+          "pixelSha256": "f76568858584a284a130982193dee5f749e45006a47f4167beae2ef5b4534bb6",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-003/alpha-source/pass-west.png",
+          "sourceAlphaSha256": "74a5c4a9dd882edfdb31136590b8c09124f3db175025c9228f27a873b1057aae",
+          "sourceOpaqueBounds": "573x495+32+57",
+          "uniformScale": 0.86868687,
+          "opaqueBounds": "498x430+64+160",
+          "transparentMargins": {
+            "left": 64,
+            "right": 65,
+            "top": 160,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "outerBorderAlphaMax": 0
+        }
+      ]
+    }
+  ],
+  "rejectedAttempts": [
+    {
+      "generatorOutputSha256": "3206744dd08c4df3f048d168cf07263251207335e72820143f96fb45eb9d56bc",
+      "reason": "All four cells presented operational-front door cues; bottom cells also moved the pan rail ahead of the cutting board, creating a contradictory front/rear identity rather than a true 180-degree rotation."
+    }
+  ]
+}

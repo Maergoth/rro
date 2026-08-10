@@ -7,6 +7,11 @@
     "costCents": 36000,
     "width": 2,
     "height": 2,
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "symbol": "2",
     "stats": {
       "seats": 2,
@@ -25,6 +30,11 @@
     "costCents": 62000,
     "width": 3,
     "height": 2,
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "symbol": "4",
     "stats": {
       "seats": 4,
@@ -43,6 +53,11 @@
     "costCents": 94000,
     "width": 4,
     "height": 2,
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "symbol": "B",
     "stats": {
       "seats": 4,
@@ -62,6 +77,11 @@
     "costCents": 126000,
     "width": 5,
     "height": 2,
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "symbol": "B",
     "stats": {
       "seats": 6,
@@ -80,6 +100,11 @@
     "costCents": 48000,
     "width": 2,
     "height": 1,
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "symbol": "H",
     "stats": {
       "turnover": 3
@@ -97,6 +122,11 @@
     "costCents": 78000,
     "width": 2,
     "height": 2,
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "symbol": "S",
     "stats": {
       "turnover": 5
@@ -114,6 +144,11 @@
     "costCents": 165000,
     "width": 2,
     "height": 1,
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "symbol": "E",
     "stats": {
       "revenue": 6,
@@ -132,6 +167,11 @@
     "costCents": 240000,
     "width": 3,
     "height": 2,
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "symbol": "R",
     "stats": {
       "kitchen": 10
@@ -149,6 +189,11 @@
     "costCents": 132000,
     "width": 3,
     "height": 1,
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "symbol": "P",
     "stats": {
       "kitchen": 6,
@@ -167,6 +212,11 @@
     "costCents": 188000,
     "width": 3,
     "height": 1,
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "symbol": "X",
     "stats": {
       "kitchen": 5,
@@ -185,6 +235,11 @@
     "costCents": 275000,
     "width": 3,
     "height": 2,
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "symbol": "D",
     "stats": {
       "sanitation": 9,
@@ -203,6 +258,11 @@
     "costCents": 54000,
     "width": 2,
     "height": 2,
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "symbol": "U",
     "stats": {
       "sanitation": 5
@@ -220,6 +280,11 @@
     "costCents": 68000,
     "width": 2,
     "height": 1,
+    "placement": {
+      "mount": "floor",
+      "occupancy": "blocking",
+      "serviceAccess": "adjacent"
+    },
     "symbol": "♻",
     "stats": {
       "sanitation": 3,
@@ -238,6 +303,11 @@
     "costCents": 44000,
     "width": 2,
     "height": 1,
+    "placement": {
+      "mount": "ceiling",
+      "occupancy": "nonblocking",
+      "serviceAccess": "none"
+    },
     "symbol": "✦",
     "stats": {
       "ambience": 5
@@ -255,6 +325,14 @@
     "costCents": 72000,
     "width": 3,
     "height": 1,
+    "placement": {
+      "mount": "wall",
+      "occupancy": "nonblocking",
+      "serviceAccess": "none",
+      "allowedWallOpenings": [
+        "solid"
+      ]
+    },
     "symbol": "❋",
     "stats": {
       "ambience": 6,
@@ -273,6 +351,14 @@
     "costCents": 39000,
     "width": 2,
     "height": 1,
+    "placement": {
+      "mount": "wall",
+      "occupancy": "nonblocking",
+      "serviceAccess": "none",
+      "allowedWallOpenings": [
+        "solid"
+      ]
+    },
     "symbol": "▣",
     "stats": {
       "ambience": 4

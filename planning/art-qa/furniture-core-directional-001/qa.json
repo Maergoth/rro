@@ -1,0 +1,243 @@
+{
+  "schemaVersion": 1,
+  "batchId": "furniture-core-directional-001",
+  "artReviewStatus": "accepted",
+  "productionComplete": false,
+  "productionCompletionBlockers": [
+    "The current Godot restaurant renderer does not bind directional furniture PNGs by rotation.",
+    "Remote commit and tree verification are owned by the publication checkpoint after this QA handoff."
+  ],
+  "source": {
+    "generator": "OpenAI built-in image generation",
+    "mode": "new generation with identity and camera reference images",
+    "promptSummary": "Preserve the referenced furniture identity and materials; render the exact same physical object rigidly rotated north, east, south, and west under one elevated orthographic-isometric camera; show top and side planes; use a flat green chroma background; include no floor, environmental shadow, text, logo, watermark, clipping, or extra object.",
+    "cameraReference": "apps/client-godot/assets/objects/directional/furniture-six-burner-range",
+    "identityReferences": [
+      "apps/client-godot/assets/objects/generated/table-two.png",
+      "apps/client-godot/assets/objects/generated/table-four.png",
+      "apps/client-godot/assets/objects/generated/host-stand.png"
+    ],
+    "matteProcess": "Official imagegen remove_chroma_key.py helper with border auto-keying, soft matte, and green despill.",
+    "normalization": "Selected accepted cells were alpha-trimmed, horizontally centered without independent deformation, and placed on 627x627 transparent canvases with a common floor-contact baseline at y=590. Only the separately generated 1254px material-counterpart cells were proportionally resized by 50 percent before placement.",
+    "alphaSources": [
+      {
+        "path": "planning/art-qa/furniture-core-directional-001/alpha-source/host-stand-2x2-north-east-south-west.png",
+        "sha256": "f97e74f4f7ba318af08ca7151fec3000d47375ab0f1538683eb675e752ce6429",
+        "selection": "All four cells accepted in north/east/south/west order."
+      },
+      {
+        "path": "planning/art-qa/furniture-core-directional-001/alpha-source/table-two-primary-2x2-north-east-unused-west.png",
+        "sha256": "effd9093e30cb2002042d453f9faa0c62a84fd38fce6186b13aa681d238c666d",
+        "selection": "Top-left north, top-right east, and bottom-right west accepted; bottom-left excluded."
+      },
+      {
+        "path": "planning/art-qa/furniture-core-directional-001/alpha-source/table-two-south-material-counterpart.png",
+        "sha256": "8edc7a60840877fd9b0e2f3bf67d656709a20094e4f62dee030c4a498ed518a9",
+        "selection": "South material-coherent rotational counterpart accepted and proportionally resized by 50 percent."
+      },
+      {
+        "path": "planning/art-qa/furniture-core-directional-001/alpha-source/table-four-primary-2x2-rejected-east-north-south.png",
+        "sha256": "c8af6b0e2dfc1a22b4ac1baa546ffcbe0164b31dd0381754117ae0ddb4e70729",
+        "selection": "Top-right east, bottom-left north, and bottom-right south accepted; top-left excluded for camera drift."
+      },
+      {
+        "path": "planning/art-qa/furniture-core-directional-001/alpha-source/table-four-west-material-counterpart.png",
+        "sha256": "8975005a698b387983ac2ef713558a8727ee8b967e3a589119e1b9108bd9d5b5",
+        "selection": "West material-coherent rotational counterpart accepted and proportionally resized by 50 percent."
+      }
+    ]
+  },
+  "gates": {
+    "requiredDirections": [
+      "north",
+      "east",
+      "south",
+      "west"
+    ],
+    "runtimeDimensions": "627x627",
+    "colorMode": "sRGBA",
+    "commonCanvasPivot": [
+      313.5,
+      590
+    ],
+    "commonFloorContactBaselineY": 590,
+    "minimumTransparentBottomMarginPixels": 37,
+    "allCornersTransparent": true,
+    "uniqueRuntimeContentHashes": true,
+    "samePhysicalObjectAcrossDirections": "pass",
+    "fixedElevatedOrthographicIsometricCamera": "pass",
+    "noClippingTextLogosWatermarksOrExtraObjects": "pass",
+    "visualReviewAtFullScale": "pass",
+    "visualReviewAtGameplayScale128px": "pass",
+    "proceduralOrDeterministicStandIn": false
+  },
+  "contactSheets": [
+    {
+      "path": "planning/art-qa/furniture-core-directional-001/contact-627-dark.png",
+      "purpose": "Exact 627px runtime sprites on a dark checkerboard, ordered by item row and north/east/south/west columns.",
+      "sha256": "57100850ff4f88dbfda75f628c4087af89235ba9f4e2b5ccdd14d1e16c414696"
+    },
+    {
+      "path": "planning/art-qa/furniture-core-directional-001/contact-128-light.png",
+      "purpose": "The same runtime sprites reduced to 128px gameplay-review scale on a light checkerboard.",
+      "sha256": "6d081bcc3d446c5534a1dddeb123760a68f2666ea323b63109b5750a03cfc240"
+    }
+  ],
+  "items": [
+    {
+      "catalogId": "table-two",
+      "assetId": "table-two",
+      "name": "Walnut Two-Top",
+      "semanticVerdict": "pass: one square dark-walnut table and exactly two matching upholstered chairs remain the same physical set through four rigid rotations; the 180-degree pairs retain intentionally symmetric silhouettes while material cues remain unique.",
+      "gameplayLegibility": "pass",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/table-two/north.png",
+          "sha256": "5a2eda2886a111e11e618383827e7a2e44bde330db5e0140c5fd60f655e6b362",
+          "opaqueBounds": "483x474+72+116",
+          "transparentMargins": { "left": 72, "right": 72, "top": 116, "bottom": 37 },
+          "floorContactBaselineY": 590
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/table-two/east.png",
+          "sha256": "d4e676f5ff109355d0c3caabae9868f1c449347ed693c2f47beb9987cfc79d33",
+          "opaqueBounds": "455x504+86+86",
+          "transparentMargins": { "left": 86, "right": 86, "top": 86, "bottom": 37 },
+          "floorContactBaselineY": 590
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/table-two/south.png",
+          "sha256": "436b3a7eb27e1ae72cdefa2217e8be8cc49e0e823fae036eddec5183515ca55f",
+          "opaqueBounds": "483x474+72+116",
+          "transparentMargins": { "left": 72, "right": 72, "top": 116, "bottom": 37 },
+          "floorContactBaselineY": 590
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/table-two/west.png",
+          "sha256": "e6543e3a20b778040d8d9e82455693a8ab9c88c0501bb2f2118b4f3ad059cb7f",
+          "opaqueBounds": "453x496+87+94",
+          "transparentMargins": { "left": 87, "right": 87, "top": 94, "bottom": 37 },
+          "floorContactBaselineY": 590
+        }
+      ]
+    },
+    {
+      "catalogId": "table-four",
+      "assetId": "table-four",
+      "name": "Oak Four-Top",
+      "semanticVerdict": "pass: one rectangular honey-oak table and exactly four matching upholstered chairs, two on each long side, remain the same physical set through four rigid rotations; the 180-degree pairs are intentionally symmetric but retain unique wood-grain evidence.",
+      "gameplayLegibility": "pass",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/table-four/north.png",
+          "sha256": "04633f182087398908585dcf67deac7214a7fdebb6309b2dc4f2b776eb0455cd",
+          "opaqueBounds": "468x493+79+97",
+          "transparentMargins": { "left": 79, "right": 80, "top": 97, "bottom": 37 },
+          "floorContactBaselineY": 590
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/table-four/east.png",
+          "sha256": "a92a0956061de546977e54006aacfec6a2bbac5af6449a0dc009c63b54a4a71f",
+          "opaqueBounds": "503x493+62+97",
+          "transparentMargins": { "left": 62, "right": 62, "top": 97, "bottom": 37 },
+          "floorContactBaselineY": 590
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/table-four/south.png",
+          "sha256": "3cb53f39cbaa4c11b6b194dd268de2b774ad936fbd8835af0d1e1829426d2ef8",
+          "opaqueBounds": "494x492+66+98",
+          "transparentMargins": { "left": 66, "right": 67, "top": 98, "bottom": 37 },
+          "floorContactBaselineY": 590
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/table-four/west.png",
+          "sha256": "c41006be11bfc852e44ae2ba585dce5b6e1465d1d7b964b88d92d2458a709b22",
+          "opaqueBounds": "503x493+62+97",
+          "transparentMargins": { "left": 62, "right": 62, "top": 97, "bottom": 37 },
+          "floorContactBaselineY": 590
+        }
+      ]
+    },
+    {
+      "catalogId": "host-stand",
+      "assetId": "host-stand",
+      "name": "Host Stand",
+      "semanticVerdict": "pass: the same dark-walnut curved-front podium, red reservation book, and pencil cup rotate coherently through four elevated directions; the book and pencil cup swap sides correctly in the 180-degree view.",
+      "gameplayLegibility": "pass",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/host-stand/north.png",
+          "sha256": "9170859b113b10161089d274ba7cae9f251ea440afdf72554d72155ee25b717a",
+          "opaqueBounds": "518x499+54+91",
+          "transparentMargins": { "left": 54, "right": 55, "top": 91, "bottom": 37 },
+          "floorContactBaselineY": 590
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/host-stand/east.png",
+          "sha256": "0fd01a4beb5dd1db9f79d9f022618c74d9d7ad74c0ffab2bb8dfea856791f209",
+          "opaqueBounds": "380x544+123+46",
+          "transparentMargins": { "left": 123, "right": 124, "top": 46, "bottom": 37 },
+          "floorContactBaselineY": 590
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/host-stand/south.png",
+          "sha256": "25a2277f0b9736c0cef7a6aa6af6ffc0e98b4a1ea1db1ca585302bc00ca9fa71",
+          "opaqueBounds": "485x434+71+156",
+          "transparentMargins": { "left": 71, "right": 71, "top": 156, "bottom": 37 },
+          "floorContactBaselineY": 590
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/host-stand/west.png",
+          "sha256": "03df9612c109fdd356b7935ef8b4c4bdf63399d42e0aae2a99743f62af2962e7",
+          "opaqueBounds": "399x533+114+57",
+          "transparentMargins": { "left": 114, "right": 114, "top": 57, "bottom": 37 },
+          "floorContactBaselineY": 590
+        }
+      ]
+    }
+  ],
+  "rejectedAttempts": [
+    {
+      "item": "host-stand",
+      "generatorOutputSha256": "2204381d1aa50c52f17ed071250b2e0be8e079af346cd36abeeb23685a88370e",
+      "reason": "The south view did not rotate the book and pencil cup with the podium."
+    },
+    {
+      "item": "table-two",
+      "generatorOutputSha256": "2b95f6f2234036de353cc5117cb6f484f7514cc91888f500970b20d9c8e9cfbc",
+      "reason": "Repeated orientation and incorrect chair arrangement."
+    },
+    {
+      "item": "table-two",
+      "generatorOutputSha256": "d75a2ba89df134b2371a62c7eef9ea9e4e19a9b4c6e424dc78a43251fd942c67",
+      "reason": "Rigid arrangement improved but camera elevation drifted."
+    },
+    {
+      "item": "table-two",
+      "generatorOutputSha256": "5cf6b6e52331b2cff20394d4b2973cd0983d89c08fbc5ef9afa434471f2a90bb",
+      "reason": "East and west placed both chairs on the near side."
+    },
+    {
+      "item": "table-two",
+      "generatorOutputSha256": "bc639b245fbfe194a4a7f0cf958f5250bab357bfaab47a2cbeb25677865d842a",
+      "reason": "The attempted opposite view rotated the chair axis incorrectly."
+    },
+    {
+      "item": "table-four",
+      "generatorOutputSha256": "9196a9e41c55cd5e76f9d61ae4e7e196f0722d1b657714ca03880b7a1092d3eb",
+      "reason": "The full set collapsed toward a direct-overhead camera."
+    }
+  ]
+}

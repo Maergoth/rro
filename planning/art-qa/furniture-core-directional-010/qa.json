@@ -1,0 +1,479 @@
+{
+  "schemaVersion": 1,
+  "batchId": "furniture-core-directional-010",
+  "assets": [
+    "furniture-prep-table-refrigerated",
+    "furniture-walkin-rack",
+    "furniture-dry-storage-rack"
+  ],
+  "artReviewStatus": "accepted",
+  "productionComplete": true,
+  "productionCompletionBlockers": [],
+  "promotionScope": {
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "repositoryPromotion": {
+    "status": "remote-verified-production-complete",
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "remotePreservation": {
+    "commit": "0a6e36b40dada458e9f3c2af70d73f58477f494b",
+    "tree": "90d89bc60d20bb2fe287e2e03320c371d71ddc29",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31161334873",
+    "artifactId": 8987205444,
+    "artifactSha256": "62bfb9f325aedb59180ccaef9d5483007ed6926c364860b4901dadf850314913"
+  },
+  "quarantineArchive": {
+    "filename": "RRO-furniture-core-directional-010-quarantine.tar.gz",
+    "note": "The safe archive and SHA-256 sidecar are preserved outside the repository; raw/rejected/process binaries are intentionally excluded from the promoted 28-file payload."
+  },
+  "source": {
+    "generator": "OpenAI built-in image generation",
+    "mode": "three separately prompted rigid 2x2 N/E/S/W atlases; targeted corrections fixed only prep-well and walk-in shelf counts",
+    "useCases": [
+      "stylized-concept",
+      "precise-object-edit"
+    ],
+    "promptLog": "planning/art-qa/furniture-core-directional-010/prompts.md",
+    "promptLogSha256": "d61a1c7e795fc2fde029fb95dcf04766b43fa03ceee57dce3a6ad267b4639d6f",
+    "rawSha256": {
+      "furniture-prep-table-refrigerated": "8e10e1e42b53e38b912f97a4698aaa8c4b3a4eb0a2738c2f945553631ae95c70",
+      "furniture-walkin-rack": "a17fd1c8770312a9681a924f63a720115d8443ee1bbf52d334a270e451d02a00",
+      "furniture-dry-storage-rack": "6704e7848e83ad0906db9fca63d0bbc42d7e6678809941e55f4119b41551802f"
+    },
+    "alphaAtlasSha256": {
+      "furniture-prep-table-refrigerated": "76b45eaf5583288bc6cc332ae102a8b4344f757c5846f5716367bd5d4d35f2ca",
+      "furniture-walkin-rack": "e6c644be81eedf68def4533c5ea7965506222898a2af5a1e75b615f2b22419ba",
+      "furniture-dry-storage-rack": "de39d1304f1430e80cbd714c7c8efe496caf8e331186e92047a018495501799c"
+    },
+    "chromaHelperSha256": "3f7b9b14ad5c90f37618bc1c16a039a2076abca12ddc41b3ae470e2b1cad6c0e",
+    "processorSha256": "7c401247678e83f3cfd4818fb21994aa7200f31121580861ffa2d2c31e0f700c",
+    "processMetadataSha256": "30a4e80e80856763f46df55068e18fbd6c80f508ad3504b7eb1e8a7ff53823a2",
+    "validatorSha256": "c1a3edb9f47ef2736825e2ccd1f5e4ae9ac761b4b937a7420b5afda6a71e7d21",
+    "validationMetadataSha256": "b63c42bcf928ebb4ee9cd595e75e62c445e6d6ecc3db45fc29f9e30829a06f43",
+    "rejectionLogSha256": "07a0753aeef2446ac2e8c86f1ca7a5219ce44e6be2cbfee51dd2ad3e3fc5a606",
+    "matteProcess": "Official imagegen border auto-key, soft matte, thresholds 12/220, despill; prep accepted with one-pixel edge contraction and walk-in accepted with two-pixel edge contraction after both failed mattes were preserved.",
+    "normalization": "Dominant connected-component isolation, exact 627x627 sRGBA canvases, one uniform scale per identity bounded by 550x525, pivot x=313.5, exclusive floor baseline y=590, and 37 transparent rows below."
+  },
+  "rejectedAttempts": [
+    {
+      "assetId": "furniture-prep-table-refrigerated",
+      "attempt": 1,
+      "stage": "semantic-source-review",
+      "generatorOutputSha256": "4b54042fbc248c81afe855299ea074eacd533c9d185dd2192e6446599e423f89",
+      "reason": "Rejected: the ingredient-well row did not preserve the locked count of exactly six across all four rotations. A targeted edit changed only the well count."
+    },
+    {
+      "assetId": "furniture-walkin-rack",
+      "attempt": 1,
+      "stage": "semantic-source-review",
+      "generatorOutputSha256": "b9816b19fc5f6f321f641c7f2658d09d0871508df3eb406ac07352c377959969",
+      "reason": "Rejected: the rack preserved only four shelf levels instead of the locked count of five. A targeted edit added only the missing shelf level."
+    },
+    {
+      "assetId": "furniture-prep-table-refrigerated",
+      "attempt": 1,
+      "stage": "alpha-and-runtime-raster-validation",
+      "generatorOutputSha256": "ff1f0b39c43fb327c009c0c6fa1ed38f7583e1d097772274e038e81fdec285b8",
+      "reason": "Rejected: strict runtime validation found one low-alpha magenta-key edge pixel after normalization. The official chroma helper was retried with the documented one-pixel alpha edge contraction."
+    },
+    {
+      "assetId": "furniture-walkin-rack",
+      "attempt": 1,
+      "stage": "alpha-and-runtime-raster-validation",
+      "generatorOutputSha256": "1bc2f82da9a87433aad7df2c88ac35744e1f42d9cb3cfc205ee0af74aff8efe7",
+      "reason": "Rejected: strict runtime validation found low-alpha magenta-key edge pixels after normalization. The official chroma helper was retried with the documented one-pixel alpha edge contraction."
+    },
+    {
+      "assetId": "furniture-walkin-rack",
+      "attempt": 2,
+      "stage": "alpha-and-runtime-raster-validation",
+      "generatorOutputSha256": "e057ec020e81e289af9890ba6f1302e1a610d8a5ab5bc053ad650f0b4546a8fc",
+      "reason": "Rejected: the one-pixel edge-contracted matte still produced low-alpha chroma-key contamination. The official helper was retried with a two-pixel edge contraction; final validation passed with no visible fringe or detached matte."
+    }
+  ],
+  "gates": {
+    "requiredDirections": [
+      "north",
+      "east",
+      "south",
+      "west"
+    ],
+    "runtimeDimensions": "627x627",
+    "colorMode": "sRGBA",
+    "commonCanvasPivot": [
+      313.5,
+      590
+    ],
+    "commonFloorContactBaselineY": 590,
+    "transparentBottomMarginPixels": 37,
+    "allOuterBordersTransparent": true,
+    "zeroVisibleMagentaFringePixelsAboveAlpha2": true,
+    "zeroDetachedLowAlphaMattePixels": true,
+    "oneUniformScalePerIdentity": true,
+    "uniqueRuntimeFileHashes": true,
+    "uniqueRuntimePixelHashes": true,
+    "uniqueRuntimePerceptualHashes": true,
+    "repositoryDirectionalPngsCompared": 112,
+    "uniqueAgainstRepositoryDirectionalPngs": true,
+    "exactFileCollisionsAgainstRepository": 0,
+    "exactPixelCollisionsAgainstRepository": 0,
+    "exactPerceptualHashCollisionsAgainstRepository": 0,
+    "closestRepositoryPerceptualMatch": {
+      "candidate": "runtime/furniture-dry-storage-rack/east.png",
+      "repository": "apps/client-godot/assets/objects/directional/furniture-host-stand-pro/east.png",
+      "dHash16HammingDistance": 63
+    },
+    "samePhysicalObjectAcrossDirections": "pass",
+    "fixedElevatedOrthographicIsometricCamera": "pass",
+    "noClippingTextLogosWatermarksShadowsOrExtraObjects": "pass",
+    "visualReviewAtFullScale": "pass: planning/art-qa/furniture-core-directional-010/contact-627-dark.png independently inspected at original resolution after final alpha remediation; construction, counts, camera, silhouettes, alpha, and floor contact pass.",
+    "visualReviewAtGameplayScale128px": "pass: planning/art-qa/furniture-core-directional-010/contact-128-light.png independently inspected at original resolution; six-well prep, five-shelf walk-in, and four-shelf dry-rack identities/facings remain distinct.",
+    "nativeGameplayCompositeReview": "pass: runtime-isometric-integration-001-attempt-008; all three identities preserve directional selection, footprint contact, scale, depth, and gameplay legibility across exact 1800x1100 north/east/south/west captures from CI run 31161334873.",
+    "proceduralOrDeterministicStandIn": false
+  },
+  "contactSheets": [
+    {
+      "path": "planning/art-qa/furniture-core-directional-010/contact-627-dark.png",
+      "purpose": "Exact 627px runtime candidates on a dark checkerboard",
+      "sha256": "2f626c728bf724a0d509eefecb6219bc3fbb29b7c4dd5def51047f1d3c778e94"
+    },
+    {
+      "path": "planning/art-qa/furniture-core-directional-010/contact-128-light.png",
+      "purpose": "Same runtime candidates reduced to 128px on a light checkerboard",
+      "sha256": "a250546037f9e9ac080ad84e378df1104aef4d71c883d40e5e938d3de09a7c7b"
+    }
+  ],
+  "excludedQuarantinePayload": {
+    "rawAtlases": 3,
+    "rejectedSourceAtlases": 2,
+    "alphaAtlases": 3,
+    "rejectedAlphaAtlases": 3,
+    "policy": "Raw, rejected, alpha-atlas, process, and validation files remain outside the repository; exact accepted/rejected hashes and reasons remain in durable QA."
+  },
+  "items": [
+    {
+      "catalogId": "prep-table-refrigerated",
+      "assetId": "furniture-prep-table-refrigerated",
+      "name": "Refrigerated Prep Table",
+      "category": "Kitchen",
+      "style": "Modern",
+      "footprint": [
+        4,
+        2
+      ],
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "identityContract": "One Modern 4x2 refrigerated prep table with exactly six ingredient wells, a raised rear rail, cutting-board ledge, two physical-left front drawers, two deep-teal front doors, one physical-right vent and amber indicator, two rear grilles, and four feet.",
+      "semanticVerdict": "pass: the six-well top and drawer/door front reverse coherently against the two-grille rear; the right-side vent and indicator retain their physical side through four distinct quarter turns.",
+      "gameplayLegibility": "pass: six-well rhythm, teal doors, stacked drawers, side vent, and twin rear grilles remain distinct at 128px.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-prep-table-refrigerated/north.png",
+          "sha256": "ccf70067ddf6b22a68a6c41631ca1309fb345ccf4ecd17aba6fb8bf9a019ecd0",
+          "pixelSha256": "e1c5cf986cd84ba542f388f68fb591be4e4a7ab834801e8eae09245baaf73036",
+          "dHash16": "000000000000008038024ff0b07f3f0140fb6c073d936d921d92c7f2207a0408",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-010/alpha-source/furniture-prep-table-refrigerated-north.png",
+          "sourceAlphaSha256": "d714462b21b972183ce51ca9019ed393a43008415ffc367cad47ca1abc643573",
+          "sourceAlphaPixelSha256": "4f30e13596aca29a43a573f7990b8c343e95c43a5828eaf38e9d6efb452530cd",
+          "uniformScale": 0.954861111111,
+          "opaqueBounds": "550x391+38+199",
+          "sourceOpaqueBounds": "576x410+25+180",
+          "transparentMargins": {
+            "left": 38,
+            "right": 39,
+            "top": 199,
+            "bottom": 37
+          },
+          "visiblePixelCount": 156431,
+          "fullyOpaquePixelCount": 151975
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-prep-table-refrigerated/east.png",
+          "sha256": "f6635d477516610c3070239b4f82e7d7841403dfcaaa60a504843f5056c11220",
+          "pixelSha256": "d11f3cd36e995aca2555b08b32123e70974f11aa9d9f13431973a6cad462dae0",
+          "dHash16": "0000000001000e20638898e08e3c838698e69e3e9b966c991799039904cd0142",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-010/alpha-source/furniture-prep-table-refrigerated-east.png",
+          "sourceAlphaSha256": "90fcad69cc83b300113e6fbe04c511112722b78e23fb12f66aad945a7346aba8",
+          "sourceAlphaPixelSha256": "f82eadda2e09886955fbf36eee24015e9bc4757973012b2bf703daeca28b896d",
+          "uniformScale": 0.954861111111,
+          "opaqueBounds": "453x426+87+164",
+          "sourceOpaqueBounds": "474x446+76+144",
+          "transparentMargins": {
+            "left": 87,
+            "right": 87,
+            "top": 164,
+            "bottom": 37
+          },
+          "visiblePixelCount": 126878,
+          "fullyOpaquePixelCount": 122870
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-prep-table-refrigerated/south.png",
+          "sha256": "46d94ae7d2920b2e288c4cf0ad01bc688bdae43ac7ca8b79c0ed9195817d1cc4",
+          "pixelSha256": "102d0c40fc36ba7125b9f5a8118e3f58406cf2262dfb87d861d9997ed7b6af9f",
+          "dHash16": "000000000000000801e03c0fc1f31e0f307f11f337331723363c98f153003040",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-010/alpha-source/furniture-prep-table-refrigerated-south.png",
+          "sourceAlphaSha256": "e64c1fd9dacbfe8bf16c77e838aefdd3f7bbc9a74a34b73fad42964a0b59ac7b",
+          "sourceAlphaPixelSha256": "b159a855a59819c63f759a34911020aab766310e4f23c635e0c2e16e952d0f32",
+          "uniformScale": 0.954861111111,
+          "opaqueBounds": "523x386+52+204",
+          "sourceOpaqueBounds": "548x404+39+186",
+          "transparentMargins": {
+            "left": 52,
+            "right": 52,
+            "top": 204,
+            "bottom": 37
+          },
+          "visiblePixelCount": 143266,
+          "fullyOpaquePixelCount": 139054
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-prep-table-refrigerated/west.png",
+          "sha256": "7030d1df14e0a6ef10a75466f4b74d354c82851e6f62a23bf68bd2c6ff1af5ef",
+          "pixelSha256": "72f5cb1d35d88b9e5405138b555f7909ea4a9b4a5bf42bda5e8c5efc5308e2e9",
+          "dHash16": "00000000001001c40e18706607873c3c31f007a10da90ba10d868bb8ca403800",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-010/alpha-source/furniture-prep-table-refrigerated-west.png",
+          "sourceAlphaSha256": "d21aa380113680a7e419969adb431b335fef93a9a94718c821cea3bbd600abf1",
+          "sourceAlphaPixelSha256": "38920488754fe7cfc5b07afab8fd820e5d443da416bbc8a38ad6d22eb598b63b",
+          "uniformScale": 0.954861111111,
+          "opaqueBounds": "505x424+61+166",
+          "sourceOpaqueBounds": "529x444+49+146",
+          "transparentMargins": {
+            "left": 61,
+            "right": 61,
+            "top": 166,
+            "bottom": 37
+          },
+          "visiblePixelCount": 143285,
+          "fullyOpaquePixelCount": 139076
+        }
+      ]
+    },
+    {
+      "catalogId": "walkin-rack",
+      "assetId": "furniture-walkin-rack",
+      "name": "Walk-In Storage Rack",
+      "category": "Storage",
+      "style": "Modern",
+      "footprint": [
+        3,
+        1
+      ],
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "identityContract": "One Modern 3x1 walk-in storage rack with exactly five teal shelf mats, four open posts, one physical-right dial, rear bracing, and four adjustable feet.",
+      "semanticVerdict": "pass: all five shelf levels remain fixed; the one side dial and rear brace rotate coherently without duplication or mirroring.",
+      "gameplayLegibility": "pass: the five teal shelf bands, open frame, side dial, and rear support remain readable at 128px.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-walkin-rack/north.png",
+          "sha256": "5c6ee08ce63045f863d197dec9f6cea84a6889ffa9d55e1011fe9945324418d3",
+          "pixelSha256": "9966226593df9425ea323cd606c956610aed01f55d9588fd2e01ae9f544b7052",
+          "dHash16": "0040001817e6b8068be6bc068be6be0689e6bc060be6be0608360ea068081000",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-010/alpha-source/furniture-walkin-rack-north.png",
+          "sourceAlphaSha256": "2fc10624ec17c96b56dec659dd4e46df3c4c7f3b5a4e1f28ae719a2fd035d9b8",
+          "sourceAlphaPixelSha256": "eba33a0e54b8d9d92b16220131738c8523334f94a53e4b01f63d33b3647584ba",
+          "uniformScale": 0.996204933586,
+          "opaqueBounds": "409x510+109+80",
+          "sourceOpaqueBounds": "411x512+108+78",
+          "transparentMargins": {
+            "left": 109,
+            "right": 109,
+            "top": 80,
+            "bottom": 37
+          },
+          "visiblePixelCount": 73688,
+          "fullyOpaquePixelCount": 49962
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-walkin-rack/east.png",
+          "sha256": "a5ddd48a57e776b3f294a45d5cba66a5828074ca5a4bef6114f69144186234a8",
+          "pixelSha256": "e403a89a1888059a8e2de6c9449dde2ea4ce7ddc5d83210ea4fe4549cc8c9797",
+          "dHash16": "040000f04c0c4b844c184f884c2c4f8c4c2c4f8c4c2c4f8c4cac34ac00b00048",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-010/alpha-source/furniture-walkin-rack-east.png",
+          "sourceAlphaSha256": "422ddf91d98b61212f95911c6fbee4a261fd427e9136e80d0faf421665e7f007",
+          "sourceAlphaPixelSha256": "f93036bd406a166b088221ecbd10631629c15729782abd1e3f89ece88c435399",
+          "uniformScale": 0.996204933586,
+          "opaqueBounds": "329x523+149+67",
+          "sourceOpaqueBounds": "330x525+148+65",
+          "transparentMargins": {
+            "left": 149,
+            "right": 149,
+            "top": 67,
+            "bottom": 37
+          },
+          "visiblePixelCount": 61879,
+          "fullyOpaquePixelCount": 39185
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-walkin-rack/south.png",
+          "sha256": "75973f5d8f0937299ad7b5735c393fd245c29ab8441d65354dc92a5de540b0e8",
+          "pixelSha256": "1e3fb4ec1b10f7006d78f5a52d562e104c1f74ae848ee78c413b2e9ba4a65802",
+          "dHash16": "00002008182458245804592458045a2458245a845c0458a45824581414142008",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-010/alpha-source/furniture-walkin-rack-south.png",
+          "sourceAlphaSha256": "99240082b9bf5d1d71eb94edbbbe5f6e701887871dd50d2e7d3f26c1dff889ad",
+          "sourceAlphaPixelSha256": "b5c5aab9b78943cdf4eaeab2e272682ca8be8d8dcd6201223b6145d90abe35ff",
+          "uniformScale": 0.996204933586,
+          "opaqueBounds": "375x484+126+106",
+          "sourceOpaqueBounds": "376x486+125+104",
+          "transparentMargins": {
+            "left": 126,
+            "right": 126,
+            "top": 106,
+            "bottom": 37
+          },
+          "visiblePixelCount": 62961,
+          "fullyOpaquePixelCount": 42507
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-walkin-rack/west.png",
+          "sha256": "b659a3eb491b79d9cfcd7791347f63af3abbfa54689a12bdf12c4a93fd5f4554",
+          "pixelSha256": "34ab4146b793b01c508e93513ced2f0a9430ea21e04cd8fd670fb7759a04a5b5",
+          "dHash16": "020020d81fc45c0457c45c0457c45c0457845c4457845c1455e4142824001800",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-010/alpha-source/furniture-walkin-rack-west.png",
+          "sourceAlphaSha256": "6c520d60334b37d7e0010499e19616130476c77225ea4078faff4cf35c202629",
+          "sourceAlphaPixelSha256": "36fdbe942052ba530c09912c28806584d99adf83e641376dc965c5166fcdef34",
+          "uniformScale": 0.996204933586,
+          "opaqueBounds": "370x525+128+65",
+          "sourceOpaqueBounds": "371x527+128+63",
+          "transparentMargins": {
+            "left": 128,
+            "right": 129,
+            "top": 65,
+            "bottom": 37
+          },
+          "visiblePixelCount": 65303,
+          "fullyOpaquePixelCount": 42039
+        }
+      ]
+    },
+    {
+      "catalogId": "dry-storage-rack",
+      "assetId": "furniture-dry-storage-rack",
+      "name": "Dry Storage Rack",
+      "category": "Storage",
+      "style": "Modern",
+      "footprint": [
+        3,
+        1
+      ],
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "identityContract": "One Modern 3x1 dry-storage rack with exactly four solid stainless shelves, charcoal posts, brass operational-front lips, one rear V brace, one physical-right teal plate, and four feet.",
+      "semanticVerdict": "pass: four solid shelves and front brass lips reverse coherently against the rear V brace; the right-side plate retains its physical side.",
+      "gameplayLegibility": "pass: solid four-shelf cadence, gold front lips, dark frame, and rear V brace remain distinct at 128px.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-dry-storage-rack/north.png",
+          "sha256": "d6050027e9154ff31681cac09b3ab52cb0a6fb0a7c05c9dafdc1d737ffc4e370",
+          "pixelSha256": "9488c75bf4fcb4f457feacac07449552cc28400a6915711cdfbea5ac8c9180d8",
+          "dHash16": "44543b824a6c487d5bb54a754a754a354a7548754a354a754875403531b24034",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-010/alpha-source/furniture-dry-storage-rack-north.png",
+          "sourceAlphaSha256": "45f6314b37868645a88a96d7930625bb1d4811ed7e78f125578f6ac11d9d5c77",
+          "sourceAlphaPixelSha256": "e13206d399d8bb1ee49fd21cf7cd4e8aaecfaf688fcd7049d602258103658cb6",
+          "uniformScale": 1.023391812865,
+          "opaqueBounds": "463x525+82+65",
+          "sourceOpaqueBounds": "452x513+87+77",
+          "transparentMargins": {
+            "left": 82,
+            "right": 82,
+            "top": 65,
+            "bottom": 37
+          },
+          "visiblePixelCount": 143328,
+          "fullyOpaquePixelCount": 128630
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-dry-storage-rack/east.png",
+          "sha256": "ddc22db377de6108a5ce06fca49a75f124630d90438a568f9cee0c4c45f4f179",
+          "pixelSha256": "7a49fa4e407a4dd6d450aced1cc3e50483989fbfc4b182372876e7aa6ef99690",
+          "dHash16": "003017cc0132b372b732b332b332b75233123332371233123332360c32500a00",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-010/alpha-source/furniture-dry-storage-rack-east.png",
+          "sourceAlphaSha256": "3197efd29732536af562f0968ab8977d8bc8e6ccbe7acaaad601c492eaf3f38b",
+          "sourceAlphaPixelSha256": "a968dff45bc19a5d09182b3826ffdb8dd5d7925d29cdc1549b9630786d8e9b94",
+          "uniformScale": 1.023391812865,
+          "opaqueBounds": "345x506+141+84",
+          "sourceOpaqueBounds": "337x494+145+96",
+          "transparentMargins": {
+            "left": 141,
+            "right": 141,
+            "top": 84,
+            "bottom": 37
+          },
+          "visiblePixelCount": 101861,
+          "fullyOpaquePixelCount": 89570
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-dry-storage-rack/south.png",
+          "sha256": "2467b0a953b6fc5c5a697e15bdcb17b5209b2bfa5a4b575a56fb29be9b02ebdb",
+          "pixelSha256": "78e8ba4ee394747efc663d3c7468e0ac812ae205ed109e4e70cc6b81d77039f5",
+          "dHash16": "00000148283440ed53b958b551f554a552ed52ed535551ad41ad530d12121204",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-010/alpha-source/furniture-dry-storage-rack-south.png",
+          "sourceAlphaSha256": "fba716d5c061ce549aa13d7bb3c71f50094e3ebd91778ebb36cc0e33768a9b93",
+          "sourceAlphaPixelSha256": "7477ef3b8d7f01ea86d40b444f138db6539f0d8a0702b1efe3c277f1b6459042",
+          "uniformScale": 1.023391812865,
+          "opaqueBounds": "446x490+90+100",
+          "sourceOpaqueBounds": "436x479+95+111",
+          "transparentMargins": {
+            "left": 90,
+            "right": 91,
+            "top": 100,
+            "bottom": 37
+          },
+          "visiblePixelCount": 126389,
+          "fullyOpaquePixelCount": 110542
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-dry-storage-rack/west.png",
+          "sha256": "d88cc6670a047361fc63252efa1267595518b42784be45c17406923bfb9cf994",
+          "pixelSha256": "04c65b89ad9958eb2198a16a54d4dd7cc9cc4a368da1bab8bd87e53ac32c29c8",
+          "dHash16": "00000aa0144863396b6969496b496b6969496bc96b4969496bf96ba81a041a00",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-010/alpha-source/furniture-dry-storage-rack-west.png",
+          "sourceAlphaSha256": "d94aa959eb76bf5cf20aa5c0c11a143292fb5e409558052fb5276a0e1acc0f0b",
+          "sourceAlphaPixelSha256": "2d899cf0d3281a3887eb5109dee6dbe37b80ac27bf9d8ca68044b26770247faa",
+          "uniformScale": 1.023391812865,
+          "opaqueBounds": "414x493+106+97",
+          "sourceOpaqueBounds": "405x482+111+108",
+          "transparentMargins": {
+            "left": 106,
+            "right": 107,
+            "top": 97,
+            "bottom": 37
+          },
+          "visiblePixelCount": 119216,
+          "fullyOpaquePixelCount": 105870
+        }
+      ]
+    }
+  ]
+}

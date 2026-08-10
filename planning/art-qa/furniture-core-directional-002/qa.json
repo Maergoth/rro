@@ -1,0 +1,483 @@
+{
+  "schemaVersion": 1,
+  "batchId": "furniture-core-directional-002",
+  "assets": [
+    "booth",
+    "banquette",
+    "service-station"
+  ],
+  "artReviewStatus": "accepted",
+  "productionComplete": false,
+  "productionCompletionBlockers": [
+    "The current Godot floor projection remains orthogonal; final elevated-isometric footprint alignment and runtime composite review have not passed."
+  ],
+  "repositoryPromotion": "remote-verified",
+  "promotionScope": {
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "remotePreservation": {
+    "commit": "daef2aa572f0f855ac95d92402b9af19cc76bc9f",
+    "tree": "36fbf6d8740e2f07f29527ff6e506cf541684b51",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30980689257"
+  },
+  "source": {
+    "generator": "OpenAI built-in image generation",
+    "mode": "identity-reference generation followed by pose-locked rotational edits",
+    "promptLog": "planning/art-qa/furniture-core-directional-002/prompts.md",
+    "promptLogSha256": "7a0dba03251344c46c90a985a2c75f1db887626e16c9d9c4f698d156847d8192",
+    "cameraReference": "apps/client-godot/assets/objects/directional/furniture-six-burner-range and accepted furniture-core-directional-001",
+    "identityReferences": [
+      "apps/client-godot/assets/objects/generated/booth.png",
+      "apps/client-godot/assets/objects/generated/banquette.png",
+      "apps/client-godot/assets/objects/generated/service-station.png"
+    ],
+    "matteProcess": "Official imagegen remove_chroma_key.py helper with border auto-keying, soft matte, green despill, and a one-pixel edge contraction selected after full-resolution fringe review.",
+    "normalization": "Alpha-trim each accepted view, apply proportional uniform scaling only, center horizontally, and place the bottommost opaque row immediately above baseline y=590 on a 627x627 transparent canvas. No directional nonuniform stretching."
+  },
+  "gates": {
+    "requiredDirections": [
+      "north",
+      "east",
+      "south",
+      "west"
+    ],
+    "runtimeDimensions": "627x627",
+    "colorMode": "sRGBA",
+    "commonCanvasPivot": [
+      313.5,
+      590
+    ],
+    "commonFloorContactBaselineY": 590,
+    "minimumTransparentBottomMarginPixels": 37,
+    "allCornersTransparent": true,
+    "uniqueRuntimePixelHashes": true,
+    "samePhysicalObjectAcrossDirections": "pass",
+    "fixedElevatedOrthographicIsometricCamera": "pass",
+    "noClippingTextLogosWatermarksOrExtraObjects": "pass",
+    "visualReviewAtFullScale": "pass: contact-627-dark.png inspected after the final one-pixel edge contraction",
+    "visualReviewAtGameplayScale128px": "pass: contact-128-light.png inspected after the final one-pixel edge contraction",
+    "proceduralOrDeterministicStandIn": false
+  },
+  "contactSheets": [
+    {
+      "path": "planning/art-qa/furniture-core-directional-002/contact-627-dark.png",
+      "purpose": "Exact 627px candidates on dark checkerboard",
+      "sha256": "80117939a11767eb64e10276a7e14a58de521bd0dc1ee82c8ad0580bde8f45c1"
+    },
+    {
+      "path": "planning/art-qa/furniture-core-directional-002/contact-128-light.png",
+      "purpose": "Same candidates reduced to 128px on light checkerboard",
+      "sha256": "21f0406fd2a010c695c355a6ba4dff3b3f0386d1029e50016f1bf62eb507c0c0"
+    }
+  ],
+  "items": [
+    {
+      "catalogId": "booth",
+      "assetId": "booth",
+      "name": "Tomato Vinyl Booth",
+      "footprint": [
+        4,
+        2
+      ],
+      "identityContract": "Exactly two opposing red channel-tufted vinyl benches, cream outer end panels, chrome trim, one cream rectangular tabletop, and one chrome pedestal.",
+      "semanticVerdict": "pass: the same two-bench Tomato Vinyl Booth, five upholstery bays per bench, cream tabletop, chrome pedestal, end panels, and trim remain coherent through both quarter-turn axes and their 180-degree material counterparts.",
+      "gameplayLegibility": "pass: the red/cream silhouette, paired seating, and central pedestal table remain distinct at 128px.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/booth/north.png",
+          "sha256": "b0ea56b7f2c11cad354b4e3dc838b1a459ee47c97795fbd9223f63031151ebc6",
+          "pixelSha256": "5e9381e5b277a27e931b7f2a4846716673ee4f10a328666f10f1cb280fb16274",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-002/alpha-source/booth-north.png",
+          "sourceAlphaSha256": "e7a2a75965f42485ea0c763fb4c75bc8621c2cac87b12009e380fa2a46be57c9",
+          "sourceOpaqueBounds": "1230x1033+74+46",
+          "uniformScale": 0.43495935,
+          "opaqueBounds": "535x449+46+141",
+          "transparentMargins": {
+            "left": 46,
+            "right": 46,
+            "top": 141,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "cornersTransparent": true
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/booth/east.png",
+          "sha256": "24ef2c3f2821d492dadd72ce0a8bb1c614c84b23c897d36b6802dc979712343c",
+          "pixelSha256": "6b8a30bf730d558153e5f4bef7e0e407ec61c2492a3b2712b7bfca9bf38e2a3a",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-002/alpha-source/booth-east.png",
+          "sourceAlphaSha256": "4fcf3018922de716f938cb4d05f407fc213fa463ba23f3e97dede8702d68d417",
+          "sourceOpaqueBounds": "1209x1047+78+38",
+          "uniformScale": 0.44251447,
+          "opaqueBounds": "535x463+46+127",
+          "transparentMargins": {
+            "left": 46,
+            "right": 46,
+            "top": 127,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "cornersTransparent": true
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/booth/south.png",
+          "sha256": "63f7754e39f35732fb02a12967c5f2444d5b8af4c1f7b6969dc89e8d8c8bcbf0",
+          "pixelSha256": "9a43efe66f23932897a53e8c20cea444b1aae78ad7f440db5f502da360ccec84",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-002/alpha-source/booth-south.png",
+          "sourceAlphaSha256": "93a5dc71dd6cb3e9713f09afd91b95e235545a958c6d8dde8bdee7f48cb1142c",
+          "sourceOpaqueBounds": "1229x1032+74+47",
+          "uniformScale": 0.43531326,
+          "opaqueBounds": "535x449+46+141",
+          "transparentMargins": {
+            "left": 46,
+            "right": 46,
+            "top": 141,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "cornersTransparent": true
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/booth/west.png",
+          "sha256": "387090ed5b540df3f6ca081df1ae7cec60c77af4ad0e515b0b3d4256dab3883c",
+          "pixelSha256": "19f9dadd8c285c68306309874c2314ae60c21891cbdbcc4a482db2bb6c58e18d",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-002/alpha-source/booth-west.png",
+          "sourceAlphaSha256": "5af2b7f9067570a218cdaad3f462aefa5df3fcbd2c50d1a4d68cccf42db40c0e",
+          "sourceOpaqueBounds": "1209x1047+78+38",
+          "uniformScale": 0.44251447,
+          "opaqueBounds": "535x463+46+127",
+          "transparentMargins": {
+            "left": 46,
+            "right": 46,
+            "top": 127,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "cornersTransparent": true
+        }
+      ]
+    },
+    {
+      "catalogId": "banquette",
+      "assetId": "banquette",
+      "name": "Deep Teal Banquette",
+      "footprint": [
+        5,
+        2
+      ],
+      "identityContract": "One continuous three-module deep-teal tufted banquette, exactly two walnut tables with brass pedestals, and exactly three matching teal aisle chairs.",
+      "semanticVerdict": "pass: one locked three-module banquette, two tables, and three chairs rotate together; north/south and east/west correctly exchange the chair row and bench across near/far screen sides.",
+      "gameplayLegibility": "pass: all three teal modules, both walnut tables, and the three-chair row remain readable at 128px despite the intentionally wide 5x2 footprint.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/banquette/north.png",
+          "sha256": "a21e42b601571b10deeed71cf090b6ab9fbfd00ca531ac978aac5d78e0c89fb5",
+          "pixelSha256": "c356e980bc201ed4ad0486172eaaa80841742e3459b6f068990a8b9882d044da",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-002/alpha-source/banquette-north.png",
+          "sourceAlphaSha256": "84853d7bac580f7270e842f98e5c404a72708cc79422dca5653c11920fd5efff",
+          "sourceOpaqueBounds": "1057x531+115+336",
+          "uniformScale": 0.52034059,
+          "opaqueBounds": "550x276+38+314",
+          "transparentMargins": {
+            "left": 38,
+            "right": 39,
+            "top": 314,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "cornersTransparent": true
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/banquette/east.png",
+          "sha256": "39ae6dbc6cc713e6a533c7ac4ca31f9485792ed67ba5beeebad88e0567bdadcc",
+          "pixelSha256": "1e3bd62c9cbde7ffb98af78c0683bf1e351a488f4d26b46fc38707ed00c044c7",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-002/alpha-source/banquette-east.png",
+          "sourceAlphaSha256": "5d0b0e7dc0d4f67cb9e40aaa9531ebda337792d2e032f7797b9c138dfd181eff",
+          "sourceOpaqueBounds": "947x806+168+207",
+          "uniformScale": 0.58078141,
+          "opaqueBounds": "550x468+38+122",
+          "transparentMargins": {
+            "left": 38,
+            "right": 39,
+            "top": 122,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "cornersTransparent": true
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/banquette/south.png",
+          "sha256": "4f9fa2548188412a7de94148436ae575a47d7638c4f8a75d0c97f3203c62b496",
+          "pixelSha256": "94e30f16b1898ee1d1ea6a3f6b607e187e2d6d682a4df373547081aa9799a878",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-002/alpha-source/banquette-south.png",
+          "sourceAlphaSha256": "5d2a1364bb5a8306e5c784ab2f8bfa0a84a5c65eb1bcd8c25bde65fc25b9f719",
+          "sourceOpaqueBounds": "1062x590+72+310",
+          "uniformScale": 0.51789077,
+          "opaqueBounds": "550x306+38+284",
+          "transparentMargins": {
+            "left": 38,
+            "right": 39,
+            "top": 284,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "cornersTransparent": true
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/banquette/west.png",
+          "sha256": "db18c25657058a3d8fdb9d8369e314e2154de7e3cd8f5870be65262241d21531",
+          "pixelSha256": "9b12e4595fdee1abf6ad8d96312f8afe79976b164b51ed6f9115132edf210bda",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-002/alpha-source/banquette-west.png",
+          "sourceAlphaSha256": "d93ba148f12cda42871df6c32a079a8268b8d3466f676fe9c65782495b6fd48e",
+          "sourceOpaqueBounds": "969x824+123+199",
+          "uniformScale": 0.56759546,
+          "opaqueBounds": "550x468+38+122",
+          "transparentMargins": {
+            "left": 38,
+            "right": 39,
+            "top": 122,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "cornersTransparent": true
+        }
+      ]
+    },
+    {
+      "catalogId": "service-station",
+      "assetId": "service-station",
+      "name": "Service Station",
+      "footprint": [
+        2,
+        2
+      ],
+      "identityContract": "One walnut station with two bronze handles, exactly six inverted tumblers, exactly three forks, three knives, and three spoons in fixed trays.",
+      "semanticVerdict": "pass: the same walnut cabinet, two handles, six-glass 3x2 tray, and 3/3/3 utensil organizer rotate coherently; tray order reverses correctly in opposite views.",
+      "gameplayLegibility": "pass: cabinet silhouette, twin trays, glass cluster, and three utensil compartments remain distinct at 128px.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/service-station/north.png",
+          "sha256": "7ed54a74f524fed8265367a2ed7936bf8e8517618fb3b9a87cb9c0ade4672c87",
+          "pixelSha256": "9dac5b4e154e29e997d09920c59b747c940e23fcfe2e43abf1337b49bad5e507",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-002/alpha-source/service-station-north.png",
+          "sourceAlphaSha256": "c1b4888cbdf6ce2353b5aa95c1307c745bf7060b6ac762e09867beaad6465d73",
+          "sourceOpaqueBounds": "1048x1002+125+122",
+          "uniformScale": 0.51049618,
+          "opaqueBounds": "535x512+46+78",
+          "transparentMargins": {
+            "left": 46,
+            "right": 46,
+            "top": 78,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "cornersTransparent": true
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/service-station/east.png",
+          "sha256": "d3887b8a518c53887a2b722dfe945d2ce9ed00633c8de7a5efeec51be7462b37",
+          "pixelSha256": "ede9e68cbe00cf3e4d0231a3a46a6462e281c09fe1f492b1c83a2096a19ec443",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-002/alpha-source/service-station-east.png",
+          "sourceAlphaSha256": "814c41031e11d842e5fca74d07fc6cbbcb81d06165d46d184b9c05e4490097f8",
+          "sourceOpaqueBounds": "1036x1075+96+96",
+          "uniformScale": 0.48837209,
+          "opaqueBounds": "506x525+60+65",
+          "transparentMargins": {
+            "left": 60,
+            "right": 61,
+            "top": 65,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "cornersTransparent": true
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/service-station/south.png",
+          "sha256": "8f0a4884ee2e1ebfed93cba9fc9220caee4f7583721877b8e683f628c82eecd9",
+          "pixelSha256": "328407fffcb2782e372c526aeb7827b7e7b6879326ea23be394dabd731cfa65a",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-002/alpha-source/service-station-south.png",
+          "sourceAlphaSha256": "0d74f269cbe39ea17fbf557e0b6d5138ccc09bbf91d011e36891f07148342b38",
+          "sourceOpaqueBounds": "1066x1007+74+124",
+          "uniformScale": 0.50187617,
+          "opaqueBounds": "535x505+46+85",
+          "transparentMargins": {
+            "left": 46,
+            "right": 46,
+            "top": 85,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "cornersTransparent": true
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/service-station/west.png",
+          "sha256": "4f9b0325d47257ea2de8ba666216bd885e4134ab8518b88babd4a9bf3bf6b3eb",
+          "pixelSha256": "6903f977fe60154d8664297665ffa1e8d2a9e9ffea9c4769585598f386a38ea3",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-002/alpha-source/service-station-west.png",
+          "sourceAlphaSha256": "32a3aee744991a16e1b0e773de570d5aa7ab76f67547218d156d1a1a3fdc3c5d",
+          "sourceOpaqueBounds": "1034x1077+109+95",
+          "uniformScale": 0.48746518,
+          "opaqueBounds": "504x525+61+65",
+          "transparentMargins": {
+            "left": 61,
+            "right": 62,
+            "top": 65,
+            "bottom": 37
+          },
+          "floorContactBaselineY": 590,
+          "canvasPivot": [
+            313.5,
+            590
+          ],
+          "dimensions": [
+            627,
+            627
+          ],
+          "mode": "sRGBA",
+          "cornersTransparent": true
+        }
+      ]
+    }
+  ],
+  "rejectedAttempts": [
+    {
+      "generatorOutputSha256": "982af547296c15bae686028e1ed13a1dab085e95816a0763ef4618d2d637df0a",
+      "reason": "Direct-overhead camera and four near-duplicate orientations; failed the elevated camera and rigid quarter-turn gates."
+    },
+    {
+      "generatorOutputSha256": "0c192ac7d1cb8a75a0263f08cda33cd3b607815f110bcd8a62f0a6a28a499b3c",
+      "reason": "Requested 180-degree counterpart changed onto the other isometric axis; failed direction binding."
+    },
+    {
+      "generatorOutputSha256": "510ff3c5a3935431b187d2a8d18e3cc2a7508f4c995a6f3698fde8a8d54099a6",
+      "reason": "Requested opposite view drifted onto the north/south screen axis; failed direction binding."
+    },
+    {
+      "generatorOutputSha256": "ce4d669e048199b31bd9879369c3451a9835d14e16c733696eab5646671ce479",
+      "reason": "The rightmost chair legs crossed the canvas edge; failed the no-clipping gate."
+    },
+    {
+      "generatorOutputSha256": "16892e651f29a55ec2eb4c81f041d76fbf238049db5afb556d6b3fd67fee3f8f",
+      "reason": "Only material texture changed; the asymmetric bench/chair arrangement did not rotate 180 degrees."
+    },
+    {
+      "generatorOutputSha256": "d8e4941dc35bb494eb44a51f765c49cf6bd92c82beedcd3748bf3f6b07ba5f45",
+      "reason": "The attempted axis correction duplicated the east/west orientation instead of producing the required quarter-turn."
+    }
+  ]
+}

@@ -1,0 +1,533 @@
+{
+  "schemaVersion": 1,
+  "batchId": "furniture-core-directional-009",
+  "assets": [
+    "furniture-expo-pass-heated",
+    "furniture-plancha-commercial",
+    "furniture-convection-oven"
+  ],
+  "artReviewStatus": "accepted",
+  "productionComplete": true,
+  "productionCompletionBlockers": [],
+  "promotionScope": {
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "repositoryPromotion": {
+    "status": "remote-verified",
+    "runtimeFiles": 12,
+    "alphaSourceFiles": 12,
+    "contactSheets": 2,
+    "provenanceDocuments": 2,
+    "totalFiles": 28
+  },
+  "remotePreservation": {
+    "commit": "447a203e8f6d2dc1f014a49c3dc1f0b57b442e11",
+    "tree": "262ecc0c84e6a79dc1194d38de6cd8aa0dcd3a3f",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31015657101",
+    "artifactId": 8934364142,
+    "artifactSha256": "529ae6a0791f38c0fb9d9ba1522eb4c1a3044e19c81dcdf2d453ab202da8d7ce"
+  },
+  "quarantineArchive": {
+    "filename": "RRO-furniture-core-directional-009-quarantine.tar.gz",
+    "sha256": "489aba694c71206f91f10251d0b937a958bcb333b4907adad0f4c76122ced72e",
+    "memberCount": 121,
+    "safetyReview": "pass: no absolute paths, parent traversal, links, devices, or special members; every non-manifest archived file passed the embedded 96-entry SHA256SUMS manifest"
+  },
+  "source": {
+    "generator": "OpenAI built-in image generation",
+    "mode": "one separately prompted 2x2 rigid N/E/S/W atlas per identity; three single-change targeted edits corrected only the expo indicator count",
+    "useCases": [
+      "stylized-concept",
+      "precise-object-edit"
+    ],
+    "promptLog": "planning/art-qa/furniture-core-directional-009/prompts.md",
+    "promptLogSha256": "84776d1b82cb805ff16963711adbd9d22cbf01a9ba79697c4fd858dedc827483",
+    "quarantinedPromptFilesSha256": {
+      "furniture-convection-oven-attempt001.txt": "d9414867e83aa2455c7ebb661beda80ccf87817823c192ba43b6d88255acfc1e",
+      "furniture-expo-pass-heated-attempt001.txt": "405372a32aad9ebe06616874f7febd8202e876d8b7b2ba9395fa5703a57bfb6b",
+      "furniture-expo-pass-heated-attempt002-edit.txt": "34ec06afbdf365d1a12b894e990f56c123bea768184bd53f358a1b661a82525b",
+      "furniture-expo-pass-heated-attempt003-edit.txt": "966513b0caf4f2705da946290ade4404b7af32001ee7b5560d77ce55c1549229",
+      "furniture-expo-pass-heated-attempt004-edit.txt": "d4cc1a85f2b34e902bd0ca2e241e6cf6d3467a3f1a44dcd30b87c83f0a84697f",
+      "furniture-plancha-commercial-attempt001.txt": "3bfba0987fea14f097777895d86225e450174833379fde5958b8c082b50ef78c",
+      "prompts.md": "84776d1b82cb805ff16963711adbd9d22cbf01a9ba79697c4fd858dedc827483"
+    },
+    "quarantinedChromaHelperSha256": "3f7b9b14ad5c90f37618bc1c16a039a2076abca12ddc41b3ae470e2b1cad6c0e",
+    "quarantinedProcessorSha256": "4312ccd0182280fa42ef7794dff32704102dd3998cdd991db14e93f2762d18d3",
+    "quarantinedValidatorSha256": "b31f921fb1f01b69ac259c23480b5213060957db0a7bf8aa188530c5e87c0b04",
+    "quarantinedQaBuilderSha256": "46073f9dc00c723e4548db558353fb34d146b231ee69c1b98f7e8510d3cab72f",
+    "quarantinedProcessMetadataSha256": "cbe39ea943e63db1ed6e74cdf5d01c741b43c32d43931720beece7458dc2f53e",
+    "quarantinedValidationMetadataSha256": "a9f1e6182add464c987d53995e2c0e7805977a096682553bf68f674b8363ddfc",
+    "quarantinedRejectionLogSha256": "1e65cb1881ee668d9048a5841e3207333cd3c34c45033b69443c95e7178eb344",
+    "rawSha256": {
+      "furniture-expo-pass-heated": "7381c954cdcc0c8ec7642ca51355b369c4a27ff70c3d4410ba451ff196ad6dc9",
+      "furniture-plancha-commercial": "b8141ba6002ae46464604ccdc7d3f31ab0f4d4229e9565e577a3a4df8cb96371",
+      "furniture-convection-oven": "1c41531e61c4ca5c6be5d187ab21ea1437e526cbf5b1bee2ad1bb2d7c676d0ad"
+    },
+    "alphaAtlasSha256": {
+      "furniture-expo-pass-heated": "60672228bd72a5f4c7d66d04ef79736aa095b2502fc2e6656cb5047a7eb3cf9a",
+      "furniture-plancha-commercial": "a5fc27b8e77e365f117048bcf46eb78bdf89a1d921c6806686e9f792253ac71a",
+      "furniture-convection-oven": "de301bfb65e376b5d259cf1f89326d2eb6ad7eb8adbc2bb2f4a014b8f01863ef"
+    },
+    "rawAttemptsSha256": {
+      "furniture-convection-oven-attempt001.png": "1c41531e61c4ca5c6be5d187ab21ea1437e526cbf5b1bee2ad1bb2d7c676d0ad",
+      "furniture-expo-pass-heated-attempt001.png": "603a57d27674ee1e34c379eefbbda60123528fc4eaf8c0f0d314a792a55f06b4",
+      "furniture-expo-pass-heated-attempt002.png": "13c88577f764bc6e398bb7be792c31c33f89749b6a285a923f37b3a36347ac67",
+      "furniture-expo-pass-heated-attempt003.png": "80d31153e204a8532d9753a6286388caaf7ab6121ede4a44998a0556a68ada87",
+      "furniture-expo-pass-heated-attempt004.png": "7381c954cdcc0c8ec7642ca51355b369c4a27ff70c3d4410ba451ff196ad6dc9",
+      "furniture-plancha-commercial-attempt001.png": "b8141ba6002ae46464604ccdc7d3f31ab0f4d4229e9565e577a3a4df8cb96371"
+    },
+    "alphaAttemptsSha256": {
+      "furniture-convection-oven-attempt001.png": "de301bfb65e376b5d259cf1f89326d2eb6ad7eb8adbc2bb2f4a014b8f01863ef",
+      "furniture-expo-pass-heated-attempt001.png": "e3c221f724ff3046d38723ff7daebeea4d281b08c4603ceae4fe6006f74c5ced",
+      "furniture-expo-pass-heated-attempt002-edge-contract1.png": "60672228bd72a5f4c7d66d04ef79736aa095b2502fc2e6656cb5047a7eb3cf9a",
+      "furniture-plancha-commercial-attempt001.png": "a5fc27b8e77e365f117048bcf46eb78bdf89a1d921c6806686e9f792253ac71a"
+    },
+    "matteProcess": "Official imagegen border auto-key, soft matte, transparent/opaque thresholds 12/220, and despill for all atlases; expo used the skill-prescribed one-pixel edge contraction on its accepted alpha retry. The quarantined processor retains low-alpha edge pixels only within two pixels of alpha >=96, removes detached matte/shadow residue, and clears only chroma-colored resampling dust at alpha <=16.",
+    "normalization": "Connected-component isolate of each full object (avoids hard atlas-seam clipping), exact 627x627 sRGBA canvases, one shared uniform scale per identity bounded by 550x525, horizontal center at pivot x=313.5, and bottommost visible row at y=589 for exclusive baseline y=590 and 37 transparent rows below."
+  },
+  "gates": {
+    "requiredDirections": [
+      "north",
+      "east",
+      "south",
+      "west"
+    ],
+    "runtimeDimensions": "627x627",
+    "colorMode": "sRGBA",
+    "commonCanvasPivot": [
+      313.5,
+      590
+    ],
+    "commonFloorContactBaselineY": 590,
+    "transparentBottomMarginPixels": 37,
+    "allOuterBordersTransparent": true,
+    "zeroVisibleMagentaFringePixelsAboveAlpha2": true,
+    "zeroDetachedLowAlphaMattePixels": true,
+    "oneUniformScalePerIdentity": true,
+    "uniqueRuntimeFileHashes": true,
+    "uniqueRuntimePixelHashes": true,
+    "uniqueRuntimePerceptualHashes": true,
+    "repositoryDirectionalPngsCompared": 100,
+    "uniqueAgainstRepositoryDirectionalPngs": true,
+    "exactFileCollisionsAgainstRepository": 0,
+    "exactPixelCollisionsAgainstRepository": 0,
+    "exactPerceptualHashCollisionsAgainstRepository": 0,
+    "closestRepositoryPerceptualMatch": {
+      "candidate": "apps/client-godot/assets/objects/directional/furniture-expo-pass-heated/east.png",
+      "repository": "apps/client-godot/assets/objects/directional/pass/south.png",
+      "dHash16HammingDistance": 68
+    },
+    "samePhysicalObjectAcrossDirections": "pass",
+    "fixedElevatedOrthographicIsometricCamera": "pass",
+    "noClippingTextLogosWatermarksShadowsOrExtraObjects": "pass",
+    "visualReviewAtFullScale": "pass: planning/art-qa/furniture-core-directional-009/contact-627-dark.png was independently inspected at original resolution; all twelve candidates preserve locked construction/counts, fixed camera, complete silhouettes, generous transparent padding, clean alpha, and exact floor contact.",
+    "visualReviewAtGameplayScale128px": "pass: planning/art-qa/furniture-core-directional-009/contact-128-light.png was independently inspected at original resolution; expo door/cubby/pad cues, plancha front/rear/side cues, and oven front/rear/control cues remain distinct and readable.",
+    "proceduralOrDeterministicStandIn": false
+  },
+  "contactSheets": [
+    {
+      "path": "planning/art-qa/furniture-core-directional-009/contact-627-dark.png",
+      "purpose": "Exact 627px runtime candidates on a dark checkerboard",
+      "sha256": "ddb4f8d272bd5cca6388d1b745f6445ac15c71368f61eb2a9ec9de9e19351f4d"
+    },
+    {
+      "path": "planning/art-qa/furniture-core-directional-009/contact-128-light.png",
+      "purpose": "Same runtime candidates reduced to 128px on a light checkerboard",
+      "sha256": "faa186b634702657819fee597f38abcbe8fcce2d85927c1cffb67b59d35de021"
+    }
+  ],
+  "rejectedAttempts": [
+    {
+      "assetId": "furniture-expo-pass-heated",
+      "attempt": 1,
+      "stage": "semantic-source-review",
+      "generatorOutputSha256": "603a57d27674ee1e34c379eefbbda60123528fc4eaf8c0f0d314a792a55f06b4",
+      "reason": "Rejected: both operational-front cells contain two vertically stacked amber indicators; the locked identity permits exactly one physical-right amber indicator. All other major counts and front/rear states were coherent, so attempt 002 is a single targeted edit."
+    },
+    {
+      "assetId": "furniture-expo-pass-heated",
+      "attempt": 2,
+      "stage": "semantic-source-review",
+      "generatorOutputSha256": "13c88577f764bc6e398bb7be792c31c33f89749b6a285a923f37b3a36347ac67",
+      "reason": "Rejected: the targeted edit corrected the NORTH/top-left duplicate, but WEST/bottom-right still contains two vertically stacked amber indicators. Attempt 003 targets only the remaining upper WEST dot."
+    },
+    {
+      "assetId": "furniture-expo-pass-heated",
+      "attempt": 3,
+      "stage": "semantic-source-review",
+      "generatorOutputSha256": "80d31153e204a8532d9753a6286388caaf7ab6121ede4a44998a0556a68ada87",
+      "reason": "Rejected: the targeted edit removed both WEST/bottom-right indicators, leaving zero instead of exactly one. Attempt 004 adds only one matching WEST indicator."
+    },
+    {
+      "assetId": "furniture-expo-pass-heated",
+      "attempt": 1,
+      "stage": "alpha-and-runtime-raster-validation",
+      "generatorOutputSha256": "e3c221f724ff3046d38723ff7daebeea4d281b08c4603ceae4fe6006f74c5ced",
+      "reason": "Rejected after normalization: the initial official-helper alpha retained sparse magenta-key edge pixels; the first processor output failed the zero-visible-magenta gate in expo north/east/south/west, and one alpha-3 resampling speck also remained in plancha south. The exact failed runtime set, contacts, processor, process metadata, and validator error are preserved under rejected/processor-attempt001-visible-magenta/. Expo is retried with the skill-prescribed one-pixel edge contraction; the processor clears only alpha <=12 chroma remnants after resizing.",
+      "rejectedProcessorSha256": "47f925ab9459ab9ae531f9ec43684ef220940db04ac6e7ada53e7056571e51fb",
+      "rejectedProcessJsonSha256": "05d56023f9c49f1f969348af37757ed9115ab535efab1f87fcbcd11e69d195b0",
+      "rejectedContactSha256": {
+        "contact-627-dark.png": "8875d98c8f1b031692962e1daec1f4be1779193d2a9f218e048a7b45622813bf",
+        "contact-128-light.png": "47854e69cbf371984e4f4844ec9fb6d73bdf25d3819f8104a4bb2ca9013b3126"
+      },
+      "rejectedRuntimeSha256": {
+        "furniture-expo-pass-heated/north.png": "75e8bc010d52fe53c47776090e31d385a13e174efbf4c5b19dd09ad1c399d405",
+        "furniture-expo-pass-heated/east.png": "d341067dff29e8f147b1f1fd19291b2baf49663dd357f58353200e6bb324a138",
+        "furniture-expo-pass-heated/south.png": "155d59a8954260e18d358c5e30e5d384d1d2ddc94bd4534819e8cce3249750f8",
+        "furniture-expo-pass-heated/west.png": "1d3bec1f04fae6cf00b09c47c8a0f6fa34b71c6b238dfe045f38e3af436f92cc",
+        "furniture-plancha-commercial/north.png": "9ccf71dec03d360f155e13b38b4a91e064110189878b0f14540cc1dbd63b3f8b",
+        "furniture-plancha-commercial/east.png": "973cf690a53c656d21856d7d384b516cfbaaeb4fd3b64394b7874b8968624baf",
+        "furniture-plancha-commercial/south.png": "580673ad8997990c625f587f5eed385387c77f4de460af642b87080453fd4ac2",
+        "furniture-plancha-commercial/west.png": "6d5862faedc907f238f04700c2b26b686f5e3d238dc33dfdae25ef6726c58bae",
+        "furniture-convection-oven/north.png": "d8f114f8a09aaa4000fd165a798efe10a30bcdabc78bc74a59a16766f15d9abe",
+        "furniture-convection-oven/east.png": "697af1b5bc14c3d2bd4a259ed075bc8eeb232bcb73f0e0e12c359aa2eb76e0f0",
+        "furniture-convection-oven/south.png": "09922d2e65fc71657d844636f29ef8251447a6aa2e2a2cac0a1204250f38ac46",
+        "furniture-convection-oven/west.png": "950e4f18f10962467eff11d56507a0efc92f4c6c57edbe70ae13e554754e0806"
+      }
+    },
+    {
+      "assetId": "furniture-expo-pass-heated",
+      "attempt": 2,
+      "stage": "runtime-raster-validation",
+      "generatorOutputSha256": "60672228bd72a5f4c7d66d04ef79736aa095b2502fc2e6656cb5047a7eb3cf9a",
+      "reason": "Rejected after the prescribed edge-contract retry: exactly one 14/255-alpha chroma-colored resampling pixel remained in expo south at runtime canvas coordinate (180,285), RGBA (216,110,158,14). The complete failed runtime set, contacts, processor, process metadata, and validator error are preserved. Processor attempt 003 raises only the bounded chroma-dust cutoff from alpha <=12 to alpha <=16.",
+      "rejectedProcessorSha256": "934f39cf8a906c69ba4829e3165192a2b618f663efe9292577819ec005b918fb",
+      "rejectedProcessJsonSha256": "5d73eb0bd0a40eefd497803071188084abb8c60902f4fb6f2be46469e85721ab",
+      "failingRuntimeSha256": "c70b7b41bca7d1cc46219d290bf042cc6be1719eb9bc9fce0da512e725a20b9e",
+      "rejectedContactSha256": {
+        "contact-627-dark.png": "a400605eca3970ec4e461c57fe01993a4ad672c5056db4728daa55d154f81d24",
+        "contact-128-light.png": "faa186b634702657819fee597f38abcbe8fcce2d85927c1cffb67b59d35de021"
+      }
+    }
+  ],
+  "excludedQuarantinePayload": {
+    "rawAtlases": 3,
+    "rawAttemptBinaries": 6,
+    "alphaAtlases": 3,
+    "alphaAttemptBinaries": 4,
+    "rejectedPayloadFiles": 38,
+    "processScripts": 4,
+    "policy": "Raw, rejected, alpha-atlas, process, and validation binaries remain outside the repository; exact accepted source hashes, attempt hashes, rejection hashes, and reasons are retained above."
+  },
+  "items": [
+    {
+      "catalogId": "expo-pass-heated",
+      "assetId": "furniture-expo-pass-heated",
+      "name": "Heated Expo Pass",
+      "category": "Kitchen",
+      "style": "Modern",
+      "footprint": [
+        4,
+        2
+      ],
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "identityContract": "One premium Modern 4x2 heated expo pass with four black warming pads, one copper heat rail on two end posts, four unlit amber heater housings, two deep-teal operational-front doors and pulls, exactly one physical-right amber indicator, four open operational-rear cubbies, plain short end panels, and four feet.",
+      "semanticVerdict": "pass: four pads and four heater housings remain fixed; the two-door front and four-cubby rear reverse coherently; the single right-end indicator appears only with the front; plain sides, rail, posts, feet, proportions, and materials rotate as one rigid object.",
+      "gameplayLegibility": "pass: copper rail, four-pad rhythm, teal door front, open four-cubby rear, and plain side silhouettes remain distinct at 128px.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-expo-pass-heated/north.png",
+          "sha256": "9396dabbac70a8f4c9c18147635a4378e491152ebb33168e5b1a7ac5f76f05e7",
+          "pixelSha256": "c7a0ab0a7dc9a143686c497d3c07bd1a790363a348bd4ead021a855953430de3",
+          "dHash16": "000000000000000025802a68ead432504593e163ec0ffccb9fcb63ca04120093",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-009/alpha-source/furniture-expo-pass-heated-north.png",
+          "sourceAlphaSha256": "10cecd773a029da9f4bed1e80a9095226fe0df2672624f06276746f511a54340",
+          "sourceAlphaPixelSha256": "7972a54a8f4d1c0a634e2c576c38028f94006525c01613d64346416551ca0638",
+          "uniformScale": 0.963222416813,
+          "opaqueBounds": "538x418+44+172",
+          "sourceOpaqueBounds": "559x434+34+156",
+          "transparentMargins": {
+            "left": 44,
+            "right": 45,
+            "top": 172,
+            "bottom": 37
+          },
+          "visiblePixelCount": 132698,
+          "fullyOpaquePixelCount": 124492
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-expo-pass-heated/east.png",
+          "sha256": "399418809574baafd3a89cd0739c16f2878bffd06cf1015ea74afe1b9a015b3c",
+          "pixelSha256": "fb7da3bf16b821528f2c162520a8603ce4a0894a896e3bf26b35fa170ccd01d4",
+          "dHash16": "0000000000000018087206903a7233861e0eb8de899e899d89f2c9c449003900",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-009/alpha-source/furniture-expo-pass-heated-east.png",
+          "sourceAlphaSha256": "ac9450ed387ca15c133a1a4a05173237ad4563bb5ff8e58f703e87b59f79f21a",
+          "sourceAlphaPixelSha256": "ec0292bac844bd8c150f9442de85eb4dadd82c6088f961931786222b930d3836",
+          "uniformScale": 0.963222416813,
+          "opaqueBounds": "495x448+66+142",
+          "sourceOpaqueBounds": "514x465+56+125",
+          "transparentMargins": {
+            "left": 66,
+            "right": 66,
+            "top": 142,
+            "bottom": 37
+          },
+          "visiblePixelCount": 125669,
+          "fullyOpaquePixelCount": 117752
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-expo-pass-heated/south.png",
+          "sha256": "ed4a51037e585d0ed9e7182b67648369dcd18fdff8a61f8dffac0c2863d7799c",
+          "pixelSha256": "3aba284c050680e266ec4c330a1d0695388f41cb68fa1340e1756723262b9688",
+          "dHash16": "000000000000001400680da91628c5b3364c33ec0d283d6c392eb951a7003400",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-009/alpha-source/furniture-expo-pass-heated-south.png",
+          "sourceAlphaSha256": "d90720f6772ac0b1fd7e4aa0b906e2527f966dff72a4186737829c85a24861e8",
+          "sourceAlphaPixelSha256": "423ea4af48eff31582ee3e89c9e437b996e293346affc2417f7b09a0f193bd3b",
+          "uniformScale": 0.963222416813,
+          "opaqueBounds": "550x421+38+169",
+          "sourceOpaqueBounds": "571x437+28+153",
+          "transparentMargins": {
+            "left": 38,
+            "right": 39,
+            "top": 169,
+            "bottom": 37
+          },
+          "visiblePixelCount": 134784,
+          "fullyOpaquePixelCount": 126175
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-expo-pass-heated/west.png",
+          "sha256": "06d56bae044a984d9afcc8bf6f8aa6c49e3a987c9c39c6e8af792b5341ad903a",
+          "pixelSha256": "7c8c7ec4ba4e0701668c7d265152906ce5a566336535764ae8046b5718f1844d",
+          "dHash16": "0000000000000018097206983433c583367939e997d19684960bd4e4d3003000",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-009/alpha-source/furniture-expo-pass-heated-west.png",
+          "sourceAlphaSha256": "98dc9663d4d2ac73670ae980ec329960c849a81b776616924896eff2a3781a39",
+          "sourceAlphaPixelSha256": "9db24dd2c0bbf77acc0a57a1cdba86a279600725cd54b77f8a84eecbf1c4c75f",
+          "uniformScale": 0.963222416813,
+          "opaqueBounds": "525x447+51+143",
+          "sourceOpaqueBounds": "545x464+41+126",
+          "transparentMargins": {
+            "left": 51,
+            "right": 51,
+            "top": 143,
+            "bottom": 37
+          },
+          "visiblePixelCount": 133666,
+          "fullyOpaquePixelCount": 125743
+        }
+      ]
+    },
+    {
+      "catalogId": "plancha-commercial",
+      "assetId": "furniture-plancha-commercial",
+      "name": "Commercial Plancha",
+      "category": "Kitchen",
+      "style": "Modern",
+      "footprint": [
+        3,
+        2
+      ],
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "identityContract": "One durable Modern 3x2 commercial plancha with a three-zone seasoned-steel plate, rear backsplash and side wings, four front knobs, one front grease drawer, one physical-right grease trough and pilot, two rear louvered vents, plain side panels, and four feet.",
+      "semanticVerdict": "pass: the four-knob/drawer front and two-vent rear exchange coherently; the right-edge grease trough and pilot retain their physical side; three zones, backsplash, wings, feet, proportions, and materials remain fixed through four quarter turns.",
+      "gameplayLegibility": "pass: broad dark griddle, four front controls, single drawer, two rear vents, and compact side profiles remain distinct at 128px.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-plancha-commercial/north.png",
+          "sha256": "9ccf71dec03d360f155e13b38b4a91e064110189878b0f14540cc1dbd63b3f8b",
+          "pixelSha256": "4136baf969d7a47aed085ed15b00a09abd8ca00add0a16e447bb3e3bf5d84929",
+          "dHash16": "00000000100020009bc4b11b68014fc4dd8d1fc96d9e69261726901614090009",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-009/alpha-source/furniture-plancha-commercial-north.png",
+          "sourceAlphaSha256": "6eb863d264a94672ba3c8238bf262530a24a9d9f0256f2a398cc17a5aaccd5b7",
+          "sourceAlphaPixelSha256": "434f738e43a838d078a3836a528bf20e7cb4125969bd4088b6a59c6754d3e088",
+          "uniformScale": 0.88141025641,
+          "opaqueBounds": "542x406+42+184",
+          "sourceOpaqueBounds": "615x461+6+129",
+          "transparentMargins": {
+            "left": 42,
+            "right": 43,
+            "top": 184,
+            "bottom": 37
+          },
+          "visiblePixelCount": 171858,
+          "fullyOpaquePixelCount": 166760
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-plancha-commercial/east.png",
+          "sha256": "973cf690a53c656d21856d7d384b516cfbaaeb4fd3b64394b7874b8968624baf",
+          "pixelSha256": "388e770dc2c79ea5162d98a2c5d819e8dc0f7a518f09cfdd56c0ebe9112bf9fa",
+          "dHash16": "000000000000080005602c302908590a5a1a485a003a041204180618522410a0",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-009/alpha-source/furniture-plancha-commercial-east.png",
+          "sourceAlphaSha256": "12a57ef912e88bddee67d466e56b9c5cdc407b760c9965e2b6f9cbc48be29ad6",
+          "sourceAlphaPixelSha256": "0d9b0432ddbfc454be9ba0817209ad8bbf0101821959d7c9406787d5871ef4a3",
+          "uniformScale": 0.88141025641,
+          "opaqueBounds": "332x407+147+183",
+          "sourceOpaqueBounds": "377x462+125+128",
+          "transparentMargins": {
+            "left": 147,
+            "right": 148,
+            "top": 183,
+            "bottom": 37
+          },
+          "visiblePixelCount": 109583,
+          "fullyOpaquePixelCount": 105510
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-plancha-commercial/south.png",
+          "sha256": "801110c95e963969acedd46ab5dd6cb748d98205cb178002c840f8c11dd355ea",
+          "pixelSha256": "2527d2331a0fe6452e2a917e6a256e3804a3d280a88c05c2341d34910b1233f9",
+          "dHash16": "000000000000000020001a40603666c119e1607762c672c689e6901d68da801a",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-009/alpha-source/furniture-plancha-commercial-south.png",
+          "sourceAlphaSha256": "549b66e504004f109fc58a35ce30ec2026550b009e7ac8d4e1a5bddba45c0373",
+          "sourceAlphaPixelSha256": "3cd9eac9557245f58284e857353b5e9bfc3f4962aaa5cd657784e70d51a06933",
+          "uniformScale": 0.88141025641,
+          "opaqueBounds": "550x336+38+254",
+          "sourceOpaqueBounds": "624x381+1+209",
+          "transparentMargins": {
+            "left": 38,
+            "right": 39,
+            "top": 254,
+            "bottom": 37
+          },
+          "visiblePixelCount": 136832,
+          "fullyOpaquePixelCount": 132048
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-plancha-commercial/west.png",
+          "sha256": "6d5862faedc907f238f04700c2b26b686f5e3d238dc33dfdae25ef6726c58bae",
+          "pixelSha256": "6dbd2be91e5671bb544885ea0ee7ac35809037c7dbee84692bae9f5a41552e96",
+          "dHash16": "000000000000010000180be827ec27ac17a437ca319a379a261a061a08340924",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-009/alpha-source/furniture-plancha-commercial-west.png",
+          "sourceAlphaSha256": "5e8de933e4015e1ac69ed6ee9a405e276f2975a754d2b19432a846ab9bdc060b",
+          "sourceAlphaPixelSha256": "1173f67b1671aec233dc8a32a94309373f29ee1b64e969fcddefad351b5fff15",
+          "uniformScale": 0.88141025641,
+          "opaqueBounds": "309x404+159+186",
+          "sourceOpaqueBounds": "351x458+138+132",
+          "transparentMargins": {
+            "left": 159,
+            "right": 159,
+            "top": 186,
+            "bottom": 37
+          },
+          "visiblePixelCount": 101268,
+          "fullyOpaquePixelCount": 97271
+        }
+      ]
+    },
+    {
+      "catalogId": "convection-oven",
+      "assetId": "furniture-convection-oven",
+      "name": "Convection Oven",
+      "category": "Kitchen",
+      "style": "Modern",
+      "footprint": [
+        3,
+        3
+      ],
+      "placement": {
+        "mount": "floor",
+        "occupancy": "blocking",
+        "serviceAccess": "adjacent"
+      },
+      "identityContract": "One premium Modern 3x3 double-deck convection oven with two stacked front doors, two dark windows, two brass handles, one physical-right charcoal control column with two dials and two amber pilots, two stacked rear grilles and two rear service panels, plain seamed sides, one top exhaust cowl, and four feet.",
+      "semanticVerdict": "pass: paired doors/windows/handles and right-front controls rotate coherently against the paired rear grilles/panels; side seams, cowl, feet, proportions, and materials stay fixed without mirroring or count drift.",
+      "gameplayLegibility": "pass: twin dark windows and brass handles, black control column, twin rear grilles, square cabinet, and top cowl remain readable at 128px.",
+      "directions": [
+        {
+          "direction": "north",
+          "path": "apps/client-godot/assets/objects/directional/furniture-convection-oven/north.png",
+          "sha256": "d8f114f8a09aaa4000fd165a798efe10a30bcdabc78bc74a59a16766f15d9abe",
+          "pixelSha256": "5f21f59bf6fd5b3c0078f8f6d619dac4f413673e9c0c2b1941745d50ea11df51",
+          "dHash16": "000814e062de931eb01eb06ab06abe6a066ab06ab06abe6d4e6d606a1c2440e4",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-009/alpha-source/furniture-convection-oven-north.png",
+          "sourceAlphaSha256": "1bfc124af11cc0e7f6aab0c200a31b383b66a7193973fb62891e15d4cf710966",
+          "sourceAlphaPixelSha256": "9cd14cf8c61db54bf899d1fdd12f0d96e8f583aabb66663cf9ae77d764058812",
+          "uniformScale": 1.058467741935,
+          "opaqueBounds": "469x501+79+89",
+          "sourceOpaqueBounds": "443x473+92+117",
+          "transparentMargins": {
+            "left": 79,
+            "right": 79,
+            "top": 89,
+            "bottom": 37
+          },
+          "visiblePixelCount": 198427,
+          "fullyOpaquePixelCount": 192962
+        },
+        {
+          "direction": "east",
+          "path": "apps/client-godot/assets/objects/directional/furniture-convection-oven/east.png",
+          "sha256": "697af1b5bc14c3d2bd4a259ed075bc8eeb232bcb73f0e0e12c359aa2eb76e0f0",
+          "pixelSha256": "cd8c638b8d060c2d3df1213f8a3c215458d512d733751a8b17e58b75fe2e3dc2",
+          "dHash16": "070860e0863e027e61e6648e728e768e648e648e728e728e468db6994b460240",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-009/alpha-source/furniture-convection-oven-east.png",
+          "sourceAlphaSha256": "f5305b5aa4457ed57f6345cfe9b5861f48886d80ee535222a484fce8ede4cbe2",
+          "sourceAlphaPixelSha256": "6f9a13bac8b6a04f9a791b9b02a0c520623081f9c2b7275c3ce9213994e9fb55",
+          "uniformScale": 1.058467741935,
+          "opaqueBounds": "454x525+86+65",
+          "sourceOpaqueBounds": "429x496+99+94",
+          "transparentMargins": {
+            "left": 86,
+            "right": 87,
+            "top": 65,
+            "bottom": 37
+          },
+          "visiblePixelCount": 194903,
+          "fullyOpaquePixelCount": 189441
+        },
+        {
+          "direction": "south",
+          "path": "apps/client-godot/assets/objects/directional/furniture-convection-oven/south.png",
+          "sha256": "09922d2e65fc71657d844636f29ef8251447a6aa2e2a2cac0a1204250f38ac46",
+          "pixelSha256": "10e8050df24dd8ce76c729062b5acfc713b211f54842544872182a6da2043137",
+          "dHash16": "020819a0465e871e201e609664967c966c966016749674966c1d6a1a90684068",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-009/alpha-source/furniture-convection-oven-south.png",
+          "sourceAlphaSha256": "e5af04e634844921a3271de5784133b4f4719b269387d64b93b50640a71fb576",
+          "sourceAlphaPixelSha256": "5a862e361576ae44533b54d3df120760b1d3f50b77f3f74d70c07a517c3aaa03",
+          "uniformScale": 1.058467741935,
+          "opaqueBounds": "463x494+82+96",
+          "sourceOpaqueBounds": "437x467+95+123",
+          "transparentMargins": {
+            "left": 82,
+            "right": 82,
+            "top": 96,
+            "bottom": 37
+          },
+          "visiblePixelCount": 192498,
+          "fullyOpaquePixelCount": 187005
+        },
+        {
+          "direction": "west",
+          "path": "apps/client-godot/assets/objects/directional/furniture-convection-oven/west.png",
+          "sha256": "950e4f18f10962467eff11d56507a0efc92f4c6c57edbe70ae13e554754e0806",
+          "pixelSha256": "58420d158cd9b4c58926db778cd6122d25d7d0954e3eac238f49481ffb004114",
+          "dHash16": "03201cc002b8823680cd83ed82e582cd82cd87ad02e542cd62c960f81b440300",
+          "sourceAlphaPath": "planning/art-qa/furniture-core-directional-009/alpha-source/furniture-convection-oven-west.png",
+          "sourceAlphaSha256": "15eaba3a097c7b2f6518a25d88c5581843befed030ea5c4de047599f190bee2d",
+          "sourceAlphaPixelSha256": "4bf583c7e42cf747d565c9f60c8947e5fa329bd1f803348d989e89c79d66442d",
+          "uniformScale": 1.058467741935,
+          "opaqueBounds": "461x504+83+86",
+          "sourceOpaqueBounds": "436x476+95+114",
+          "transparentMargins": {
+            "left": 83,
+            "right": 83,
+            "top": 86,
+            "bottom": 37
+          },
+          "visiblePixelCount": 189494,
+          "fullyOpaquePixelCount": 184131
+        }
+      ]
+    }
+  ]
+}

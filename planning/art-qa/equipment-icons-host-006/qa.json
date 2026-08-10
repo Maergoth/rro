@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1,
+  "batchId": "equipment-icons-host-006",
+  "status": "accepted",
+  "repositoryPromotion": "remote-verified",
+  "remotePreservation": {
+    "commit": "dd8c05995b39649132ff5ce8fad29a432f15cebc",
+    "tree": "7231193527236af6538c1d9fcd6e1d11184bdb7b",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30979027528"
+  },
+  "catalogSequences": [
+    41,
+    42,
+    43,
+    44,
+    45
+  ],
+  "source": {
+    "generator": "OpenAI built-in image generation",
+    "useCase": "stylized-concept",
+    "styleReference": "planning/art-qa/equipment-icons-chef-cook-host-005/contact-128-dark.png",
+    "sharedPromptContract": "One bespoke Rush & Revenue Online game inventory icon matching the painterly semi-realistic isolated-object rendering, elevated three-quarter view, tactile professional materials, restrained highlights, clean silhouette, and visual weight of the accepted style reference. Center the complete subject on a perfectly flat solid #FF00FF chroma-key background with generous padding and readability at 64px. No gradient, texture, floor plane, cast/contact shadow, reflection, magenta subject material, text, letters, numbers, pseudo-text, brands, logos, watermark, people, hands, border, frame, room, unrelated props, or procedural emblem.",
+    "matteProcess": "remove_chroma_key.py --auto-key border --soft-matte --transparent-threshold 12 --opaque-threshold 220 --despill",
+    "runtimeResize": "trim transparent bounds, scale proportionally to at most 116x116, center on a 128x128 transparent canvas",
+    "notes": "The preserved high-resolution files are post-chroma alpha sources. Four are 1254x1254; the portrait seating-tablet source is 1024x1536. Runtime assets are the 128x128 PNGs under apps/client-godot/assets/items; dark, light, and all-45 comparison sheets are retained as visual QA evidence.",
+    "preservedHighResolutionSource": "planning/art-qa/equipment-icons-host-006/alpha-source"
+  },
+  "gates": {
+    "dimensions": "128x128",
+    "colorMode": "sRGBA",
+    "minimumTransparentMarginPixels": 6,
+    "actualMinimumTransparentMarginPixels": 6,
+    "allCornersTransparent": true,
+    "uniqueRuntimeContentHashes": true,
+    "noCollisionWithPreviouslyAcceptedItemHashes": true,
+    "previouslyAcceptedRepositoryRuntimeIconCount": 40,
+    "noLettersNumbersPseudoTextBrandsOrWatermarks": true,
+    "visualReviewAtFullScale": "pass",
+    "visualReviewAtGameplayScale66px": "pass",
+    "duplicateOrAmbiguousSilhouettes": "none",
+    "chromaFringeOnDarkAndLightBackgrounds": "none visible",
+    "visualComparisonAcrossAll45AcceptedIcons": "pass"
+  },
+  "contactSheets": [
+    {
+      "path": "planning/art-qa/equipment-icons-host-006/contact-128-dark.png",
+      "purpose": "128px runtime icons on a dark background",
+      "sha256": "3861f2f2eebf254df3db34a3bcc14e9c7c626971f65e5be3f05b3e1c10aacc0e"
+    },
+    {
+      "path": "planning/art-qa/equipment-icons-host-006/contact-66-light.png",
+      "purpose": "66px gameplay-scale icons on a light background",
+      "sha256": "ad71b5c3dd024d2406e332f964c4e5d90cb589c65dce52ed4f1d761b8e857d06"
+    },
+    {
+      "path": "planning/art-qa/equipment-icons-host-006/comparison-all-45-66-dark.png",
+      "purpose": "Gameplay-scale semantic and silhouette comparison of accepted sequences 1-45",
+      "sha256": "73cd7531b4d254209fd1235633ab4babcd7b6a4d858b1b77ef57af94c2648e9b"
+    }
+  ],
+  "items": [
+    {
+      "sequence": 41,
+      "catalogId": "host-seating-tablet",
+      "iconId": "role-equipment.host.glare-free-seating-tablet",
+      "name": "Glare-Free Seating Tablet",
+      "kind": "equipment",
+      "subjectPrompt": "One thin portrait-format restaurant host tablet in a rugged dark-teal shell with orange corner grips and a brass kickstand; matte screen shows only round and square table silhouettes, colored party tokens, and timer arcs without text or digits.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-host-glare-free-seating-tablet.png",
+      "runtimeSha256": "6163ae12181aae851526dc199854ad5ae56bc2e4b784e441b1d47b740a56da94",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-host-006/alpha-source/role-equipment-host-glare-free-seating-tablet.png",
+      "alphaSourceSha256": "61248f7311e761e011823fb66dcdb91c066471a265c7a8dc97947acbf6e52a2b",
+      "rawChromaSourceSha256": "06cdc73da234299dc9bea41d299f2eae70ee5a4e96af61c1b8b698fce7adb610",
+      "opaqueBounds": "72x116+28+6",
+      "transparentMargins": {
+        "left": 28,
+        "right": 28,
+        "top": 6,
+        "bottom": 6
+      },
+      "semanticVerdict": "pass: narrow portrait hardware, matte floor-only table map, colored party tokens, and brass kickstand clearly distinguish the host seating tool from the wide owner operations tablet",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 42,
+      "catalogId": "host-brass-crumb-scraper",
+      "iconId": "role-equipment.host.brass-crumb-scraper",
+      "name": "Brass Crumb Scraper",
+      "kind": "equipment",
+      "subjectPrompt": "One elongated crescent-curved solid-brass table crumber with a broad beveled sweeping lip, shallow built-in crumb-catching trough, weighted spine, short walnut grip, teal collar, and orange rivet.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-host-brass-crumb-scraper.png",
+      "runtimeSha256": "5340011fbe46d884a870d7701659ec0b83ab7c73f804783ee1cd48c1f8a54844",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-host-006/alpha-source/role-equipment-host-brass-crumb-scraper.png",
+      "alphaSourceSha256": "c4fe278d66ea88fa4efeb63d8ce1e4a51ed3e3deac46e7bb1e98ebc9a8f0c514",
+      "rawChromaSourceSha256": "0a5b33bd2fa1f50bb9bf893010e8f8a9063eba5057b65123b84139191b9cb895",
+      "opaqueBounds": "116x91+6+18",
+      "transparentMargins": {
+        "left": 6,
+        "right": 6,
+        "top": 18,
+        "bottom": 19
+      },
+      "semanticVerdict": "pass: the heavy crescent brass trough, sweeping lip, and short grip read as a dedicated crumb collector rather than a knife, turner, strip, pen, or tweezers",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 43,
+      "catalogId": "host-bus-tub-harness",
+      "iconId": "role-equipment.host.balanced-bus-tub-harness",
+      "name": "Balanced Bus-Tub Harness",
+      "kind": "equipment",
+      "subjectPrompt": "One complete load-balancing harness around an empty shallow charcoal bus tub, with crossed dark-teal shoulder straps, an orange padded chest yoke, brass quick-release buckles, symmetrical supports, and a rigid under-tub cradle.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-host-balanced-bus-tub-harness.png",
+      "runtimeSha256": "e244fa9f9478c8724ae91e8ebf5c84575ecda9c150f69a3fab24ae9c078251d7",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-host-006/alpha-source/role-equipment-host-balanced-bus-tub-harness.png",
+      "alphaSourceSha256": "b78823f2e37a355125dfdb80845eaa06738c7bc430fbf631d7a2219cafed219e",
+      "rawChromaSourceSha256": "661daef3723e2c0e4221428f0f4a1c16007620598d7b66edc7d65bbdae7316a7",
+      "opaqueBounds": "99x116+14+6",
+      "transparentMargins": {
+        "left": 14,
+        "right": 15,
+        "top": 6,
+        "bottom": 6
+      },
+      "semanticVerdict": "pass: dominant crossed shoulder straps, padded yoke, symmetric buckles, and visible under-tub balance cradle make this carrying harness unmistakable and not a backpack, apron, or plain bin",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 44,
+      "catalogId": "host-sanitizer-caddy-refill",
+      "iconId": "role-equipment.host.reset-caddy-refill",
+      "name": "Reset Caddy Refill",
+      "kind": "consumable",
+      "subjectPrompt": "One compact single-table refill bundle in a dark-teal four-compartment fiber tray with orange belly band, containing exactly a pump sanitizer refill, folded cream towel, rolled blue gloves, and blank brass tent marker.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-host-reset-caddy-refill.png",
+      "runtimeSha256": "365fbba68161f0691b8055b61358da738d51086eb688109a6417219426a29237",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-host-006/alpha-source/role-equipment-host-reset-caddy-refill.png",
+      "alphaSourceSha256": "ec00724dd658cab1c3968c6806065375c16301897de48a1ada8ec7fe3e308982",
+      "rawChromaSourceSha256": "23e2125690f6928b19735d4ef34b4124c46baf90d6fc1538e87db653877d0e3b",
+      "opaqueBounds": "116x102+6+13",
+      "transparentMargins": {
+        "left": 6,
+        "right": 6,
+        "top": 13,
+        "bottom": 13
+      },
+      "semanticVerdict": "pass: one banded four-compartment bundle visibly combines sanitizer, towel, gloves, and table marker as a fresh table-reset refill rather than a chemical, medical, or general tool caddy",
+      "gameplayLegibility": "pass"
+    },
+    {
+      "sequence": 45,
+      "catalogId": "host-guest-activity-pack",
+      "iconId": "role-equipment.host.little-guest-activity-pack",
+      "name": "Little Guest Activity Pack",
+      "kind": "consumable",
+      "subjectPrompt": "One recyclable kraft-paper activity folio partly open with a dark-teal sleeve, orange cord, exactly three chunky teal/orange/mustard crayons, and a folded cream restaurant maze sheet containing only pictorial lines and food/table drawings.",
+      "runtimePath": "apps/client-godot/assets/items/role-equipment-host-little-guest-activity-pack.png",
+      "runtimeSha256": "af90f3a94ba26bbd319ca9761adc198bed011d94fd25ebfcd03d8e56060c2b7d",
+      "alphaSourcePath": "planning/art-qa/equipment-icons-host-006/alpha-source/role-equipment-host-little-guest-activity-pack.png",
+      "alphaSourceSha256": "5d67e9fade9558d375dcd0b851a7cfb694416145f5eb593d401ef9f1b2e36c67",
+      "rawChromaSourceSha256": "453660da40de9c673d48b089ea7d2de2f46561236c5a26bdf3ff6e81e3391149",
+      "opaqueBounds": "116x101+6+13",
+      "transparentMargins": {
+        "left": 6,
+        "right": 6,
+        "top": 13,
+        "bottom": 14
+      },
+      "semanticVerdict": "pass: three chunky crayons, open reusable folio, orange cord, and a purely pictorial restaurant maze clearly read as a child guest activity pack rather than cards, a notebook, menu, or office stationery",
+      "gameplayLegibility": "pass"
+    }
+  ],
+  "assets": [
+    "host-seating-tablet",
+    "host-brass-crumb-scraper",
+    "host-bus-tub-harness",
+    "host-sanitizer-caddy-refill",
+    "host-guest-activity-pack"
+  ]
+}

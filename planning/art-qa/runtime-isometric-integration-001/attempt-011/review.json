@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "id": "runtime-isometric-integration-001-attempt-011",
+  "reviewedAt": "2026-08-09T02:06:00Z",
+  "source": {
+    "remoteCommit": "a22e5055646184cef0d4d34ebb2a66cc5435c052",
+    "remoteTree": "1a42c3e55c04b03b4a0e14c0189395195f35d8d7",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31289514663",
+    "artifactId": 9030941364,
+    "artifactName": "elevated-isometric-runtime-qa",
+    "artifactSha256": "41c3b80ed02da62ff97fcb9b781fb3bd7087fac96bd0800538817c096a371cb3"
+  },
+  "automatedGates": {
+    "windowsCi": "passed",
+    "ubuntuCi": "passed",
+    "nativeGodotCapture": "passed",
+    "captureCount": 4,
+    "viewport": [1800, 1100],
+    "minimumSampledColors": 448,
+    "exactArtifactDigestVerified": true,
+    "exactCaptureHashesVerified": true,
+    "legalMountedPlacementRecordsPresent": true,
+    "fixedCameraContractPresent": true
+  },
+  "visualReview": {
+    "status": "passed-camera-conformant-assets",
+    "productionComplete": false,
+    "reviewers": [
+      "root original-scale and gameplay-scale inspection"
+    ],
+    "passed": [
+      "The Live Operations Console preserves one rigid identity through true quarter turns: front plus physical-right, physical-right plus rear, rear plus physical-left, and physical-left plus front. Its three monitors, three amber indicators, rear doors and cable rail, and single physical-right grille remain mechanically coherent.",
+      "The Owner's Operations Desk preserves one rigid identity through true quarter turns: guest front plus physical-right, rear plus physical-right, rear plus physical-left, and guest front plus physical-left. Its two drawers remain physical-right, its cable grommet remains physical-left, and its brass guest-front inlay and single laptop do not mirror or duplicate.",
+      "The Essential Cafe Two-Top preserves exactly two opposite chairs, one napkin holder, and one under-edge bag hook while alternating between the two required diagonal ground-plane axes across N/E/S/W.",
+      "All three corrected identities sit on their declared footprints with stable floor contact, coherent elevated orthographic-isometric projection, correct depth, readable gameplay-scale silhouettes, and no clipping, overlays, floating, or viewport cropping.",
+      "The other thirty-seven present identities show no new runtime placement or depth regression in this capture, but receive no camera-conformance credit from this review and remain explicitly pending re-audit.",
+      "The exact GitHub artifact digest, four capture hashes, remote commit, exact tree, and green Windows and Ubuntu CI are verified."
+    ],
+    "blockers": [],
+    "acceptedAssetIds": [
+      "furniture-essential-cafe-two-top",
+      "furniture-manager-console",
+      "furniture-office-desk"
+    ],
+    "rejectedAssetIds": [],
+    "cameraConformancePendingAssetIds": [
+      "the other thirty-seven present directional identities"
+    ],
+    "nextCaptureRequirements": [
+      "Preserve this exact review evidence in GitHub with green hosted CI before giving the three corrected identities production-complete credit.",
+      "Re-audit or correct the other thirty-seven present directional identities against the same fixed camera contract in small, independently reviewed batches.",
+      "Continue creating the other 189 catalog identities only under the fixed camera contract and full source-to-native review pipeline."
+    ]
+  },
+  "captures": [
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-011/restaurant-north.png",
+      "sha256": "a341a1f6cd438ed51a36786258f0e035953f6a7e6cdeb8b3a8dc6fffd67024b5"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-011/restaurant-east.png",
+      "sha256": "5046d01faf3fedf034fac826703688c2a6c0703dfe961c525aad7437b056ecd7"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-011/restaurant-south.png",
+      "sha256": "c9853ff4b386bf360de108e29c5e76c65cabd1aca1a34e8be17ea3f542299c15"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-011/restaurant-west.png",
+      "sha256": "68b2d88517c1cab17536cf3ba4a4d3d2a071729d459b1e41ea1c557d8e65f113"
+    },
+    {
+      "path": "planning/art-qa/runtime-isometric-integration-001/attempt-011/qa.json",
+      "sha256": "32719c158515cdc039fedc472b78155fe657f3788282183cf07cdf1977f4e972"
+    }
+  ]
+}

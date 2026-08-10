@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "batchId": "character-remediation-idle-classic-v1",
+  "status": "accepted-source-runtime-blocked",
+  "assets": [
+    "body-base-a-idle-isometric",
+    "body-base-b-idle-isometric",
+    "body-skin-masks-base-a",
+    "body-skin-masks-base-b",
+    "outfit-classic-base-a",
+    "outfit-classic-base-b"
+  ],
+  "scope": {
+    "bodyPresentations": 2,
+    "directions": 8,
+    "bodyRuntimeFiles": 16,
+    "skinRuntimeFiles": 32,
+    "classicOutfitRuntimeFiles": 48,
+    "runtimePngs": 96,
+    "uniqueRuntimeHashes": 96,
+    "byteReproducedFiles": 99,
+    "canvas": [384, 512],
+    "pixelFormat": "8-bit RGBA PNG (sRGB)",
+    "groundContactPivot": [192, 472]
+  },
+  "sourceCommit": "20e83ef4dbac4f616686023007f4eb9ee7801445",
+  "remotePreservation": {
+    "commit": "7b2caaf6843e2d1b895870a80103eff57227d15e",
+    "tree": "3892dcc335490ff767d8e17d39a4b5b8b9236a6a",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/30973906887"
+  },
+  "acceptedEditSources": [
+    {
+      "path": "planning/art-sources/character-remediation-idle-classic-v1/base-a-atlas.png",
+      "sha256": "597795e9e01a553462d1a94179176a26bd5d86cff0b2a2ca84203350cbd2ff2e"
+    },
+    {
+      "path": "planning/art-sources/character-remediation-idle-classic-v1/base-b-atlas.png",
+      "sha256": "880bd0d5d8e0c7931fbc647c7698e87eb71b39f41dc148ee590549fdc1beeebc"
+    },
+    {
+      "path": "planning/art-sources/character-remediation-idle-classic-v1/base-a-south-west-sleeve-edit.png",
+      "sha256": "cf2d44033756138a4f82ebb452422644b660e35c6596a02d6e09e3ce245a95b2"
+    }
+  ],
+  "runtimeFiles": {
+    "count": 96,
+    "manifests": [
+      {
+        "scope": "16 body and 32 skin runtime files",
+        "path": "planning/art-qa/character-remediation-idle-classic-v1/normalized-bodies-metrics.json",
+        "sha256": "40eaba3b2d3a0058684331d0dbb73e72d6099d20ea479404e0f761239b371992"
+      },
+      {
+        "scope": "48 classic-outfit runtime files",
+        "path": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-metrics.json",
+        "sha256": "f5dc82f71b722cadd1ae6a60995ed1dea8a401d4104b4caf20cf50554d72b4c8"
+      }
+    ],
+    "checksumIndex": "planning/art-qa/character-remediation-idle-classic-v1/SHA256SUMS.txt",
+    "runtimeHashListSha256": "16495a2fc59152db385184de3150e17615690df7bc6bfa4e05b6c98ee910a541"
+  },
+  "visualEvidence": [
+    {
+      "purpose": "normalized body contact sheet at full resolution",
+      "path": "planning/art-qa/character-remediation-idle-classic-v1/normalized-bodies-full.png",
+      "sha256": "5bbccb23e37830c55aed3cf1728cd7724089a3d0e4b76a7d960f2a3066c5f70e"
+    },
+    {
+      "purpose": "body to classic-outfit composites at full resolution",
+      "path": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-full.png",
+      "sha256": "2e8c581eeade06ec57681cd27300154ea3db6ed7cf52d9dfd9018f942b246cdc"
+    },
+    {
+      "purpose": "body to classic-outfit composites at gameplay scale",
+      "path": "planning/art-qa/character-remediation-idle-classic-v1/classic-composites-gameplay.png",
+      "sha256": "594f1079bf7ea3472126111e9f8ce0cbb470a4220e1c431e6ef4f46654666d2b"
+    }
+  ],
+  "gates": {
+    "maximumPivotXError": 0.4731849168136648,
+    "greenEdgePixels": 0,
+    "skinAlphaMismatchPixels": 0,
+    "classicMaskOverlapPixels": 0,
+    "classicDiffuseUnionMismatchPixels": 0,
+    "protectedFaceOverlapPixels": 0,
+    "protectedHandOverlapPixels": 0,
+    "protectedFootOverlapPixels": 0,
+    "rearLegLeakagePixels": 0
+  },
+  "review": {
+    "reviewers": ["character-art-agent", "root-production-agent"],
+    "fullResolution": "accepted",
+    "gameplayScale": "accepted",
+    "camera": "elevated orthographic-isometric",
+    "layerOrder": ["body", "classic-outfit"]
+  },
+  "blockers": [
+    "Accepted character art is static idle only; animated body frames are not included.",
+    "The Godot character runtime compositor is not implemented or bound to these layers.",
+    "Animation/activity bindings are not implemented."
+  ],
+  "explicitExclusions": {
+    "apron": "failed and unmodified",
+    "otherModularCharacterLayers": "not included"
+  }
+}
