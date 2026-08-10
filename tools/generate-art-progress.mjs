@@ -65,6 +65,11 @@ const runtimeQaAttempts = (pass.runtimeQaAttempts ?? []).map((attempt) => ({
       && /^https:\/\/github\.com\/Maergoth\/rro\/actions\/runs\/\d+$/.test(attempt.reviewPreservation?.ci ?? ""),
   ),
 }));
+const cameraGeometryAudits = (pass.cameraGeometryAudits ?? []).map((audit) => ({
+  ...audit,
+  evidencePresent: Boolean(audit.evidence && present(audit.evidence)),
+}));
+const latestCameraGeometryAudit = cameraGeometryAudits.at(-1);
 const reviewBatches = [...batches, ...pendingBatches];
 
 function reviewFor(assetId) {
@@ -242,8 +247,10 @@ const ledger = {
     "planning/art-production.json",
     "planning/character-art-catalog.json",
     "planning/character-launch-applicability-v1.json",
+    "planning/art-qa/furniture-camera-geometry-audit-001.json",
     "apps/client-godot/assets/**",
     "current Godot runtime bindings",
+    "tools/validate-furniture-camera-geometry-v1.mjs",
   ],
   durableBaseline: { branch: pass.branch, pullRequest: pass.pullRequest, ...pass.lastVerifiedRemote },
   completionPipeline: ["generated", "processed", "raster_validated", "visual_accepted", "runtime_bound", "remote_verified", "ci_green"],
@@ -256,6 +263,7 @@ const ledger = {
       runtimeCompositeBlockedAssetIds: furnitureRuntimeContract.runtimeCompositeBlockedAssetIds,
       runtimeCompositePendingAssetIds: furnitureRuntimeContract.runtimeCompositePendingAssetIds,
       cameraProjection: furnitureRuntimeContract.cameraProjection,
+      cameraGeometryGate: furnitureRuntimeContract.cameraGeometryGate,
       cameraConformantAssetIds: furnitureRuntimeContract.cameraConformantAssetIds,
       cameraConformancePendingAssetIds: furnitureRuntimeContract.cameraConformancePendingAssetIds,
       runtimeReviewRemoteVerified,
@@ -294,10 +302,14 @@ const ledger = {
   reviewedBatches: batches,
   pendingBatches,
   runtimeQaAttempts,
+  cameraGeometryAudits,
   preservedReferences: [{ id: "alpha2-overhead-furniture", files: legacyObjectPngs.map((name) => `apps/client-godot/assets/objects/generated/${name}`), count: legacyObjectPngs.length, productionStatus: "preserved-reference-wrong-camera" }],
   quarantinedWork: pass.quarantinedWork,
   contractGaps: [
     "Freeze furniture shadow and operational-state requirements (active, dirty, damaged, broken) per catalog item before those states can receive a completion denominator.",
+    ...((cameraConformancePendingAssetIds.size > 0) ? [
+      `Replace and re-audit ${cameraConformancePendingAssetIds.size} present directional furniture sets against the executable exact -0.5/+0.5 ground-axis and screen-vertical camera gate before any receives production credit.`,
+    ] : []),
     ...((runtimeCompositeBlockedAssetIds.size + runtimeCompositePendingAssetIds.size) > 0 ? [
       `Resolve the latest native directional-furniture review for ${[
         ...runtimeCompositeBlockedAssetIds,
@@ -336,7 +348,7 @@ lines.push("| Lane | Required units | Files/sets present | Source accepted | Rem
 lines.push("|---|---:|---:|---:|---:|---:|");
 for (const row of summaries) lines.push(`| ${row.lane} | ${row.required} | ${row.present} | ${row.sourceAccepted} | ${row.remoteVerified} | ${row.productionComplete} |`);
 lines.push("");
-lines.push(`${equipmentIcons.filter((item) => item.productionComplete).length} equipment icons and ${furniture.filter((item) => item.productionComplete).length} furniture directional sets are production-complete because their exact reviewed bytes are visually accepted, runtime-bound, remotely verified, and CI-green. Character art and the other missing lanes remain explicit below.`);
+lines.push(`Current production-complete counts are ${equipmentIcons.filter((item) => item.productionComplete).length} equipment icons and ${furniture.filter((item) => item.productionComplete).length} furniture directional sets. Production credit requires exact reviewed bytes to be visually accepted, camera-validated where applicable, runtime-bound, remotely verified, and CI-green. Character art and the other incomplete lanes remain explicit below.`);
 const pendingRuntimeEntries = furniture.filter((item) => item.runtimeCompositePending);
 const localOnlyPendingRuntimeEntries = pendingRuntimeEntries.filter((item) => !item.remoteVerified);
 const pendingRuntimeSummary = pendingRuntimeEntries.length > 0
@@ -348,7 +360,7 @@ const blockedRuntimeEntries = furniture.filter((item) => item.runtimeCompositeBl
 const blockedRuntimeSummary = blockedRuntimeEntries.length > 0
   ? `${blockedRuntimeEntries.map((item) => `\`${item.assetId}\``).join(", ")} remain blocked by the latest native gameplay review.`
   : "No source-accepted directional sets remain blocked by the latest native gameplay review.";
-lines.push(`Directional furniture texture selection is ${yes(directionalSelectionBound)} and projection alignment is ${yes(projectionAligned)}. Latest native review \`${latestFurnitureRuntimeQa?.id ?? "unavailable"}\` accepted ${latestRuntimeAcceptedAssetIds.size}/${furniture.filter((item) => item.present).length} present sets; its durable review checkpoint is remote-verified: ${yes(runtimeReviewRemoteVerified)}. ${blockedRuntimeSummary} ${pendingRuntimeSummary}`);
+lines.push(`Directional furniture texture selection is ${yes(directionalSelectionBound)} and projection alignment is ${yes(projectionAligned)}. Latest native review \`${latestFurnitureRuntimeQa?.id ?? "unavailable"}\` historically accepted ${latestRuntimeAcceptedAssetIds.size}/${furniture.filter((item) => item.present).length} present sets for selection, placement, scale, depth, and legibility; its durable review checkpoint is remote-verified: ${yes(runtimeReviewRemoteVerified)}. Measured audit \`${latestCameraGeometryAudit?.id ?? "unavailable"}\` supersedes camera judgements and leaves ${cameraConformantAssetIds.size}/${furniture.filter((item) => item.present).length} present sets camera-conformant and ${cameraConformancePendingAssetIds.size} camera-pending. ${blockedRuntimeSummary} ${pendingRuntimeSummary}`);
 lines.push("");
 lines.push("## Character truth");
 lines.push("");
@@ -372,6 +384,16 @@ lines.push("");
 lines.push("| Modular slot | Required visible choices | IDs |");
 lines.push("|---|---:|---|");
 for (const [slot, ids] of Object.entries(slotCatalogs)) lines.push(`| ${slot} | ${ids.length} | ${ids.map((id) => `\`${id}\``).join(", ")} |`);
+lines.push("");
+lines.push("## Measured furniture camera geometry audits");
+lines.push("");
+lines.push("Native composites remain valuable evidence for selection, placement, scale, depth, and gameplay legibility, but they do not independently prove projection geometry. Production camera credit comes only from the deterministic source-pixel gate below.");
+lines.push("");
+lines.push("| Audit | Result | Algorithm | Expected ground slopes | Tolerances | Audited | Conformant | Retracted | Durable evidence |");
+lines.push("|---|---|---|---|---|---:|---:|---:|---|");
+for (const audit of cameraGeometryAudits) {
+  lines.push(`| ${audit.id} | ${audit.status} | ${audit.algorithm} | ${(audit.expectedGroundSlopes ?? []).join(" / ")} | angle ±${audit.groundAngleToleranceDegrees}°; slope ±${audit.groundSlopeTolerance}; upright ±${audit.verticalAngleToleranceDegrees}° | ${(audit.auditedAssetIds ?? []).length} | ${(audit.measuredConformantAssetIds ?? []).length} | ${(audit.retractedAssetIds ?? []).length} | ${audit.evidencePresent ? audit.evidence : "missing"} |`);
+}
 lines.push("");
 lines.push("## Native runtime art QA attempts");
 lines.push("");

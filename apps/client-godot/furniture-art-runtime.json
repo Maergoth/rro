@@ -36,37 +36,54 @@
     "verticalEdges": "screen-vertical",
     "perspective": false
   },
-  "cameraConformantAssetIds": [
-    "furniture-chemical-cabinet",
-    "furniture-dish-machine-high-temp",
-    "furniture-essential-cafe-two-top",
-    "furniture-linen-storage",
-    "furniture-manager-console",
-    "furniture-office-desk",
-    "furniture-three-comp-sink",
-    "furniture-water-station",
-    "furniture-wet-floor-station"
-  ],
+  "cameraGeometryGate": {
+    "schemaVersion": 1,
+    "algorithm": "rgba-sobel-orientation-constrained-hough-v1",
+    "validator": "tools/validate-furniture-camera-geometry-v1.mjs",
+    "auditEvidence": "planning/art-qa/furniture-camera-geometry-audit-001.json",
+    "expectedGroundSlopes": [
+      -0.5,
+      0.5
+    ],
+    "expectedGroundAnglesDegrees": [
+      -26.56505117707799,
+      26.56505117707799
+    ],
+    "groundAngleToleranceDegrees": 1.25,
+    "groundSlopeTolerance": 0.03,
+    "expectedVerticalAngleDegrees": 90,
+    "verticalAngleToleranceDegrees": 1.25
+  },
+  "cameraConformantAssetIds": [],
   "cameraConformancePendingAssetIds": [
     "banquette",
     "booth",
     "dish-machine",
     "espresso",
     "furniture-banquette-section",
+    "furniture-chemical-cabinet",
     "furniture-commercial-chair",
     "furniture-convection-oven",
+    "furniture-dish-machine-high-temp",
     "furniture-dry-storage-rack",
+    "furniture-essential-cafe-two-top",
     "furniture-expo-pass-heated",
     "furniture-host-stand-pro",
+    "furniture-linen-storage",
+    "furniture-manager-console",
     "furniture-oak-two-top",
+    "furniture-office-desk",
     "furniture-plancha-commercial",
     "furniture-pos-terminal",
     "furniture-premium-chair",
     "furniture-prep-table-refrigerated",
     "furniture-server-station-pro",
     "furniture-six-burner-range",
+    "furniture-three-comp-sink",
     "furniture-walkin-rack",
     "furniture-walnut-four-top",
+    "furniture-water-station",
+    "furniture-wet-floor-station",
     "host-stand",
     "local-art",
     "mop-sink",
@@ -177,6 +194,6 @@
     "cameraConformanceValidated": false,
     "runtimeCompositeAccepted": true,
     "productionComplete": false,
-    "remainingVisualGate": "Batches 011, 012, and 013 are the first nine sets rebuilt and reviewed against the explicit fixed-camera projection. The other thirty-one present directional sets require camera-conformance re-audit or correction before production credit; the other 189 catalog identities still require source creation and the full review pipeline."
+    "remainingVisualGate": "Measured camera audit 001 retracted all nine prior camera credits: none of the 40 present directional sets passes the exact +/-0.5 ground-axis and screen-vertical geometry gate. All 40 require corrected sources and a new measured/native review; the other 189 catalog identities still require source creation and the full review pipeline."
   }
 }

@@ -21,6 +21,8 @@ const reviewPaths = [
   "planning/art-qa/runtime-isometric-integration-001/attempt-013/review.json",
 ];
 const [attempt001, attempt002, attempt003, attempt004, attempt005, attempt006, attempt007, attempt008, attempt009, attempt010, attempt011, attempt012, attempt013] = reviewPaths.map((path) => JSON.parse(read(path).toString("utf8")));
+const artPass = JSON.parse(read("planning/art-pass-v2.json").toString("utf8"));
+const runtimeAttempt = (id) => artPass.runtimeQaAttempts.find((attempt) => attempt.id === id);
 
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 
@@ -159,7 +161,7 @@ test("native isometric attempt 010 accepts all thirty-seven present assets witho
   assert.deepEqual(attempt010.visualReview.blockers, []);
 });
 
-test("native isometric attempt 011 accepts only the three fixed-camera corrected assets", () => {
+test("native isometric attempt 011 preserves its historical verdict and explicit camera supersession", () => {
   assert.equal(attempt011.source.remoteCommit, "a22e5055646184cef0d4d34ebb2a66cc5435c052");
   assert.equal(attempt011.source.remoteTree, "1a42c3e55c04b03b4a0e14c0189395195f35d8d7");
   assert.equal(attempt011.source.artifactId, 9030941364);
@@ -171,9 +173,11 @@ test("native isometric attempt 011 accepts only the three fixed-camera corrected
   assert.deepEqual(attempt011.visualReview.rejectedAssetIds, []);
   assert.deepEqual(attempt011.visualReview.blockers, []);
   assert.match(attempt011.visualReview.cameraConformancePendingAssetIds[0], /thirty-seven/);
+  assert.equal(runtimeAttempt(attempt011.id).status, "historical-native-pass-camera-verdict-retracted");
+  assert.equal(runtimeAttempt(attempt011.id).cameraProductionCreditRetracted, true);
 });
 
-test("native isometric attempt 012 accepts the corrected service-furniture perspectives", () => {
+test("native isometric attempt 012 preserves its historical verdict and explicit camera supersession", () => {
   assert.equal(attempt012.source.remoteCommit, "4ed663373440bedffcc4812618eb413adeaf484e");
   assert.equal(attempt012.source.remoteTree, "a1a257363562e05fa5526654930c0fbdda786375");
   assert.equal(attempt012.source.artifactId, 9038954590);
@@ -185,9 +189,11 @@ test("native isometric attempt 012 accepts the corrected service-furniture persp
   assert.deepEqual(attempt012.visualReview.rejectedAssetIds, []);
   assert.deepEqual(attempt012.visualReview.blockers, []);
   assert.match(attempt012.visualReview.cameraConformancePendingAssetIds[0], /thirty-four/);
+  assert.equal(runtimeAttempt(attempt012.id).status, "historical-native-pass-camera-verdict-retracted");
+  assert.equal(runtimeAttempt(attempt012.id).cameraProductionCreditRetracted, true);
 });
 
-test("native isometric attempt 013 accepts the corrected utility-furniture rotations", () => {
+test("native isometric attempt 013 preserves its historical verdict and explicit camera supersession", () => {
   assert.equal(attempt013.source.remoteCommit, "124359a3ff083b3cf8b73dd5b387368819cf9639");
   assert.equal(attempt013.source.remoteTree, "0121cb8c82814a03426824174f9bdcb126318083");
   assert.equal(attempt013.source.artifactId, 9048282911);
@@ -199,6 +205,8 @@ test("native isometric attempt 013 accepts the corrected utility-furniture rotat
   assert.deepEqual(attempt013.visualReview.rejectedAssetIds, []);
   assert.deepEqual(attempt013.visualReview.blockers, []);
   assert.match(attempt013.visualReview.cameraConformancePendingAssetIds[0], /thirty-one/);
+  assert.equal(runtimeAttempt(attempt013.id).status, "historical-native-pass-camera-verdict-retracted");
+  assert.equal(runtimeAttempt(attempt013.id).cameraProductionCreditRetracted, true);
 });
 
 test("every durable native capture has exact bytes and the required gameplay viewport", () => {

@@ -8,6 +8,7 @@ const contract = JSON.parse(read("apps/client-godot/furniture-art-runtime.json")
 const runtime = read("apps/client-godot/scripts/restaurant_floor.gd");
 const binding = read("apps/client-godot/scripts/furniture_art_binding.gd");
 const validator = read("tools/validate-art-pass-v2.mjs");
+const cameraValidator = read("tools/validate-furniture-camera-geometry-v1.mjs");
 const exportPreset = read("apps/client-godot/export_presets.cfg");
 const artPass = JSON.parse(read("planning/art-pass-v2.json"));
 const furnitureBatch002Qa = JSON.parse(read("planning/art-qa/furniture-core-directional-002/qa.json"));
@@ -112,15 +113,20 @@ test("the runtime contract covers every source-accepted directional set without 
     verticalEdges: "screen-vertical",
     perspective: false,
   });
-  assert.deepEqual(contract.cameraConformantAssetIds, ["furniture-chemical-cabinet", "furniture-dish-machine-high-temp", "furniture-essential-cafe-two-top", "furniture-linen-storage", "furniture-manager-console", "furniture-office-desk", "furniture-three-comp-sink", "furniture-water-station", "furniture-wet-floor-station"]);
+  assert.deepEqual(contract.cameraConformantAssetIds, []);
   assert.deepEqual(
     [...contract.cameraConformantAssetIds, ...contract.cameraConformancePendingAssetIds].sort(),
     [...contract.acceptedDirectionalAssetIds].sort(),
   );
   assert.equal(new Set([...contract.cameraConformantAssetIds, ...contract.cameraConformancePendingAssetIds]).size, contract.acceptedDirectionalAssetIds.length);
-  assert.match(contract.capability.remainingVisualGate, /first nine sets rebuilt.*thirty-one present directional sets.*189 catalog identities/i);
+  assert.equal(contract.cameraConformancePendingAssetIds.length, 40);
+  assert.deepEqual(contract.cameraGeometryGate.expectedGroundSlopes, [-0.5, 0.5]);
+  assert.equal(contract.cameraGeometryGate.expectedVerticalAngleDegrees, 90);
+  assert.match(contract.capability.remainingVisualGate, /retracted all nine prior camera credits.*all 40.*189 catalog identities/i);
   assert.match(validator, /runtimeCompositeAccepted must be true iff runtime acceptance exactly covers every source-accepted directional set with no blocked or pending identities/);
   assert.match(validator, /cameraConformanceValidated must be true iff every source-accepted set passes the fixed-camera contract/);
+  assert.match(cameraValidator, /source pixels no longer reproduce durable camera measurement/);
+  assert.match(cameraValidator, /runtime camera-conformant credits must exactly match the latest measured audit/);
 });
 
 test("common floor-contact anchoring uses uniform scale and never stretches directional textures", () => {

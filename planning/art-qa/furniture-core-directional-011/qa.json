@@ -6,9 +6,12 @@
     "furniture-dish-machine-high-temp",
     "furniture-three-comp-sink"
   ],
-  "artReviewStatus": "accepted",
-  "productionComplete": true,
-  "productionCompletionBlockers": [],
+  "artReviewStatus": "accepted-source-camera-retracted",
+  "productionComplete": false,
+  "productionCompletionBlockers": [
+    "measured camera geometry audit 001 rejects every asset in this batch under the exact +/-0.5 ground-axis contract",
+    "replacement N/E/S/W bytes must pass deterministic geometry measurement and a new native gameplay review"
+  ],
   "promotionScope": {
     "runtimeFiles": 12,
     "alphaSourceFiles": 12,
@@ -17,7 +20,7 @@
     "totalFiles": 28
   },
   "repositoryPromotion": {
-    "status": "remote-verified-production-complete",
+    "status": "remote-verified-source-accepted-camera-retracted",
     "runtimeFiles": 12,
     "alphaSourceFiles": 12,
     "contactSheets": 2,
@@ -33,7 +36,7 @@
   },
   "source": {
     "generator": "OpenAI built-in image generation",
-    "mode": "separate fixed-camera directional generation and identity-preserving edits; deterministic horizontal reorientation used only when required to restore the contracted projected footprint axis",
+    "mode": "separate directional generation intended for one fixed camera plus identity-preserving edits; measured audit 001 later proved the intended camera contract was not achieved",
     "useCases": [
       "stylized-concept"
     ],
@@ -128,13 +131,23 @@
     "exactPixelCollisionsAgainstRepository": 0,
     "exactPerceptualHashCollisionsAgainstRepository": 0,
     "samePhysicalObjectAcrossDirections": "pass",
-    "fixedElevatedOrthographicIsometricCamera": "pass: azimuth 315 degrees, elevation 26.565 degrees, perspective disabled, ground axes 2:1, screen-vertical uprights",
+    "fixedElevatedOrthographicIsometricCamera": "fail: deterministic source-pixel measurement finds dominant ground axes outside exact slopes -0.5/+0.5 in every asset; see furniture-camera-geometry-audit-001",
     "noClippingTextLogosWatermarksShadowsOrExtraObjects": "pass",
-    "visualReviewAtFullScale": "pass: planning/art-qa/furniture-core-directional-011/contact-627-dark.png inspected at original resolution; identity, counts, physical-side assignments, fixed camera, alpha, silhouettes, and floor contact pass.",
+    "visualReviewAtFullScale": "superseded: the former visual review passed identity, counts, alpha, silhouettes, and floor contact but incorrectly inferred camera conformance without measuring ground-axis geometry.",
     "visualReviewAtGameplayScale128px": "pass: planning/art-qa/furniture-core-directional-011/contact-128-light.png inspected at original resolution; all three identities and directional cues remain legible.",
-    "nativeGameplayCompositeReview": "pass: runtime-isometric-integration-001-attempt-013 accepts the exact three corrected identities across native N/E/S/W gameplay composites; evidence is durably preserved at 8557c266c761d53c84148ab298ad0857e5c6596b with green CI run 31349580572.",
+    "nativeGameplayCompositeReview": "historical pass: attempt 013 remains durable evidence for runtime selection, placement, scale, depth, and legibility, but its camera-conformance verdict is superseded by measured camera audit 001.",
     "proceduralOrDeterministicStandIn": false,
-    "trueObjectOnlyQuarterTurns": "pass: N/S share one footprint-axis family; E/W physically swap the projected long and short axes; locked asymmetric details remain on their physical faces"
+    "trueObjectOnlyQuarterTurns": "unproven for production: asymmetric detail continuity remains useful source evidence, but the prior visual axis-swap judgement cannot substitute for measured camera geometry"
+  },
+  "cameraGeometryMeasurement": {
+    "status": "failed-measured-camera-geometry",
+    "audit": "planning/art-qa/furniture-camera-geometry-audit-001.json",
+    "validator": "tools/validate-furniture-camera-geometry-v1.mjs",
+    "retractedAssetIds": [
+      "furniture-chemical-cabinet",
+      "furniture-dish-machine-high-temp",
+      "furniture-three-comp-sink"
+    ]
   },
   "contactSheets": [
     {
@@ -159,7 +172,7 @@
         1
       ],
       "identityContract": "One Modern 2x1 brushed-stainless locked chemical cabinet with two teal front doors, one centered padlock hasp, two amber hazard diamonds, one physical-right grille, two rear rails, and four feet.",
-      "semanticVerdict": "pass: fixed-camera N/E/S/W source review proves genuine object-only quarter turns, correct footprint-axis swapping, and physical-side detail continuity.",
+      "semanticVerdict": "identity pass, camera fail: physical-side details remain useful reference evidence, but measured ground-axis geometry retracts fixed-camera and footprint-axis production credit.",
       "gameplayLegibility": "pass: exact 128px contact review preserves identity, component counts, silhouette, and directional cues.",
       "assetId": "furniture-chemical-cabinet",
       "placement": {
@@ -268,7 +281,7 @@
         3
       ],
       "identityContract": "One Modern 4x3 pass-through hood dishwasher with one hood and handle, open rack bay, right-side controls and teal rinse pipe, two lower service panels, rear louvered grille and braces, and four feet.",
-      "semanticVerdict": "pass: fixed-camera N/E/S/W source review proves genuine object-only quarter turns, correct footprint-axis swapping, and physical-side detail continuity.",
+      "semanticVerdict": "identity pass, camera fail: physical-side details remain useful reference evidence, but measured ground-axis geometry retracts fixed-camera and footprint-axis production credit.",
       "gameplayLegibility": "pass: exact 128px contact review preserves identity, component counts, silhouette, and directional cues.",
       "assetId": "furniture-dish-machine-high-temp",
       "placement": {
@@ -377,7 +390,7 @@
         2
       ],
       "identityContract": "One Modern 4x2 stainless warewashing sink with exactly three basins, two drainboards, one centered pre-rinse faucet, three front access panels, a physical-right soap cage, three rear brackets, six legs, and a lower brace.",
-      "semanticVerdict": "pass: fixed-camera N/E/S/W source review proves genuine object-only quarter turns, correct footprint-axis swapping, and physical-side detail continuity.",
+      "semanticVerdict": "identity pass, camera fail: physical-side details remain useful reference evidence, but measured ground-axis geometry retracts fixed-camera and footprint-axis production credit.",
       "gameplayLegibility": "pass: exact 128px contact review preserves identity, component counts, silhouette, and directional cues.",
       "assetId": "furniture-three-comp-sink",
       "placement": {

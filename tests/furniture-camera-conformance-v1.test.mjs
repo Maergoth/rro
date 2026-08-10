@@ -7,6 +7,7 @@ const ROOT = resolve(import.meta.dirname, "..");
 const read = (path) => JSON.parse(readFileSync(resolve(ROOT, path), "utf8"));
 const runtime = read("apps/client-godot/furniture-art-runtime.json");
 const batch013 = read("planning/art-qa/furniture-core-directional-013/qa.json");
+const cameraAudit = read("planning/art-qa/furniture-camera-geometry-audit-001.json");
 
 test("directional furniture uses one explicit fixed elevated-isometric camera", () => {
   assert.deepEqual(runtime.cameraProjection, {
@@ -30,30 +31,31 @@ test("directional furniture uses one explicit fixed elevated-isometric camera", 
       west: ["left", "front"],
     },
   });
-  assert.match(batch013.gates.cameraConformance, /^pass:/);
-  assert.match(batch013.gates.visualReviewAtFullScale, /fixed elevated orthographic-isometric camera/);
+  assert.match(batch013.gates.cameraConformance, /^fail:/);
+  assert.match(batch013.gates.visualReviewAtFullScale, /^superseded:/);
 });
 
 test("camera-conformant and pending assets exactly partition source-accepted furniture", () => {
   const accepted = [...runtime.acceptedDirectionalAssetIds].sort();
   const conformant = [...runtime.cameraConformantAssetIds].sort();
   const pending = [...runtime.cameraConformancePendingAssetIds].sort();
-  assert.deepEqual(conformant, [
-    "furniture-chemical-cabinet",
-    "furniture-dish-machine-high-temp",
-    "furniture-essential-cafe-two-top",
-    "furniture-linen-storage",
-    "furniture-manager-console",
-    "furniture-office-desk",
-    "furniture-three-comp-sink",
-    "furniture-water-station",
-    "furniture-wet-floor-station",
-  ]);
+  assert.deepEqual(conformant, []);
   assert.deepEqual([...conformant, ...pending].sort(), accepted);
   assert.equal(new Set([...conformant, ...pending]).size, accepted.length);
-  assert.equal(pending.length, 31);
+  assert.equal(pending.length, 40);
   assert.equal(runtime.capability.cameraConformanceValidated, false);
   assert.equal(runtime.capability.productionComplete, false);
+});
+
+test("camera audit 001 retracts the nine prior visual credits without deleting source evidence", () => {
+  assert.equal(cameraAudit.status, "failed-retract-all-nine-camera-credits");
+  assert.equal(cameraAudit.auditedAssets.length, 9);
+  assert.ok(cameraAudit.auditedAssets.every((asset) => !asset.passed && asset.failedDirections.length === 4));
+  assert.deepEqual(cameraAudit.measuredConformantAssetIds, []);
+  assert.deepEqual([...cameraAudit.retractedAssetIds].sort(), [...cameraAudit.previouslyCreditedAssetIds].sort());
+  assert.equal(batch013.productionComplete, false);
+  assert.equal(batch013.artReviewStatus, "accepted-source-camera-retracted");
+  assert.equal(batch013.cameraGeometryMeasurement.audit, "planning/art-qa/furniture-camera-geometry-audit-001.json");
 });
 
 test("rejected batch013 atlases can never be mistaken for accepted fixed-camera evidence", () => {

@@ -6,11 +6,11 @@
     "furniture-linen-storage",
     "furniture-water-station"
   ],
-  "artReviewStatus": "accepted",
-  "productionComplete": true,
+  "artReviewStatus": "accepted-source-camera-retracted",
+  "productionComplete": false,
   "source": {
     "generator": "OpenAI built-in image generation",
-    "mode": "twelve separately prompted fixed-camera direction sources; object-only quarter turns under one numeric orthographic-isometric camera",
+    "mode": "twelve separately prompted directional sources intended for one numeric orthographic-isometric camera; measured audit 001 later proved the intended camera contract was not achieved",
     "useCases": [
       "stylized-concept",
       "precise-object-edit"
@@ -108,12 +108,22 @@
     "exactPixelCollisionsAgainstRepository": 0,
     "exactPerceptualHashCollisionsAgainstRepository": 0,
     "samePhysicalObjectAcrossDirections": "pass",
-    "fixedElevatedOrthographicIsometricCamera": "pass: numeric camera and adjacent-face sequence inspected across all twelve independent sources",
+    "fixedElevatedOrthographicIsometricCamera": "fail: deterministic source-pixel measurement finds dominant ground axes outside exact slopes -0.5/+0.5 in every asset; see furniture-camera-geometry-audit-001",
     "noClippingTextLogosWatermarksOrExtraObjects": "pass",
-    "visualReviewAtFullScale": "pass: planning/art-qa/furniture-core-directional-012/contact-627-dark.png inspected at original 627px scale; camera, face sequence, identity, materials, asymmetric details, alpha, and grounding pass.",
+    "visualReviewAtFullScale": "superseded: the former visual review passed identity, materials, alpha, and grounding but incorrectly inferred camera conformance without measuring ground-axis geometry.",
     "visualReviewAtGameplayScale128px": "pass: planning/art-qa/furniture-core-directional-012/contact-128-light.png inspected at gameplay scale; all three identities and their direction cues remain distinct.",
-    "nativeGameplayCompositeReview": "pass: runtime-isometric-integration-001-attempt-012 accepts the exact three corrected identities across native N/E/S/W gameplay composites; evidence is durably preserved at fee22ea72daa496b4a590ff45df2c8b9872e2de7 with green CI run 31317025179.",
+    "nativeGameplayCompositeReview": "historical pass: attempt 012 remains durable evidence for runtime selection, placement, scale, depth, and legibility, but its camera-conformance verdict is superseded by measured camera audit 001.",
     "proceduralOrDeterministicStandIn": false
+  },
+  "cameraGeometryMeasurement": {
+    "status": "failed-measured-camera-geometry",
+    "audit": "planning/art-qa/furniture-camera-geometry-audit-001.json",
+    "validator": "tools/validate-furniture-camera-geometry-v1.mjs",
+    "retractedAssetIds": [
+      "furniture-wet-floor-station",
+      "furniture-linen-storage",
+      "furniture-water-station"
+    ]
   },
   "contactSheets": [
     {
@@ -152,7 +162,7 @@
         1
       ],
       "identityContract": "One Modern 2x1 charcoal wheeled spill-response cabinet with teal front doors, one amber caution panel, one physical-left blue mop, one physical-right red wringer bucket, a rear utility rail, and four casters.",
-      "semanticVerdict": "pass: fixed-camera front/right, right/rear, rear/left, and left/front views preserve one asymmetric station.",
+      "semanticVerdict": "identity pass, camera fail: asymmetric station details remain useful reference evidence, but measured ground-axis geometry retracts fixed-camera production credit.",
       "gameplayLegibility": "pass: teal doors, amber panel, red bucket, blue mop, casters, and rear rail remain distinct at 128px.",
       "assetId": "furniture-wet-floor-station",
       "placement": {
@@ -285,7 +295,7 @@
         1
       ],
       "identityContract": "One Modern 2x1 stainless-and-cream linen cabinet with front doors and brass pulls, cream/teal/gray linen stacks, a physical-right grille, rear shelving, a plain physical-left side, and four feet.",
-      "semanticVerdict": "pass: fixed-camera quarter turns preserve front doors, right grille, rear shelves, plain left side, and linen-stack identity.",
+      "semanticVerdict": "identity pass, camera fail: face details and linen-stack identity remain useful reference evidence, but measured ground-axis geometry retracts fixed-camera production credit.",
       "gameplayLegibility": "pass: door, grille, shelf, and linen color cues remain readable at 128px.",
       "assetId": "furniture-linen-storage",
       "placement": {
@@ -418,7 +428,7 @@
         2
       ],
       "identityContract": "One Modern 2x2 brushed-stainless water station with three front taps, a black drip bay, two teal front doors, a physical-right grille, two rear blue filter housings, a plain physical-left side, and four feet.",
-      "semanticVerdict": "pass: fixed-camera quarter turns preserve front taps/doors, right grille, rear filters, and plain left face without mirroring.",
+      "semanticVerdict": "identity pass, camera fail: taps, grille, filters, and face details remain useful reference evidence, but measured ground-axis geometry retracts fixed-camera production credit.",
       "gameplayLegibility": "pass: black bay, teal doors, right grille, and blue rear filters remain distinct at 128px.",
       "assetId": "furniture-water-station",
       "placement": {
@@ -550,14 +560,17 @@
     "totalFiles": 28
   },
   "repositoryPromotion": {
-    "status": "remote-verified-production-complete",
+    "status": "remote-verified-source-accepted-camera-retracted",
     "runtimeFiles": 12,
     "alphaSourceFiles": 12,
     "contactSheets": 2,
     "provenanceDocuments": 2,
     "totalFiles": 28
   },
-  "productionCompletionBlockers": [],
+  "productionCompletionBlockers": [
+    "measured camera geometry audit 001 rejects every asset in this batch under the exact +/-0.5 ground-axis contract",
+    "replacement N/E/S/W bytes must pass deterministic geometry measurement and a new native gameplay review"
+  ],
   "remotePreservation": {
     "commit": "da9a828fc47c2b8c8e015cc2e4f648516985b577",
     "tree": "f1f329f726d35db4650c5f8958c3e32c564dc027",

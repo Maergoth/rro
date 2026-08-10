@@ -6,9 +6,12 @@
     "furniture-manager-console",
     "furniture-essential-cafe-two-top"
   ],
-  "artReviewStatus": "accepted",
-  "productionComplete": true,
-  "productionCompletionBlockers": [],
+  "artReviewStatus": "accepted-source-camera-retracted",
+  "productionComplete": false,
+  "productionCompletionBlockers": [
+    "measured camera geometry audit 001 rejects every asset in this batch under the exact +/-0.5 ground-axis contract",
+    "replacement N/E/S/W bytes must pass deterministic geometry measurement and a new native gameplay review"
+  ],
   "cameraContract": {
     "type": "elevated-orthographic-isometric",
     "fixedCamera": true,
@@ -86,8 +89,8 @@
     }
   ],
   "gates": {
-    "visualReviewAtFullScale": "pass: exact 627px review confirms one fixed elevated orthographic-isometric camera, alternating ground diagonals, adjacent-face quarter turns, and preserved asymmetric identities",
-    "visualReviewAtGameplayScale128px": "pass: all three fixed-camera identities and their quarter-turn states remain readable at 128px",
+    "visualReviewAtFullScale": "superseded: the former visual review passed identity and legibility but incorrectly inferred one fixed camera without measuring ground-axis geometry",
+    "visualReviewAtGameplayScale128px": "pass for identity/legibility only: all three directional identities remain readable at 128px; this does not prove camera geometry",
     "rasterContract": "pass: 12/12 627x627 RGBA, common pivot (313.5,590), bottom margin 37, transparent borders",
     "repositoryDirectionalPngsCompared": 148,
     "exactFileCollisionsAgainstRepository": 0,
@@ -95,8 +98,18 @@
     "exactPerceptualHashCollisionsAgainstRepository": 0,
     "visibleMagentaDefects": 0,
     "proceduralOrDeterministicStandIn": false,
-    "nativeGameplayCompositeReview": "pending: exact repository-bound four-rotation native capture and human review",
-    "cameraConformance": "pass: fixed camera; N front+right, E right+rear, S rear+left, W left+front; no straight-on elevation or perspective change"
+    "nativeGameplayCompositeReview": "historical source-stage status superseded: later attempt 011 remains durable runtime placement/legibility evidence, but its camera-conformance verdict is retracted by measured camera audit 001",
+    "cameraConformance": "fail: deterministic source-pixel measurement finds dominant ground axes outside exact slopes -0.5/+0.5 in every asset"
+  },
+  "cameraGeometryMeasurement": {
+    "status": "failed-measured-camera-geometry",
+    "audit": "planning/art-qa/furniture-camera-geometry-audit-001.json",
+    "validator": "tools/validate-furniture-camera-geometry-v1.mjs",
+    "retractedAssetIds": [
+      "furniture-office-desk",
+      "furniture-manager-console",
+      "furniture-essential-cafe-two-top"
+    ]
   },
   "items": [
     {
@@ -177,7 +190,7 @@
           "alphaBaselineY": 590
         }
       ],
-      "sourceMode": "four separately generated fixed-camera directional frames",
+      "sourceMode": "four separately generated directional frames intended for a fixed camera; measured geometry audit failed",
       "rawGeneratorOutputSha256ByDirection": {
         "north": "0d785f7a205a5b99a3059102ec27ae61168aa1580a8d681cd8696de2c1b2547d",
         "east": "90d29b2f307c281a61e3f24aee8e69dec690323b77a2be5dc90f47764739aba0",
@@ -263,7 +276,7 @@
           "alphaBaselineY": 590
         }
       ],
-      "sourceMode": "four separately generated fixed-camera directional frames",
+      "sourceMode": "four separately generated directional frames intended for a fixed camera; measured geometry audit failed",
       "rawGeneratorOutputSha256ByDirection": {
         "north": "f0aebf405423bd591ffe3a36713c3bd52f723971dce1b1540c539a0ea0e2e981",
         "east": "e294d6bf9da2e1bda2456abe194ea2b3c0351ab848e46aebb2cd6b48999f3895",
@@ -349,7 +362,7 @@
           "alphaBaselineY": 590
         }
       ],
-      "sourceMode": "four separately generated fixed-camera directional frames",
+      "sourceMode": "four separately generated directional frames intended for a fixed camera; measured geometry audit failed",
       "rawGeneratorOutputSha256ByDirection": {
         "north": "785c70f8e44d21c293e75e2f7b77968cf3fb9f0c8d0d464d1761fb078bff571f",
         "east": "45504011e76ac00f783a3c03cbf8b4832fad925174c166070a4b668782878457",
@@ -366,7 +379,7 @@
     "totalFiles": 28
   },
   "repositoryPromotion": {
-    "status": "remote-verified-production-complete",
+    "status": "remote-verified-source-accepted-camera-retracted",
     "runtimeFiles": 12,
     "alphaSourceFiles": 12,
     "contactSheets": 2,

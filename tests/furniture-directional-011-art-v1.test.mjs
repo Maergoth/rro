@@ -8,7 +8,7 @@ import { inflateSync } from "node:zlib";
 const ROOT = resolve(import.meta.dirname, "..");
 const QA_ROOT = "planning/art-qa/furniture-core-directional-011";
 const QA_PATH = `${QA_ROOT}/qa.json`;
-const QA_SHA256 = "684237c74b3e10f7cfcaf02f3a0c062300b042d4398f5ea1cb87c0df9d2570e0";
+const QA_SHA256 = "c9873ff510d4a260cd43aadb1319888eff3287189296090bc54f3110091b895d";
 const ASSETS = ["furniture-chemical-cabinet", "furniture-dish-machine-high-temp", "furniture-three-comp-sink"];
 const DIRECTIONS = ["north", "east", "south", "west"];
 const PLACEMENT = { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" };
@@ -104,15 +104,16 @@ function assertTransparentBorder(image, path) {
   }
 }
 
-test("furniture directional batch 011 preserves exact corrected fixed-camera source evidence", () => {
+test("furniture directional batch 011 preserves exact source and camera-retraction evidence", () => {
   const qa = json(QA_PATH);
   assert.equal(fileSha256(QA_PATH), QA_SHA256);
   assert.equal(qa.batchId, "furniture-core-directional-011");
   assert.deepEqual(qa.assets, ASSETS);
-  assert.equal(qa.artReviewStatus, "accepted");
-  assert.equal(qa.productionComplete, true);
-  assert.equal(qa.repositoryPromotion.status, "remote-verified-production-complete");
-  assert.deepEqual(qa.productionCompletionBlockers, []);
+  assert.equal(qa.artReviewStatus, "accepted-source-camera-retracted");
+  assert.equal(qa.productionComplete, false);
+  assert.equal(qa.repositoryPromotion.status, "remote-verified-source-accepted-camera-retracted");
+  assert.equal(qa.productionCompletionBlockers.length, 2);
+  assert.match(qa.productionCompletionBlockers[0], /audit 001 rejects every asset/);
   assert.deepEqual(qa.remotePreservation, {
     commit: "124359a3ff083b3cf8b73dd5b387368819cf9639",
     tree: "0121cb8c82814a03426824174f9bdcb126318083",
@@ -120,7 +121,9 @@ test("furniture directional batch 011 preserves exact corrected fixed-camera sou
     artifactId: 9048282911,
     artifactSha256: "01f19b7bfaa17af2e65644f7c83675912f63d5ab0c0a2952290c67404eac8c75",
   });
-  assert.match(qa.gates.nativeGameplayCompositeReview, /^pass: runtime-isometric-integration-001-attempt-013/);
+  assert.match(qa.gates.nativeGameplayCompositeReview, /^historical pass: attempt 013/);
+  assert.equal(qa.cameraGeometryMeasurement.status, "failed-measured-camera-geometry");
+  assert.deepEqual(qa.cameraGeometryMeasurement.retractedAssetIds, ASSETS);
   assert.deepEqual(qa.cameraContract, {
     projection: "true-orthographic",
     perspective: false,
@@ -202,10 +205,10 @@ test("furniture directional batch 011 contact sheets are exact reviewed full and
     { path: `${QA_ROOT}/contact-128-light.png`, sha256: "d5c4b584f6d1dcbc0b09bb4b26cabdfcc3fb01d5832a1fc50252a9527bad9b59" },
   ]);
   for (const contact of qa.contactSheets) assert.equal(fileSha256(contact.path), contact.sha256);
-  assert.match(qa.gates.visualReviewAtFullScale, /^pass:/);
+  assert.match(qa.gates.visualReviewAtFullScale, /^superseded:/);
   assert.match(qa.gates.visualReviewAtGameplayScale128px, /^pass:/);
   assert.equal(qa.gates.repositoryDirectionalPngsCompared, 148);
-  assert.match(qa.gates.trueObjectOnlyQuarterTurns, /^pass:/);
+  assert.match(qa.gates.trueObjectOnlyQuarterTurns, /^unproven for production:/);
   assert.equal(qa.gates.exactFileCollisionsAgainstRepository, 0);
   assert.equal(qa.gates.exactPixelCollisionsAgainstRepository, 0);
   assert.equal(qa.gates.exactPerceptualHashCollisionsAgainstRepository, 0);
