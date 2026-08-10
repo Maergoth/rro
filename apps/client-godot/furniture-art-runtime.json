@@ -37,10 +37,13 @@
     "perspective": false
   },
   "cameraConformantAssetIds": [
+    "furniture-chemical-cabinet",
+    "furniture-dish-machine-high-temp",
     "furniture-essential-cafe-two-top",
     "furniture-linen-storage",
     "furniture-manager-console",
     "furniture-office-desk",
+    "furniture-three-comp-sink",
     "furniture-water-station",
     "furniture-wet-floor-station"
   ],
@@ -50,10 +53,8 @@
     "dish-machine",
     "espresso",
     "furniture-banquette-section",
-    "furniture-chemical-cabinet",
     "furniture-commercial-chair",
     "furniture-convection-oven",
-    "furniture-dish-machine-high-temp",
     "furniture-dry-storage-rack",
     "furniture-expo-pass-heated",
     "furniture-host-stand-pro",
@@ -64,7 +65,6 @@
     "furniture-prep-table-refrigerated",
     "furniture-server-station-pro",
     "furniture-six-burner-range",
-    "furniture-three-comp-sink",
     "furniture-walkin-rack",
     "furniture-walnut-four-top",
     "host-stand",
@@ -177,6 +177,6 @@
     "cameraConformanceValidated": false,
     "runtimeCompositeAccepted": true,
     "productionComplete": false,
-    "remainingVisualGate": "Batches 012 and 013 are the first six sets rebuilt and reviewed against the explicit fixed-camera projection. The other thirty-four present directional sets require camera-conformance re-audit or correction before production credit; the other 189 catalog identities still require source creation and the full review pipeline."
+    "remainingVisualGate": "Batches 011, 012, and 013 are the first nine sets rebuilt and reviewed against the explicit fixed-camera projection. The other thirty-one present directional sets require camera-conformance re-audit or correction before production credit; the other 189 catalog identities still require source creation and the full review pipeline."
   }
 }

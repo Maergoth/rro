@@ -12,15 +12,15 @@ Only the final state is production-complete. Existing files, historical narrativ
 
 - Branch: `agent/complete-production-art`
 - Draft PR: https://github.com/Maergoth/rro/pull/2
-- Last verified remote head before this ledger check-in: `a22e5055646184cef0d4d34ebb2a66cc5435c052`
-- Verified tree: `1a42c3e55c04b03b4a0e14c0189395195f35d8d7`
-- CI: https://github.com/Maergoth/rro/actions/runs/31289514663
+- Last verified remote head before this ledger check-in: `8557c266c761d53c84148ab298ad0857e5c6596b`
+- Verified tree: `bd2832e475239b1108fbbfa13460370c53e7178a`
+- CI: https://github.com/Maergoth/rro/actions/runs/31349580572
 
 ## Launch coverage
 
 | Lane | Required units | Files/sets present | Source accepted | Remote verified | Production complete |
 |---|---:|---:|---:|---:|---:|
-| Furniture directional sets | 229 | 40 | 40 | 40 | 6 |
+| Furniture directional sets | 229 | 40 | 40 | 40 | 9 |
 | Equipment inventory icons | 45 | 45 | 45 | 45 | 45 |
 | Construction material textures | 18 | 0 | 0 | 0 | 0 |
 | Opening geometry sets (4 directions each) | 5 | 0 | 0 | 0 | 0 |
@@ -34,8 +34,8 @@ Only the final state is production-complete. Existing files, historical narrativ
 | Equipment attachment body-fits | 62 | 0 | 0 | 0 | 0 |
 | Activity → animation bindings | 89 | 0 | 0 | 0 | 0 |
 
-45 equipment icons and 6 furniture directional sets are production-complete because their exact reviewed bytes are visually accepted, runtime-bound, remotely verified, and CI-green. Character art and the other missing lanes remain explicit below.
-Directional furniture texture selection is yes and projection alignment is yes. Latest native review `runtime-isometric-integration-001-attempt-012` accepted 3/40 present sets; its durable review checkpoint is remote-verified: yes. No source-accepted directional sets remain blocked by the latest native gameplay review. No source-accepted directional sets are pending their first native four-rotation gameplay composite.
+45 equipment icons and 9 furniture directional sets are production-complete because their exact reviewed bytes are visually accepted, runtime-bound, remotely verified, and CI-green. Character art and the other missing lanes remain explicit below.
+Directional furniture texture selection is yes and projection alignment is yes. Latest native review `runtime-isometric-integration-001-attempt-013` accepted 3/40 present sets; its durable review checkpoint is remote-verified: yes. No source-accepted directional sets remain blocked by the latest native gameplay review. No source-accepted directional sets are pending their first native four-rotation gameplay composite.
 
 ## Character truth
 
@@ -83,6 +83,7 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 | runtime-isometric-integration-001-attempt-010 | passed-all-present-assets | `dd54253` | https://github.com/Maergoth/rro/actions/runs/31233762203/artifacts/9014716339 | native-four-rotation-capture, elevated-projection, directional-selection, floor-contact-pivots, mixed-world-depth, gameplay-legibility, legal-mounted-placement-records, wall-and-ceiling-context, thirty-seven-present-assets | none | planning/art-qa/runtime-isometric-integration-001/attempt-010/review.json |
 | runtime-isometric-integration-001-attempt-011 | passed-camera-conformant-assets | `a22e505` | https://github.com/Maergoth/rro/actions/runs/31289514663/artifacts/9030941364 | native-four-rotation-capture, fixed-camera-contract, elevated-projection, directional-selection, floor-contact-pivots, mixed-world-depth, gameplay-legibility, three-camera-conformant-assets | none | planning/art-qa/runtime-isometric-integration-001/attempt-011/review.json |
 | runtime-isometric-integration-001-attempt-012 | passed-camera-conformant-assets | `4ed6633` | https://github.com/Maergoth/rro/actions/runs/31316662076/artifacts/9038954590 | native-four-rotation-capture, fixed-camera-contract, elevated-projection, directional-selection, floor-contact-pivots, mixed-world-depth, gameplay-legibility, three-camera-conformant-assets | none | planning/art-qa/runtime-isometric-integration-001/attempt-012/review.json |
+| runtime-isometric-integration-001-attempt-013 | passed-camera-conformant-assets | `124359a` | https://github.com/Maergoth/rro/actions/runs/31348885720/artifacts/9048282911 | native-four-rotation-capture, fixed-camera-contract, elevated-projection, directional-selection, floor-contact-pivots, mixed-world-depth, gameplay-legibility, three-camera-conformant-assets | none | planning/art-qa/runtime-isometric-integration-001/attempt-013/review.json |
 
 ## Reviewed batches and durable evidence
 
@@ -90,7 +91,7 @@ A native capture is evidence, not automatic acceptance. Failed attempts remain d
 |---|---:|---|---|---|---|
 | furniture-core-directional-013 | 28 | passed | passed-native-gameplay-composite-attempt-011 | `a22e505` | planning/art-qa/furniture-core-directional-013/contact-627-dark.png |
 | furniture-core-directional-012 | 28 | passed | passed-native-gameplay-composite-attempt-012 | `da9a828` | planning/art-qa/furniture-core-directional-012/contact-627-dark.png |
-| furniture-core-directional-011 | 28 | passed | passed-native-gameplay-composite-attempt-009 | `d0d4f91` | planning/art-qa/furniture-core-directional-011/contact-627-dark.png |
+| furniture-core-directional-011 | 28 | passed | passed-native-gameplay-composite-attempt-013 | `124359a` | planning/art-qa/furniture-core-directional-011/contact-627-dark.png |
 | furniture-core-directional-010 | 28 | passed | passed-native-gameplay-composite-attempt-008 | `0a6e36b` | planning/art-qa/furniture-core-directional-010/contact-627-dark.png |
 | furniture-core-directional-009 | 28 | passed | passed-native-gameplay-composite-attempt-007 | `447a203` | planning/art-qa/furniture-core-directional-009/contact-627-dark.png |
 | furniture-core-directional-008 | 28 | passed | passed-native-gameplay-composite-attempt-004 | `9749406` | planning/art-qa/furniture-core-directional-008/contact-627-dark.png |
@@ -189,9 +190,9 @@ This JSON block is part of this same authoritative document and contains every c
   "durableBaseline": {
     "branch": "agent/complete-production-art",
     "pullRequest": "https://github.com/Maergoth/rro/pull/2",
-    "commit": "a22e5055646184cef0d4d34ebb2a66cc5435c052",
-    "tree": "1a42c3e55c04b03b4a0e14c0189395195f35d8d7",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/31289514663"
+    "commit": "8557c266c761d53c84148ab298ad0857e5c6596b",
+    "tree": "bd2832e475239b1108fbbfa13460370c53e7178a",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31349580572"
   },
   "completionPipeline": [
     "generated",
@@ -215,7 +216,7 @@ This JSON block is part of this same authoritative document and contains every c
       "cameraConformanceValidated": false,
       "runtimeCompositeAccepted": true,
       "productionComplete": false,
-      "remainingVisualGate": "Batches 012 and 013 are the first six sets rebuilt and reviewed against the explicit fixed-camera projection. The other thirty-four present directional sets require camera-conformance re-audit or correction before production credit; the other 189 catalog identities still require source creation and the full review pipeline.",
+      "remainingVisualGate": "Batches 011, 012, and 013 are the first nine sets rebuilt and reviewed against the explicit fixed-camera projection. The other thirty-one present directional sets require camera-conformance re-audit or correction before production credit; the other 189 catalog identities still require source creation and the full review pipeline.",
       "acceptedDirectionalAssetIds": [
         "banquette",
         "booth",
@@ -324,10 +325,13 @@ This JSON block is part of this same authoritative document and contains every c
         "perspective": false
       },
       "cameraConformantAssetIds": [
+        "furniture-chemical-cabinet",
+        "furniture-dish-machine-high-temp",
         "furniture-essential-cafe-two-top",
         "furniture-linen-storage",
         "furniture-manager-console",
         "furniture-office-desk",
+        "furniture-three-comp-sink",
         "furniture-water-station",
         "furniture-wet-floor-station"
       ],
@@ -337,10 +341,8 @@ This JSON block is part of this same authoritative document and contains every c
         "dish-machine",
         "espresso",
         "furniture-banquette-section",
-        "furniture-chemical-cabinet",
         "furniture-commercial-chair",
         "furniture-convection-oven",
-        "furniture-dish-machine-high-temp",
         "furniture-dry-storage-rack",
         "furniture-expo-pass-heated",
         "furniture-host-stand-pro",
@@ -351,7 +353,6 @@ This JSON block is part of this same authoritative document and contains every c
         "furniture-prep-table-refrigerated",
         "furniture-server-station-pro",
         "furniture-six-burner-range",
-        "furniture-three-comp-sink",
         "furniture-walkin-rack",
         "furniture-walnut-four-top",
         "host-stand",
@@ -377,7 +378,7 @@ This JSON block is part of this same authoritative document and contains every c
       "present": 40,
       "sourceAccepted": 40,
       "remoteVerified": 40,
-      "productionComplete": 6
+      "productionComplete": 9
     },
     {
       "lane": "Equipment inventory icons",
@@ -2318,7 +2319,7 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-011",
       "review": "passed",
-      "runtimeQa": "passed-native-gameplay-composite-attempt-009",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-013",
       "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-011/contact-627-dark.png",
       "qaEvidencePresent": true,
@@ -2333,11 +2334,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "cameraConformant": false,
-      "cameraConformancePending": true,
-      "runtimeBound": false,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "cameraConformant": true,
+      "cameraConformancePending": false,
+      "runtimeBound": true,
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "dish-machine-high-temp",
@@ -2376,7 +2377,7 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-011",
       "review": "passed",
-      "runtimeQa": "passed-native-gameplay-composite-attempt-009",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-013",
       "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-011/contact-627-dark.png",
       "qaEvidencePresent": true,
@@ -2391,11 +2392,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "cameraConformant": false,
-      "cameraConformancePending": true,
-      "runtimeBound": false,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "cameraConformant": true,
+      "cameraConformancePending": false,
+      "runtimeBound": true,
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "three-comp-sink",
@@ -2434,7 +2435,7 @@ This JSON block is part of this same authoritative document and contains every c
       "present": true,
       "batchId": "furniture-core-directional-011",
       "review": "passed",
-      "runtimeQa": "passed-native-gameplay-composite-attempt-009",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-013",
       "remoteVerified": true,
       "qaEvidence": "planning/art-qa/furniture-core-directional-011/contact-627-dark.png",
       "qaEvidencePresent": true,
@@ -2449,11 +2450,11 @@ This JSON block is part of this same authoritative document and contains every c
       "runtimeCompositeAccepted": true,
       "runtimeCompositeBlocked": false,
       "runtimeCompositePending": false,
-      "cameraConformant": false,
-      "cameraConformancePending": true,
-      "runtimeBound": false,
-      "productionComplete": false,
-      "status": "source_accepted_runtime_blocked"
+      "cameraConformant": true,
+      "cameraConformancePending": false,
+      "runtimeBound": true,
+      "productionComplete": true,
+      "status": "production_complete"
     },
     {
       "id": "glass-rack-system",
@@ -16757,16 +16758,16 @@ This JSON block is part of this same authoritative document and contains every c
       ],
       "files": 28,
       "qa": "passed",
-      "runtimeQa": "passed-native-gameplay-composite-attempt-009",
-      "sourcePromptMode": "built-in image generation; three separately prompted rigid elevated-isometric four-direction utility-fixture atlases, official chroma-key edge remediation, common-pivot normalization, and full/gameplay-scale contact review",
-      "remoteCommit": "d0d4f9111e23b488c8886bd773f75eb81c2dac38",
-      "remoteTree": "858d1f601b278e59ce34187fd68374ef9a076c88",
-      "ci": "https://github.com/Maergoth/rro/actions/runs/31184950416",
-      "artifactId": 8996352192,
-      "artifactSha256": "3b9f431c59473ccf9524de03454859928b7430601ef1c7c73c29ff11f353e072",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-013",
+      "sourcePromptMode": "built-in image generation; twelve separately prompted fixed-camera directional frames with five rejected correction attempts, official chroma-key removal, common-pivot normalization, and full/gameplay-scale contact review",
+      "remoteCommit": "124359a3ff083b3cf8b73dd5b387368819cf9639",
+      "remoteTree": "0121cb8c82814a03426824174f9bdcb126318083",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31348885720",
+      "artifactId": 9048282911,
+      "artifactSha256": "01f19b7bfaa17af2e65644f7c83675912f63d5ab0c0a2952290c67404eac8c75",
       "qaEvidence": "planning/art-qa/furniture-core-directional-011/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-011/qa.json",
-      "notes": "Locked chemical cabinet, high-temperature dish machine, and three-compartment sink are source-accepted, remotely preserved, visually accepted in native four-rotation gameplay review attempt 009, and backed by an exact remote review-evidence checkpoint with green hosted CI.",
+      "notes": "Locked chemical cabinet, high-temperature dish machine, and three-compartment sink were rebuilt after their earlier atlas mixed arbitrary three-quarter views and incorrect quarter-turn footprint axes. The corrected frames pass the explicit fixed elevated orthographic-isometric camera, physical face sequence, long/short footprint-axis swapping, identity, alpha, pivot, full-resolution, 128px, and exact native four-rotation review. Their source, native review, and review evidence are remotely preserved with green hosted CI; the other thirty-one present identities remain explicitly pending camera-conformance audit.",
       "qaEvidencePresent": true,
       "remoteVerified": true
     },
@@ -17881,6 +17882,41 @@ This JSON block is part of this same authoritative document and contains every c
         "commit": "fee22ea72daa496b4a590ff45df2c8b9872e2de7",
         "tree": "86058e2f2428abf575240c5ad73ce4280f8a4aff",
         "ci": "https://github.com/Maergoth/rro/actions/runs/31317025179"
+      },
+      "productionComplete": false,
+      "evidencePresent": true,
+      "reviewRemoteVerified": true
+    },
+    {
+      "id": "runtime-isometric-integration-001-attempt-013",
+      "status": "passed-camera-conformant-assets",
+      "remoteCommit": "124359a3ff083b3cf8b73dd5b387368819cf9639",
+      "remoteTree": "0121cb8c82814a03426824174f9bdcb126318083",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31348885720",
+      "artifactId": 9048282911,
+      "artifactSha256": "01f19b7bfaa17af2e65644f7c83675912f63d5ab0c0a2952290c67404eac8c75",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-013/review.json",
+      "passed": [
+        "native-four-rotation-capture",
+        "fixed-camera-contract",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility",
+        "three-camera-conformant-assets"
+      ],
+      "blockers": [],
+      "acceptedAssetIds": [
+        "furniture-chemical-cabinet",
+        "furniture-dish-machine-high-temp",
+        "furniture-three-comp-sink"
+      ],
+      "rejectedAssetIds": [],
+      "reviewPreservation": {
+        "commit": "8557c266c761d53c84148ab298ad0857e5c6596b",
+        "tree": "bd2832e475239b1108fbbfa13460370c53e7178a",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31349580572"
       },
       "productionComplete": false,
       "evidencePresent": true,

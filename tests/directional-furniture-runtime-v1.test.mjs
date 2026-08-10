@@ -112,13 +112,13 @@ test("the runtime contract covers every source-accepted directional set without 
     verticalEdges: "screen-vertical",
     perspective: false,
   });
-  assert.deepEqual(contract.cameraConformantAssetIds, ["furniture-essential-cafe-two-top", "furniture-linen-storage", "furniture-manager-console", "furniture-office-desk", "furniture-water-station", "furniture-wet-floor-station"]);
+  assert.deepEqual(contract.cameraConformantAssetIds, ["furniture-chemical-cabinet", "furniture-dish-machine-high-temp", "furniture-essential-cafe-two-top", "furniture-linen-storage", "furniture-manager-console", "furniture-office-desk", "furniture-three-comp-sink", "furniture-water-station", "furniture-wet-floor-station"]);
   assert.deepEqual(
     [...contract.cameraConformantAssetIds, ...contract.cameraConformancePendingAssetIds].sort(),
     [...contract.acceptedDirectionalAssetIds].sort(),
   );
   assert.equal(new Set([...contract.cameraConformantAssetIds, ...contract.cameraConformancePendingAssetIds]).size, contract.acceptedDirectionalAssetIds.length);
-  assert.match(contract.capability.remainingVisualGate, /first six sets rebuilt.*thirty-four present directional sets.*189 catalog identities/i);
+  assert.match(contract.capability.remainingVisualGate, /first nine sets rebuilt.*thirty-one present directional sets.*189 catalog identities/i);
   assert.match(validator, /runtimeCompositeAccepted must be true iff runtime acceptance exactly covers every source-accepted directional set with no blocked or pending identities/);
   assert.match(validator, /cameraConformanceValidated must be true iff every source-accepted set passes the fixed-camera contract/);
 });

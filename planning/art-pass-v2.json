@@ -3,9 +3,9 @@
   "branch": "agent/complete-production-art",
   "pullRequest": "https://github.com/Maergoth/rro/pull/2",
   "lastVerifiedRemote": {
-    "commit": "a22e5055646184cef0d4d34ebb2a66cc5435c052",
-    "tree": "1a42c3e55c04b03b4a0e14c0189395195f35d8d7",
-    "ci": "https://github.com/Maergoth/rro/actions/runs/31289514663"
+    "commit": "8557c266c761d53c84148ab298ad0857e5c6596b",
+    "tree": "bd2832e475239b1108fbbfa13460370c53e7178a",
+    "ci": "https://github.com/Maergoth/rro/actions/runs/31349580572"
   },
   "completionRule": "generated, processed, raster-validated, visually accepted, runtime-bound assets whose exact reviewed bytes are remotely verified on GitHub with green CI",
   "artDirection": {
@@ -741,6 +741,39 @@
         "ci": "https://github.com/Maergoth/rro/actions/runs/31317025179"
       },
       "productionComplete": false
+    },
+    {
+      "id": "runtime-isometric-integration-001-attempt-013",
+      "status": "passed-camera-conformant-assets",
+      "remoteCommit": "124359a3ff083b3cf8b73dd5b387368819cf9639",
+      "remoteTree": "0121cb8c82814a03426824174f9bdcb126318083",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31348885720",
+      "artifactId": 9048282911,
+      "artifactSha256": "01f19b7bfaa17af2e65644f7c83675912f63d5ab0c0a2952290c67404eac8c75",
+      "evidence": "planning/art-qa/runtime-isometric-integration-001/attempt-013/review.json",
+      "passed": [
+        "native-four-rotation-capture",
+        "fixed-camera-contract",
+        "elevated-projection",
+        "directional-selection",
+        "floor-contact-pivots",
+        "mixed-world-depth",
+        "gameplay-legibility",
+        "three-camera-conformant-assets"
+      ],
+      "blockers": [],
+      "acceptedAssetIds": [
+        "furniture-chemical-cabinet",
+        "furniture-dish-machine-high-temp",
+        "furniture-three-comp-sink"
+      ],
+      "rejectedAssetIds": [],
+      "reviewPreservation": {
+        "commit": "8557c266c761d53c84148ab298ad0857e5c6596b",
+        "tree": "bd2832e475239b1108fbbfa13460370c53e7178a",
+        "ci": "https://github.com/Maergoth/rro/actions/runs/31349580572"
+      },
+      "productionComplete": false
     }
   ],
   "pendingBatches": [],
@@ -794,16 +827,16 @@
       ],
       "files": 28,
       "qa": "passed",
-      "runtimeQa": "passed-native-gameplay-composite-attempt-009",
-      "sourcePromptMode": "built-in image generation; three separately prompted rigid elevated-isometric four-direction utility-fixture atlases, official chroma-key edge remediation, common-pivot normalization, and full/gameplay-scale contact review",
-      "remoteCommit": "d0d4f9111e23b488c8886bd773f75eb81c2dac38",
-      "remoteTree": "858d1f601b278e59ce34187fd68374ef9a076c88",
-      "ci": "https://github.com/Maergoth/rro/actions/runs/31184950416",
-      "artifactId": 8996352192,
-      "artifactSha256": "3b9f431c59473ccf9524de03454859928b7430601ef1c7c73c29ff11f353e072",
+      "runtimeQa": "passed-native-gameplay-composite-attempt-013",
+      "sourcePromptMode": "built-in image generation; twelve separately prompted fixed-camera directional frames with five rejected correction attempts, official chroma-key removal, common-pivot normalization, and full/gameplay-scale contact review",
+      "remoteCommit": "124359a3ff083b3cf8b73dd5b387368819cf9639",
+      "remoteTree": "0121cb8c82814a03426824174f9bdcb126318083",
+      "ci": "https://github.com/Maergoth/rro/actions/runs/31348885720",
+      "artifactId": 9048282911,
+      "artifactSha256": "01f19b7bfaa17af2e65644f7c83675912f63d5ab0c0a2952290c67404eac8c75",
       "qaEvidence": "planning/art-qa/furniture-core-directional-011/contact-627-dark.png",
       "qaManifest": "planning/art-qa/furniture-core-directional-011/qa.json",
-      "notes": "Locked chemical cabinet, high-temperature dish machine, and three-compartment sink are source-accepted, remotely preserved, visually accepted in native four-rotation gameplay review attempt 009, and backed by an exact remote review-evidence checkpoint with green hosted CI."
+      "notes": "Locked chemical cabinet, high-temperature dish machine, and three-compartment sink were rebuilt after their earlier atlas mixed arbitrary three-quarter views and incorrect quarter-turn footprint axes. The corrected frames pass the explicit fixed elevated orthographic-isometric camera, physical face sequence, long/short footprint-axis swapping, identity, alpha, pivot, full-resolution, 128px, and exact native four-rotation review. Their source, native review, and review evidence are remotely preserved with green hosted CI; the other thirty-one present identities remain explicitly pending camera-conformance audit."
     },
     {
       "id": "furniture-core-directional-010",

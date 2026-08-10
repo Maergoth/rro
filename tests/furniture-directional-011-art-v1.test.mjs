@@ -8,7 +8,7 @@ import { inflateSync } from "node:zlib";
 const ROOT = resolve(import.meta.dirname, "..");
 const QA_ROOT = "planning/art-qa/furniture-core-directional-011";
 const QA_PATH = `${QA_ROOT}/qa.json`;
-const QA_SHA256 = "540500d73a551edc4e694aca44090f5db64175aee3455484430bcb158d23a83c";
+const QA_SHA256 = "684237c74b3e10f7cfcaf02f3a0c062300b042d4398f5ea1cb87c0df9d2570e0";
 const ASSETS = ["furniture-chemical-cabinet", "furniture-dish-machine-high-temp", "furniture-three-comp-sink"];
 const DIRECTIONS = ["north", "east", "south", "west"];
 const PLACEMENT = { mount: "floor", occupancy: "blocking", serviceAccess: "adjacent" };
@@ -110,11 +110,17 @@ test("furniture directional batch 011 preserves exact corrected fixed-camera sou
   assert.equal(qa.batchId, "furniture-core-directional-011");
   assert.deepEqual(qa.assets, ASSETS);
   assert.equal(qa.artReviewStatus, "accepted");
-  assert.equal(qa.productionComplete, false);
-  assert.equal(qa.repositoryPromotion.status, "promoted-local-pending-remote-verification");
-  assert.equal(qa.productionCompletionBlockers.length, 2);
-  assert.equal(qa.remotePreservation, null);
-  assert.match(qa.gates.nativeGameplayCompositeReview, /^pending:/);
+  assert.equal(qa.productionComplete, true);
+  assert.equal(qa.repositoryPromotion.status, "remote-verified-production-complete");
+  assert.deepEqual(qa.productionCompletionBlockers, []);
+  assert.deepEqual(qa.remotePreservation, {
+    commit: "124359a3ff083b3cf8b73dd5b387368819cf9639",
+    tree: "0121cb8c82814a03426824174f9bdcb126318083",
+    ci: "https://github.com/Maergoth/rro/actions/runs/31348885720",
+    artifactId: 9048282911,
+    artifactSha256: "01f19b7bfaa17af2e65644f7c83675912f63d5ab0c0a2952290c67404eac8c75",
+  });
+  assert.match(qa.gates.nativeGameplayCompositeReview, /^pass: runtime-isometric-integration-001-attempt-013/);
   assert.deepEqual(qa.cameraContract, {
     projection: "true-orthographic",
     perspective: false,
